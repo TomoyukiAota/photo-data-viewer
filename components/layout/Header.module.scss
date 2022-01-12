@@ -1,5 +1,19 @@
 .header {
   height: 100%;
   width: 100%;
-  padding: 20px 50px;
+  padding: 10px 30px;
+  border-bottom: 2px solid #c6c6c6; // follow the draggable splitter from react-reflex
+
+  > * + * {
+    padding-top: 10px;
+  }
+}
+
+.textfield-and-button {
+  width: 100%;
+  display: flex;
+
+  > button {
+    margin-left: 10px;
+  }
 }
