@@ -18,24 +18,15 @@ function Home() {
         )}
         <ReflexElement>
           <ReflexContainer orientation='vertical'>
-            <ReflexElement className='left-pane'>
-              <div className='pane-content'>
-                <label>Left Pane (resizable)</label>
-              </div>
+            <ReflexElement minSize={100}>
+              <ReflexContainer orientation='horizontal'>
+                <ReflexElement minSize={100}>Photo</ReflexElement>
+                <ReflexSplitter />
+                <ReflexElement minSize={100}>Map</ReflexElement>
+              </ReflexContainer>
             </ReflexElement>
             <ReflexSplitter />
-            <ReflexElement className='right-pane' minSize={200}>
-              <div className='pane-content'>
-                <label>
-                  Right Pane (resizable)
-                  <br />
-                  <br />
-                  minSize = 200px
-                  <br />
-                  maxSize = 800px
-                </label>
-              </div>
-            </ReflexElement>
+            <ReflexElement minSize={100}>Data</ReflexElement>
           </ReflexContainer>
         </ReflexElement>
       </ReflexContainer>
