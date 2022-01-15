@@ -1,23 +1,26 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Input } from '@mui/material';
+import { useContext } from 'react';
 
+import PhotoContext from '../../store/photo-context';
 import classes from './Header.module.scss';
 
 const Header: React.FC<{ className?: string }> = (props) => {
+  const photoCtx = useContext(PhotoContext);
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    photoCtx.loadPhoto(event.target.files);
+  };
+
   return (
     <div className={`${props.className} ${classes.header}`}>
       <div>Select your photo to display the EXIF data:</div>
-      <div className={classes['textfield-and-button']}>
-        <TextField
-          fullWidth
-          InputProps={{
-            readOnly: true,
-          }}
-          size='small'
-          variant='outlined'
-        />
-        <Button variant='outlined'>Select</Button>
-      </div>
+      <Input
+        type='file'
+        onChange={handleInputChange}
+        className={classes.input}
+      ></Input>
     </div>
   );
 };
