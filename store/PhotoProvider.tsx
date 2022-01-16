@@ -3,11 +3,19 @@ import { useState } from 'react';
 
 import overrideNextImage from '../styles/override-next-image.module.scss';
 import PhotoContext from './photo-context';
+import classes from './PhotoProvider.module.scss';
+
+const PhotoProviderText: React.FC = (props) => {
+  return <div className={classes.text}>{props.children}</div>;
+};
 
 const PhotoProvider: React.FC = (props) => {
   const initialLoadedPhotoImage = (
-    <div>Selected photo will be displayed here.</div>
+    <PhotoProviderText>
+      The selected photo will be displayed here.
+    </PhotoProviderText>
   );
+
   const [loadedPhotoImage, setLoadedPhotoImage] = useState(
     () => initialLoadedPhotoImage
   );
@@ -22,7 +30,9 @@ const PhotoProvider: React.FC = (props) => {
     const file = fileList[0]; // Only one file is selected in the file select dialog.
     if (!file) {
       setLoadedPhotoImage(() => (
-        <div>Something went wrong. The selected file cannot be displayed.</div>
+        <PhotoProviderText>
+          Something went wrong. The selected file cannot be displayed.
+        </PhotoProviderText>
       ));
       return;
     }
