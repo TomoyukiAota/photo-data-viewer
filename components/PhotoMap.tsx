@@ -1,7 +1,8 @@
+import LeafletLoader from './leaflet/LeafletLoader';
 import classes from './PhotoMap.module.scss';
 
 const PhotoMap: React.FC<{ className?: string }> = (props) => {
-  return <div className={`${props.className}`}>Photo Map</div>;
+  return <LeafletLoader />;
 };
 
 export default PhotoMap;
