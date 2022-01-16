@@ -1,7 +1,11 @@
-import classes from './PhotoData.module.scss';
+import { Fragment, useContext } from 'react';
+
+import PhotoContext from '../store/photo-context';
 
 const PhotoImage: React.FC<{ className?: string }> = (props) => {
-  return <div className={`${props.className}`}>Photo Image</div>;
+  const photoCtx = useContext(PhotoContext);
+
+  return <Fragment>{photoCtx.loadedPhotoImage}</Fragment>;
 };
 
 export default PhotoImage;

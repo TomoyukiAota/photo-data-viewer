@@ -1,0 +1,24 @@
+/*
+  To use Image from 'next/image', setting width and height or layout='fill' is required,
+  which do not display the image well.
+  Applying .imageContainer and .image solves this problem.
+  References:
+   - https://github.com/vercel/next.js/discussions/18739#discussioncomment-344932
+   - https://dev.to/tanahmed/next-image-make-image-fill-available-space-272o
+   - https://stackblitz.com/edit/nextjs-image-full-bleed?file=pages%2Findex.js
+*/
+
+.imageContainer {
+  width: 100%;
+
+  > div {
+    position: unset !important;
+  }
+
+  .image {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+}
