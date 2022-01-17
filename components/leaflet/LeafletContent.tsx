@@ -19,7 +19,7 @@ const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
 ) => {
   const map = useMap();
-  map.setView(props.latLng, props.zoom);
+  map.flyTo(props.latLng, props.zoom);
   return null;
 };
 
