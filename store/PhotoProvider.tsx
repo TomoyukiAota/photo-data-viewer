@@ -27,19 +27,20 @@ const PhotoProvider: React.FC = (props) => {
   );
 
   const loadPhoto = async (fileList: FileList | null) => {
-    console.log(fileList);
-    if (!fileList) {
-      setLoadedPhotoImage(() => initialLoadedPhotoImage);
+    console.log('loadPhoto called. fileList', fileList);
+    if (!fileList || !fileList.length || fileList.length === 0) {
+      console.log(
+        'fileList is empty. Possibly selecting a file is cancelled in the file select dialog.'
+      );
       return;
     }
 
     const file = fileList[0]; // Only one file is selected in the file select dialog.
     if (!file) {
-      setLoadedPhotoImage(() => (
-        <PhotoProviderText>
-          Something went wrong. The selected file cannot be displayed.
-        </PhotoProviderText>
-      ));
+      console.log(
+        'file is falsy. Something went wrong with the selected file.'
+      );
+      console.log('file', file);
       return;
     }
 
