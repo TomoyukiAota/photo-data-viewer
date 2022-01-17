@@ -13,7 +13,7 @@ import 'leaflet-defaulticon-compatibility';
 import PhotoContext from '../../store/photo-context';
 
 const defaultLatLng: LatLngExpression = [0, 0];
-const defaultZoom = 0;
+const defaultZoom = 1;
 
 const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
