@@ -1,7 +1,10 @@
+import exifr from 'exifr';
 import Image from 'next/image';
 import { useState } from 'react';
 
 import overrideNextImage from '../styles/override-next-image.module.scss';
+import { ExifrParseOutput } from './exifr-parse-output';
+import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 import classes from './PhotoProvider.module.scss';
 
@@ -10,6 +13,9 @@ const PhotoProviderText: React.FC = (props) => {
 };
 
 const PhotoProvider: React.FC = (props) => {
+  const [loadedPhotoData, setLoadedPhotoData] =
+    useState<LoadedPhotoData | null>(null);
+
   const initialLoadedPhotoImage = (
     <PhotoProviderText>
       The selected photo will be displayed here.
@@ -20,7 +26,7 @@ const PhotoProvider: React.FC = (props) => {
     () => initialLoadedPhotoImage
   );
 
-  const loadPhoto = (fileList: FileList | null) => {
+  const loadPhoto = async (fileList: FileList | null) => {
     console.log(fileList);
     if (!fileList) {
       setLoadedPhotoImage(() => initialLoadedPhotoImage);
@@ -47,11 +53,17 @@ const PhotoProvider: React.FC = (props) => {
         ></Image>
       </div>
     ));
+
+    const exifrParseOutput: ExifrParseOutput = await exifr.parse(file);
+    console.log(`exifrParseOutput`, exifrParseOutput);
+    const data = createLoadedPhotoData(exifrParseOutput);
+    setLoadedPhotoData(data);
   };
 
   return (
     <PhotoContext.Provider
       value={{
+        loadedPhotoData: loadedPhotoData,
         loadedPhotoImage: loadedPhotoImage,
         loadPhoto: loadPhoto,
       }}
