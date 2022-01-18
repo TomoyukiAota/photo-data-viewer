@@ -1,7 +1,7 @@
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
-import PhotoData from '../PhotoData';
+import PhotoData from '../photo-data/PhotoData';
 import PhotoImage from '../PhotoImage';
 import PhotoMap from '../PhotoMap';
 
