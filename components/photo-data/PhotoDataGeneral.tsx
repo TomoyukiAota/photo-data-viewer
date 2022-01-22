@@ -10,7 +10,16 @@ import {
 
 import classes from './PhotoDataGeneral.module.scss';
 
-const getChildRows = (row, rootRows) => {
+interface GridRow {
+  id: number;
+  parentId: number | null;
+  gender: string;
+  name: string;
+  city: string;
+  car: string;
+}
+
+const getChildRows = (row: GridRow, rootRows: GridRow[]) => {
   const childRows = rootRows.filter(
     (r) => r.parentId === (row ? row.id : null)
   );
@@ -25,7 +34,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = (props) => {
     { name: 'car', title: 'Car' },
   ]);
 
-  const originalData = [
+  const originalData: GridRow[] = [
     {
       id: 0,
       parentId: null,
@@ -194,12 +203,19 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = (props) => {
   ]);
   const [expandedRowIds, setExpandenRowIds] = useState([0, 1]);
 
+  const handleOnExpandedRowIdsChange: (
+    expandedRowIds: Array<number | string>
+  ) => void = (expandedRowIds) => {
+    const expandedRowIdsInNumber = expandedRowIds.map(Number);
+    setExpandenRowIds(expandedRowIdsInNumber);
+  };
+
   return (
     <Paper className={classes.container}>
       <Grid rows={data} columns={columns}>
         <TreeDataState
           expandedRowIds={expandedRowIds}
-          onExpandedRowIdsChange={setExpandenRowIds}
+          onExpandedRowIdsChange={handleOnExpandedRowIdsChange}
         />
         <CustomTreeData getChildRows={getChildRows} />
         <Table columnExtensions={tableColumnExtensions} />
