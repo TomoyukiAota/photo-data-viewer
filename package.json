@@ -9,6 +9,9 @@
     "format": "prettier --write --ignore-path .gitignore ./**/*.{js,jsx,ts,tsx,css,scss}"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "2.7.6",
+    "@devexpress/dx-react-grid": "2.7.6",
+    "@devexpress/dx-react-grid-material-ui": "2.7.6",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@mui/icons-material": "5.2.5",
