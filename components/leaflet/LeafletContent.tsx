@@ -29,8 +29,12 @@ const LeafletContent: React.FC = () => {
   let latLng: LatLngExpression = defaultLatLng;
   let zoom = defaultZoom;
 
-  if (loadedPhotoData) {
-    latLng = [loadedPhotoData.latitude, loadedPhotoData.longitude];
+  if (loadedPhotoData?.exif) {
+    // TODO: Handle when latitude and longitude is not available.
+    latLng = [
+      loadedPhotoData.exif.latitude as number,
+      loadedPhotoData.exif.longitude as number,
+    ];
     zoom = 12;
   }
 

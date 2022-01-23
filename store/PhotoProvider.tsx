@@ -57,7 +57,7 @@ const PhotoProvider: React.FC = (props) => {
 
     const exifrParseOutput: ExifrParseOutput = await exifr.parse(file);
     console.log(`exifrParseOutput`, exifrParseOutput);
-    const data = createLoadedPhotoData(exifrParseOutput);
+    const data = createLoadedPhotoData(file, exifrParseOutput);
     setLoadedPhotoData(data);
   };
 
