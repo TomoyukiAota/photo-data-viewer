@@ -5,21 +5,27 @@
  */
 export interface ExifrParseOutput {
   ApertureValue: number;
+  BlueMatrixColumn: Uint8Array;
+  BlueTRC: Uint8Array;
   BrightnessValue: number;
+  ChromaticAdaptation: Uint8Array;
   ColorSpace: number;
+  ColorSpaceData: string;
   ComponentsConfiguration: Uint8Array;
-  CreateDate: Date,
-  DateTimeOriginal: Date,
+  CreateDate: Date;
+  DateTimeOriginal: Date;
+  DeviceManufacturer: string;
+  DeviceModel: any; // undefined in an actual file
   ExifImageHeight: number;
   ExifImageWidth: number;
   ExifVersion: string;
   ExposureCompensation: number;
   ExposureMode: string;
   ExposureProgram: string;
-  ExposureTime: number
-  FNumber: number
+  ExposureTime: number;
+  FNumber: number;
   Flash: string;
-  FlashpixVersion: number;
+  FlashpixVersion: string;
   FocalLength: number;
   FocalLengthIn35mmFormat: number;
   GPSAltitude: number;
@@ -32,20 +38,36 @@ export interface ExifrParseOutput {
   GPSImgDirectionRef: string;
   GPSLatitude: number[];
   GPSLatitudeRef: string;
-  GPSLongitude: number[]
+  GPSLongitude: number[];
   GPSLongitudeRef: string;
   GPSSpeed: number;
   GPSSpeedRef: string;
   GPSTimeStamp: string;
+  GreenMatrixColumn: Uint8Array;
+  GreenTRC: Uint8Array;
   ISO: number;
   LensInfo: number[];
   LensMake: string;
   LensModel: string;
   Make: string;
+  MediaWhitePoint: Uint8Array;
   MeteringMode: string;
   Model: string;
   ModifyDate: Date;
   Orientation: string;
+  PrimaryPlatform: string;
+  ProfileCMMType: string;
+  ProfileClass: string;
+  ProfileConnectionSpace: string;
+  ProfileCopyright: string;
+  ProfileCreator: string;
+  ProfileDateTime: Date;
+  ProfileDescription: string;
+  ProfileFileSignature: string;
+  ProfileVersion: string;
+  RedMatrixColumn: Uint8Array;
+  RedTRC: Uint8Array;
+  RenderingIntent: string;
   ResolutionUnit: string;
   SceneCaptureType: string;
   SceneType: string;
@@ -61,4 +83,5 @@ export interface ExifrParseOutput {
   YResolution: number;
   latitude: number;
   longitude: number;
+  makerNote: Uint8Array;
 }
