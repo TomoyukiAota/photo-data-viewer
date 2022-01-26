@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { ExifrParseOutput } from './exifr-parse-output';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 
 export class DateTimeOriginal {
   private readonly dateTimeOriginal: ReturnType<typeof dayjs>;
@@ -14,6 +13,8 @@ export class DateTimeOriginal {
 
 export class LoadedPhotoExifData {
   public exifrParseOutput?: ExifrParseOutput;
+  public width?: number;
+  public height?: number;
   public latitude?: number;
   public longitude?: number;
   public dateTimeOriginal?: DateTimeOriginal;
@@ -25,6 +26,8 @@ export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput): L
 
   const exifData = new LoadedPhotoExifData();
   exifData.exifrParseOutput = exifrParseOutput;
+  exifData.width = exifrParseOutput.ExifImageWidth;
+  exifData.height = exifrParseOutput.ExifImageHeight;
   exifData.latitude = exifrParseOutput.latitude;
   exifData.longitude = exifrParseOutput.longitude;
   exifData.dateTimeOriginal = new DateTimeOriginal(exifrParseOutput.DateTimeOriginal);

@@ -1,5 +1,6 @@
 import { LoadedPhotoData } from '../../store/loaded-photo-data';
 import LatLngRow from './LatLngRow';
+import WidthHeightRow from './WidthHeightRow';
 import { GridRow } from './grid-row';
 
 interface NameAndValue {
@@ -29,7 +30,15 @@ export function createGeneralDataRows(
       name: 'Date Taken',
       value: loadedPhotoData?.exif?.dateTimeOriginal?.localizedFormat ?? '',
     },
-    // TODO: Add Image Dimensions
+    {
+      name: 'Width x Height',
+      value: (
+        <WidthHeightRow
+          width={loadedPhotoData?.exif?.width}
+          height={loadedPhotoData?.exif?.height}
+        />
+      ),
+    },
     {
       name: 'Latitude, Longitude',
       value: (
