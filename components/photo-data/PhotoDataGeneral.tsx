@@ -9,15 +9,9 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 
 import PhotoContext from '../../store/photo-context';
-import LatLngRow from './LatLngRow';
+import { createGeneralDataRows } from './general-data-row';
+import { GridRow } from './grid-row';
 import classes from './PhotoDataGeneral.module.scss';
-
-interface GridRow {
-  id: number;
-  parentId: number | null;
-  name: string;
-  value: string | JSX.Element;
-}
 
 const getChildRows = (row: GridRow, rootRows: GridRow[]) => {
   const childRows = rootRows.filter(
@@ -38,44 +32,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = (props) => {
     { name: 'value', title: 'Value' },
   ]);
 
-  const rows: GridRow[] = [
-    {
-      id: 0,
-      parentId: null,
-      name: 'File Name',
-      value: loadedPhotoData?.file?.name ?? '',
-    },
-    {
-      id: 1,
-      parentId: null,
-      name: 'File Size',
-      value: loadedPhotoData?.file?.size?.displayString ?? '',
-    },
-    {
-      id: 2,
-      parentId: null,
-      name: 'Last Modified',
-      value: loadedPhotoData?.file?.lastModified?.localizedFormat ?? '',
-    },
-    {
-      id: 3,
-      parentId: null,
-      name: 'Date Taken',
-      value: loadedPhotoData?.exif?.dateTimeOriginal?.localizedFormat ?? '',
-    },
-    // TODO: Add Image Dimensions
-    {
-      id: 4,
-      parentId: null,
-      name: 'Latitude, Longitude',
-      value: (
-        <LatLngRow
-          latitude={loadedPhotoData?.exif?.latitude}
-          longitude={loadedPhotoData?.exif?.longitude}
-        />
-      ),
-    },
-  ];
+  const rows = createGeneralDataRows(photoCtx.loadedPhotoData);
 
   const [tableColumnExtensions] = useState([
     { columnName: 'name', width: 300 },
