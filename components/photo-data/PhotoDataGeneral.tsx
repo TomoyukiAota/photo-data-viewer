@@ -25,8 +25,6 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = (props) => {
 
   console.log('PhotoDataGeneral: photoCtx', photoCtx);
 
-  const loadedPhotoData = photoCtx.loadedPhotoData;
-
   const [columns] = useState([
     { name: 'name', title: 'Name' },
     { name: 'value', title: 'Value' },
