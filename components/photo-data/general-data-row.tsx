@@ -1,5 +1,5 @@
-import LatLngRow from './LatLngRow';
 import { LoadedPhotoData } from '../../store/loaded-photo-data';
+import LatLngRow from './LatLngRow';
 import { GridRow } from './grid-row';
 
 interface NameAndValue {
