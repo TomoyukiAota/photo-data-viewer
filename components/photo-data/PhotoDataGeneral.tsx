@@ -9,8 +9,8 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 
 import PhotoContext from '../../store/photo-context';
-import { createGeneralDataRows } from './general-data-row';
-import { GridRow } from './grid-row';
+import { createGeneralDataRows } from './row/general-data-row';
+import { GridRow } from './row/grid-row';
 import classes from './PhotoDataGeneral.module.scss';
 
 const getChildRows = (row: GridRow, rootRows: GridRow[]) => {
