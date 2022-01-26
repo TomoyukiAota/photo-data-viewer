@@ -41,13 +41,15 @@ export function createGeneralDataRows(
     },
   ];
 
-  const generalDataRows = nameAndValues.map((nameAndValue, index) => {
-    return {
-      id: index,
-      parentId: null,
-      ...nameAndValue,
-    };
-  });
+  const generalDataRows: GeneralDataRow[] = nameAndValues.map(
+    (nameAndValue, index) => {
+      return {
+        id: index,
+        parentId: null,
+        ...nameAndValue,
+      };
+    }
+  );
 
   return generalDataRows;
 }
