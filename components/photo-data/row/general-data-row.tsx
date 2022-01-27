@@ -1,18 +1,11 @@
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { NameValueGridRow, NameAndValue } from '../NameValueGrid';
 import LatLngRow from './LatLngRow';
 import WidthHeightRow from './WidthHeightRow';
-import { GridRow } from './grid-row';
-
-interface NameAndValue {
-  name: string;
-  value: string | JSX.Element;
-}
-
-export interface GeneralDataRow extends GridRow, NameAndValue {}
 
 export function createGeneralDataRows(
   loadedPhotoData: LoadedPhotoData | null
-): GeneralDataRow[] {
+): NameValueGridRow[] {
   const nameAndValues: NameAndValue[] = [
     {
       name: 'File Name',
@@ -50,7 +43,7 @@ export function createGeneralDataRows(
     },
   ];
 
-  const generalDataRows: GeneralDataRow[] = nameAndValues.map(
+  const generalDataRows: NameValueGridRow[] = nameAndValues.map(
     (nameAndValue, index) => {
       return {
         id: index,
