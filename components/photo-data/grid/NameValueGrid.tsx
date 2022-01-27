@@ -8,7 +8,7 @@ import {
   TableTreeColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 
-import { GridRow } from './row/grid-row';
+import { GridRow } from './grid-row';
 import classes from './NameValueGrid.module.scss';
 
 export interface NameAndValue {

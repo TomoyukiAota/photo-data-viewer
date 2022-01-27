@@ -1,5 +1,5 @@
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
-import { NameValueGridRow, NameAndValue } from '../NameValueGrid';
+import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 import LatLngRow from './LatLngRow';
 import WidthHeightRow from './WidthHeightRow';
 

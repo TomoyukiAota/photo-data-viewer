@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PhotoContext from '../../store/photo-context';
 import { createGeneralDataRows } from './row/general-data-row';
-import NameValueGrid from './NameValueGrid';
+import NameValueGrid from './grid/NameValueGrid';
 
 const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
   const photoCtx = useContext(PhotoContext);
