@@ -3,25 +3,27 @@ import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 import LatLngRow from './LatLngRow';
 import WidthHeightRow from './WidthHeightRow';
 
+type TempNameAndValue = NameAndValue | { name: string; value: undefined };
+
 export function createGeneralDataRows(
   loadedPhotoData: LoadedPhotoData | null
 ): NameValueGridRow[] {
-  const nameAndValues: NameAndValue[] = [
+  const nameAndValues: TempNameAndValue[] = [
     {
       name: 'File Name',
-      value: loadedPhotoData?.file?.name ?? '',
+      value: loadedPhotoData?.file?.name,
     },
     {
       name: 'File Size',
-      value: loadedPhotoData?.file?.size?.displayString ?? '',
+      value: loadedPhotoData?.file?.size?.displayString,
     },
     {
       name: 'Last Modified',
-      value: loadedPhotoData?.file?.lastModified?.displayString ?? '',
+      value: loadedPhotoData?.file?.lastModified?.displayString,
     },
     {
       name: 'Date Taken',
-      value: loadedPhotoData?.exif?.dateTimeOriginal?.displayString ?? '',
+      value: loadedPhotoData?.exif?.dateTimeOriginal?.displayString,
     },
     {
       name: 'Width x Height',
@@ -48,7 +50,8 @@ export function createGeneralDataRows(
       return {
         id: index,
         parentId: null,
-        ...nameAndValue,
+        name: nameAndValue.name,
+        value: nameAndValue.value ?? '',
       };
     }
   );
