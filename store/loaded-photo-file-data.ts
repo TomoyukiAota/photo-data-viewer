@@ -1,16 +1,11 @@
-import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import filesize from 'filesize';
-
-dayjs.extend(localizedFormat);
+import { formatDate } from '../utils/format-date';
 
 export class LastModified {
-  private readonly lastModified: ReturnType<typeof dayjs>;
-  public readonly localizedFormat: string;
+  public readonly displayString: string;
 
   constructor(lastModified: number) {
-    this.lastModified = dayjs(lastModified);
-    this.localizedFormat = this.lastModified.format('LLLL');
+    this.displayString = formatDate(lastModified);
   }
 }
 

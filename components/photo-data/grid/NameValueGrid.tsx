@@ -13,7 +13,7 @@ import classes from './NameValueGrid.module.scss';
 
 export interface NameAndValue {
   name: string;
-  value: string | JSX.Element;
+  value: string | number | JSX.Element;
 }
 
 export interface NameValueGridRow extends GridRow, NameAndValue {}

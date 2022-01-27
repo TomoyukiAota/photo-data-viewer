@@ -1,45 +1,38 @@
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
-import LatLngRow from './LatLngRow';
-import WidthHeightRow from './WidthHeightRow';
+
+type TempNameAndValue = NameAndValue | { name: string; value: undefined };
 
 export function createDetailDataRows(
   loadedPhotoData: LoadedPhotoData | null
 ): NameValueGridRow[] {
-  const nameAndValues: NameAndValue[] = [
+  const exifrOutput = loadedPhotoData?.exif?.exifrParseOutput;
+
+  const nameAndValues: TempNameAndValue[] = [
     {
-      name: 'File Name (Details Data)',
-      value: loadedPhotoData?.file?.name ?? '',
+      name: 'ApertureValue',
+      value: exifrOutput?.ApertureValue,
     },
     {
-      name: 'File Size',
-      value: loadedPhotoData?.file?.size?.displayString ?? '',
+      name: 'BrightnessValue',
+      value: exifrOutput?.BrightnessValue,
     },
     {
-      name: 'Last Modified',
-      value: loadedPhotoData?.file?.lastModified?.localizedFormat ?? '',
+      name: 'ColorSpace',
+      value: exifrOutput?.ColorSpace,
     },
     {
-      name: 'Date Taken',
-      value: loadedPhotoData?.exif?.dateTimeOriginal?.localizedFormat ?? '',
+      name: 'ColorSpaceData',
+      value: exifrOutput?.ColorSpaceData,
     },
     {
-      name: 'Width x Height',
-      value: (
-        <WidthHeightRow
-          width={loadedPhotoData?.exif?.width}
-          height={loadedPhotoData?.exif?.height}
-        />
-      ),
+      name: 'CreateDate',
+      value: formatDate(exifrOutput?.CreateDate),
     },
     {
-      name: 'Latitude, Longitude',
-      value: (
-        <LatLngRow
-          latitude={loadedPhotoData?.exif?.latitude}
-          longitude={loadedPhotoData?.exif?.longitude}
-        />
-      ),
+      name: 'DateTimeOriginal',
+      value: formatDate(exifrOutput?.DateTimeOriginal),
     },
   ];
 
@@ -48,7 +41,8 @@ export function createDetailDataRows(
       return {
         id: index,
         parentId: null,
-        ...nameAndValue,
+        name: nameAndValue.name,
+        value: nameAndValue.value ?? '',
       };
     }
   );

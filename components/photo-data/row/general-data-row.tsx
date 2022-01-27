@@ -17,11 +17,11 @@ export function createGeneralDataRows(
     },
     {
       name: 'Last Modified',
-      value: loadedPhotoData?.file?.lastModified?.localizedFormat ?? '',
+      value: loadedPhotoData?.file?.lastModified?.displayString ?? '',
     },
     {
       name: 'Date Taken',
-      value: loadedPhotoData?.exif?.dateTimeOriginal?.localizedFormat ?? '',
+      value: loadedPhotoData?.exif?.dateTimeOriginal?.displayString ?? '',
     },
     {
       name: 'Width x Height',

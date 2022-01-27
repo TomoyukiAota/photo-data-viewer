@@ -1,13 +1,11 @@
-import dayjs from 'dayjs';
+import { formatDate } from '../utils/format-date';
 import { ExifrParseOutput } from './exifr-parse-output';
 
 export class DateTimeOriginal {
-  private readonly dateTimeOriginal: ReturnType<typeof dayjs>;
-  public readonly localizedFormat: string;
+  public readonly displayString: string;
 
   constructor(date: Date) {
-    this.dateTimeOriginal = dayjs(date);
-    this.localizedFormat = this.dateTimeOriginal.format('LLLL');
+    this.displayString = formatDate(date);
   }
 }
 
