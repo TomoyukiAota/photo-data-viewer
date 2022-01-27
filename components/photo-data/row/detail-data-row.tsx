@@ -34,6 +34,66 @@ export function createDetailDataRows(
       name: 'DateTimeOriginal',
       value: formatDate(exifrOutput?.DateTimeOriginal),
     },
+    {
+      name: 'DeviceManufacturer',
+      value: exifrOutput?.DeviceManufacturer,
+    },
+    {
+      name: 'ExifImageHeight',
+      value: exifrOutput?.ExifImageHeight,
+    },
+    {
+      name: 'ExifImageWidth',
+      value: exifrOutput?.ExifImageWidth,
+    },
+    {
+      name: 'ExifVersion',
+      value: exifrOutput?.ExifVersion,
+    },
+    {
+      name: 'ExposureCompensation',
+      value: exifrOutput?.ExposureCompensation,
+    },
+    {
+      name: 'ExposureMode',
+      value: exifrOutput?.ExposureMode,
+    },
+    {
+      name: 'ExposureProgram',
+      value: exifrOutput?.ExposureProgram,
+    },
+    {
+      name: 'ExposureTime',
+      value: exifrOutput?.ExposureTime,
+    },
+    {
+      name: 'FNumber',
+      value: exifrOutput?.FNumber,
+    },
+    {
+      name: 'Flash',
+      value: exifrOutput?.Flash,
+    },
+    {
+      name: 'FlashpixVersion',
+      value: exifrOutput?.FlashpixVersion,
+    },
+    {
+      name: 'FocalLength',
+      value: exifrOutput?.FocalLength,
+    },
+    {
+      name: 'FocalLengthIn35mmFormat',
+      value: exifrOutput?.FocalLengthIn35mmFormat,
+    },
+    {
+      name: 'GPSAltitude',
+      value: exifrOutput?.GPSAltitude,
+    },
+    {
+      name: 'GPSDateStamp',
+      value: exifrOutput?.GPSDateStamp,
+    },
   ];
 
   const detailDataRows: NameValueGridRow[] = nameAndValues.map(
