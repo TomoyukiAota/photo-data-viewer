@@ -4,6 +4,33 @@ import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 
+function shouldIncludeProperty(key: string, value: any): boolean {
+  if (value instanceof Uint8Array) {
+    return false;
+  }
+  return true;
+}
+
+function formatValue(input: any): string {
+  let formattedValue = '';
+
+  if (typeof input === 'string') {
+    formattedValue = input;
+  } else if (typeof input === 'number') {
+    formattedValue = input.toString();
+  } else if (input instanceof Date) {
+    formattedValue = formatDate(input);
+  } else if (input instanceof Array) {
+    formattedValue = formatArray(input);
+  } else if (input instanceof Uint8Array) {
+    formattedValue = '';
+  } else {
+    formattedValue = input;
+  }
+
+  return formattedValue;
+}
+
 export function createDetailDataRows(
   loadedPhotoData: LoadedPhotoData | null
 ): NameValueGridRow[] {
@@ -15,32 +42,11 @@ export function createDetailDataRows(
 
   const sortedExifrOutput = sortKeys(exifrOutput);
   const nameAndValues: NameAndValue[] = Object.entries(sortedExifrOutput)
-    .filter(([key, value]) => {
-      if (value instanceof Uint8Array) {
-        return false;
-      }
-      return true;
-    })
+    .filter(([key, value]) => shouldIncludeProperty(key, value))
     .map(([key, value]) => {
-      let processedValue = '';
-
-      if (typeof value === 'string') {
-        processedValue = value;
-      } else if (typeof value === 'number') {
-        processedValue = value.toString();
-      } else if (value instanceof Date) {
-        processedValue = formatDate(value);
-      } else if (value instanceof Array) {
-        processedValue = formatArray(value);
-      } else if (value instanceof Uint8Array) {
-        processedValue = '';
-      } else {
-        processedValue = value;
-      }
-
       return {
         name: key,
-        value: processedValue,
+        value: formatValue(value),
       };
     });
 
