@@ -1,4 +1,6 @@
+import sortKeys from 'sort-keys';
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 
@@ -9,92 +11,33 @@ export function createDetailDataRows(
 ): NameValueGridRow[] {
   const exifrOutput = loadedPhotoData?.exif?.exifrParseOutput;
 
-  const nameAndValues: TempNameAndValue[] = [
-    {
-      name: 'ApertureValue',
-      value: exifrOutput?.ApertureValue,
-    },
-    {
-      name: 'BrightnessValue',
-      value: exifrOutput?.BrightnessValue,
-    },
-    {
-      name: 'ColorSpace',
-      value: exifrOutput?.ColorSpace,
-    },
-    {
-      name: 'ColorSpaceData',
-      value: exifrOutput?.ColorSpaceData,
-    },
-    {
-      name: 'CreateDate',
-      value: formatDate(exifrOutput?.CreateDate),
-    },
-    {
-      name: 'DateTimeOriginal',
-      value: formatDate(exifrOutput?.DateTimeOriginal),
-    },
-    {
-      name: 'DeviceManufacturer',
-      value: exifrOutput?.DeviceManufacturer,
-    },
-    {
-      name: 'ExifImageHeight',
-      value: exifrOutput?.ExifImageHeight,
-    },
-    {
-      name: 'ExifImageWidth',
-      value: exifrOutput?.ExifImageWidth,
-    },
-    {
-      name: 'ExifVersion',
-      value: exifrOutput?.ExifVersion,
-    },
-    {
-      name: 'ExposureCompensation',
-      value: exifrOutput?.ExposureCompensation,
-    },
-    {
-      name: 'ExposureMode',
-      value: exifrOutput?.ExposureMode,
-    },
-    {
-      name: 'ExposureProgram',
-      value: exifrOutput?.ExposureProgram,
-    },
-    {
-      name: 'ExposureTime',
-      value: exifrOutput?.ExposureTime,
-    },
-    {
-      name: 'FNumber',
-      value: exifrOutput?.FNumber,
-    },
-    {
-      name: 'Flash',
-      value: exifrOutput?.Flash,
-    },
-    {
-      name: 'FlashpixVersion',
-      value: exifrOutput?.FlashpixVersion,
-    },
-    {
-      name: 'FocalLength',
-      value: exifrOutput?.FocalLength,
-    },
-    {
-      name: 'FocalLengthIn35mmFormat',
-      value: exifrOutput?.FocalLengthIn35mmFormat,
-    },
-    {
-      name: 'GPSAltitude',
-      value: exifrOutput?.GPSAltitude,
-    },
-    {
-      name: 'GPSDateStamp',
-      value: exifrOutput?.GPSDateStamp,
-    },
-  ];
+  if (!exifrOutput) {
+    return [];
+  }
+
+  const sortedExifrOutput = sortKeys(exifrOutput);
+  const nameAndValues = Object.entries(sortedExifrOutput).map(
+    ([key, value]) => {
+      let processedValue = '';
+
+      if (typeof value === 'string') {
+        processedValue = value;
+      } else if (typeof value === 'number') {
+        processedValue = value.toString();
+      } else if (value instanceof Date) {
+        processedValue = formatDate(value);
+      } else if (value instanceof Array) {
+        processedValue = formatArray(value);
+      } else {
+        processedValue = value;
+      }
+
+      return {
+        name: key,
+        value: processedValue,
+      };
+    }
+  );
 
   const detailDataRows: NameValueGridRow[] = nameAndValues.map(
     (nameAndValue, index) => {
