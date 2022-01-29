@@ -14,8 +14,14 @@ export function createDetailDataRows(
   }
 
   const sortedExifrOutput = sortKeys(exifrOutput);
-  const nameAndValues: NameAndValue[] = Object.entries(sortedExifrOutput).map(
-    ([key, value]) => {
+  const nameAndValues: NameAndValue[] = Object.entries(sortedExifrOutput)
+    .filter(([key, value]) => {
+      if (value instanceof Uint8Array) {
+        return false;
+      }
+      return true;
+    })
+    .map(([key, value]) => {
       let processedValue = '';
 
       if (typeof value === 'string') {
@@ -26,6 +32,8 @@ export function createDetailDataRows(
         processedValue = formatDate(value);
       } else if (value instanceof Array) {
         processedValue = formatArray(value);
+      } else if (value instanceof Uint8Array) {
+        processedValue = '';
       } else {
         processedValue = value;
       }
@@ -34,8 +42,7 @@ export function createDetailDataRows(
         name: key,
         value: processedValue,
       };
-    }
-  );
+    });
 
   const detailDataRows: NameValueGridRow[] = nameAndValues.map(
     (nameAndValue, index) => {
