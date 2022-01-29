@@ -11,9 +11,16 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility';
 
 import PhotoContext from '../../store/photo-context';
+import { LoadedPhotoExifData } from '../../store/loaded-photo-exif-data';
 
 const defaultLatLng: LatLngExpression = [0, 0];
 const defaultZoom = 1;
+
+function isLagLngValid(exif?: LoadedPhotoExifData | null): boolean {
+  if (!exif) return false;
+  if (exif.latitude === 0 && exif.longitude === 0) return true;
+  return !!exif.latitude && !!exif.longitude;
+}
 
 const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
@@ -25,16 +32,14 @@ const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
 
 const LeafletContent: React.FC = () => {
   const photoCtx = useContext(PhotoContext);
-  const loadedPhotoData = photoCtx.loadedPhotoData;
+  const exif = photoCtx.loadedPhotoData?.exif;
+
   let latLng: LatLngExpression = defaultLatLng;
   let zoom = defaultZoom;
 
-  if (loadedPhotoData?.exif) {
-    // TODO: Handle when latitude and longitude is not available.
-    latLng = [
-      loadedPhotoData.exif.latitude as number,
-      loadedPhotoData.exif.longitude as number,
-    ];
+  const isLatLngValid = isLagLngValid(exif);
+  if (isLatLngValid) {
+    latLng = [exif?.latitude as number, exif?.longitude as number];
     zoom = 12;
   }
 
@@ -49,7 +54,7 @@ const LeafletContent: React.FC = () => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       <UpdateMap latLng={latLng} zoom={zoom} />
-      {loadedPhotoData && <Marker position={latLng}></Marker>}
+      {isLatLngValid && <Marker position={latLng}></Marker>}
     </MapContainer>
   );
 };
