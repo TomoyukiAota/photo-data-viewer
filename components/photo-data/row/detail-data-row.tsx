@@ -4,8 +4,6 @@ import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 
-type TempNameAndValue = NameAndValue | { name: string; value: undefined };
-
 export function createDetailDataRows(
   loadedPhotoData: LoadedPhotoData | null
 ): NameValueGridRow[] {
@@ -16,7 +14,7 @@ export function createDetailDataRows(
   }
 
   const sortedExifrOutput = sortKeys(exifrOutput);
-  const nameAndValues = Object.entries(sortedExifrOutput).map(
+  const nameAndValues: NameAndValue[] = Object.entries(sortedExifrOutput).map(
     ([key, value]) => {
       let processedValue = '';
 
@@ -45,7 +43,7 @@ export function createDetailDataRows(
         id: index,
         parentId: null,
         name: nameAndValue.name,
-        value: nameAndValue.value ?? '',
+        value: nameAndValue.value,
       };
     }
   );
