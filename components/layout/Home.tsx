@@ -22,6 +22,7 @@ function Home() {
             style={{
               height: `${headerHeight}px`,
               minHeight: `${headerHeight}px`,
+              maxHeight: `${headerHeight}px`,
             }}
           >
             <Header></Header>
