@@ -16,7 +16,7 @@ function Home() {
     <div className={classes.home}>
       <ReflexContainer orientation='horizontal'>
         {isHeaderVisible && (
-          <ReflexElement minSize={headerHeight} maxSize={headerHeight}>
+          <ReflexElement style={{ height: '100px', minHeight: '100px' }}>
             <Header></Header>
           </ReflexElement>
         )}
