@@ -7,7 +7,7 @@ const StringifiedData: React.FC<{
   stringifiedData?: string;
 }> = (props) => {
   return (
-    <div>
+    <div className={classes['stringified-data-container']}>
       <div className={classes.description}>
         The object returned from{' '}
         <a
@@ -33,7 +33,7 @@ const PhotoDataRawData: React.FC<{ className?: string }> = (props) => {
     4
   );
   return (
-    <div>
+    <div className={classes.container}>
       {!stringifiedData && <div className={classes['no-data']}>No Data</div>}
       {stringifiedData && (
         <StringifiedData stringifiedData={stringifiedData}></StringifiedData>

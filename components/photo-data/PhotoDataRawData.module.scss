@@ -1,5 +1,15 @@
+.container {
+  height: 100%;
+}
+
 .no-data {
   padding: 10px;
+}
+
+.stringified-data-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .description {
@@ -11,6 +21,7 @@
 }
 
 .stringified-data {
+  overflow-y: scroll;
   white-space: pre;
   padding: 10px;
 }

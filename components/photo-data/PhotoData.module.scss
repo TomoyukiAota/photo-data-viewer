@@ -6,4 +6,5 @@
 
 .tab-content {
   flex-grow: 1;
+  min-height: 0; // For scrollbar to appear only within tab-content area.
 }
