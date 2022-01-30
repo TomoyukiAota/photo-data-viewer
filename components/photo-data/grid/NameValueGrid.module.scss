@@ -4,4 +4,22 @@
   > div {
     height: 100%;
   }
+
+  thead th {
+    & {
+      // For sticky header. See https://qiita.com/orangain/items/6268b6528ab33b27f8f2
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 1);
+    }
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  tbody td {
+    padding: 0;
+  }
 }
