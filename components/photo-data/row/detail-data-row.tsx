@@ -1,4 +1,3 @@
-import sortKeys from 'sort-keys';
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
 import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
@@ -40,8 +39,7 @@ export function createDetailDataRows(
     return [];
   }
 
-  const sortedExifrOutput = sortKeys(exifrOutput);
-  const nameAndValues: NameAndValue[] = Object.entries(sortedExifrOutput)
+  const nameAndValues: NameAndValue[] = Object.entries(exifrOutput)
     .filter(([key, value]) => shouldIncludeProperty(key, value))
     .map(([key, value]) => {
       return {

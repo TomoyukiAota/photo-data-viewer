@@ -1,3 +1,4 @@
+import sortKeys from 'sort-keys';
 import { formatDate } from '../utils/format-date';
 import { ExifrParseOutput } from './exifr-parse-output';
 
@@ -23,7 +24,7 @@ export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput): L
     return null;
 
   const exifData = new LoadedPhotoExifData();
-  exifData.exifrParseOutput = exifrParseOutput;
+  exifData.exifrParseOutput = sortKeys(exifrParseOutput);
   exifData.width = exifrParseOutput.ExifImageWidth;
   exifData.height = exifrParseOutput.ExifImageHeight;
   exifData.latitude = exifrParseOutput.latitude;
