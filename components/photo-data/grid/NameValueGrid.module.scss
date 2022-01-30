@@ -17,9 +17,17 @@
 
     padding-top: 4px;
     padding-bottom: 4px;
+
+    &:first-child {
+      padding-left: 0;
+    }
   }
 
   tbody td {
     padding: 0;
+
+    &:first-child {
+      padding-left: 0;
+    }
   }
 }
