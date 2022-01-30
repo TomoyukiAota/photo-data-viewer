@@ -27,13 +27,19 @@ function Home() {
                 <ReflexElement minSize={100}>
                   <PhotoImage />
                 </ReflexElement>
-                <ReflexSplitter />
+                <ReflexSplitter
+                  className={classes['horizontal-splitter']}
+                  style={{ height: '8px', border: 0 }}
+                />
                 <ReflexElement minSize={100}>
                   <PhotoMap />
                 </ReflexElement>
               </ReflexContainer>
             </ReflexElement>
-            <ReflexSplitter />
+            <ReflexSplitter
+              className={classes['vertical-splitter']}
+              style={{ width: '8px', border: 0 }}
+            />
             <ReflexElement minSize={100}>
               <PhotoData />
             </ReflexElement>

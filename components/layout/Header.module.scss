@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   padding: 10px 30px;
-  border-bottom: 2px solid #c6c6c6; // follow the draggable splitter from react-reflex
+  border-bottom: 8px solid #eeeeee; // follow the draggable splitter from react-reflex
 
   > * + * {
     padding-top: 10px;
