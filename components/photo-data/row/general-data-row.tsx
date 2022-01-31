@@ -36,12 +36,7 @@ export function createGeneralDataRows(
     },
     {
       name: 'Latitude, Longitude',
-      value: (
-        <LatLngRow
-          latitude={loadedPhotoData?.exif?.latitude}
-          longitude={loadedPhotoData?.exif?.longitude}
-        />
-      ),
+      value: <LatLngRow loadedPhotoData={loadedPhotoData} />,
     },
   ];
 

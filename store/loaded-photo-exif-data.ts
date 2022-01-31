@@ -1,4 +1,5 @@
 import sortKeys from 'sort-keys';
+import isNumber from 'is-number';
 import { formatDate } from '../utils/format-date';
 import { ExifrParseOutput } from './exifr-parse-output';
 
@@ -17,6 +18,7 @@ export class LoadedPhotoExifData {
   public latitude?: number;
   public longitude?: number;
   public dateTimeOriginal?: DateTimeOriginal;
+  public get isLatLngAvailable(): boolean { return isNumber(this.latitude) && isNumber(this.longitude); }
 }
 
 export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput): LoadedPhotoExifData | null {

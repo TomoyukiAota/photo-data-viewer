@@ -5,6 +5,8 @@ import { createLoadedPhotoFileData, LoadedPhotoFileData } from './loaded-photo-f
 export class LoadedPhotoData {
   public file?: LoadedPhotoFileData | null;
   public exif?: LoadedPhotoExifData | null;
+  public get isFileLoaded(): boolean { return !!this.file; }
+  public get isLatLngAvailable(): boolean { return !!this.exif?.isLatLngAvailable }
 }
 
 export function createLoadedPhotoData(file: File, exifrParseOutput: ExifrParseOutput) {

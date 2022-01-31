@@ -1,4 +1,5 @@
 import filesize from 'filesize';
+import isNumber from 'is-number';
 import { formatDate } from '../utils/format-date';
 
 export class LastModified {
@@ -13,7 +14,7 @@ export class FileSize {
   public readonly displayString: string;
 
   constructor(public byte: number) {
-    this.displayString = filesize(this.byte);
+    this.displayString = isNumber(byte) ? filesize(byte) : '';
   }
 }
 
@@ -25,10 +26,13 @@ export class LoadedPhotoFileData {
 }
 
 export function createLoadedPhotoFileData(file: File): LoadedPhotoFileData | null {
+  if (!file) { return null; }
+
   const fileData = new LoadedPhotoFileData();
-  fileData.lastModified = new LastModified(file.lastModified);
-  fileData.name = file.name;
-  fileData.size = new FileSize(file.size);
-  fileData.mimeType = file.type;
+  const { lastModified, name, size, type } = file;
+  fileData.lastModified = new LastModified(lastModified);
+  fileData.name = name;
+  fileData.size = new FileSize(size);
+  fileData.mimeType = type;
   return fileData;
 }

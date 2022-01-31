@@ -1,25 +1,32 @@
 import IconButton from '@mui/material/IconButton';
 import GoogleIcon from '../../../icons/google.svg';
+import { LoadedPhotoData } from '../../../store/loaded-photo-data';
 
 import classes from './LatLngRow.module.scss';
 
 const LatLngRow: React.FC<{
   className?: string;
-  latitude?: number;
-  longitude?: number;
+  loadedPhotoData?: LoadedPhotoData | null;
 }> = (props) => {
-  if (!props?.latitude || !props?.longitude) return <div></div>;
+  if (!props?.loadedPhotoData?.isFileLoaded) {
+    return <div></div>;
+  }
+  if (!props?.loadedPhotoData?.exif?.isLatLngAvailable) {
+    return <div>Not Available</div>;
+  }
+
+  const { latitude, longitude } = props?.loadedPhotoData?.exif;
 
   const handleGoogleButtonClicked = () => {
     const zoom = 14;
     window.open(
-      `https://maps.google.com/?q=${props.latitude},${props.longitude}&ll=${props.latitude},${props.longitude}&z=${zoom}`
+      `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
     );
   };
 
   return (
     <div className={classes.row}>
-      {props?.latitude?.toFixed(4) ?? ''}, {props?.longitude?.toFixed(4) ?? ''}
+      {latitude?.toFixed(4) ?? ''}, {longitude?.toFixed(4) ?? ''}
       <IconButton
         onClick={handleGoogleButtonClicked}
         title='Show in Google Maps'
