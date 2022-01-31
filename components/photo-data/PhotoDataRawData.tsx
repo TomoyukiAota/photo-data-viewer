@@ -34,7 +34,7 @@ const PhotoDataRawData: React.FC<{ className?: string }> = (props) => {
   );
   return (
     <div className={classes.container}>
-      {!stringifiedData && <div className={classes['no-data']}>No Data</div>}
+      {!stringifiedData && <div className={classes['no-data']}>No data</div>}
       {stringifiedData && (
         <StringifiedData stringifiedData={stringifiedData}></StringifiedData>
       )}
