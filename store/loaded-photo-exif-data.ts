@@ -1,5 +1,6 @@
-import sortKeys from 'sort-keys';
+import exifr from 'exifr';
 import isNumber from 'is-number';
+import sortKeys from 'sort-keys';
 import { formatDate } from '../utils/format-date';
 import { ExifrParseOutput } from './exifr-parse-output';
 
@@ -22,7 +23,17 @@ export class LoadedPhotoExifData {
   public get isLatLngAvailable(): boolean { return isNumber(this.latitude) && isNumber(this.longitude); }
 }
 
-export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput | null): LoadedPhotoExifData | null {
+export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhotoExifData | null> {
+  if (!file) return null;
+
+  let exifrParseOutput: ExifrParseOutput | null = null;
+  try {
+    exifrParseOutput = await exifr.parse(file, true);
+    console.log(`exifr.parse returned exifrParseOutput: `, exifrParseOutput);
+  } catch (error) {
+    console.log('exifr.parse threw an error: ', error);
+  }
+
   if (!exifrParseOutput)
     return null;
 
