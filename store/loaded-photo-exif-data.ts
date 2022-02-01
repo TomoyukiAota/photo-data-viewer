@@ -24,7 +24,7 @@ export class LoadedPhotoExifData {
 }
 
 export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhotoExifData | null> {
-  if (!file) return null;
+  if (!file) { return null; }
 
   let exifrParseOutput: ExifrParseOutput | null = null;
   try {
@@ -34,8 +34,7 @@ export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhoto
     console.log('exifr.parse threw an error: ', error);
   }
 
-  if (!exifrParseOutput)
-    return null;
+  if (!exifrParseOutput) { return null; }
 
   const exifData = new LoadedPhotoExifData();
   exifData.exifrParseOutput = sortKeys(exifrParseOutput);
