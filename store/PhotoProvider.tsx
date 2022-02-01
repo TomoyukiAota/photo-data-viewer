@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import overrideNextImage from '../styles/override-next-image.module.scss';
-import { ExifrParseOutput } from './exifr-parse-output';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 import classes from './PhotoProvider.module.scss';
