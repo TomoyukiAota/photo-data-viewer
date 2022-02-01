@@ -18,10 +18,11 @@ export class LoadedPhotoExifData {
   public latitude?: number;
   public longitude?: number;
   public dateTimeOriginal?: DateTimeOriginal;
+  public get isWidthHeightAvailable(): boolean { return isNumber(this.width) && isNumber(this.height); }
   public get isLatLngAvailable(): boolean { return isNumber(this.latitude) && isNumber(this.longitude); }
 }
 
-export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput): LoadedPhotoExifData | null {
+export function createLoadedPhotoExifData(exifrParseOutput: ExifrParseOutput | null): LoadedPhotoExifData | null {
   if (!exifrParseOutput)
     return null;
 

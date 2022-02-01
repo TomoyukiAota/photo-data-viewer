@@ -1,4 +1,3 @@
-import exifr from 'exifr';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -55,9 +54,7 @@ const PhotoProvider: React.FC = (props) => {
       </div>
     ));
 
-    const exifrParseOutput: ExifrParseOutput = await exifr.parse(file, true);
-    console.log(`exifrParseOutput`, exifrParseOutput);
-    const data = createLoadedPhotoData(file, exifrParseOutput);
+    const data = await createLoadedPhotoData(file);
     console.log('LoadedPhotoData', data);
     setLoadedPhotoData(data);
   };

@@ -1,5 +1,6 @@
 import { LoadedPhotoData } from '../../../store/loaded-photo-data';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
+import GridRow from './GridRow';
 import LatLngRow from './LatLngRow';
 import WidthHeightRow from './WidthHeightRow';
 
@@ -11,28 +12,43 @@ export function createGeneralDataRows(
   const nameAndValues: TempNameAndValue[] = [
     {
       name: 'File Name',
-      value: loadedPhotoData?.file?.name,
+      value: (
+        <GridRow
+          loadedPhotoData={loadedPhotoData}
+          data={loadedPhotoData?.file?.name}
+        />
+      ),
     },
     {
       name: 'File Size',
-      value: loadedPhotoData?.file?.size?.displayString,
+      value: (
+        <GridRow
+          loadedPhotoData={loadedPhotoData}
+          data={loadedPhotoData?.file?.size?.displayString}
+        />
+      ),
     },
     {
       name: 'Last Modified',
-      value: loadedPhotoData?.file?.lastModified?.displayString,
+      value: (
+        <GridRow
+          loadedPhotoData={loadedPhotoData}
+          data={loadedPhotoData?.file?.lastModified?.displayString}
+        />
+      ),
     },
     {
       name: 'Date Taken',
-      value: loadedPhotoData?.exif?.dateTimeOriginal?.displayString,
+      value: (
+        <GridRow
+          loadedPhotoData={loadedPhotoData}
+          data={loadedPhotoData?.exif?.dateTimeOriginal?.displayString}
+        />
+      ),
     },
     {
       name: 'Width x Height',
-      value: (
-        <WidthHeightRow
-          width={loadedPhotoData?.exif?.width}
-          height={loadedPhotoData?.exif?.height}
-        />
-      ),
+      value: <WidthHeightRow loadedPhotoData={loadedPhotoData} />,
     },
     {
       name: 'Latitude, Longitude',

@@ -1,4 +1,4 @@
-export interface GridRow {
+export interface IGridRowData {
   id: number;
   parentId: number | null;
 }

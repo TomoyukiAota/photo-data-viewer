@@ -8,7 +8,7 @@ import {
   TableTreeColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 
-import { GridRow } from './grid-row';
+import { IGridRowData } from './grid-row-data';
 import classes from './NameValueGrid.module.scss';
 
 export interface NameAndValue {
@@ -16,7 +16,7 @@ export interface NameAndValue {
   value: string | number | JSX.Element;
 }
 
-export interface NameValueGridRow extends GridRow, NameAndValue {}
+export interface NameValueGridRow extends IGridRowData, NameAndValue {}
 
 const NameValueGrid: React.FC<{
   className?: string;
@@ -40,7 +40,7 @@ const NameValueGrid: React.FC<{
     setExpandenRowIds(expandedRowIdsInNumber);
   };
 
-  const getChildRows = (row: GridRow, rootRows: GridRow[]) => {
+  const getChildRows = (row: IGridRowData, rootRows: IGridRowData[]) => {
     const childRows = rootRows.filter(
       (r) => r.parentId === (row ? row.id : null)
     );
