@@ -3,18 +3,20 @@
 
 .dialog {
   width: 300px;
-  height: 100px;
+  height: 150px;
   padding: 10px 0;
 
   text-align: center;
 
   display: grid;
   grid:
-    'title'   auto
-    'message' auto
-    / 100%;
-  .title   { grid-area: title;   }
-  .message { grid-area: message; }
+    'title'                  auto
+    'message'                auto
+    'close-button-container' auto
+    / auto;
+  .title                  { grid-area: title;                  }
+  .message                { grid-area: message;                }
+  .close-button-container { grid-area: close-button-container; }
 }
 
 .title {
@@ -23,4 +25,19 @@
 
 .message {
   align-self: center;
+}
+
+.close-button-container {
+  align-self: flex-end;
+
+  > button {
+    padding: 4px 20px;
+    background-color: #dddddd;
+    border-radius: 4px;
+    text-transform: none;
+
+    &:hover {
+      background-color: #cccccc;
+    }
+  }
 }

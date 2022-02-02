@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import DialogContext from '../../store/dialog/dialog-context';
 
@@ -15,12 +16,17 @@ const UnsupportedFileSelectedDialog: React.FC = () => {
   };
 
   return (
-    <Dialog onClose={handleClose} open={isOpened}>
+    <Dialog open={isOpened}>
       <div className={classes.dialog}>
         <DialogTitle sx={{ padding: 0 }} className={classes.title}>
           Unsupported File Format
         </DialogTitle>
         <div className={classes.message}>EXIF data is not available.</div>
+        <div className={classes['close-button-container']}>
+          <Button variant='text' onClick={handleClose}>
+            Close
+          </Button>
+        </div>
       </div>
     </Dialog>
   );
