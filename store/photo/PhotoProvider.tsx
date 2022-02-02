@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useContext, useState } from 'react';
 
-import overrideNextImage from '../styles/override-next-image.module.scss';
-import DialogContext from './dialog/dialog-context';
+import overrideNextImage from '../../styles/override-next-image.module.scss';
+import DialogContext from '../dialog/dialog-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 import classes from './PhotoProvider.module.scss';

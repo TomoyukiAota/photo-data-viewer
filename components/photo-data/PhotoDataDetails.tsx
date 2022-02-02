@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PhotoContext from '../../store/photo-context';
+import PhotoContext from '../../store/photo/photo-context';
 import { createDetailDataRows } from './row/detail-data-row';
 import NameValueGrid from './grid/NameValueGrid';
 

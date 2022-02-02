@@ -1,6 +1,6 @@
 import filesize from 'filesize';
 import isNumber from 'is-number';
-import { formatDate } from '../utils/format-date';
+import { formatDate } from '../../utils/format-date';
 
 export class LastModified {
   public readonly displayString: string;

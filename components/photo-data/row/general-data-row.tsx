@@ -1,4 +1,4 @@
-import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 import GridRow from './GridRow';
 import LatLngRow from './LatLngRow';

@@ -1,6 +1,6 @@
 import IconButton from '@mui/material/IconButton';
 import GoogleIcon from '../../../icons/google.svg';
-import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
 
 import classes from './LatLngRow.module.scss';
 

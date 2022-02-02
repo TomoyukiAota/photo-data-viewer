@@ -1,4 +1,4 @@
-import { LoadedPhotoData } from '../../../store/loaded-photo-data';
+import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
 import classes from './WidthHeightRow.module.scss';
 
 const WidthHeightRow: React.FC<{

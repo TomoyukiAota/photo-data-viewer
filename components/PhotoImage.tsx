@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react';
 
-import PhotoContext from '../store/photo-context';
+import PhotoContext from '../store/photo/photo-context';
 import classes from './PhotoImage.module.scss';
 
 const PhotoImage: React.FC<{ className?: string }> = (props) => {

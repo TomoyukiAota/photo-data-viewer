@@ -1,7 +1,7 @@
 import exifr from 'exifr';
 import isNumber from 'is-number';
 import sortKeys from 'sort-keys';
-import { formatDate } from '../utils/format-date';
+import { formatDate } from '../../utils/format-date';
 import { ExifrParseOutput } from './exifr-parse-output';
 
 export class DateTimeOriginal {

@@ -10,8 +10,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'; // Re-uses images from ~leaflet package
 import 'leaflet-defaulticon-compatibility';
 
-import PhotoContext from '../../store/photo-context';
-import { LoadedPhotoExifData } from '../../store/loaded-photo-exif-data';
+import PhotoContext from '../../store/photo/photo-context';
+import { LoadedPhotoExifData } from '../../store/photo/loaded-photo-exif-data';
 
 const defaultLatLng: LatLngExpression = [0, 0];
 const defaultZoom = 1;
