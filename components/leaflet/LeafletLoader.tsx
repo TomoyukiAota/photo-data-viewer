@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-function LeafletLoader() {
+const LeafletLoader: React.FC = () => {
   const LeafletContent = React.useMemo(
     () =>
       dynamic(() => import('./LeafletContent'), {
@@ -15,6 +15,6 @@ function LeafletLoader() {
     ]
   );
   return <LeafletContent />;
-}
+};
 
 export default LeafletLoader;

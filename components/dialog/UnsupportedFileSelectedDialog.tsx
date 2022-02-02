@@ -6,7 +6,7 @@ import DialogContext from '../../store/dialog/dialog-context';
 
 import classes from './UnsupportedFileSelectedDialog.module.scss';
 
-function UnsupportedFileSelectedDialog(props) {
+const UnsupportedFileSelectedDialog: React.FC = () => {
   const dialogCtx = useContext(DialogContext);
   const isOpened = dialogCtx.unsupportedFileSelected.isOpened;
 
@@ -24,6 +24,6 @@ function UnsupportedFileSelectedDialog(props) {
       </div>
     </Dialog>
   );
-}
+};
 
 export default UnsupportedFileSelectedDialog;

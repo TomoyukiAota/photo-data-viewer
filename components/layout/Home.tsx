@@ -8,7 +8,7 @@ import PhotoMap from '../PhotoMap';
 import Header from './Header';
 import classes from './Home.module.scss';
 
-function Home() {
+const Home: React.FC = () => {
   const headerHeight = 100;
   const isHeaderVisible = true;
 
@@ -56,6 +56,6 @@ function Home() {
       </ReflexContainer>
     </div>
   );
-}
+};
 
 export default Home;
