@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import overrideNextImage from '../styles/override-next-image.module.scss';
+import DialogContext from './dialog-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 import classes from './PhotoProvider.module.scss';
@@ -11,6 +12,8 @@ const PhotoProviderText: React.FC = (props) => {
 };
 
 const PhotoProvider: React.FC = (props) => {
+  const dialogCtx = useContext(DialogContext);
+
   const [loadedPhotoData, setLoadedPhotoData] =
     useState<LoadedPhotoData | null>(null);
 
@@ -56,6 +59,10 @@ const PhotoProvider: React.FC = (props) => {
     const data = await createLoadedPhotoData(file);
     console.log('LoadedPhotoData', data);
     setLoadedPhotoData(data);
+
+    if (!data?.isExifAvailable) {
+      dialogCtx.unsupportedFileSelected.open();
+    }
   };
 
   return (

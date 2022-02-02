@@ -1,0 +1,26 @@
+// Ignoring prettier for grid properties
+/* prettier-ignore */
+
+.dialog {
+  width: 300px;
+  height: 100px;
+  padding: 10px 0;
+
+  text-align: center;
+
+  display: grid;
+  grid:
+    'title'   auto
+    'message' auto
+    / 100%;
+  .title   { grid-area: title;   }
+  .message { grid-area: message; }
+}
+
+.title {
+  align-self: center;
+}
+
+.message {
+  align-self: center;
+}
