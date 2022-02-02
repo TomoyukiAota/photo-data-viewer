@@ -1,4 +1,4 @@
-import DialogProvider from './DialogProvider';
+import DialogProvider from './dialog/DialogProvider';
 import PhotoProvider from './PhotoProvider';
 
 const AppProvider: React.FC = (props) => {

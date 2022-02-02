@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 
-import DialogContext from '../../store/dialog-context';
+import DialogContext from '../../store/dialog/dialog-context';
 
 import classes from './UnsupportedFileSelectedDialog.module.scss';
 
