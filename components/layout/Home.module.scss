@@ -3,14 +3,17 @@
   width: 100%;
 }
 
-.horizontal-splitter {
+@mixin splitter-hover {
   &:hover {
-    background-color: #1976d2 !important; // override height given by react-reflex
+    background-color: #aaaaaa !important;
+    transition: all 1s ease 0.2s !important;
   }
 }
 
+.horizontal-splitter {
+  @include splitter-hover;
+}
+
 .vertical-splitter {
-  &:hover {
-    background-color: #1976d2 !important; // override height given by react-reflex
-  }
+  @include splitter-hover;
 }
