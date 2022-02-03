@@ -27,23 +27,8 @@ const PhotoProvider: React.FC = (props) => {
     () => initialLoadedPhotoImage
   );
 
-  const loadPhoto = async (fileList: FileList | null) => {
-    console.log('loadPhoto called. fileList', fileList);
-    if (!fileList || !fileList.length || fileList.length === 0) {
-      console.log(
-        'fileList is empty. Possibly selecting a file is cancelled in the file select dialog.'
-      );
-      return;
-    }
-
-    const file = fileList[0]; // Only one file is selected in the file select dialog.
-    if (!file) {
-      console.log(
-        'file is falsy. Something went wrong with the selected file.'
-      );
-      console.log('file', file);
-      return;
-    }
+  const loadPhoto = async (file: File) => {
+    console.log('loadPhoto called. file: ', file);
 
     setLoadedPhotoImage(() => (
       <div className={overrideNextImage.imageContainer}>
