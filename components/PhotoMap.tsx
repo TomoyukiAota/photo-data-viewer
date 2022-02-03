@@ -7,7 +7,7 @@ const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
   return (
     <div className={classes.overlay}>
       <div className={classes['overlay-content']}>
-        The location data (latitude and longitude) is not available.
+        Location data (latitude and longitude) is not available.
       </div>
     </div>
   );
