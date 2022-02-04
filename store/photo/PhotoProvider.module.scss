@@ -6,3 +6,14 @@
   align-items: center;
   color: white;
 }
+
+.loading-text {
+  animation: flickerAnimation 3s infinite;
+}
+
+// prettier-ignore
+@keyframes flickerAnimation {
+  0%   { opacity: 0.2; }
+  50%  { opacity: 1;   }
+  100% { opacity: 0.2; }
+}
