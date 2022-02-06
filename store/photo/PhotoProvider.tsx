@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import Image from 'next/image';
 import { useContext, useState } from 'react';
 
-import overrideNextImage from '../../styles/override-next-image.module.scss';
+import PhotoImage from '../../components/photo-image/PhotoImage';
+
 import { isHeif } from '../../utils/filename-extension';
 import DialogContext from '../dialog/dialog-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
@@ -78,14 +78,7 @@ const PhotoProvider: React.FC = (props) => {
     const url = await getImageUrl(file);
 
     setLoadedPhotoImage(() => (
-      <div className={overrideNextImage.imageContainer}>
-        <Image
-          className={overrideNextImage.image}
-          src={url}
-          alt={file.name}
-          layout='fill'
-        ></Image>
-      </div>
+      <PhotoImage url={url} alt={file.name}></PhotoImage>
     ));
   };
 

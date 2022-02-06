@@ -8,14 +8,14 @@
    - https://stackblitz.com/edit/nextjs-image-full-bleed?file=pages%2Findex.js
 */
 
-.imageContainer {
+.next-image-container {
   width: 100%;
 
   > div {
     position: unset !important;
   }
 
-  .image {
+  .next-image {
     object-fit: contain;
     width: 100% !important;
     position: relative !important;
