@@ -6,6 +6,7 @@ import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
 import PhotoText from '../../components/photo-image/PhotoText';
 
 import { isHeif } from '../../utils/filename-extension';
+import { sleep } from '../../utils/sleep';
 import DialogContext from '../dialog/dialog-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
@@ -50,9 +51,13 @@ const PhotoProvider: React.FC = (props) => {
   const loadPhoto = async (file: File) => {
     console.log('loadPhoto called. file: ', file);
 
-    // Show loading message because it takes time to load HEIF file.
     if (isHeif(file.name)) {
+      // Show loading message because it takes time to load HEIF file.
       setLoadedPhotoImage(() => <PhotoLoadingText />);
+    } else {
+      // Show loading message and wait to avoid showing rotation transition.
+      setLoadedPhotoImage(() => <PhotoLoadingText />);
+      await sleep(500);
     }
 
     const data = await createLoadedPhotoData(file);
