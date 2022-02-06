@@ -2,7 +2,7 @@ import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
 import PhotoData from '../photo-data/PhotoData';
-import PhotoImage from '../photo-image/PhotoImage';
+import PhotoImageContainer from '../photo-image/PhotoImageContainer';
 import PhotoMap from '../PhotoMap';
 
 import Header from './Header';
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
             <ReflexElement minSize={100}>
               <ReflexContainer orientation='horizontal'>
                 <ReflexElement minSize={100}>
-                  <PhotoImage />
+                  <PhotoImageContainer />
                 </ReflexElement>
                 <ReflexSplitter
                   className={classes['horizontal-splitter']}
