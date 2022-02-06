@@ -2,12 +2,13 @@ import classNames from 'classnames';
 import { useContext, useState } from 'react';
 
 import PhotoImage from '../../components/photo-image/PhotoImage';
+import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
+import PhotoText from '../../components/photo-image/PhotoText';
 
 import { isHeif } from '../../utils/filename-extension';
 import DialogContext from '../dialog/dialog-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
-import classes from './PhotoProvider.module.scss';
 
 async function getBlobForHeif(file: File) {
   let blob: Blob | null = null;
@@ -32,14 +33,6 @@ async function getImageUrl(file: File) {
   return url;
 }
 
-const PhotoProviderText: React.FC<{ className?: string }> = (props) => {
-  return (
-    <div className={classNames(classes.text, props.className)}>
-      {props.children}
-    </div>
-  );
-};
-
 const PhotoProvider: React.FC = (props) => {
   const dialogCtx = useContext(DialogContext);
 
@@ -47,9 +40,7 @@ const PhotoProvider: React.FC = (props) => {
     useState<LoadedPhotoData | null>(null);
 
   const initialLoadedPhotoImage = (
-    <PhotoProviderText>
-      The selected photo will be displayed here.
-    </PhotoProviderText>
+    <PhotoText>The selected photo will be displayed here.</PhotoText>
   );
 
   const [loadedPhotoImage, setLoadedPhotoImage] = useState(
@@ -61,11 +52,7 @@ const PhotoProvider: React.FC = (props) => {
 
     // Show loading message because it takes time to load HEIF file.
     if (isHeif(file.name)) {
-      setLoadedPhotoImage(() => (
-        <PhotoProviderText className={classes['loading-text']}>
-          Loading the selected photo...
-        </PhotoProviderText>
-      ));
+      setLoadedPhotoImage(() => <PhotoLoadingText />);
     }
 
     const data = await createLoadedPhotoData(file);
