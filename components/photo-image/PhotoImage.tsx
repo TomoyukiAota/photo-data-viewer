@@ -1,4 +1,4 @@
-// Disabling @next/next/no-img-element to rotate the imgae and place the rotate icon
+// Disabling @next/next/no-img-element to rotate the photo and place the rotate icon
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useRef } from 'react';
