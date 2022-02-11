@@ -51,8 +51,12 @@ const Header: React.FC<{ className?: string }> = (props) => {
         <div className={classes.text}>
           Select your photo to display the EXIF data.
         </div>
-        <Button variant='outlined' onClick={handleButtonClicked}>
-          Select Photo...
+        <Button
+          variant='outlined'
+          onClick={handleButtonClicked}
+          sx={{ textTransform: 'none' }}
+        >
+          Select Photo
         </Button>
         <input
           type='file'
