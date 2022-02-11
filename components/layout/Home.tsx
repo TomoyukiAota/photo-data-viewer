@@ -1,5 +1,4 @@
-import { useWindowWidth } from '@react-hook/window-size/throttled';
-
+import { useAppLayout } from '../../hooks/useAppLayout';
 import PhotoData from '../photo-data/PhotoData';
 import PhotoImageContainer from '../photo-image/PhotoImageContainer';
 import PhotoMap from '../PhotoMap';
@@ -10,8 +9,7 @@ import HomeWideLayout from './HomeWideLayout';
 import classes from './Home.module.scss';
 
 const Home: React.FC = () => {
-  const windowWidth = useWindowWidth();
-  const shouldUseWideLayout = windowWidth > 1200;
+  const appLayout = useAppLayout();
 
   const header = <Header />;
   const photoImage = <PhotoImageContainer />;
@@ -20,7 +18,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {shouldUseWideLayout ? (
+      {appLayout.isWideLayout ? (
         <HomeWideLayout
           header={header}
           photoImage={photoImage}

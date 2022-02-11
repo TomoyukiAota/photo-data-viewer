@@ -1,14 +1,10 @@
-@mixin splitter-hover {
-  &:hover {
-    background-color: #aaaaaa !important;
-    transition: all 1s ease 0.2s !important;
-  }
+.tab-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.horizontal-splitter {
-  @include splitter-hover;
-}
-
-.vertical-splitter {
-  @include splitter-hover;
+.tab-content {
+  flex-grow: 1;
+  min-height: 0; // For scrollbar to appear only within tab-content area.
 }

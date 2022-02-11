@@ -1,8 +1,7 @@
-import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { styled } from '@mui/system';
 import { useState } from 'react';
 
+import StyledTab from '../tab/StyledTab';
 import PhotoDataDetails from './PhotoDataDetails';
 import PhotoDataGeneral from './PhotoDataGeneral';
 import PhotoDataRawData from './PhotoDataRawData';
@@ -13,12 +12,6 @@ const TabName = {
   Details: 'Details',
   RawData: 'Raw Data',
 };
-
-const StyledTab = styled((props: any) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: 'none',
-  })
-);
 
 const PhotoData: React.FC<{ className?: string }> = (props) => {
   const [selectedTabName, setSelectedTabName] = useState(TabName.General);

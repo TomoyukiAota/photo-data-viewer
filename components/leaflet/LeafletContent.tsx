@@ -12,6 +12,7 @@ import 'leaflet-defaulticon-compatibility';
 
 import PhotoContext from '../../store/photo/photo-context';
 import { LoadedPhotoExifData } from '../../store/photo/loaded-photo-exif-data';
+import { useAppLayout } from '../../hooks/useAppLayout';
 
 const defaultLatLng: LatLngExpression = [0, 0];
 const defaultZoom = 1;
@@ -25,8 +26,13 @@ function isLagLngValid(exif?: LoadedPhotoExifData | null): boolean {
 const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
 ) => {
+  const appLayout = useAppLayout();
   const map = useMap();
-  map.flyTo(props.latLng, props.zoom);
+  if (appLayout.isWideLayout) {
+    map.flyTo(props.latLng, props.zoom);
+  } else {
+    map.setView(props.latLng, props.zoom); // For the narrow layout, flyTo effect bothers when showing the Map tab.
+  }
   return null;
 };
 
