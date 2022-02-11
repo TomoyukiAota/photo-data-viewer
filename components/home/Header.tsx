@@ -47,17 +47,21 @@ const Header: React.FC<{ className?: string }> = (props) => {
 
   return (
     <div className={`${props.className} ${classes.header}`}>
-      <div>Select your photo to display the EXIF data.</div>
-      <Button variant='outlined' onClick={handleButtonClicked}>
-        Select Photo...
-      </Button>
-      <input
-        type='file'
-        onClick={handleInputClicked}
-        onChange={handleInputChange}
-        ref={inputElementRef}
-        className={classes.input}
-      ></input>
+      <div>
+        <div className={classes.text}>
+          Select your photo to display the EXIF data.
+        </div>
+        <Button variant='outlined' onClick={handleButtonClicked}>
+          Select Photo...
+        </Button>
+        <input
+          type='file'
+          onClick={handleInputClicked}
+          onChange={handleInputChange}
+          ref={inputElementRef}
+          className={classes.input}
+        ></input>
+      </div>
     </div>
   );
 };

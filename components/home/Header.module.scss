@@ -1,8 +1,14 @@
 .header {
   height: 100%;
   width: 100%;
-  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
   border-bottom: 8px solid #eeeeee; // follow the draggable splitter from react-reflex
+
+  .text {
+    margin-bottom: 15px;
+  }
 
   > button {
     height: 30px;

@@ -11,7 +11,7 @@ const HomeWideLayout: React.FC<{
   photoMap: JSX.Element;
   photoData: JSX.Element;
 }> = (props) => {
-  const headerHeight = 100;
+  const headerHeight = 120;
   const isHeaderVisible = true;
 
   return (
