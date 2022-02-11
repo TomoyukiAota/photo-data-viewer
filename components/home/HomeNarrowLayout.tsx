@@ -23,7 +23,7 @@ const HomeNarrowLayout: React.FC<{
 }> = (props) => {
   const appLayout = useAppLayout();
 
-  const headerHeight = appLayout.windowWidth < 360 ? 120 : 100;
+  const headerHeight = appLayout.windowWidth < 360 ? 120 : 100; // Use larger header height because the text is displayed in 2 lines with narrower window.
   const isHeaderVisible = true;
 
   const [selectedTabName, setSelectedTabName] = useState(TabName.Data);
