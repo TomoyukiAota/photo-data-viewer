@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
+import { useAppLayout } from '../../hooks/useAppLayout';
 import StyledTab from '../tab/StyledTab';
 import homeClasses from './Home.module.scss';
 import classes from './HomeNarrowLayout.module.scss';
@@ -20,7 +21,9 @@ const HomeNarrowLayout: React.FC<{
   photoMap: JSX.Element;
   photoData: JSX.Element;
 }> = (props) => {
-  const headerHeight = 100;
+  const appLayout = useAppLayout();
+
+  const headerHeight = appLayout.windowWidth < 360 ? 120 : 100;
   const isHeaderVisible = true;
 
   const [selectedTabName, setSelectedTabName] = useState(TabName.Data);
