@@ -1,6 +1,8 @@
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
+import homeClasses from './Home.module.scss';
+
 import classes from './HomeWideLayout.module.scss';
 
 const HomeWideLayout: React.FC<{
@@ -13,7 +15,7 @@ const HomeWideLayout: React.FC<{
   const isHeaderVisible = true;
 
   return (
-    <div className={classes.home}>
+    <div className={homeClasses.home}>
       <ReflexContainer orientation='horizontal'>
         {isHeaderVisible && (
           <ReflexElement
