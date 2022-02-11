@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Fragment } from 'react';
-import Home from '../components/layout/Home';
+import Home from '../components/home/Home';
 
 const Index: NextPage = () => {
   return (
