@@ -21,43 +21,18 @@ export interface NameValueGridRow extends IGridRowData, NameAndValue {}
 const NameValueGrid: React.FC<{
   className?: string;
   rows: NameValueGridRow[];
+  columnExtensions: Table.ColumnExtension[];
 }> = (props) => {
   const [columns] = useState([
     { name: 'name', title: 'Name' },
     { name: 'value', title: 'Value' },
   ]);
 
-  const [tableColumnExtensions] = useState([
-    { columnName: 'name', width: 300 },
-  ]);
-
-  const [expandedRowIds, setExpandenRowIds] = useState([0, 1]);
-
-  const handleOnExpandedRowIdsChange: (
-    expandedRowIds: Array<number | string>
-  ) => void = (expandedRowIds) => {
-    const expandedRowIdsInNumber = expandedRowIds.map(Number);
-    setExpandenRowIds(expandedRowIdsInNumber);
-  };
-
-  const getChildRows = (row: IGridRowData, rootRows: IGridRowData[]) => {
-    const childRows = rootRows.filter(
-      (r) => r.parentId === (row ? row.id : null)
-    );
-    return childRows.length ? childRows : null;
-  };
-
   return (
     <Paper className={classes.container}>
       <Grid rows={props.rows} columns={columns}>
-        <TreeDataState
-          expandedRowIds={expandedRowIds}
-          onExpandedRowIdsChange={handleOnExpandedRowIdsChange}
-        />
-        <CustomTreeData getChildRows={getChildRows} />
-        <Table columnExtensions={tableColumnExtensions} />
+        <Table columnExtensions={props.columnExtensions} />
         <TableHeaderRow />
-        <TableTreeColumn for='name' />
       </Grid>
     </Paper>
   );
