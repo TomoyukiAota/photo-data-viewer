@@ -1,0 +1,19 @@
+.home {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin splitter-hover {
+  &:hover {
+    background-color: #aaaaaa !important;
+    transition: all 1s ease 0.2s !important;
+  }
+}
+
+.horizontal-splitter {
+  @include splitter-hover;
+}
+
+.vertical-splitter {
+  @include splitter-hover;
+}
