@@ -63,6 +63,7 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
         }}
         open={Boolean(anchorElNav)}
         onClose={handleCloseMenu}
+        BackdropProps={{ style: { backgroundColor: '#222222', opacity: 0.4 } }}
       >
         {pages.map((page) => {
           const isCurrentPage = router.pathname === page.pathname;
