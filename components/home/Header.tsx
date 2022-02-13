@@ -49,7 +49,7 @@ const Header: React.FC<{ className?: string }> = (props) => {
     <div className={`${props.className} ${classes.header}`}>
       <div>
         <div className={classes.text}>
-          Select your photo to display the EXIF data.
+          Select your photo to display EXIF data.
         </div>
         <Button
           variant='outlined'
