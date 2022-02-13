@@ -10,7 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { useAppLayout } from '../../hooks/useAppLayout';
 import classes from './AppMenu.module.scss';
 
 interface Page {
@@ -23,17 +22,8 @@ const pages: Page[] = [
   { pathname: '/about', displayName: 'About' },
 ];
 
-function getAppMenuCssProperties(windowWidth: number): React.CSSProperties {
-  if (windowWidth > 600) {
-    return { top: '30px', right: '30px' };
-  } else {
-    return { top: '30px', right: '10px' };
-  }
-}
-
 const AppMenu: React.FC<{ classNames?: string }> = (props) => {
   const router = useRouter();
-  const { windowWidth } = useAppLayout();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
   const handleOpenMenu: React.MouseEventHandler<HTMLElement> = (event) => {
@@ -49,10 +39,8 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
     setAnchorElNav(null);
   };
 
-  const appMenuCssProperties = getAppMenuCssProperties(windowWidth);
-
   return (
-    <div className={props.classNames} style={appMenuCssProperties}>
+    <div className={props.classNames} style={{ top: '30px', right: '20px' }}>
       <IconButton
         size='large'
         color='inherit'
