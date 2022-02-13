@@ -6,6 +6,8 @@ import {
   MenuItem,
 } from '@mui/material';
 import { Check } from '@mui/icons-material';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -15,11 +17,12 @@ import classes from './AppMenu.module.scss';
 interface Page {
   pathname: string;
   displayName: string;
+  icon: JSX.Element;
 }
 
 const pages: Page[] = [
-  { pathname: '/', displayName: 'Home' },
-  { pathname: '/about', displayName: 'About' },
+  { pathname: '/', displayName: 'Home', icon: <HomeIcon /> },
+  { pathname: '/about', displayName: 'About', icon: <InfoIcon /> },
 ];
 
 const AppMenu: React.FC<{ classNames?: string }> = (props) => {
@@ -72,14 +75,13 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
               key={page.displayName}
               onClick={() => handleMenuItemClicked(page)}
             >
-              {isCurrentPage && (
-                <ListItemIcon>
-                  <Check />
-                </ListItemIcon>
-              )}
-              <ListItemText inset={!isCurrentPage}>
-                {page.displayName}
-              </ListItemText>
+              <ListItemIcon>
+                <Check
+                  style={{ visibility: isCurrentPage ? 'visible' : 'hidden' }}
+                />
+              </ListItemIcon>
+              <ListItemIcon>{page.icon}</ListItemIcon>
+              <ListItemText>{page.displayName}</ListItemText>
             </MenuItem>
           );
         })}
