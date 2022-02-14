@@ -17,7 +17,12 @@ const About: React.FC = () => {
       <div className={classes['app-name']}>Photo Data Viewer</div>
       <div className={classes['messages']}>
         <div>
-          Please submit issues and bugs in{' '}
+          This application fetches EXIF data from your file within your browser.
+          <br />
+          Therefore, it does not send your file to any servers.
+        </div>
+        <div>
+          If you find issues and bugs, please submit them in{' '}
           <a
             href='https://github.com/TomoyukiAota/photo-data-viewer/issues'
             target='_blank'
@@ -26,11 +31,6 @@ const About: React.FC = () => {
             GitHub Issues
           </a>
           .
-        </div>
-        <div>
-          This application fetches EXIF data from your file within your browser,
-          <br />
-          so it does not send your file to any servers.
         </div>
         <div>
           The source code of this application is hosted on{' '}
