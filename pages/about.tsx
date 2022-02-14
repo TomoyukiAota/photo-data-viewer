@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Fragment } from 'react';
+import About from '../components/about/About';
 
-const About: NextPage = () => {
+const AboutPage: NextPage = () => {
   return (
     <Fragment>
       <Head>
@@ -10,9 +11,9 @@ const About: NextPage = () => {
         <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>About Page</div>
+      <About />
     </Fragment>
   );
 };
 
-export default About;
+export default AboutPage;

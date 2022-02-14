@@ -1,0 +1,63 @@
+// prettier-ignore
+.container {
+  width: 100%;
+  padding: 100px 20px;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid:
+    'app-name'     auto
+    'messages'     auto
+    'developed-by' auto
+    / auto;
+  .app-name     { grid-area: app-name;     }
+  .messages     { grid-area: messages;     }
+  .developed-by { grid-area: developed-by; }
+}
+
+.app-name {
+  font-size: 28px;
+  text-align: center;
+}
+
+.messages {
+  padding: 50px 0 0 0;
+
+  > div {
+    padding: 10px 0;
+  }
+}
+
+// prettier-ignore
+.developed-by {
+  padding: 20px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  > img {
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    &:active {
+      background-color: #bbb;
+    }
+  }
+}
+
+.twitter-profile-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.github-profile-icon {
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+}
