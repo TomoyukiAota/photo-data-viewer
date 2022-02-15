@@ -1,0 +1,42 @@
+// prettier-ignore
+.container {
+  width: 100%;
+  padding: 100px 20px;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  grid:
+    'page-title'         auto
+    'date-time-settings' auto
+    / auto;
+  .page-title         { grid-area: page-title;         }
+  .date-time-settings { grid-area: date-time-settings; }
+}
+
+.page-title {
+  font-size: 28px;
+  text-align: center;
+}
+
+.date-time-settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-time-settings-title {
+  padding: 0px 0 20px 5px;
+}
+
+.date-time-settings-select {
+  display: flex;
+  gap: 10px;
+}
+
+.date-time-settings-example {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
