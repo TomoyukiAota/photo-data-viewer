@@ -3,30 +3,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import dayjs from 'dayjs';
-import { useState } from 'react';
 
+import { UserSettingKey, useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import classes from './Settings.module.scss';
 
-type DateFormatType = DateTimeFormat.ForUser.DateFormatType;
-type ClockSystemFormatType = DateTimeFormat.ForUser.ClockSystemFormatType;
-
 const Settings: React.FC = () => {
-  const [dateFormat, setDateFormat] = useState<DateFormatType>(
-    DateTimeFormat.ForUser.DateFormat_Default
-  );
+  const { userSettings, setUserSetting } = useUserSettings();
 
+  const dateFormat = userSettings.dateFormat;
   const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
-    setDateFormat(event.target.value as DateFormatType);
+    setUserSetting(UserSettingKey.DateFormat, event.target.value);
   };
 
-  const [clockSystemFormat, setClockSystemFormat] =
-    useState<ClockSystemFormatType>(
-      DateTimeFormat.ForUser.ClockSystemFormat_Default
-    );
-
+  const clockSystemFormat = userSettings.clockSystemFormat;
   const handleClockSystemFormatChange = (event: SelectChangeEvent<string>) => {
-    setClockSystemFormat(event.target.value as ClockSystemFormatType);
+    setUserSetting(UserSettingKey.ClockSystemFormat, event.target.value);
   };
 
   const formatStr = DateTimeFormat.ForUser.getDayjsFormatString(
@@ -38,6 +30,10 @@ const Settings: React.FC = () => {
   return (
     <div className={classes.container}>
       <div className={classes['page-title']}>Settings</div>
+      <div className={classes['page-description']}>
+        <div>Select the photo again to apply the change.</div>
+        <div>The settings are saved in your browser.</div>
+      </div>
       <div className={classes['date-time-settings']}>
         <div className={classes['date-time-settings-title']}>
           Date & Time Format
