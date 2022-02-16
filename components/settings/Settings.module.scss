@@ -8,17 +8,25 @@
   align-items: center;
   grid:
     'page-title'         auto
+    'page-description'   auto
     'date-time-settings' auto
-    'saved-in-browser'   auto
     / auto;
   .page-title         { grid-area: page-title;         }
+  .page-description   { grid-area: page-description;   }
   .date-time-settings { grid-area: date-time-settings; }
-  .saved-in-browser   { grid-area: saved-in-browser;   }
 }
 
 .page-title {
   font-size: 28px;
   text-align: center;
+}
+
+.page-description {
+  padding-top: 50px;
+
+  > * + * {
+    padding-top: 10px;
+  }
 }
 
 .date-time-settings {
@@ -38,12 +46,8 @@
 }
 
 .date-time-settings-example {
-  padding: 15px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.saved-in-browser {
-  font-size: 14px;
 }

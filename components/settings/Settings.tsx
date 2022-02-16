@@ -30,6 +30,10 @@ const Settings: React.FC = () => {
   return (
     <div className={classes.container}>
       <div className={classes['page-title']}>Settings</div>
+      <div className={classes['page-description']}>
+        <div>Select the photo again to apply the change.</div>
+        <div>The settings are saved in your browser.</div>
+      </div>
       <div className={classes['date-time-settings']}>
         <div className={classes['date-time-settings-title']}>
           Date & Time Format
@@ -74,9 +78,6 @@ const Settings: React.FC = () => {
           <div>Example</div>
           <div>{dateTimeExample}</div>
         </div>
-      </div>
-      <div className={classes['saved-in-browser']}>
-        The settings are saved in your browser.
       </div>
     </div>
   );
