@@ -3,30 +3,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import dayjs from 'dayjs';
-import { useState } from 'react';
 
+import { UserSettingKey, useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import classes from './Settings.module.scss';
 
-type DateFormatType = DateTimeFormat.ForUser.DateFormatType;
-type ClockSystemFormatType = DateTimeFormat.ForUser.ClockSystemFormatType;
-
 const Settings: React.FC = () => {
-  const [dateFormat, setDateFormat] = useState<DateFormatType>(
-    DateTimeFormat.ForUser.DateFormat_Default
-  );
+  const { userSettings, setUserSetting } = useUserSettings();
 
+  const dateFormat = userSettings.dateFormat;
   const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
-    setDateFormat(event.target.value as DateFormatType);
+    setUserSetting(UserSettingKey.DateFormat, event.target.value);
   };
 
-  const [clockSystemFormat, setClockSystemFormat] =
-    useState<ClockSystemFormatType>(
-      DateTimeFormat.ForUser.ClockSystemFormat_Default
-    );
-
+  const clockSystemFormat = userSettings.clockSystemFormat;
   const handleClockSystemFormatChange = (event: SelectChangeEvent<string>) => {
-    setClockSystemFormat(event.target.value as ClockSystemFormatType);
+    setUserSetting(UserSettingKey.ClockSystemFormat, event.target.value);
   };
 
   const formatStr = DateTimeFormat.ForUser.getDayjsFormatString(
@@ -82,6 +74,9 @@ const Settings: React.FC = () => {
           <div>Example</div>
           <div>{dateTimeExample}</div>
         </div>
+      </div>
+      <div className={classes['saved-in-browser']}>
+        The settings are saved in your browser.
       </div>
     </div>
   );
