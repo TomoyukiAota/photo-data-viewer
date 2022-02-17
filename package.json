@@ -16,6 +16,8 @@
     "@emotion/styled": "11.6.0",
     "@mui/icons-material": "5.2.5",
     "@mui/material": "5.2.8",
+    "@react-hook/debounce": "4.0.0",
+    "@react-hook/size": "2.1.2",
     "@react-hook/window-size": "3.0.7",
     "@rehooks/local-storage": "2.4.4",
     "classnames": "2.3.1",

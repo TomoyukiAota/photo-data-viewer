@@ -1,6 +1,11 @@
-import { useContext } from 'react';
+import { useDebounce } from '@react-hook/debounce';
+import useSize from '@react-hook/size';
+import { useContext, useRef } from 'react';
+
+import { useAppLayout } from '../hooks/useAppLayout';
 import PhotoContext from '../store/photo/photo-context';
 import LeafletLoader from './leaflet/LeafletLoader';
+
 import classes from './PhotoMap.module.scss';
 
 const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
@@ -14,14 +19,26 @@ const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
 };
 
 const PhotoMap: React.FC<{ className?: string }> = (props) => {
+  const mapSizeTarget = useRef(null);
+  const mapSize = useSize(mapSizeTarget);
+  const [debouncedMapSize, setDebouncedMapSize] = useDebounce(mapSize, 300);
+  const { isWideLayout } = useAppLayout();
+  if (isWideLayout) {
+    setDebouncedMapSize(mapSize);
+  } else {
+    // Do nothing for narrow layout case because
+    // 1) the map size cannot be changed, and
+    // 2) calling setDebouncedMapSize results in flickering after switching to Map tab.
+  }
+
   const photoCtx = useContext(PhotoContext);
   const isFileLoaded = !!photoCtx.loadedPhotoData?.isFileLoaded;
   const isLatLngAvailable = !!photoCtx.loadedPhotoData?.isLatLngAvailable;
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} ref={mapSizeTarget}>
       {isFileLoaded && !isLatLngAvailable && <LatLngNotAvailableOverlay />}
-      <LeafletLoader />
+      <LeafletLoader mapSize={debouncedMapSize} />
     </div>
   );
 };
