@@ -51,8 +51,8 @@ const LeafletContent: React.FC = () => {
 
   return (
     <MapContainer
-      center={defaultLatLng}
-      zoom={defaultZoom}
+      center={latLng}
+      zoom={zoom}
       style={{ height: '100%', width: '100%' }}
     >
       <TileLayer

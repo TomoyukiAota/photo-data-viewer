@@ -3,15 +3,20 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const LeafletLoader: React.FC = () => {
+const LeafletLoader: React.FC<{ mapSize: [number, number] }> = (props) => {
+  const [mapWidth, mapHeight] = props.mapSize;
+
   const LeafletContent = React.useMemo(
     () =>
       dynamic(() => import('./LeafletContent'), {
         loading: () => <p>A map is loading</p>,
         ssr: false,
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       /* list variables which should trigger a re-render here */
+      mapWidth,
+      mapHeight,
     ]
   );
   return <LeafletContent />;
