@@ -6,9 +6,9 @@ import dayjs from 'dayjs';
 
 import { UserSettingKey, useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
-import classes from './Settings.module.scss';
+import classes from './UserSettings.module.scss';
 
-const Settings: React.FC = () => {
+const UserSettings: React.FC = () => {
   const { userSettings, setUserSetting } = useUserSettings();
 
   const dateFormat = userSettings.dateFormat;
@@ -31,7 +31,7 @@ const Settings: React.FC = () => {
     <div className={classes.container}>
       <div className={classes['page-title']}>Settings</div>
       <div className={classes['page-description']}>
-        <div>Select the photo again to apply the change.</div>
+        <div>To apply the change, select the photo again.</div>
         <div>The settings are saved in your browser.</div>
       </div>
       <div className={classes['date-time-settings']}>
@@ -83,4 +83,4 @@ const Settings: React.FC = () => {
   );
 };
 
-export default Settings;
+export default UserSettings;

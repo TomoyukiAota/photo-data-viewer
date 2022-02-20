@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useContext, useState } from 'react';
 
 import PhotoImage from '../../components/photo-image/PhotoImage';

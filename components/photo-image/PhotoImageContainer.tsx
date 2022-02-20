@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 
 import PhotoContext from '../../store/photo/photo-context';
 import classes from './PhotoImageContainer.module.scss';
