@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Fragment } from 'react';
-import Settings from '../components/settings/Settings';
+import UserSettings from '../components/user-settings/UserSettings';
 
 const SettingsPage: NextPage = () => {
   return (
@@ -11,7 +11,7 @@ const SettingsPage: NextPage = () => {
         <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Settings />
+      <UserSettings />
     </Fragment>
   );
 };
