@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
-import { TreeDataState, CustomTreeData } from '@devexpress/dx-react-grid';
+import { Paper } from '@mui/material';
 import {
   Grid,
   Table,
   TableHeaderRow,
-  TableTreeColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 
 import { IGridRowData } from './grid-row-data';
