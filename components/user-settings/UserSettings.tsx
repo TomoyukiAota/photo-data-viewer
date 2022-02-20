@@ -31,7 +31,7 @@ const UserSettings: React.FC = () => {
     <div className={classes.container}>
       <div className={classes['page-title']}>Settings</div>
       <div className={classes['page-description']}>
-        <div>Select the photo again to apply the change.</div>
+        <div>To apply the change, select the photo again.</div>
         <div>The settings are saved in your browser.</div>
       </div>
       <div className={classes['date-time-settings']}>
