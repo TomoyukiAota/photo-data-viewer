@@ -26,8 +26,8 @@ const HomeWideLayout: React.FC<{
   const headerHeight = 120;
   const isHeaderVisible = true;
 
-  const photoImagePaneFlex = userSettings.wideLayoutPhotoImagePaneSize;
-  const photoDataPaneFlex = userSettings.wideLayoutPhotoDataPaneSize;
+  const photoImagePaneFlex = userSettings.wideLayoutPhotoImagePaneFlex;
+  const photoDataPaneFlex = userSettings.wideLayoutPhotoDataPaneFlex;
   const onResizePane = (
     event: HandlerProps,
     userSettingKey: UserSettingKeyType
@@ -62,7 +62,7 @@ const HomeWideLayout: React.FC<{
                   onStopResize={(event) =>
                     onResizePane(
                       event,
-                      UserSettingKey.WideLayoutPhotoImagePaneSize
+                      UserSettingKey.WideLayoutPhotoImagePaneFlex
                     )
                   }
                 >
@@ -83,7 +83,7 @@ const HomeWideLayout: React.FC<{
               minSize={100}
               flex={photoDataPaneFlex}
               onStopResize={(event) =>
-                onResizePane(event, UserSettingKey.WideLayoutPhotoDataPaneSize)
+                onResizePane(event, UserSettingKey.WideLayoutPhotoDataPaneFlex)
               }
             >
               {props.photoData}
