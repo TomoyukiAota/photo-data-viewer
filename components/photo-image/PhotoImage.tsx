@@ -75,7 +75,7 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
           src={props.url}
           alt={props.alt}
           ref={photoImgRef}
-        ></img>
+         />
       </div>
       <img
         className={classes['rotate-icon']}
@@ -87,7 +87,7 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
         style={{ opacity: 0 }}
         onClick={handleRotateIconClicked}
         ref={rotateIconRef}
-      ></img>
+       />
     </div>
   );
 };

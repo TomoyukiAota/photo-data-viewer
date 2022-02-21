@@ -7,7 +7,7 @@ const GridRow: React.FC<{
   data?: string;
 }> = (props) => {
   if (!props?.loadedPhotoData?.isFileLoaded) {
-    return <div></div>;
+    return <div />;
   }
   if (!props?.data) {
     return <div>Not Available</div>;

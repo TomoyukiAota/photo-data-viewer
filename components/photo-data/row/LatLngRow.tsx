@@ -9,7 +9,7 @@ const LatLngRow: React.FC<{
   loadedPhotoData?: LoadedPhotoData | null;
 }> = (props) => {
   if (!props?.loadedPhotoData?.isFileLoaded) {
-    return <div></div>;
+    return <div />;
   }
   if (!props?.loadedPhotoData?.exif?.isLatLngAvailable) {
     return <div>Not Available</div>;

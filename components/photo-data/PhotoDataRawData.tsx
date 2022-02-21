@@ -19,7 +19,7 @@ const StringifiedData: React.FC<{
         </a>{' '}
         function is displayed below:
       </div>
-      <hr className={classes.divider}></hr>
+      <hr className={classes.divider} />
       <div className={classes['stringified-data']}>{props.stringifiedData}</div>
     </div>
   );
@@ -36,7 +36,7 @@ const PhotoDataRawData: React.FC<{ className?: string }> = (props) => {
     <div className={classes.container}>
       {!stringifiedData && <div className={classes['no-data']}>No data</div>}
       {stringifiedData && (
-        <StringifiedData stringifiedData={stringifiedData}></StringifiedData>
+        <StringifiedData stringifiedData={stringifiedData} />
       )}
     </div>
   );
