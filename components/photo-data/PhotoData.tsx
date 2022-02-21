@@ -35,15 +35,9 @@ const PhotoData: React.FC<{ className?: string }> = (props) => {
         <StyledTab label={TabName.RawData} value={TabName.RawData} />
       </Tabs>
       <div className={classes['tab-content']}>
-        {selectedTabName === TabName.General && (
-          <PhotoDataGeneral />
-        )}
-        {selectedTabName === TabName.Details && (
-          <PhotoDataDetails />
-        )}
-        {selectedTabName === TabName.RawData && (
-          <PhotoDataRawData />
-        )}
+        {selectedTabName === TabName.General && <PhotoDataGeneral />}
+        {selectedTabName === TabName.Details && <PhotoDataDetails />}
+        {selectedTabName === TabName.RawData && <PhotoDataRawData />}
       </div>
     </div>
   );
