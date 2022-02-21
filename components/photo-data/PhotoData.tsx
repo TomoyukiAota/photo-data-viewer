@@ -36,13 +36,13 @@ const PhotoData: React.FC<{ className?: string }> = (props) => {
       </Tabs>
       <div className={classes['tab-content']}>
         {selectedTabName === TabName.General && (
-          <PhotoDataGeneral></PhotoDataGeneral>
+          <PhotoDataGeneral />
         )}
         {selectedTabName === TabName.Details && (
-          <PhotoDataDetails></PhotoDataDetails>
+          <PhotoDataDetails />
         )}
         {selectedTabName === TabName.RawData && (
-          <PhotoDataRawData></PhotoDataRawData>
+          <PhotoDataRawData />
         )}
       </div>
     </div>

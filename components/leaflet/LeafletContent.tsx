@@ -60,7 +60,7 @@ const LeafletContent: React.FC = () => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       <UpdateMap latLng={latLng} zoom={zoom} />
-      {isLatLngValid && <Marker position={latLng}></Marker>}
+      {isLatLngValid && <Marker position={latLng} />}
     </MapContainer>
   );
 };

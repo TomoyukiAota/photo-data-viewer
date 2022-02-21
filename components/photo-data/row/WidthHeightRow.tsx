@@ -6,7 +6,7 @@ const WidthHeightRow: React.FC<{
   loadedPhotoData?: LoadedPhotoData | null;
 }> = (props) => {
   if (!props?.loadedPhotoData?.isFileLoaded) {
-    return <div></div>;
+    return <div />;
   }
   if (!props?.loadedPhotoData?.exif?.isWidthHeightAvailable) {
     return <div>Not Available</div>;

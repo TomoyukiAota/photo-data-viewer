@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppProvider>
-      <AppMenu classNames={classes['app-menu']}></AppMenu>
+      <AppMenu classNames={classes['app-menu']} />
       <Component {...pageProps} />
       <UnsupportedFileSelectedDialog />
     </AppProvider>
