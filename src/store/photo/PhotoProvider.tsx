@@ -68,9 +68,7 @@ const PhotoProvider: React.FC = (props) => {
 
     const url = await getImageUrl(file);
 
-    setLoadedPhotoImage(() => (
-      <PhotoImage url={url} alt={file.name}></PhotoImage>
-    ));
+    setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
   };
 
   return (
