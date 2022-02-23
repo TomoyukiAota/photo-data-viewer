@@ -5,3 +5,7 @@ export function trackPhotoSelectedEvent(file: File) {
   const extension = getExtension(file.name)?.toLowerCase() ?? 'No_Extension';
   gtag.event('Selected Photo', 'Selected Photo', `Filename Extension: ${extension}`);
 }
+
+export function trackOpenUrl(url: string, urlDescription: string, from: string) {
+  gtag.event(`Opened URL`, `[${from}] Opened URL for ${urlDescription}`, url);
+}
