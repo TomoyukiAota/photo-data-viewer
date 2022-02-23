@@ -1,4 +1,3 @@
-import { getExtension } from '../../utils/filename-extension';
 import { createLoadedPhotoExifData, LoadedPhotoExifData } from './loaded-photo-exif-data';
 import { createLoadedPhotoFileData, LoadedPhotoFileData } from './loaded-photo-file-data';
 
@@ -6,7 +5,6 @@ export class LoadedPhotoData {
   public file?: LoadedPhotoFileData | null;
   public exif?: LoadedPhotoExifData | null;
   public get isFileLoaded(): boolean { return !!this.file; }
-  public get filenameExtension(): string { return getExtension(this.file?.name) }
   public get isExifAvailable(): boolean { return !!this.exif; }
   public get isLatLngAvailable(): boolean { return !!this.exif?.isLatLngAvailable }
 }
