@@ -11,5 +11,9 @@ export function trackOpenUrl(url: string, urlDescription: string, from: string) 
 }
 
 export function trackLoadedUserSetting(key: string, value: string) {
-  gtag.event('Loaded User Settings', 'Loaded User Settings', `${key}: ${value}`);
+  gtag.event('User Setting', 'Loaded User Setting', `${key}: ${value}`);
+}
+
+export function trackChangedUserSetting(key: string, value: string) {
+  gtag.event('User Setting', 'Changed User Setting', `${key}: ${value}`);
 }

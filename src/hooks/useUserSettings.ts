@@ -1,5 +1,5 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
-import { trackLoadedUserSetting } from '../google-analytics/track-event';
+import { trackChangedUserSetting, trackLoadedUserSetting } from '../google-analytics/track-event';
 import { DateTimeFormat } from '../utils/date-time-format';
 
 export const UserSettingKey = {
@@ -29,7 +29,10 @@ export const useUserSettings = () => {
     wideLayoutPhotoDataPaneFlex,
     wideLayoutPhotoImagePaneFlex,
   }
-  const setUserSetting = (key: UserSettingKeyType, value: any) => writeStorage(key, value);
+  const setUserSetting = (key: UserSettingKeyType, value: any) => {
+    writeStorage(key, value);
+    trackChangedUserSetting(key, value);
+  };
   return { userSettings, setUserSetting };
 };
 
