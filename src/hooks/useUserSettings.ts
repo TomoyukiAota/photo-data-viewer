@@ -1,4 +1,5 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
+import { trackLoadedUserSetting } from '../google-analytics/track-event';
 import { DateTimeFormat } from '../utils/date-time-format';
 
 export const UserSettingKey = {
@@ -30,6 +31,19 @@ export const useUserSettings = () => {
   }
   const setUserSetting = (key: UserSettingKeyType, value: any) => writeStorage(key, value);
   return { userSettings, setUserSetting };
+};
+
+export const useUserSettingsTracker = () => {
+  const { userSettings } = useUserSettings();
+
+  const trackLoadedUserSettings = () => {
+    trackLoadedUserSetting(UserSettingKey.DateFormat, userSettings.dateFormat);
+    trackLoadedUserSetting(UserSettingKey.ClockSystemFormat, userSettings.clockSystemFormat);
+    trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoDataPaneFlex, userSettings.wideLayoutPhotoDataPaneFlex.toString());
+    trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoImagePaneFlex, userSettings.wideLayoutPhotoImagePaneFlex.toString());
+  }
+
+  return { trackLoadedUserSettings };
 };
 
 export const useUserSettingsInitializer = () => {

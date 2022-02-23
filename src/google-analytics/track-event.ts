@@ -9,3 +9,7 @@ export function trackPhotoSelectedEvent(file: File) {
 export function trackOpenUrl(url: string, urlDescription: string, from: string) {
   gtag.event(`Opened URL`, `[${from}] Opened URL for ${urlDescription}`, url);
 }
+
+export function trackLoadedUserSetting(key: string, value: string) {
+  gtag.event('Loaded User Settings', 'Loaded User Settings', `${key}: ${value}`);
+}
