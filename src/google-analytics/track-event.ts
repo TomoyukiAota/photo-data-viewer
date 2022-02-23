@@ -1,9 +1,16 @@
-import { getExtension } from '../utils/filename-extension';
 import * as gtag from './gtag';
+import { LoadedPhotoData } from '../store/photo/loaded-photo-data';
 
-export function trackPhotoSelectedEvent(file: File) {
-  const extension = getExtension(file.name)?.toLowerCase() ?? 'No_Extension';
-  gtag.event('Selected Photo', 'Selected Photo', `Filename Extension: ${extension}`);
+export function trackLoadedPhotoData(data: LoadedPhotoData) {
+  const extension = data.filenameExtension?.toLowerCase() ?? 'No_Extension';
+  gtag.event('Loaded Photo', 'Loaded Photo', `Filename Extension: ${extension}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `isFileLoaded: ${data.isFileLoaded}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `isExifAvailable: ${data.isExifAvailable}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `isLatLngAvailable: ${data.isLatLngAvailable}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `File Size: ${data.file?.size?.displayString}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `MIME Type: ${data.file?.mimeType}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `Image Width: ${data.exif?.width}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `Image Height: ${data.exif?.height}`);
 }
 
 export function trackOpenUrl(url: string, urlDescription: string, from: string) {

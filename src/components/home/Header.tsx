@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import { useContext, useRef } from 'react';
 
-import { trackPhotoSelectedEvent } from '../../google-analytics/track-event';
 import PhotoContext from '../../store/photo/photo-context';
 import classes from './Header.module.scss';
 
@@ -43,7 +42,6 @@ const Header: React.FC<{ className?: string }> = (props) => {
       return;
     }
 
-    trackPhotoSelectedEvent(file);
     photoCtx.loadPhoto(file);
   };
 

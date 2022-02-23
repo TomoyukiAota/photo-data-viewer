@@ -4,6 +4,7 @@ import PhotoImage from '../../components/photo-image/PhotoImage';
 import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
 import PhotoText from '../../components/photo-image/PhotoText';
 
+import { trackLoadedPhotoData } from '../../google-analytics/track-event';
 import { isHeif } from '../../utils/filename-extension';
 import { sleep } from '../../utils/sleep';
 import DialogContext from '../dialog/dialog-context';
@@ -61,6 +62,7 @@ const PhotoProvider: React.FC = (props) => {
 
     const data = await createLoadedPhotoData(file);
     console.log('LoadedPhotoData', data);
+    trackLoadedPhotoData(data);
     setLoadedPhotoData(data);
     if (!data?.isExifAvailable) {
       dialogCtx.unsupportedFileSelected.open();
