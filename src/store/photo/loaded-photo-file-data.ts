@@ -1,5 +1,6 @@
 import filesize from 'filesize';
 import isNumber from 'is-number';
+import { getExtension } from '../../utils/filename-extension';
 import { formatDate } from '../../utils/format-date';
 
 export class LastModified {
@@ -23,6 +24,7 @@ export class LoadedPhotoFileData {
   public name?: string;
   public size?: FileSize;
   public mimeType?: string; // e.g. "image/jpeg"
+  public get filenameExtension(): string { return getExtension(this.name); }
 }
 
 export function createLoadedPhotoFileData(file: File): LoadedPhotoFileData | null {

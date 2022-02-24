@@ -1,15 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { IconDataUrl } from '../../icons/icon-data-url';
+import { openUrl } from '../../utils/open-url';
 
 import classes from './About.module.scss';
 
 const About: React.FC = () => {
   const handleTwitterProfileIconClicked = () => {
-    window.open('https://twitter.com/TomoyukiAota', '_blank');
+    openUrl(
+      'https://twitter.com/TomoyukiAota',
+      'Twitter Profile of Tomoyuki Aota',
+      'About Page'
+    );
   };
   const handleGitHubProfileIconClicked = () => {
-    window.open('https://github.com/TomoyukiAota', '_blank');
+    openUrl(
+      'https://github.com/TomoyukiAota',
+      'GitHub Profile of Tomoyuki Aota',
+      'About Page'
+    );
   };
 
   return (

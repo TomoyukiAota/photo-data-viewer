@@ -1,4 +1,5 @@
 import IconButton from '@mui/material/IconButton';
+import { trackOpenUrl } from '../../../google-analytics/track-event';
 import GoogleIcon from '../../../icons/google.svg';
 import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
 
@@ -21,6 +22,11 @@ const LatLngRow: React.FC<{
     const zoom = 14;
     window.open(
       `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
+    );
+    trackOpenUrl(
+      'https://maps.google.com/ with query parameters for latitude, longitude, and zoom',
+      'Show in Google Maps',
+      'Home Page'
     );
   };
 

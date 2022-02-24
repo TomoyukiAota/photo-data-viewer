@@ -64,7 +64,7 @@ const Header: React.FC<{ className?: string }> = (props) => {
           onChange={handleInputChange}
           ref={inputElementRef}
           className={classes.input}
-         />
+        />
       </div>
     </div>
   );

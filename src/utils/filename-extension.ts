@@ -14,7 +14,7 @@ export class FilenameExtension {
   public static isMov(extension: string) { return this.movExtensions.includes(extension.toLowerCase()); }
 }
 
-export function getExtension(filename: string): string {
+export function getExtension(filename?: string): string {
   const extension = filename?.split?.('.')?.pop?.();
   return extension ?? '';
 }
