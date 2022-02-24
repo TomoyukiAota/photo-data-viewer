@@ -24,7 +24,7 @@ const LatLngRow: React.FC<{
       `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
     );
     trackOpenUrl(
-      'https://maps.google.com/',
+      'https://maps.google.com/ with query parameters for latitude, longitude, and zoom',
       'Show in Google Maps',
       'Home Page'
     );
