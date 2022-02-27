@@ -24,3 +24,7 @@ export function trackLoadedUserSetting(key: string, value: string) {
 export function trackChangedUserSetting(key: string, value: string) {
   gtag.event('User Setting', 'Changed User Setting', `${key}: ${value}`);
 }
+
+export function trackChangedAppLayout(key: string, value: string) {
+  gtag.event('App Layout', 'App Layout', `${key}: ${value}`);
+}
