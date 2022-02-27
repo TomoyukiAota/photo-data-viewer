@@ -6,7 +6,7 @@ function isWideLayout(windowWidth: number): boolean {
   return windowWidth > 1200;
 }
 
-export const useAppLayout = () => {
+export const useThrottledAppLayout = () => {
   const [windowWidth, windowHeight] = useThrottledWindowSize();
   return { isWideLayout: isWideLayout(windowWidth), windowWidth, windowHeight };
 }

@@ -1,4 +1,4 @@
-import { useAppLayout } from '../../hooks/useAppLayout';
+import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 import PhotoData from '../photo-data/PhotoData';
 import PhotoImageContainer from '../photo-image/PhotoImageContainer';
 import PhotoMap from '../PhotoMap';
@@ -9,7 +9,7 @@ import HomeWideLayout from './HomeWideLayout';
 import classes from './Home.module.scss';
 
 const Home: React.FC = () => {
-  const appLayout = useAppLayout();
+  const appLayout = useThrottledAppLayout();
 
   const header = <Header />;
   const photoImage = <PhotoImageContainer />;

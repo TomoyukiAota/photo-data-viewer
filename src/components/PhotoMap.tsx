@@ -2,7 +2,7 @@ import { useDebounce } from '@react-hook/debounce';
 import useSize from '@react-hook/size';
 import { useContext, useRef } from 'react';
 
-import { useAppLayout } from '../hooks/useAppLayout';
+import { useThrottledAppLayout } from '../hooks/useAppLayout';
 import PhotoContext from '../store/photo/photo-context';
 import LeafletLoader from './leaflet/LeafletLoader';
 
@@ -22,7 +22,7 @@ const PhotoMap: React.FC<{ className?: string }> = (props) => {
   const mapSizeTarget = useRef(null);
   const mapSize = useSize(mapSizeTarget);
   const [debouncedMapSize, setDebouncedMapSize] = useDebounce(mapSize, 300);
-  const { isWideLayout } = useAppLayout();
+  const { isWideLayout } = useThrottledAppLayout();
   if (isWideLayout) {
     setDebouncedMapSize(mapSize);
   } else {
