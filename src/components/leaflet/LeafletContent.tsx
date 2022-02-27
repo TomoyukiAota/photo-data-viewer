@@ -12,7 +12,7 @@ import 'leaflet-defaulticon-compatibility';
 
 import PhotoContext from '../../store/photo/photo-context';
 import { LoadedPhotoExifData } from '../../store/photo/loaded-photo-exif-data';
-import { useAppLayout } from '../../hooks/useAppLayout';
+import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 
 const defaultLatLng: LatLngExpression = [0, 0];
 const defaultZoom = 1;
@@ -26,7 +26,7 @@ function isLagLngValid(exif?: LoadedPhotoExifData | null): boolean {
 const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
 ) => {
-  const appLayout = useAppLayout();
+  const appLayout = useThrottledAppLayout();
   const map = useMap();
   if (appLayout.isWideLayout) {
     map.flyTo(props.latLng, props.zoom);

@@ -16,6 +16,10 @@ export function event(category: string, action: string, label: string, value = '
     return;
   }
 
+  if (typeof window === 'undefined') {
+    return; // Avoid compile error during Next.js SSR
+  }
+
   window.gtag('event', action, {
     event_category: category,
     event_label: label,

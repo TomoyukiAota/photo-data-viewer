@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useAppLayout } from '../../hooks/useAppLayout';
+import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 import PhotoContext from '../../store/photo/photo-context';
 import { createGeneralDataRows } from './row/general-data-row';
 import NameValueGrid from './grid/NameValueGrid';
@@ -13,7 +13,7 @@ function getNameColumnWidth(windowWidth: number): number {
 }
 
 const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
-  const appLayout = useAppLayout();
+  const appLayout = useThrottledAppLayout();
   const nameColumnWidth = getNameColumnWidth(appLayout.windowWidth);
   const photoCtx = useContext(PhotoContext);
   const rows = createGeneralDataRows(photoCtx.loadedPhotoData);
