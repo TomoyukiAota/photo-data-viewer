@@ -26,9 +26,16 @@ const About: React.FC = () => {
       <div className={classes['app-name']}>Photo Data Viewer</div>
       <div className={classes['messages']}>
         <div>
-          This application fetches EXIF data from your file within your browser.
+          This application fetches EXIF data from your file within your browser,
           <br />
-          Therefore, it does not send your file to any servers.
+          so the file is kept within your browser and not sent to any servers.
+        </div>
+        <div>
+          To improve this application, this application collects anonymized
+          <br />
+          usage information (e.g. opening this page) using Google Analytics.
+          <br />
+          You agree to it by continuing to use this application.
         </div>
         <div>
           If you find issues and bugs, please submit them in{' '}
