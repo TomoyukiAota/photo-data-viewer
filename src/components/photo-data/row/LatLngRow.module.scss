@@ -4,5 +4,12 @@
 
   > button {
     margin-left: 30px;
+    padding: 4px;
+    border-radius: 20%;
+    background-color: rgba(0, 0, 0, 0.03);
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
   }
 }
