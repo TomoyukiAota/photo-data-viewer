@@ -1,7 +1,8 @@
 @mixin splitter-hover {
+  transition: all 1s ease 0.2s !important;
+
   &:hover {
     background-color: #aaaaaa !important;
-    transition: all 1s ease 0.2s !important;
   }
 }
 
