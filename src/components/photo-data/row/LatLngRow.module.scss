@@ -1,5 +1,8 @@
 $screen-width-breakpoint: 400px;
 
+// CSS selectors are intentionally defined within .row to increase their specificity.
+// This is because there was a case that the style was not applied due to insufficient specificy
+// only in production build. (Development build is okay, so it happens only in production build for some reason.)
 .row {
   display: flex;
   flex-direction: row;
