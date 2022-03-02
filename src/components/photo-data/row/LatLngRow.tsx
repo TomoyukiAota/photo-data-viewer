@@ -33,7 +33,6 @@ const LatLngRow: React.FC<{
   };
 
   const handleGoogleStreetViewButtonClicked = () => {
-    const zoom = 14;
     window.open(
       `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
     );
