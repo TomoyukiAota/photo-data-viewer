@@ -3,13 +3,30 @@
   align-items: center;
 
   > button {
-    margin-left: 30px;
-    padding: 4px;
-    border-radius: 20%;
     background-color: rgba(0, 0, 0, 0.04);
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.08);
     }
   }
+}
+
+.google-maps-button {
+  margin-left: 30px;
+  padding: 4px;
+  border-radius: 20%;
+}
+
+.google-maps-icon {
+  height: 25px;
+}
+
+.google-street-view-button {
+  margin-left: 10px;
+  padding: 2px;
+  border-radius: 20%;
+}
+
+.google-street-view-icon {
+  height: 30px;
 }
