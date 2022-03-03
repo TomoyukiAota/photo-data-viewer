@@ -15,8 +15,12 @@ export class FilenameExtension {
 }
 
 export function getExtension(filename?: string): string {
-  const extension = filename?.split?.('.')?.pop?.();
-  return extension ?? '';
+  if (filename?.includes?.('.')) {
+    const extension = filename.split?.('.')?.pop?.();
+    return extension ?? '';
+  } else {
+    return '';
+  }
 }
 
 export function isHeif(filename: string) {
