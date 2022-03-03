@@ -2,7 +2,7 @@ import * as gtag from './gtag';
 import { LoadedPhotoData } from '../store/photo/loaded-photo-data';
 
 export function trackLoadedPhotoData(data: LoadedPhotoData) {
-  const extension = data.file?.filenameExtension.toLowerCase() ?? 'No_Extension';
+  const extension = data.file?.filenameExtension.toLowerCase() ?? 'N/A (something went wrong)';
   gtag.event('Loaded Photo', 'Loaded Photo', `Filename Extension: ${extension}`);
   gtag.event('Loaded Photo', 'Loaded Photo', `isFileLoaded: ${data.isFileLoaded}`);
   gtag.event('Loaded Photo', 'Loaded Photo', `isExifAvailable: ${data.isExifAvailable}`);
