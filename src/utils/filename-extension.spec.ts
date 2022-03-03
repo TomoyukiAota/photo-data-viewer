@@ -1,4 +1,4 @@
-import { isHeif, getExtension } from './filename-extension';
+import { getExtension, isHeif } from './filename-extension';
 
 describe('FilenameExtension', () => {
   it('getExtension', () => {
