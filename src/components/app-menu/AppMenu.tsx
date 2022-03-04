@@ -45,7 +45,7 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
   };
 
   return (
-    <div className={props.classNames} style={{ top: '30px', right: '20px' }}>
+    <div className={props.classNames} style={{ top: '30px', right: '10px' }}>
       <IconButton
         size='large'
         color='inherit'

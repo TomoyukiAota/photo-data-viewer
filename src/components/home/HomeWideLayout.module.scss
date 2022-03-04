@@ -13,3 +13,7 @@
 .vertical-splitter {
   @include splitter-hover;
 }
+
+.image-and-map-container {
+  overflow-y: hidden !important; // Handle the weird issue that the scrollbar appears when image/map panes are evenly split (i.e. default)
+}

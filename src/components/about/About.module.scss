@@ -1,7 +1,7 @@
 // prettier-ignore
 .container {
   width: 100%;
-  padding: 100px 20px;
+  padding: 130px 20px 0 20px;
 
   display: grid;
   justify-content: center;
@@ -24,7 +24,7 @@
 .messages {
   padding: 50px 0 0 0;
 
-  > div {
+  > * + * {
     padding: 10px 0;
   }
 
