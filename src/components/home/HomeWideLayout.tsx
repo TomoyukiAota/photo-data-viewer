@@ -23,7 +23,7 @@ const HomeWideLayout: React.FC<{
 }> = (props) => {
   const { userSettings, setUserSetting } = useUserSettings();
 
-  const headerHeight = 120;
+  const headerHeight = 130;
   const isHeaderVisible = true;
 
   const photoImagePaneFlex = userSettings.wideLayoutPhotoImagePaneFlex;
