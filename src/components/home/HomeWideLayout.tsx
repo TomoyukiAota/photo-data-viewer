@@ -54,7 +54,10 @@ const HomeWideLayout: React.FC<{
         )}
         <ReflexElement>
           <ReflexContainer orientation='vertical'>
-            <ReflexElement minSize={100}>
+            <ReflexElement
+              minSize={100}
+              className={classes['image-and-map-container']}
+            >
               <ReflexContainer orientation='horizontal'>
                 <ReflexElement
                   minSize={100}
