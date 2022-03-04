@@ -29,13 +29,8 @@ export function createGeneralDataRows(
       ),
     },
     {
-      name: 'Last Modified',
-      value: (
-        <GridRow
-          loadedPhotoData={loadedPhotoData}
-          data={loadedPhotoData?.file?.lastModified?.displayString}
-        />
-      ),
+      name: 'Width x Height',
+      value: <WidthHeightRow loadedPhotoData={loadedPhotoData} />,
     },
     {
       name: 'Date Taken',
@@ -45,10 +40,6 @@ export function createGeneralDataRows(
           data={loadedPhotoData?.exif?.dateTimeOriginal?.displayString}
         />
       ),
-    },
-    {
-      name: 'Width x Height',
-      value: <WidthHeightRow loadedPhotoData={loadedPhotoData} />,
     },
     {
       name: 'Latitude, Longitude',
