@@ -11,5 +11,5 @@
 }
 
 .menu-icon-text {
-  font-size: 5px;
+  font-size: 12px; // Smaller than 10px doesn't take effect in Chrome, but it does in iPhone's Safari.
 }
