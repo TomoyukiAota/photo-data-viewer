@@ -52,7 +52,10 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
         aria-label='menu'
         onClick={handleOpenMenu}
       >
-        <MenuIcon />
+        <div className={classes['menu-icon-wrapper']}>
+          <MenuIcon className={classes['menu-icon']} />
+          <span className={classes['menu-icon-text']}>MENU</span>
+        </div>
       </IconButton>
       <Menu
         id='menu-appbar'
