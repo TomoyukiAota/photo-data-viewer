@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import PhotoContext from '../../store/photo/photo-context';
+import PhotoContext from '../../context/photo/photo-context';
 import classes from './PhotoDataRawData.module.scss';
 
 const StringifiedData: React.FC<{
