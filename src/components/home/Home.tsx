@@ -1,7 +1,7 @@
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 import PhotoData from '../photo-data/PhotoData';
 import PhotoImageContainer from '../photo-image/PhotoImageContainer';
-import PhotoMap from '../PhotoMap';
+import PhotoMap from '../photo-map/PhotoMap';
 
 import Header from './Header';
 import HomeNarrowLayout from './HomeNarrowLayout';
