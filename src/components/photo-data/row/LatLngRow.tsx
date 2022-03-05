@@ -3,7 +3,7 @@
 import IconButton from '@mui/material/IconButton';
 import { trackOpenUrl } from '../../../google-analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
-import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
+import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 
 import classes from './LatLngRow.module.scss';
 

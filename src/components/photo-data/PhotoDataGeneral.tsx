@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
-import PhotoContext from '../../store/photo/photo-context';
+import PhotoContext from '../../context/photo/photo-context';
 import { createGeneralDataRows } from './row/general-data-row';
 import NameValueGrid from './grid/NameValueGrid';
 

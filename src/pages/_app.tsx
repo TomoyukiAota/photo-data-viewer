@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import AppMenu from '../components/app-menu/AppMenu';
 import UnsupportedFileSelectedDialog from '../components/dialog/UnsupportedFileSelectedDialog';
 import { useAppRoot } from '../hooks/useAppRoot';
-import AppProvider from '../store/AppProvider';
+import AppProvider from '../context/AppProvider';
 
 import classes from './_app.module.scss';
 

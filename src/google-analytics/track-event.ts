@@ -1,5 +1,5 @@
 import * as gtag from './gtag';
-import { LoadedPhotoData } from '../store/photo/loaded-photo-data';
+import { LoadedPhotoData } from '../context/photo/loaded-photo-data';
 
 export function trackLoadedPhotoData(data: LoadedPhotoData) {
   const extension = data.file?.filenameExtension.toLowerCase() ?? 'N/A (something went wrong)';

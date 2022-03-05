@@ -2,9 +2,9 @@ import { useDebounce } from '@react-hook/debounce';
 import useSize from '@react-hook/size';
 import { useContext, useRef } from 'react';
 
-import { useThrottledAppLayout } from '../hooks/useAppLayout';
-import PhotoContext from '../store/photo/photo-context';
-import LeafletLoader from './leaflet/LeafletLoader';
+import { useThrottledAppLayout } from '../../hooks/useAppLayout';
+import PhotoContext from '../../context/photo/photo-context';
+import LeafletLoader from '../leaflet/LeafletLoader';
 
 import classes from './PhotoMap.module.scss';
 

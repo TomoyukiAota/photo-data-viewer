@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import DialogContext from '../../store/dialog/dialog-context';
+import DialogContext from '../../context/dialog/dialog-context';
 
 import classes from './UnsupportedFileSelectedDialog.module.scss';
 

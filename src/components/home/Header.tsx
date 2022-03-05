@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { useContext, useRef } from 'react';
 
-import PhotoContext from '../../store/photo/photo-context';
+import PhotoContext from '../../context/photo/photo-context';
 import classes from './Header.module.scss';
 
 const Header: React.FC<{ className?: string }> = (props) => {

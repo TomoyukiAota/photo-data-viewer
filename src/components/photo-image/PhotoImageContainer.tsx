@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import PhotoContext from '../../store/photo/photo-context';
+import PhotoContext from '../../context/photo/photo-context';
 import classes from './PhotoImageContainer.module.scss';
 
 const PhotoImageContainer: React.FC<{ className?: string }> = (props) => {

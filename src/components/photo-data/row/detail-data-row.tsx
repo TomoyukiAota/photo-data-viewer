@@ -1,4 +1,4 @@
-import { LoadedPhotoData } from '../../../store/photo/loaded-photo-data';
+import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
