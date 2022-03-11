@@ -38,7 +38,7 @@ const About: React.FC = () => {
           You agree to it by continuing to use this application.
         </div>
         <div>
-          If you find issues and bugs, please submit them in{' '}
+          If you find any bugs or issues, please submit them in{' '}
           <a
             href='https://github.com/TomoyukiAota/photo-data-viewer/issues'
             target='_blank'
