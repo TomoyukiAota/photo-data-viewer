@@ -1,6 +1,6 @@
 @mixin splitter-hover {
-  transition: all 1s ease 0.2s !important;
-
+  // The same animation as the splitter gutter in Photo Location Map.
+  transition: background-color 1s ease 0.2s !important;
   &:hover {
     background-color: #aaaaaa !important;
   }
