@@ -1,5 +1,6 @@
-import * as gtag from './gtag';
+import { AppIntegration } from '../app-integration/app-integration';
 import { LoadedPhotoData } from '../context/photo/loaded-photo-data';
+import * as gtag from './gtag';
 
 export function trackLoadedPhotoData(data: LoadedPhotoData) {
   const extension = data.file?.filenameExtension.toLowerCase() ?? 'N/A (something went wrong)';
@@ -27,4 +28,8 @@ export function trackChangedUserSetting(key: string, value: string) {
 
 export function trackChangedAppLayout(key: string, value: string) {
   gtag.event('App Layout', 'App Layout', `${key}: ${value}`);
+}
+
+export function trackAppIntegrationMode() {
+  gtag.event('Environment', 'App Integration Mode', AppIntegration.mode);
 }

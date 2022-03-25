@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
+import { AppIntegration } from '../../app-integration/app-integration';
 import StyledTab from '../tab/StyledTab';
 import homeClasses from './Home.module.scss';
 import classes from './HomeNarrowLayout.module.scss';
@@ -21,7 +22,7 @@ const HomeNarrowLayout: React.FC<{
   photoData: JSX.Element;
 }> = (props) => {
   const headerHeight = 130;
-  const isHeaderVisible = true;
+  const isHeaderVisible = AppIntegration.isStandalone;
 
   const [selectedTabName, setSelectedTabName] = useState(TabName.Data);
 
