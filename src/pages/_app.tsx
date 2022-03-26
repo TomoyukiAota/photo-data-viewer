@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { useState, useEffect } from 'react';
 
 import { AppIntegration } from '../app-integration/app-integration';
+import LoadPhotoInPlm from '../app-integration/LoadPhotoInPlm';
 import AppMenu from '../components/app-menu/AppMenu';
 import UnsupportedFileSelectedDialog from '../components/dialog/UnsupportedFileSelectedDialog';
 import AppProvider from '../context/AppProvider';
@@ -38,6 +39,7 @@ function AppRoot({ Component, pageProps }: AppProps) {
           />
           <Component {...pageProps} />
           <UnsupportedFileSelectedDialog />
+          <LoadPhotoInPlm />
         </AppProvider>
       ),
     [Component, pageProps]
