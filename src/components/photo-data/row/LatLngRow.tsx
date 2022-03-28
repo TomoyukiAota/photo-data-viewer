@@ -49,7 +49,7 @@ const LatLngRow: React.FC<{
       <div className={classes['lat-lng-text']}>
         {latitude?.toFixed(4) ?? ''}, {longitude?.toFixed(4) ?? ''}
       </div>
-      {AppIntegration.isStandalone ?? (
+      {AppIntegration.isStandalone && (
         <div className={classes['buttons']}>
           <IconButton
             className={classes['google-maps-button']}
