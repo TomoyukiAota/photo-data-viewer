@@ -7,7 +7,7 @@ const SettingsPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`Settings - ${pageTitleDefaultValue}`}</title>
+        <title>{pageTitleDefaultValue.settings}</title>
         <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

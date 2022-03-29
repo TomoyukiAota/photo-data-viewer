@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { IconDataUrl } from '../../icons/icon-data-url';
+import { standaloneAppName } from '../../utils/app-name';
 import { openUrl } from '../../utils/open-url';
 
 import classes from './About.module.scss';
@@ -23,7 +24,7 @@ const About: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes['app-name']}>Photo Data Viewer</div>
+      <div className={classes['app-name']}>{standaloneAppName}</div>
       <div className={classes['messages']}>
         <div>
           This application fetches EXIF data from your file within your browser,{' '}

@@ -8,7 +8,7 @@ type PageTitleContextType = {
 };
 
 const PageTitleContext = createContext<PageTitleContextType>({
-  indexPageTitle: pageTitleDefaultValue,
+  indexPageTitle: pageTitleDefaultValue.index,
   setIndexPageTitle: () => { },
 });
 

@@ -7,7 +7,7 @@ const AboutPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`About - ${pageTitleDefaultValue}`}</title>
+        <title>{pageTitleDefaultValue.about}</title>
         <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
