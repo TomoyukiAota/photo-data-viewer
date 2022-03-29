@@ -1,14 +1,14 @@
 import DialogProvider from './dialog/DialogProvider';
-import DocumentTitleProvider from './document-title/DocumentTitleProvider';
+import PageTitleProvider from './page-title/PageTitleProvider';
 import PhotoProvider from './photo/PhotoProvider';
 
 const AppProvider: React.FC = (props) => {
   return (
-    <DocumentTitleProvider>
+    <PageTitleProvider>
       <DialogProvider>
         <PhotoProvider>{props.children}</PhotoProvider>
       </DialogProvider>
-    </DocumentTitleProvider>
+    </PageTitleProvider>
   );
 };
 

@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import About from '../components/about/About';
-import { documentTitleDefaultValue } from '../context/document-title/document-title-default-value';
+import { pageTitleDefaultValue } from '../context/page-title/page-title-default-value';
 
 const AboutPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`About - ${documentTitleDefaultValue}`}</title>
+        <title>{`About - ${pageTitleDefaultValue}`}</title>
         <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
