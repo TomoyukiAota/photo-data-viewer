@@ -1,7 +1,7 @@
-import { standaloneAppName } from '../../utils/app-name';
+import { appName } from '../../app-integration/app-name';
 
 export const pageTitleDefaultValue = {
-  index: standaloneAppName,
-  about: `About - ${standaloneAppName}`,
-  settings: `Settings - ${standaloneAppName}`,
+  index: appName.standalone,
+  about: `About - ${appName.standalone}`,
+  settings: `Settings - ${appName.standalone}`,
 };
