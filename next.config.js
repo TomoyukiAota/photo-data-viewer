@@ -16,7 +16,9 @@ module.exports = {
       // config.target needs to be different value for different deployment.
       // To deploy as standalone app, config.target needs to be the default value, so it's not set.
       // To deploy in Photo Location Map, set config.target to 'electron-renderer' to be able to call the functions in fs (e.g. fs.readFileSync).
-      config.target = 'electron-renderer';
+      if (process.env.PLM_DEPLOYMENT === 'True') {
+        config.target = 'electron-renderer';
+      }
     }
 
     return config;
