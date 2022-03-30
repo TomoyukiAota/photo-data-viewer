@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import IconButton from '@mui/material/IconButton';
+import { AppIntegration } from '../../../app-integration/app-integration';
 import { trackOpenUrl } from '../../../google-analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
@@ -48,30 +49,32 @@ const LatLngRow: React.FC<{
       <div className={classes['lat-lng-text']}>
         {latitude?.toFixed(4) ?? ''}, {longitude?.toFixed(4) ?? ''}
       </div>
-      <div className={classes['buttons']}>
-        <IconButton
-          className={classes['google-maps-button']}
-          onClick={handleGoogleMapsButtonClicked}
-          title='Show in Google Maps'
-        >
-          <img
-            className={classes['google-maps-icon']}
-            src={IconDataUrl.googleMapsIcon}
-            alt='Show in Google Maps'
-          />
-        </IconButton>
-        <IconButton
-          className={classes['google-street-view-button']}
-          onClick={handleGoogleStreetViewButtonClicked}
-          title='Show in Google Street View'
-        >
-          <img
-            className={classes['google-street-view-icon']}
-            src={IconDataUrl.googleStreetViewIcon}
-            alt='Show in Google Street View'
-          />
-        </IconButton>
-      </div>
+      {AppIntegration.isStandalone && (
+        <div className={classes['buttons']}>
+          <IconButton
+            className={classes['google-maps-button']}
+            onClick={handleGoogleMapsButtonClicked}
+            title='Show in Google Maps'
+          >
+            <img
+              className={classes['google-maps-icon']}
+              src={IconDataUrl.googleMapsIcon}
+              alt='Show in Google Maps'
+            />
+          </IconButton>
+          <IconButton
+            className={classes['google-street-view-button']}
+            onClick={handleGoogleStreetViewButtonClicked}
+            title='Show in Google Street View'
+          >
+            <img
+              className={classes['google-street-view-icon']}
+              src={IconDataUrl.googleStreetViewIcon}
+              alt='Show in Google Street View'
+            />
+          </IconButton>
+        </div>
+      )}
     </div>
   );
 };

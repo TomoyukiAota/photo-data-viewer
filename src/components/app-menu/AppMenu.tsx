@@ -27,7 +27,9 @@ const pages: Page[] = [
   { pathname: '/about', displayName: 'About', icon: <InfoIcon /> },
 ];
 
-const AppMenu: React.FC<{ classNames?: string }> = (props) => {
+const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
+  props
+) => {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
@@ -45,7 +47,14 @@ const AppMenu: React.FC<{ classNames?: string }> = (props) => {
   };
 
   return (
-    <div className={props.classNames} style={{ top: '30px', right: '10px' }}>
+    <div
+      className={props.className}
+      style={{
+        top: '30px',
+        right: '10px',
+        display: props.isVisible ? 'block' : 'none',
+      }}
+    >
       <IconButton
         size='large'
         color='inherit'

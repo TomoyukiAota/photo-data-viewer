@@ -6,6 +6,7 @@ import {
 } from 'react-reflex';
 import 'react-reflex/styles.css';
 
+import { AppIntegration } from '../../app-integration/app-integration';
 import {
   UserSettingKey,
   UserSettingKeyType,
@@ -24,7 +25,7 @@ const HomeWideLayout: React.FC<{
   const { userSettings, setUserSetting } = useUserSettings();
 
   const headerHeight = 130;
-  const isHeaderVisible = true;
+  const isHeaderVisible = AppIntegration.isStandalone;
 
   const photoImagePaneFlex = userSettings.wideLayoutPhotoImagePaneFlex;
   const photoDataPaneFlex = userSettings.wideLayoutPhotoDataPaneFlex;

@@ -2,7 +2,13 @@
 
 import { LatLngExpression } from 'leaflet';
 import { useContext } from 'react';
-import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet';
+import {
+  AttributionControl,
+  MapContainer,
+  Marker,
+  TileLayer,
+  useMap,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // leaflet-defaulticon-compatibility is required to show the markers on the map.
@@ -54,11 +60,13 @@ const LeafletContent: React.FC = () => {
       center={latLng}
       zoom={zoom}
       style={{ height: '100%', width: '100%' }}
+      attributionControl={false}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; OpenStreetMap contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
+      <AttributionControl prefix='Leaflet' />
       <UpdateMap latLng={latLng} zoom={zoom} />
       {isLatLngValid && <Marker position={latLng} />}
     </MapContainer>
