@@ -1,5 +1,15 @@
+// In Vercel, for pdv-in-plm project, the following settings are required:
+// - In "Build & Development Settings", OUTPUT DIRECTORY needs to be .next_plm
+// - In "Environment Variables", set PDV_IN_PLM=True
+
+const distDirForPlm = '.next_plm';
+const isPdvInPlm = process.env.PDV_IN_PLM === 'True';
+
 /** @type {import('next').NextConfig} */
 module.exports = {
+  // Change distDir so that running "npm run dev:plm" and "npm run dev" do not collide.
+  distDir: isPdvInPlm ? distDirForPlm : module.exports.distDir,
+
   reactStrictMode: true,
   webpack(config, { isServer }) {
     config.module.rules.push({
@@ -16,7 +26,9 @@ module.exports = {
       // config.target needs to be different value for different deployment.
       // To deploy as standalone app, config.target needs to be the default value, so it's not set.
       // To deploy in Photo Location Map, set config.target to 'electron-renderer' to be able to call the functions in fs (e.g. fs.readFileSync).
-      // config.target = 'electron-renderer';
+      if (isPdvInPlm) {
+        config.target = 'electron-renderer';
+      }
     }
 
     return config;
