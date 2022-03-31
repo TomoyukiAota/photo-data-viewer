@@ -1,9 +1,14 @@
+// In Vercel, for pdv-in-plm project, the following settings are required:
+// - In "Build & Development Settings", OUTPUT DIRECTORY needs to be .next_plm
+// - In "Environment Variables", set PDV_IN_PLM=True
+
+const distDirForPlm = '.next_plm';
 const isPdvInPlm = process.env.PDV_IN_PLM === 'True';
 
 /** @type {import('next').NextConfig} */
 module.exports = {
   // Change distDir so that running "npm run dev:plm" and "npm run dev" do not collide.
-  distDir: isPdvInPlm ? '.next_plm' : module.exports.distDir,
+  distDir: isPdvInPlm ? distDirForPlm : module.exports.distDir,
 
   reactStrictMode: true,
   webpack(config, { isServer }) {
