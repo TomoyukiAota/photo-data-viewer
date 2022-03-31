@@ -3,7 +3,7 @@ const isPdvInPlm = process.env.PDV_IN_PLM === 'True';
 /** @type {import('next').NextConfig} */
 module.exports = {
   // Change distDir so that running "npm run dev:plm" and "npm run dev" do not collide.
-  distDir: isPdvInPlm ? '.next_plm' : '.next_standalone',
+  distDir: isPdvInPlm ? '.next_plm' : module.exports.distDir,
 
   reactStrictMode: true,
   webpack(config, { isServer }) {
