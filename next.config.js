@@ -1,5 +1,10 @@
+const isPdvInPlm = process.env.PDV_IN_PLM === 'True';
+
 /** @type {import('next').NextConfig} */
 module.exports = {
+  // Change distDir so that running "npm run dev:plm" and "npm run dev" do not collide.
+  distDir: isPdvInPlm ? '.next_plm' : '.next_standalone',
+
   reactStrictMode: true,
   webpack(config, { isServer }) {
     config.module.rules.push({
@@ -16,7 +21,7 @@ module.exports = {
       // config.target needs to be different value for different deployment.
       // To deploy as standalone app, config.target needs to be the default value, so it's not set.
       // To deploy in Photo Location Map, set config.target to 'electron-renderer' to be able to call the functions in fs (e.g. fs.readFileSync).
-      if (process.env.PDV_IN_PLM === 'True') {
+      if (isPdvInPlm) {
         config.target = 'electron-renderer';
       }
     }
