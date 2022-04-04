@@ -10,18 +10,15 @@ const StringifiedData: React.FC<{
   return (
     <div className={classes['stringified-data-container']}>
       <div className={classes.description}>
-        <span>The object returned from</span>{' '}
-        {AppIntegration.isStandalone && (
-          <a
-            href='https://github.com/MikeKovarik/exifr/'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            exifr.parse
-          </a>
-        )}
-        {!AppIntegration.isStandalone && <span>exifr.parse</span>}{' '}
-        <span>function is displayed below:</span>
+        The object returned from{' '}
+        <a
+          href='https://github.com/MikeKovarik/exifr/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          exifr.parse
+        </a>{' '}
+        function is displayed below:
       </div>
       <hr className={classes.divider} />
       <div className={classes['stringified-data']}>{props.stringifiedData}</div>
