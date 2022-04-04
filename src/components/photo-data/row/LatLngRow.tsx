@@ -49,32 +49,30 @@ const LatLngRow: React.FC<{
       <div className={classes['lat-lng-text']}>
         {latitude?.toFixed(4) ?? ''}, {longitude?.toFixed(4) ?? ''}
       </div>
-      {AppIntegration.isStandalone && (
-        <div className={classes['buttons']}>
-          <IconButton
-            className={classes['google-maps-button']}
-            onClick={handleGoogleMapsButtonClicked}
-            title='Show in Google Maps'
-          >
-            <img
-              className={classes['google-maps-icon']}
-              src={IconDataUrl.googleMapsIcon}
-              alt='Show in Google Maps'
-            />
-          </IconButton>
-          <IconButton
-            className={classes['google-street-view-button']}
-            onClick={handleGoogleStreetViewButtonClicked}
-            title='Show in Google Street View'
-          >
-            <img
-              className={classes['google-street-view-icon']}
-              src={IconDataUrl.googleStreetViewIcon}
-              alt='Show in Google Street View'
-            />
-          </IconButton>
-        </div>
-      )}
+      <div className={classes['buttons']}>
+        <IconButton
+          className={classes['google-maps-button']}
+          onClick={handleGoogleMapsButtonClicked}
+          title='Show in Google Maps'
+        >
+          <img
+            className={classes['google-maps-icon']}
+            src={IconDataUrl.googleMapsIcon}
+            alt='Show in Google Maps'
+          />
+        </IconButton>
+        <IconButton
+          className={classes['google-street-view-button']}
+          onClick={handleGoogleStreetViewButtonClicked}
+          title='Show in Google Street View'
+        >
+          <img
+            className={classes['google-street-view-icon']}
+            src={IconDataUrl.googleStreetViewIcon}
+            alt='Show in Google Street View'
+          />
+        </IconButton>
+      </div>
     </div>
   );
 };
