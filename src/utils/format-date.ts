@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { UserSettingKey } from '../hooks/useUserSettings';
 import { DateTimeFormat } from './date-time-format';
+import { UserSettingKey } from './user-settings';
 
 function getDateTimeFormat(): DateTimeFormat.ForUser.DateFormatType {
   const savedStr = localStorage.getItem(UserSettingKey.DateFormat) as DateTimeFormat.ForUser.DateFormatType;

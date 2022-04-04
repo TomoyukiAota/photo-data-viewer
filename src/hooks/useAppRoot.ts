@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { loadPlmSettings } from "../app-integration/plm-settings";
 import usePageView from "../google-analytics/usePageView";
 import { useAppLayoutTracker } from "./useAppLayout";
 import { useUserSettingsInitializer, useUserSettingsTracker } from "./useUserSettings";
 
 export const useAppRoot = () => {
   usePageView();
+
+  loadPlmSettings();
 
   const { initilizeUserSettingsIfNeeded } = useUserSettingsInitializer();
   initilizeUserSettingsIfNeeded();

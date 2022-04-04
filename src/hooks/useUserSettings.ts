@@ -1,22 +1,8 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { trackChangedUserSetting, trackLoadedUserSetting } from '../google-analytics/track-event';
 import { DateTimeFormat } from '../utils/date-time-format';
+import { UserSettingDefaultValue, UserSettingKey, UserSettingKeyType } from '../utils/user-settings';
 
-export const UserSettingKey = {
-  DateFormat: 'DateFormat',
-  ClockSystemFormat: 'ClockSystemFormat',
-  WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',
-  WideLayoutPhotoImagePaneFlex: 'WideLayoutPhotoImagePaneFlex',
-} as const;
-
-export const UserSettingDefaultValue = {
-  DateFormat: DateTimeFormat.ForUser.DateFormat_Default,
-  ClockSystemFormat: DateTimeFormat.ForUser.ClockSystemFormat_Default,
-  WideLayoutPhotoDataPaneFlex: 0.5,
-  WideLayoutPhotoImagePaneFlex: 0.5,
-} as const;
-
-export type UserSettingKeyType = typeof UserSettingKey[keyof typeof UserSettingKey];
 
 export const useUserSettings = () => {
   const [dateFormat] = useLocalStorage(UserSettingKey.DateFormat, UserSettingDefaultValue.DateFormat);

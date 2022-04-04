@@ -7,11 +7,8 @@ import {
 import 'react-reflex/styles.css';
 
 import { AppIntegration } from '../../app-integration/app-integration';
-import {
-  UserSettingKey,
-  UserSettingKeyType,
-  useUserSettings,
-} from '../../hooks/useUserSettings';
+import { useUserSettings } from '../../hooks/useUserSettings';
+import { UserSettingKey, UserSettingKeyType } from '../../utils/user-settings';
 
 import homeClasses from './Home.module.scss';
 import classes from './HomeWideLayout.module.scss';
