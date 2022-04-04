@@ -1,4 +1,4 @@
-import { DateTimeFormat } from '../utils/date-time-format';
+import { DateTimeFormat } from './date-time-format';
 
 export const UserSettingKey = {
   DateFormat: 'DateFormat',
