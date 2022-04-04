@@ -1,4 +1,4 @@
-import { UserSettingKey } from '../hooks/useUserSettings';
+import { UserSettingKey } from '../utils/user-settings';
 import { AppIntegration } from './app-integration';
 
 export function loadPlmSettings() {

@@ -4,8 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import dayjs from 'dayjs';
 
-import { UserSettingKey, useUserSettings } from '../../hooks/useUserSettings';
+import { useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
+import { UserSettingKey } from '../../utils/user-settings';
 import classes from './UserSettings.module.scss';
 
 const UserSettings: React.FC = () => {
