@@ -3,13 +3,15 @@ import { DateTimeFormat } from './date-time-format';
 import { UserSettingKey } from './user-settings';
 
 function getDateTimeFormat(): DateTimeFormat.ForUser.DateFormatType {
-  const savedStr = localStorage.getItem(UserSettingKey.DateFormat) as DateTimeFormat.ForUser.DateFormatType;
-  return savedStr === null ? DateTimeFormat.ForUser.DateFormat_Default : savedStr;
+  const savedStr = localStorage.getItem(UserSettingKey.DateFormat);
+  const format = savedStr ?? DateTimeFormat.ForUser.DateFormat_Default
+  return format as DateTimeFormat.ForUser.DateFormatType;
 }
 
 function getClockSystemFormat(): DateTimeFormat.ForUser.ClockSystemFormatType {
-  const savedStr = localStorage.getItem(UserSettingKey.ClockSystemFormat) as DateTimeFormat.ForUser.ClockSystemFormatType;
-  return savedStr === null ? DateTimeFormat.ForUser.ClockSystemFormat_Default : savedStr;
+  const savedStr = localStorage.getItem(UserSettingKey.ClockSystemFormat);
+  const format = savedStr ?? DateTimeFormat.ForUser.ClockSystemFormat_Default;
+  return format as DateTimeFormat.ForUser.ClockSystemFormatType;
 }
 
 export function formatDate(dateTime: Parameters<typeof dayjs>[0]): string {
