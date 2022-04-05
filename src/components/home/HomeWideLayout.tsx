@@ -7,8 +7,13 @@ import {
 import 'react-reflex/styles.css';
 
 import { AppIntegration } from '../../app-integration/app-integration';
-import { useUserSettings } from '../../hooks/useUserSettings';
-import { UserSettingKey, UserSettingKeyType } from '../../utils/user-settings';
+import {
+  readUserSettingAsNumber,
+  UserSettingDefaultValue,
+  UserSettingKey,
+  UserSettingKeyType,
+  wideLayoutPaneFlexDefaultValue,
+} from '../../utils/user-settings';
 
 import homeClasses from './Home.module.scss';
 import classes from './HomeWideLayout.module.scss';
@@ -19,19 +24,24 @@ const HomeWideLayout: React.FC<{
   photoMap: JSX.Element;
   photoData: JSX.Element;
 }> = (props) => {
-  const { userSettings, setUserSetting } = useUserSettings();
-
   const headerHeight = 130;
   const isHeaderVisible = AppIntegration.isStandalone;
 
-  const photoImagePaneFlex = userSettings.wideLayoutPhotoImagePaneFlex;
-  const photoDataPaneFlex = userSettings.wideLayoutPhotoDataPaneFlex;
+  const photoImagePaneFlex = readUserSettingAsNumber(
+    UserSettingKey.WideLayoutPhotoImagePaneFlex,
+    UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex
+  );
+  const photoDataPaneFlex = readUserSettingAsNumber(
+    UserSettingKey.WideLayoutPhotoDataPaneFlex,
+    UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex
+  );
+
   const onResizePane = (
     event: HandlerProps,
     userSettingKey: UserSettingKeyType
   ) => {
-    const size = event.component.props.flex;
-    setUserSetting(userSettingKey, size);
+    const size = event.component.props.flex ?? wideLayoutPaneFlexDefaultValue;
+    localStorage.setItem(userSettingKey, size.toString());
   };
 
   return (
