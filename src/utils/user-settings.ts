@@ -9,9 +9,15 @@ export const UserSettingKey = {
 
 export type UserSettingKeyType = typeof UserSettingKey[keyof typeof UserSettingKey];
 
+export const wideLayoutPaneFlexDefaultValue = 0.5;
+
 export const UserSettingDefaultValue = {
   DateFormat: DateTimeFormat.ForUser.DateFormat_Default,
   ClockSystemFormat: DateTimeFormat.ForUser.ClockSystemFormat_Default,
-  WideLayoutPhotoDataPaneFlex: 0.5,
-  WideLayoutPhotoImagePaneFlex: 0.5,
+  WideLayoutPhotoDataPaneFlex: wideLayoutPaneFlexDefaultValue,
+  WideLayoutPhotoImagePaneFlex: wideLayoutPaneFlexDefaultValue,
 } as const;
+
+export function readUserSettingAsNumber(key: UserSettingKeyType, defaultValue: number): number {
+  return Number(localStorage.getItem(key) ?? defaultValue);
+}
