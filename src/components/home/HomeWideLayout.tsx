@@ -1,19 +1,9 @@
-import {
-  HandlerProps,
-  ReflexContainer,
-  ReflexElement,
-  ReflexSplitter,
-} from 'react-reflex';
+import { useContext } from 'react';
+import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
 
 import { AppIntegration } from '../../app-integration/app-integration';
-import {
-  readUserSettingAsNumber,
-  UserSettingDefaultValue,
-  UserSettingKey,
-  UserSettingKeyType,
-  wideLayoutPaneFlexDefaultValue,
-} from '../../utils/user-settings';
+import GutterPositionContext from '../../context/gutter-position/gutter-position-context';
 
 import homeClasses from './Home.module.scss';
 import classes from './HomeWideLayout.module.scss';
@@ -27,22 +17,7 @@ const HomeWideLayout: React.FC<{
   const headerHeight = 130;
   const isHeaderVisible = AppIntegration.isStandalone;
 
-  const photoImagePaneFlex = readUserSettingAsNumber(
-    UserSettingKey.WideLayoutPhotoImagePaneFlex,
-    UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex
-  );
-  const photoDataPaneFlex = readUserSettingAsNumber(
-    UserSettingKey.WideLayoutPhotoDataPaneFlex,
-    UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex
-  );
-
-  const onResizePane = (
-    event: HandlerProps,
-    userSettingKey: UserSettingKeyType
-  ) => {
-    const size = event.component.props.flex ?? wideLayoutPaneFlexDefaultValue;
-    localStorage.setItem(userSettingKey, size.toString());
-  };
+  const gutterCtx = useContext(GutterPositionContext).wideLayout;
 
   return (
     <div className={homeClasses.home}>
@@ -69,12 +44,9 @@ const HomeWideLayout: React.FC<{
               <ReflexContainer orientation='horizontal'>
                 <ReflexElement
                   minSize={100}
-                  flex={photoImagePaneFlex}
+                  flex={gutterCtx.photoImagePaneFlex}
                   onStopResize={(event) =>
-                    onResizePane(
-                      event,
-                      UserSettingKey.WideLayoutPhotoImagePaneFlex
-                    )
+                    gutterCtx.setPhotoImagePaneFlex(event.component.props.flex)
                   }
                 >
                   {props.photoImage}
@@ -92,9 +64,9 @@ const HomeWideLayout: React.FC<{
             />
             <ReflexElement
               minSize={100}
-              flex={photoDataPaneFlex}
+              flex={gutterCtx.photoDataPaneFlex}
               onStopResize={(event) =>
-                onResizePane(event, UserSettingKey.WideLayoutPhotoDataPaneFlex)
+                gutterCtx.setPhotoDataPaneFlex(event.component.props.flex)
               }
             >
               {props.photoData}
