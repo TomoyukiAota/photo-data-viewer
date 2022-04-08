@@ -78,12 +78,20 @@ const PhotoProvider: React.FC = (props) => {
     setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
   };
 
+  const reloadPhoto = () => {
+    const file = loadedPhotoData?.file?.file;
+    if (!file) return;
+
+    loadPhoto(file);
+  };
+
   return (
     <PhotoContext.Provider
       value={{
         loadedPhotoData: loadedPhotoData,
         loadedPhotoImage: loadedPhotoImage,
         loadPhoto: loadPhoto,
+        reloadPhoto: reloadPhoto,
       }}
     >
       {props.children}
