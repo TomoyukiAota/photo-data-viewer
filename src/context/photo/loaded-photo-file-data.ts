@@ -20,6 +20,7 @@ export class FileSize {
 }
 
 export class LoadedPhotoFileData {
+  public file?: File;
   public lastModified?: LastModified;
   public name?: string;
   public size?: FileSize;
@@ -32,6 +33,7 @@ export function createLoadedPhotoFileData(file: File): LoadedPhotoFileData | nul
 
   const fileData = new LoadedPhotoFileData();
   const { lastModified, name, size, type } = file;
+  fileData.file = file;
   fileData.lastModified = new LastModified(lastModified);
   fileData.name = name;
   fileData.size = new FileSize(size);

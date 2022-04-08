@@ -3,7 +3,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import dayjs from 'dayjs';
+import { useContext } from 'react';
 
+import PhotoContext from '../../context/photo/photo-context';
 import { useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import { UserSettingKey } from '../../utils/user-settings';
@@ -11,15 +13,18 @@ import classes from './UserSettings.module.scss';
 
 const UserSettings: React.FC = () => {
   const { userSettings, setUserSetting } = useUserSettings();
+  const photoCtx = useContext(PhotoContext);
 
   const dateFormat = userSettings.dateFormat;
   const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
     setUserSetting(UserSettingKey.DateFormat, event.target.value);
+    photoCtx.reloadPhoto();
   };
 
   const clockSystemFormat = userSettings.clockSystemFormat;
   const handleClockSystemFormatChange = (event: SelectChangeEvent<string>) => {
     setUserSetting(UserSettingKey.ClockSystemFormat, event.target.value);
+    photoCtx.reloadPhoto();
   };
 
   const formatStr = DateTimeFormat.ForUser.getDayjsFormatString(
@@ -32,8 +37,7 @@ const UserSettings: React.FC = () => {
     <div className={classes.container}>
       <div className={classes['page-title']}>Settings</div>
       <div className={classes['page-description']}>
-        <div>To apply the change, select the photo again.</div>
-        <div>The settings are saved in your browser.</div>
+        <div>Settings are saved in your browser.</div>
       </div>
       <div className={classes['date-time-settings']}>
         <div className={classes['date-time-settings-title']}>
