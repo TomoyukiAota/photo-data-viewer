@@ -50,8 +50,11 @@ const PhotoProvider: React.FC = (props) => {
     () => initialLoadedPhotoImage
   );
 
-  const loadPhoto = async (file: File, option = { isReload: false }) => {
-    console.log('loadPhoto called. file: ', file);
+  const loadFile = async (
+    file: File | undefined,
+    option: { isReload: boolean }
+  ) => {
+    if (!file) return;
 
     const title = `${file.name} - ${getAppName()}`; // For Photo Location Map, title needs to be the same as browserWindow.title
     setIndexPageTitle(title);
@@ -70,8 +73,8 @@ const PhotoProvider: React.FC = (props) => {
     trackLoadedPhotoData(data);
     setLoadedPhotoData(data);
 
-    const isExifAvailable = data?.isExifAvailable;
-    const isReload = option?.isReload;
+    const isExifAvailable = !!data?.isExifAvailable;
+    const isReload = !!option?.isReload;
     if (!isExifAvailable && !isReload) {
       dialogCtx.unsupportedFileSelected.open();
     }
@@ -81,11 +84,15 @@ const PhotoProvider: React.FC = (props) => {
     setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
   };
 
-  const reloadPhoto = () => {
-    const file = loadedPhotoData?.file?.file;
-    if (!file) return;
+  const loadPhoto = (file: File) => {
+    console.debug('loadPhoto called. file: ', file);
+    loadFile(file, { isReload: false });
+  };
 
-    loadPhoto(file, { isReload: true });
+  const reloadPhoto = () => {
+    console.debug('reloadPhoto called.');
+    const file = loadedPhotoData?.file?.file;
+    loadFile(file, { isReload: true });
   };
 
   return (
