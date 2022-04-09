@@ -27,7 +27,7 @@ const NameValueGrid: React.FC<{
   ]);
 
   return (
-    <Paper className={classes.container}>
+    <Paper className={classes.container} sx={{ boxShadow: 'none' }}>
       <Grid rows={props.rows} columns={columns}>
         <Table columnExtensions={props.columnExtensions} />
         <TableHeaderRow />
