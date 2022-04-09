@@ -19,6 +19,9 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
   const nameColumnWidth = getNameColumnWidth(appLayout.windowWidth);
   const photoCtx = useContext(PhotoContext);
   const rows = createGeneralDataRows(photoCtx.loadedPhotoData);
+  const isIosMessageVisible =
+    isIos() && photoCtx.loadedPhotoData?.isExifAvailable;
+
   return (
     <div className={classes.container}>
       <div className={classes.table}>
@@ -27,7 +30,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
           columnExtensions={[{ columnName: 'name', width: nameColumnWidth }]}
         />
       </div>
-      {isIos() && (
+      {isIosMessageVisible && (
         <div className={classes.message}>
           For iOS users, iOS removes some EXIF data (e.g. latitude and
           longitude) in some cases. Please read{' '}
