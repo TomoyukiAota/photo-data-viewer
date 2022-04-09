@@ -18,7 +18,10 @@ const UnsupportedFileSelectedDialog: React.FC = () => {
   return (
     <Dialog open={isOpened}>
       <div className={classes.dialog}>
-        <DialogTitle sx={{ padding: 0 }} className={classes.title}>
+        <DialogTitle
+          sx={{ padding: 0, fontSize: '1.1rem' }}
+          className={classes.title}
+        >
           Unsupported File Format
         </DialogTitle>
         <div className={classes.message}>EXIF data is not available.</div>
