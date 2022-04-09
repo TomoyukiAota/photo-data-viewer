@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 import IconButton from '@mui/material/IconButton';
-import { AppIntegration } from '../../../app-integration/app-integration';
+import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { trackOpenUrl } from '../../../google-analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
-import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 
 import classes from './LatLngRow.module.scss';
 
@@ -47,9 +46,11 @@ const LatLngRow: React.FC<{
   return (
     <div className={classes.row}>
       <div className={classes['lat-lng-text']}>
-        {latitude?.toFixed(4) ?? ''}, {longitude?.toFixed(4) ?? ''}
+        {latitude?.toFixed(4) ?? ''}
+        <br />
+        {longitude?.toFixed(4) ?? ''}
       </div>
-      <div className={classes['buttons']}>
+      <div>
         <IconButton
           className={classes['google-maps-button']}
           onClick={handleGoogleMapsButtonClicked}
