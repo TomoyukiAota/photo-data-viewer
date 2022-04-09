@@ -42,7 +42,13 @@ export function createGeneralDataRows(
       ),
     },
     {
-      name: 'Latitude, Longitude',
+      name: (
+        <div>
+          Latitude
+          <br />
+          Longitude
+        </div>
+      ),
       value: <LatLngRow loadedPhotoData={loadedPhotoData} />,
     },
   ];

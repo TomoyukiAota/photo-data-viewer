@@ -10,7 +10,7 @@ import { IGridRowData } from './grid-row-data';
 import classes from './NameValueGrid.module.scss';
 
 export interface NameAndValue {
-  name: string;
+  name: string | JSX.Element;
   value: string | number | JSX.Element;
 }
 

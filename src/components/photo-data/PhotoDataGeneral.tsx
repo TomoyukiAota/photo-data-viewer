@@ -10,7 +10,7 @@ function getNameColumnWidth(windowWidth: number): number {
   if (windowWidth > 600) {
     return 200;
   } else {
-    return 170;
+    return 130;
   }
 }
 

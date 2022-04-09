@@ -1,5 +1,3 @@
-$screen-width-breakpoint: 400px;
-
 // CSS selectors are intentionally defined within .row to increase their specificity.
 // This is because there was a case that the style was not applied due to insufficient specificy
 // only in production build. (Development build is okay, so it happens only in production build for some reason.)
@@ -7,11 +5,6 @@ $screen-width-breakpoint: 400px;
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  @media only screen and (max-width: $screen-width-breakpoint) {
-    flex-direction: column;
-    align-items: baseline;
-  }
 
   button {
     background-color: rgba(0, 0, 0, 0.04);
@@ -23,16 +16,6 @@ $screen-width-breakpoint: 400px;
 
   .lat-lng-text {
     margin-right: 30px;
-
-    @media only screen and (max-width: $screen-width-breakpoint) {
-      margin: 5px 0;
-    }
-  }
-
-  .buttons {
-    @media only screen and (max-width: $screen-width-breakpoint) {
-      margin-bottom: 5px;
-    }
   }
 
   .google-maps-button {
