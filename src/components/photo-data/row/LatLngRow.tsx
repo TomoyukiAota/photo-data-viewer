@@ -46,9 +46,9 @@ const LatLngRow: React.FC<{
   return (
     <div className={classes.row}>
       <div className={classes['lat-lng-text']}>
-        {latitude?.toFixed(4) ?? ''}
+        {latitude?.toFixed(6) ?? ''}
         <br />
-        {longitude?.toFixed(4) ?? ''}
+        {longitude?.toFixed(6) ?? ''}
       </div>
       <div>
         <IconButton
