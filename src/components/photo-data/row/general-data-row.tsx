@@ -7,7 +7,8 @@ import WidthHeightRow from './WidthHeightRow';
 type TempNameAndValue = NameAndValue | { name: string; value: undefined };
 
 export function createGeneralDataRows(
-  loadedPhotoData: LoadedPhotoData | null
+  loadedPhotoData: LoadedPhotoData | null,
+  fontSize: React.CSSProperties
 ): NameValueGridRow[] {
   const nameAndValues: TempNameAndValue[] = [
     {
@@ -58,8 +59,8 @@ export function createGeneralDataRows(
       return {
         id: index,
         parentId: null,
-        name: nameAndValue.name,
-        value: nameAndValue.value ?? '',
+        name: <div style={fontSize}>{nameAndValue.name}</div>,
+        value: <div style={fontSize}>{nameAndValue.value ?? ''}</div>,
       };
     }
   );

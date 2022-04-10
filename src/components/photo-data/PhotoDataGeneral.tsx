@@ -14,11 +14,20 @@ function getNameColumnWidth(windowWidth: number): number {
   }
 }
 
+function getFontSize(windowWidth: number): React.CSSProperties {
+  if (windowWidth < 330) {
+    return { fontSize: '0.82rem' }; // Smaller fontSize for Date Taken to fit into smaller screen (i.e. iPhone SE 1st gen with 320px width)
+  }
+
+  return {}; // fontSize is not specified. (0.875rem will be for table by MuiTableCell.)
+}
+
 const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
   const appLayout = useThrottledAppLayout();
   const nameColumnWidth = getNameColumnWidth(appLayout.windowWidth);
+  const fontSize = getFontSize(appLayout.windowWidth);
   const photoCtx = useContext(PhotoContext);
-  const rows = createGeneralDataRows(photoCtx.loadedPhotoData);
+  const rows = createGeneralDataRows(photoCtx.loadedPhotoData, fontSize);
   const isIosMessageVisible =
     isIos() && photoCtx.loadedPhotoData?.isExifAvailable;
 
@@ -31,7 +40,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
         />
       </div>
       {isIosMessageVisible && (
-        <div className={classes.message}>
+        <div className={classes.message} style={fontSize}>
           For iOS users, iOS removes some EXIF data (e.g. latitude and
           longitude) in some cases. Please read{' '}
           <a
