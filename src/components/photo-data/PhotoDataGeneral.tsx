@@ -15,7 +15,7 @@ function getNameColumnWidth(windowWidth: number): number {
 }
 
 function getFontSize(windowWidth: number): React.CSSProperties {
-  if (windowWidth < 330) {
+  if (windowWidth < 340) {
     return { fontSize: '0.82rem' }; // Smaller fontSize for Date Taken to fit into smaller screen (i.e. iPhone SE 1st gen with 320px width)
   }
 
