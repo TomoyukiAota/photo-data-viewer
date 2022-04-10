@@ -19,7 +19,7 @@ function getFontSize(windowWidth: number): React.CSSProperties {
     return { fontSize: '0.82rem' }; // Smaller fontSize for Date Taken to fit into smaller screen (i.e. iPhone SE 1st gen with 320px width)
   }
 
-  return {}; // fontSize is not specified. (0.875rem will be for table by MuiTableCell.)
+  return {}; // fontSize is not specified. (0.875rem specified by MuiTableCell will be used for table.)
 }
 
 const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
