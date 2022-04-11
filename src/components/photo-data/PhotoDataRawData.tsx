@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { AppIntegration } from '../../app-integration/app-integration';
 import PhotoContext from '../../context/photo/photo-context';
 import classes from './PhotoDataRawData.module.scss';
 
@@ -10,15 +9,16 @@ const StringifiedData: React.FC<{
   return (
     <div className={classes['stringified-data-container']}>
       <div className={classes.description}>
-        The object returned from{' '}
+        Below is the raw data gotten from{' '}
         <a
           href='https://github.com/MikeKovarik/exifr/'
           target='_blank'
           rel='noopener noreferrer'
         >
-          exifr.parse
-        </a>{' '}
-        function is displayed below:
+          exifr
+        </a>
+        .<br /> If the value of an EXIF tag is [object Object] in Details tab,
+        search for the tag in this raw data.
       </div>
       <hr className={classes.divider} />
       <div className={classes['stringified-data']}>{props.stringifiedData}</div>

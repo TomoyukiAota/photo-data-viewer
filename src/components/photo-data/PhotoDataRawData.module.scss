@@ -14,6 +14,12 @@
 
 .description {
   padding: 10px 20px;
+
+  @media only screen and (max-width: 330px) {
+    br {
+      display: none;
+    }
+  }
 }
 
 .divider {
