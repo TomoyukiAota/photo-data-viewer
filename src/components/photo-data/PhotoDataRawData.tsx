@@ -17,8 +17,7 @@ const StringifiedData: React.FC<{
         >
           exifr
         </a>
-        .<br /> If the value of an EXIF tag is [object Object] in Details tab,
-        search for the tag in this raw data.
+        .
       </div>
       <hr className={classes.divider} />
       <div className={classes['stringified-data']}>{props.stringifiedData}</div>
