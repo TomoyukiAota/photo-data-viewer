@@ -3,13 +3,6 @@ import { formatArray } from '../../../utils/format-array';
 import { formatDate } from '../../../utils/format-date';
 import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 
-function shouldIncludeProperty(key: string, value: any): boolean {
-  if (value instanceof Uint8Array) {
-    return false;
-  }
-  return true;
-}
-
 function formatValue(input: any): string {
   let formattedValue = '';
 
@@ -21,9 +14,10 @@ function formatValue(input: any): string {
     formattedValue = formatDate(input);
   } else if (input instanceof Array) {
     formattedValue = formatArray(input);
-  } else if (input instanceof Uint8Array) {
-    formattedValue = '';
   } else {
+    // For any other types (notably Uint8Array, Uint16Array and object),
+    // they are converted to string by calling toString().
+    // This is to ensure that string is returned, otherwise the app crashes (e.g. Regions object from IMG_2273.JPG causes crash.)
     formattedValue = input?.toString?.();
   }
 
@@ -39,14 +33,14 @@ export function createDetailDataRows(
     return [];
   }
 
-  const nameAndValues: NameAndValue[] = Object.entries(exifrOutput)
-    .filter(([key, value]) => shouldIncludeProperty(key, value))
-    .map(([key, value]) => {
+  const nameAndValues: NameAndValue[] = Object.entries(exifrOutput).map(
+    ([key, value]) => {
       return {
         name: key,
         value: formatValue(value),
       };
-    });
+    }
+  );
 
   const detailDataRows: NameValueGridRow[] = nameAndValues.map(
     (nameAndValue, index) => {
