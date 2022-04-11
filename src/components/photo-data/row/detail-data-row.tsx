@@ -18,7 +18,7 @@ function formatValue(input: any): string {
     // For any other types (notably Uint8Array, Uint16Array and object),
     // they are converted to string by calling toString().
     // This is to ensure that string is returned, otherwise the app crashes (e.g. Regions object from IMG_2273.JPG causes crash.)
-    formattedValue = input?.toString?.();
+    formattedValue = input?.toString?.() ?? '';
   }
 
   return formattedValue;
