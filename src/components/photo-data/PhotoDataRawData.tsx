@@ -9,7 +9,7 @@ const StringifiedData: React.FC<{
   return (
     <div className={classes['stringified-data-container']}>
       <div className={classes.description}>
-        Below is the raw data gotten from{' '}
+        Below is the raw data gotten with{' '}
         <a
           href='https://github.com/MikeKovarik/exifr/'
           target='_blank'
