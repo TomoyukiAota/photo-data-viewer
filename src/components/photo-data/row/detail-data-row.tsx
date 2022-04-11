@@ -24,7 +24,7 @@ function formatValue(input: any): string {
   } else if (input instanceof Uint8Array) {
     formattedValue = '';
   } else {
-    formattedValue = input;
+    formattedValue = input?.toString?.();
   }
 
   return formattedValue;
