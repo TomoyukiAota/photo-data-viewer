@@ -80,6 +80,18 @@ const About: React.FC = () => {
           onClick={handleGitHubProfileIconClicked}
         />
       </div>
+      <div className={classes['plm']}>
+        Want to see the map for the locations of many photos all at once?
+        <br />{' '}
+        <a
+          href='https://tomoyukiaota.github.io/photo-location-map/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Photo Location Map
+        </a>{' '}
+        is available for such purposes.
+      </div>
     </div>
   );
 };

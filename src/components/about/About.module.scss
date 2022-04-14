@@ -10,10 +10,18 @@
     'app-name'     auto
     'messages'     auto
     'developed-by' auto
+    'plm'          auto
     / auto;
   .app-name     { grid-area: app-name;     }
   .messages     { grid-area: messages;     }
   .developed-by { grid-area: developed-by; }
+  .plm          { grid-area: plm;          }
+
+  @media only screen and (max-width: 522px) {
+    br {
+      display: none;
+    }
+  }
 }
 
 .app-name {
@@ -26,12 +34,6 @@
 
   > * + * {
     padding: 10px 0;
-  }
-
-  @media only screen and (max-width: 522px) {
-    br {
-      display: none;
-    }
   }
 }
 
