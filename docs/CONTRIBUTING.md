@@ -12,8 +12,8 @@ Note that there are two deployments of this app.
 
 | Deployment              | Note                                                                                                                |
 | :---------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Standalone              | Hosted in https://photo-data-viewer.vercel.app to be opened from web browsers.                                      |
-| [Photo Location Map][1] | Hosted in https://pdv-in-plm.vercel.app to be opened from Photo Location Map. This URL does not work with browsers. |
+| Standalone              | Hosted on https://photo-data-viewer.vercel.app to be opened from web browsers.                                      |
+| [Photo Location Map][1] | Hosted on https://pdv-in-plm.vercel.app to be opened from Photo Location Map. This URL does not work with browsers. |
 
 [1]: https://github.com/TomoyukiAota/photo-location-map
 
