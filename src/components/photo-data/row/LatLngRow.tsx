@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { trackOpenUrl } from '../../../google-analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
+import { openTabWithoutOpener } from '../../../utils/open-url';
 
 import classes from './LatLngRow.module.scss';
 
@@ -22,7 +23,7 @@ const LatLngRow: React.FC<{
 
   const handleGoogleMapsButtonClicked = () => {
     const zoom = 14;
-    window.open(
+    openTabWithoutOpener(
       `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
     );
     trackOpenUrl(
@@ -33,7 +34,7 @@ const LatLngRow: React.FC<{
   };
 
   const handleGoogleStreetViewButtonClicked = () => {
-    window.open(
+    openTabWithoutOpener(
       `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
     );
     trackOpenUrl(

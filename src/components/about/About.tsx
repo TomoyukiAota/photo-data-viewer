@@ -43,7 +43,7 @@ const About: React.FC = () => {
           <a
             href='https://github.com/TomoyukiAota/photo-data-viewer/issues'
             target='_blank'
-            rel='noopener noreferrer'
+            rel='noopener'
           >
             GitHub Issues
           </a>
@@ -54,7 +54,7 @@ const About: React.FC = () => {
           <a
             href='https://github.com/TomoyukiAota/photo-data-viewer'
             target='_blank'
-            rel='noopener noreferrer'
+            rel='noopener'
           >
             GitHub
           </a>
@@ -86,7 +86,7 @@ const About: React.FC = () => {
         <a
           href='https://tomoyukiaota.github.io/photo-location-map/'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           Photo Location Map
         </a>{' '}
