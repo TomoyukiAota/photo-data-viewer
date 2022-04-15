@@ -23,7 +23,9 @@ const LatLngRow: React.FC<{
   const handleGoogleMapsButtonClicked = () => {
     const zoom = 14;
     window.open(
-      `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
+      `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`,
+      '_blank',
+      'noopener'
     );
     trackOpenUrl(
       'https://maps.google.com/ with query parameters for latitude, longitude, and zoom',
@@ -34,7 +36,9 @@ const LatLngRow: React.FC<{
 
   const handleGoogleStreetViewButtonClicked = () => {
     window.open(
-      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
+      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`,
+      '_blank',
+      'noopener'
     );
     trackOpenUrl(
       'https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom',
