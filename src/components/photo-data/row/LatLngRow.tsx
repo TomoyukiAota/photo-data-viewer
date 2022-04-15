@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { trackOpenUrl } from '../../../google-analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
+import { openTabWithoutOpener } from '../../../utils/open-url';
 
 import classes from './LatLngRow.module.scss';
 
@@ -22,10 +23,8 @@ const LatLngRow: React.FC<{
 
   const handleGoogleMapsButtonClicked = () => {
     const zoom = 14;
-    window.open(
-      `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`,
-      '_blank',
-      'noopener'
+    openTabWithoutOpener(
+      `https://maps.google.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=${zoom}`
     );
     trackOpenUrl(
       'https://maps.google.com/ with query parameters for latitude, longitude, and zoom',
@@ -35,10 +34,8 @@ const LatLngRow: React.FC<{
   };
 
   const handleGoogleStreetViewButtonClicked = () => {
-    window.open(
-      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`,
-      '_blank',
-      'noopener'
+    openTabWithoutOpener(
+      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
     );
     trackOpenUrl(
       'https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom',
