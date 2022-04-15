@@ -5,6 +5,9 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'react/jsx-no-target-blank': [true, {
+      "allowReferrer": true, // Assuming noopener alone is enough because IE will sunset soon (as of writing this, which is April 2022).
+    }],
     'react/self-closing-comp': ['error', {
       'component': true,
       'html': true,

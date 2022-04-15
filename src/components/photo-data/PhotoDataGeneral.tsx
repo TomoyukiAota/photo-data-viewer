@@ -46,7 +46,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
           <a
             href='https://stackoverflow.com/questions/57942150/file-upload-and-exif-in-mobile-safari'
             target='_blank'
-            rel='noreferrer'
+            rel='noopener'
           >
             this page
           </a>{' '}

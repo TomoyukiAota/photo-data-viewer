@@ -13,7 +13,7 @@ const StringifiedData: React.FC<{
         <a
           href='https://github.com/MikeKovarik/exifr/'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           exifr
         </a>
