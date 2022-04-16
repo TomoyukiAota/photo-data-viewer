@@ -1,6 +1,7 @@
 import DialogProvider from './dialog/DialogProvider';
 import GutterPositionProvider from './gutter-position/GutterPositionProvider';
 import PageTitleProvider from './page-title/PageTitleProvider';
+import PhotoDimensionsProvider from './photo-dimensions/PhotoDimensionsProvider';
 import PhotoProvider from './photo/PhotoProvider';
 
 const AppProvider: React.FC = (props) => {
@@ -8,7 +9,9 @@ const AppProvider: React.FC = (props) => {
     <PageTitleProvider>
       <DialogProvider>
         <GutterPositionProvider>
-          <PhotoProvider>{props.children}</PhotoProvider>
+          <PhotoDimensionsProvider>
+            <PhotoProvider>{props.children}</PhotoProvider>
+          </PhotoDimensionsProvider>
         </GutterPositionProvider>
       </DialogProvider>
     </PageTitleProvider>

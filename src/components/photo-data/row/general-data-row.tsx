@@ -31,7 +31,7 @@ export function createGeneralDataRows(
     },
     {
       name: 'Width x Height',
-      value: <WidthHeightRow loadedPhotoData={loadedPhotoData} />,
+      value: <WidthHeightRow />,
     },
     {
       name: 'Date Taken',
