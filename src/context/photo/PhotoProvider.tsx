@@ -9,6 +9,7 @@ import { isHeif } from '../../utils/filename-extension';
 import { sleep } from '../../utils/sleep';
 import DialogContext from '../dialog/dialog-context';
 import PageTitleContext from '../page-title/page-title-context';
+import PhotoDimensionsContext from '../photo-dimensions/photo-dimensions-context';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 
@@ -37,6 +38,7 @@ async function getImageUrl(file: File) {
 
 const PhotoProvider: React.FC = (props) => {
   const { setIndexPageTitle } = useContext(PageTitleContext);
+  const photoDimensionsCtx = useContext(PhotoDimensionsContext);
   const dialogCtx = useContext(DialogContext);
 
   const [loadedPhotoData, setLoadedPhotoData] =
@@ -72,6 +74,9 @@ const PhotoProvider: React.FC = (props) => {
     console.log('LoadedPhotoData', data);
     trackLoadedPhotoData(data);
     setLoadedPhotoData(data);
+
+    photoDimensionsCtx.setLoadStatus('Loading');
+    photoDimensionsCtx.setDimensions(null);
 
     const isExifAvailable = !!data?.isExifAvailable;
     const isReload = !!option?.isReload;

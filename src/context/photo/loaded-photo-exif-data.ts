@@ -14,12 +14,9 @@ export class DateTimeOriginal {
 
 export class LoadedPhotoExifData {
   public exifrParseOutput?: ExifrParseOutput;
-  public width?: number;
-  public height?: number;
   public latitude?: number;
   public longitude?: number;
   public dateTimeOriginal?: DateTimeOriginal;
-  public get isWidthHeightAvailable(): boolean { return isNumber(this.width) && isNumber(this.height); }
   public get isLatLngAvailable(): boolean { return isNumber(this.latitude) && isNumber(this.longitude); }
 }
 
@@ -38,8 +35,6 @@ export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhoto
 
   const exifData = new LoadedPhotoExifData();
   exifData.exifrParseOutput = sortKeys(exifrParseOutput);
-  exifData.width = exifrParseOutput.ExifImageWidth;
-  exifData.height = exifrParseOutput.ExifImageHeight;
   exifData.latitude = exifrParseOutput.latitude;
   exifData.longitude = exifrParseOutput.longitude;
   exifData.dateTimeOriginal = new DateTimeOriginal(exifrParseOutput.DateTimeOriginal);

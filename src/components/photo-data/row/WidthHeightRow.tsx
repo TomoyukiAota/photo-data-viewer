@@ -1,19 +1,26 @@
-import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
+import { useContext } from 'react';
+import PhotoDimensionsContext from '../../../context/photo-dimensions/photo-dimensions-context';
 import classes from './WidthHeightRow.module.scss';
 
-const WidthHeightRow: React.FC<{
-  className?: string;
-  loadedPhotoData?: LoadedPhotoData | null;
-}> = (props) => {
-  if (!props?.loadedPhotoData?.isFileLoaded) {
-    return <div />;
-  }
-  if (!props?.loadedPhotoData?.exif?.isWidthHeightAvailable) {
+const WidthHeightRow: React.FC = () => {
+  const { dimensions, loadStatus } = useContext(PhotoDimensionsContext);
+
+  if (loadStatus === 'Not Loaded') {
+    return <div />; // at app start
+  } else if (loadStatus === 'Loading') {
+    return <div>Loading...</div>;
+  } else if (loadStatus === 'Load Failed') {
     return <div>Not Available</div>;
   }
 
-  const { width, height } = props?.loadedPhotoData?.exif;
+  if (!dimensions) {
+    console.assert(
+      "Something went wrong when loadStatus === 'Load Success' and dimensions is falsy."
+    );
+    return <div />;
+  }
 
+  const { width, height } = dimensions;
   return (
     <div>
       {width} x {height}
