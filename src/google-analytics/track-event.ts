@@ -1,5 +1,6 @@
 import { AppIntegration } from '../app-integration/app-integration';
 import { LoadedPhotoData } from '../context/photo/loaded-photo-data';
+import { PhotoDimensions } from '../context/photo-dimensions/photo-dimensions-type';
 import * as gtag from './gtag';
 
 export function trackLoadedPhotoData(data: LoadedPhotoData) {
@@ -10,8 +11,12 @@ export function trackLoadedPhotoData(data: LoadedPhotoData) {
   gtag.event('Loaded Photo', 'Loaded Photo', `isLatLngAvailable: ${data.isLatLngAvailable}`);
   gtag.event('Loaded Photo', 'Loaded Photo', `File Size: ${data.file?.size?.displayString}`);
   gtag.event('Loaded Photo', 'Loaded Photo', `MIME Type: ${data.file?.mimeType}`);
-  gtag.event('Loaded Photo', 'Loaded Photo', `Image Width: ${data.exif?.width}`);
-  gtag.event('Loaded Photo', 'Loaded Photo', `Image Height: ${data.exif?.height}`);
+}
+
+export function trackPhotoDimensions(dimensions: PhotoDimensions | null) {
+  if (!dimensions) return;
+  gtag.event('Loaded Photo', 'Loaded Photo', `Image Width: ${dimensions?.width}`);
+  gtag.event('Loaded Photo', 'Loaded Photo', `Image Height: ${dimensions?.height}`);
 }
 
 export function trackOpenUrl(url: string, urlDescription: string, from: string) {
