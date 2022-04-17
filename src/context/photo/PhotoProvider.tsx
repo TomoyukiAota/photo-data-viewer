@@ -10,6 +10,7 @@ import { sleep } from '../../utils/sleep';
 import DialogContext from '../dialog/dialog-context';
 import PageTitleContext from '../page-title/page-title-context';
 import PhotoDimensionsContext from '../photo-dimensions/photo-dimensions-context';
+import { setPhotoDimensions } from '../photo-dimensions/set-photo-dimensions';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 
@@ -85,8 +86,8 @@ const PhotoProvider: React.FC = (props) => {
     }
 
     const url = await getImageUrl(file);
-
     setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
+    setPhotoDimensions(photoDimensionsCtx, url);
   };
 
   const loadPhoto = (file: File) => {

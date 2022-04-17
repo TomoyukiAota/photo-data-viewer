@@ -1,16 +1,13 @@
 // Disabling @next/next/no-img-element to rotate the photo and place the rotate icon
 /* eslint-disable @next/next/no-img-element */
 
-import { useContext, useEffect, useRef } from 'react';
-
-import PhotoDimensionsContext from '../../context/photo-dimensions/photo-dimensions-context';
+import { useEffect, useRef } from 'react';
 import { IconDataUrl } from '../../icons/icon-data-url';
 import classes from './PhotoImage.module.scss';
 
 const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
   props
 ) => {
-  const photoDimensionsCtx = useContext(PhotoDimensionsContext);
   const photoContainerRef = useRef<HTMLDivElement>(null);
   const photoImgRef = useRef<HTMLImageElement>(null);
   const rotateIconRef = useRef<HTMLImageElement>(null);
@@ -65,22 +62,13 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
     }
   };
 
-  const handlePhotoImgOnLoad = () => {
+  const handlePhotoImgOnError = () => {
     const photoImg = photoImgRef.current;
     if (!photoImg) return;
 
-    const width = photoImg.naturalWidth;
-    const height = photoImg.naturalHeight;
-    console.log(
-      `<img /> for the photo is loaded. { width: ${width}, height: ${height} }`
-    );
-    photoDimensionsCtx.setDimensions({ width, height });
-    photoDimensionsCtx.setLoadStatus('Load Success');
-  };
-
-  const handlePhotoImgOnError = () => {
-    photoDimensionsCtx.setDimensions(null);
-    photoDimensionsCtx.setLoadStatus('Load Failed');
+    photoImg.onerror = null;
+    photoImg.outerHTML =
+      '<div style="color: white">Unsupported File Format</div>';
   };
 
   return (
@@ -95,7 +83,6 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
           src={props.url}
           alt={props.alt}
           ref={photoImgRef}
-          onLoad={handlePhotoImgOnLoad}
           onError={handlePhotoImgOnError}
         />
       </div>
