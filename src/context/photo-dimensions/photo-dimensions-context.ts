@@ -1,7 +1,7 @@
 import React from "react";
 import { PhotoDimensions, PhotoImgLoadStatus } from "./photo-dimensions-type";
 
-type PhotoDimensionsContextType = {
+export type PhotoDimensionsContextType = {
   loadStatus: PhotoImgLoadStatus,
   setLoadStatus: (status: PhotoImgLoadStatus) => void,
   dimensions: PhotoDimensions | null,
