@@ -9,6 +9,7 @@ import { Check } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import MenuIcon from '@mui/icons-material/Menu';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ interface Page {
 
 const pages: Page[] = [
   { pathname: '/', displayName: 'Home', icon: <HomeIcon /> },
+  { pathname: '/demo', displayName: 'Demo', icon: <PlayArrowIcon /> },
   { pathname: '/settings', displayName: 'Settings', icon: <SettingsIcon /> },
   { pathname: '/about', displayName: 'About', icon: <InfoIcon /> },
 ];
