@@ -17,6 +17,10 @@ function blobToFile(blob: Blob, fileName:string): File {
   )
 }
 
+// Using jsDelivr for 'https://github.com/TomoyukiAota/photo-data-viewer-resources/blob/d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG?raw=true';
+// This is to circumvent the CORS error which occurs when the file in GitHub is directly fetched.
+const photoUrlForDemo = 'https://cdn.jsdelivr.net/gh/TomoyukiAota/photo-data-viewer-resources@d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG'
+
 const Demo: React.FC = () => {
   const photoCtx = useContext(PhotoContext);
   const router = useRouter();
@@ -26,12 +30,7 @@ const Demo: React.FC = () => {
   > = async () => {
     await router.push('/');
     await sleep(1000); // After navigating to Home page, wait for some time. This makes the demo look better.
-
-    // Using jsDelivr for 'https://github.com/TomoyukiAota/photo-data-viewer-resources/blob/d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG?raw=true';
-    // This is to circumvent the CORS error which occurs when the file in GitHub is directly fetched.
-    const photoUrl = 'https://cdn.jsdelivr.net/gh/TomoyukiAota/photo-data-viewer-resources@d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG'
-
-    const response = await fetch(photoUrl);
+    const response = await fetch(photoUrlForDemo);
     const blob = await response.blob();
     const file = blobToFile(blob, 'IMG_5769.JGP');
     photoCtx.loadPhoto(file);
@@ -42,7 +41,15 @@ const Demo: React.FC = () => {
       <div className={classes['page-title']}>Demo</div>
       <div className={classes['messages']}>
         <div>
-          Once &quot;Run Demo&quot; button is clicked, this application behaves as if this photo is selected.
+          Once &quot;Run Demo&quot; button is clicked, this application behaves as if{' '}
+          <a
+            href={photoUrlForDemo}
+            target='_blank'
+            rel='noopener'
+          >
+            this photo
+          </a>{' '}
+          is selected.
         </div>
       </div>
       <div className={classes['run-demo']}>
