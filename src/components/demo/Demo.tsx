@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 import { useContext } from 'react';
 
 import PhotoContext from '../../context/photo/photo-context';
