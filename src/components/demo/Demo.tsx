@@ -1,7 +1,9 @@
 import { Button } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
 import PhotoContext from '../../context/photo/photo-context';
+import { sleep } from '../../utils/sleep';
 import classes from './Demo.module.scss';
 
 function blobToFile(blob: Blob, fileName:string): File {
@@ -17,10 +19,14 @@ function blobToFile(blob: Blob, fileName:string): File {
 
 const Demo: React.FC = () => {
   const photoCtx = useContext(PhotoContext);
+  const router = useRouter();
 
   const handleButtonClicked: React.MouseEventHandler<
       HTMLButtonElement
   > = async () => {
+    await router.push('/');
+    await sleep(1000); // After navigating to Home page, wait for some time. This makes the demo look better.
+
     // Using jsDelivr for 'https://github.com/TomoyukiAota/photo-data-viewer-resources/blob/d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG?raw=true';
     // This is to circumvent the CORS error which occurs when the file in GitHub is directly fetched.
     const photoUrl = 'https://cdn.jsdelivr.net/gh/TomoyukiAota/photo-data-viewer-resources@d803c13d8718d4ac8b3dad8dfb9597d441040f4d/photos/IMG_5769.JPG'
