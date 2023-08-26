@@ -9,9 +9,11 @@
   grid:
     'page-title' auto
     'messages'   auto
+    'run-demo'   auto
     / auto;
   .page-title { grid-area: page-title; }
   .messages   { grid-area: messages;   }
+  .run-demo   { grid-area: run-demo;   }
 
   @media only screen and (max-width: 522px) {
     br {
@@ -31,4 +33,14 @@
   > * + * {
     padding: 10px 0;
   }
+}
+
+.run-demo {
+  padding: 30px 0 0 0;
+  display: grid;
+  place-items: center;
+}
+
+.run-demo-button {
+  width: 160px;
 }
