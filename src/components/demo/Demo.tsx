@@ -4,18 +4,8 @@ import { useContext } from 'react';
 
 import PhotoContext from '../../context/photo/photo-context';
 import { sleep } from '../../utils/sleep';
+import { blobToFile } from "./blob-to-file";
 import classes from './Demo.module.scss';
-
-function blobToFile(blob: Blob, fileName:string): File {
-  return new File(
-    [blob],
-    fileName,
-    {
-      lastModified: new Date().getTime(), // lastModified is the current time, which is the same as the file downloaded to the disk using web browsers.
-      type: blob.type
-    }
-  )
-}
 
 // Using jsDelivr for 'https://github.com/TomoyukiAota/photo-data-viewer-resources/blob/bdd784c66d9b891277f42d1f2b7f4ec65b8c8e5d/photos/Demo%20(Apple%20Park%20Visitor%20Center).JPG?raw=true';
 // This is to circumvent the CORS error which occurs when the file in GitHub is directly fetched.
