@@ -4,7 +4,7 @@ This page contains useful information to contribute to this project.
 
 ## Prerequisite
 
-- Node.js (64-bit, version 16.14.0 or greater)
+- Node.js (64-bit, version 18.17.1 or greater)
 
 ## Deployments
 

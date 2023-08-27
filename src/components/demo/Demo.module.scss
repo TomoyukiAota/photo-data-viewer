@@ -1,0 +1,46 @@
+// prettier-ignore
+.container {
+  width: 100%;
+  padding: 130px 20px 0 20px;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid:
+    'page-title' auto
+    'messages'   auto
+    'run-demo'   auto
+    / auto;
+  .page-title { grid-area: page-title; }
+  .messages   { grid-area: messages;   }
+  .run-demo   { grid-area: run-demo;   }
+
+  @media only screen and (max-width: 522px) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.page-title {
+  font-size: 28px;
+  text-align: center;
+}
+
+.messages {
+  padding: 50px 0 0 0;
+
+  > * + * {
+    padding: 10px 0;
+  }
+}
+
+.run-demo {
+  padding: 40px 0 0 0;
+  display: grid;
+  place-items: center;
+}
+
+.run-demo-button {
+  width: 120px;
+}
