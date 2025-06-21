@@ -7,10 +7,10 @@ import { openUrl } from '../../utils/open-url';
 import classes from './About.module.scss';
 
 const About: React.FC = () => {
-  const handleTwitterProfileIconClicked = () => {
+  const handleXFormerlyTwitterProfileIconClicked = () => {
     openUrl(
-      'https://twitter.com/TomoyukiAota',
-      'Twitter Profile of Tomoyuki Aota',
+      'https://x.com/TomoyukiAota',
+      'X (Formerly Twitter) Profile of Tomoyuki Aota',
       'About Page'
     );
   };
@@ -66,11 +66,11 @@ const About: React.FC = () => {
           This application is developed by Tomoyuki Aota.
         </span>
         <img
-          className={classes['twitter-profile-icon']}
-          src={IconDataUrl.twitterLogo}
-          alt='Twitter Profile'
-          title='Open Twitter Profile'
-          onClick={handleTwitterProfileIconClicked}
+          className={classes['x-formerly-twitter-profile-icon']}
+          src={IconDataUrl.xFormerlyTwitterLogo}
+          alt='X (Formerly Twitter) Profile'
+          title='Open X (Formerly Twitter) Profile'
+          onClick={handleXFormerlyTwitterProfileIconClicked}
         />
         <img
           className={classes['github-profile-icon']}
