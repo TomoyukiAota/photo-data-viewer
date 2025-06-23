@@ -7,6 +7,7 @@ import { openUrl } from '../../utils/open-url';
 import classes from './About.module.scss';
 
 const About: React.FC = () => {
+  const profileIconWidthHeight = '40px'; // Specifying width and height of <img> instead of using CSS to avoid flickering when switching pages
   const handleXFormerlyTwitterProfileIconClicked = () => {
     openUrl(
       'https://x.com/TomoyukiAota',
@@ -70,8 +71,8 @@ const About: React.FC = () => {
           src={IconDataUrl.xFormerlyTwitterLogo}
           alt='X (Formerly Twitter) Profile'
           title='Open X (Formerly Twitter) Profile'
-          width={'40px'}
-          height={'40px'}
+          width={profileIconWidthHeight}
+          height={profileIconWidthHeight}
           onClick={handleXFormerlyTwitterProfileIconClicked}
         />
         <img
@@ -79,8 +80,8 @@ const About: React.FC = () => {
           src={IconDataUrl.gitHubLogo}
           alt='GitHub Profile'
           title='Open GitHub Profile'
-          width={'40px'}
-          height={'40px'}
+          width={profileIconWidthHeight}
+          height={profileIconWidthHeight}
           onClick={handleGitHubProfileIconClicked}
         />
       </div>
