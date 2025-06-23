@@ -70,6 +70,8 @@ const About: React.FC = () => {
           src={IconDataUrl.xFormerlyTwitterLogo}
           alt='X (Formerly Twitter) Profile'
           title='Open X (Formerly Twitter) Profile'
+          width={'40px'}
+          height={'40px'}
           onClick={handleXFormerlyTwitterProfileIconClicked}
         />
         <img
@@ -77,6 +79,8 @@ const About: React.FC = () => {
           src={IconDataUrl.gitHubLogo}
           alt='GitHub Profile'
           title='Open GitHub Profile'
+          width={'40px'}
+          height={'40px'}
           onClick={handleGitHubProfileIconClicked}
         />
       </div>
