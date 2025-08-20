@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:nodejs.org)",
+      "Bash(npm show:*)",
+      "Bash(npm run build:*)",
+      "Bash(node:*)",
+      "Bash(where node)",
+      "Bash(volta list:*)",
+      "Bash(volta use:*)",
+      "Bash(volta pin:*)",
+      "Bash(npm:*)",
+      "Bash(powershell:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
