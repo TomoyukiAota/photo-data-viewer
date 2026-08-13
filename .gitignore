@@ -38,3 +38,6 @@ yarn-error.log*
 
 # editor
 .idea
+
+# mise
+mise.local.toml
