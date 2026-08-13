@@ -5,6 +5,7 @@ import PhotoImage from '../../components/photo-image/PhotoImage';
 import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
 import PhotoText from '../../components/photo-image/PhotoText';
 import { trackLoadedPhotoData } from '../../google-analytics/track-event';
+import { convertHeifToJpeg } from '../../utils/convert-heif-to-jpeg';
 import { isHeif } from '../../utils/filename-extension';
 import { sleep } from '../../utils/sleep';
 import DialogContext from '../dialog/dialog-context';
@@ -17,8 +18,7 @@ import PhotoContext from './photo-context';
 async function getBlobForHeif(file: File) {
   let blob: Blob | null = null;
   try {
-    const heic2any = require('heic2any'); // requre here to make debugging easier
-    blob = await heic2any({ blob: file });
+    blob = await convertHeifToJpeg(file);
   } catch (error) {
     console.log(
       `An error is thrown when handling the HEIF file ${file.name}. error: `,
