@@ -61,8 +61,5 @@
     "prettier": "2.5.1",
     "sass": "1.49.8",
     "typescript": "5.9.2"
-  },
-  "volta": {
-    "node": "24.6.0"
   }
 }

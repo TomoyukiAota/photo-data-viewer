@@ -4,7 +4,9 @@ This page contains useful information to contribute to this project.
 
 ## Prerequisite
 
-- Node.js (64-bit, version 24.6.0 or greater)
+- [mise](https://mise.jdx.dev/)
+
+This project uses mise to manage the versions of Node.js and npm, which are defined in [mise.toml](../mise.toml). Follow [the installation guide](https://mise.jdx.dev/installing-mise.html) to install mise and activate it in your shell.
 
 ## Deployments
 
@@ -19,7 +21,13 @@ Note that there are two deployments of this app.
 
 ## Build and run for development
 
-After cloning this repository, install the dependencies with this command:
+After cloning this repository, install Node.js and npm with this command:
+
+```bash
+mise trust && mise install
+```
+
+Then, install the dependencies with this command:
 
 ```bash
 npm ci
