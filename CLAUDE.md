@@ -10,6 +10,17 @@ This repository is written in English — code, comments, `README.md`, docs, com
 messages, branch names, pull request titles and descriptions, and this file.
 Keep it that way.
 
+## This repository is public
+
+`TomoyukiAota/photo-data-viewer` is a **public** repository. Everything that lands
+here is readable by anyone: pull request titles and descriptions, issues, **commit
+messages**, branch names, and comments in the code.
+
+**Do not write private things here** — names of private repositories, third-party
+services used privately, personal photos. When such a source is needed, carry over
+**the content only**, without naming where it came from. When in doubt, leave it
+out and ask.
+
 ## Knowledge about this repo lives in this repo
 
 Do not use Claude's memory (`~/.claude/projects/…/memory/`) as the place to keep
@@ -24,17 +35,3 @@ and a pull request makes it reviewable.
 This is not a promise to remember: [`.claude/settings.json`](.claude/settings.json)
 sets `"autoMemoryEnabled": false`, which turns memory off entirely (both reading
 and writing). That file is tracked, so the switch travels with the repository.
-
-Working in a directory that is **not** under git is the exception — there, memory
-is the only place available, so use it.
-
-## This repository is public
-
-`TomoyukiAota/photo-data-viewer` is a **public** repository. Everything that lands
-here is readable by anyone: pull request titles and descriptions, issues, **commit
-messages**, branch names, and comments in the code.
-
-**Do not write private things here** — names of private repositories, third-party
-services used privately, personal photos. When such a source is needed, carry over
-**the content only**, without naming where it came from. When in doubt, leave it
-out and ask.
