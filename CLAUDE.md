@@ -1,25 +1,37 @@
 # CLAUDE.md
 
-このアプリの中身・開発の進め方は [`README.md`](README.md) と
-[`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) にある。ここには
-**セッションの入口でだけ必要なこと**を書く。
+What this app does and how to work on it is in [`README.md`](README.md) and
+[`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md). This file holds only what is
+needed at the start of a session.
 
-## 知識はこのリポジトリに置く（memory を使わない）
+## Write in English
 
-memory（`~/.claude/projects/…/memory/`）は **clone ごと・マシンごとに別**で
-持ち歩けない。同じことを別の PC で作業したときに最初から無い、が実際に起きた。
-だから**このリポジトリに関わることは全部リポジトリに置く**——README・`docs/`・
-このファイル・コードの隣のコメント。
+This repository is written in English — code, comments, `README.md`, docs, commit
+messages, branch names, pull request titles and descriptions, and this file.
+Keep it that way.
 
-お願いではなく、[`.claude/settings.json`](.claude/settings.json) で
-`"autoMemoryEnabled": false` にして**機能ごと切ってある**（読み書きとも止まる）。
-追跡されている設定なので、clone しても PC を変えても効く。
+## This repository is public
 
-## このリポジトリは公開されている
+`TomoyukiAota/photo-data-viewer` is a **public** repository. Everything that lands
+here is readable by anyone: pull request titles and descriptions, issues, **commit
+messages**, branch names, and comments in the code.
 
-`TomoyukiAota/photo-data-viewer` は **public**。ここに残るもの——PR のタイトルと
-本文、issue、**コミットメッセージ**、ブランチ名、コード中のコメント——は誰でも読める。
+**Do not write private things here** — names of private repositories, third-party
+services used privately, personal photos. When such a source is needed, carry over
+**the content only**, without naming where it came from. When in doubt, leave it
+out and ask.
 
-**非公開のもの（非公開リポジトリの名前、私的に使っている外部サービス、個人の写真など）
-を書かない。** 参照が要る作業でも、出典を示さずに**内容だけ**転記する。
-迷ったら書かずに確認する。
+## Knowledge about this repo lives in this repo
+
+Do not use Claude's memory (`~/.claude/projects/…/memory/`) as the place to keep
+knowledge about this repository. Memory is **per clone and per machine**, so it
+does not travel: work on another computer and it is simply not there. That has
+already happened.
+
+Put it in the repository instead — `README.md`, `docs/`, this file, or a comment
+next to the code it explains. Git carries it to every clone and every machine,
+and a pull request makes it reviewable.
+
+This is not a promise to remember: [`.claude/settings.json`](.claude/settings.json)
+sets `"autoMemoryEnabled": false`, which turns memory off entirely (both reading
+and writing). That file is tracked, so the switch travels with the repository.
