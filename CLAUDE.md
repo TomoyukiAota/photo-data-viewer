@@ -17,7 +17,7 @@ here is readable by anyone: pull request titles and descriptions, issues, **comm
 messages**, branch names, and comments in the code.
 
 **Do not write private things here** — names of private repositories, third-party
-services used privately, personal photos. When such a source is needed, carry over
+services used privately, photos which reveal personal information. When such a source is needed, carry over
 **the content only**, without naming where it came from. When in doubt, leave it
 out and ask.
 
