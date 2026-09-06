@@ -15,9 +15,6 @@ memory（`~/.claude/projects/…/memory/`）は **clone ごと・マシンごと
 `"autoMemoryEnabled": false` にして**機能ごと切ってある**（読み書きとも止まる）。
 追跡されている設定なので、clone しても PC を変えても効く。
 
-**git 管理されていないディレクトリでの作業は例外**で、そちらは memory を使う
-（置き場が他に無いため）。
-
 ## このリポジトリは公開されている
 
 `TomoyukiAota/photo-data-viewer` は **public**。ここに残るもの——PR のタイトルと
