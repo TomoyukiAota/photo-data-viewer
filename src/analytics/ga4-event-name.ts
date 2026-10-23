@@ -5,6 +5,10 @@
 // a name per value, such as which URL was opened, goes in GA4's event parameters.
 export const Ga4EventName = {
   LoadedPhoto: 'loaded_photo',
+  DisplayedPhoto: 'displayed_photo',
+  OpenedUnsupportedFileDialog: 'opened_unsupported_file_dialog',
+  RanDemo: 'ran_demo',
+  PageHidden: 'page_hidden',
   OpenedUrl: 'opened_url',
   LoadedUserSetting: 'loaded_user_setting',
   ChangedUserSetting: 'changed_user_setting',

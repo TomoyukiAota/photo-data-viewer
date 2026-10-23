@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { trackPhotoDimensions } from '../../analytics/track-event';
 import PhotoDimensionsContext from './photo-dimensions-context';
 import { PhotoDimensions, PhotoImgLoadStatus } from './photo-dimensions-type';
 
@@ -10,7 +9,6 @@ const PhotoDimensionsProvider: React.FC = (props) => {
 
   const handleSetDimensions = (dimensions: PhotoDimensions | null) => {
     setDimensions(dimensions);
-    trackPhotoDimensions(dimensions);
   };
 
   return (

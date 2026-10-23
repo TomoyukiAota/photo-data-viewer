@@ -1,3 +1,4 @@
+import { EventFields, toGa4Params } from './event-fields';
 import * as ga4 from './ga4';
 import { Ga4EventNameType } from './ga4-event-name';
 import { isUsageDataSent } from './opt-out';
@@ -7,7 +8,8 @@ export interface AnalyticsEvent {
   /** What the analytics backends record, named as this app has always named it. */
   category: string;
   action: string;
-  label?: string;
+  /** Text, or fields, which the analytics backends receive as JSON and GA4 as event parameters (event-fields.ts). */
+  label?: string | EventFields;
   value?: string;
   /** What GA4 records instead of the action, as GA4's rules allow no spaces or brackets in a name. */
   ga4Name: Ga4EventNameType;
@@ -21,10 +23,12 @@ export interface AnalyticsEvent {
 export function trackEvent(event: AnalyticsEvent): void {
   if (!isUsageDataSent()) return;
 
-  const { category, action, label, value } = event;
+  const { category, action, value } = event;
+  const label = typeof event.label === 'object' ? JSON.stringify(event.label) : event.label;
+  const labelParams = typeof event.label === 'object' ? toGa4Params(event.label) : { event_label: event.label ?? '' };
   ga4.event(event.ga4Name, {
     event_category: category,
-    event_label: label ?? '',
+    ...labelParams,
     value: value ?? '',
     ...event.ga4Params,
   });

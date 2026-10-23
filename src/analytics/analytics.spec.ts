@@ -48,6 +48,27 @@ describe('trackEvent', () => {
     expect(ga4.event).toHaveBeenCalledWith('app_integration_mode', { event_category: 'Environment', event_label: '', value: '' });
   });
 
+  it('sends fields as JSON to Photo Location Map, and as parameters to GA4 instead of the label', () => {
+    trackEvent({
+      category: 'Loaded Photo',
+      action: 'Displayed Photo',
+      label: { result: 'displayed', width: 4032, exifFields: ['Make'], heifError: undefined },
+      ga4Name: Ga4EventName.DisplayedPhoto,
+    });
+    expect(sendToPlmBackend).toHaveBeenCalledWith(
+      'Loaded Photo',
+      'Displayed Photo',
+      '{"result":"displayed","width":4032,"exifFields":["Make"]}',
+      undefined
+    );
+    expect(ga4.event).toHaveBeenCalledWith('displayed_photo', {
+      event_category: 'Loaded Photo',
+      result: 'displayed',
+      width: 4032,
+      value: '',
+    });
+  });
+
   it('sends nothing when usage data is turned off', () => {
     mockedIsUsageDataSent.mockReturnValue(false);
     trackEvent({ category: 'Loaded Photo', action: 'Loaded Photo', label: 'x', ga4Name: Ga4EventName.LoadedPhoto });

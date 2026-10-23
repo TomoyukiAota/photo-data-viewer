@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import { trackRanDemo } from '../../analytics/track-event';
 import PhotoContext from '../../context/photo/photo-context';
 import { sleep } from '../../utils/sleep';
 import { blobToFile } from './blob-to-file';
@@ -19,12 +20,13 @@ const Demo: React.FC = () => {
   const handleButtonClicked: React.MouseEventHandler<
     HTMLButtonElement
   > = async () => {
+    trackRanDemo();
     await router.push('/');
     await sleep(1000); // After navigating to Home page, wait for some time. This makes the demo look better.
     const response = await fetch(photoUrlForDemo);
     const blob = await response.blob();
     const file = blobToFile(blob, 'Demo (Apple Park).jpg');
-    photoCtx.loadPhoto(file);
+    photoCtx.loadPhoto(file, { isDemo: true });
   };
 
   return (
