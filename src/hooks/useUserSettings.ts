@@ -1,5 +1,5 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
-import { trackChangedUserSetting, trackLoadedUserSetting } from '../google-analytics/track-event';
+import { trackChangedUserSetting, trackLoadedUserSetting } from '../analytics/track-event';
 import { DateTimeFormat } from '../utils/date-time-format';
 import { UserSettingDefaultValue, UserSettingKey, UserSettingKeyType } from '../utils/user-settings';
 

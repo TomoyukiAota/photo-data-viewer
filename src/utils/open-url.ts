@@ -1,4 +1,4 @@
-import { trackOpenUrl } from "../google-analytics/track-event";
+import { trackOpenUrl } from "../analytics/track-event";
 
 export function openUrl(url: string, urlDescription: string, from: string): void {
   openTabWithoutOpener(url);

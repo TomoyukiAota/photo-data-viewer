@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { trackPhotoDimensions } from '../../google-analytics/track-event';
+import { trackPhotoDimensions } from '../../analytics/track-event';
 import PhotoDimensionsContext from './photo-dimensions-context';
 import { PhotoDimensions, PhotoImgLoadStatus } from './photo-dimensions-type';
 
