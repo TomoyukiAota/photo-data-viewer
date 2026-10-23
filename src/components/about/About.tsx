@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
+import Link from 'next/link';
+
 import { IconDataUrl } from '../../icons/icon-data-url';
 import { appName } from '../../app-integration/app-name';
 import { openUrl } from '../../utils/open-url';
@@ -33,11 +35,17 @@ const About: React.FC = () => {
           so the file is kept within your browser and not sent to any servers.
         </div>
         <div>
-          To improve this application, this application collects anonymized{' '}
+          To improve this application, it collects usage information, such as{' '}
           <br />
-          usage information (e.g. opening this page) using Google Analytics.{' '}
+          which pages are opened and what kind of photo was loaded, along with{' '}
           <br />
-          You agree to it by continuing to use this application.
+          your IP address and the approximate location derived from it.{' '}
+          <br />
+          You can turn this off in{' '}
+          <Link href='/settings'>
+            <a>Settings</a>
+          </Link>
+          .
         </div>
         <div>
           If you find any bugs or issues, please submit them in{' '}
