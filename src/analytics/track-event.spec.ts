@@ -12,6 +12,7 @@ import {
   trackOpenedUnsupportedFileDialog,
   trackOpenUrl,
   trackPageHidden,
+  trackPageLoaded,
   trackRanDemo,
 } from './track-event';
 
@@ -52,6 +53,7 @@ describe('track-event', () => {
     trackChangedUserSetting('SendUsageData', 'false');
     trackChangedAppLayout('isWideLayout', 'True');
     trackAppIntegrationMode();
+    trackPageLoaded();
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -90,7 +92,17 @@ describe('track-event', () => {
       'User Setting / Changed User Setting',
       'App Layout / App Layout',
       'Environment / App Integration Mode',
+      'Page / Page Loaded',
     ]);
+  });
+
+  it('sends where the visitor came from and what they view the app with, once per page load', () => {
+    const loaded = sent().find((event) => event.action === 'Page Loaded');
+    expect(loaded?.label).toMatchObject({
+      language: navigator.language,
+      screen: expect.stringMatching(/^\d+x\d+$/),
+      viewport: expect.stringMatching(/^\d+x\d+$/),
+    });
   });
 
   it('sends a photo load as one event, with the names of its EXIF fields and not their values', () => {
