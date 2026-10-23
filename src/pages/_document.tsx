@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { GA_ID, GA_ID_EXISTS } from '../google-analytics/gtag';
+import { GA_ID, GA_ID_EXISTS } from '../analytics/ga4';
 
 export default function Document() {
   return (
