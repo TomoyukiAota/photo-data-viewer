@@ -5,6 +5,7 @@ export const UserSettingKey = {
   ClockSystemFormat: 'ClockSystemFormat',
   WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',
   WideLayoutPhotoImagePaneFlex: 'WideLayoutPhotoImagePaneFlex',
+  SendUsageData: 'SendUsageData',
 } as const;
 
 export type UserSettingKeyType = typeof UserSettingKey[keyof typeof UserSettingKey];
@@ -16,6 +17,7 @@ export const UserSettingDefaultValue = {
   ClockSystemFormat: DateTimeFormat.ForUser.ClockSystemFormat_Default,
   WideLayoutPhotoDataPaneFlex: wideLayoutPaneFlexDefaultValue,
   WideLayoutPhotoImagePaneFlex: wideLayoutPaneFlexDefaultValue,
+  SendUsageData: true,
 } as const;
 
 export function readUserSettingAsNumber(key: UserSettingKeyType, defaultValue: number): number {

@@ -1,18 +1,19 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import * as ga4 from './ga4';
+import { trackPageView } from './analytics';
+import { GA_ID_EXISTS } from './ga4';
 
 export default function usePageView() {
   const router = useRouter();
   useEffect(() => {
-    if (!ga4.GA_ID_EXISTS) {
+    if (!GA_ID_EXISTS) {
       return;
     }
 
     const handleRouteChange = (url: string, { shallow }: { shallow: boolean }) => {
       if (!shallow) {
-        ga4.pageview(url);
+        trackPageView(url);
       }
     }
 
