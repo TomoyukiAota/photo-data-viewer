@@ -9,6 +9,7 @@ export const Ga4EventName = {
   OpenedUnsupportedFileDialog: 'opened_unsupported_file_dialog',
   RanDemo: 'ran_demo',
   PageHidden: 'page_hidden',
+  PageLoaded: 'page_loaded',
   OpenedUrl: 'opened_url',
   LoadedUserSetting: 'loaded_user_setting',
   ChangedUserSetting: 'changed_user_setting',

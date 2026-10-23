@@ -2,10 +2,12 @@ import { applyUsageDataSetting, trackEvent, trackPageView } from './analytics';
 import * as ga4 from './ga4';
 import { Ga4EventName } from './ga4-event-name';
 import { isUsageDataSent } from './opt-out';
+import { sendToPdvBackend } from './pdv-backend/pdv-backend';
 import { sendToPlmBackend } from './plm-backend';
 
 jest.mock('./ga4');
 jest.mock('./opt-out');
+jest.mock('./pdv-backend/pdv-backend');
 jest.mock('./plm-backend');
 
 const mockedIsUsageDataSent = isUsageDataSent as jest.MockedFunction<typeof isUsageDataSent>;
@@ -40,6 +42,7 @@ describe('trackEvent', () => {
       ga4Name: Ga4EventName.ChangedUserSetting,
     });
     expect(sendToPlmBackend).toHaveBeenCalledWith('User Setting', 'Changed User Setting', 'DateFormat: YYYY/MM/DD', '1');
+    expect(sendToPdvBackend).toHaveBeenCalledWith('User Setting', 'Changed User Setting', 'DateFormat: YYYY/MM/DD', '1');
   });
 
   it('leaves a missing label and value out for Photo Location Map, which stores them as null', () => {
@@ -76,6 +79,7 @@ describe('trackEvent', () => {
     expect(ga4.event).not.toHaveBeenCalled();
     expect(ga4.pageview).not.toHaveBeenCalled();
     expect(sendToPlmBackend).not.toHaveBeenCalled();
+    expect(sendToPdvBackend).not.toHaveBeenCalled();
   });
 });
 

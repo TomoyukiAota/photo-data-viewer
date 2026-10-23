@@ -81,6 +81,25 @@ export function trackRanDemo() {
   trackEvent({ category: 'Demo', action: 'Ran Demo', ga4Name: Ga4EventName.RanDemo });
 }
 
+// Once per page load: where the visitor came from, and what they view the app with.
+// Photo Location Map records the same of its own launch, as events.
+export function trackPageLoaded() {
+  trackEvent({
+    category: 'Page',
+    action: 'Page Loaded',
+    label: {
+      // Browsers send only the origin of another site by default, so this is rarely more than that.
+      referrer: document.referrer.slice(0, 512) || undefined,
+      language: navigator.language,
+      languages: [...navigator.languages],
+      screen: `${window.screen.width}x${window.screen.height}`,
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+      devicePixelRatio: window.devicePixelRatio,
+    },
+    ga4Name: Ga4EventName.PageLoaded,
+  });
+}
+
 export interface PageHiddenDetails {
   secondsSinceLoad: number;
   /** How long the page was visible since it was loaded, which time in a background tab is not. */

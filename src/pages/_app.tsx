@@ -8,7 +8,7 @@ import LoadPhotoInPlm from '../app-integration/LoadPhotoInPlm';
 import AppMenu from '../components/app-menu/AppMenu';
 import UnsupportedFileSelectedDialog from '../components/dialog/UnsupportedFileSelectedDialog';
 import AppProvider from '../context/AppProvider';
-import { trackAppIntegrationMode } from '../analytics/track-event';
+import { trackAppIntegrationMode, trackPageLoaded } from '../analytics/track-event';
 import { useAppRoot } from '../hooks/useAppRoot';
 
 import classes from './_app.module.scss';
@@ -16,6 +16,7 @@ import classes from './_app.module.scss';
 if (!AppIntegration.isDuringSsrOrSsg) {
   console.debug('App Integration Mode: ', AppIntegration.mode);
   trackAppIntegrationMode();
+  trackPageLoaded();
 }
 
 function AppRoot({ Component, pageProps }: AppProps) {

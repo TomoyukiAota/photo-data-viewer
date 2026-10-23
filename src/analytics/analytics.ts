@@ -2,6 +2,7 @@ import { EventFields, toGa4Params } from './event-fields';
 import * as ga4 from './ga4';
 import { Ga4EventNameType } from './ga4-event-name';
 import { isUsageDataSent } from './opt-out';
+import { sendToPdvBackend } from './pdv-backend/pdv-backend';
 import { sendToPlmBackend } from './plm-backend';
 
 export interface AnalyticsEvent {
@@ -33,6 +34,7 @@ export function trackEvent(event: AnalyticsEvent): void {
     ...event.ga4Params,
   });
   sendToPlmBackend(category, action, label, value);
+  sendToPdvBackend(category, action, label, value);
 }
 
 export function trackPageView(path: string): void {
