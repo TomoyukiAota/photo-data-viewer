@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { loadPlmSettings } from "../app-integration/plm-settings";
 import usePageView from "../analytics/usePageView";
 import { useAppLayoutTracker } from "./useAppLayout";
+import { usePageHiddenTracker } from "./usePageHiddenTracker";
 import { useUserSettingsInitializer, useUserSettingsTracker } from "./useUserSettings";
 
 export const useAppRoot = () => {
   usePageView();
+  usePageHiddenTracker();
 
   loadPlmSettings();
 
