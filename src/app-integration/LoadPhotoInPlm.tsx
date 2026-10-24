@@ -1,9 +1,10 @@
 import { useContext, useEffect } from 'react';
 import PhotoContext from '../context/photo/photo-context';
+import { PHOTO_PATH_PARAM } from '../analytics/ga4-page';
 import { AppIntegration } from './app-integration';
 
 function getPhotoPath(): string {
-  const photoPath = new URL(window.location.href).searchParams.get('photoPath');
+  const photoPath = new URL(window.location.href).searchParams.get(PHOTO_PATH_PARAM);
   console.log('photoPath passed from Photo Location Map:', photoPath);
   return photoPath as string;
 }
