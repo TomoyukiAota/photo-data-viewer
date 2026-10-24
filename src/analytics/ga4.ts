@@ -1,3 +1,5 @@
+import { ga4PageFields } from './ga4-page';
+
 export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? '';
 export const GA_ID_EXISTS = !!GA_ID;
 
@@ -18,6 +20,7 @@ export function pageview(path: string) {
 
   window.gtag('config', GA_ID, {
     page_path: path,
+    ...ga4PageFields(window.location.href),
   });
 }
 
@@ -54,6 +57,7 @@ export function setDisabled(disabled: boolean) {
     window.gtag('js', new Date());
     window.gtag('config', GA_ID, {
       page_path: window.location.pathname,
+      ...ga4PageFields(window.location.href),
     });
   }
 }
