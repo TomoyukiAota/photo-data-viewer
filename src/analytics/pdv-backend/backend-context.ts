@@ -1,10 +1,10 @@
 // What the analytics backend is told about this app with every event, besides the
 // event itself.
 
-// Sending to this app's own analytics backend, from the standalone app only. Off
-// until its endpoints exist; turning it on is a step of its own, checked in a
-// browser first.
-export const PDV_BACKEND_ENABLED = false;
+// Sending to this app's own analytics backend, from the standalone app only. Its
+// endpoints exist since 2026-10-26, each answering browsers from its own origins
+// only. Setting this to false stops the sending again, everything else kept.
+export const PDV_BACKEND_ENABLED = true;
 
 export const PdvBackendEndpoint = {
   dev: 'https://collect-dev.analytics.photo-data-viewer.tomoyukiaota.com/v1/events',
