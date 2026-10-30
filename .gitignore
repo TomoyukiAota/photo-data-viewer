@@ -41,3 +41,8 @@ yarn-error.log*
 
 # mise
 mise.local.toml
+
+# Dependency upgrade verification artifacts
+/.upgrade-artifacts/
+/test-results/
+/playwright-report/
