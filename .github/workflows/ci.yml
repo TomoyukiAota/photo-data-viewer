@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ""
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -18,10 +22,10 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
 
       - name: Install Node.js and npm with mise
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@v5.2.4
 
       - name: npm ci
         run: npm ci
@@ -29,8 +33,20 @@ jobs:
       - name: npm run lint
         run: npm run lint
 
-      - name: npm run test
-        run: npm run test
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test -- --runInBand
 
       - name: npm run build
         run: npm run build
+
+      - name: Build embedded application
+        run: npm run build:plm
+
+      - name: Install browser for functional regression tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser regression tests
+        run: npm run test:e2e

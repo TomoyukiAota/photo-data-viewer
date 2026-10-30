@@ -12,7 +12,8 @@ The fixed HEIF input decodes to 3024 x 4032 in the baseline (orientation applied
 
 Tracked PNG baselines are captured from the original production build. Map panes
 are masked because Leaflet's movement is animated; marker existence is asserted.
-External font CSS, remote tiles and GA are isolated for deterministic comparisons.
+Remote tiles and GA are isolated. Roboto remains loaded identically in both builds;
+Next 12 inlines the Google font CSS whereas Next 16 uses the stylesheet request.
 Visual comparison is opt-in (`PDV_VISUAL=1`) on the same OS/browser. Functional
 checks run without platform-specific image comparison on CI.
 
@@ -31,3 +32,11 @@ No remote branch push, preview deployment, or production change has occurred.
 Installed Photo Location Map reports version 1.12.1; its embedded runtime has not
 been exercised against localhost yet. Browser support below Next 16's declared
 minimum remains an unresolved release consideration.
+
+Baseline stabilization: screenshots were regenerated from a separate copy of the
+original `3594ba5` source/build on port 3300, never from upgraded application code.
+Masking uses the bounded Leaflet container (its map pane has zero intrinsic size).
+The comparator permits at most four changed pixels per full image: the measured
+intermediate difference was two pixels at a text glyph edge, with no layout shift.
+This avoids accepting visible styling/layout differences while tolerating isolated
+font rasterization noise. All other expectations remain unchanged.

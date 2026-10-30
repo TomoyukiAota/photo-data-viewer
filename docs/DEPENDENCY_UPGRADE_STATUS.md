@@ -12,10 +12,10 @@ version candidates, validation requirements, and autonomous decision rules.
 | Implementation authorization | User requested implementation on 2026-10-31 |
 | Checkout when plan was written | `feature/write-claude-md-in-english` |
 | Starting code SHA | `22d1587a43da038e6f87bc828946b8ad1dcfec23` |
-| Latest verified upgrade code SHA | Starting application verified; see dependency-upgrade-evidence/BASELINE.md |
+| Latest verified upgrade code SHA | `3594ba5` (baseline harness and portable images) |
 | Active work package | U03 / U05 |
 | Working-tree changes | Baseline harness, fixtures, screenshots and evidence |
-| Dependency install/version changes | None |
+| Dependency install/version changes | Next/React intermediate install complete; not yet accepted |
 | Agent-owned active processes | None |
 | Next action | Migrate runtime and the coupled Next/React/tooling group, preserving baseline screenshots |
 
@@ -118,3 +118,22 @@ User action needed, if any (otherwise none):
   type checks, scoped unit tests and browser baseline checks completed. Fixtures
   and comparison screenshots are stored in Git. Runtime 26.13.0/npm 12.2.1 installed
   via mise; project selection has not changed yet.
+
+- Node 26.13.0/npm 12.2.1: unit tests and lint pass, but Next 12 build fails
+  in bundled jsonwebtoken because Node 26 removes SlowBuffer. Runtime and Next
+  must therefore land together. Intermediate migration now targets Next 16.4.3,
+  React 18.3.1, MUI 5.18.0, DevExpress 4.0.11, ESLint 9.39.5, TS 5.9.3.
+
+- Intermediate dependencies installed cleanly under Node 26.13.0/npm 12.2.1.
+  The old mutually pinned DevExpress lock graph caused ERESOLVE; original lock and
+  node_modules were preserved in ignored artifacts, then a fresh lock was resolved
+  without force/legacy-peer flags. Lint/types/16 unit tests pass. SSR needed
+  transpilePackages for legacy DevExpress ESM imports; build under investigation.
+
+- Intermediate verification: Next 16.4.3, Node 26.13.0/npm 12.2.1, React 18.3.1,
+  MUI 5.18.0, DevExpress 4.0.11, libheif 1.23.5 and TypeScript 6.0.3 pass
+  lint/type checks/16 unit tests, production build, and all 9 browser tests
+  including visual comparison against the original-source baselines. Browser
+  comparison allows four isolated rasterization pixels; observed differences were
+  at text glyph edges. Leaflet CDN CSS/SRI now matches installed 1.9.4 bytes.
+  Next step: checkpoint embedded build, then bounded grid/React19/MUI9 migration.

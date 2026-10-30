@@ -15,6 +15,7 @@ const WidthHeightRow: React.FC = () => {
 
   if (!dimensions) {
     console.assert(
+      false,
       "Something went wrong when loadStatus === 'Load Success' and dimensions is falsy."
     );
     return <div />;

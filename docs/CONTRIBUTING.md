@@ -52,3 +52,25 @@ npm run dev:plm
 ```
 
 Open http://localhost:3100 from Photo Location Map to see the app.
+
+## Validation and dependency upgrades
+
+Use `mise exec -- <command>` when the current shell still has an older runtime
+selected after changing `mise.toml`.
+
+```bash
+npm run test:all
+npm run build
+npm run build:plm
+npx playwright install chromium
+npm run test:e2e
+```
+
+The browser suite starts the standalone production server on port 3200. It uses
+public/synthetic fixtures and isolates analytics and external map/font requests.
+For visual comparisons on the same macOS/Chrome environment as the committed
+baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
+to accept an unexplained UI change. Cross-platform CI runs functional assertions.
+
+Read [the upgrade status](./DEPENDENCY_UPGRADE_STATUS.md) before resuming an
+upgrade, then follow [the implementation plan](./DEPENDENCY_UPGRADE_PLAN.md).

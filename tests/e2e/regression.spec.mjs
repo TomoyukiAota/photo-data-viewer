@@ -5,9 +5,12 @@ const photo = readFileSync(new URL('../fixtures/demo.jpg', import.meta.url));
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64');
 
 async function snapshot(page, name) {
+  if (page.viewportSize().width > 1200 && new URL(page.url()).pathname === '/') {
+    await expect(page.locator('.leaflet-container')).toBeVisible();
+  }
   await page.evaluate(() => document.fonts.ready);
   if (process.env.PDV_VISUAL) {
-    await expect(page).toHaveScreenshot(`${name}.png`, { animations: 'disabled', mask: [page.locator('.leaflet-map-pane')], timeout: 15000 });
+    await expect(page).toHaveScreenshot(`${name}.png`, { animations: 'disabled', maxDiffPixels: 4, mask: [page.locator('.leaflet-container')], timeout: 15000 });
   }
 }
 
@@ -22,9 +25,9 @@ async function navigate(page, name) {
 }
 
 test.beforeEach(async ({ page }) => {
-  // Keep baseline captures independent of map servers, external fonts, and GA.
+  // Keep baseline captures independent of map servers, and GA.
   await page.route(/googletagmanager\.com|google-analytics\.com/, route => route.abort());
-  await page.route(/fonts\.googleapis\.com|unpkg\.com/, route => route.fulfill({ contentType: 'text/css', body: '' }));
+  await page.route(/unpkg\.com/, route => route.fulfill({ contentType: 'text/css', body: '' }));
   await page.route(/tile\.openstreetmap\.org/, route => route.fulfill({ contentType: 'image/png', body: png }));
   await page.route(/cdn\.jsdelivr\.net.*Demo/, route => route.fulfill({ contentType: 'image/jpeg', body: photo }));
 });

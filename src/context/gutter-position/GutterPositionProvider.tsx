@@ -1,5 +1,5 @@
 import isNumber from 'is-number';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   readUserSettingAsNumber,
   UserSettingDefaultValue,
@@ -21,12 +21,16 @@ function saveGutterPositionToLocalStorage(position: {
   );
 }
 
-const GutterPositionProvider: React.FC = (props) => {
+const GutterPositionProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [photoDataPaneFlex, setPhotoDataPaneFlex] = useState<number>(
-    UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex
+    () => typeof window === 'undefined'
+      ? UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex
+      : readUserSettingAsNumber(UserSettingKey.WideLayoutPhotoDataPaneFlex, UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex)
   );
   const [photoImagePaneFlex, setPhotoImagePaneFlex] = useState<number>(
-    UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex
+    () => typeof window === 'undefined'
+      ? UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex
+      : readUserSettingAsNumber(UserSettingKey.WideLayoutPhotoImagePaneFlex, UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex)
   );
 
   const handleSetPhotoDataPaneFlex = (value?: number | null) => {
@@ -51,22 +55,6 @@ const GutterPositionProvider: React.FC = (props) => {
       photoImagePaneFlex: valueNumber,
     });
   };
-
-  useEffect(
-    () => {
-      const photoDataPaneFlex = readUserSettingAsNumber(
-        UserSettingKey.WideLayoutPhotoDataPaneFlex,
-        UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex
-      );
-      setPhotoDataPaneFlex(photoDataPaneFlex);
-      const photoImagePaneFlex = readUserSettingAsNumber(
-        UserSettingKey.WideLayoutPhotoImagePaneFlex,
-        UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex
-      );
-      setPhotoImagePaneFlex(photoImagePaneFlex);
-    },
-    [] // Load gutter position from local storage when the app starts.
-  );
 
   return (
     <GutterPositionContext.Provider

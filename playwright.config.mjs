@@ -5,6 +5,12 @@ export default defineConfig({
   timeout: 30000,
   workers: 1,
   snapshotPathTemplate: '{testDir}/snapshots/{arg}{ext}',
+  webServer: process.env.PDV_BASE_URL ? undefined : {
+    command: 'npm start -- -p 3200',
+    url: 'http://127.0.0.1:3200',
+    reuseExistingServer: !process.env.CI,
+    env: { NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: '' },
+  },
   use: {
     baseURL: process.env.PDV_BASE_URL || 'http://127.0.0.1:3200',
     viewport: { width: 1280, height: 800 },

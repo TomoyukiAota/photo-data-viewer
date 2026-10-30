@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import DialogContext from './dialog-context';
 
-const DialogProvider: React.FC = (props) => {
+const DialogProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [isUnsupportedFileDialogOpened, setIsUnsupportedFileDialogOpened] =
     useState(false);
 

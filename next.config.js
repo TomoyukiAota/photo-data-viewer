@@ -11,6 +11,12 @@ module.exports = {
   distDir: isPdvInPlm ? distDirForPlm : module.exports.distDir,
 
   reactStrictMode: true,
+  // Bundle the legacy grid's ESM imports instead of loading them in Node.js.
+  transpilePackages: [
+    '@devexpress/dx-react-core',
+    '@devexpress/dx-react-grid',
+    '@devexpress/dx-react-grid-material-ui',
+  ],
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/i,
