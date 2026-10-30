@@ -8,16 +8,16 @@ version candidates, validation requirements, and autonomous decision rules.
 | Field | Recorded value |
 | --- | --- |
 | Last updated | 2026-10-31, Asia/Tokyo |
-| Phase | Implementation in progress: U00/U01 |
+| Phase | Baseline captured; runtime and dependency migration next |
 | Implementation authorization | User requested implementation on 2026-10-31 |
 | Checkout when plan was written | `feature/write-claude-md-in-english` |
 | Starting code SHA | `22d1587a43da038e6f87bc828946b8ad1dcfec23` |
-| Latest verified upgrade code SHA | None; current app baseline has not been executed for this project |
-| Active work package | U00 / U01 |
-| Working-tree changes | Planning documents only; inspect actual Git status on resume |
+| Latest verified upgrade code SHA | Starting application verified; see dependency-upgrade-evidence/BASELINE.md |
+| Active work package | U03 / U05 |
+| Working-tree changes | Baseline harness, fixtures, screenshots and evidence |
 | Dependency install/version changes | None |
 | Agent-owned active processes | None |
-| Next action | Refresh targets, install original lockfile, and execute baseline checks |
+| Next action | Migrate runtime and the coupled Next/React/tooling group, preserving baseline screenshots |
 
 The branch above is an observation, not a command to switch branches or discard
 work. Implementation branch: `codex/dependency-upgrades`. Planning files are now being
@@ -33,9 +33,9 @@ implications. No row is verified until its declared checks have evidence.
 
 | ID | State | Verified code SHA / evidence | Next action or remaining gate |
 | --- | --- | --- | --- |
-| U00 | in_progress | — | Refresh registry and environment metadata |
-| U01 | pending | — | Capture current behavior and both-mode baseline |
-| U02 | pending | — | Add and prove regression checks against baseline |
+| U00 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
+| U01 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
+| U02 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
 | U03 | pending | — | Upgrade runtime/CI and verify reproducibility |
 | U04 | pending | — | Upgrade independent utility packages |
 | U05 | pending | — | Upgrade Next/React intermediate and coupled tools |
@@ -113,3 +113,8 @@ User action needed, if any (otherwise none):
 
 - 2026-10-31: User authorized implementation. Created `codex/dependency-upgrades`
   from the inspected starting SHA and began U00/U01.
+
+- 2026-10-31: Resumed after interruption. Both original production builds, lint,
+  type checks, scoped unit tests and browser baseline checks completed. Fixtures
+  and comparison screenshots are stored in Git. Runtime 26.13.0/npm 12.2.1 installed
+  via mise; project selection has not changed yet.
