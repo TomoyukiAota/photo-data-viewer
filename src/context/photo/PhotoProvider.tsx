@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import { getAppName } from '../../app-integration/app-name';
 import PhotoImage from '../../components/photo-image/PhotoImage';
 import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
 import PhotoText from '../../components/photo-image/PhotoText';
-import { trackLoadedPhotoData } from '../../google-analytics/track-event';
+import { describeError } from '../../analytics/event-fields';
+import { PhotoDisplayDetails, trackDisplayedPhoto, trackLoadedPhoto } from '../../analytics/track-event';
 import { convertHeifToJpeg } from '../../utils/convert-heif-to-jpeg';
 import { isHeif } from '../../utils/filename-extension';
 import { sleep } from '../../utils/sleep';
@@ -16,25 +17,32 @@ import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
 import PhotoContext from './photo-context';
 
 async function getBlobForHeif(file: File) {
+  const startedAt = performance.now();
   let blob: Blob | null = null;
+  let heif: PhotoDisplayDetails['heif'];
   try {
     blob = await convertHeifToJpeg(file);
+    heif = { result: 'converted', decodeMs: performance.now() - startedAt };
   } catch (error) {
     console.log(
       `An error is thrown when handling the HEIF file ${file.name}. error: `,
       error
     );
+    heif = { result: 'failed', error: describeError(error), decodeMs: performance.now() - startedAt };
   }
-  return blob;
+  return { blob, heif };
 }
 
 async function getImageUrl(file: File) {
   let fileOrBlob: File | Blob = file;
+  let heif: PhotoDisplayDetails['heif'];
   if (isHeif(file.name)) {
-    fileOrBlob = (await getBlobForHeif(file)) ?? file;
+    const converted = await getBlobForHeif(file);
+    fileOrBlob = converted.blob ?? file;
+    heif = converted.heif;
   }
   const url = URL.createObjectURL(fileOrBlob);
-  return url;
+  return { url, heif };
 }
 
 const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
@@ -53,9 +61,12 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
     () => initialLoadedPhotoImage
   );
 
+  // Whether the photo shown is the demo's, so that loading it again after a setting changes is recorded as the demo's too.
+  const isDemoPhoto = useRef(false);
+
   const loadFile = async (
     file: File | undefined,
-    option: { isReload: boolean }
+    option: { isReload: boolean; isDemo: boolean }
   ) => {
     if (!file) return;
 
@@ -71,34 +82,39 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
       await sleep(500);
     }
 
+    // Timed from here, so that the wait above, made on purpose, is not counted.
+    const loadStartedAt = performance.now();
+    const isReload = !!option?.isReload;
+    const isDemo = !!option?.isDemo;
     const data = await createLoadedPhotoData(file);
     console.log('LoadedPhotoData', data);
-    trackLoadedPhotoData(data);
+    trackLoadedPhoto(data, { exifMs: performance.now() - loadStartedAt, isReload, isDemo });
     setLoadedPhotoData(data);
 
     photoDimensionsCtx.setLoadStatus('Loading');
     photoDimensionsCtx.setDimensions(null);
 
     const isExifAvailable = !!data?.isExifAvailable;
-    const isReload = !!option?.isReload;
     if (!isExifAvailable && !isReload) {
       dialogCtx.unsupportedFileSelected.open();
     }
 
-    const url = await getImageUrl(file);
+    const { url, heif } = await getImageUrl(file);
     setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
-    setPhotoDimensions(photoDimensionsCtx, url);
+    const dimensions = await setPhotoDimensions(photoDimensionsCtx, url);
+    trackDisplayedPhoto({ dimensions, loadMs: performance.now() - loadStartedAt, heif, isReload, isDemo });
   };
 
-  const loadPhoto = (file: File) => {
+  const loadPhoto = (file: File, options?: { isDemo?: boolean }) => {
     console.debug('loadPhoto called. file: ', file);
-    loadFile(file, { isReload: false });
+    isDemoPhoto.current = !!options?.isDemo;
+    loadFile(file, { isReload: false, isDemo: isDemoPhoto.current });
   };
 
   const reloadPhoto = () => {
     console.debug('reloadPhoto called.');
     const file = loadedPhotoData?.file?.file;
-    loadFile(file, { isReload: true });
+    loadFile(file, { isReload: true, isDemo: isDemoPhoto.current });
   };
 
   return (

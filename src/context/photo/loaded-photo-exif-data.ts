@@ -20,16 +20,13 @@ export class LoadedPhotoExifData {
   public get isLatLngAvailable(): boolean { return isNumber(this.latitude) && isNumber(this.longitude); }
 }
 
+// Throws what exifr.parse throws, so that createLoadedPhotoData records why the
+// EXIF data could not be read.
 export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhotoExifData | null> {
   if (!file) { return null; }
 
-  let exifrParseOutput: ExifrParseOutput | null = null;
-  try {
-    exifrParseOutput = await exifr.parse(file, true);
-    console.log(`exifr.parse returned exifrParseOutput: `, exifrParseOutput);
-  } catch (error) {
-    console.log('exifr.parse threw an error: ', error);
-  }
+  const exifrParseOutput: ExifrParseOutput | null = await exifr.parse(file, true);
+  console.log(`exifr.parse returned exifrParseOutput: `, exifrParseOutput);
 
   if (!exifrParseOutput) { return null; }
 

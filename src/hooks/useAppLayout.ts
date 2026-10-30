@@ -1,6 +1,6 @@
 import { useWindowSize as useDebouncedWindowSize, DebouncedWindowSizeOptions } from '@react-hook/window-size';
 import { useWindowSize as useThrottledWindowSize } from '@react-hook/window-size/throttled';
-import { trackChangedAppLayout } from '../google-analytics/track-event';
+import { trackChangedAppLayout } from '../analytics/track-event';
 
 function isWideLayout(windowWidth: number): boolean {
   return windowWidth > 1200;

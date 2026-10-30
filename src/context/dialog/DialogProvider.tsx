@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { trackOpenedUnsupportedFileDialog } from '../../analytics/track-event';
 import DialogContext from './dialog-context';
 
 const DialogProvider: React.FC<React.PropsWithChildren> = (props) => {
@@ -8,6 +9,7 @@ const DialogProvider: React.FC<React.PropsWithChildren> = (props) => {
 
   const handleUnsupportedFileDialogOpen = () => {
     setIsUnsupportedFileDialogOpened(true);
+    trackOpenedUnsupportedFileDialog();
   };
   const handleUnsupportedFileDialogClose = () => {
     setIsUnsupportedFileDialogOpened(false);

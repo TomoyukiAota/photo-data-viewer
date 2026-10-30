@@ -2,7 +2,7 @@
 
 import IconButton from '@mui/material/IconButton';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
-import { trackOpenUrl } from '../../../google-analytics/track-event';
+import { trackOpenUrl } from '../../../analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
 import { openTabWithoutOpener } from '../../../utils/open-url';
 
