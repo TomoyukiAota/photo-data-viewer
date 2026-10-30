@@ -19,7 +19,7 @@ import classes from './AppMenu.module.scss';
 interface Page {
   pathname: string;
   displayName: string;
-  icon: JSX.Element;
+  icon: React.JSX.Element;
 }
 
 const pages: Page[] = [
@@ -30,7 +30,7 @@ const pages: Page[] = [
 ];
 
 const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
-  props
+  props,
 ) => {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
@@ -82,7 +82,9 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         }}
         open={Boolean(anchorElNav)}
         onClose={handleCloseMenu}
-        BackdropProps={{ style: { backgroundColor: '#222222', opacity: 0.4 } }}
+        slotProps={{
+          backdrop: { style: { backgroundColor: '#222222', opacity: 0.4 } },
+        }}
       >
         {pages.map((page) => {
           const isCurrentPage = router.pathname === page.pathname;

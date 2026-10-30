@@ -137,3 +137,13 @@ User action needed, if any (otherwise none):
   comparison allows four isolated rasterization pixels; observed differences were
   at text glyph edges. Leaflet CDN CSS/SRI now matches installed 1.9.4 bytes.
   Next step: checkpoint embedded build, then bounded grid/React19/MUI9 migration.
+
+- React 19.3.1/MUI 9.5.0/react-leaflet 5 migration passes lint/types/unit checks,
+  production builds and 11 browser cases with original-source screenshot matching.
+  Replaced the unsupported DevExpress grid with the exact two-column table used
+  by this app, preserving empty-state geometry too. Electron 32.0.2 local JPEG/HEIC
+  loads and URL settings pass in an isolated profile. Removed npm-check in favor
+  of npm outdated; audit is now 7 low entries, no moderate/high/critical.
+- Fetched origin/main: newer independent analytics and opt-out settings changes
+  exist at 7db4679. Checkpoint current upgrade, then merge that work and recapture
+  reference screenshots from unmodified upstream code to preserve its UI/features.
