@@ -1,149 +1,89 @@
 # Dependency upgrade status and resume record
 
-Read [DEPENDENCY_UPGRADE_PLAN.md](./DEPENDENCY_UPGRADE_PLAN.md) for scope,
-version candidates, validation requirements, and autonomous decision rules.
+Last updated: 2026-10-31 (Asia/Tokyo).
+Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade-evidence/RESULTS.md).
 
 ## Current checkpoint
 
-| Field | Recorded value |
-| --- | --- |
-| Last updated | 2026-10-31, Asia/Tokyo |
-| Phase | Baseline captured; runtime and dependency migration next |
-| Implementation authorization | User requested implementation on 2026-10-31 |
-| Checkout when plan was written | `feature/write-claude-md-in-english` |
-| Starting code SHA | `22d1587a43da038e6f87bc828946b8ad1dcfec23` |
-| Latest verified upgrade code SHA | `3594ba5` (baseline harness and portable images) |
-| Active work package | U03 / U05 |
-| Working-tree changes | Baseline harness, fixtures, screenshots and evidence |
-| Dependency install/version changes | Next/React intermediate install complete; not yet accepted |
-| Agent-owned active processes | None |
-| Next action | Migrate runtime and the coupled Next/React/tooling group, preserving baseline screenshots |
+- Implementation is authorized and locally verified; remote CI/review preparation is active.
+- Branch: `codex/dependency-upgrades`.
+- Original starting SHA: `22d1587a43da038e6f87bc828946b8ad1dcfec23`.
+- Baseline harness commit: `3594ba5`; React 18 checkpoint: `d9e9fc1`;
+  React 19 checkpoint: `96ec189`; latest upstream merge: `c556404`.
+- Integrated upstream main `7db4679`, retaining analytics and opt-out UI changes.
+- Application code at `c556404` passed 111 unit tests, builds and browser checks;
+  current pending changes are final tests/evidence/CI checkpoint files.
+- Next action: commit final evidence, push the implementation branch, create a
+  draft PR and inspect the three-OS CI results. Fix concrete failures autonomously.
+- No production publication or main-branch merge has been requested.
 
-The branch above is an observation, not a command to switch branches or discard
-work. Implementation branch: `codex/dependency-upgrades`. Planning files are now being
-committed with the initial implementation checkpoint. The starting SHA predates
-these files.
+## Work packages
 
-## Work package tracker
-
-States: `pending`, `in_progress`, `verified`, `awaiting_external`, or `deferred`.
-Use `awaiting_external` only for the affected task; it does not pause independent
-work. A deferred task must include the reason, retained version, and release
-implications. No row is verified until its declared checks have evidence.
-
-| ID | State | Verified code SHA / evidence | Next action or remaining gate |
-| --- | --- | --- | --- |
-| U00 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
-| U01 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
-| U02 | verified | [Baseline](./dependency-upgrade-evidence/BASELINE.md) | Complete locally; external integration gate retained |
-| U03 | pending | — | Upgrade runtime/CI and verify reproducibility |
-| U04 | pending | — | Upgrade independent utility packages |
-| U05 | pending | — | Upgrade Next/React intermediate and coupled tools |
-| U06 | pending | — | Upgrade and validate HEIF decoder |
-| U07 | pending | — | Upgrade map stack and reconcile CSS/SRI |
-| U08 | pending | — | Upgrade panes and grid/MUI intermediate |
-| U09 | pending | — | Resolve grid barrier, then evaluate React 19/MUI 9 |
-| U10 | pending | — | Complete development tools and compatibility probes |
-| U11 | pending | — | Review resolved tree, audit, and remaining exceptions |
-| U12 | pending | — | Finish accessible validations and final decision packet |
-| U13 | pending | — | Only after necessary decisions and actual release authorization |
-
-## Validation record
-
-Planning-time observations are not implementation test results.
-
-| Check | Result | Notes |
+| ID | State | Evidence / remaining gate |
 | --- | --- | --- |
-| Repository inventory | Inspected | 26 runtime + 18 development direct dependencies; two deployment modes |
-| Public package metadata and migration constraints | Researched 2026-10-31 | Snapshot is in the plan; refresh at U00 |
-| Existing lockfile audit | 61 affected entries reported during research | Critical 4, high 31, moderate 13, low 13; exploitability not established |
-| Baseline install / lint / type check / tests | Not run for this upgrade effort | Do not infer a passing baseline from existing CI configuration |
-| Baseline standalone and embedded builds / runtime | Not run | Required at U01 |
-| Visual regression baseline | Not captured | Required at U01/U02 |
-| Actual Vercel project settings and deployed companion versions | Not inspected | Investigate accessible sources before requesting user work |
+| U00 | verified | Official version/peer snapshot, repository and available host runtime inspected |
+| U01 | verified | Original builds/behavior captured; upstream baseline refreshed separately |
+| U02 | verified | 111 current unit tests, 11 browser cases and tracked reference screenshots |
+| U03 | verified locally | Node 26.13.0/npm 12.2.1 and reproducible install; remote OS matrix pending |
+| U04 | verified | Utility packages and formatting/persistence regression checks |
+| U05 | verified | Next 16.4.3, Pages Router/Webpack and both build modes retained |
+| U06 | verified | libheif 1.23.5, fixed HEIC dimensions/appearance and Electron loading |
+| U07 | verified | Leaflet stack, marker checks, CSS/CDN/SRI alignment |
+| U08 | verified | Splitter drag/persistence and table geometry/screenshots |
+| U09 | verified | React 19.3.1/MUI 9.5.0; unsupported grid replaced with equivalent table |
+| U10 | verified with exceptions | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers |
+| U11 | verified locally | Full tree valid; 7 low dev-only findings, production audit zero |
+| U12 | in_progress | Remote CI and final review packet |
+| U13 | deferred | Production publication is outside the current implementation request |
 
-## User decision and external-action queue
+## Validation and evidence
 
-There are **no concrete user decisions ready to request yet**. Research risks
-are not themselves permission requests. Resolve what is possible and prepare
-the remaining items together at U12.
+- `mise exec -- npm ci`: pass from the committed lockfile.
+- `mise exec -- npm ls --all`: pass, no invalid dependency tree.
+- Lint, type check, 111 unit tests in 17 suites: pass after upstream integration.
+- Standalone and embedded production builds: pass.
+- Chrome with before/after images: 11 cases pass against old-dependency upstream UI.
+- WebKit functional regression: 11 cases pass.
+- Isolated Electron 32.0.2: JPEG/HEIC local-file loads, dimensions, titles, URL
+  settings and embedded controls pass. This matches the installed companion's
+  runtime; it does not change that installation or its user data.
+- Firefox: Playwright Nightly cannot create/find its profile before navigation;
+  separate TMPDIR retry failed too. This is explicitly not a passing result.
+- Large raw logs are local in ignored `.upgrade-artifacts`. Portable tests,
+  fixtures, screenshots, version metadata and summaries are committed.
+- All test-owned temporary servers are stopped by their suites. A reference Next
+  12 server may remain on port 3300 until final cleanup; inspect ownership before
+  stopping it. Never reuse a stale server after rebuilding its output directory.
 
-| ID | Affected tasks | Concrete issue | Agent work/evidence completed | Recommended option and alternatives | Exact user action | Gate |
-| --- | --- | --- | --- | --- | --- | --- |
-| — | — | None prepared yet | — | — | — | — |
+## Version exceptions
 
-## Exceptions to latest versions
+| Package | Retained | Evaluated latest | Reproduced blocker |
+| --- | --- | --- | --- |
+| ESLint | 9.39.5 (EOL) | 10.14.0 | eslint-plugin-react 7.37.5 peers only through ^9.7 |
+| TypeScript | 6.0.3 | 7.0.2 | typescript-eslint 8.72.1 requires >=4.8.4 <6.1.0 |
 
-No implementation versions have been accepted yet. Candidates such as React 18,
-MUI 6, ESLint 9, and TypeScript 6 are research-stage intermediate options, not
-accepted permanent exceptions. Record tested exceptions here as work proceeds.
+Seven low audit entries trace to one deepmerge advisory in current Jest/SVGR;
+latest deepmerge remains affected. No unsafe forced graph or obsolete tool
+major downgrade was applied. Production audit has zero findings.
 
-| Package / group | Retained exact version | Newer version evaluated | Reproducible blocker and evidence | Support/security implications | Next opportunity |
-| --- | --- | --- | --- | --- | --- |
-| — | — | — | None tested yet | — | — |
+## Consolidated release review packet
 
-## Task handoff template
+There are no missing user inputs blocking the local implementation. Before a
+production release, review these concrete items together:
 
-Replace or append this record when work is in progress. Keep it concise enough to
-read at every resume. Commands must omit secrets and private machine details.
+| Item | Agent work already complete | Remaining decision/action |
+| --- | --- | --- |
+| Browser support | Current Chrome/WebKit and companion-compatible Electron checks; official Next minimums documented | Confirm whether Chrome/Edge/Firefox 111+ and Safari 16.4+ meet the intended support policy; Firefox execution remains unverified locally |
+| Deployment | Engines declare Node 26.x; both Webpack production builds pass; existing embedded distDir/mode retained | If publishing is requested, inspect actual Vercel project settings and preserve old deployment IDs before promotion |
 
-```text
-Timestamp (Asia/Tokyo):
-Task ID / state:
-Branch / current HEAD:
-Last verified code SHA:
-Goal of this checkpoint:
-Selected exact versions and rationale:
-Changed files / unfinished changes:
-Commands completed (environment, result, evidence location):
-Failure / hypothesis / next discriminating check:
-Active command or server (ownership, working directory, safe recovery):
-Deferred items and independent work still possible:
-One specific next action:
-Rollback reference and matching lockfile:
-User action needed, if any (otherwise none):
-```
+No production settings were edited. See the results document for exact version
+inventory, known limits, reproduction commands and rollback steps. Independent
+work must continue while an external CI check is pending.
 
-## Activity log
+## Resume procedure
 
-- 2026-10-31: Converted the research into a repository-local implementation plan
-  with checkpoint/resume rules, bounded work packages, autonomous decisions,
-  regression gates, and one consolidated final user decision/action packet.
-  No application, dependency, runtime, CI, or deployment changes were made.
-
-- 2026-10-31: User authorized implementation. Created `codex/dependency-upgrades`
-  from the inspected starting SHA and began U00/U01.
-
-- 2026-10-31: Resumed after interruption. Both original production builds, lint,
-  type checks, scoped unit tests and browser baseline checks completed. Fixtures
-  and comparison screenshots are stored in Git. Runtime 26.13.0/npm 12.2.1 installed
-  via mise; project selection has not changed yet.
-
-- Node 26.13.0/npm 12.2.1: unit tests and lint pass, but Next 12 build fails
-  in bundled jsonwebtoken because Node 26 removes SlowBuffer. Runtime and Next
-  must therefore land together. Intermediate migration now targets Next 16.4.3,
-  React 18.3.1, MUI 5.18.0, DevExpress 4.0.11, ESLint 9.39.5, TS 5.9.3.
-
-- Intermediate dependencies installed cleanly under Node 26.13.0/npm 12.2.1.
-  The old mutually pinned DevExpress lock graph caused ERESOLVE; original lock and
-  node_modules were preserved in ignored artifacts, then a fresh lock was resolved
-  without force/legacy-peer flags. Lint/types/16 unit tests pass. SSR needed
-  transpilePackages for legacy DevExpress ESM imports; build under investigation.
-
-- Intermediate verification: Next 16.4.3, Node 26.13.0/npm 12.2.1, React 18.3.1,
-  MUI 5.18.0, DevExpress 4.0.11, libheif 1.23.5 and TypeScript 6.0.3 pass
-  lint/type checks/16 unit tests, production build, and all 9 browser tests
-  including visual comparison against the original-source baselines. Browser
-  comparison allows four isolated rasterization pixels; observed differences were
-  at text glyph edges. Leaflet CDN CSS/SRI now matches installed 1.9.4 bytes.
-  Next step: checkpoint embedded build, then bounded grid/React19/MUI9 migration.
-
-- React 19.3.1/MUI 9.5.0/react-leaflet 5 migration passes lint/types/unit checks,
-  production builds and 11 browser cases with original-source screenshot matching.
-  Replaced the unsupported DevExpress grid with the exact two-column table used
-  by this app, preserving empty-state geometry too. Electron 32.0.2 local JPEG/HEIC
-  loads and URL settings pass in an isolated profile. Removed npm-check in favor
-  of npm outdated; audit is now 7 low entries, no moderate/high/critical.
-- Fetched origin/main: newer independent analytics and opt-out settings changes
-  exist at 7db4679. Checkpoint current upgrade, then merge that work and recapture
-  reference screenshots from unmodified upstream code to preserve its UI/features.
+Inspect Git status and log, reconcile them with this record, then inspect the
+current PR/CI state before repeating an install/build/push. Read current evidence
+before rerunning successful checks. Preserve unrelated changes and restore code
+and lockfile together when reverting a failed upgrade. Test-only profiles and
+artifacts are local and do not need to be kept alive to resume.

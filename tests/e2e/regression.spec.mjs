@@ -41,6 +41,10 @@ async function navigate(page, name) {
 
 test.beforeEach(async ({ page }) => {
   // Keep baseline captures independent of map servers, and GA.
+  await page.route(
+    /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
+    (route) => route.fulfill({ status: 204, body: '' }),
+  );
   await page.route(/googletagmanager\.com|google-analytics\.com/, (route) =>
     route.abort(),
   );
@@ -121,6 +125,13 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   await expect(page.getByLabel('Date Format', { exact: true })).toHaveText(
     'DD/MM/YYYY',
   );
+  await page
+    .getByLabel('Send usage data to improve this application')
+    .uncheck();
+  await page.reload();
+  await expect(
+    page.getByLabel('Send usage data to improve this application'),
+  ).not.toBeChecked();
   await navigate(page, 'About');
   await snapshot(page, 'about');
   await navigate(page, 'Demo');
@@ -140,13 +151,11 @@ test('no EXIF and malformed files retain the existing dialog and image behavior'
     .locator('input[type=file]')
     .setInputFiles({ name: 'no-exif.png', mimeType: 'image/png', buffer: png });
   await expect(page.locator('img[alt="no-exif.png"]')).toBeVisible();
-  await page
-    .locator('input[type=file]')
-    .setInputFiles({
-      name: 'broken.jpg',
-      mimeType: 'image/jpeg',
-      buffer: Buffer.from('invalid'),
-    });
+  await page.locator('input[type=file]').setInputFiles({
+    name: 'broken.jpg',
+    mimeType: 'image/jpeg',
+    buffer: Buffer.from('invalid'),
+  });
   await expect(page.getByRole('dialog')).toContainText(
     'EXIF data is not available.',
   );

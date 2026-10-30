@@ -53,9 +53,10 @@ for (const filename of ['demo.jpg', 'demo.heic']) {
       });
       const result = JSON.parse(readFileSync(resultPath, 'utf8'));
       expect(result.title).toBe(`${filename} - Photo Location Map`);
-      expect(result.width).toBeGreaterThan(0);
+      expect([result.width, result.height]).toEqual([3024, 4032]);
       expect(result.electron).toBe('32.0.2');
       expect(result.fileInputCount).toBe(0);
+      expect(result.menuVisible).toBe(false);
       expect(result.dateFormat).toBe('DD/MM/YYYY');
       expect(result.clockSystemFormat).toBe('12-hour');
       expect(result.text).toContain(filename);

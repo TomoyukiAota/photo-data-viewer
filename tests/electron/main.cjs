@@ -10,6 +10,9 @@ app.whenReady().then(async () => {
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
   const errors = [];
+  win.webContents.on('console-message', (_, level, message) => {
+    if (level >= 3) errors.push(message);
+  });
   win.webContents.on('render-process-gone', (_, details) =>
     errors.push(details.reason),
   );
@@ -25,6 +28,7 @@ app.whenReady().then(async () => {
           resolve({ title: document.title, width: img.naturalWidth, height: img.naturalHeight,
             electron: process.versions.electron, text: document.body.innerText,
             fileInputCount: document.querySelectorAll('input[type=file]').length,
+            menuVisible: document.querySelector('button[aria-label=menu]').getBoundingClientRect().width > 0,
             dateFormat: localStorage.getItem('DateFormat'),
             clockSystemFormat: localStorage.getItem('ClockSystemFormat') });
         } else if (Date.now() - start > 20000) {

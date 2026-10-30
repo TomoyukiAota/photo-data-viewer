@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-31",
+  "node": "26.13.0 LTS",
+  "npm": "12.2.1",
+  "packages": [
+    {
+      "name": "@emotion/react",
+      "kind": "dependencies",
+      "installed": "11.14.0",
+      "observed_latest": "11.14.0"
+    },
+    {
+      "name": "@emotion/styled",
+      "kind": "dependencies",
+      "installed": "11.14.1",
+      "observed_latest": "11.14.1"
+    },
+    {
+      "name": "@mui/icons-material",
+      "kind": "dependencies",
+      "installed": "9.5.0",
+      "observed_latest": "9.5.0"
+    },
+    {
+      "name": "@mui/material",
+      "kind": "dependencies",
+      "installed": "9.5.0",
+      "observed_latest": "9.5.0"
+    },
+    {
+      "name": "@react-hook/debounce",
+      "kind": "dependencies",
+      "installed": "4.0.0",
+      "observed_latest": "4.0.0"
+    },
+    {
+      "name": "@react-hook/size",
+      "kind": "dependencies",
+      "installed": "2.1.2",
+      "observed_latest": "2.1.2"
+    },
+    {
+      "name": "@react-hook/window-size",
+      "kind": "dependencies",
+      "installed": "3.1.1",
+      "observed_latest": "3.1.1"
+    },
+    {
+      "name": "@rehooks/local-storage",
+      "kind": "dependencies",
+      "installed": "2.4.5",
+      "observed_latest": "2.4.5"
+    },
+    {
+      "name": "classnames",
+      "kind": "dependencies",
+      "installed": "2.5.1",
+      "observed_latest": "2.5.1"
+    },
+    {
+      "name": "dayjs",
+      "kind": "dependencies",
+      "installed": "1.11.23",
+      "observed_latest": "1.11.23"
+    },
+    {
+      "name": "exifr",
+      "kind": "dependencies",
+      "installed": "7.1.3",
+      "observed_latest": "7.1.3"
+    },
+    {
+      "name": "filesize",
+      "kind": "dependencies",
+      "installed": "11.0.29",
+      "observed_latest": "11.0.29"
+    },
+    {
+      "name": "get-file-object-from-local-path",
+      "kind": "dependencies",
+      "installed": "1.0.2",
+      "observed_latest": "1.0.2"
+    },
+    {
+      "name": "is-number",
+      "kind": "dependencies",
+      "installed": "7.0.0",
+      "observed_latest": "7.0.0"
+    },
+    {
+      "name": "leaflet",
+      "kind": "dependencies",
+      "installed": "1.9.4",
+      "observed_latest": "1.9.4"
+    },
+    {
+      "name": "leaflet-defaulticon-compatibility",
+      "kind": "dependencies",
+      "installed": "0.1.2",
+      "observed_latest": "0.1.2"
+    },
+    {
+      "name": "libheif-js",
+      "kind": "dependencies",
+      "installed": "1.23.5",
+      "observed_latest": "1.23.5"
+    },
+    {
+      "name": "next",
+      "kind": "dependencies",
+      "installed": "16.4.3",
+      "observed_latest": "16.4.3"
+    },
+    {
+      "name": "react",
+      "kind": "dependencies",
+      "installed": "19.3.1",
+      "observed_latest": "19.3.1"
+    },
+    {
+      "name": "react-dom",
+      "kind": "dependencies",
+      "installed": "19.3.1",
+      "observed_latest": "19.3.1"
+    },
+    {
+      "name": "react-leaflet",
+      "kind": "dependencies",
+      "installed": "5.0.0",
+      "observed_latest": "5.0.0"
+    },
+    {
+      "name": "react-reflex",
+      "kind": "dependencies",
+      "installed": "6.0.2",
+      "observed_latest": "6.0.2"
+    },
+    {
+      "name": "sort-keys",
+      "kind": "dependencies",
+      "installed": "6.0.1",
+      "observed_latest": "6.0.1"
+    },
+    {
+      "name": "@playwright/test",
+      "kind": "devDependencies",
+      "installed": "1.64.1",
+      "observed_latest": "1.64.1"
+    },
+    {
+      "name": "@svgr/webpack",
+      "kind": "devDependencies",
+      "installed": "8.1.0",
+      "observed_latest": "8.1.0"
+    },
+    {
+      "name": "@testing-library/dom",
+      "kind": "devDependencies",
+      "installed": "10.4.2",
+      "observed_latest": "10.4.2"
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "kind": "devDependencies",
+      "installed": "7.0.1",
+      "observed_latest": "7.0.1"
+    },
+    {
+      "name": "@testing-library/react",
+      "kind": "devDependencies",
+      "installed": "16.3.3",
+      "observed_latest": "16.3.3"
+    },
+    {
+      "name": "@types/gtag.js",
+      "kind": "devDependencies",
+      "installed": "0.0.20",
+      "observed_latest": "0.0.20"
+    },
+    {
+      "name": "@types/is-number",
+      "kind": "devDependencies",
+      "installed": "7.0.5",
+      "observed_latest": "7.0.5"
+    },
+    {
+      "name": "@types/jest",
+      "kind": "devDependencies",
+      "installed": "30.0.0",
+      "observed_latest": "30.0.0"
+    },
+    {
+      "name": "@types/leaflet",
+      "kind": "devDependencies",
+      "installed": "1.9.22",
+      "observed_latest": "1.9.22"
+    },
+    {
+      "name": "@types/node",
+      "kind": "devDependencies",
+      "installed": "26.6.6",
+      "observed_latest": "26.6.6"
+    },
+    {
+      "name": "@types/react",
+      "kind": "devDependencies",
+      "installed": "19.3.0",
+      "observed_latest": "19.3.0"
+    },
+    {
+      "name": "@types/react-dom",
+      "kind": "devDependencies",
+      "installed": "19.3.0",
+      "observed_latest": "19.3.0"
+    },
+    {
+      "name": "cross-env",
+      "kind": "devDependencies",
+      "installed": "10.1.0",
+      "observed_latest": "10.1.0"
+    },
+    {
+      "name": "eslint",
+      "kind": "devDependencies",
+      "installed": "9.39.5",
+      "observed_latest": "10.14.0"
+    },
+    {
+      "name": "eslint-config-next",
+      "kind": "devDependencies",
+      "installed": "16.4.3",
+      "observed_latest": "16.4.3"
+    },
+    {
+      "name": "eslint-config-prettier",
+      "kind": "devDependencies",
+      "installed": "10.1.8",
+      "observed_latest": "10.1.8"
+    },
+    {
+      "name": "eslint-plugin-react",
+      "kind": "devDependencies",
+      "installed": "7.37.5",
+      "observed_latest": "7.37.5"
+    },
+    {
+      "name": "jest",
+      "kind": "devDependencies",
+      "installed": "30.5.2",
+      "observed_latest": "30.5.2"
+    },
+    {
+      "name": "jest-environment-jsdom",
+      "kind": "devDependencies",
+      "installed": "30.5.2",
+      "observed_latest": "30.5.2"
+    },
+    {
+      "name": "prettier",
+      "kind": "devDependencies",
+      "installed": "3.9.10",
+      "observed_latest": "3.9.10"
+    },
+    {
+      "name": "sass",
+      "kind": "devDependencies",
+      "installed": "1.107.0",
+      "observed_latest": "1.107.0"
+    },
+    {
+      "name": "typescript",
+      "kind": "devDependencies",
+      "installed": "6.0.3",
+      "observed_latest": "7.0.2"
+    }
+  ]
+}
