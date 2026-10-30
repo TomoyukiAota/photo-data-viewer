@@ -87,3 +87,8 @@ current PR/CI state before repeating an install/build/push. Read current evidenc
 before rerunning successful checks. Preserve unrelated changes and restore code
 and lockfile together when reverting a failed upgrade. Test-only profiles and
 artifacts are local and do not need to be kept alive to resume.
+
+CI follow-up: Linux passed all checks. Windows PowerShell stripped npm argument
+forwarding (`npm test -- --runInBand`), so added an explicit `test:ci` script and
+updated CI/test:all to call it without forwarded arguments. App tests did not run
+on that first Windows attempt; this is not being classified as a test pass.

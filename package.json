@@ -11,13 +11,14 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:all": "npm run lint && npm run typecheck && npm test -- --runInBand",
+    "test:all": "npm run lint && npm run typecheck && npm run test:ci",
     "check": "npm outdated --long",
     "build:plm": "cross-env PDV_IN_PLM=True next build --webpack",
     "start:plm": "cross-env PDV_IN_PLM=True next start -p 3100",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:electron": "playwright test -c playwright.electron.config.mjs"
+    "test:electron": "playwright test -c playwright.electron.config.mjs",
+    "test:ci": "jest --runInBand"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
