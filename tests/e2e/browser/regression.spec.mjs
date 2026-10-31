@@ -39,6 +39,45 @@ async function navigate(page, name) {
   await page.getByRole('menuitem', { name, exact: true }).click();
 }
 
+test('long filenames wrap within the General value cell', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/');
+  for (const name of [
+    `${'longfilename'.repeat(12)}.jpg`,
+    `${'long filename '.repeat(12)}.jpg`,
+  ]) {
+    await page.locator('input[type=file]').setInputFiles({
+      name,
+      mimeType: 'image/jpeg',
+      buffer: photo,
+    });
+    const cell = page.getByRole('cell', { name, exact: true });
+    await expect(cell).toBeVisible();
+    const linesFit = await cell.evaluate((element) => {
+      const text = document
+        .createTreeWalker(element, NodeFilter.SHOW_TEXT)
+        .nextNode();
+      const range = document.createRange();
+      range.selectNodeContents(text);
+      const lines = [...range.getClientRects()].filter(
+        (rect) => rect.width && rect.height,
+      );
+      const bounds = element.getBoundingClientRect();
+      return (
+        lines.length > 1 &&
+        lines.every(
+          (rect) =>
+            rect.left >= bounds.left &&
+            rect.right <= bounds.right &&
+            rect.top >= bounds.top &&
+            rect.bottom <= bounds.bottom,
+        )
+      );
+    });
+    expect(linesFit).toBe(true);
+  }
+});
+
 test.beforeEach(async ({ page }) => {
   // Keep baseline captures independent of map servers, and GA.
   await page.route(

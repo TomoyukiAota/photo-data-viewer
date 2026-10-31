@@ -48,9 +48,17 @@ for (const filename of ['demo.jpg', 'demo.heic']) {
         });
         child.once('exit', (code) => {
           clearTimeout(timer);
-          code === 0
-            ? resolve()
-            : reject(new Error(readFileSync(resultPath, 'utf8')));
+          if (code === 0) {
+            resolve();
+            return;
+          }
+          let message;
+          try {
+            message = readFileSync(resultPath, 'utf8');
+          } catch {
+            message = `Electron exited with code ${code}`;
+          }
+          reject(new Error(message));
         });
       });
       const result = JSON.parse(readFileSync(resultPath, 'utf8'));

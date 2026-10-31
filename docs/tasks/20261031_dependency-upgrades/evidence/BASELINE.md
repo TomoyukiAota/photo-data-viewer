@@ -17,18 +17,31 @@ Next 12 inlines the Google font CSS whereas Next 16 uses the stylesheet request.
 Visual comparison is opt-in (`PDV_VISUAL=1`) on the same OS/browser. Functional
 checks run without platform-specific image comparison on CI.
 
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:947aac8c2d77d9140a665d477502a42e3acf67f90ef0bcf741b32d854a27bbf5 -->
+
 Local raw logs are in ignored `.upgrade-artifacts/baseline-*.log`; portable inputs,
-tests, source revision and image references are committed. The commands below refer
-to the recorded baseline checkout. For the current E2E layout and commands, see
+tests, source revision and image references are committed. Use separate checkouts:
+the application checkout at `22d1587a43da038e6f87bc828946b8ad1dcfec23` runs
+the baseline server, and the harness checkout at `3594ba5` contains the Playwright
+tests and configuration. For the current E2E layout and commands, see
 [DEVELOPMENT.md](../../../DEVELOPMENT.md).
 
 ```sh
+# In the application checkout at 22d1587a43da038e6f87bc828946b8ad1dcfec23:
 npm ci
 npm run build
 npm start -- -p 3200
-# In another terminal, with Chrome installed:
-PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e
+
+# In another terminal, in the harness checkout at 3594ba5, with Chrome installed:
+npm ci
+PDV_CHROME=1 PDV_VISUAL=1 npx playwright test --config playwright.config.mjs
 ```
+
+The harness configuration targets the baseline server at `http://127.0.0.1:3200`.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 No remote branch push, preview deployment, or production change has occurred.
 Installed Photo Location Map reports version 1.12.1; its embedded runtime has not
