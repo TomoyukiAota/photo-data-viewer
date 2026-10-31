@@ -5,8 +5,9 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 
 ## Current checkpoint
 
-- Authorized implementation and independent validation are complete. One browser
-  support decision remains before release; production publication was not requested.
+- Authorized implementation and independent validation are complete. The user
+  accepted the new browser minimums on 2026-10-31; no policy decisions remain.
+  Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
@@ -14,33 +15,35 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 - [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
   passed on macOS, Linux and Windows, including both builds and production/dev
   browser checks. Both standalone and embedded Vercel preview build checks passed.
+- Documentation checkpoint `4aa6c28` also passed the complete three-OS matrix in
+  [CI run 236](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156910247).
 - Original starting SHA: `22d1587a43da038e6f87bc828946b8ad1dcfec23`.
   Baseline harness: `3594ba5`; React 18 checkpoint: `d9e9fc1`;
   React 19 checkpoint: `96ec189`; upstream merge: `c556404`.
 - Integrated upstream main `7db4679`, retaining analytics and opt-out UI changes.
 - Test-owned development/reference servers are stopped. No persistent runtime
   process or disposable profile must remain alive to resume.
-- Next action: review the consolidated decision below. Do not merge main or
-  publish production without an actual release request.
+- No implementation work or user decisions are pending. A main merge or production
+  publication remains outside this request.
 
 ## Work packages
 
-| ID  | State                      | Evidence / remaining gate                                                       |
-| --- | -------------------------- | ------------------------------------------------------------------------------- |
-| U00 | verified                   | Official version/peer snapshot, repository and available host runtime inspected |
-| U01 | verified                   | Original builds/behavior captured; upstream baseline refreshed separately       |
-| U02 | verified                   | 111 current unit tests, 11 browser cases and tracked reference screenshots      |
-| U03 | verified                   | Node 26.13.0/npm 12.2.1, reproducible install and three-OS CI                   |
-| U04 | verified                   | Utility packages and formatting/persistence regression checks                   |
-| U05 | verified                   | Next 16.4.3, Pages Router/Webpack and both build modes retained                 |
-| U06 | verified                   | libheif 1.23.5, fixed HEIC dimensions/appearance and Electron loading           |
-| U07 | verified                   | Leaflet stack, marker checks, CSS/CDN/SRI alignment                             |
-| U08 | verified                   | Splitter drag/persistence and table geometry/screenshots                        |
-| U09 | verified with release gate | React 19.3.1/MUI 9.5.0; equivalent table; browser policy decision below         |
-| U10 | verified with exceptions   | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers               |
-| U11 | verified                   | Full tree valid; 7 low dev-only findings, production audit zero                 |
-| U12 | verified                   | Three-OS CI, draft PR and final review packet                                   |
-| U13 | deferred                   | Production publication is outside the current implementation request            |
+| ID  | State                    | Evidence / remaining gate                                                       |
+| --- | ------------------------ | ------------------------------------------------------------------------------- |
+| U00 | verified                 | Official version/peer snapshot, repository and available host runtime inspected |
+| U01 | verified                 | Original builds/behavior captured; upstream baseline refreshed separately       |
+| U02 | verified                 | 111 current unit tests, 11 browser cases and tracked reference screenshots      |
+| U03 | verified                 | Node 26.13.0/npm 12.2.1, reproducible install and three-OS CI                   |
+| U04 | verified                 | Utility packages and formatting/persistence regression checks                   |
+| U05 | verified                 | Next 16.4.3, Pages Router/Webpack and both build modes retained                 |
+| U06 | verified                 | libheif 1.23.5, fixed HEIC dimensions/appearance and Electron loading           |
+| U07 | verified                 | Leaflet stack, marker checks, CSS/CDN/SRI alignment                             |
+| U08 | verified                 | Splitter drag/persistence and table geometry/screenshots                        |
+| U09 | verified                 | React 19.3.1/MUI 9.5.0; equivalent table; new browser minimums accepted         |
+| U10 | verified with exceptions | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers               |
+| U11 | verified                 | Full tree valid; 7 low dev-only findings, production audit zero                 |
+| U12 | verified                 | Three-OS CI, draft PR and final review packet                                   |
+| U13 | deferred                 | Production publication is outside the current implementation request            |
 
 ## Validation and evidence
 
@@ -72,18 +75,19 @@ latest deepmerge remains affected. No forced graph or obsolete tool major
 rollback was applied. Production audit has zero findings; critical/high/moderate
 findings are zero across the entire tree.
 
-## Consolidated user decision packet
+## Resolved user decision
 
-Independent implementation work is complete. This is the one user policy choice
-that the repository does not let the agent determine:
+On 2026-10-31 the user accepted the new browser minimums, retaining the implemented
+Next/MUI versions. This resolves the final policy decision:
 
-| Decision        | Why user input is needed / completed work                                                                                                                                                                                                                                                                                                  | Recommended option and alternative                                                                                                                                                                                                                                                          | Exact user action                                                                                    |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Browser support | No declared minimum-browser policy; existing UI code explicitly considers older small iPhones. Current Chrome/WebKit/Electron checks and screenshot comparisons pass. Official combined minimums are Chrome 117+, Edge/Firefox 121+, Safari 17+; legacy Safari devices fall outside them. Firefox launch is separately unverified locally. | Accept the new official range if legacy devices are not required, retaining this latest-compatible implementation. If older browsers must remain supported, retain that requirement and revise the Next/MUI upgrade ceiling with another compatibility/security review and regression pass. | State whether the new minimums are acceptable; if not, specify the oldest required browsers/devices. |
+| Decision        | Accepted policy                                               | Validation limits                                                                                                                                             |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Browser support | Chrome 117+, Edge/Firefox 121+, Safari 17+ (macOS/iOS/iPadOS) | Current Chrome/WebKit/Electron and screenshot checks pass; historical browser versions were not individually tested. Local Firefox launch remains unverified. |
 
 [MUI 9's supported platforms](https://mui.com/material-ui/getting-started/supported-platforms/)
-are stricter than Next 16's. This support-policy change must not be described as
-unchanged browser coverage, even though the tested UI/functionality matches.
+are stricter than Next 16's. Older browsers fall outside the accepted range;
+the support-policy change is intentional even though the tested UI/functionality
+matches. The accepted minimums are also documented in the README.
 
 No main merge or production publication was performed. If release is later
 requested, the agent should inspect actual Vercel project settings, preserve old
@@ -104,7 +108,6 @@ this is future release work, not a request for the user to perform it now.
 Inspect Git status/log and current PR/CI state before repeating installs or
 builds. The application commit above has full successful CI; later documentation
 commits may have their own runs. Read evidence first and preserve unrelated work.
-If browser support is accepted, no further implementation is currently pending;
-if legacy support is required, revise the target matrix before editing code.
+Browser support is accepted and no further implementation is currently pending.
 Restore code, lockfile and runtime settings together when rolling back. Keep
 production release separate from this implementation request.

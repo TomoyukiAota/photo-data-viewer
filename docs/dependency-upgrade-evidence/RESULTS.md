@@ -97,15 +97,16 @@ The reviewable implementation is in [draft PR #63](https://github.com/TomoyukiAo
 ## Release review and rollback
 
 No production publication or main-branch merge is part of this implementation.
-Before release, confirm the supported browser policy. Next 16 declares Chrome/
-Edge/Firefox 111+ and Safari 16.4+, but **MUI 9 has the stricter combined lower
-bounds: Chrome 117+, Edge/Firefox 121+, and Safari (macOS/iOS) 17+**.
+On 2026-10-31 the user accepted the new supported browser minimums:
+**Chrome 117+, Edge/Firefox 121+, and Safari (macOS/iOS/iPadOS) 17+**.
+This resolves the final policy decision and retains the implemented Next/MUI
+versions. MUI 9's minimums are stricter than Next 16's.
 See [MUI's supported platforms](https://mui.com/material-ui/getting-started/supported-platforms/).
 The old framework/UI stack supported older browsers. Tests cover current Chrome/
 WebKit and Electron 32, not every historical browser. Older iOS devices such as
-those limited to Safari 15 are outside this new supported range. If those devices
-must remain supported, the user must choose a different upgrade ceiling before
-release; do not silently describe their support as unchanged.
+those limited to Safari 15 are outside the accepted range. This intentional
+support-policy change is documented in the README; browser coverage is not
+described as unchanged.
 
 The Vercel projects should use Node 26.x (also declared in package engines), retain
 `PDV_IN_PLM=True` and `.next_plm` for the embedded project, and use Webpack build
