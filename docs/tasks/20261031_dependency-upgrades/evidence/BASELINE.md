@@ -21,12 +21,19 @@ checks run without platform-specific image comparison on CI.
 
 <!-- coderabbit-ai-generated-section:v1:947aac8c2d77d9140a665d477502a42e3acf67f90ef0bcf741b32d854a27bbf5 -->
 
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:1b1312095dc008d21a6ba94be89df2bbf83a3d13db922beee88b5d2df21a0724 -->
+
 Local raw logs are in ignored `.upgrade-artifacts/baseline-*.log`; portable inputs,
-tests, source revision and image references are committed. Use separate checkouts:
+tests, source revision and image references are committed. The following commands
+reproduce the initial baseline suite, before stabilization. Use separate checkouts:
 the application checkout at `22d1587a43da038e6f87bc828946b8ad1dcfec23` runs
-the baseline server, and the harness checkout at `3594ba5` contains the Playwright
-tests and configuration. For the current E2E layout and commands, see
+the baseline server, and the harness checkout at `3594ba5` contains the original
+Playwright tests and references. For the current E2E layout and commands, see
 [DEVELOPMENT.md](../../../DEVELOPMENT.md).
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ```sh
 # In the application checkout at 22d1587a43da038e6f87bc828946b8ad1dcfec23:
@@ -48,10 +55,31 @@ Installed Photo Location Map reports version 1.12.1; its embedded runtime has no
 been exercised against localhost yet. Browser support below Next 16's declared
 minimum remains an unresolved release consideration.
 
-Baseline stabilization: screenshots were regenerated from a separate copy of the
-original `3594ba5` source/build on port 3300, never from upgraded application code.
-Masking uses the bounded Leaflet container (its map pane has zero intrinsic size).
-The comparator permits at most four changed pixels per full image: the measured
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:04a5b975b9c331a57a84f14a6cdd1b3cadb41d4e57eaaa4707238980156323f0 -->
+
+## Stabilized comparison
+
+The intermediate application and matching Playwright harness are at
+`d9e9fc1abbf9c7c16b7edd0c94dd7794e677e889`. Its
+`tests/e2e/snapshots/` contains the references used by that harness. These were
+regenerated from the original application at `3594ba5`, served separately on port
+3300, rather than from the upgraded application. The harness masks the bounded
+Leaflet container and allows at most four changed pixels per image. The recorded
 intermediate difference was two pixels at a text glyph edge, with no layout shift.
-This avoids accepting visible styling/layout differences while tolerating isolated
-font rasterization noise. All other expectations remain unchanged.
+
+To reproduce the intermediate comparison on the recorded macOS/Chrome environment,
+use a checkout at `d9e9fc1abbf9c7c16b7edd0c94dd7794e677e889` with its declared
+Node 26.13.0 and npm 12.2.1. Close other servers on port 3200 first:
+
+```sh
+npm ci
+npm run build
+PDV_CHROME=1 PDV_VISUAL=1 npx playwright test --config playwright.config.mjs
+```
+
+The harness starts the intermediate application on port 3200 and compares it to
+its committed references. It does not need the original server to be running.
+
+<!-- /coderabbit-ai-generated:v1 -->
