@@ -73,6 +73,19 @@ For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
 
+For Firefox, install Playwright's matching browser with `npx playwright install
+firefox`, then run `PDV_BROWSER=firefox npm run test:e2e`. On macOS 27, a
+`Could not find profile folder` startup error can occur while Firefox resolves
+its app-data directory. Run with an isolated test-owned app-data home:
+
+```bash
+mkdir -p .upgrade-artifacts/firefox-home
+CFFIXED_USER_HOME="$PWD/.upgrade-artifacts/firefox-home" PDV_BROWSER=firefox npm run test:e2e
+```
+
+This setting applies to that command and its child processes. See the
+[upstream issue](https://github.com/microsoft/playwright/issues/42768).
+
 `PDV_DEV=1 npm run test:e2e` starts a development server on port 3200 and runs
 navigation/photo regression checks, including the About-to-Settings link. Close
 other test servers on that port first; suites intentionally do not reuse servers.

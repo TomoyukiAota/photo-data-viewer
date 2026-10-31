@@ -58,8 +58,9 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
   embedded controls pass in production and development. This matches the installed
   companion runtime without modifying that installation or its user data.
 - Standalone development navigation/photo smoke passes locally and in three-OS CI.
-- Firefox: Playwright Nightly cannot create/find its profile before navigation;
-  a separate TMPDIR retry also failed. Firefox execution remains unverified.
+- Firefox 157.0: all 11 functional cases pass on macOS 27.0.1 with an isolated
+  test-owned app-data home. The previous profile-folder startup failure is
+  resolved; see CONTRIBUTING.md for the process-scoped reproduction command.
 - Tests, public/synthetic fixtures, screenshots, version metadata and summaries
   are committed. Large local logs/runtime copies remain ignored in `.upgrade-artifacts`.
 
@@ -80,9 +81,9 @@ findings are zero across the entire tree.
 On 2026-10-31 the user accepted the new browser minimums, retaining the implemented
 Next/MUI versions. This resolves the final policy decision:
 
-| Decision        | Accepted policy                                               | Validation limits                                                                                                                                             |
-| --------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Browser support | Chrome 117+, Edge/Firefox 121+, Safari 17+ (macOS/iOS/iPadOS) | Current Chrome/WebKit/Electron and screenshot checks pass; historical browser versions were not individually tested. Local Firefox launch remains unverified. |
+| Decision        | Accepted policy                                               | Validation limits                                                                                                                                     |
+| --------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Browser support | Chrome 117+, Edge/Firefox 121+, Safari 17+ (macOS/iOS/iPadOS) | Current Chrome/WebKit/Firefox/Electron functional checks and Chrome screenshot checks pass; historical browser versions were not individually tested. |
 
 [MUI 9's supported platforms](https://mui.com/material-ui/getting-started/supported-platforms/)
 are stricter than Next 16's. Older browsers fall outside the accepted range;
@@ -96,6 +97,10 @@ this is future release work, not a request for the user to perform it now.
 
 ## Resolved implementation issues
 
+- Firefox's macOS app-data lookup failed before navigation even with a fresh
+  profile. A command-scoped `CFFIXED_USER_HOME` pointing to a test-owned directory
+  isolates browser data and restores startup. All 11 functional cases pass;
+  raw evidence is `.upgrade-artifacts/firefox-isolated-e2e.log`.
 - Windows PowerShell stripped `npm test -- --runInBand` argument forwarding.
   An explicit `test:ci` script removes forwarding and passes the complete matrix.
 - Current Next development rejected the upstream nested About Link/anchor. The

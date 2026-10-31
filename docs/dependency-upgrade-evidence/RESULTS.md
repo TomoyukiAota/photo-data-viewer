@@ -46,9 +46,14 @@ macOS arm64, Node 26.13.0, npm 12.2.1:
 - Electron 32.0.2 (same runtime as installed companion version 1.12.1): JPEG and
   HEIC local-file loading, title, dimensions, hidden standalone controls, and URL
   date/clock settings pass in isolated test profiles.
-- Firefox could not launch its installed Playwright Nightly because it reported
-  a missing profile directory before navigation. A separate TMPDIR retry also
-  failed. This environment gap is not a passing Firefox validation.
+- Firefox 157.0: all 11 functional browser cases pass on macOS 27.0.1. The initial
+  profile-folder startup failure persisted with a separate TMPDIR; a process-scoped
+  `CFFIXED_USER_HOME` pointing to a test-owned directory restored startup and
+  allowed the complete suite to pass. This matches the app-data lookup problem in
+  [the upstream report](https://github.com/microsoft/playwright/issues/42768).
+  See CONTRIBUTING.md for reproduction; raw local evidence is
+  `.upgrade-artifacts/firefox-isolated-e2e.log`. Chrome screenshot references are
+  not used for cross-engine pixel comparisons.
 
 The original baseline is `3594ba5`. After merging newer main, reference captures
 were refreshed from **upstream application code and old dependencies**, served on
