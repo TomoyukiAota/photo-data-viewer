@@ -15,7 +15,7 @@ The updated application supports these browser versions and later:
 | Firefox                       | 121             |
 | Safari (macOS and iOS/iPadOS) | 17              |
 
-See [upgrade results](./docs/dependency-upgrade-evidence/RESULTS.md) for validation
+See [upgrade results](./docs/tasks/20261031_dependency-upgrades/evidence/RESULTS.md) for validation
 coverage and known limitations.
 
 ## To contribute to this project

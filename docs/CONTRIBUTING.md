@@ -119,5 +119,16 @@ For embedded integration checks, build with `npm run build:plm` and set
 Node integration settings. `PDV_ELECTRON_BASE_URL=http://localhost:3100` can target
 an already running `npm run dev:plm` server instead of starting a production one.
 
-Read [the upgrade status](./DEPENDENCY_UPGRADE_STATUS.md) before resuming an
-upgrade, then follow [the implementation plan](./DEPENDENCY_UPGRADE_PLAN.md).
+## Task records
+
+Keep task-specific plans, progress and evidence under
+`docs/tasks/YYYYMMDD_title/`. Use the task's start date in Asia/Tokyo and a short
+English title; keep the directory name fixed when resuming the work.
+
+Use `PLAN.md` for the plan, `STATUS.md` for progress and resume instructions, and
+`evidence/` for supporting records. Browse [the task directories](./tasks/) to
+find the relevant work, then read its `STATUS.md` before resuming. The directory
+listing itself is the task list.
+
+Keep ongoing development procedures and application documentation in the shared
+documents, including this guide and the repository README.

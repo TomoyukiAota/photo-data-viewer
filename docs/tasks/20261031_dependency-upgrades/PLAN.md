@@ -6,7 +6,7 @@ Execution state: **implementation authorized on 2026-10-31**. The user requested
 execution of this plan. Routine implementation, local verification, and reversible
 checkpoints are authorized. Production publication has not been requested.
 
-Read [DEPENDENCY_UPGRADE_STATUS.md](./DEPENDENCY_UPGRADE_STATUS.md) first when
+Read [STATUS.md](./STATUS.md) first when
 resuming. That file records the actual state; this file describes the procedure.
 Neither document relies on chat history or machine-specific assistant memory.
 
@@ -251,7 +251,7 @@ bundled npm 11.20.0, mise 2026.10.24, and mise-action
 The original npm 12.2.1 candidate was superseded by the bundled-npm policy above.
 The existing `*-latest` CI images float. Vercel supports Node 26.x; subsequent
 project/runtime inspection and remaining release gates are recorded in
-[the preflight](./dependency-upgrade-evidence/VERCEL_PREFLIGHT.md).
+[the preflight](./evidence/VERCEL_PREFLIGHT.md).
 
 Important constraints from the research:
 

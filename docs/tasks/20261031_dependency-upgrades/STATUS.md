@@ -1,7 +1,7 @@
 # Dependency upgrade status and resume record
 
-Last updated: 2026-10-31 (Asia/Tokyo).
-Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade-evidence/RESULTS.md).
+Last updated: 2026-11-01 (Asia/Tokyo).
+Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
 
 ## Current checkpoint
 
@@ -10,10 +10,13 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
   bundled npm on 2026-10-31. Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
+- On 2026-11-01, task documents were grouped in this directory using the original
+  start date. All 22 local Markdown links were checked after the move. Application
+  source, dependencies and runtime/CI configuration are unchanged by this move.
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
   Subsequent checkpoints update agent instructions, E2E organization and hosting
   build configuration; application source is unchanged.
-- [Vercel preflight](./dependency-upgrade-evidence/VERCEL_PREFLIGHT.md) confirms
+- [Vercel preflight](./evidence/VERCEL_PREFLIGHT.md) confirms
   effective Node 26.13.0, embedded-mode variables and both current production
   alias/deployment mappings. Local development, CI and Vercel now select the
   bundled npm 11.20.0. The separate npm tool and cloud npm download/build override
@@ -91,7 +94,8 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 - Standalone development navigation/photo smoke passes locally and in three-OS CI.
 - Firefox 157.0: all 11 functional cases pass on macOS 27.0.1 with an isolated
   test-owned app-data home. The previous profile-folder startup failure is
-  resolved; see CONTRIBUTING.md for the process-scoped reproduction command.
+  resolved; see [CONTRIBUTING.md](../../CONTRIBUTING.md) for the process-scoped
+  reproduction command.
 - Tests, public/synthetic fixtures, screenshots, version metadata and summaries
   are committed. Large local logs/runtime copies remain ignored in `.upgrade-artifacts`.
 
