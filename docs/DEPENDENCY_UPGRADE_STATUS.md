@@ -5,9 +5,9 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 
 ## Current checkpoint
 
-- The user accepted the new browser minimums and selected Node LTS's bundled npm
-  on 2026-10-31. The npm 11.20.0 follow-up is being validated; earlier full-matrix
-  evidence used npm 12.2.1. Production publication was not requested.
+- Implementation and validation are complete, including the npm 11.20.0
+  follow-up. The user accepted the new browser minimums and selected Node LTS's
+  bundled npm on 2026-10-31. Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
@@ -19,6 +19,12 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
   bundled npm 11.20.0. The separate npm tool and cloud npm download/build override
   are removed; strict script approvals are retained. Inspect current PR checks
   when resuming rather than treating earlier npm 12 runs as npm 11 evidence.
+- Verified runtime/configuration checkpoint: `311639f2062280f0cfd96ce9e889bc3401237364`.
+  [CI run 248](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41208253850)
+  passed the full macOS/Linux/Windows matrix. All three job logs and both READY
+  Vercel preview logs show Node 26.13.0 / npm 11.20.0, with no npm engine mismatch.
+  Preview IDs/links are recorded in the preflight. Production alias mappings are
+  unchanged. Subsequent documentation-only checkpoints may have separate checks.
 - [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
   passed on macOS, Linux and Windows, including both builds and production/dev
   browser checks. Both standalone and embedded Vercel preview build checks passed.
@@ -41,7 +47,7 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 | U00 | verified                 | Official version/peer snapshot, repository and available host runtime inspected |
 | U01 | verified                 | Original builds/behavior captured; upstream baseline refreshed separately       |
 | U02 | verified                 | 111 current unit tests, 11 browser cases and tracked reference screenshots      |
-| U03 | revalidating             | Node 26.13.0/bundled npm 11.20.0; clean install and script-policy probe pass   |
+| U03 | verified                 | Node 26.13.0/bundled npm 11.20.0; clean install, script policy and three-OS CI |
 | U04 | verified                 | Utility packages and formatting/persistence regression checks                   |
 | U05 | verified                 | Next 16.4.3, Pages Router/Webpack and both build modes retained                 |
 | U06 | verified                 | libheif 1.23.5, fixed HEIC dimensions/appearance and Electron loading           |
@@ -50,7 +56,7 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 | U09 | verified                 | React 19.3.1/MUI 9.5.0; equivalent table; new browser minimums accepted         |
 | U10 | verified with exceptions | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers               |
 | U11 | verified with exceptions | Full tree valid; 32 moderate/5 low dev-only findings, production audit zero     |
-| U12 | revalidating             | Updated npm policy requires current three-OS CI and both preview builds       |
+| U12 | verified                 | Bundled-npm three-OS CI, both preview builds and draft PR review packet       |
 | U13 | deferred                 | Production publication is outside the current implementation request            |
 
 ## Validation and evidence
@@ -60,7 +66,8 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
   lint/types, all 111 unit tests and both production builds pass. Chrome's 11
   unchanged screenshot cases, WebKit's 11 cases, Firefox's 11 cases and both
   Electron local-file cases pass. Standalone development smoke and both embedded
-  development JPEG/HEIC cases also pass. Remote CI and preview checks are next.
+  development JPEG/HEIC cases also pass. Full three-OS CI and both Vercel preview
+  builds pass on the runtime/configuration checkpoint above.
   npm 11's offline script-policy probe confirms unreviewed scripts fail with
   `ESTRICTALLOWSCRIPTS` before execution, approved scripts execute, and explicit
   denials skip execution. Raw local logs use `.upgrade-artifacts/npm11-*`.
@@ -142,9 +149,10 @@ follow the results document's release/rollback procedure.
 ## Resume procedure
 
 Inspect Git status/log and current PR/CI state before repeating installs or
-builds. The application commit above has full successful CI; later documentation
-commits may have their own runs. Read evidence first and preserve unrelated work.
-Browser support and the bundled-npm policy are accepted. Check current preview/CI results and the
-preflight's remaining release gates before choosing a next action.
+builds. The runtime/configuration checkpoint above has full successful CI; later
+documentation commits may have their own runs. Read evidence first and preserve
+unrelated work. Browser support and the bundled-npm policy are accepted. Check
+current preview/CI results and the preflight's remaining release gates before
+choosing a next action.
 Restore code, lockfile and runtime settings together when rolling back. Keep
 production release separate from this implementation request.

@@ -90,6 +90,18 @@ logs are in ignored `.upgrade-artifacts`; the PR links remote CI evidence.
 
 ## Remote verification
 
+Bundled-npm checkpoint `311639f2062280f0cfd96ce9e889bc3401237364` passed
+[CI run 248](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41208253850)
+on macOS, Linux and Windows, including clean install, lint/types, all 111 unit
+tests, both builds and production/development browser regression. Every job's
+version step shows Node 26.13.0 and npm 11.20.0. Both
+[standalone](https://vercel.com/tomoyukiaotas-projects/photo-data-viewer/Cc5r6LwZGf4mDdftjd1oQcLriT5P)
+and [embedded](https://vercel.com/tomoyukiaotas-projects/pdv-in-plm/4EjdB3teKebLoAE4Qni4BdKr88Ji)
+Vercel previews are READY for that same commit; their logs confirm the same
+Node/npm versions and the default `npm run build` command. No npm engine
+warnings occurred. Current production aliases still resolve to the retained
+deployments in the preflight.
+
 Application commit `a8d4ff29c392a9dc28c6e7392913386682b1c3ae` passed
 [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
 on macOS, Linux and Windows. Each job installs the pinned runtime/dependencies,

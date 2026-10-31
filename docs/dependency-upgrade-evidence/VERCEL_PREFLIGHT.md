@@ -42,6 +42,24 @@ available through the connection did not expose the dashboard's output-directory
 override, so its literal setting was not independently inspected. Successful
 embedded previews confirm the effective build works with the existing settings.
 
+## Bundled-npm validation
+
+Runtime/configuration checkpoint `311639f2062280f0cfd96ce9e889bc3401237364` passed
+[CI run 248](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41208253850)
+on macOS, Linux and Windows. Every job's version step reports Node 26.13.0 and
+npm 11.20.0. Both previews for this commit are READY:
+
+- [Standalone](https://vercel.com/tomoyukiaotas-projects/photo-data-viewer/Cc5r6LwZGf4mDdftjd1oQcLriT5P):
+  `dpl_Cc5r6LwZGf4mDdftjd1oQcLriT5P`.
+- [Embedded](https://vercel.com/tomoyukiaotas-projects/pdv-in-plm/4EjdB3teKebLoAE4Qni4BdKr88Ji):
+  `dpl_4EjdB3teKebLoAE4Qni4BdKr88Ji`.
+
+Both build logs show the install command `node --version && npm --version && npm ci`,
+followed by `v26.13.0` and `11.20.0`. The default build command runs `npm run build`
+and `next build --webpack`. No npm engine mismatch warnings occur. Production
+aliases were re-resolved after these builds and still point to the deployment
+IDs below.
+
 ## Current production and restore targets
 
 The production aliases were resolved directly and matched these retained READY
