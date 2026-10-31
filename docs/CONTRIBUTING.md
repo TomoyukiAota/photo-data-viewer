@@ -67,10 +67,21 @@ npm run test:e2e
 ```
 
 The browser suite starts the standalone production server on port 3200. It uses
-public/synthetic fixtures and isolates analytics and external map/font requests.
+public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
+Roboto font used by the reference application.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
+
+`PDV_DEV=1 npm run test:e2e` starts a development server on port 3200 and runs
+navigation/photo regression checks, including the About-to-Settings link. Close
+other test servers on that port first; suites intentionally do not reuse servers.
+
+For embedded integration checks, build with `npm run build:plm` and set
+`PDV_ELECTRON_PATH` to a separate Electron 32.0.2 runtime executable before running
+`npm run test:electron`. Tests create disposable profiles and use the companion's
+Node integration settings. `PDV_ELECTRON_BASE_URL=http://localhost:3100` can target
+an already running `npm run dev:plm` server instead of starting a production one.
 
 Read [the upgrade status](./DEPENDENCY_UPGRADE_STATUS.md) before resuming an
 upgrade, then follow [the implementation plan](./DEPENDENCY_UPGRADE_PLAN.md).

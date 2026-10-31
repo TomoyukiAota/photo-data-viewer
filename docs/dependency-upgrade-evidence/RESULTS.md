@@ -61,6 +61,20 @@ have no companion analytics listener and do not send events to its service.
 Tracked fixtures, screenshots and commands make checks reproducible. Raw local
 logs are in ignored `.upgrade-artifacts`; the PR links remote CI evidence.
 
+## Remote verification
+
+Application commit `a8d4ff29c392a9dc28c6e7392913386682b1c3ae` passed
+[CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
+on macOS, Linux and Windows. Each job installs the pinned runtime/dependencies,
+runs lint/types/unit tests, builds standalone and embedded modes, and runs Chrome
+production regression plus development navigation/photo smoke checks.
+
+Both [standalone Vercel preview](https://vercel.com/tomoyukiaotas-projects/photo-data-viewer/6LAv9PPg39Fh4U88hqY8ZKsLNavK)
+and [embedded Vercel preview](https://vercel.com/tomoyukiaotas-projects/pdv-in-plm/ER9P7PUTdNkwB7XT1Cr6aFBefBYB)
+build checks succeeded for that application commit. These are preview build checks,
+not a production promotion or an inspection of production project settings.
+The reviewable implementation is in [draft PR #63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
+
 ## Remaining version and audit exceptions
 
 - ESLint 9.39.5: a clean dependency-resolution probe with ESLint 10.14.0 fails
@@ -83,10 +97,15 @@ logs are in ignored `.upgrade-artifacts`; the PR links remote CI evidence.
 ## Release review and rollback
 
 No production publication or main-branch merge is part of this implementation.
-Before release, confirm the supported browser policy: Next 16 declares Chrome/
-Edge/Firefox 111+ and Safari 16.4+, while the old framework supported older
-browsers. Tests cover current Chrome/WebKit and Electron 32, not every historical
-browser. If older browsers are required, that is a concrete support tradeoff.
+Before release, confirm the supported browser policy. Next 16 declares Chrome/
+Edge/Firefox 111+ and Safari 16.4+, but **MUI 9 has the stricter combined lower
+bounds: Chrome 117+, Edge/Firefox 121+, and Safari (macOS/iOS) 17+**.
+See [MUI's supported platforms](https://mui.com/material-ui/getting-started/supported-platforms/).
+The old framework/UI stack supported older browsers. Tests cover current Chrome/
+WebKit and Electron 32, not every historical browser. Older iOS devices such as
+those limited to Safari 15 are outside this new supported range. If those devices
+must remain supported, the user must choose a different upgrade ceiling before
+release; do not silently describe their support as unchanged.
 
 The Vercel projects should use Node 26.x (also declared in package engines), retain
 `PDV_IN_PLM=True` and `.next_plm` for the embedded project, and use Webpack build
