@@ -73,7 +73,7 @@ Raw local probe evidence is `.upgrade-artifacts/npm11-script-policy/validation.l
   `CFFIXED_USER_HOME` pointing to a test-owned directory restored startup and
   allowed the complete suite to pass. This matches the app-data lookup problem in
   [the upstream report](https://github.com/microsoft/playwright/issues/42768).
-  See [CONTRIBUTING.md](../../../CONTRIBUTING.md) for reproduction; raw local evidence is
+  See [DEVELOPMENT.md](../../../DEVELOPMENT.md) for reproduction; raw local evidence is
   `.upgrade-artifacts/firefox-isolated-e2e.log`. Chrome screenshot references are
   not used for cross-engine pixel comparisons.
 

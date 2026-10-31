@@ -20,7 +20,7 @@ checks run without platform-specific image comparison on CI.
 Local raw logs are in ignored `.upgrade-artifacts/baseline-*.log`; portable inputs,
 tests, source revision and image references are committed. The commands below refer
 to the recorded baseline checkout. For the current E2E layout and commands, see
-[CONTRIBUTING.md](../../../CONTRIBUTING.md).
+[DEVELOPMENT.md](../../../DEVELOPMENT.md).
 
 ```sh
 npm ci

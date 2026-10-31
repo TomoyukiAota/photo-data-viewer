@@ -21,3 +21,6 @@ coverage and known limitations.
 ## To contribute to this project
 
 Please refer to [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
+
+For runtime details, verification commands and task records, see
+[DEVELOPMENT.md](./docs/DEVELOPMENT.md).

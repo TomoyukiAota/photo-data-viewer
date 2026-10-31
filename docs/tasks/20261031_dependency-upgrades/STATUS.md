@@ -10,6 +10,9 @@ Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
   bundled npm on 2026-10-31. Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
+- Detailed runtime and verification instructions are in
+  [DEVELOPMENT.md](../../DEVELOPMENT.md). CONTRIBUTING.md retains its original
+  basic setup instructions.
 - On 2026-11-01, task documents were grouped in this directory using the original
   start date. All 22 local Markdown links were checked after the move. Application
   source, dependencies and runtime/CI configuration are unchanged by this move.
@@ -94,7 +97,7 @@ Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
 - Standalone development navigation/photo smoke passes locally and in three-OS CI.
 - Firefox 157.0: all 11 functional cases pass on macOS 27.0.1 with an isolated
   test-owned app-data home. The previous profile-folder startup failure is
-  resolved; see [CONTRIBUTING.md](../../CONTRIBUTING.md) for the process-scoped
+  resolved; see [DEVELOPMENT.md](../../DEVELOPMENT.md) for the process-scoped
   reproduction command.
 - Tests, public/synthetic fixtures, screenshots, version metadata and summaries
   are committed. Large local logs/runtime copies remain ignored in `.upgrade-artifacts`.
