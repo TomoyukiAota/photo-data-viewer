@@ -11,8 +11,12 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
-  Subsequent checkpoints update agent instructions and E2E organization; application
-  source is unchanged.
+  Subsequent checkpoints update agent instructions, E2E organization and hosting
+  build configuration; application source is unchanged.
+- [Vercel preflight](./dependency-upgrade-evidence/VERCEL_PREFLIGHT.md) confirms
+  effective Node 26.13.0, embedded-mode variables and both current production
+  alias/deployment mappings. An npm 11.20.0 mismatch is addressed by source-controlled
+  npm 12.2.1 install/build commands; inspect the current PR checks when resuming.
 - [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
   passed on macOS, Linux and Windows, including both builds and production/dev
   browser checks. Both standalone and embedded Vercel preview build checks passed.
@@ -24,8 +28,9 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 - Integrated upstream main `7db4679`, retaining analytics and opt-out UI changes.
 - Test-owned development/reference servers are stopped. No persistent runtime
   process or disposable profile must remain alive to resume.
-- No implementation work or user decisions are pending. A main merge or production
-  publication remains outside this request.
+- Production release remains outside this request. Rollback candidate eligibility
+  returns a distinct HTTP 403, and dashboard-only branch/output settings are not
+  exposed by the project summaries. These release gates are recorded in the preflight.
 
 ## Work packages
 
@@ -96,10 +101,10 @@ are stricter than Next 16's. Older browsers fall outside the accepted range;
 the support-policy change is intentional even though the tested UI/functionality
 matches. The accepted minimums are also documented in the README.
 
-No main merge or production publication was performed. If release is later
-requested, the agent should inspect actual Vercel project settings, preserve old
-deployment IDs and follow the results document's release/rollback procedure;
-this is future release work, not a request for the user to perform it now.
+No main merge or production publication was performed. The preflight records
+inspected settings, existing deployment IDs and the remaining dashboard/rollback
+permission gates. Resolve those gates before any later authorized release and
+follow the results document's release/rollback procedure.
 
 ## Resolved implementation issues
 
@@ -119,6 +124,7 @@ this is future release work, not a request for the user to perform it now.
 Inspect Git status/log and current PR/CI state before repeating installs or
 builds. The application commit above has full successful CI; later documentation
 commits may have their own runs. Read evidence first and preserve unrelated work.
-Browser support is accepted and no further implementation is currently pending.
+Browser support is accepted. Check the npm-pinning preview/CI results and the
+preflight's remaining release gates before choosing a next action.
 Restore code, lockfile and runtime settings together when rolling back. Keep
 production release separate from this implementation request.

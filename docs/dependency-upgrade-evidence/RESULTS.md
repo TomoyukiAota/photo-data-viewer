@@ -120,10 +120,18 @@ those limited to Safari 15 are outside the accepted range. This intentional
 support-policy change is documented in the README; browser coverage is not
 described as unchanged.
 
-The Vercel projects should use Node 26.x (also declared in package engines), retain
-`PDV_IN_PLM=True` and `.next_plm` for the embedded project, and use Webpack build
-scripts. Actual production project settings were not changed. The pinned Node/npm
-versions are for local/CI reproduction; Vercel may roll forward patches within 26.x.
+The [Vercel preflight](./VERCEL_PREFLIGHT.md) confirmed that package engines override
+both projects' Node 22.x defaults: previews use Node 26.13.0. Embedded mode has
+`PDV_IN_PLM=True` in all three environments. An npm 11.20.0 mismatch is addressed
+with explicit npm 12.2.1 installation/build commands in `vercel.json`; current PR
+checks record validation. The existing project-specific output configuration is
+retained. Actual production project settings were not changed. Vercel may roll
+forward patches within 26.x.
+
+Current production aliases and retained READY deployment IDs are recorded in the
+preflight. Rollback candidate eligibility returned HTTP 403; execution permission
+and dashboard-only branch/output switches remain unverified. These are release
+gates, not successful checks. No production promotion or rollback was performed.
 
 Rollback code and lockfile together to the prior deployed revision and restore
 that revision's Node/npm settings. Preserve each project's old deployment ID and

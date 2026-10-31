@@ -55,6 +55,11 @@ Open http://localhost:3100 from Photo Location Map to see the app.
 
 ## Validation and dependency upgrades
 
+Vercel uses [`vercel.json`](../vercel.json) to install and build with npm 12.2.1;
+`packageManager` alone did not override Vercel's bundled npm. Keep that pin aligned
+with `package.json` and `mise.toml`. The Node major comes from `engines.node`.
+The embedded project's `PDV_IN_PLM=True` setting selects its existing build mode.
+
 End-to-end tests live in [`tests/e2e`](../tests/e2e). Both Playwright configuration
 files are there, alongside `browser` (tests and reference screenshots), `electron`
 (integration tests and launcher), and shared `fixtures`. The npm scripts select
