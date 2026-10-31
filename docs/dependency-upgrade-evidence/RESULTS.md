@@ -29,6 +29,10 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
 - Removed npm-check (unmaintained dependencies with high/moderate audit findings);
   `npm run check` now uses npm's own `outdated --long` command.
 - Integrated upstream analytics/opt-out changes, retaining their functionality.
+- Consolidated both Playwright configurations and browser/Electron suites under
+  `tests/e2e`, with shared fixtures and browser screenshot references. Existing npm
+  commands remain the entry points; app-server working directories and result
+  paths explicitly resolve from the repository root. Both configurations are linted.
 
 ## Local verification
 
@@ -38,6 +42,9 @@ macOS arm64, Node 26.13.0, npm 12.2.1:
 - 111 unit tests across 17 suites pass, including upstream analytics tests.
 - Standalone and embedded production builds pass. Both development modes also
   pass navigation/photo smoke checks, including Electron JPEG/HEIC local loads.
+- Following the E2E directory move: lint, 11 Chrome cases with unchanged screenshot
+  references, both Electron JPEG/HEIC cases and standalone development smoke pass.
+  All 23 moved test/helper/fixture/reference files are byte-for-byte unchanged.
 - Chrome: all 11 browser cases pass with the original-source screenshot references.
   At most four isolated rasterization pixels are allowed per image; visible layout
   changes are not accepted. The Leaflet container is masked; map markers and

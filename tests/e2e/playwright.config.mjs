@@ -1,7 +1,12 @@
 import { defineConfig } from '@playwright/test';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './browser',
+  outputDir: resolve(repoRoot, 'test-results'),
   timeout: process.env.PDV_DEV ? 90000 : 30000,
   grep: process.env.PDV_DEV ? /photo values/ : undefined,
   workers: 1,
@@ -9,6 +14,7 @@ export default defineConfig({
   webServer: process.env.PDV_BASE_URL
     ? undefined
     : {
+        cwd: repoRoot,
         command: process.env.PDV_DEV
           ? 'npm run dev:test'
           : 'npm start -- -p 3200',

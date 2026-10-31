@@ -11,7 +11,8 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
-  Subsequent checkpoint changes update documentation only.
+  Subsequent checkpoints update agent instructions and E2E organization; application
+  source is unchanged.
 - [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
   passed on macOS, Linux and Windows, including both builds and production/dev
   browser checks. Both standalone and embedded Vercel preview build checks passed.
@@ -47,6 +48,11 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 
 ## Validation and evidence
 
+- E2E configurations, browser tests/screenshots, Electron tests and shared fixtures
+  are consolidated in `tests/e2e`. Existing npm commands select the moved configs;
+  app-server working directories and output paths remain rooted at the repository.
+  After the move, lint, 11 Chrome visual cases, two Electron cases and the standalone
+  development scenario pass. All 23 moved test/reference/fixture files are byte-identical.
 - Clean `mise exec -- npm ci`, complete `npm ls --all`, lint and type checks pass.
 - 111 unit tests in 17 suites pass, including integrated upstream analytics tests.
 - Standalone and embedded production builds pass locally and on all three CI OSes.

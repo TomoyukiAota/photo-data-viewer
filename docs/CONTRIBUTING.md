@@ -55,6 +55,12 @@ Open http://localhost:3100 from Photo Location Map to see the app.
 
 ## Validation and dependency upgrades
 
+End-to-end tests live in [`tests/e2e`](../tests/e2e). Both Playwright configuration
+files are there, alongside `browser` (tests and reference screenshots), `electron`
+(integration tests and launcher), and shared `fixtures`. The npm scripts select
+the appropriate configuration. App-server working directories and test output
+paths are anchored to the repository root.
+
 Use `mise exec -- <command>` when the current shell still has an older runtime
 selected after changing `mise.toml`.
 

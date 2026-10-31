@@ -18,14 +18,16 @@ Visual comparison is opt-in (`PDV_VISUAL=1`) on the same OS/browser. Functional
 checks run without platform-specific image comparison on CI.
 
 Local raw logs are in ignored `.upgrade-artifacts/baseline-*.log`; portable inputs,
-tests, source revision and image references are committed. Reproduce with:
+tests, source revision and image references are committed. The commands below refer
+to the recorded baseline checkout. For the current E2E layout and commands, see
+[CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ```sh
 npm ci
 npm run build
 npm start -- -p 3200
 # In another terminal, with Chrome installed:
-PDV_CHROME=1 PDV_VISUAL=1 npx playwright test
+PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e
 ```
 
 No remote branch push, preview deployment, or production change has occurred.
