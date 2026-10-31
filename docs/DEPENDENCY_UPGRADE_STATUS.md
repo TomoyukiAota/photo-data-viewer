@@ -92,3 +92,23 @@ CI follow-up: Linux passed all checks. Windows PowerShell stripped npm argument
 forwarding (`npm test -- --runInBand`), so added an explicit `test:ci` script and
 updated CI/test:all to call it without forwarded arguments. App tests did not run
 on that first Windows attempt; this is not being classified as a test pass.
+
+Development verification follow-up: standalone dev navigation exposed an old
+Next Link-with-anchor pattern introduced by newer main. Migrated that one link
+without changing its appearance, and added a dev-mode CI smoke scenario. Embedded
+production checks pass, but embedded dev bootstrap is under investigation; a
+Webpack global-object compatibility setting is currently being tested. Do not
+mark the current working tree fully verified until this is resolved or explicitly
+reported with evidence.
+
+Embedded development issue resolved: Next 16 enables Webpack TrustedScript eval
+wrappers, which Electron 32 does not evaluate. Omitting that output option only
+for embedded development restores bootstrap. Both JPEG/HEIC dev checks pass;
+production retains its existing default. The earlier globalObject experiment was
+removed. Standalone dev navigation also passes after the current Link migration.
+CI on commit 229564b passed macOS/Linux/Windows; rerunning for these final fixes.
+
+Final local verification after development fixes: 111 tests, lint/types, both
+production builds, 11 Chrome visual/browser cases and 2 Electron production cases
+pass. Both standalone and embedded development scenarios pass too. The same
+standalone development smoke command used by CI has also passed locally.

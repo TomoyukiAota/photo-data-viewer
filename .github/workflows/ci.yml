@@ -52,3 +52,8 @@ jobs:
 
       - name: Browser regression tests
         run: npm run test:e2e
+
+      - name: Development-mode regression smoke test
+        run: npm run test:e2e
+        env:
+          PDV_DEV: 1

@@ -2,13 +2,16 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  timeout: 30000,
+  timeout: process.env.PDV_DEV ? 90000 : 30000,
+  grep: process.env.PDV_DEV ? /photo values/ : undefined,
   workers: 1,
   snapshotPathTemplate: '{testDir}/snapshots/{arg}{ext}',
   webServer: process.env.PDV_BASE_URL
     ? undefined
     : {
-        command: 'npm start -- -p 3200',
+        command: process.env.PDV_DEV
+          ? 'npm run dev:test'
+          : 'npm start -- -p 3200',
         url: 'http://127.0.0.1:3200',
         reuseExistingServer: false,
         env: { NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: '' },

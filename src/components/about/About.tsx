@@ -14,14 +14,14 @@ const About: React.FC = () => {
     openUrl(
       'https://x.com/TomoyukiAota',
       'X (Formerly Twitter) Profile of Tomoyuki Aota',
-      'About Page'
+      'About Page',
     );
   };
   const handleGitHubProfileIconClicked = () => {
     openUrl(
       'https://github.com/TomoyukiAota',
       'GitHub Profile of Tomoyuki Aota',
-      'About Page'
+      'About Page',
     );
   };
 
@@ -39,13 +39,8 @@ const About: React.FC = () => {
           <br />
           which pages are opened and what kind of photo was loaded, along with{' '}
           <br />
-          your IP address and the approximate location derived from it.{' '}
-          <br />
-          You can turn this off in{' '}
-          <Link href='/settings'>
-            <a>Settings</a>
-          </Link>
-          .
+          your IP address and the approximate location derived from it. <br />
+          You can turn this off in <Link href='/settings'>Settings</Link>.
         </div>
         <div>
           If you find any bugs or issues, please submit them in{' '}

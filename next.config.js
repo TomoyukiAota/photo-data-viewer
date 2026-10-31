@@ -11,7 +11,7 @@ module.exports = {
   distDir: isPdvInPlm ? distDirForPlm : module.exports.distDir,
 
   reactStrictMode: true,
-  webpack(config, { isServer }) {
+  webpack(config, { isServer, dev }) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -40,6 +40,11 @@ module.exports = {
       // To deploy in Photo Location Map, set config.target to 'electron-renderer' to be able to call the functions in fs (e.g. fs.readFileSync).
       if (isPdvInPlm) {
         config.target = 'electron-renderer';
+        if (dev) {
+          // Older Electron Chromium treats eval(TrustedScript) as a no-op.
+          // Keep development module evaluation compatible; production is unchanged.
+          delete config.output.trustedTypes;
+        }
       }
     }
 

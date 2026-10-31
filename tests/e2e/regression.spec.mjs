@@ -134,6 +134,9 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   ).not.toBeChecked();
   await navigate(page, 'About');
   await snapshot(page, 'about');
+  await page.getByRole('link', { name: 'Settings', exact: true }).click();
+  await expect(page).toHaveURL(/\/settings$/);
+  await navigate(page, 'About');
   await navigate(page, 'Demo');
   await snapshot(page, 'demo');
   await page.getByRole('button', { name: 'Run Demo' }).click();

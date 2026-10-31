@@ -18,7 +18,8 @@
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
     "test:electron": "playwright test -c playwright.electron.config.mjs",
-    "test:ci": "jest --runInBand"
+    "test:ci": "jest --runInBand",
+    "dev:test": "next dev --webpack -p 3200"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

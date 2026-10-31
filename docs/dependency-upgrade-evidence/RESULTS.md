@@ -15,6 +15,11 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
 - Replaced the unsupported DevExpress grid with the same read-only two-column
   table. Column widths, padding, typography, overflow, empty-state centering and
   computed header positioning match the original implementation.
+- Migrated the upstream About link to the current Next Link API, preserving the
+  rendered anchor and its navigation. A development-mode CI smoke check covers it.
+- For embedded development only, omit the new Webpack TrustedScript wrapper:
+  Electron 32 treats eval(TrustedScript) as a no-op, preventing Next dev bootstrap.
+  Production keeps Next's default Trusted Types configuration.
 - Migrated React types and nullable element refs, hydration initialization and
   pane-size keyed map remounts. Existing settings keys and visible behavior remain.
 - Updated both Leaflet package CSS and CDN CSS/SRI to byte-matching 1.9.4.
@@ -31,7 +36,8 @@ macOS arm64, Node 26.13.0, npm 12.2.1:
 
 - Clean `npm ci`, complete `npm ls --all`, lint and TypeScript checks pass.
 - 111 unit tests across 17 suites pass, including upstream analytics tests.
-- Standalone and embedded production builds pass.
+- Standalone and embedded production builds pass. Both development modes also
+  pass navigation/photo smoke checks, including Electron JPEG/HEIC local loads.
 - Chrome: all 11 browser cases pass with the original-source screenshot references.
   At most four isolated rasterization pixels are allowed per image; visible layout
   changes are not accepted. The Leaflet container is masked; map markers and
@@ -53,7 +59,7 @@ Analytics endpoints are intercepted during browser tests; isolated Electron test
 have no companion analytics listener and do not send events to its service.
 
 Tracked fixtures, screenshots and commands make checks reproducible. Raw local
-logs are in ignored `.upgrade-artifacts`; CI results will provide remote evidence.
+logs are in ignored `.upgrade-artifacts`; the PR links remote CI evidence.
 
 ## Remaining version and audit exceptions
 

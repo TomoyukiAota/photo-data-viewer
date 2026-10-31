@@ -13,7 +13,9 @@ for (const filename of ['demo.jpg', 'demo.heic']) {
     );
     const profile = mkdtempSync(join(tmpdir(), 'pdv-electron-'));
     const resultPath = join(profile, 'result.json');
-    const url = new URL('http://127.0.0.1:3130/');
+    const url = new URL(
+      process.env.PDV_ELECTRON_BASE_URL || 'http://127.0.0.1:3130/',
+    );
     url.searchParams.set(
       'photoPath',
       fileURLToPath(new URL(`../fixtures/${filename}`, import.meta.url)),
