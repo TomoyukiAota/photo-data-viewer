@@ -72,9 +72,9 @@
   },
   "engines": {
     "node": "26.x",
-    "npm": "12.x"
+    "npm": "11.x"
   },
-  "packageManager": "npm@12.2.1",
+  "packageManager": "npm@11.20.0",
   "allowScripts": {
     "unrs-resolver@1.12.2": true,
     "@parcel/watcher@2.6.0": true

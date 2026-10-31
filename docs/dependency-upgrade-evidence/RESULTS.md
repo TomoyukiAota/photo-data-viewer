@@ -7,7 +7,7 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
 
 ## Implemented changes
 
-- Node 26.13.0 LTS, npm 12.2.1, Next 16.4.3, React/React DOM 19.3.1,
+- Node 26.13.0 LTS with bundled npm 11.20.0, Next 16.4.3, React/React DOM 19.3.1,
   MUI 9.5.0, TypeScript 6.0.3, Jest/jsdom 30.5.2, current compatible
   supporting packages, and current CI actions/mise.
 - Retained Pages Router, Webpack, both output directories, Electron renderer
@@ -33,10 +33,25 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
   `tests/e2e`, with shared fixtures and browser screenshot references. Existing npm
   commands remain the entry points; app-server working directories and result
   paths explicitly resolve from the repository root. Both configurations are linted.
+- Follow the selected Node LTS release's bundled npm in local development, CI and
+  Vercel. The independent npm mise entry and cloud npm download/build override
+  are removed. `vercel.json` logs versions and runs the existing `npm ci`.
+  Version-specific `allowScripts` approvals remain; `.npmrc` enables
+  `strict-allow-scripts` so npm 11 rejects unreviewed dependency install scripts.
 
 ## Local verification
 
-macOS arm64, Node 26.13.0, npm 12.2.1:
+macOS arm64, Node 26.13.0 and bundled npm 11.20.0. The checks below were repeated
+after npm alignment. Earlier application checkpoints used npm 12.2.1; current
+remote validation is recorded in the status file and PR checks.
+
+The npm 11 follow-up confirms that only the root lockfile's npm engine changed;
+every dependency entry is identical. A separate offline fixture exercises the
+actual npm lifecycle policy: unreviewed scripts fail with `ESTRICTALLOWSCRIPTS`
+before execution; an explicit approval runs the fixture's marker-writing script;
+an explicit denial skips it. File/tarball approvals use npm's resolved-source
+identity. The application's two registry-package approvals remain version-pinned.
+Raw local probe evidence is `.upgrade-artifacts/npm11-script-policy/validation.log`.
 
 - Clean `npm ci`, complete `npm ls --all`, lint and TypeScript checks pass.
 - 111 unit tests across 17 suites pass, including upstream analytics tests.
@@ -97,11 +112,18 @@ The reviewable implementation is in [draft PR #63](https://github.com/TomoyukiAo
   typescript-eslint 8.72.1 peer range is `>=4.8.4 <6.1.0`. The Next lint stack uses
   it. Do not bypass this declaration by forcing the native compiler into tools
   expecting the earlier compiler API.
-- Seven low audit entries remain, all from the same deepmerge advisory through
-  current Jest/SVGR. Published latest deepmerge 4.3.1 is still in the affected
-  range. The audit suggests downgrading parent tools to obsolete majors; that is
-  not applied. No runtime/production advisories remain (`npm audit --omit=dev`).
-  Total audit findings declined from 61 to 7; critical/high/moderate are zero.
+- The 2026-10-31 audit refresh reports **37 development-only entries: 32 moderate,
+  5 low, zero high/critical**. Production audit remains zero. Earlier checkpoints
+  reported seven low entries. The refreshed count includes two advisories
+  published at 2026-10-30 23:09 UTC:
+  [glob cancellation bypass](https://github.com/advisories/GHSA-3g3m-2fjr-6pw4)
+  and [minimatch denial of service](https://github.com/advisories/GHSA-g3hv-75wg-m249).
+  Both npm 11.20.0 and npm 12.2.1 reproduce the same counts on the unchanged
+  dependency graph. Patched glob 14.0.2+ and minimatch 11.0.1+ fall outside ranges
+  used by the current Jest/ESLint stack; no forced transitive major overrides or
+  obsolete parent-tool downgrades were applied. The low deepmerge advisory also
+  remains in current Jest/SVGR, with latest deepmerge 4.3.1 still affected.
+  Recheck compatible upstream fixes before a later release.
 - Packages such as exifr, is-number and the local-file helper were already at
   their published latest version. No application behavior was replaced merely
   because their release dates are old.
@@ -122,11 +144,12 @@ described as unchanged.
 
 The [Vercel preflight](./VERCEL_PREFLIGHT.md) confirmed that package engines override
 both projects' Node 22.x defaults: previews use Node 26.13.0. Embedded mode has
-`PDV_IN_PLM=True` in all three environments. An npm 11.20.0 mismatch is addressed
-with explicit npm 12.2.1 installation/build commands in `vercel.json`; current PR
-checks record validation. The existing project-specific output configuration is
-retained. Actual production project settings were not changed. Vercel may roll
-forward patches within 26.x.
+`PDV_IN_PLM=True` in all three environments. The selected policy aligns the local,
+CI and preview npm with Node's bundled 11.20.0. `vercel.json` logs the versions and
+runs `npm ci` with the existing npm; the default build command is retained.
+Current PR checks record validation. The existing project-specific output
+configuration is retained. Actual production project settings were not changed.
+Vercel may roll forward patches within 26.x.
 
 Current production aliases and retained READY deployment IDs are recorded in the
 preflight. Rollback candidate eligibility returned HTTP 403; execution permission

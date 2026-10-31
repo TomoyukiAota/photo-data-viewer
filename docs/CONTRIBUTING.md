@@ -6,7 +6,10 @@ This page contains useful information to contribute to this project.
 
 - [mise](https://mise.jdx.dev/)
 
-This project uses mise to manage the versions of Node.js and npm, which are defined in [mise.toml](../mise.toml). Follow [the installation guide](https://mise.jdx.dev/installing-mise.html) to install mise and activate it in your shell.
+This project uses mise to manage Node.js, defined in [mise.toml](../mise.toml),
+and uses that release's bundled npm. Node 26.13.0 includes npm 11.20.0; do not
+install npm separately. Follow [the installation guide](https://mise.jdx.dev/installing-mise.html)
+to install mise and activate it in your shell.
 
 ## Deployments
 
@@ -21,7 +24,7 @@ Note that there are two deployments of this app.
 
 ## Build and run for development
 
-After cloning this repository, install Node.js and npm with this command:
+After cloning this repository, install Node.js and its bundled npm with this command:
 
 ```bash
 mise trust && mise install
@@ -55,10 +58,19 @@ Open http://localhost:3100 from Photo Location Map to see the app.
 
 ## Validation and dependency upgrades
 
-Vercel uses [`vercel.json`](../vercel.json) to install and build with npm 12.2.1;
-`packageManager` alone did not override Vercel's bundled npm. Keep that pin aligned
-with `package.json` and `mise.toml`. The Node major comes from `engines.node`.
+Local development, CI and Vercel use Node's bundled npm: Node 26.13.0 / npm 11.20.0.
+[`vercel.json`](../vercel.json) logs the runtime versions and runs `npm ci` with
+the existing npm; it does not download a separate npm release. Vercel's default
+build command runs `npm run build`. The Node major comes from `engines.node`;
+Vercel controls minor/patch rollout, so check its build logs after Node updates
+and keep `mise.toml` and `packageManager` aligned with the selected bundle.
 The embedded project's `PDV_IN_PLM=True` setting selects its existing build mode.
+
+[`package.json`](../package.json) retains version-specific `allowScripts`
+approvals. [`.npmrc`](../.npmrc) sets `strict-allow-scripts=true`, so npm 11 fails
+installation if a dependency has unreviewed install scripts. Review newly
+introduced scripts before adding an approval; do not bypass this policy to make
+an install pass. See [npm's configuration reference](https://docs.npmjs.com/cli/v11/using-npm/config/#strict-allow-scripts).
 
 End-to-end tests live in [`tests/e2e`](../tests/e2e). Both Playwright configuration
 files are there, alongside `browser` (tests and reference screenshots), `electron`

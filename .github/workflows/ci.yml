@@ -24,10 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
 
-      - name: Install Node.js and npm with mise
+      - name: Install Node.js with bundled npm using mise
         uses: jdx/mise-action@v5.2.4
         with:
           version: 2026.10.24
+
+      - name: Show runtime versions
+        run: |
+          node --version
+          npm --version
 
       - name: npm ci
         run: npm ci

@@ -17,6 +17,11 @@ test tools, and CI actions as far as compatibility allows. Prefer supported LTS
 runtime lines and stable package releases. Preserve application functionality,
 appearance, interaction, settings, and both deployment modes.
 
+Runtime policy clarified on 2026-10-31: prefer the npm bundled with the selected
+Node LTS release, rather than upgrading npm independently. The selected pair is
+Node 26.13.0 / npm 11.20.0 for local development, CI and Vercel previews. Preserve
+the explicit install-script approval policy when changing npm majors.
+
 Internal compatibility changes are allowed during implementation. Preserve the
 Pages Router and Webpack initially, including the Electron renderer target,
 local-file access, SVG loader, and HEIF loading configuration. A router, bundler,
@@ -126,7 +131,7 @@ Split a row when needed. Keep mutually dependent version changes together.
 | U00 | Implementation requested | Inspect current checkout and service capabilities, record the starting SHA, refresh official version/peer/support data, freeze candidate versions, and identify deployment triggers and browser/Electron assumptions. |
 | U01 | U00 | Reproduce the current application and current lint/tests/type checks; build and run both modes. Record pre-existing failures and capture reference screenshots and behavior using public or synthetic fixtures. |
 | U02 | U01 | Add focused regression checks for the behavior contract. Prove they pass against the unchanged application before upgrading it. Keep externally unavailable checks explicit. |
-| U03 | U02 | Upgrade runtime and CI infrastructure. Target Node LTS; separate the npm major change. Add explicit type checks and builds for both modes on the existing OS matrix. Verify lockfile reproducibility. |
+| U03 | U02 | Upgrade runtime and CI infrastructure. Target Node LTS with its bundled npm. Add explicit type checks and builds for both modes on the existing OS matrix. Verify lockfile reproducibility and install-script approvals. |
 | U04 | U02 | Update relatively independent utility packages in small groups. Compare date, size, storage, resize, and EXIF ordering results. Add a U03 dependency when a selected package requires the newer runtime. |
 | U05 | U03 | Upgrade Next toward the current supported target while retaining Pages Router/Webpack. Use React 18 as an intermediate checkpoint; coordinate React types, Testing Library, React Leaflet 4, and lint dependencies as required. Review each intervening Next major's migration guide. |
 | U06 | U03 | Update the HEIF decoder separately. Verify decoded dimensions/orientation/color, loading/failure behavior, repeated loads, memory cleanup, and both build modes. |
@@ -241,10 +246,12 @@ selected for regression coverage, the observed candidate was 1.64.1; verify its
 compatibility with the baseline runtime before adopting it.
 
 Infrastructure candidates: Node 26.13.0 LTS (24.22.2 LTS as a possible bridge),
-npm 12.2.1 (Node 26.13.0 bundles 11.20.0), mise 2026.10.24, and mise-action
+bundled npm 11.20.0, mise 2026.10.24, and mise-action
 5.2.4. Checkout already uses major v7; the observed latest release was 7.0.1.
-The existing `*-latest` CI images float. Vercel supports Node 26.x, but actual
-project settings and deployed patch versions have not been inspected.
+The original npm 12.2.1 candidate was superseded by the bundled-npm policy above.
+The existing `*-latest` CI images float. Vercel supports Node 26.x; subsequent
+project/runtime inspection and remaining release gates are recorded in
+[the preflight](./dependency-upgrade-evidence/VERCEL_PREFLIGHT.md).
 
 Important constraints from the research:
 

@@ -14,7 +14,7 @@ the Next.js framework preset.
 | Project                                  | photo-data-viewer                        | pdv-in-plm                                  |
 | Project Node setting                     | 22.x                                     | 22.x                                        |
 | Effective preview build Node             | 26.13.0                                  | 26.13.0                                     |
-| Dependency-install npm before correction | 11.20.0                                  | 11.20.0                                     |
+| Default dependency-install npm           | 11.20.0                                  | 11.20.0                                     |
 | Build command observed                   | npm run build, then next build --webpack | npm run build, then next build --webpack    |
 | PDV_IN_PLM                               | Not configured                           | True in Production, Preview and Development |
 | Preview result                           | READY                                    | READY                                       |
@@ -24,12 +24,16 @@ No dashboard Node change is necessary to obtain Node 26 for this branch. Vercel
 controls minor/patch rollout; build and function-runtime patches can differ.
 See [Vercel's Node version rules](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions).
 
-The same logs showed an npm engine mismatch: the project requires npm 12.x but
-Vercel used bundled npm 11.20.0. The source-controlled `vercel.json` now explicitly
-runs npm 12.2.1 for installation (`ci`) and builds. It logs npm/Node versions for
-verification. This applies to deployments of the changed source, leaving the
-dashboard defaults and already deployed production versions intact. See the
-PR's latest Vercel build checks for validation of this correction.
+Those logs originally showed an npm engine mismatch: the branch requested npm
+12.x while Vercel used Node's bundled npm 11.20.0. Commit `8cbe9e6` temporarily
+overrode installation/builds with npm 12.2.1. The user subsequently selected the
+bundled-npm policy: use Node 26.13.0 / npm 11.20.0 consistently in local development,
+CI and Vercel. The current source removes the separate npm installation and build
+override. `vercel.json` logs Node/npm versions and runs the existing `npm ci`;
+Vercel's default `npm run build` command is retained. `.npmrc` enables strict
+install-script approvals for npm 11. See the current PR checks for the latest
+preview validation. Dashboard defaults and existing production deployments are
+unchanged.
 
 The embedded mode still derives `.next_plm` and Electron renderer targeting from
 the existing `next.config.js` and `PDV_IN_PLM=True`. The configuration does not

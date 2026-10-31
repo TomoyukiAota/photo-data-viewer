@@ -5,9 +5,9 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 
 ## Current checkpoint
 
-- Authorized implementation and independent validation are complete. The user
-  accepted the new browser minimums on 2026-10-31; no policy decisions remain.
-  Production publication was not requested.
+- The user accepted the new browser minimums and selected Node LTS's bundled npm
+  on 2026-10-31. The npm 11.20.0 follow-up is being validated; earlier full-matrix
+  evidence used npm 12.2.1. Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - Draft PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 - Verified application commit: `a8d4ff29c392a9dc28c6e7392913386682b1c3ae`.
@@ -15,8 +15,10 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
   build configuration; application source is unchanged.
 - [Vercel preflight](./dependency-upgrade-evidence/VERCEL_PREFLIGHT.md) confirms
   effective Node 26.13.0, embedded-mode variables and both current production
-  alias/deployment mappings. An npm 11.20.0 mismatch is addressed by source-controlled
-  npm 12.2.1 install/build commands; inspect the current PR checks when resuming.
+  alias/deployment mappings. Local development, CI and Vercel now select the
+  bundled npm 11.20.0. The separate npm tool and cloud npm download/build override
+  are removed; strict script approvals are retained. Inspect current PR checks
+  when resuming rather than treating earlier npm 12 runs as npm 11 evidence.
 - [CI run 234](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41156267381)
   passed on macOS, Linux and Windows, including both builds and production/dev
   browser checks. Both standalone and embedded Vercel preview build checks passed.
@@ -39,7 +41,7 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 | U00 | verified                 | Official version/peer snapshot, repository and available host runtime inspected |
 | U01 | verified                 | Original builds/behavior captured; upstream baseline refreshed separately       |
 | U02 | verified                 | 111 current unit tests, 11 browser cases and tracked reference screenshots      |
-| U03 | verified                 | Node 26.13.0/npm 12.2.1, reproducible install and three-OS CI                   |
+| U03 | revalidating             | Node 26.13.0/bundled npm 11.20.0; clean install and script-policy probe pass   |
 | U04 | verified                 | Utility packages and formatting/persistence regression checks                   |
 | U05 | verified                 | Next 16.4.3, Pages Router/Webpack and both build modes retained                 |
 | U06 | verified                 | libheif 1.23.5, fixed HEIC dimensions/appearance and Electron loading           |
@@ -47,12 +49,23 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 | U08 | verified                 | Splitter drag/persistence and table geometry/screenshots                        |
 | U09 | verified                 | React 19.3.1/MUI 9.5.0; equivalent table; new browser minimums accepted         |
 | U10 | verified with exceptions | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers               |
-| U11 | verified                 | Full tree valid; 7 low dev-only findings, production audit zero                 |
-| U12 | verified                 | Three-OS CI, draft PR and final review packet                                   |
+| U11 | verified with exceptions | Full tree valid; 32 moderate/5 low dev-only findings, production audit zero     |
+| U12 | revalidating             | Updated npm policy requires current three-OS CI and both preview builds       |
 | U13 | deferred                 | Production publication is outside the current implementation request            |
 
 ## Validation and evidence
 
+- Bundled npm follow-up: `mise exec` selects Node 26.13.0 and npm 11.20.0 from
+  the Node installation. Clean install, full dependency-tree validation,
+  lint/types, all 111 unit tests and both production builds pass. Chrome's 11
+  unchanged screenshot cases, WebKit's 11 cases, Firefox's 11 cases and both
+  Electron local-file cases pass. Standalone development smoke and both embedded
+  development JPEG/HEIC cases also pass. Remote CI and preview checks are next.
+  npm 11's offline script-policy probe confirms unreviewed scripts fail with
+  `ESTRICTALLOWSCRIPTS` before execution, approved scripts execute, and explicit
+  denials skip execution. Raw local logs use `.upgrade-artifacts/npm11-*`.
+  The lockfile differs only in the root npm engine; dependency versions and
+  application source are unchanged.
 - E2E configurations, browser tests/screenshots, Electron tests and shared fixtures
   are consolidated in `tests/e2e`. Existing npm commands select the moved configs;
   app-server working directories and output paths remain rooted at the repository.
@@ -82,10 +95,12 @@ Read [the plan](./DEPENDENCY_UPGRADE_PLAN.md) and [results](./dependency-upgrade
 | ESLint     | 9.39.5 (EOL) | 10.14.0          | eslint-plugin-react 7.37.5 peers only through ^9.7 |
 | TypeScript | 6.0.3        | 7.0.2            | typescript-eslint 8.72.1 requires >=4.8.4 <6.1.0   |
 
-Seven low audit entries trace to one deepmerge advisory in current Jest/SVGR;
-latest deepmerge remains affected. No forced graph or obsolete tool major
-rollback was applied. Production audit has zero findings; critical/high/moderate
-findings are zero across the entire tree.
+The audit refresh reports 32 moderate and 5 low entries, all development-only,
+from glob/minimatch and deepmerge. Both npm 11 and npm 12 reproduce these counts
+on the unchanged dependency graph; production audit remains zero, with no
+high/critical findings. Current parent-tool ranges exclude the patched
+glob/minimatch majors. No forced graph or obsolete tool major rollback was
+applied; see the results for advisory links and recheck upstream fixes later.
 
 ## Resolved user decision
 
@@ -100,6 +115,11 @@ Next/MUI versions. This resolves the final policy decision:
 are stricter than Next 16's. Older browsers fall outside the accepted range;
 the support-policy change is intentional even though the tested UI/functionality
 matches. The accepted minimums are also documented in the README.
+
+On the same date, the user selected Node LTS's bundled npm for local development,
+CI and Vercel: Node 26.13.0 / npm 11.20.0. npm will not be upgraded independently
+without a concrete compatibility or security need. Preserve strict install-script
+approvals and revalidate the selected bundle when updating Node.
 
 No main merge or production publication was performed. The preflight records
 inspected settings, existing deployment IDs and the remaining dashboard/rollback
@@ -124,7 +144,7 @@ follow the results document's release/rollback procedure.
 Inspect Git status/log and current PR/CI state before repeating installs or
 builds. The application commit above has full successful CI; later documentation
 commits may have their own runs. Read evidence first and preserve unrelated work.
-Browser support is accepted. Check the npm-pinning preview/CI results and the
+Browser support and the bundled-npm policy are accepted. Check current preview/CI results and the
 preflight's remaining release gates before choosing a next action.
 Restore code, lockfile and runtime settings together when rolling back. Keep
 production release separate from this implementation request.
