@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 What this app does and how to work on it is in [`README.md`](README.md) and
 [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md). This file holds only what is
@@ -35,3 +35,13 @@ and a pull request makes it reviewable.
 This is not a promise to remember: [`.claude/settings.json`](.claude/settings.json)
 sets `"autoMemoryEnabled": false`, which turns memory off entirely (both reading
 and writing). That file is tracked, so the switch travels with the repository.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

@@ -1,5 +1,5 @@
 import { useDebounce } from '@react-hook/debounce';
-import useSize from '@react-hook/size';
+import { useElementSize } from '../../hooks/useElementSize';
 import { useContext, useRef } from 'react';
 
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
@@ -19,8 +19,8 @@ const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
 };
 
 const PhotoMap: React.FC<{ className?: string }> = (props) => {
-  const mapSizeTarget = useRef(null);
-  const mapSize = useSize(mapSizeTarget);
+  const mapSizeTarget = useRef<HTMLDivElement>(null);
+  const mapSize = useElementSize(mapSizeTarget);
   const [debouncedMapSize, setDebouncedMapSize] = useDebounce(mapSize, 300);
   const { isWideLayout } = useThrottledAppLayout();
   if (isWideLayout) {

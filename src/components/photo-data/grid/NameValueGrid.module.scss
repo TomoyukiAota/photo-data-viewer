@@ -1,24 +1,70 @@
 .container {
   height: 100%;
 
-  > div {
+  .layout {
     height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  thead th {
-    & {
-      // For sticky header. See https://qiita.com/orangain/items/6268b6528ab33b27f8f2
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background-color: rgba(255, 255, 255, 1);
+  .scroll {
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  .table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  th,
+  td {
+    padding-left: 8px;
+    padding-right: 8px;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &:first-child {
+      padding-left: 24px;
     }
-
-    padding: 4px 0;
   }
 
-  tbody td {
-    padding: 2px 0;
+  th {
+    // Match the legacy grid's computed header positioning and metrics.
+    position: relative;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    line-height: 24px;
+  }
+
+  td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .heading {
+    display: flex;
+  }
+
+  .empty:first-child {
+    padding: 48px 0;
+
+    > div {
+      position: sticky;
+      left: 50%;
+      width: fit-content;
+
+      big {
+        display: inline-block;
+        transform: translateX(-50%);
+      }
+    }
   }
 }

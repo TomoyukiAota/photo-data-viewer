@@ -1,4 +1,4 @@
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import isNumber from 'is-number';
 import { getExtension } from '../../utils/filename-extension';
 import { formatDate } from '../../utils/format-date';
