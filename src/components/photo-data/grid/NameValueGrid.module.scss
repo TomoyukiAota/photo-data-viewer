@@ -45,8 +45,8 @@
   td {
     padding-top: 2px;
     padding-bottom: 2px;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .heading {

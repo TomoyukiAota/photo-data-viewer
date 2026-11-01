@@ -22,6 +22,7 @@ function saveGutterPositionToLocalStorage(position: {
 }
 
 const GutterPositionProvider: React.FC<React.PropsWithChildren> = (props) => {
+  // AppProvider mounts this on the client; retain defaults for direct server rendering.
   const [photoDataPaneFlex, setPhotoDataPaneFlex] = useState<number>(
     () => typeof window === 'undefined'
       ? UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex

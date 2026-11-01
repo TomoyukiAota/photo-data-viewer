@@ -15,12 +15,6 @@ export default function Document() {
           rel='stylesheet'
           href='https://fonts.googleapis.com/icon?family=Material+Icons'
         />
-        <link
-          rel='stylesheet'
-          href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
-          integrity='sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='
-          crossOrigin=''
-        />
         {/* Google Analytics. When usage data is turned off in Settings (src/analytics/opt-out.ts),
             gtag.js is not loaded and not configured, and the property it reads to send nothing is
             set as well. Turning it on again does what the first branch does (setDisabled in ga4.ts).

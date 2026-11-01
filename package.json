@@ -15,7 +15,7 @@
     "check": "npm outdated --long",
     "build:plm": "cross-env PDV_IN_PLM=True next build --webpack",
     "start:plm": "cross-env PDV_IN_PLM=True next start -p 3100",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test:e2e": "playwright test --config tests/e2e/playwright.config.mjs",
     "test:electron": "playwright test --config tests/e2e/playwright.electron.config.mjs",
     "test:ci": "jest --runInBand",

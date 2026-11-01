@@ -41,6 +41,10 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
+`npm run typecheck` generates Next.js types before running TypeScript, including
+on a fresh checkout. Next.js manages `next-env.d.ts`; it is ignored by Git because
+its imports depend on the active build mode.
+
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.

@@ -39,7 +39,18 @@ async function navigate(page, name) {
   await page.getByRole('menuitem', { name, exact: true }).click();
 }
 
-test('long filenames wrap within the General value cell', async ({ page }) => {
+async function expectTruncated(cell) {
+  await expect(cell).toHaveCSS('white-space', 'nowrap');
+  await expect(cell).toHaveCSS('text-overflow', 'ellipsis');
+  await expect(cell).toHaveCSS('overflow-x', 'hidden');
+  await expect
+    .poll(() =>
+      cell.evaluate((element) => element.scrollWidth > element.clientWidth),
+    )
+    .toBe(true);
+}
+
+test('long filenames retain ellipsis in the General value cell', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/');
   for (const name of [
@@ -53,28 +64,7 @@ test('long filenames wrap within the General value cell', async ({ page }) => {
     });
     const cell = page.getByRole('cell', { name, exact: true });
     await expect(cell).toBeVisible();
-    const linesFit = await cell.evaluate((element) => {
-      const text = document
-        .createTreeWalker(element, NodeFilter.SHOW_TEXT)
-        .nextNode();
-      const range = document.createRange();
-      range.selectNodeContents(text);
-      const lines = [...range.getClientRects()].filter(
-        (rect) => rect.width && rect.height,
-      );
-      const bounds = element.getBoundingClientRect();
-      return (
-        lines.length > 1 &&
-        lines.every(
-          (rect) =>
-            rect.left >= bounds.left &&
-            rect.right <= bounds.right &&
-            rect.top >= bounds.top &&
-            rect.bottom <= bounds.bottom,
-        )
-      );
-    });
-    expect(linesFit).toBe(true);
+    await expectTruncated(cell);
   }
 });
 
@@ -86,9 +76,6 @@ test.beforeEach(async ({ page }) => {
   );
   await page.route(/googletagmanager\.com|google-analytics\.com/, (route) =>
     route.abort(),
-  );
-  await page.route(/unpkg\.com/, (route) =>
-    route.fulfill({ contentType: 'text/css', body: '' }),
   );
   await page.route(/tile\.openstreetmap\.org/, (route) =>
     route.fulfill({ contentType: 'image/png', body: png }),
@@ -122,6 +109,7 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   await expect(page).toHaveTitle(/demo.jpg/);
   await expect(page.getByRole('cell', { name: /37\.332/ })).toBeVisible();
   await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
+  await expect(page.locator('.leaflet-marker-icon')).toHaveCSS('position', 'absolute');
   await snapshot(page, 'loaded-general');
   await page
     .getByRole('img', { name: 'Rotate photo', exact: true })
@@ -134,6 +122,12 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   await expect(
     page.getByRole('cell', { name: 'Apple', exact: true }).first(),
   ).toBeVisible();
+  for (const name of ['BlueTRC', 'ChromaticAdaptation']) {
+    const row = page.getByRole('row').filter({
+      has: page.getByRole('cell', { name, exact: true }),
+    });
+    await expectTruncated(row.getByRole('cell').nth(1));
+  }
   await snapshot(page, 'loaded-details');
   await page.getByRole('tab', { name: 'Raw Data', exact: true }).click();
   await expect(page.getByText(/"Make": "Apple"/)).toBeVisible();
@@ -150,12 +144,20 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
     localStorage.getItem('WideLayoutPhotoDataPaneFlex'),
   );
   expect(Number(saved)).toBeGreaterThan(0.5);
+  const movedBox = await vertical.boundingBox();
+  expect(Math.abs(movedBox.x - box.x)).toBeGreaterThan(50);
   await page.reload();
   expect(
     await page.evaluate(() =>
       localStorage.getItem('WideLayoutPhotoDataPaneFlex'),
     ),
   ).toBe(saved);
+  await expect
+    .poll(async () => {
+      const restoredBox = await vertical.boundingBox();
+      return restoredBox ? Math.abs(restoredBox.x - movedBox.x) : Infinity;
+    })
+    .toBeLessThanOrEqual(1);
   await navigate(page, 'Settings');
   await snapshot(page, 'settings');
   await page.getByLabel('Date Format', { exact: true }).click();

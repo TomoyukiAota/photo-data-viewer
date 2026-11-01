@@ -22,7 +22,8 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
   Production keeps Next's default Trusted Types configuration.
 - Migrated React types and nullable element refs, hydration initialization and
   pane-size keyed map remounts. Existing settings keys and visible behavior remain.
-- Updated both Leaflet package CSS and CDN CSS/SRI to byte-matching 1.9.4.
+- Updated Leaflet's bundled CSS to 1.9.4 and removed the duplicate CDN stylesheet
+  and its SRI hash. The map and marker use the package's bundled styles.
 - Migrated Next lint to flat ESLint configuration, added explicit type checks,
   limited Jest discovery to app sources, and made jsdom/types/test dependencies
   explicit. No lint rules or Strict Mode were disabled to pass validation.
@@ -38,12 +39,18 @@ and the committed lockfile. Research metadata is in [registry-snapshot.json](./r
   are removed. `vercel.json` logs versions and runs the existing `npm ci`.
   Version-specific `allowScripts` approvals remain; `.npmrc` enables
   `strict-allow-scripts` so npm 11 rejects unreviewed dependency install scripts.
+- Generate Next.js declarations with `next typegen` before `tsc`. The generated
+  `next-env.d.ts` remains included in TypeScript and is no longer tracked by Git.
 
 ## Local verification
 
 macOS arm64, Node 26.13.0 and bundled npm 11.20.0. The checks below were repeated
-after npm alignment. Earlier application checkpoints used npm 12.2.1; current
-remote validation is recorded in the status file and PR checks.
+after the Claude Code review follow-up. Earlier application checkpoints used
+npm 12.2.1; current remote validation is recorded in the status file and PR checks.
+
+The [review follow-up](../STATUS.md#review-follow-up-2026-11-01) records each
+finding's disposition. The corrected overflow matches the existing references;
+the stronger splitter check also rejects a layout that ignores saved positions.
 
 The npm 11 follow-up confirms that only the root lockfile's npm engine changed;
 every dependency entry is identical. A separate offline fixture exercises the
@@ -60,15 +67,15 @@ Raw local probe evidence is `.upgrade-artifacts/npm11-script-policy/validation.l
 - Following the E2E directory move: lint, 11 Chrome cases with unchanged screenshot
   references, both Electron JPEG/HEIC cases and standalone development smoke pass.
   All 23 moved test/helper/fixture/reference files are byte-for-byte unchanged.
-- Chrome: all 11 browser cases pass with the original-source screenshot references.
+- Chrome: all 12 browser cases pass with the original-source screenshot references.
   At most four isolated rasterization pixels are allowed per image; visible layout
   changes are not accepted. The Leaflet container is masked; map markers and
   navigation are asserted independently.
-- WebKit: all 11 functional browser cases pass.
+- WebKit: all 12 functional browser cases pass.
 - Electron 32.0.2 (same runtime as installed companion version 1.12.1): JPEG and
   HEIC local-file loading, title, dimensions, hidden standalone controls, and URL
   date/clock settings pass in isolated test profiles.
-- Firefox 157.0: all 11 functional browser cases pass on macOS 27.0.1. The initial
+- Firefox 157.0: all 12 functional browser cases pass on macOS 27.0.1. The initial
   profile-folder startup failure persisted with a separate TMPDIR; a process-scoped
   `CFFIXED_USER_HOME` pointing to a test-owned directory restored startup and
   allowed the complete suite to pass. This matches the app-data lookup problem in
@@ -112,7 +119,7 @@ Both [standalone Vercel preview](https://vercel.com/tomoyukiaotas-projects/photo
 and [embedded Vercel preview](https://vercel.com/tomoyukiaotas-projects/pdv-in-plm/ER9P7PUTdNkwB7XT1Cr6aFBefBYB)
 build checks succeeded for that application commit. These are preview build checks,
 not a production promotion or an inspection of production project settings.
-The reviewable implementation is in [draft PR #63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
+The reviewable implementation is in [PR #63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63).
 
 ## Remaining version and audit exceptions
 

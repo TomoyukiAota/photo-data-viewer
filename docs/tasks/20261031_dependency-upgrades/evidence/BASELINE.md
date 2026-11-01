@@ -17,14 +17,6 @@ Next 12 inlines the Google font CSS whereas Next 16 uses the stylesheet request.
 Visual comparison is opt-in (`PDV_VISUAL=1`) on the same OS/browser. Functional
 checks run without platform-specific image comparison on CI.
 
-<!-- coderabbit-ai-generated:v1 -->
-
-<!-- coderabbit-ai-generated-section:v1:947aac8c2d77d9140a665d477502a42e3acf67f90ef0bcf741b32d854a27bbf5 -->
-
-<!-- coderabbit-ai-generated:v1 -->
-
-<!-- coderabbit-ai-generated-section:v1:1b1312095dc008d21a6ba94be89df2bbf83a3d13db922beee88b5d2df21a0724 -->
-
 Local raw logs are in ignored `.upgrade-artifacts/baseline-*.log`; portable inputs,
 tests, source revision and image references are committed. The following commands
 reproduce the initial baseline suite, before stabilization. Use separate checkouts:
@@ -32,8 +24,6 @@ the application checkout at `22d1587a43da038e6f87bc828946b8ad1dcfec23` runs
 the baseline server, and the harness checkout at `3594ba5` contains the original
 Playwright tests and references. For the current E2E layout and commands, see
 [DEVELOPMENT.md](../../../DEVELOPMENT.md).
-
-<!-- /coderabbit-ai-generated:v1 -->
 
 ```sh
 # In the application checkout at 22d1587a43da038e6f87bc828946b8ad1dcfec23:
@@ -48,16 +38,10 @@ PDV_CHROME=1 PDV_VISUAL=1 npx playwright test --config playwright.config.mjs
 
 The harness configuration targets the baseline server at `http://127.0.0.1:3200`.
 
-<!-- /coderabbit-ai-generated:v1 -->
-
 No remote branch push, preview deployment, or production change has occurred.
 Installed Photo Location Map reports version 1.12.1; its embedded runtime has not
 been exercised against localhost yet. Browser support below Next 16's declared
 minimum remains an unresolved release consideration.
-
-<!-- coderabbit-ai-generated:v1 -->
-
-<!-- coderabbit-ai-generated-section:v1:04a5b975b9c331a57a84f14a6cdd1b3cadb41d4e57eaaa4707238980156323f0 -->
 
 ## Stabilized comparison
 
@@ -81,5 +65,3 @@ PDV_CHROME=1 PDV_VISUAL=1 npx playwright test --config playwright.config.mjs
 
 The harness starts the intermediate application on port 3200 and compares it to
 its committed references. It does not need the original server to be running.
-
-<!-- /coderabbit-ai-generated:v1 -->
