@@ -179,7 +179,7 @@ PR checks for the latest commit's remote results.
 
 | Finding | Action |
 | --- | --- |
-| Long table values wrap after autofix | Restore the original ellipsis in General and Details; assert clipping and compare existing screenshots. |
+| Long table values wrap after autofix | Restore original single-line clipping in General and ellipsis in Details; assert clipping and compare existing screenshots. |
 | Generated Next.js declaration changes with each command | Ignore and untrack `next-env.d.ts`; run `next typegen` before TypeScript. Fresh generation/type checking passes without existing build output. |
 | Splitter persistence test only checks storage | Compare actual splitter coordinates after reload. A negative control that ignores saved settings fails with a 104 px difference while the stored value remains intact. |
 | Duplicate Leaflet CDN stylesheet | Retain bundled package CSS, remove the CDN link and test interception, and check the marker's actual positioning style. |
@@ -187,6 +187,7 @@ PR checks for the latest commit's remote results.
 | CONTRIBUTING wording about npm | Retain the owner's explicit request for the original file; DEVELOPMENT.md describes bundled npm accurately. |
 | Server guard is currently defensive | Keep the defaults and explain direct server-rendering protection in a comment. |
 | Older embedded companion versions | Already resolved by the owner: support the latest release only. |
+| Follow-up suggestion to add filename ellipsis | The original app also clips nested filename text without an ellipsis. Retain that appearance and correct the test's claim; Details still explicitly checks ellipsis. |
 
 Local lint, fresh type generation/checking, 111 unit tests and both production
 builds pass. Chrome visual, WebKit and Firefox each pass 12 cases. All 17 reference
@@ -195,3 +196,17 @@ cases in production and development pass. `next-env.d.ts` regenerates in each
 mode without a tracked modification. The splitter negative control fails at the
 new coordinate assertion with a 104 px difference, as intended. Raw follow-up
 logs use `.upgrade-artifacts/review-*`.
+
+The subsequent CodeRabbit review of `0c02af7` correctly noted that a cell's
+`text-overflow` does not apply to the filename's nested text. Comparing the
+original Next 12 app with the upgraded app at a 320 px viewport shows identical
+computed styles and dimensions for the cell and both nested containers. Their
+filename-cell PNGs are byte-identical (SHA-256
+`888e7488c2ded2715edf5d2e281590a670c8453a9b6fe9b69f3c01c1f931cb8b`). Adding
+inner ellipsis would change the original UI, so no application styling changes
+are made for this suggestion. The filename test now describes and checks
+single-line clipping; the plain-text Details checks separately assert ellipsis.
+The comparison JSON and captures are `.upgrade-artifacts/review-filename-*`.
+The corrected filename test passes against the original application as well.
+After this test-only clarification, Chrome visual, WebKit and Firefox each pass
+all 12 cases again, without changing any reference PNGs.

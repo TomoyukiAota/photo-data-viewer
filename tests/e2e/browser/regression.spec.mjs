@@ -41,7 +41,6 @@ async function navigate(page, name) {
 
 async function expectTruncated(cell) {
   await expect(cell).toHaveCSS('white-space', 'nowrap');
-  await expect(cell).toHaveCSS('text-overflow', 'ellipsis');
   await expect(cell).toHaveCSS('overflow-x', 'hidden');
   await expect
     .poll(() =>
@@ -50,7 +49,7 @@ async function expectTruncated(cell) {
     .toBe(true);
 }
 
-test('long filenames retain ellipsis in the General value cell', async ({ page }) => {
+test('long filenames retain the original single-line clipping', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/');
   for (const name of [
@@ -64,6 +63,7 @@ test('long filenames retain ellipsis in the General value cell', async ({ page }
     });
     const cell = page.getByRole('cell', { name, exact: true });
     await expect(cell).toBeVisible();
+    // The original app clips nested filename text without rendering an ellipsis.
     await expectTruncated(cell);
   }
 });
@@ -126,7 +126,9 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
     const row = page.getByRole('row').filter({
       has: page.getByRole('cell', { name, exact: true }),
     });
-    await expectTruncated(row.getByRole('cell').nth(1));
+    const value = row.getByRole('cell').nth(1);
+    await expectTruncated(value);
+    await expect(value).toHaveCSS('text-overflow', 'ellipsis');
   }
   await snapshot(page, 'loaded-details');
   await page.getByRole('tab', { name: 'Raw Data', exact: true }).click();
