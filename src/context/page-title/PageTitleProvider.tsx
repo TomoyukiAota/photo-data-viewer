@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PageTitleContext from './page-title-context';
 import { pageTitleDefaultValue } from './page-title-default-value';
 
-const PageTitleProvider: React.FC = (props) => {
+const PageTitleProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [indexPageTitle, setIndexPageTitle] = useState(
     pageTitleDefaultValue.index
   );

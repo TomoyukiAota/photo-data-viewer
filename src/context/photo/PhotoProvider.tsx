@@ -45,7 +45,7 @@ async function getImageUrl(file: File) {
   return { url, heif };
 }
 
-const PhotoProvider: React.FC = (props) => {
+const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
   const { setIndexPageTitle } = useContext(PageTitleContext);
   const photoDimensionsCtx = useContext(PhotoDimensionsContext);
   const dialogCtx = useContext(DialogContext);

@@ -4,7 +4,7 @@ import PageTitleProvider from './page-title/PageTitleProvider';
 import PhotoDimensionsProvider from './photo-dimensions/PhotoDimensionsProvider';
 import PhotoProvider from './photo/PhotoProvider';
 
-const AppProvider: React.FC = (props) => {
+const AppProvider: React.FC<React.PropsWithChildren> = (props) => {
   return (
     <PageTitleProvider>
       <DialogProvider>

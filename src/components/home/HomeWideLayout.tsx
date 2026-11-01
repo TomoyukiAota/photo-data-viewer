@@ -9,10 +9,10 @@ import homeClasses from './Home.module.scss';
 import classes from './HomeWideLayout.module.scss';
 
 const HomeWideLayout: React.FC<{
-  header: JSX.Element;
-  photoImage: JSX.Element;
-  photoMap: JSX.Element;
-  photoData: JSX.Element;
+  header: React.JSX.Element;
+  photoImage: React.JSX.Element;
+  photoMap: React.JSX.Element;
+  photoData: React.JSX.Element;
 }> = (props) => {
   const headerHeight = 130;
   const isHeaderVisible = AppIntegration.isStandalone;
