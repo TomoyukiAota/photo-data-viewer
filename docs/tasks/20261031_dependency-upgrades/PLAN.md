@@ -4,7 +4,8 @@ Planning date: 2026-10-31 (Asia/Tokyo).
 
 Execution state: **implementation authorized on 2026-10-31**. The user requested
 execution of this plan. Routine implementation, local verification, and reversible
-checkpoints are authorized. Production publication has not been requested.
+checkpoints are authorized. Production publication was authorized on 2026-11-01
+after manual verification; see STATUS.md for the completed release checkpoint.
 
 Read [STATUS.md](./STATUS.md) first when
 resuming. That file records the actual state; this file describes the procedure.
