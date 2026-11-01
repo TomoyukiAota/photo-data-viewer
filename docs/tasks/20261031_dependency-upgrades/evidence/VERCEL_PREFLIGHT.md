@@ -2,7 +2,8 @@
 
 Inspected on 2026-10-31 and refreshed on 2026-11-01 (Asia/Tokyo) through the
 authenticated Vercel connection and the existing Chrome dashboard session.
-No production promotion, rollback, project-setting change or main merge was made.
+Preparation did not change cloud settings. The owner subsequently authorized
+publication; the completed 2026-11-01 release is recorded below.
 
 ## Effective build configuration
 
@@ -89,7 +90,7 @@ and `next build --webpack`. No npm engine mismatch warnings occur. Production
 aliases were re-resolved after these builds and still point to the deployment
 IDs below.
 
-## Current production and restore targets
+## Pre-release production and restore targets
 
 The production aliases were resolved directly and matched these retained READY
 production deployments. Both contain upstream main commit
@@ -108,7 +109,7 @@ Immutable URLs:
 Re-resolve aliases immediately before a release: these are snapshot restore
 targets, not a promise that production will remain on them indefinitely.
 
-Both current production deployments report `source=git`, `target=production` and
+Both pre-release production deployments report `source=git`, `target=production` and
 branch `main`; their logs also identify that main commit. Feature-branch pushes
 create previews. Both Production environment dashboards explicitly track `main`
 with Auto-Assign Custom Production Domains checked. Merging this PR triggers
@@ -132,10 +133,13 @@ Vercel CLI 65.9.0 is now installed globally in this Mac's Node 26.13.0 environme
 outside the application's dependencies. Startup and native helper loading pass.
 The two reviewed helper install scripts were approved once for this installation;
 no repository or persistent user-wide script policy was changed. `vercel whoami`
-reports logged out. CLI login is optional for this release because GitHub merging,
-connection-based deployment inspection and dashboard recovery are available.
+initially reported logged out. The owner subsequently authenticated it before
+publication. Explicit project/team checks and filtered rollback-candidate queries
+now succeed through the CLI. The connector's earlier permission limit is
+specific to that access path.
 
-Preserve both current production IDs for the next release. This team uses Hobby,
+Retain the pre-release IDs as historical restore targets, and capture the live
+production IDs before each future publication. This team uses Hobby,
 which permits Instant Rollback only to the previous production deployment.
 Recheck candidates immediately after the release. A rollback stops automatic
 production-domain assignment; a later Promote restores it. See
@@ -169,5 +173,41 @@ production-domain assignment; a later Promote restores it. See
    prepare a reviewed correction; promote a repaired production deployment to
    restore normal automatic domain assignment.
 
-All preparation above is complete. Production publication and the checks that
-require the newly published build remain pending the owner's release decision.
+## Production release record (2026-11-01)
+
+The owner completed manual verification in both modes and explicitly authorized
+merging PR #63 and publishing both applications. PR #63 merged as
+`6518a36e3ce1b87a7cc148ce7c0f7dd2cf3bf4ed`; its complete tree equals the checked
+head `dd91a2d16b125d605b8174547181617a34be727a`.
+
+| Application | Production deployment | HTML build ID |
+| --- | --- | --- |
+| Standalone | dpl_EkwK2FyZGNEBAZvugFm6tbdTcyDU | i3CQ4xEBgdv5ZMatcUyeb |
+| Embedded | dpl_8Z9eYmkgXipiSpTf4jgC3vp3dFVN | -VB54QiJl8Jw9M52b_OCl |
+
+At this checkpoint, both deployments were READY, targeted Production, identified
+the expected main merge SHA, and owned their public aliases. Each public alias
+returned HTTP 200 and the same HTML build ID as its immutable deployment:
+
+- [Standalone](https://photo-data-viewer-qar2hg3xy-tomoyukiaotas-projects.vercel.app/)
+- [Embedded](https://pdv-in-qkhykk1km-tomoyukiaotas-projects.vercel.app/)
+
+Both production build logs confirm Node 26.13.0 and npm 11.20.0. The existing
+production browser suite passed all 12 Chrome cases against the standalone public
+URL. Both real local JPEG/HEIC cases passed in Electron 32.0.2 against the embedded
+public URL. These checks intercept analytics and use isolated browser
+contexts/profiles. Error/fatal runtime-log counts, scoped to each new deployment
+over the preceding 30 minutes, returned no groups. The
+main merge's [three-OS CI](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41277717422)
+also passes.
+
+After publication, the explicitly scoped CLI confirms both prior `7db4679`
+deployments remain `isRollbackCandidate=true`. No rollback or cloud-setting
+change was needed. The local companion's temporary preview URL was restored to
+`https://pdv-in-plm.vercel.app/`; the main-process build passes and the companion
+checkout is clean.
+
+This section records the verified application release checkpoint. Subsequent
+documentation-only commits can produce newer deployments of identical application
+source. Resolve the live aliases and eligible candidates before any future
+release or recovery; Hobby's one-previous-production limit still applies.

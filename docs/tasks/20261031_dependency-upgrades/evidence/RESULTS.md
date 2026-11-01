@@ -97,6 +97,23 @@ logs are in ignored `.upgrade-artifacts`; the PR links remote CI evidence.
 
 ## Remote verification
 
+Production application checkpoint `6518a36e3ce1b87a7cc148ce7c0f7dd2cf3bf4ed`
+was published from PR #63 on 2026-11-01 with the owner's authorization, after
+manual standalone/integrated verification. Its tree equals the tested PR head
+`dd91a2d`. Both public URLs serve the new READY deployments. All 12 Chrome cases
+pass on `https://photo-data-viewer.vercel.app`; both JPEG/HEIC cases pass on
+`https://pdv-in-plm.vercel.app` in Electron 32.0.2. HTML build IDs at each public
+alias match its immutable deployment. The main merge passed
+[CI run 41277717422](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41277717422)
+on all three OSes. The scoped runtime error/fatal scans return no groups for
+either release deployment. See the preflight's production release record for
+deployment IDs, build IDs and recovery context.
+
+Raw production results are `.upgrade-artifacts/release-production-browser.log`
+and `.upgrade-artifacts/release-production-electron.log`. The companion's temporary
+preview URL was restored to its production URL; its main-process build passes
+and its checkout is clean.
+
 Release-preparation checkpoint `d67058ad01c28466e32515fb1a8340c6ba6bdfa3` passed
 [CI run 41265984384](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/41265984384)
 on all three OSes. Both immutable Vercel previews are READY. The existing Chrome
@@ -159,8 +176,8 @@ The reviewable implementation is in [PR #63](https://github.com/TomoyukiAota/pho
 
 ## Release review and rollback
 
-Release preparation was requested on 2026-11-01. Production publication and the
-main-branch merge still require the owner's release decision.
+Release preparation and production publication were authorized on 2026-11-01.
+PR #63 is merged and both public applications passed post-release verification.
 On 2026-10-31 the user accepted the new supported browser minimums:
 **Chrome 117+, Edge/Firefox 121+, and Safari (macOS/iOS/iPadOS) 17+**.
 This resolves the final policy decision and retains the implemented Next/MUI
@@ -186,9 +203,11 @@ preflight. The 2026-11-01 refresh confirms both production branches are `main`,
 automatic production-domain assignment is enabled, the embedded output override
 is `.next_plm`, and the retained deployments are rollback candidates. Dashboard
 Instant Rollback is available for both projects' eligible prior deployments.
-The connection's filtered rollback request still returns HTTP 403; use the
-authenticated dashboard for recovery rather than assuming the connector can
-execute it. No production promotion or rollback was performed.
+The connection's filtered rollback request returned HTTP 403. After the owner
+authenticated the CLI, its explicitly scoped query succeeds. At the application
+release checkpoint, both previous `7db4679` deployments remain eligible recovery
+targets. No rollback was needed. Recheck current candidates before recovery,
+especially after later documentation-only deployments.
 
 Rollback code and lockfile together to the prior deployed revision and restore
 that revision's Node/npm settings. Preserve each project's old deployment ID and
