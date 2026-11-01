@@ -12,6 +12,14 @@ Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
   bundled npm on 2026-10-31. Production publication was not requested.
 - Branch: `codex/dependency-upgrades`.
 - PR: [#63](https://github.com/TomoyukiAota/photo-data-viewer/pull/63), ready for review.
+- Release preparation was requested on 2026-11-01. Both projects' dashboard
+  settings, current restore targets and dashboard rollback actions are checked.
+  Production still serves `7db4679`; merging this PR will automatically publish
+  both applications. The remaining owner decision is whether to release.
+- Application/test checkpoint `d67058a` passed the complete three-OS CI matrix,
+  both preview builds and CodeRabbit checks, with no unresolved review threads.
+  The actual immutable standalone preview also passes all 12 Chrome cases;
+  the embedded preview passes both local-file cases in Electron 32.0.2.
 - Detailed runtime and verification instructions are in
   [DEVELOPMENT.md](../../DEVELOPMENT.md). CONTRIBUTING.md retains its original
   basic setup instructions.
@@ -44,9 +52,12 @@ Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
 - Integrated upstream main `7db4679`, retaining analytics and opt-out UI changes.
 - Test-owned development/reference servers are stopped. No persistent runtime
   process or disposable profile must remain alive to resume.
-- Production release remains outside this request. Rollback candidate eligibility
-  returns a distinct HTTP 403, and dashboard-only branch/output settings are not
-  exposed by the project summaries. These release gates are recorded in the preflight.
+- The preflight now resolves the earlier dashboard/rollback inspection gaps.
+  The filtered rollback endpoint still returns HTTP 403, but the ordinary
+  production list exposes candidate eligibility and both dashboard rollback
+  menus are available. Vercel CLI 65.9.0 is installed on this Mac and starts;
+  it is not authenticated. No project settings, domains or production traffic
+  were changed during preparation.
 
 ## Work packages
 
@@ -64,8 +75,8 @@ Read [the plan](./PLAN.md) and [results](./evidence/RESULTS.md).
 | U09 | verified                 | React 19.3.1/MUI 9.5.0; equivalent table; new browser minimums accepted         |
 | U10 | verified with exceptions | TS 6.0.3 and ESLint 9.39.5; clean newer-version probes fail peers               |
 | U11 | verified with exceptions | Full tree valid; 32 moderate/5 low dev-only findings, production audit zero     |
-| U12 | verified locally         | Review follow-up regression passes; inspect PR checks for current remote status |
-| U13 | deferred                 | Production publication is outside the current implementation request            |
+| U12 | verified                 | Local, three-OS CI and actual deployed-preview regression pass; inspect current PR checks |
+| U13 | prepared                 | Dashboard settings and restore targets checked; owner release decision and post-release checks remain |
 
 ## Validation and evidence
 
@@ -143,9 +154,13 @@ coverage was accepted for the current release; older Electron versions and chang
 to the README browser table are not required.
 
 No main merge or production publication was performed. The preflight records
-inspected settings, existing deployment IDs and the remaining dashboard/rollback
-permission gates. Resolve those gates before any later authorized release and
-follow the results document's release/rollback procedure.
+inspected settings, existing deployment IDs and the release/rollback procedure.
+Recheck the exact reviewed head and restore targets immediately before any later
+authorized release.
+
+On 2026-11-01 the owner chose to retain TypeScript 6.0.3 and defer additional
+development-dependency vulnerability work while prioritizing release preparation.
+These exceptions remain documented; no forced dependency changes were made.
 
 ## Resolved implementation issues
 
