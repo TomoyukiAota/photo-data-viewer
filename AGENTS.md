@@ -36,6 +36,13 @@ This is not a promise to remember: [`.claude/settings.json`](.claude/settings.js
 sets `"autoMemoryEnabled": false`, which turns memory off entirely (both reading
 and writing). That file is tracked, so the switch travels with the repository.
 
+## Stay on the documented setup
+
+Use each tool the way its documentation sets it up. Do not depart from that with
+npm `overrides`, custom environments or patches unless a needed feature or a
+serious security vulnerability requires it; removing a deprecation warning does
+not. See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md#stay-on-the-documented-setup).
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

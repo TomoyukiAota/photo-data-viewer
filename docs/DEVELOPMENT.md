@@ -22,6 +22,35 @@ installation if a dependency has unreviewed install scripts. Review newly
 introduced scripts before adding an approval; do not bypass this policy to make
 an install pass. See [npm's configuration reference](https://docs.npmjs.com/cli/v11/using-npm/config/#strict-allow-scripts).
 
+### Stay on the documented setup
+
+Use each tool the way its documentation sets it up, such as Jest with
+`jest-environment-jsdom` as the
+[Next.js Jest guide](https://nextjs.org/docs/pages/guides/testing/jest) installs
+it. Depart from that setup, for example with npm `overrides`, a custom test
+environment or a patch, only for a specific reason: a feature that cannot be
+built otherwise, or avoiding a serious security vulnerability.
+
+Removing a deprecation warning is not such a reason. Upstream updates to the
+standard setup resolve it over time, and it is not urgent. Record the warning in
+the next section instead.
+
+### Known deprecation warnings
+
+A clean `npm ci` prints three deprecation warnings. Each comes from the latest
+release of a package in the standard setup.
+
+| Warning                       | Comes from                                                                                                                                                            | Revisit when                                                                                                                                                                                                                                                           |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eslint@9.39.5` (end-of-life) | `eslint-config-next` bundles `eslint-plugin-react`, `eslint-plugin-import` and `eslint-plugin-jsx-a11y`, whose peer ranges end at ESLint 9, so npm refuses ESLint 10. | The plugins publish ESLint 10 support ([react](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977), [import](https://github.com/import-js/eslint-plugin-import/issues/3278), [jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/1075)). |
+| `glob@10.5.0`                 | Jest → `babel-plugin-istanbul` 8.0.0, which collects coverage → `test-exclude` 7.                                                                                     | `babel-plugin-istanbul` accepts `test-exclude` 8 ([upstream issue](https://github.com/istanbuljs/babel-plugin-istanbul/issues/337)).                                                                                                                                   |
+| `whatwg-encoding@3.1.1`       | `jest-environment-jsdom` 30.5.2 → jsdom 26.                                                                                                                           | `jest-environment-jsdom` moves to jsdom 27 or later ([upstream issue](https://github.com/jestjs/jest/issues/16000)).                                                                                                                                                   |
+
+After dependency changes, check that a clean `npm ci` prints no other
+`npm warn deprecated` lines. The
+[deprecation warnings record](./tasks/20261106_deprecation-warnings/STATUS.md)
+describes the check and the alternatives that were evaluated.
+
 ## Verification
 
 End-to-end tests live in [`tests/e2e`](../tests/e2e). Both Playwright configuration
