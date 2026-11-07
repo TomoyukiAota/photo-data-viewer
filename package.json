@@ -29,7 +29,6 @@
     "@react-hook/debounce": "4.0.0",
     "@react-hook/size": "2.1.2",
     "@react-hook/window-size": "3.1.1",
-    "@rehooks/local-storage": "2.4.5",
     "classnames": "2.5.1",
     "dayjs": "1.11.23",
     "exifr": "7.1.3",
