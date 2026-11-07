@@ -44,7 +44,4 @@ module.exports = {
 
     return config;
   },
-  images: {
-    disableStaticImages: true, // Image module types come from types/images.d.ts instead of Next.js.
-  },
 };
