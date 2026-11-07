@@ -40,6 +40,12 @@ These parts are not kept, because the app does not use them:
 The event that tells the hooks in the same tab about a write has a new name.
 Nothing outside the hook listens for it.
 
+One behavior differs on purpose. When another tab calls `localStorage.clear()`,
+the browser fires a `storage` event with a null key. The library ignored it, so a
+tab could keep showing usage data as off while `isUsageDataSent()` read the
+missing setting as on. The hook now reads its value again then. Review found
+this.
+
 ## Resuming
 
 Nothing is pending once the pull request is merged. Read and write settings

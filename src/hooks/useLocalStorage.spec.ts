@@ -78,6 +78,17 @@ describe('useLocalStorage', () => {
     expect(result.current).toBe('YYYY-MM-DD');
   });
 
+  it('follows another tab clearing the storage', () => {
+    localStorage.setItem('key', 'false');
+    const { result } = renderHook(() => useLocalStorage('key', true));
+    expect(result.current).toBe(false);
+    localStorage.clear(); // As the other tab's clear() leaves it.
+    act(() => {
+      window.dispatchEvent(new StorageEvent('storage', { key: null }));
+    });
+    expect(result.current).toBe(true);
+  });
+
   it('stops following changes when unmounted', () => {
     const rendered: boolean[] = [];
     const { unmount } = renderHook(() => {

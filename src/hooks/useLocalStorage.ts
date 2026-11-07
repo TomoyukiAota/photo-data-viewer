@@ -61,8 +61,12 @@ export function useLocalStorage<T>(key: string, defaultValue: T): T {
       if (detail.key === key) setValue(detail.value as T | null);
     };
     const handleStorage = (event: StorageEvent) => {
-      if (event.key !== key) return;
-      setValue(event.newValue === null ? null : (parse(event.newValue) as T));
+      if (event.key === null) {
+        // Another tab cleared the storage.
+        setValue(readStorage(key) as T | null);
+      } else if (event.key === key) {
+        setValue(event.newValue === null ? null : (parse(event.newValue) as T));
+      }
     };
     window.addEventListener(changeEvent, handleChange);
     window.addEventListener('storage', handleStorage);
