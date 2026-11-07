@@ -3,7 +3,7 @@ import { loadPlmSettings } from "../app-integration/plm-settings";
 import usePageView from "../analytics/usePageView";
 import { useAppLayoutTracker } from "./useAppLayout";
 import { usePageHiddenTracker } from "./usePageHiddenTracker";
-import { initializeUserSettingsIfNeeded, useUserSettingsTracker } from "./useUserSettings";
+import { useUserSettingsInitializer, useUserSettingsTracker } from "./useUserSettings";
 
 export const useAppRoot = () => {
   usePageView();
@@ -11,7 +11,7 @@ export const useAppRoot = () => {
 
   loadPlmSettings();
 
-  initializeUserSettingsIfNeeded();
+  useUserSettingsInitializer();
 
   const { trackAppLayout, appLayout } = useAppLayoutTracker();
   useEffect(

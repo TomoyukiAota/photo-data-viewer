@@ -33,6 +33,16 @@ Node 26, `typeof localStorage` prints it and `typeof window` does not.
 - Breaking the hook in seven ways (reading `typeof localStorage`, the default on
   the first render, JSON-quoted strings, no `storage` listener, no same-tab event,
   no default stored, a null default stored) each failed a unit test.
+- Running the settings initializer during render again, as before the review fix,
+  fails two unit tests: React logs "Cannot update a component (`DateFormat`)
+  while rendering a different component (`Root`)" after another tab removes the
+  setting.
+- With `localStorage` throwing a `SecurityError` on every read, as Chrome does
+  when site data is blocked, `/` and `/settings` were blank with that page error,
+  on `main` and with this change alike.
+
+All checks below were run again after the review fix, with the same results; the
+console comparison was again identical to the baseline.
 
 ## Checks
 
@@ -41,7 +51,7 @@ Node 26, `typeof localStorage` prints it and `typeof window` does not.
 | Clean `npm ci`                               | Only the three known deprecation warnings; 859 packages                       |
 | `npm ls --all`                               | Passes                                                                        |
 | `npm audit`                                  | No production entries; 28 development entries (5 low, 23 moderate), as before |
-| `npm run test:all`                           | Passes; 128 tests (111 before)                                                |
+| `npm run test:all`                           | Passes; 130 tests (111 before)                                                |
 | `npm run test:e2e`                           | 12 passed                                                                     |
 | `PDV_DEV=1 npm run test:e2e`                 | 1 passed, with the known `/_next/hmr` notice                                  |
 | `npm run test:electron` with Electron 32.0.2 | 2 passed                                                                      |

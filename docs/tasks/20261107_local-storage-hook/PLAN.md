@@ -43,7 +43,7 @@ format.
   mount.
 - A write reaches every mounted hook of the key in the same tab, and a change in
   another tab (the `storage` event) does too.
-- What the settings initializer stores while the app renders.
+- What the settings initializer stores as the app loads.
 
 ## Decision rules
 

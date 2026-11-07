@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { applyUsageDataSetting } from '../analytics/analytics';
 import { trackChangedUserSetting, trackLoadedUserSetting } from '../analytics/track-event';
 import { DateTimeFormat } from '../utils/date-time-format';
@@ -48,9 +49,8 @@ export const useUserSettingsTracker = () => {
   return { trackLoadedUserSettings };
 };
 
-// Stores the default of each of these settings that has no saved value, while the app
-// renders. A saved value that reads as null counts as none. On the server, it does
-// nothing.
+// Stores the default of each of these settings that has no saved value. A saved value
+// that reads as null counts as none. On the server, it does nothing.
 export function initializeUserSettingsIfNeeded() {
   function setIfUninitialized(key: string, value: unknown) {
     if (readStorage(key) === null) {
@@ -63,6 +63,14 @@ export function initializeUserSettingsIfNeeded() {
   setIfUninitialized(UserSettingKey.WideLayoutPhotoDataPaneFlex, UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex);
   setIfUninitialized(UserSettingKey.WideLayoutPhotoImagePaneFlex, UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex);
 }
+
+// Runs initializeUserSettingsIfNeeded after every commit. Not during render: storing a
+// value updates the other components using the setting, which React does not allow
+// while this one renders. After every commit, not once: a setting removed later, in
+// another tab, gets its default again.
+export const useUserSettingsInitializer = () => {
+  useEffect(() => initializeUserSettingsIfNeeded());
+};
 
 // Turning the sending of usage data off is recorded before it takes effect, and turning
 // it on after, so that both are recorded. The one event sent on turning it off is how

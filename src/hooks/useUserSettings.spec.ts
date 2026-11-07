@@ -1,8 +1,11 @@
-import { renderHook } from '@testing-library/react';
+import { act, render, renderHook } from '@testing-library/react';
+import { createElement } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 import {
   changeSendUsageData,
   initializeUserSettingsIfNeeded,
   useUserSettings,
+  useUserSettingsInitializer,
 } from './useUserSettings';
 
 afterEach(() => localStorage.clear());
@@ -59,6 +62,54 @@ describe('initializeUserSettingsIfNeeded', () => {
       WideLayoutPhotoDataPaneFlex: '0.5',
       WideLayoutPhotoImagePaneFlex: '0.5',
     });
+  });
+});
+
+describe('useUserSettingsInitializer', () => {
+  it('stores the defaults after the first render, not while rendering', () => {
+    const storedWhileRendering: (string | null)[] = [];
+    renderHook(() => {
+      useUserSettingsInitializer();
+      storedWhileRendering.push(localStorage.getItem('DateFormat'));
+    });
+    expect(storedWhileRendering[0]).toBeNull();
+    expect(stored()).toEqual({
+      ClockSystemFormat: '24-hour',
+      DateFormat: 'YYYY-MM-DD',
+      WideLayoutPhotoDataPaneFlex: '0.5',
+      WideLayoutPhotoImagePaneFlex: '0.5',
+    });
+  });
+
+  // As in the app, the component that runs it also uses a setting, and so does a
+  // component inside it.
+  it('stores a default again after another tab removes it, outside of rendering', () => {
+    function DateFormat() {
+      return useLocalStorage('DateFormat', 'YYYY-MM-DD');
+    }
+    function Root() {
+      useUserSettingsInitializer();
+      useLocalStorage('DateFormat', 'YYYY-MM-DD');
+      return createElement(DateFormat);
+    }
+    const errors = jest.spyOn(console, 'error');
+    try {
+      localStorage.setItem('DateFormat', 'DD/MM/YYYY');
+      const { container } = render(createElement(Root));
+      expect(container.textContent).toBe('DD/MM/YYYY');
+
+      localStorage.removeItem('DateFormat');
+      act(() => {
+        window.dispatchEvent(
+          new StorageEvent('storage', { key: 'DateFormat', newValue: null }),
+        );
+      });
+      expect(localStorage.getItem('DateFormat')).toBe('YYYY-MM-DD');
+      expect(container.textContent).toBe('YYYY-MM-DD');
+      expect(errors).not.toHaveBeenCalled();
+    } finally {
+      errors.mockRestore();
+    }
   });
 });
 

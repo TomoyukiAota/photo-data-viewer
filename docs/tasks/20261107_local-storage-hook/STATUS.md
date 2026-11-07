@@ -12,9 +12,13 @@ Implemented and verified locally; the pull request is open and not merged.
   exports `useLocalStorage`, which returns the value, `writeStorage` and
   `readStorage`.
 - `useUserSettingsInitializer` called the hook inside a plain function under an
-  `eslint-disable` for `react-hooks/rules-of-hooks`. It is now the plain function
-  `initializeUserSettingsIfNeeded`, which reads storage directly and stores the
-  same values: the default of each of the four settings that has none.
+  `eslint-disable` for `react-hooks/rules-of-hooks`, and stored values while
+  `AppRoot` rendered. It now runs the plain function
+  `initializeUserSettingsIfNeeded`, which reads storage directly, in an effect
+  after every commit. It stores the same values: the default of each of the four
+  settings that has none. Review found that storing during render could update
+  other components using a setting while `AppRoot` rendered, which React warns
+  about, after another tab removed that setting.
 - Builds and the development and production servers print no `localStorage`
   warning. The stored values, the values the Settings page first renders and the
   development-mode browser console are unchanged.
@@ -27,8 +31,9 @@ These parts are not kept, because the app does not use them:
 - The in-memory storage the library used when `localStorage` cannot be used, for
   example when a browser blocks site data. `GutterPositionProvider` and
   `formatDate` already read `localStorage` directly, so the app depends on working
-  storage either way. This was concluded from the code; a browser with storage
-  blocked was not tried.
+  storage either way. With `localStorage` throwing a `SecurityError`, as Chrome
+  does when site data is blocked, `/` and `/settings` are blank both on `main` and
+  with this change.
 - The `CustomEvent` polyfill, which the supported browsers do not need, and the
   rewritten error message for objects with circular references.
 
