@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { recordError } from '../../analytics/record-error';
 import ErrorBoundary from './ErrorBoundary';
+import PageNotShown from './PageNotShown';
 
 jest.mock('../../analytics/record-error');
 
@@ -45,6 +46,17 @@ describe('ErrorBoundary', () => {
       boundary: 'map',
       componentStack: expect.stringContaining('at ErrorBoundary'),
     });
+  });
+
+  it('shows the page\'s fallback, which offers a reload, when the whole page threw', () => {
+    render(
+      <ErrorBoundary name='page' fallback={<PageNotShown />}>
+        <Map throws />
+      </ErrorBoundary>
+    );
+    expect(screen.getByRole('alert').textContent).toContain('Something went wrong, and this page cannot be shown.');
+    expect(screen.getByRole('button', { name: 'Reload' })).toBeTruthy();
+    expect(recordError).toHaveBeenCalledWith(error, 'render', expect.objectContaining({ boundary: 'page' }));
   });
 
   it('renders the children again when the reset key changes, and not before', () => {
