@@ -15,6 +15,7 @@ export const Ga4EventName = {
   ChangedUserSetting: 'changed_user_setting',
   AppLayout: 'app_layout',
   AppIntegrationMode: 'app_integration_mode',
+  UnhandledError: 'unhandled_error',
 } as const;
 
 export type Ga4EventNameType = typeof Ga4EventName[keyof typeof Ga4EventName];

@@ -51,6 +51,7 @@ const PhotoMap: React.FC<{ className?: string }> = (props) => {
   return (
     <div className={classes.container} ref={mapSizeTarget}>
       <ErrorBoundary
+        name='map'
         fallback={<MapNotShownOverlay />}
         resetKey={photoCtx.loadedPhotoData}
       >

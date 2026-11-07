@@ -279,6 +279,45 @@ test('a photo whose GPS values are empty is shown without a location', async ({
   expect(errors).toEqual([]);
 });
 
+test('errors nothing handled are sent to the analytics backend', async ({
+  page,
+}) => {
+  const events = [];
+  await page.route(
+    /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
+    (route) => {
+      events.push(...JSON.parse(route.request().postData()).events);
+      return route.fulfill({ status: 204, body: '' });
+    },
+  );
+  await page.goto('/');
+  await page.evaluate(() => {
+    setTimeout(() => {
+      throw new TypeError('thrown by the test');
+    });
+    Promise.reject(new RangeError('rejected by the test'));
+  });
+  await expect
+    .poll(() =>
+      events
+        .filter((event) => event.action === 'Unhandled Error')
+        .map((event) => JSON.parse(event.label))
+        .sort((a, b) => a.error.localeCompare(b.error)),
+    )
+    .toEqual([
+      expect.objectContaining({
+        error: 'RangeError: rejected by the test',
+        errorSource: 'unhandledrejection',
+        pathname: '/',
+      }),
+      expect.objectContaining({
+        error: 'TypeError: thrown by the test',
+        errorSource: 'error',
+        pathname: '/',
+      }),
+    ]);
+});
+
 test('HEIF decoding preserves image dimensions and displayed metadata', async ({
   page,
 }) => {

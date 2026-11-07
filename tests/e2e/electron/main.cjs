@@ -1,7 +1,14 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const { writeFileSync } = require('node:fs');
 
 app.setPath('userData', process.env.PDV_ELECTRON_PROFILE);
+
+// The events the app sends Photo Location Map's main process, on the channel it
+// listens on (src/analytics/plm-backend.ts).
+const trackedEvents = [];
+ipcMain.on('analytics-backend-track-event', (_, category, action, label, value) =>
+  trackedEvents.push({ category, action, label, value }),
+);
 app.whenReady().then(async () => {
   const win = new BrowserWindow({
     width: 1280,
@@ -56,9 +63,22 @@ app.whenReady().then(async () => {
         }
       }, 50);
     })`);
+    if (process.env.PDV_ELECTRON_THROW) {
+      // An error nothing handles, whose message has the photo's path in it.
+      await win.webContents.executeJavaScript(`setTimeout(() => {
+        throw new Error('Cannot open ' + new URLSearchParams(location.search).get('photoPath'));
+      }); true`);
+      const start = Date.now();
+      while (
+        !trackedEvents.some((event) => event.action === '[PDV] Unhandled Error') &&
+        Date.now() - start < 10000
+      ) {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+    }
     writeFileSync(
       process.env.PDV_ELECTRON_RESULT,
-      JSON.stringify({ ...result, errors }),
+      JSON.stringify({ ...result, errors, trackedEvents }),
     );
     app.exit(0);
   } catch (error) {
