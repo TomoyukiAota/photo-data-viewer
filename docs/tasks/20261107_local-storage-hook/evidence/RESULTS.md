@@ -74,3 +74,11 @@ without the change, and the other also fails if the hook takes the event's null
 value instead of reading again. Then `npm run test:all` (132 tests), both builds (no
 warning), `npm run test:e2e` (12), `PDV_DEV=1 npm run test:e2e` (1) and
 `npm run test:electron` (2) passed.
+
+## After merging `main` again
+
+`main` then went back to Next.js's default static image imports, which changed
+only `next.config.js` and `types/images.d.ts`. After merging that as well,
+`npm run test:all` (132 tests), both builds (no warning), `npm run test:e2e`
+(12), `PDV_DEV=1 npm run test:e2e` (1) and `npm run test:electron` (2) passed. The
+dependencies did not change, so `npm ci` was not repeated.
