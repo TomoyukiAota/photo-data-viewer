@@ -38,8 +38,16 @@ export default class ErrorBoundary extends Component<
     });
   }
 
-  public componentDidUpdate(previousProps: ErrorBoundaryProps): void {
+  // Only from an error state the boundary was already in. When the children
+  // throw in the very render that changes the key, React commits the fallback
+  // with the new key, and resetting then would render them again at once,
+  // to throw and be recorded a second time.
+  public componentDidUpdate(
+    previousProps: ErrorBoundaryProps,
+    previousState: ErrorBoundaryState
+  ): void {
     if (
+      previousState.hasError &&
       this.state.hasError &&
       !Object.is(previousProps.resetKey, this.props.resetKey)
     ) {

@@ -59,6 +59,18 @@ describe('ErrorBoundary', () => {
     expect(recordError).toHaveBeenCalledWith(error, 'render', expect.objectContaining({ boundary: 'page' }));
   });
 
+  it('catches an error once when the children throw in the render that changes the reset key', () => {
+    const boundary = (resetKey: number, throws: boolean) => (
+      <ErrorBoundary name='map' fallback={<p>fallback</p>} resetKey={resetKey}>
+        <Map throws={throws} />
+      </ErrorBoundary>
+    );
+    const { rerender } = render(boundary(1, false));
+    rerender(boundary(2, true));
+    expect(screen.getByText('fallback')).toBeTruthy();
+    expect(recordError).toHaveBeenCalledTimes(1);
+  });
+
   it('renders the children again when the reset key changes, and not before', () => {
     const boundary = (resetKey: number, throws: boolean) => (
       <ErrorBoundary name='map' fallback={<p>fallback</p>} resetKey={resetKey}>

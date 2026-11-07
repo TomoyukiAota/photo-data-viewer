@@ -27,7 +27,7 @@ with valid GPS data showed its marker.
 
 | Command | Result |
 | --- | --- |
-| `npm run test:all` (lint, typecheck, Jest) | Passed: 22 suites, 156 tests |
+| `npm run test:all` (lint, typecheck, Jest) | Passed: 22 suites, 157 tests |
 | `npm run build` | Passed |
 | `npm run build:plm` | Passed |
 | `npm run test:e2e` (Chromium) | Passed: 14 tests, 2 of them new |
