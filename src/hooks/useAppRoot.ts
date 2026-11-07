@@ -11,8 +11,7 @@ export const useAppRoot = () => {
 
   loadPlmSettings();
 
-  const { initilizeUserSettingsIfNeeded } = useUserSettingsInitializer();
-  initilizeUserSettingsIfNeeded();
+  useUserSettingsInitializer();
 
   const { trackAppLayout, appLayout } = useAppLayoutTracker();
   useEffect(

@@ -40,7 +40,9 @@ a newer jsdom, the results can inform that decision.
 - During builds and server startup, Node 26 prints an `ExperimentalWarning` that
   `localStorage` is not available because `--localstorage-file` was not provided.
   `@rehooks/local-storage` 2.4.5 probes `localStorage` when it is imported on the
-  server.
+  server. A hook in this repository has since replaced the library, and the
+  warning is gone; see the
+  [localStorage hook record](../20261107_local-storage-hook/STATUS.md).
 - `PDV_DEV=1 npm run test:e2e` logs that the development server blocked a
   cross-origin `/_next/hmr` request from `127.0.0.1`, because the suite uses that
   host while the server's origin is `localhost`. The test passes.
