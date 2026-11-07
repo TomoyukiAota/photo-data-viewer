@@ -5,7 +5,7 @@ Started on 2026-11-07. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Implemented and verified locally; the pull request is open and not merged.
+Complete; verified locally and in CI.
 
 - [`src/hooks/useLocalStorage.ts`](../../../src/hooks/useLocalStorage.ts)
   replaces `@rehooks/local-storage`, which is removed from the dependencies. It

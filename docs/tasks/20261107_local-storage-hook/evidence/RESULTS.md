@@ -56,3 +56,12 @@ console comparison was again identical to the baseline.
 | `PDV_DEV=1 npm run test:e2e`                 | 1 passed, with the known `/_next/hmr` notice                                  |
 | `npm run test:electron` with Electron 32.0.2 | 2 passed                                                                      |
 | Prettier on the new files                    | Passes                                                                        |
+
+## After merging `main`
+
+`main` meanwhile removed the unused SVGR loader, which also changed
+`package.json` and `package-lock.json`. After merging it, a clean `npm ci` (728
+packages) printed only the three known deprecation warnings, and these passed:
+`npm ls --all`, `npm run test:all` (130 tests), both builds (no warning),
+`npm run test:e2e` (12), `PDV_DEV=1 npm run test:e2e` (1) and
+`npm run test:electron` (2).
