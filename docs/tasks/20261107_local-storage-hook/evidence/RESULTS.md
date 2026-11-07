@@ -51,7 +51,7 @@ console comparison was again identical to the baseline.
 | Clean `npm ci`                               | Only the three known deprecation warnings; 859 packages                       |
 | `npm ls --all`                               | Passes                                                                        |
 | `npm audit`                                  | No production entries; 28 development entries (5 low, 23 moderate), as before |
-| `npm run test:all`                           | Passes; 131 tests (111 before)                                                |
+| `npm run test:all`                           | Passes; 132 tests (111 before)                                                |
 | `npm run test:e2e`                           | 12 passed                                                                     |
 | `PDV_DEV=1 npm run test:e2e`                 | 1 passed, with the known `/_next/hmr` notice                                  |
 | `npm run test:electron` with Electron 32.0.2 | 2 passed                                                                      |
@@ -69,7 +69,8 @@ packages) printed only the three known deprecation warnings, and these passed:
 ## After handling a cleared storage
 
 A `storage` event with a null key, which another tab's `localStorage.clear()`
-fires, now makes the hook read its value again. A unit test covers it and fails
-without the change. Then `npm run test:all` (131 tests), both builds (no
+fires, now makes the hook read its value again. Two unit tests cover it: one fails
+without the change, and the other also fails if the hook takes the event's null
+value instead of reading again. Then `npm run test:all` (132 tests), both builds (no
 warning), `npm run test:e2e` (12), `PDV_DEV=1 npm run test:e2e` (1) and
 `npm run test:electron` (2) passed.

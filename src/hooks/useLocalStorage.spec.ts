@@ -89,6 +89,16 @@ describe('useLocalStorage', () => {
     expect(result.current).toBe(true);
   });
 
+  it('reads the storage again on a clear, keeping a value written since', () => {
+    const { result } = renderHook(() => useLocalStorage('key', true));
+    localStorage.clear();
+    localStorage.setItem('key', 'false'); // Written before the clear's event runs.
+    act(() => {
+      window.dispatchEvent(new StorageEvent('storage', { key: null }));
+    });
+    expect(result.current).toBe(false);
+  });
+
   it('stops following changes when unmounted', () => {
     const rendered: boolean[] = [];
     const { unmount } = renderHook(() => {
