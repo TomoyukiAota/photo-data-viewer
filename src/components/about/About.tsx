@@ -37,10 +37,12 @@ const About: React.FC = () => {
         <div>
           To improve this application, it collects usage information, such as{' '}
           <br />
-          which pages are opened and what kind of photo was loaded, along with{' '}
+          which pages are opened, what kind of photo was loaded and which{' '}
           <br />
-          your IP address and the approximate location derived from it. <br />
-          You can turn this off in <Link href='/settings'>Settings</Link>.
+          errors occurred, along with your IP address and the approximate{' '}
+          <br />
+          location derived from it. You can turn this off in{' '}
+          <Link href='/settings'>Settings</Link>.
         </div>
         <div>
           If you find any bugs or issues, please submit them in{' '}

@@ -17,17 +17,10 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility';
 
 import PhotoContext from '../../context/photo/photo-context';
-import { LoadedPhotoExifData } from '../../context/photo/loaded-photo-exif-data';
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 
 const defaultLatLng: LatLngExpression = [0, 0];
 const defaultZoom = 1;
-
-function isLagLngValid(exif?: LoadedPhotoExifData | null): boolean {
-  if (!exif) return false;
-  if (exif.latitude === 0 && exif.longitude === 0) return true;
-  return !!exif.latitude && !!exif.longitude;
-}
 
 const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   props
@@ -42,6 +35,7 @@ const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   return null;
 };
 
+/** The map: the loaded photo's place with a marker, or the whole world when the photo has no location. */
 const LeafletContent: React.FC = () => {
   const photoCtx = useContext(PhotoContext);
   const exif = photoCtx.loadedPhotoData?.exif;
@@ -49,7 +43,9 @@ const LeafletContent: React.FC = () => {
   let latLng: LatLngExpression = defaultLatLng;
   let zoom = defaultZoom;
 
-  const isLatLngValid = isLagLngValid(exif);
+  // The same check as the rest of the page, which says when the location is not
+  // available: only numbers within range, as Leaflet throws on anything else.
+  const isLatLngValid = !!exif?.isLatLngAvailable;
   if (isLatLngValid) {
     latLng = [exif?.latitude as number, exif?.longitude as number];
     zoom = 12;

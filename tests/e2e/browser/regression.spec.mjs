@@ -7,6 +7,50 @@ const png = Buffer.from(
   'base64',
 );
 
+/**
+ * demo.jpg with its EXIF replaced by a GPS block whose latitude and longitude have
+ * no values and whose references are empty bytes, as some files have. For it,
+ * exifr 7.1.3 gives the latitude and the longitude as the text "NaNNaN".
+ */
+function photoWithEmptyGpsValues() {
+  const entries = [
+    [0x0001, 7, 0], // GPSLatitudeRef, UNDEFINED, no bytes
+    [0x0002, 5, 0], // GPSLatitude, RATIONAL, no values
+    [0x0003, 7, 0], // GPSLongitudeRef
+    [0x0004, 5, 0], // GPSLongitude
+  ];
+  const gpsOffset = 8 + 18; // After the TIFF header and IFD0, which has one entry.
+  const tiff = Buffer.alloc(gpsOffset + 2 + 12 * entries.length + 4);
+  tiff.write('II*\0', 0, 'latin1');
+  tiff.writeUInt32LE(8, 4);
+  tiff.writeUInt16LE(1, 8);
+  tiff.writeUInt16LE(0x8825, 10); // GPSInfo, LONG, 1 value: the GPS block's offset.
+  tiff.writeUInt16LE(4, 12);
+  tiff.writeUInt32LE(1, 14);
+  tiff.writeUInt32LE(gpsOffset, 18);
+  tiff.writeUInt16LE(entries.length, gpsOffset);
+  entries.forEach(([tag, type, count], i) => {
+    const offset = gpsOffset + 2 + 12 * i;
+    tiff.writeUInt16LE(tag, offset);
+    tiff.writeUInt16LE(type, offset + 2);
+    tiff.writeUInt32LE(count, offset + 4);
+  });
+  const payload = Buffer.concat([Buffer.from('Exif\0\0', 'latin1'), tiff]);
+  const app1 = Buffer.concat([Buffer.from([0xff, 0xe1, 0, 0]), payload]);
+  app1.writeUInt16BE(payload.length + 2, 2);
+
+  // Every segment of demo.jpg but its APP1, with this APP1 right after SOI.
+  const segments = [photo.subarray(0, 2), app1];
+  let i = 2;
+  while (photo[i] === 0xff && photo[i + 1] !== 0xda) {
+    const end = i + 2 + photo.readUInt16BE(i + 2);
+    if (photo[i + 1] !== 0xe1) segments.push(photo.subarray(i, end));
+    i = end;
+  }
+  segments.push(photo.subarray(i));
+  return Buffer.concat(segments);
+}
+
 async function snapshot(page, name) {
   if (
     page.viewportSize().width > 1200 &&
@@ -212,6 +256,68 @@ test('no EXIF and malformed files retain the existing dialog and image behavior'
       .locator('#__next')
       .getByText('Unsupported File Format', { exact: true }),
   ).toBeVisible();
+});
+
+test('a photo whose GPS values are empty is shown without a location', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await page.locator('input[type=file]').setInputFiles({
+    name: 'empty-gps.jpg',
+    mimeType: 'image/jpeg',
+    buffer: photoWithEmptyGpsValues(),
+  });
+  await expect(
+    page.getByRole('cell', { name: 'empty-gps.jpg', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('img[alt="empty-gps.jpg"]')).toBeVisible();
+  await expect(
+    page.getByText('Location data (latitude and longitude) is not available.'),
+  ).toBeVisible();
+  await expect(page.locator('.leaflet-container')).toBeVisible();
+  await expect(page.locator('.leaflet-marker-icon')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test('errors nothing handled are sent to the analytics backend', async ({
+  page,
+}) => {
+  const events = [];
+  await page.route(
+    /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
+    (route) => {
+      events.push(...JSON.parse(route.request().postData()).events);
+      return route.fulfill({ status: 204, body: '' });
+    },
+  );
+  await page.goto('/');
+  await page.evaluate(() => {
+    setTimeout(() => {
+      throw new TypeError('thrown by the test');
+    });
+    Promise.reject(new RangeError('rejected by the test'));
+  });
+  await expect
+    .poll(() =>
+      events
+        .filter((event) => event.action === 'Unhandled Error')
+        .map((event) => JSON.parse(event.label))
+        .sort((a, b) => a.error.localeCompare(b.error)),
+    )
+    .toEqual([
+      expect.objectContaining({
+        error: 'RangeError: rejected by the test',
+        errorSource: 'unhandledrejection',
+        pathname: '/',
+      }),
+      expect.objectContaining({
+        error: 'TypeError: thrown by the test',
+        errorSource: 'error',
+        pathname: '/',
+      }),
+    ]);
 });
 
 test('HEIF decoding preserves image dimensions and displayed metadata', async ({
