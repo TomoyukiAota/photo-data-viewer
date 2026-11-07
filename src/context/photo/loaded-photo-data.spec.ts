@@ -26,6 +26,17 @@ describe('createLoadedPhotoData', () => {
     expect(data.isLatLngAvailable).toBe(true);
   });
 
+  it('leaves out coordinates a map cannot show, and keeps what exifr gave in the raw output', async () => {
+    // What exifr 7.1.3 gives for a GPS block whose latitude and longitude have no values.
+    mockedParse.mockResolvedValue({ Make: 'Apple', latitude: 'NaNNaN', longitude: 'NaNNaN' });
+    const data = await createLoadedPhotoData(file());
+    expect(data.exifResult).toBe('found');
+    expect(data.isLatLngAvailable).toBe(false);
+    expect(data.exif?.latitude).toBeUndefined();
+    expect(data.exif?.longitude).toBeUndefined();
+    expect(data.exif?.exifrParseOutput?.latitude).toBe('NaNNaN');
+  });
+
   it('reports a file without EXIF data', async () => {
     mockedParse.mockResolvedValue(undefined);
     const data = await createLoadedPhotoData(file());
