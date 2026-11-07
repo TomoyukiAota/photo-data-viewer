@@ -19,6 +19,7 @@ const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
   );
 };
 
+/** Shown in the map's place when rendering the map threw (the error boundary below). */
 const MapNotShownOverlay: React.FC = () => {
   return (
     <div className={classes.overlay}>
@@ -29,6 +30,7 @@ const MapNotShownOverlay: React.FC = () => {
   );
 };
 
+/** The map pane: the loaded photo's place, with a message over the map when it has none, or in its place when the map cannot be shown. */
 const PhotoMap: React.FC<{ className?: string }> = (props) => {
   const mapSizeTarget = useRef<HTMLDivElement>(null);
   const mapSize = useElementSize(mapSizeTarget);

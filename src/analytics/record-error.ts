@@ -35,14 +35,15 @@ export interface ErrorRecorderOptions {
   homeDir: () => string | null;
 }
 
-// The options are passed in so that this can be unit-tested.
+/** Makes the recorder (recordError). The options are passed in so that it can be unit-tested. */
 export function createErrorRecorder(options: ErrorRecorderOptions) {
   let recordedErrors = 0;
   const recordedTexts = new Map<string, number>();
   const recordedErrorObjects = new WeakSet<object>();
   let isRecording = false;
 
-  return (error: unknown, source: ErrorSource, details: ErrorDetails = {}): void => {
+  /** Records one error, unless it was recorded already or the page load sent its most. Never throws. */
+  function record(error: unknown, source: ErrorSource, details: ErrorDetails = {}): void {
     if (isRecording || recordedErrors >= MAX_ERRORS_PER_PAGE_LOAD) return;
 
     isRecording = true;
@@ -78,9 +79,12 @@ export function createErrorRecorder(options: ErrorRecorderOptions) {
     } finally {
       isRecording = false;
     }
-  };
+  }
+
+  return record;
 }
 
+/** An error as "Name: message", or what was thrown as text; never throws. */
 function errorText(error: unknown): string {
   if (error instanceof Error) return `${error.name}: ${error.message}`;
   try {
@@ -118,11 +122,13 @@ const WINDOWS_PATH = /(?<![A-Za-z\d])[A-Za-z]:[\\/][^'"`()<>|:*?\n]*/g;
 const UNC_PATH = /\\\\[^'"`()<>|:*?\n]+/g;
 const POSIX_PATH = /(?<![\w.~-])(?:~[\\/]|\/(?:Users|home|root|private|var|tmp|Volumes|mnt|media|opt|Applications|Library)\/)[^'"`()<>|:*?\n]*/g;
 
+/** What takes the user's paths out of a text, for this page's address and, in Photo Location Map's window, the home folder. */
 function createScrubber(location: Pick<Location, 'host' | 'search'>, homeDir: string | null): (text: string) => string {
   const photoPath = new URLSearchParams(location.search).get(PHOTO_PATH_PARAM);
   const photoName = photoPath?.split(/[\\/]/).pop();
 
-  return (text) => {
+  /** The text without the photo's path and name, the home folder, any path on the user's computer, and addresses' queries. */
+  function scrub(text: string): string {
     let result = text;
     // The photo's path before its name, which is in it; the home folder before the
     // name too, so that a path under it is found whole.
@@ -135,7 +141,9 @@ function createScrubber(location: Pick<Location, 'host' | 'search'>, homeDir: st
       .replace(WINDOWS_PATH, (path) => hidePath(path.trimEnd()))
       .replace(UNC_PATH, (path) => hidePath(path.trimEnd()))
       .replace(POSIX_PATH, (path) => hidePath(path.trimEnd()));
-  };
+  }
+
+  return scrub;
 }
 
 /**
@@ -156,6 +164,7 @@ function stackFrames(stack: string | undefined, scrub: (text: string) => string,
   return frames.length > 0 ? frames : undefined;
 }
 
+/** One frame of a stack with its address shortened: this app's code by its path, a file on the user's computer by its name. */
 function shortenFrame(frame: string, scrub: (text: string) => string, host: string): string {
   let name: string;
   let address: string;
@@ -184,8 +193,10 @@ function shortenFrame(frame: string, scrub: (text: string) => string, host: stri
   return `${scrub(name)}${shortened}${position}${end}`;
 }
 
-// In Photo Location Map's window, which enables nodeIntegration, Node's os module
-// tells the user's home folder, where most paths in errors there would start.
+/**
+ * The user's home folder, where most paths in errors start, from Node's os module:
+ * Photo Location Map's window enables nodeIntegration. Null anywhere else.
+ */
 function loadHomeDirFromElectron(): string | null {
   try {
     const electronRequire = (window as unknown as { require?: (id: string) => { homedir?: () => string } }).require;
@@ -210,10 +221,12 @@ const IGNORED_MESSAGES = /^(?:Script error\.?|ResizeObserver loop .*)$/;
 
 const INSTALLED = Symbol.for('photo-data-viewer.recordErrorsNothingHandled');
 
-// Records the errors thrown outside React's rendering, in an event handler or a
-// timer, and the promises rejected with nothing awaiting them. Errors in rendering
-// never reach the window, as Next.js catches them first; the error boundaries
-// record those (ErrorBoundary.tsx).
+/**
+ * Records the errors thrown outside React's rendering, in an event handler or a
+ * timer, and the promises rejected with nothing awaiting them. Errors in rendering
+ * never reach the window, as Next.js catches them first; the error boundaries
+ * record those (ErrorBoundary.tsx).
+ */
 export function recordErrorsNothingHandled(): void {
   if (typeof window === 'undefined') return;
 

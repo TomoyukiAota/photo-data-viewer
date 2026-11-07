@@ -7,9 +7,11 @@ const png = Buffer.from(
   'base64',
 );
 
-// demo.jpg with its EXIF replaced by a GPS block whose latitude and longitude have
-// no values and whose references are empty bytes, as some files have. For it,
-// exifr 7.1.3 gives the latitude and the longitude as the text "NaNNaN".
+/**
+ * demo.jpg with its EXIF replaced by a GPS block whose latitude and longitude have
+ * no values and whose references are empty bytes, as some files have. For it,
+ * exifr 7.1.3 gives the latitude and the longitude as the text "NaNNaN".
+ */
 function photoWithEmptyGpsValues() {
   const entries = [
     [0x0001, 7, 0], // GPSLatitudeRef, UNDEFINED, no bytes

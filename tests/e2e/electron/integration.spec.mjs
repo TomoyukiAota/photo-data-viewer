@@ -5,12 +5,15 @@ import { homedir, tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 
+/** A fixture's path on this machine, as Photo Location Map passes a photo's. */
 function photoPath(filename) {
   return fileURLToPath(new URL(`../fixtures/${filename}`, import.meta.url));
 }
 
-// Opens the app in Electron as Photo Location Map does, with the photo's path in
-// the address, and gives what main.cjs found once the photo was shown.
+/**
+ * Opens the app in Electron as Photo Location Map does, with the photo's path in
+ * the address, and gives what main.cjs found once the photo was shown.
+ */
 async function runInElectron(filename, env = {}) {
   const profile = mkdtempSync(join(tmpdir(), 'pdv-electron-'));
   const resultPath = join(profile, 'result.json');

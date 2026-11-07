@@ -16,21 +16,25 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-// Keeps an error thrown while rendering a part of the page to that part: the part
-// shows the fallback, and the rest of the page stays. Without one, Next.js replaces
-// the whole page. A class component, as React has no hook for this; see "Handling
-// Client Errors" in Next.js' Pages Router documentation. React itself logs the
-// error; this records it, as such an error never reaches the window.
+/**
+ * Keeps an error thrown while rendering a part of the page to that part: the part
+ * shows the fallback, and the rest of the page stays. Without one, Next.js replaces
+ * the whole page. A class component, as React has no hook for this; see "Handling
+ * Client Errors" in Next.js' Pages Router documentation. React itself logs the
+ * error; this records it, as such an error never reaches the window.
+ */
 export default class ErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
   public state: ErrorBoundaryState = { hasError: false };
 
+  /** Shows the fallback in the render after the children threw. */
   public static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
 
+  /** Records the error, which never reaches the window: Next.js would catch it first. */
   public componentDidCatch(error: unknown, errorInfo: ErrorInfo): void {
     recordError(error, 'render', {
       boundary: this.props.name,
@@ -38,10 +42,13 @@ export default class ErrorBoundary extends Component<
     });
   }
 
-  // Only from an error state the boundary was already in. When the children
-  // throw in the very render that changes the key, React commits the fallback
-  // with the new key, and resetting then would render them again at once,
-  // to throw and be recorded a second time.
+  /**
+   * Renders the children again when the reset key changes, only from an error
+   * state the boundary was already in. When the children throw in the very render
+   * that changes the key, React commits the fallback with the new key, and
+   * resetting then would render them again at once, to throw and be recorded a
+   * second time.
+   */
   public componentDidUpdate(
     previousProps: ErrorBoundaryProps,
     previousState: ErrorBoundaryState
@@ -55,6 +62,7 @@ export default class ErrorBoundary extends Component<
     }
   }
 
+  /** The fallback once the children threw, the children otherwise. */
   public render(): ReactNode {
     return this.state.hasError ? this.props.fallback : this.props.children;
   }

@@ -10,6 +10,7 @@ jest.mock('./analytics');
 
 const host = 'photo-data-viewer.vercel.app';
 
+/** A recorder for a page of this app, whose events go to the returned mock, with the label of each call. */
 function setUp({ search = '', homeDir = null as string | null } = {}) {
   const track = jest.fn<void, [AnalyticsEvent]>();
   const record = createErrorRecorder({
@@ -21,6 +22,7 @@ function setUp({ search = '', homeDir = null as string | null } = {}) {
   return { record, track, label };
 }
 
+/** An error whose stack has the given frames below its first line, as Chrome writes one. */
 function errorWithStack(message: string, stack: string[], name = 'Error') {
   const error = new Error(message);
   error.name = name;

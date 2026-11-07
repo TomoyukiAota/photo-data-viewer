@@ -35,6 +35,7 @@ const UpdateMap: React.FC<{ latLng: LatLngExpression; zoom: number }> = (
   return null;
 };
 
+/** The map: the loaded photo's place with a marker, or the whole world when the photo has no location. */
 const LeafletContent: React.FC = () => {
   const photoCtx = useContext(PhotoContext);
   const exif = photoCtx.loadedPhotoData?.exif;

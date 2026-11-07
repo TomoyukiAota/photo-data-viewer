@@ -28,6 +28,7 @@ const subscribe = () => () => {};
 const getClientSnapshot = () => true;
 const getServerSnapshot = () => false;
 
+/** Every page, with the providers, the menu and the dialogs, inside the error boundary that records an error in rendering. */
 function AppRoot({ Component, pageProps }: AppProps) {
   useAppRoot();
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);

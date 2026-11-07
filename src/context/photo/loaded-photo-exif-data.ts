@@ -20,8 +20,11 @@ export class LoadedPhotoExifData {
   public get isLatLngAvailable(): boolean { return isValidLatLng(this.latitude, this.longitude); }
 }
 
-// Throws what exifr.parse throws, so that createLoadedPhotoData records why the
-// EXIF data could not be read.
+/**
+ * Reads a file's EXIF data, keeping coordinates only when a map can show them.
+ * Throws what exifr.parse throws, so that createLoadedPhotoData records why the
+ * EXIF data could not be read.
+ */
 export async function createLoadedPhotoExifData(file: File): Promise<LoadedPhotoExifData | null> {
   if (!file) { return null; }
 
