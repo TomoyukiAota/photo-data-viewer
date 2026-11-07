@@ -100,6 +100,9 @@ test('embedded mode sends Photo Location Map an error nothing handled, without t
     errorSource: 'error',
     pathname: '/',
   });
-  expect(event.label).not.toContain(photoPath('demo.jpg'));
-  expect(event.label).not.toContain(homedir());
+  // The label is JSON, which escapes each backslash of a Windows path, so a path
+  // is looked for as JSON writes it.
+  const asInJson = (text) => JSON.stringify(text).slice(1, -1);
+  expect(event.label).not.toContain(asInJson(photoPath('demo.jpg')));
+  expect(event.label).not.toContain(asInJson(homedir()));
 });
