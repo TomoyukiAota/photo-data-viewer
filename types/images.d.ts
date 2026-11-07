@@ -1,4 +1,4 @@
-// This file is introduce to handle SVG file's static typing.
+// This file declares the types of image modules.
 // The original type declaration for images (including SVG) by Next.js is disabled by https://nextjs.org/docs/api-reference/next/image#disable-static-imports
 // The original type declaration by Next.js is here: https://github.com/vercel/next.js/blob/canary/packages/next/image-types/global.d.ts
 
@@ -11,11 +11,6 @@ type StaticImageData = {
 
 declare module '*.png' {
   const content: StaticImageData;
-  export default content;
-}
-
-declare module '*.svg' {
-  const content: React.FC<React.SVGProps<SVGSVGElement>>; // Based on https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration/68129058#68129058
   export default content;
 }
 
