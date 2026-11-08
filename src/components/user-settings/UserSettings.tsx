@@ -6,16 +6,39 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import dayjs from 'dayjs';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
 import { useUserSettings } from '../../hooks/useUserSettings';
+import { applyLanguage } from '../../i18n/i18n';
+import {
+  getLanguage,
+  isLanguageCode,
+  languages,
+  languageSettingAuto,
+} from '../../i18n/languages';
+import { browserLanguage, currentLanguage } from '../../i18n/resolve-language';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import { UserSettingKey } from '../../utils/user-settings';
 import classes from './UserSettings.module.scss';
 
 const UserSettings: React.FC = () => {
+  const { t } = useTranslation();
   const { userSettings, setUserSetting } = useUserSettings();
   const photoCtx = useContext(PhotoContext);
+
+  // A saved value that names no language the app has is shown as the default.
+  const language =
+    userSettings.language === languageSettingAuto ||
+    isLanguageCode(userSettings.language)
+      ? userSettings.language
+      : languageSettingAuto;
+  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
+    setUserSetting(UserSettingKey.Language, event.target.value);
+    // Before the photo is loaded again, so that its dates are in the language.
+    applyLanguage(currentLanguage());
+    photoCtx.reloadPhoto();
+  };
 
   const dateFormat = userSettings.dateFormat;
   const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
@@ -27,6 +50,14 @@ const UserSettings: React.FC = () => {
   const handleClockSystemFormatChange = (event: SelectChangeEvent<string>) => {
     setUserSetting(UserSettingKey.ClockSystemFormat, event.target.value);
     photoCtx.reloadPhoto();
+  };
+  // The stored values stay as they are; what the select shows is translated.
+  const clockSystemFormatLabel: Record<
+    DateTimeFormat.ForUser.ClockSystemFormatType,
+    string
+  > = {
+    [DateTimeFormat.ForUser.ClockSystemFormat_12h]: t('settings.dateTime.clock12'),
+    [DateTimeFormat.ForUser.ClockSystemFormat_24h]: t('settings.dateTime.clock24'),
   };
 
   const handleSendUsageDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,21 +72,52 @@ const UserSettings: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes['page-title']}>Settings</div>
+      <div className={classes['page-title']}>{t('settings.title')}</div>
       <div className={classes['page-description']}>
-        <div>Settings are saved in your browser.</div>
+        <div>{t('settings.savedInBrowser')}</div>
+      </div>
+      <div className={classes['language-settings']}>
+        <div className={classes['language-settings-title']}>
+          {t('settings.language.title')}
+        </div>
+        <FormControl sx={{ minWidth: 150 }}>
+          <InputLabel id='language'>{t('settings.language.label')}</InputLabel>
+          <Select
+            labelId='language'
+            value={language}
+            label={t('settings.language.label')}
+            onChange={handleLanguageChange}
+          >
+            <MenuItem value={languageSettingAuto}>
+              {t('settings.language.auto', {
+                language: getLanguage(browserLanguage()).name,
+              })}
+            </MenuItem>
+            {languages.map((item) => {
+              // Each language under its own name, so that a user who cannot read
+              // the current language still finds theirs.
+              return (
+                <MenuItem value={item.code} key={item.code}>
+                  {item.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </div>
       <div className={classes['date-time-settings']}>
         <div className={classes['date-time-settings-title']}>
-          Date & Time Format
+          {t('settings.dateTime.title')}
         </div>
         <div className={classes['date-time-settings-select']}>
           <FormControl sx={{ minWidth: 150 }}>
-            <InputLabel id='date-format'>Date Format</InputLabel>
+            <InputLabel id='date-format'>
+              {t('settings.dateTime.dateFormat')}
+            </InputLabel>
             <Select
               labelId='date-format'
               value={dateFormat}
-              label='Date Format'
+              label={t('settings.dateTime.dateFormat')}
               onChange={handleDateFormatChange}
             >
               {DateTimeFormat.ForUser.DateFormat_List.map((value) => {
@@ -68,17 +130,19 @@ const UserSettings: React.FC = () => {
             </Select>
           </FormControl>
           <FormControl sx={{ minWidth: 110 }}>
-            <InputLabel id='clock-system-format'>12- or 24-hour</InputLabel>
+            <InputLabel id='clock-system-format'>
+              {t('settings.dateTime.clockSystem')}
+            </InputLabel>
             <Select
               labelId='clock-system-format'
               value={clockSystemFormat}
-              label='12- or 24-hour'
+              label={t('settings.dateTime.clockSystem')}
               onChange={handleClockSystemFormatChange}
             >
               {DateTimeFormat.ForUser.ClockSystemFormat_List.map((value) => {
                 return (
                   <MenuItem value={value} key={value}>
-                    {value}
+                    {clockSystemFormatLabel[value]}
                   </MenuItem>
                 );
               })}
@@ -86,12 +150,14 @@ const UserSettings: React.FC = () => {
           </FormControl>
         </div>
         <div className={classes['date-time-settings-example']}>
-          <div>Example</div>
+          <div>{t('settings.dateTime.example')}</div>
           <div>{dateTimeExample}</div>
         </div>
       </div>
       <div className={classes['usage-data-settings']}>
-        <div className={classes['usage-data-settings-title']}>Usage Data</div>
+        <div className={classes['usage-data-settings-title']}>
+          {t('settings.usageData.title')}
+        </div>
         <FormControlLabel
           control={
             <Switch
@@ -99,11 +165,10 @@ const UserSettings: React.FC = () => {
               onChange={handleSendUsageDataChange}
             />
           }
-          label='Send usage data to improve this application'
+          label={t('settings.usageData.send')}
         />
         <div className={classes['usage-data-settings-note']}>
-          What is sent is described on the About page. This setting applies to
-          this browser only.
+          {t('settings.usageData.note')}
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import IconButton from '@mui/material/IconButton';
+import { useTranslation } from 'react-i18next';
+
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { trackOpenUrl } from '../../../analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
@@ -12,15 +14,17 @@ const LatLngRow: React.FC<{
   className?: string;
   loadedPhotoData?: LoadedPhotoData | null;
 }> = (props) => {
+  const { t } = useTranslation();
   if (!props?.loadedPhotoData?.isFileLoaded) {
     return <div />;
   }
   if (!props?.loadedPhotoData?.exif?.isLatLngAvailable) {
-    return <div>Not Available</div>;
+    return <div>{t('photoData.notAvailable')}</div>;
   }
 
   const { latitude, longitude } = props?.loadedPhotoData?.exif;
 
+  // The descriptions given to the analytics stay English, whatever the language.
   const handleGoogleMapsButtonClicked = () => {
     const zoom = 14;
     openTabWithoutOpener(
@@ -55,23 +59,23 @@ const LatLngRow: React.FC<{
         <IconButton
           className={classes['google-maps-button']}
           onClick={handleGoogleMapsButtonClicked}
-          title='Show in Google Maps'
+          title={t('photoData.general.showInGoogleMaps')}
         >
           <img
             className={classes['google-maps-icon']}
             src={IconDataUrl.googleMapsIcon}
-            alt='Show in Google Maps'
+            alt={t('photoData.general.showInGoogleMaps')}
           />
         </IconButton>
         <IconButton
           className={classes['google-street-view-button']}
           onClick={handleGoogleStreetViewButtonClicked}
-          title='Show in Google Street View'
+          title={t('photoData.general.showInGoogleStreetView')}
         >
           <img
             className={classes['google-street-view-icon']}
             src={IconDataUrl.googleStreetViewIcon}
-            alt='Show in Google Street View'
+            alt={t('photoData.general.showInGoogleStreetView')}
           />
         </IconButton>
       </div>

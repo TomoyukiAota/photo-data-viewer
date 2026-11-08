@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 import PhotoContext from '../../context/photo/photo-context';
 import { isIos } from '../../utils/os';
@@ -23,11 +25,12 @@ function getFontSize(windowWidth: number): React.CSSProperties {
 }
 
 const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
+  const { t } = useTranslation();
   const appLayout = useThrottledAppLayout();
   const nameColumnWidth = getNameColumnWidth(appLayout.windowWidth);
   const fontSize = getFontSize(appLayout.windowWidth);
   const photoCtx = useContext(PhotoContext);
-  const rows = createGeneralDataRows(photoCtx.loadedPhotoData, fontSize);
+  const rows = createGeneralDataRows(photoCtx.loadedPhotoData, fontSize, t);
   const isIosMessageVisible =
     isIos() && photoCtx.loadedPhotoData?.isExifAvailable;
 
@@ -41,16 +44,18 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
       </div>
       {isIosMessageVisible && (
         <div className={classes.message} style={fontSize}>
-          For iOS users, iOS removes some EXIF data (e.g. latitude and
-          longitude) in some cases. Please read{' '}
-          <a
-            href='https://stackoverflow.com/questions/57942150/file-upload-and-exif-in-mobile-safari'
-            target='_blank'
-            rel='noopener'
-          >
-            this page
-          </a>{' '}
-          for details.
+          <Trans
+            i18nKey='photoData.general.iosNote'
+            components={{
+              pageLink: (
+                <a
+                  href='https://stackoverflow.com/questions/57942150/file-upload-and-exif-in-mobile-safari'
+                  target='_blank'
+                  rel='noopener'
+                />
+              ),
+            }}
+          />
         </div>
       )}
     </div>

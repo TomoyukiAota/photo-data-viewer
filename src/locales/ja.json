@@ -1,0 +1,117 @@
+{
+  "menu": {
+    "buttonLabel": "メニュー",
+    "label": "MENU",
+    "home": "ホーム",
+    "demo": "デモ",
+    "settings": "設定",
+    "about": "このアプリについて"
+  },
+  "pageTitle": {
+    "demo": "デモ - {{appName}}",
+    "settings": "設定 - {{appName}}",
+    "about": "このアプリについて - {{appName}}"
+  },
+  "home": {
+    "selectYourPhoto": "写真を選択すると、EXIF データを表示します。",
+    "selectPhoto": "写真を選択",
+    "tabs": {
+      "data": "データ",
+      "map": "地図",
+      "photo": "写真"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "選択した写真がここに表示されます。",
+    "loading": "選択した写真を読み込んでいます...",
+    "rotate": "写真を回転",
+    "unsupportedFileFormat": "対応していないファイル形式です"
+  },
+  "map": {
+    "loading": "地図を読み込んでいます",
+    "locationNotAvailable": "位置情報（緯度・経度）がありません。",
+    "cannotBeShown": "地図を表示できません。"
+  },
+  "photoData": {
+    "tabs": {
+      "general": "全般",
+      "details": "詳細",
+      "rawData": "生データ"
+    },
+    "columns": {
+      "name": "名前",
+      "value": "値"
+    },
+    "noData": "データなし",
+    "notAvailable": "なし",
+    "loading": "読み込み中...",
+    "general": {
+      "fileName": "ファイル名",
+      "fileSize": "ファイルサイズ",
+      "widthHeight": "幅 × 高さ",
+      "dateTaken": "撮影日時",
+      "latitude": "緯度",
+      "longitude": "経度",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Google マップで表示",
+      "showInGoogleStreetView": "Google ストリートビューで表示",
+      "iosNote": "iOS では、EXIF データの一部（緯度・経度など）が削除される場合があります。詳しくは<pageLink>こちらのページ</pageLink>をご覧ください。"
+    },
+    "rawData": {
+      "description": "以下は <exifrLink>exifr</exifrLink> で取得した生データです。"
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "対応していないファイル形式です",
+    "message": "EXIF データがありません。",
+    "close": "閉じる"
+  },
+  "pageNotShown": {
+    "message": "問題が発生したため、このページを表示できません。",
+    "reload": "再読み込み"
+  },
+  "demo": {
+    "title": "デモ",
+    "description": "「デモを実行」ボタンをクリックすると、<photoLink>この写真</photoLink>を選択したときと同じように動作します。",
+    "runDemo": "デモを実行"
+  },
+  "settings": {
+    "title": "設定",
+    "savedInBrowser": "設定はブラウザに保存されます。",
+    "language": {
+      "title": "言語",
+      "label": "言語",
+      "auto": "ブラウザの設定に従う（{{language}}）"
+    },
+    "dateTime": {
+      "title": "日時の形式",
+      "dateFormat": "日付の形式",
+      "clockSystem": "12/24 時間制",
+      "clock12": "12 時間制",
+      "clock24": "24 時間制",
+      "example": "例"
+    },
+    "usageData": {
+      "title": "使用状況データ",
+      "send": "使用状況データを送信して、このアプリの改善に協力する",
+      "note": "送信する内容は「このアプリについて」のページに記載しています。この設定はこのブラウザにのみ適用されます。"
+    }
+  },
+  "about": {
+    "keptInBrowser": "このアプリは、ブラウザの中でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザの外に出ず、どのサーバーにも送信されません。",
+    "usageData": "このアプリの改善のため、開いたページ、読み込んだ写真の種類、発生したエラーなどの使用状況を、<br/>IP アドレスとそこから推定されるおおよその位置とともに収集しています。<br/>これは<settingsLink>設定</settingsLink>でオフにできます。",
+    "reportIssues": "不具合や問題を見つけた場合は、<issuesLink>GitHub Issues</issuesLink> に報告してください。",
+    "sourceCode": "このアプリのソースコードは <gitHubLink>GitHub</gitHubLink> で公開しています。",
+    "translations": "ほかの言語への翻訳を歓迎します。<guideLink>翻訳のしかた</guideLink>をご覧ください。",
+    "developedBy": "このアプリは Tomoyuki Aota が開発しています。",
+    "xProfile": {
+      "alt": "X（旧 Twitter）のプロフィール",
+      "title": "X（旧 Twitter）のプロフィールを開く"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub のプロフィール",
+      "title": "GitHub のプロフィールを開く"
+    },
+    "photoLocationMap": "たくさんの写真の撮影場所を一度に地図で見たいですか？<br/><plmLink>Photo Location Map</plmLink> がその用途に使えます。"
+  }
+}

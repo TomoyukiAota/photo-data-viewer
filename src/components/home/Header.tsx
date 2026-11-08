@@ -1,10 +1,12 @@
 import { Button } from '@mui/material';
 import { useContext, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
 import classes from './Header.module.scss';
 
 const Header: React.FC<{ className?: string }> = (props) => {
+  const { t } = useTranslation();
   const inputElementRef = useRef<HTMLInputElement>(null);
   const photoCtx = useContext(PhotoContext);
 
@@ -48,15 +50,13 @@ const Header: React.FC<{ className?: string }> = (props) => {
   return (
     <div className={`${props.className} ${classes.header}`}>
       <div>
-        <div className={classes.text}>
-          Select your photo to display EXIF data.
-        </div>
+        <div className={classes.text}>{t('home.selectYourPhoto')}</div>
         <Button
           variant='outlined'
           onClick={handleButtonClicked}
           sx={{ textTransform: 'none' }}
         >
-          Select Photo
+          {t('home.selectPhoto')}
         </Button>
         <input
           type='file'

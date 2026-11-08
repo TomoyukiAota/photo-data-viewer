@@ -6,6 +6,8 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+
 import { IGridRowData } from './grid-row-data';
 import classes from './NameValueGrid.module.scss';
 
@@ -28,9 +30,10 @@ const NameValueGrid: React.FC<{
   rows: NameValueGridRow[];
   columnExtensions: ColumnExtension[];
 }> = ({ rows, columnExtensions }) => {
+  const { t } = useTranslation();
   const columns = [
-    { name: 'name', title: 'Name' },
-    { name: 'value', title: 'Value' },
+    { name: 'name', title: t('photoData.columns.name') },
+    { name: 'value', title: t('photoData.columns.value') },
   ] as const;
   const widths = columns.map(
     (column) =>
@@ -80,7 +83,7 @@ const NameValueGrid: React.FC<{
                   <TableRow>
                     <TableCell colSpan={2} className={classes.empty}>
                       <div>
-                        <big>No data</big>
+                        <big>{t('photoData.noData')}</big>
                       </div>
                     </TableCell>
                   </TableRow>

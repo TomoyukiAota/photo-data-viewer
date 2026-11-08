@@ -1,6 +1,7 @@
 import { useDebounce } from '@react-hook/debounce';
 import { useElementSize } from '../../hooks/useElementSize';
 import { useContext, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useThrottledAppLayout } from '../../hooks/useAppLayout';
 import PhotoContext from '../../context/photo/photo-context';
@@ -10,10 +11,11 @@ import LeafletLoader from '../leaflet/LeafletLoader';
 import classes from './PhotoMap.module.scss';
 
 const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
+  const { t } = useTranslation();
   return (
     <div className={classes.overlay}>
       <div className={classes['overlay-content']}>
-        Location data (latitude and longitude) is not available.
+        {t('map.locationNotAvailable')}
       </div>
     </div>
   );
@@ -21,11 +23,10 @@ const LatLngNotAvailableOverlay: React.FC<{ className?: string }> = (props) => {
 
 /** Shown in the map's place when rendering the map threw (the error boundary below). */
 const MapNotShownOverlay: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className={classes.overlay}>
-      <div className={classes['overlay-content']}>
-        The map cannot be shown.
-      </div>
+      <div className={classes['overlay-content']}>{t('map.cannotBeShown')}</div>
     </div>
   );
 };

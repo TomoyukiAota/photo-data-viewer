@@ -358,3 +358,61 @@ test('narrow photo, metadata, and map tabs retain their layout', async ({
   await expect(page.locator('img[alt="demo.jpg"]')).toBeVisible();
   await snapshot(page, 'narrow-photo');
 });
+
+// The suite above runs with the en-US locale (playwright.config.mjs); these run
+// as a browser set to Japanese, the first translation.
+test.describe('in a browser whose language is Japanese', () => {
+  test.use({ locale: 'ja-JP' });
+
+  // The select by its role: right after an option is chosen, its list is still
+  // closing, and getByLabel would find the list as well.
+  const languageSelect = (page, label) =>
+    page.getByRole('combobox', { name: label, exact: true });
+
+  test('the app is in Japanese, and the language chosen in Settings is kept', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+    await expect(page.getByRole('button', { name: '写真を選択' })).toBeVisible();
+    await expect(
+      page.getByRole('tab', { name: '全般', exact: true }),
+    ).toBeVisible();
+    await loadPhoto(page);
+    // The day of the week in Date Taken comes from dayjs' Japanese locale.
+    await expect(
+      page.getByRole('cell', {
+        name: /^\d{4}-\d{2}-\d{2} [日月火水木金土] \d{2}:\d{2}:\d{2}$/,
+      }),
+    ).toBeVisible();
+    await snapshot(page, 'narrow-loaded-ja');
+
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page.getByRole('menuitem', { name: '設定', exact: true }).click();
+    await expect(languageSelect(page, '言語')).toHaveText(
+      'ブラウザの設定に従う（日本語）',
+    );
+    await snapshot(page, 'settings-ja');
+    await languageSelect(page, '言語').click();
+    await page.getByRole('option', { name: 'English', exact: true }).click();
+    await expect(languageSelect(page, 'Language')).toHaveText('English');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.getByLabel('Date Format', { exact: true })).toBeVisible();
+    await page.reload();
+    await expect(languageSelect(page, 'Language')).toHaveText('English');
+    expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
+      'en',
+    );
+  });
+
+  test('the About page is in Japanese', async ({ page }) => {
+    await page.goto('/about');
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+    await snapshot(page, 'about-ja');
+  });
+});

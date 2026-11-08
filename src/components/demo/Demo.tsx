@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { trackRanDemo } from '../../analytics/track-event';
 import PhotoContext from '../../context/photo/photo-context';
@@ -14,6 +15,7 @@ const photoUrlForDemo =
   'https://cdn.jsdelivr.net/gh/TomoyukiAota/photo-data-viewer-resources@2ba9ef57fd580cdabc4b26102098064e0b3c8505/photos/Demo%20(Apple%20Park).jpg';
 
 const Demo: React.FC = () => {
+  const { t } = useTranslation();
   const photoCtx = useContext(PhotoContext);
   const router = useRouter();
 
@@ -31,15 +33,17 @@ const Demo: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes['page-title']}>Demo</div>
+      <div className={classes['page-title']}>{t('demo.title')}</div>
       <div className={classes['messages']}>
         <div>
-          Once &quot;Run Demo&quot; button is clicked, this application behaves
-          as if{' '}
-          <a href={photoUrlForDemo} target='_blank' rel='noopener'>
-            this photo
-          </a>{' '}
-          is selected.
+          <Trans
+            i18nKey='demo.description'
+            components={{
+              photoLink: (
+                <a href={photoUrlForDemo} target='_blank' rel='noopener' />
+              ),
+            }}
+          />
         </div>
       </div>
       <div className={classes['run-demo']}>
@@ -49,7 +53,7 @@ const Demo: React.FC = () => {
           onClick={handleButtonClicked}
           sx={{ textTransform: 'none' }}
         >
-          Run Demo
+          {t('demo.runDemo')}
         </Button>
       </div>
     </div>

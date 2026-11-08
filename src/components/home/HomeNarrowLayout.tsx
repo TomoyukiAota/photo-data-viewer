@@ -1,5 +1,6 @@
 import Tabs from '@mui/material/Tabs';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css';
@@ -9,6 +10,7 @@ import StyledTab from '../tab/StyledTab';
 import homeClasses from './Home.module.scss';
 import classes from './HomeNarrowLayout.module.scss';
 
+// The tabs' values, which tell them apart; their labels are translated.
 const TabName = {
   Data: 'Data',
   Map: 'Map',
@@ -21,6 +23,7 @@ const HomeNarrowLayout: React.FC<{
   photoMap: React.JSX.Element;
   photoData: React.JSX.Element;
 }> = (props) => {
+  const { t } = useTranslation();
   const headerHeight = 130;
   const isHeaderVisible = AppIntegration.isStandalone;
 
@@ -60,9 +63,9 @@ const HomeNarrowLayout: React.FC<{
                 padding: '0 10px',
               }}
             >
-              <StyledTab label={TabName.Data} value={TabName.Data} />
-              <StyledTab label={TabName.Map} value={TabName.Map} />
-              <StyledTab label={TabName.Photo} value={TabName.Photo} />
+              <StyledTab label={t('home.tabs.data')} value={TabName.Data} />
+              <StyledTab label={t('home.tabs.map')} value={TabName.Map} />
+              <StyledTab label={t('home.tabs.photo')} value={TabName.Photo} />
             </Tabs>
             <div className={classes['tab-content']}>
               {selectedTabName === TabName.Data && props.photoData}

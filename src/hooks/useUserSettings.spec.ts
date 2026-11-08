@@ -22,6 +22,7 @@ describe('useUserSettings', () => {
     const saved = {
       ClockSystemFormat: '12-hour',
       DateFormat: 'DD/MM/YYYY',
+      Language: 'ja',
       SendUsageData: 'false',
       WideLayoutPhotoDataPaneFlex: '0.3',
       WideLayoutPhotoImagePaneFlex: '0.7',
@@ -36,6 +37,7 @@ describe('useUserSettings', () => {
       wideLayoutPhotoDataPaneFlex: 0.3,
       wideLayoutPhotoImagePaneFlex: 0.7,
       sendUsageData: false,
+      language: 'ja',
     });
     expect(stored()).toEqual(saved);
   });
@@ -45,6 +47,7 @@ describe('useUserSettings', () => {
     expect(stored()).toEqual({
       ClockSystemFormat: '24-hour',
       DateFormat: 'YYYY-MM-DD',
+      Language: 'auto',
       SendUsageData: 'true',
       WideLayoutPhotoDataPaneFlex: '0.5',
       WideLayoutPhotoImagePaneFlex: '0.5',
@@ -59,6 +62,7 @@ describe('initializeUserSettingsIfNeeded', () => {
     expect(stored()).toEqual({
       ClockSystemFormat: '24-hour',
       DateFormat: 'DD/MM/YYYY',
+      Language: 'auto',
       WideLayoutPhotoDataPaneFlex: '0.5',
       WideLayoutPhotoImagePaneFlex: '0.5',
     });
@@ -76,6 +80,7 @@ describe('useUserSettingsInitializer', () => {
     expect(stored()).toEqual({
       ClockSystemFormat: '24-hour',
       DateFormat: 'YYYY-MM-DD',
+      Language: 'auto',
       WideLayoutPhotoDataPaneFlex: '0.5',
       WideLayoutPhotoImagePaneFlex: '0.5',
     });

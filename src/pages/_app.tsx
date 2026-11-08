@@ -1,4 +1,5 @@
 import '../styles/globals.scss';
+import '../i18n/i18n'; // First, so that the texts are ready before anything is rendered.
 
 import type { AppProps } from 'next/app';
 import { useSyncExternalStore } from 'react';

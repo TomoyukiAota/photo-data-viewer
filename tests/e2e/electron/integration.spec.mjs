@@ -14,7 +14,7 @@ function photoPath(filename) {
  * Opens the app in Electron as Photo Location Map does, with the photo's path in
  * the address, and gives what main.cjs found once the photo was shown.
  */
-async function runInElectron(filename, env = {}) {
+async function runInElectron(filename, env = {}, params = {}) {
   const profile = mkdtempSync(join(tmpdir(), 'pdv-electron-'));
   const resultPath = join(profile, 'result.json');
   const url = new URL(
@@ -23,6 +23,9 @@ async function runInElectron(filename, env = {}) {
   url.searchParams.set('photoPath', photoPath(filename));
   url.searchParams.set('dateFormat', 'DD/MM/YYYY');
   url.searchParams.set('clockSystemFormat', '12-hour');
+  for (const [name, value] of Object.entries(params)) {
+    url.searchParams.set(name, value);
+  }
   try {
     await new Promise((resolve, reject) => {
       const child = spawn(
@@ -83,6 +86,9 @@ for (const filename of ['demo.jpg', 'demo.heic']) {
     expect(result.menuVisible).toBe(false);
     expect(result.dateFormat).toBe('DD/MM/YYYY');
     expect(result.clockSystemFormat).toBe('12-hour');
+    // English, as Photo Location Map's window is, until it passes a language.
+    expect(result.lang).toBe('en');
+    expect(result.text).toContain('General');
     expect(result.text).toContain(filename);
     expect(result.errors).toEqual([]);
   });
@@ -108,4 +114,17 @@ test('embedded mode sends Photo Location Map an error nothing handled, without t
   const asInJson = (text) => JSON.stringify(text).slice(1, -1);
   expect(event.label).not.toContain(asInJson(photoPath('demo.jpg')));
   expect(event.label).not.toContain(asInJson(homedir()));
+});
+
+test('embedded mode shows the language Photo Location Map passes', async () => {
+  test.skip(
+    !process.env.PDV_ELECTRON_PATH,
+    'Set PDV_ELECTRON_PATH to the companion-compatible Electron executable.',
+  );
+  const result = await runInElectron('demo.jpg', {}, { language: 'ja' });
+  expect(result.lang).toBe('ja');
+  expect(result.text).toContain('全般'); // The General tab.
+  expect(result.text).not.toContain('General');
+  expect(result.title).toBe('demo.jpg - Photo Location Map');
+  expect(result.errors).toEqual([]);
 });
