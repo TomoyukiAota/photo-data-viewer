@@ -8,6 +8,9 @@ import {
 
 afterEach(() => localStorage.clear());
 
+// Languages the app has no translation for are written as tags that no language
+// has (xx, yy-YY), so that adding a translation never breaks these tests.
+
 const standalone = {
   isPlm: false,
   languageParam: null,
@@ -22,12 +25,12 @@ describe('matchLanguage', () => {
   });
 
   it('takes the first tag that has a translation, however its case is written', () => {
-    expect(matchLanguage(['de-DE', 'JA', 'en'])).toBe('ja');
+    expect(matchLanguage(['xx-XX', 'JA', 'en'])).toBe('ja');
     expect(matchLanguage(['en-US', 'ja'])).toBe('en');
   });
 
   it('gives null when no tag has a translation', () => {
-    expect(matchLanguage(['de', 'pt-BR', 'zh-Hant'])).toBeNull();
+    expect(matchLanguage(['xx', 'yy-YY', 'zz-Zzzz'])).toBeNull();
     expect(matchLanguage([])).toBeNull();
   });
 });
@@ -39,7 +42,7 @@ describe('resolveLanguage, standalone', () => {
   });
 
   it('is English when the browser asks for languages that have no translation', () => {
-    expect(resolveLanguage({ ...standalone, browserLanguages: ['de', 'pt-BR'] })).toBe('en');
+    expect(resolveLanguage({ ...standalone, browserLanguages: ['xx', 'yy-YY'] })).toBe('en');
   });
 
   it('follows the setting over the browser', () => {
@@ -67,7 +70,7 @@ describe('resolveLanguage, in Photo Location Map', () => {
 
   it("is English without a parameter it has a translation for, whatever the machine's language or a saved setting", () => {
     expect(resolveLanguage(plm)).toBe('en');
-    expect(resolveLanguage({ ...plm, languageParam: 'de' })).toBe('en');
+    expect(resolveLanguage({ ...plm, languageParam: 'xx' })).toBe('en');
     expect(resolveLanguage({ ...plm, languageSetting: 'ja' })).toBe('en');
   });
 });
