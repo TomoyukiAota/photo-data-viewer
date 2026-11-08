@@ -32,11 +32,17 @@ finds the texts by them.
    the language alone (`de`, `fr`, `ko`) unless a region matters for the text
    (`pt-BR`, `zh-Hant`). Paste the content of `src/locales/en.json` into it and
    translate every text.
-3. Add the language to `src/i18n/languages.ts`, next to the others: its code,
-   its name in the language itself (`日本語`, `Deutsch`), the dayjs locale that
-   has its days of the week, and the import of its file. The dayjs locales are
-   listed at <https://github.com/iamkun/dayjs/tree/dev/src/locale>; most have
-   the language's code, in lower case (`pt-br`, `zh-tw`).
+3. Add the language to `src/i18n/languages.ts`, next to the others. Three
+   lines are needed; for German, say:
+   - at the top, `import 'dayjs/locale/de';`, which loads the days of the week
+     and AM/PM for dates. Without it, dates keep the previous language's. The
+     dayjs locales are listed at
+     <https://github.com/iamkun/dayjs/tree/dev/src/locale>; most have the
+     language's code, in lower case (`pt-br`, `zh-tw`);
+   - next to the other translations, `import de from '../locales/de.json';`;
+   - in the `languages` list,
+     `{ code: 'de', name: 'Deutsch', dayjsLocale: 'de', translation: de },`
+     with the language's name written in the language itself.
 4. Open a pull request titled `Add <language> translation`. If you can, add a
    screenshot of the Home page and the Settings page in your language; see
    [Checking how it looks](#checking-how-it-looks).
@@ -67,7 +73,8 @@ reviews the pull request:
   it, so keep the pair and translate the text inside. `<br/>` is a line break
   the English text has for wide screens; your translation may drop it or put it
   where your language breaks well.
-- Every file is listed in `src/i18n/languages.ts`.
+- Every file is listed in `src/i18n/languages.ts`, and the dayjs locale of
+  every language listed there is loaded.
 
 To run it on your computer, set the repository up as
 [CONTRIBUTING.md](./CONTRIBUTING.md) says, then:

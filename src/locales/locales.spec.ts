@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
@@ -50,6 +51,14 @@ it('lists every language in src/i18n/languages.ts once, with a file for each', (
   const codes = languages.map((language) => language.code);
   expect(new Set(codes).size).toBe(codes.length);
   for (const code of codes) expect(files).toContain(`${code}.json`);
+});
+
+it('loads the dayjs locale of every language, which the days of the week come from', () => {
+  // A locale is loaded by importing it in languages.ts; one that is not stays
+  // silently at the previous language when it is set.
+  for (const language of languages) {
+    expect(Object.keys(dayjs.Ls)).toContain(language.dayjsLocale);
+  }
 });
 
 describe.each(files)('%s', (file) => {
