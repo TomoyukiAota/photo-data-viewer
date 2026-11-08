@@ -55,6 +55,7 @@ app.whenReady().then(async () => {
             clearInterval(timer);
             // The menu button is the only button with an aria-label; the label itself is translated.
             const menuButton = document.querySelector('button[aria-label]');
+            if (!menuButton) throw new Error('The menu button was not found');
             resolve({ title: document.title, width: img.naturalWidth, height: img.naturalHeight,
               electron: process.versions.electron, text: document.body.innerText,
               fileInputCount: document.querySelectorAll('input[type=file]').length,

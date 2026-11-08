@@ -55,8 +55,10 @@ reviews the pull request:
 - Every key in your file exists in `en.json`. A misspelled key, or a key for a
   text that no longer exists, fails.
 - No text is empty. A text you cannot translate yet: delete its line, and the
-  app shows the English text in its place. The test's output names the texts a
-  language is still missing, without failing.
+  app shows the English text in its place. When the line was the last one in
+  its group, also delete the comma at the end of the line before it; otherwise
+  the file is no longer valid JSON, and the check fails at once. The test's
+  output names the texts a language is still missing, without failing.
 - The `{{placeholders}}` of a text are those of the English text. The app fills
   them in: `{{appName}}` is "Photo Data Viewer", `{{width}}` and `{{height}}`
   are the photo's size, `{{language}}` is the name of a language.
