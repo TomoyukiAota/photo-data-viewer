@@ -1,7 +1,50 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const { writeFileSync } = require('node:fs');
+const { app, BrowserWindow, ipcMain, protocol } = require('electron');
+const { randomBytes } = require('node:crypto');
+const { readFileSync, writeFileSync } = require('node:fs');
+const { basename, join } = require('node:path');
 
 app.setPath('userData', process.env.PDV_ELECTRON_PROFILE);
+
+// PDV_ELECTRON_HOST=isolated opens the app as Photo Location Map does since its
+// window is isolated: no Node.js, a sandbox and context isolation, with the bridge
+// of isolated-preload.cjs, which gives the photo at PDV_ELECTRON_PHOTO_PATH as a
+// URL of the plm-photo scheme, or as its bytes with PDV_ELECTRON_TRANSPORT=ipc.
+const isolated = process.env.PDV_ELECTRON_HOST === 'isolated';
+if (isolated) {
+  protocol.registerSchemesAsPrivileged([
+    { scheme: 'plm-photo', privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true } },
+  ]);
+}
+
+function servePhotoThroughTheBridge() {
+  const photoPath = process.env.PDV_ELECTRON_PHOTO_PATH;
+  const name = basename(photoPath);
+  const type = name.toLowerCase().endsWith('.heic') ? 'image/heic' : 'image/jpeg';
+  const token = randomBytes(32).toString('hex');
+  const origin = new URL(process.env.PDV_ELECTRON_URL).origin;
+  // As Photo Location Map does: Chromium gives the handler no Origin header, so the
+  // request must be a CORS one from a page of the app's origin, by its referrer.
+  const fromTheApp = (request) => {
+    try {
+      return request.mode === 'cors' && new URL(request.referrer).origin === origin;
+    } catch {
+      return false;
+    }
+  };
+  protocol.handle('plm-photo', (request) => {
+    if (new URL(request.url).pathname.slice(1) !== token || !fromTheApp(request)) {
+      return new Response(null, { status: 404 });
+    }
+    return new Response(readFileSync(photoPath), {
+      headers: { 'content-type': type, 'access-control-allow-origin': origin },
+    });
+  });
+  ipcMain.handle('ipc-constants-photo-data-viewer-photo', () =>
+    process.env.PDV_ELECTRON_TRANSPORT === 'ipc'
+      ? { name, type, bytes: readFileSync(photoPath) }
+      : { name, type, url: `plm-photo://photo/${token}` },
+  );
+}
 
 // The events the app sends Photo Location Map's main process, on the channel it
 // listens on (src/analytics/plm-backend.ts).
@@ -10,11 +53,14 @@ ipcMain.on('analytics-backend-track-event', (_, category, action, label, value) 
   trackedEvents.push({ category, action, label, value }),
 );
 app.whenReady().then(async () => {
+  if (isolated) servePhotoThroughTheBridge();
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
     show: false,
-    webPreferences: { nodeIntegration: true, contextIsolation: false },
+    webPreferences: isolated
+      ? { contextIsolation: true, nodeIntegration: false, sandbox: true, preload: join(__dirname, 'isolated-preload.cjs') }
+      : { nodeIntegration: true, contextIsolation: false },
   });
   win.webContents.session.webRequest.onBeforeRequest(
     {
@@ -53,20 +99,21 @@ app.whenReady().then(async () => {
         if (img && img.alt === ${JSON.stringify(process.env.PDV_ELECTRON_PHOTO)} && img.naturalWidth > 0) {
           clearInterval(timer);
           resolve({ title: document.title, width: img.naturalWidth, height: img.naturalHeight,
-            electron: process.versions.electron, text: document.body.innerText,
+            electron: typeof process === 'undefined' ? null : process.versions.electron,
+            nodeInPage: typeof require !== 'undefined' || typeof process !== 'undefined', text: document.body.innerText,
             fileInputCount: document.querySelectorAll('input[type=file]').length,
             menuVisible: document.querySelector('button[aria-label=menu]').getBoundingClientRect().width > 0,
             dateFormat: localStorage.getItem('DateFormat'),
             clockSystemFormat: localStorage.getItem('ClockSystemFormat') });
         } else if (Date.now() - start > 20000) {
-          clearInterval(timer); reject(new Error('Photo did not load: ' + document.body.innerText + JSON.stringify({next: !!window.next, sameGlobal: global === window, chunks: global.webpackChunk_N_E?.length, push: String(global.webpackChunk_N_E?.push).slice(0,100)})));
+          clearInterval(timer); reject(new Error('Photo did not load: ' + document.body.innerText + JSON.stringify({next: !!window.next, sameGlobal: typeof global !== 'undefined' && global === window, chunks: globalThis.webpackChunk_N_E?.length, push: String(globalThis.webpackChunk_N_E?.push).slice(0,100)})));
         }
       }, 50);
     })`);
     if (process.env.PDV_ELECTRON_THROW) {
       // An error nothing handles, whose message has the photo's path in it.
       await win.webContents.executeJavaScript(`setTimeout(() => {
-        throw new Error('Cannot open ' + new URLSearchParams(location.search).get('photoPath'));
+        throw new Error('Cannot open ' + (new URLSearchParams(location.search).get('photoPath') ?? ${JSON.stringify(process.env.PDV_ELECTRON_PHOTO)}));
       }); true`);
       const start = Date.now();
       while (

@@ -4,6 +4,7 @@ import {
   MAX_ERRORS_PER_PAGE_LOAD,
   MAX_ERRORS_WITH_SAME_TEXT,
   recordErrorsNothingHandled,
+  scrubPhotoName,
 } from './record-error';
 
 jest.mock('./analytics');
@@ -111,6 +112,13 @@ describe('createErrorRecorder', () => {
     expect(label(0).error).toBe('Error: Failed to decode <path>');
     expect(label(1).error).toBe('Error: Failed to decode <photo>');
     expect(label(2).error).toBe('Error: Cannot find <path>');
+  });
+
+  it('takes out the name of the photo that Photo Location Map\'s isolated window gave, and the URL to read it', () => {
+    const { record, label } = setUp({ search: '?plmBridge=1' });
+    scrubPhotoName('Grandma.HEIC');
+    record(new Error('Failed to decode Grandma.HEIC from plm-photo://photo/0123456789abcdef'), 'error');
+    expect(label().error).toBe('Error: Failed to decode <photo> from plm-photo:…');
   });
 
   it('keeps an address without its query, and this app\'s by its path', () => {

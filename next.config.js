@@ -29,16 +29,14 @@ module.exports = {
       // Reference: https://github.com/vercel/next.js/issues/7755#issuecomment-812805708
       config.resolve.fallback.fs = false;
 
-      // config.target needs to be different value for different deployment.
-      // To deploy as standalone app, config.target needs to be the default value, so it's not set.
-      // To deploy in Photo Location Map, set config.target to 'electron-renderer' to be able to call the functions in fs (e.g. fs.readFileSync).
-      if (isPdvInPlm) {
-        config.target = 'electron-renderer';
-        if (dev) {
-          // Older Electron Chromium treats eval(TrustedScript) as a no-op.
-          // Keep development module evaluation compatible; production is unchanged.
-          delete config.output.trustedTypes;
-        }
+      // The deployment in Photo Location Map is built for a browser, as the standalone one is, with the default
+      // config.target. Photo Location Map's isolated window has no Node.js, and gives the photo through its bridge
+      // (src/app-integration/plm-bridge.ts). An earlier version's window has Node.js, and there this app reads the
+      // photo with Electron's own require (src/app-integration/local-photo-file.ts).
+      if (isPdvInPlm && dev) {
+        // Older Electron Chromium treats eval(TrustedScript) as a no-op.
+        // Keep development module evaluation compatible; production is unchanged.
+        delete config.output.trustedTypes;
       }
     }
 
