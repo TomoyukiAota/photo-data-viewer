@@ -36,14 +36,14 @@ run `npm ci` and the tests on three operating systems.
 
 ### After the maintainer's review of the Japanese texts, 2026-11-10
 
-Seven texts in `ja.json` were changed, the note under the usage data switch lost
+Eight texts in `ja.json` were changed, the note under the usage data switch lost
 its second sentence in both languages, and a date in Japanese writes the day of
 the week in parentheses through `dateTime.weekdayPattern` (see `STATUS.md`).
 The visual run in Chrome changed `settings.png`, `narrow-loaded-ja.png`,
 `settings-ja.png` and `about-ja.png`, and nothing else; in `settings.png` the
 content column is narrower, and so sits further right, as the sentence that was
-removed had been its widest line. The checks were run again (a seventh text, the
-first sentence of the About page, followed, and `about-ja.png` with it):
+removed had been its widest line. The checks were run again (two texts of the
+About page followed, and `about-ja.png` with them):
 
 | Command                                          | Result                                                                     |
 | ------------------------------------------------ | -------------------------------------------------------------------------- |

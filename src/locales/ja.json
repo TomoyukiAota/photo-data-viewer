@@ -102,7 +102,7 @@
   },
   "about": {
     "keptInBrowser": "このアプリは、ブラウザ内部でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザ内部で処理され、サーバーには送信されません。",
-    "usageData": "このアプリの改善のため、開いたページ、読み込んだ写真の種類、発生したエラーなどの使用状況を、<br/>IP アドレスとそこから推定されるおおよその位置とともに収集しています。<br/>これは<settingsLink>設定</settingsLink>でオフにできます。",
+    "usageData": "このアプリの改善のため、開いたページ、読み込んだ写真のファイル形式、発生したエラーなどの使用状況を、<br/>IP アドレスとそこから推定されるおおよその位置とともに収集しています。<br/>これは<settingsLink>設定</settingsLink>でオフにできます。",
     "reportIssues": "不具合や問題を見つけた場合は、<issuesLink>GitHub Issues</issuesLink> に報告してください。",
     "sourceCode": "このアプリのソースコードは <gitHubLink>GitHub</gitHubLink> で公開しています。",
     "translations": "ほかの言語への翻訳を歓迎します。<guideLink>翻訳のしかた</guideLink>をご覧ください。",
