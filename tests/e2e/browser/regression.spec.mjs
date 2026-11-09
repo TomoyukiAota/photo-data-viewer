@@ -380,10 +380,11 @@ test.describe('in a browser whose language is Japanese', () => {
       page.getByRole('tab', { name: '全般', exact: true }),
     ).toBeVisible();
     await loadPhoto(page);
-    // The day of the week in Date Taken comes from dayjs' Japanese locale.
+    // The day of the week in Date Taken comes from dayjs' Japanese locale, in
+    // parentheses as Japanese writes it (dateTime.weekdayPattern in ja.json).
     await expect(
       page.getByRole('cell', {
-        name: /^\d{4}-\d{2}-\d{2} [日月火水木金土] \d{2}:\d{2}:\d{2}$/,
+        name: /^\d{4}-\d{2}-\d{2} \([日月火水木金土]\) \d{2}:\d{2}:\d{2}$/,
       }),
     ).toBeVisible();
     await snapshot(page, 'narrow-loaded-ja');

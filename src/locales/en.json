@@ -12,6 +12,9 @@
     "settings": "Settings - {{appName}}",
     "about": "About - {{appName}}"
   },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
   "home": {
     "selectYourPhoto": "Select your photo to display EXIF data.",
     "selectPhoto": "Select Photo",
@@ -94,7 +97,7 @@
     "usageData": {
       "title": "Usage Data",
       "send": "Send usage data to improve this application",
-      "note": "What is sent is described on the About page. This setting applies to this browser only."
+      "note": "What is sent is described on the About page."
     }
   },
   "about": {

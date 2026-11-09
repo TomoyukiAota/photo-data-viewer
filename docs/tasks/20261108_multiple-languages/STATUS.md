@@ -38,22 +38,30 @@ it, and are worth a second look:
   platform only if contributors ask (decision 4). A text not translated yet may
   be left out of a language's file and is shown in English; the test names such
   texts without failing.
-- Japanese as the first translation, written during this work (decision 5):
-  the wording in `src/locales/ja.json` has not been reviewed by anyone else.
+- Japanese as the first translation, written during this work (decision 5).
+  The maintainer reviewed the wording on 2026-11-10: six texts were changed,
+  and the day of the week in a date is written in parentheses, `(月)`, in
+  Japanese only. Each language's file says how it writes the day of the week
+  (`dateTime.weekdayPattern`, a dayjs pattern; `ddd` in English).
+- The note under the usage data switch on the Settings page lost its second
+  sentence, "This setting applies to this browser only.", in both languages
+  at the maintainer's request: the page already says that settings are saved
+  in the browser.
 - The About page keeps its line breaks as `<br/>` inside the English texts, so
   that stage 1 changed nothing visible.
 - The About page gained a line inviting translations, and the Settings page a
   Language section above Date & Time Format; the `about` and `settings`
   screenshots were updated for them, and three Japanese screenshots added.
-- The menu icon's text stays "MENU" in Japanese, as "メニュー" does not fit
-  under the icon.
+- The menu icon's text is メニュー in Japanese, as the maintainer asked. It is
+  wider than the icon's 40 px box, so the label no longer wraps and overflows
+  into the button's padding instead.
 
 ## Resuming
 
 Nothing is left to implement in this repository. What remains is the
 maintainer's:
 
-- Review the Japanese texts and the decisions above in the pull request.
+- Review the decisions above in the pull request.
 - Photo Location Map: a language setting of its own, passed as `language` in the
   address (its repository).
 - Optional: a GitHub label for translation pull requests; the guide asks for the

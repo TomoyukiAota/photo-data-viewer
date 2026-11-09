@@ -66,7 +66,8 @@ const UserSettings: React.FC = () => {
 
   const formatStr = DateTimeFormat.ForUser.getDayjsFormatString(
     dateFormat,
-    clockSystemFormat
+    clockSystemFormat,
+    t('dateTime.weekdayPattern')
   );
   const dateTimeExample = dayjs('2019-11-25T14:53:29.396Z').format(formatStr);
 

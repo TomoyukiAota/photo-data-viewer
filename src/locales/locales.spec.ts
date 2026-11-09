@@ -92,6 +92,11 @@ describe.each(files)('%s', (file) => {
     expect(different).toEqual([]);
   });
 
+  it('keeps ddd, the day of the week, in dateTime.weekdayPattern', () => {
+    // The one value that is a dayjs pattern, not a text (docs/TRANSLATING.md).
+    expect(texts['dateTime.weekdayPattern'] ?? 'ddd').toContain('ddd');
+  });
+
   it('keeps the <tags> of each English text', () => {
     const different = Object.keys(texts).filter(
       (key) => key in english && tags(texts[key]) !== tags(english[key]),

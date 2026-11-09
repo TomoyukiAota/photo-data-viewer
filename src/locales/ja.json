@@ -1,7 +1,7 @@
 {
   "menu": {
     "buttonLabel": "メニュー",
-    "label": "MENU",
+    "label": "メニュー",
     "home": "ホーム",
     "demo": "デモ",
     "settings": "設定",
@@ -12,8 +12,11 @@
     "settings": "設定 - {{appName}}",
     "about": "このアプリについて - {{appName}}"
   },
+  "dateTime": {
+    "weekdayPattern": "(ddd)"
+  },
   "home": {
-    "selectYourPhoto": "写真を選択すると、EXIF データを表示します。",
+    "selectYourPhoto": "写真ファイルを選択すると、EXIF データを表示します。",
     "selectPhoto": "写真を選択",
     "tabs": {
       "data": "データ",
@@ -48,7 +51,7 @@
     "general": {
       "fileName": "ファイル名",
       "fileSize": "ファイルサイズ",
-      "widthHeight": "幅 × 高さ",
+      "widthHeight": "横幅 × 縦幅",
       "dateTaken": "撮影日時",
       "latitude": "緯度",
       "longitude": "経度",
@@ -94,11 +97,11 @@
     "usageData": {
       "title": "使用状況データ",
       "send": "使用状況データを送信して、このアプリの改善に協力する",
-      "note": "送信する内容は「このアプリについて」のページに記載しています。この設定はこのブラウザにのみ適用されます。"
+      "note": "送信する内容は「このアプリについて」のページに記載しています。"
     }
   },
   "about": {
-    "keptInBrowser": "このアプリは、ブラウザの中でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザの外に出ず、どのサーバーにも送信されません。",
+    "keptInBrowser": "このアプリは、ブラウザの中でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザ内部で処理され、サーバーには送信されません。",
     "usageData": "このアプリの改善のため、開いたページ、読み込んだ写真の種類、発生したエラーなどの使用状況を、<br/>IP アドレスとそこから推定されるおおよその位置とともに収集しています。<br/>これは<settingsLink>設定</settingsLink>でオフにできます。",
     "reportIssues": "不具合や問題を見つけた場合は、<issuesLink>GitHub Issues</issuesLink> に報告してください。",
     "sourceCode": "このアプリのソースコードは <gitHubLink>GitHub</gitHubLink> で公開しています。",
@@ -112,6 +115,6 @@
       "alt": "GitHub のプロフィール",
       "title": "GitHub のプロフィールを開く"
     },
-    "photoLocationMap": "たくさんの写真の撮影場所を一度に地図で見たいですか？<br/><plmLink>Photo Location Map</plmLink> がその用途に使えます。"
+    "photoLocationMap": "多くの写真の撮影場所を一度に地図で見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
   }
 }

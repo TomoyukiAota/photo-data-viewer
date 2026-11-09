@@ -34,6 +34,24 @@ run `npm ci` and the tests on three operating systems.
 | `npm run test:e2e` (Chromium)                    | Passed: 16 tests                                                           |
 | `npm run test:electron` with Electron 32.0.2     | Passed: 10 tests; the language test runs in both windows, see below        |
 
+### After the maintainer's review of the Japanese texts, 2026-11-10
+
+Six texts in `ja.json` were changed, the note under the usage data switch lost
+its second sentence in both languages, and a date in Japanese writes the day of
+the week in parentheses through `dateTime.weekdayPattern` (see `STATUS.md`).
+The visual run in Chrome changed `settings.png`, `narrow-loaded-ja.png`,
+`settings-ja.png` and `about-ja.png`, and nothing else; in `settings.png` the
+content column is narrower, and so sits further right, as the sentence that was
+removed had been its widest line. The checks were run again:
+
+| Command                                          | Result                                                                     |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| `npm run test:all` (lint, typecheck, Jest)       | Passed: 27 suites, 198 tests (3 of them new, for the weekday pattern)      |
+| `npm run build`, `npm run build:plm`             | Passed                                                                     |
+| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`     | Passed: 16 tests, with the four screenshots updated                        |
+| `npm run test:e2e` (Chromium)                    | Passed: 16 tests                                                           |
+| `npm run test:electron` with Electron 32.0.2     | Passed: 10 tests                                                           |
+
 Stage 1 was checked on its own before stages 2 and 3 were started: with the
 texts moved out of the components and nothing else, the visual run in Chrome
 passed with every one of the 14 tests and no screenshot changed, and so did the

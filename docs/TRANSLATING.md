@@ -73,6 +73,7 @@ reviews the pull request:
   it, so keep the pair and translate the text inside. `<br/>` is a line break
   the English text has for wide screens; your translation may drop it or put it
   where your language breaks well.
+- `dateTime.weekdayPattern`, when the file has it, contains `ddd`.
 - Every file is listed in `src/i18n/languages.ts`, and the dayjs locale of
   every language listed there is loaded.
 
@@ -91,7 +92,12 @@ npm test -- locales
   on phones ("File Name", "Width x Height", "Date Taken", ...). A long
   translation is cut off there; prefer a short one.
 - The days of the week and AM/PM in dates come from dayjs' locale, not from
-  the file.
+  the file. One value in the file is not a text but a dayjs pattern:
+  `dateTime.weekdayPattern`, how a date writes the day of the week. `ddd` is
+  its short name (Mon, 月); Japanese writes `(ddd)`, shown as `(月)`. Keep
+  `ddd` and change only what is around it, or leave the key out when your
+  language writes the day of the week plainly. Letters would be read as a
+  pattern too, so a word goes in square brackets: `[le] ddd`.
 - English is written in the second person, plainly, without exclamation marks.
   Follow the register that an application's settings page has in your language.
 - Machine translation can give a first draft, but a wrong text is worse than an
@@ -121,7 +127,7 @@ the browser's device toolbar) and at a wide one, and the About page.
 | Code | Language | Status                                                     |
 | ---- | -------- | ---------------------------------------------------------- |
 | `en` | English  | The source.                                                |
-| `ja` | 日本語   | Complete; written with the first version of the translations. |
+| `ja` | 日本語   | Complete; reviewed by the maintainer.                      |
 
 When a language is added, add it here with who reviewed it, or "machine
 translation, not reviewed yet" until a speaker has.

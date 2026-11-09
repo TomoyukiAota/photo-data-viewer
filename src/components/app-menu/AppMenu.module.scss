@@ -12,4 +12,5 @@
 
 .menu-icon-text {
   font-size: 12px; // Smaller than 10px doesn't take effect in Chrome, but it does in iPhone's Safari.
+  white-space: nowrap; // メニュー, the Japanese label, is wider than the wrapper; it overflows into the button's padding instead of wrapping.
 }
