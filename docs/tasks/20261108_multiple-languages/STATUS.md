@@ -39,7 +39,7 @@ it, and are worth a second look:
   be left out of a language's file and is shown in English; the test names such
   texts without failing.
 - Japanese as the first translation, written during this work (decision 5).
-  The maintainer reviewed the wording on 2026-11-10: six texts were changed,
+  The maintainer reviewed the wording on 2026-11-10: seven texts were changed,
   and the day of the week in a date is written in parentheses, `(月)`, in
   Japanese only. Each language's file says how it writes the day of the week
   (`dateTime.weekdayPattern`, a dayjs pattern; `ddd` in English).
