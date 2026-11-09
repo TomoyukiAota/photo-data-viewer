@@ -2,6 +2,8 @@ import {
   createPlmBackendSink,
   IpcRendererLike,
   loadIpcRendererFromElectron,
+  loadSenderFromBridge,
+  PLM_ANALYTICS_BACKEND_CHANNEL,
 } from './plm-backend';
 
 function setUp({ isPlm = true, available = true } = {}) {
@@ -86,5 +88,27 @@ describe('loadIpcRendererFromElectron', () => {
       throw new Error('Cannot find module');
     };
     expect(loadIpcRendererFromElectron()).toBeNull();
+  });
+});
+
+describe('loadSenderFromBridge', () => {
+  const windowWithBridge = window as unknown as { plmPhotoDataViewer?: unknown };
+
+  afterEach(() => {
+    delete windowWithBridge.plmPhotoDataViewer;
+  });
+
+  it('is none outside Photo Location Map\'s isolated window', () => {
+    expect(loadSenderFromBridge(() => false)).toBeNull();
+  });
+
+  it("sends through the window's bridge, looked up at each event, as the bridge can come after the first", () => {
+    const sender = loadSenderFromBridge(() => true);
+    sender?.send(PLM_ANALYTICS_BACKEND_CHANNEL, 'Photo Data Viewer', '[PDV] Before the bridge', 'label');
+    const trackEvent = jest.fn();
+    windowWithBridge.plmPhotoDataViewer = { version: 1, trackEvent, readPhoto: jest.fn() };
+    sender?.send(PLM_ANALYTICS_BACKEND_CHANNEL, 'Photo Data Viewer', '[PDV] Loaded Photo', 'label', 'value');
+    expect(trackEvent).toHaveBeenCalledTimes(1);
+    expect(trackEvent).toHaveBeenCalledWith('Photo Data Viewer', '[PDV] Loaded Photo', 'label', 'value');
   });
 });

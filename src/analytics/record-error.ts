@@ -105,7 +105,8 @@ function shortenUrl(address: string, host: string): string {
   try {
     const url = new URL(address);
     if (url.protocol === 'file:') return hidePath(decodeURIComponent(url.pathname));
-    if (url.protocol === 'blob:' || url.protocol === 'data:') return `${url.protocol}…`;
+    // A photo's URL from Photo Location Map's isolated window holds the token that lets this page read the photo.
+    if (url.protocol === 'blob:' || url.protocol === 'data:' || url.protocol === 'plm-photo:') return `${url.protocol}…`;
     return `${url.host === host ? '' : url.host}${url.pathname}`;
   } catch {
     return '<address>';
@@ -122,10 +123,17 @@ const WINDOWS_PATH = /(?<![A-Za-z\d])[A-Za-z]:[\\/][^'"`()<>|:*?\n]*/g;
 const UNC_PATH = /\\\\[^'"`()<>|:*?\n]+/g;
 const POSIX_PATH = /(?<![\w.~-])(?:~[\\/]|\/(?:Users|home|root|private|var|tmp|Volumes|mnt|media|opt|Applications|Library)\/)[^'"`()<>|:*?\n]*/g;
 
+let photoNameFromBridge: string | undefined;
+
+/** The name of the photo that Photo Location Map's isolated window gave, which errors are scrubbed of too. */
+export function scrubPhotoName(name: string): void {
+  photoNameFromBridge = name;
+}
+
 /** What takes the user's paths out of a text, for this page's address and, in Photo Location Map's window, the home folder. */
 function createScrubber(location: Pick<Location, 'host' | 'search'>, homeDir: string | null): (text: string) => string {
   const photoPath = new URLSearchParams(location.search).get(PHOTO_PATH_PARAM);
-  const photoName = photoPath?.split(/[\\/]/).pop();
+  const photoName = photoPath?.split(/[\\/]/).pop() ?? photoNameFromBridge;
 
   /** The text without the photo's path and name, the home folder, any path on the user's computer, and addresses' queries. */
   function scrub(text: string): string {

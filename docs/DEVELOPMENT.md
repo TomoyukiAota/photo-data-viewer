@@ -101,10 +101,17 @@ navigation/photo regression checks, including the About-to-Settings link. Close
 other test servers on that port first; suites intentionally do not reuse servers.
 
 For embedded integration checks, build with `npm run build:plm` and set
-`PDV_ELECTRON_PATH` to a separate Electron 32.0.2 runtime executable before running
-`npm run test:electron`. Tests create disposable profiles and use the companion's
-Node integration settings. `PDV_ELECTRON_BASE_URL=http://localhost:3100` can target
-an already running `npm run dev:plm` server instead of starting a production one.
+`PDV_ELECTRON_PATH` to a separate Electron runtime executable before running
+`npm run test:electron`. The tests open the app in both windows of the companion:
+the earlier one, with Node integration, where the app reads the photo by its path,
+and the isolated one, without Node.js, in a sandbox, whose bridge gives the photo
+(`tests/e2e/electron/isolated-preload.cjs` copies the companion's preload). Run
+them with Electron 32.0.2, the runtime of the installed companion 1.12.1, which the
+tests of the earlier window check for. Run the isolated window's tests with the
+companion's current Electron too: `npm run test:electron -- --grep "isolated window"`.
+Tests create disposable profiles.
+`PDV_ELECTRON_BASE_URL=http://localhost:3100` can target an already running
+`npm run dev:plm` server instead of starting a production one.
 
 ## Task records
 
