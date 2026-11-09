@@ -1,4 +1,5 @@
 import { AppIntegration } from '../app-integration/app-integration';
+import { isInBridgeWindow, plmBridge } from '../app-integration/plm-bridge';
 
 // Sends this app's events to Photo Location Map's analytics backend when this app
 // runs in Photo Location Map's window. They go through Photo Location Map's main
@@ -63,8 +64,20 @@ export function loadIpcRendererFromElectron(): IpcRendererLike | null {
   }
 }
 
+/**
+ * In Photo Location Map's isolated window, its bridge, which sends on the same channel; looked up at each event, as
+ * the window's preload can give it after the first event. Null in other windows.
+ */
+export function loadSenderFromBridge(inBridgeWindow = isInBridgeWindow): IpcRendererLike | null {
+  if (!inBridgeWindow()) return null;
+  return {
+    send: (_channel, category, action, label, value) =>
+      plmBridge()?.trackEvent(category as string, action as string, label as string | undefined, value as string | undefined),
+  };
+}
+
 export const sendToPlmBackend = createPlmBackendSink({
   isPlm: () => AppIntegration.isPlm,
-  loadIpcRenderer: loadIpcRendererFromElectron,
+  loadIpcRenderer: () => loadSenderFromBridge() ?? loadIpcRendererFromElectron(),
   logger: console,
 });

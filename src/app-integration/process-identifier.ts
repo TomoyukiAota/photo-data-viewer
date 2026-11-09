@@ -13,10 +13,13 @@ export class ProcessIdentifier {
   // Electron Renderer |   defined | "renderer"
   // Electron Main     |   defined |  "browser"
 
-  private static readonly process = process as ElectronProcess;
+  // The window's own process, which Electron gives a window with Node.js, rather than the bundler's stand-in for it in
+  // a browser (next.config.js). A page without Node.js, as in Photo Location Map's isolated window, has none.
+  private static readonly process = (globalThis as unknown as { process?: ElectronProcess }).process as ElectronProcess;
 
+  /** Whether this window, or this process during SSR, has Node.js's process. */
   public static get isNode(): boolean {
-    return (typeof process !== 'undefined');
+    return (typeof this.process !== 'undefined');
   }
 
   public static get isElectron(): boolean {

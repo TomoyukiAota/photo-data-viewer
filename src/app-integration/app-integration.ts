@@ -1,10 +1,14 @@
+import { isInBridgeWindow } from './plm-bridge';
 import { ProcessIdentifier } from './process-identifier';
 
 const isDuringSsrOrSsg = typeof window === 'undefined';
 
+/**
+ * Whether this page is in Photo Location Map: in its isolated window, which gives a bridge (plm-bridge.ts), or, in an
+ * earlier Photo Location Map, its window with Node.js, an Electron renderer process.
+ */
 function isPhotoLocationMap(): boolean {
-  // Assume being used in Photo Location Map if running in Electron renderer process.
-  return ProcessIdentifier.isElectronRenderer;
+  return isInBridgeWindow() || ProcessIdentifier.isElectronRenderer;
 }
 
 const isPlm = isPhotoLocationMap();
