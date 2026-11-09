@@ -48,13 +48,20 @@ export function plmBridge(): PlmBridge | null {
 
 /**
  * The bridge, once the window's preload gave it: at once, or when the preload, run after the page's scripts, says
- * so. Rejects after `timeoutMs`, or for a version of the bridge that this app does not know.
+ * so. Rejects after `timeoutMs`, when the preload says so without giving one, or for a version of the bridge that
+ * this app does not know.
  */
 export function whenPlmBridgeReady(timeoutMs = 10000): Promise<PlmBridge> {
   return new Promise((resolve, reject) => {
     const settle = () => {
       const bridge = plmBridge();
       if (bridge) resolve(bridge);
+      else if ((window as WindowWithBridge).plmPhotoDataViewer === undefined)
+        reject(
+          new Error(
+            "Photo Location Map's window said that its bridge is ready, but gave none.",
+          ),
+        );
       else
         reject(
           new Error(

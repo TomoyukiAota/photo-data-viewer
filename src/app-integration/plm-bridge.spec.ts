@@ -64,11 +64,17 @@ describe("The bridge of Photo Location Map's isolated window", () => {
     await expect(waiting).resolves.toBe(given);
   });
 
-  it('fails when none comes in time, or when it is of a version that this app does not know', async () => {
+  it('fails when none comes in time, when the preload says so without one, or for a version that this app does not know', async () => {
     jest.useFakeTimers();
     const waiting = whenPlmBridgeReady(1000);
     jest.advanceTimersByTime(1000);
     await expect(waiting).rejects.toThrow('gave no bridge within 1000 ms');
+
+    const saidWithoutOne = whenPlmBridgeReady();
+    window.dispatchEvent(new Event(PLM_BRIDGE_READY_EVENT));
+    await expect(saidWithoutOne).rejects.toThrow(
+      'said that its bridge is ready, but gave none',
+    );
 
     (window as WindowWithBridge).plmPhotoDataViewer = { version: 2 };
     await expect(whenPlmBridgeReady()).rejects.toThrow(
