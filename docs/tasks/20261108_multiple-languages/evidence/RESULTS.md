@@ -18,6 +18,22 @@ plan.
 | A clean `npm ci`                                 | The three known deprecation warnings only; `npm ls --all` passes           |
 | `npm audit`                                      | 26 advisories, all in the existing Jest and ESLint tooling; none names i18next, react-i18next or html-parse-stringify |
 
+### After merging `main` on 2026-11-10
+
+`main` gained Photo Location Map's isolated window, which has no Node.js and
+gives the photo through a bridge, with tests of its own in the Electron suite.
+The Electron harness and `package.json` conflicted, and were merged by keeping
+both sides. The checks were then run again, except the visual run, the
+`PDV_DEV` run, the clean `npm ci` and `npm audit`; the pull request's checks
+run `npm ci` and the tests on three operating systems.
+
+| Command                                          | Result                                                                     |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| `npm run test:all` (lint, typecheck, Jest)       | Passed: 27 suites, 195 tests                                               |
+| `npm run build`, `npm run build:plm`             | Passed                                                                     |
+| `npm run test:e2e` (Chromium)                    | Passed: 16 tests                                                           |
+| `npm run test:electron` with Electron 32.0.2     | Passed: 10 tests; the language test runs in both windows, see below        |
+
 Stage 1 was checked on its own before stages 2 and 3 were started: with the
 texts moved out of the components and nothing else, the visual run in Chrome
 passed with every one of the 14 tests and no screenshot changed, and so did the
@@ -55,7 +71,10 @@ Chromium run. That is the check that no text was lost or altered.
   stored as `en`; the About page in Japanese, with its translated title.
 - Electron: the three existing tests also assert `lang="en"` and the English
   General tab, on a machine whose language is Japanese; a new test passes
-  `language=ja` and sees `lang="ja"` and the Japanese tab.
+  `language=ja` and sees `lang="ja"` and the Japanese tab. Since `main` was
+  merged, that test runs in both windows of Photo Location Map, the one with
+  Node.js and the isolated one, and the isolated window's own tests assert
+  `lang="en"` too.
 
 ## Found on the way
 
