@@ -9,6 +9,7 @@ import {
 
 type WindowWithBridge = Window & { plmPhotoDataViewer?: unknown };
 
+/** A stand-in for the bridge, which gives a JPEG's bytes, with `overrides`. */
 function bridge(overrides: Partial<PlmBridge> = {}): PlmBridge {
   return {
     version: 1,
@@ -22,6 +23,7 @@ function bridge(overrides: Partial<PlmBridge> = {}): PlmBridge {
   };
 }
 
+/** Sets the page's address to the root with `search` as its query. */
 function setAddress(search: string) {
   window.history.replaceState(null, '', `/${search}`);
 }

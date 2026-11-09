@@ -16,14 +16,22 @@ if (isolated) {
   ]);
 }
 
+/**
+ * Serves the photo at PDV_ELECTRON_PHOTO_PATH as Photo Location Map's isolated
+ * window does: through the bridge's IPC channel, as a plm-photo: URL or as its
+ * bytes, and at that URL for the app's page alone.
+ */
 function servePhotoThroughTheBridge() {
   const photoPath = process.env.PDV_ELECTRON_PHOTO_PATH;
   const name = basename(photoPath);
   const type = name.toLowerCase().endsWith('.heic') ? 'image/heic' : 'image/jpeg';
   const token = randomBytes(32).toString('hex');
   const origin = new URL(process.env.PDV_ELECTRON_URL).origin;
-  // As Photo Location Map does: Chromium gives the handler no Origin header, so the
-  // request must be a CORS one from a page of the app's origin, by its referrer.
+  /**
+   * Whether `request` comes from the app's page, as Photo Location Map checks it:
+   * Chromium gives the handler no Origin header, so the request must be a CORS
+   * one, from a page of the app's origin by its referrer.
+   */
   const fromTheApp = (request) => {
     try {
       return request.mode === 'cors' && new URL(request.referrer).origin === origin;

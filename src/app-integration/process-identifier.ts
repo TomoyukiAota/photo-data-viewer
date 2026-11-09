@@ -17,6 +17,7 @@ export class ProcessIdentifier {
   // a browser (next.config.js). A page without Node.js, as in Photo Location Map's isolated window, has none.
   private static readonly process = (globalThis as unknown as { process?: ElectronProcess }).process as ElectronProcess;
 
+  /** Whether this window, or this process during SSR, has Node.js's process. */
   public static get isNode(): boolean {
     return (typeof this.process !== 'undefined');
   }

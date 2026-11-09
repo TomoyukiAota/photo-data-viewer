@@ -6,6 +6,7 @@ import { scrubPhotoName } from '../analytics/record-error';
 import { isInBridgeWindow, readPhotoFile, whenPlmBridgeReady } from './plm-bridge';
 import { electronRequire, readLocalPhotoFile } from './local-photo-file';
 
+/** The photo's path, which an earlier Photo Location Map passes in the address. */
 function getPhotoPath(): string {
   const photoPath = new URL(window.location.href).searchParams.get(PHOTO_PATH_PARAM);
   console.log('photoPath passed from Photo Location Map:', photoPath);
@@ -19,6 +20,10 @@ async function loadPhotoFromBridge(loadPhoto: (file: File) => void) {
   loadPhoto(await readPhotoFile(bridge, fetch, scrubPhotoName));
 }
 
+/**
+ * Loads the photo that Photo Location Map opened this app for: from the bridge of its isolated window, or, in an
+ * earlier version's window, from the path in the address. Does nothing outside Photo Location Map.
+ */
 function loadPhotoInPlm(loadPhoto: (file: File) => void) {
   if (!AppIntegration.isPlm) {
     return;

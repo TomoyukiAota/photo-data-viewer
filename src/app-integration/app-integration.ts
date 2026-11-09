@@ -3,9 +3,11 @@ import { ProcessIdentifier } from './process-identifier';
 
 const isDuringSsrOrSsg = typeof window === 'undefined';
 
+/**
+ * Whether this page is in Photo Location Map: in its isolated window, which gives a bridge (plm-bridge.ts), or, in an
+ * earlier Photo Location Map, its window with Node.js, an Electron renderer process.
+ */
 function isPhotoLocationMap(): boolean {
-  // In Photo Location Map's isolated window, which gives a bridge (plm-bridge.ts), or, in an earlier Photo Location
-  // Map, its window with Node.js: an Electron renderer process.
   return isInBridgeWindow() || ProcessIdentifier.isElectronRenderer;
 }
 
