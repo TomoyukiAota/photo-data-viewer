@@ -54,12 +54,12 @@ const HomeNarrowLayout: React.FC<{
         )}
         <ReflexElement>
           <div className={classes['tab-container']}>
-            {/* Scrollable, for a language whose labels are wider than a phone's window. */}
+            {/* Scrollable without buttons, as the tabs of PhotoData.tsx are. */}
             <Tabs
               value={selectedTabName}
               onChange={handleTabsChange}
               variant='scrollable'
-              scrollButtons='auto'
+              scrollButtons={false}
               sx={{
                 borderBottom: 1,
                 borderColor: 'divider',
