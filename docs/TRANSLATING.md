@@ -121,14 +121,30 @@ take longer with every language.
 ## Writing the texts
 
 - Names stay as they are: Photo Data Viewer, Photo Location Map, EXIF, GitHub,
-  exifr, Google Maps, Google Street View.
+  exifr.
+- Google's products are written as Google names them in your language, with
+  "Google" as it is: `Google マップ`, `Mapy Google`, and `Google Maps` where
+  Google keeps the English name.
+- The words that this app shares with
+  [Photo Location Map](https://github.com/TomoyukiAota/photo-location-map) are
+  the same in both: Language, Search, "No languages found", Settings, Close,
+  Reload, the settings of the date and time, "location data", the profile
+  links, and the words for a photo, a file and EXIF data. Its translations are
+  in `src-shared/i18n/locales/<code>.json` of its repository. When you change
+  such a word here, look there, and say in the pull request when the two now
+  differ.
 - `menu.language`, the menu's entry for the Language page, keeps the English
   word in parentheses, as in `言語 (Language)`, so that someone who cannot
   read the current language still finds where to change it. The page's title,
   `language.title`, is the word alone.
 - `language.useBrowserSetting` is the first entry of the list on the Language
   page: the choice to follow the language that the browser is set to.
-  `{{language}}` is the name of that language, such as `English`.
+  `{{language}}` is the name of that language, such as `English`. It parallels
+  "Use system setting" in Photo Location Map.
+- A `{{placeholder}}` is written plainly in a language written from right to
+  left as well. The app keeps what it puts there together by itself (between
+  two characters that are not drawn, U+2068 and U+2069), so that a number or an
+  English name is read in its own order.
 - For the words that every application has (Settings, Search, Close, Reload),
   use the words that Windows and macOS use in your language.
 - Texts in the table of the Home page are shown in a column 130 pixels wide
@@ -145,7 +161,8 @@ take longer with every language.
 - The tabs scroll when their labels are wider than the window, so a label need
   not be shortened for them.
 - The days of the week and AM/PM in dates come from dayjs' locale, not from
-  the file. One value in the file is not a text but a dayjs pattern:
+  the file. The digits of a date are 0 to 9 in every language, as its other
+  numbers are. One value in the file is not a text but a dayjs pattern:
   `dateTime.weekdayPattern`, how a date writes the day of the week. `ddd` is
   its short name (Mon, 月); Japanese writes `(ddd)`, shown as `(月)`. Keep
   `ddd` and change only what is around it, or leave the key out when your

@@ -8,11 +8,11 @@ Node 26.13.0 and npm 11.20.0, in the working tree of the branch
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 33 suites, 542 tests, in about a second                           |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 35 suites, 601 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
-| `npm run test:e2e` (Chromium)                        | Passed: 19 tests, 3 of them new, in 26 s                                  |
-| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 19 tests; the screenshots as described below                      |
-| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 19 tests, after the list's box was taken out of the Tab key's stops |
+| `npm run test:e2e` (Chromium)                        | Passed: 20 tests, 4 of them new, in 26 s                                  |
+| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 20 tests; the screenshots as described below                      |
+| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 19 tests, after the list's box was taken out of the Tab key's stops; the one for a phone is skipped, as Playwright emulates a touch device in Chromium alone |
 | `PDV_DEV=1 npm run test:e2e`                         | Passed: 1 test                                                            |
 | `npm run test:electron`                              | **Not run**; see [In Photo Location Map](#in-photo-location-map)          |
 | A clean `npm ci`                                     | The three known deprecation warnings only; 731 packages, 3 more than before |
@@ -24,11 +24,13 @@ browser suite.
 ## The tests do not multiply with the languages
 
 - The unit test of the translation files, `src/locales/locales.spec.ts`, checks
-  every file: 42 files, 7 checks each, and 4 for the list as a whole, 298 tests
-  in 0.3 s. It also loads every language as the app does, and compares what it
+  every file: 42 files, 8 checks each, and 4 for the list as a whole, 340 tests
+  in 0.4 s. It also loads every language as the app does, and compares what it
   got with the file, and holds the list to the order of its names.
-- The browser suite has English, Japanese and Arabic: 3 more tests than before,
-  for 42 languages in place of 2.
+- One unit test writes a date in each of the 42 languages, in every format of
+  the settings, and tells if a digit is not one of 0 to 9.
+- The browser suite has English, Japanese and Arabic, and one test for a
+  phone: 4 more tests than before, for 42 languages in place of 2.
 - Looking at every language in a browser was done once, with scripts that are
   not part of the repository; see [Every language at the width of a
   phone](#every-language-at-the-width-of-a-phone).
@@ -42,14 +44,17 @@ Taken with Chrome on this Mac, like the others.
 - `language.png`, `language-ja.png`: new, the Language page. Headless Chrome
   draws no scrollbars, so the list is shown without the one that a window has.
   They and `language-ar.png` were taken again when the maintainer fixed the
-  names and their order.
+  names and their order, and once more when the search field got the focus:
+  the field has its ring in them.
+- `about-ja.png`: updated, for one word of the sentence that welcomes
+  translations (`他の言語`), which is Photo Location Map's now.
 - `loaded-general-ar.png`, `narrow-loaded-ar.png`, `settings-ar.png`,
   `language-ar.png`: new, in Arabic, laid out from the right.
 - Every other screenshot is unchanged, which is the check that English and
   Japanese are laid out as before: the six of the empty Home page, the three of
   a loaded photo's tabs, `heif-general.png`, `empty-details.png`,
   `unsupported-dialog.png`, `narrow-loaded.png`, `narrow-photo.png`,
-  `about.png`, `demo.png`, `narrow-loaded-ja.png` and `about-ja.png`.
+  `about.png`, `demo.png` and `narrow-loaded-ja.png`.
 
 Two of them caught mistakes on the way, which were corrected:
 
@@ -99,6 +104,23 @@ The last run found nothing in any language: no text cut off, no page wider
 than the window, the dialog and the map's message inside their boxes, the
 header's button inside the header, the menu inside the window, and the About
 page no wider than in English at a wide window.
+
+## After the words were brought into line with Photo Location Map
+
+The same script was run again over the 42 languages, with the values shown in
+the selects of the Settings page added to what it measures.
+
+| What                                   | Languages                    | What was done                         |
+| -------------------------------------- | ---------------------------- | ------------------------------------- |
+| The label "12- or 24-hour" cut off, by 1 to 11 px, with Photo Location Map's longer form | `cs`, `da`, `nb`, `ro`, `th` | This app's short form is kept         |
+
+Nothing else was cut: the longer words for a photo in a tab (`Фотография`),
+the two forms of the clock in the select (`12 godzin`, `24 godziny`), and the
+other labels fit, or scroll with the tabs.
+
+The list was looked at with one match and with none, in English and in Arabic:
+the box stays 226 px high (seven entries and its border), and "No languages
+found" is at the top of it.
 
 ## In Photo Location Map
 

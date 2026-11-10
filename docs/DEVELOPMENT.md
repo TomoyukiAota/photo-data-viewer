@@ -84,6 +84,9 @@ for those languages. The suite stays with these three languages: every
 translation file is checked by the unit test `src/locales/locales.spec.ts`
 instead, which takes no longer with more languages
 ([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
+One test runs as a phone, where the Language page leaves the keyboard's focus
+alone. Playwright emulates a touch device in Chromium alone, so the test is
+skipped in Firefox.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.

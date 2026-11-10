@@ -36,6 +36,10 @@ maintainer's to do.
   logical properties in the app's styles).
 - **Regional variants resolve to a language of the list**
   (`src/i18n/resolve-language.ts`).
+- **The words that this app shares with Photo Location Map are the same in
+  both**, in each language: its translations, which were written at the same
+  time, are the glossary. The list, the texts of a right-to-left language and
+  the dates work as they do there.
 
 ## Decisions taken on the way
 
@@ -59,10 +63,18 @@ second look.
   no table of them.
 - **The search finds the first entry by its text alone** ("browser",
   "setting"), not by the language it stands for.
-- **"No languages found" is said inside the box**, in the place of the entries,
-  so the box is one line high then.
-- **The box is as high as its entries, up to seven**: it is lower while a
-  search leaves fewer than seven.
+- **The box keeps the height of seven entries** whatever the search leaves, as
+  Photo Location Map's does, so that nothing below it moves while the user
+  types. At first it was as high as its entries.
+- **"No languages found" is said inside the box**, in the place of the entries.
+  The line is in the page while it is empty, without height, so that a screen
+  reader says the text when it comes.
+- **The search field has the focus when the page opens, where that changes
+  nothing else.** Photo Location Map's dialog gives its search field the focus.
+  On a page, that is done where the main pointer is a mouse or a trackpad, so a
+  keyboard is at hand, and while the field is inside the window, without
+  scrolling. Where the user types on the screen, the focus would bring the
+  keyboard up over the list, so it is left where it is.
 - **Typing a letter while the list has the focus does nothing.** Photo Location
   Map's list, made with Angular's CDK, jumps to the entry that starts with the
   letter; the search field does that here.
@@ -79,12 +91,42 @@ second look.
   reader of Nynorsk reads Bokmål better than English.
 - **`zh-MO` is `zh-Hant`, and `zh-SG` and a plain `zh` are `zh-Hans`.** A plain
   `pt` is `pt-BR`; a region other than Brazil is `pt-PT`.
-- **Names stay in English in the 40 new languages**, Google Maps and Google
-  Street View included, as the guide says. Japanese writes Google's Japanese
-  names, as the maintainer reviewed it.
+- **Names stay as the English text writes them.** Google's products are the
+  exception: they are written as Google names them in the language, as Photo
+  Location Map writes them and as Japanese did already (`Google マップ`, `Mapy
+  Google`). At first the 40 new languages kept the English names.
 - **Latitude and Longitude are abbreviated in ten languages**, a few words
-  carry a soft hyphen, and "12- or 24-hour" is `12/24` in eleven: see
+  carry a soft hyphen, and "12- or 24-hour" is `12/24` in twelve: see
   [the words chosen](./evidence/TERMS.md).
+
+### The words shared with Photo Location Map
+
+Photo Location Map's 42 translations were compared with this app's, and 320
+texts in 40 languages were changed to its words:
+[the words chosen](./evidence/TERMS.md) lists what was taken and what is kept
+different.
+
+- **Its word is taken unless this app's is clearly the better one**: for the
+  texts that are the same in English in both, and for the words inside the
+  other sentences (a photo, location data, EXIF data, usage data, Google's
+  products, "Use ... setting").
+- **The form of a command and the capitals follow it too** where a language
+  had them otherwise: the imperative in Dutch, the singular imperative in
+  Romanian, the informal form in Galician, forms that address no one in
+  Hebrew, and a capital on the first word alone in Indonesian, Malay and
+  Turkish.
+- **Kept different**, each with its reason in that file: the label "12- or
+  24-hour" in five languages, where the longer form is cut in this app's
+  field; "Twitter" in Latin letters in Arabic; the no-break space of French;
+  the verb for rotating in Finnish; the verb for choosing a photo in five
+  languages, where Photo Location Map's is the one for marking.
+- **Japanese**: the sentence that welcomes translations is Photo Location
+  Map's (`他の言語`). The Map tab stays `地図`, where Photo Location Map writes
+  `マップ`: both were reviewed by the maintainer, who is asked.
+- **A character that is not drawn is written as an escape** in a translation
+  file, and the check holds every file to it. French's no-break spaces were
+  written as the characters themselves, and the guide showed a soft hyphen as
+  one.
 
 ### Longer texts
 
@@ -126,6 +168,21 @@ those of the Settings page.
   react-reflex has no right-to-left mode, and its splitter moved against the
   mouse with the panes the other way round.
 - **The map's controls stay where Leaflet puts them.**
+- **A value that the app puts into a text is kept together** in a
+  right-to-left language, between U+2068 and U+2069, as Photo Location Map does
+  (`src/i18n/text-values.ts`): the name of the browser's language in the
+  list's first entry, and a photo's width and height. The app's name in a
+  page's title is not, as the browser draws the title.
+- **A file's name keeps its own order** without anything added: it is in an
+  element with `dir="auto"`, which sets it apart as `<bdi>` does in Photo
+  Location Map. It is the only place where the page shows one.
+
+### Dates
+
+- **A date has the digits 0 to 9 in every language**, as in Photo Location
+  Map. dayjs' locale of Arabic turns them into the digits of its script only
+  with a plugin that this app does not use, so nothing had to change; a unit
+  test now tells if that changes.
 
 ## Not verified
 
@@ -148,8 +205,10 @@ those of the Settings page.
 Nothing is left to implement. What remains is the maintainer's:
 
 - Review the pull request, and merge it when the app is to be published.
-- Bring the words that this app shares with Photo Location Map into line, once
-  its translations exist: [the words chosen](./evidence/TERMS.md) lists them.
+- Keep the words that this app shares with Photo Location Map the same in
+  both when either changes: [the words chosen](./evidence/TERMS.md) lists them,
+  and the ones that are kept different.
+- Decide between `地図` and `マップ` for the Map tab in Japanese.
 - Run the Electron suite as `docs/DEVELOPMENT.md` says.
 - Photo Location Map's lists of languages and of codes must stay the same as
   this app's: a code that it passes and this app does not have is shown in
