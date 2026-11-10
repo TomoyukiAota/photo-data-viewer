@@ -21,13 +21,12 @@
 
   th,
   td {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-inline: 8px;
     white-space: nowrap;
     vertical-align: middle;
 
     &:first-child {
-      padding-left: 24px;
+      padding-inline-start: 24px;
     }
   }
 
@@ -64,7 +63,7 @@
 
     > div {
       position: sticky;
-      left: 50%;
+      inset-inline-start: 50%;
       width: fit-content;
 
       big {
@@ -73,4 +72,10 @@
       }
     }
   }
+}
+
+// In a language written from right to left, the text is brought back to the
+// middle the other way.
+:global([dir='rtl']) .container .empty:first-child > div big {
+  transform: translateX(50%);
 }

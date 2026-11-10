@@ -22,10 +22,12 @@
     "dev:test": "next dev --webpack -p 3200"
   },
   "dependencies": {
+    "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "9.5.0",
     "@mui/material": "9.5.0",
+    "@mui/stylis-plugin-rtl": "9.5.0",
     "@react-hook/debounce": "4.0.0",
     "@react-hook/size": "2.1.2",
     "@react-hook/window-size": "3.1.1",
@@ -44,7 +46,8 @@
     "react-i18next": "18.0.0",
     "react-leaflet": "5.0.0",
     "react-reflex": "6.0.2",
-    "sort-keys": "6.0.1"
+    "sort-keys": "6.0.1",
+    "stylis": "4.2.0"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
@@ -58,6 +61,7 @@
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "@types/stylis": "4.2.7",
     "cross-env": "10.1.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.3",

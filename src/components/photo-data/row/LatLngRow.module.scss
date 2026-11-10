@@ -15,8 +15,13 @@
   }
 
   .lat-lng-text {
-    margin-right: 30px;
     text-align: right;
+  }
+
+  // The space between the numbers and the buttons is the buttons', as the
+  // numbers have a direction of their own.
+  .buttons {
+    margin-inline-start: 30px;
   }
 
   .google-maps-button {
@@ -29,7 +34,7 @@
   }
 
   .google-street-view-button {
-    margin-left: 10px;
+    margin-inline-start: 10px;
     padding: 2px;
     border-radius: 20%;
   }

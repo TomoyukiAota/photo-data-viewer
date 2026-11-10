@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { initReactI18next } from 'react-i18next';
 
 import { appName } from '../app-integration/app-name';
+import { loadRtlStyles } from '../direction/rtl-styles';
 import en from '../locales/en.json';
 import { defaultLanguage, getLanguage, LanguageCode } from './languages';
 import { currentLanguage } from './resolve-language';
@@ -37,16 +38,21 @@ export function isLanguageLoaded(code: LanguageCode): boolean {
 
 /**
  * Fetches a language's texts and its dayjs locale, unless they are here
- * already. When they cannot be fetched, with no connection for instance, the
- * error is reported and the promise is rejected; asking again then tries again.
+ * already, and, for a language written from right to left, the styles that lay
+ * MUI's components out that way. When they cannot be fetched, with no
+ * connection for instance, the error is reported and the promise is rejected;
+ * asking again then tries again.
  */
 export function loadLanguage(code: LanguageCode): Promise<void> {
   if (isLanguageLoaded(code)) return Promise.resolve();
   let fetching = loading.get(code);
   if (!fetching) {
-    fetching = getLanguage(code)
-      .load()
-      .then(({ translation, dayjsLocale }) => {
+    const language = getLanguage(code);
+    fetching = Promise.all([
+      language.load(),
+      language.direction === 'rtl' ? loadRtlStyles() : undefined,
+    ])
+      .then(([{ translation, dayjsLocale }]) => {
         i18next.addResourceBundle(code, 'translation', translation);
         dayjsLocales.set(code, dayjsLocale);
       })
@@ -60,7 +66,7 @@ export function loadLanguage(code: LanguageCode): Promise<void> {
   return fetching;
 }
 
-/** Shows the app in a language that is loaded. */
+/** Shows the app in a language that is loaded: its texts, its days of the week, and the page's `lang` and `dir`. */
 function showLanguage(code: LanguageCode): void {
   if (i18next.language !== code) {
     i18next.changeLanguage(code);
@@ -76,7 +82,8 @@ function showLanguage(code: LanguageCode): void {
  * Shows the app in a language, once it is loaded: the texts, the days of the
  * week and the meridiem that dayjs formats, and the page's `lang`, by which
  * browsers choose the glyphs of Japanese and Chinese, and `dir`, the direction
- * the language is written in. The Language page calls this when the setting
+ * the language is written in, which the layout follows (DirectionProvider.tsx
+ * for MUI's components). The Language page calls this when the setting
  * changes, before it loads the photo again for its dates. The promise is
  * rejected, and the language stays as it was, when the language cannot be
  * fetched.

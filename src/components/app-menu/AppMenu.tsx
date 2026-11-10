@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useIsRtl } from '../../direction/DirectionProvider';
 import classes from './AppMenu.module.scss';
 
 interface Page {
@@ -42,6 +43,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
   props,
 ) => {
   const { t } = useTranslation();
+  const isRtl = useIsRtl();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
@@ -63,7 +65,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
       className={props.className}
       style={{
         top: '30px',
-        right: '10px',
+        insetInlineEnd: '10px', // The right, or the left in a language written from right to left.
         display: props.isVisible ? 'block' : 'none',
       }}
     >
@@ -83,7 +85,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         anchorEl={anchorElNav}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: isRtl ? 'right' : 'left', // The button's side towards the page.
         }}
         keepMounted
         transformOrigin={{

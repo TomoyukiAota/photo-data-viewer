@@ -25,7 +25,10 @@ const StringifiedData: React.FC<{
         />
       </div>
       <hr className={classes.divider} />
-      <div className={classes['stringified-data']}>{props.stringifiedData}</div>
+      {/* JSON, which is written from left to right in every language. */}
+      <div className={classes['stringified-data']} dir='ltr'>
+        {props.stringifiedData}
+      </div>
     </div>
   );
 };

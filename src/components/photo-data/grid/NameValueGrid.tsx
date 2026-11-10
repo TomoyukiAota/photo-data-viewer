@@ -86,6 +86,14 @@ const NameValueGrid: React.FC<{
                             ? classes.wrap
                             : undefined
                         }
+                        // Plain text is a photo's data, in whatever language it is
+                        // written: it takes its own direction, so that "f/2.8" or
+                        // "3.09 MB" keeps its order in a right-to-left language.
+                        dir={
+                          typeof row[column.name] === 'object'
+                            ? undefined
+                            : 'auto'
+                        }
                       >
                         {row[column.name]}
                       </TableCell>

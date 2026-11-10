@@ -3,7 +3,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 10px 100px 10px 20px;
+  padding: 10px 20px;
+  padding-inline-end: 100px; // Room for the menu button.
   border-bottom: 8px solid #eeeeee; // follow the draggable splitter from react-reflex
 }
 

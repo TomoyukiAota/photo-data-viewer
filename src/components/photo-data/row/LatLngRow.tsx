@@ -50,12 +50,13 @@ const LatLngRow: React.FC<{
 
   return (
     <div className={classes.row}>
-      <div className={classes['lat-lng-text']}>
+      {/* From left to right in every language, so that a minus sign stays before its number. */}
+      <div className={classes['lat-lng-text']} dir='ltr'>
         {latitude?.toFixed(6) ?? ''}
         <br />
         {longitude?.toFixed(6) ?? ''}
       </div>
-      <div>
+      <div className={classes.buttons}>
         <IconButton
           className={classes['google-maps-button']}
           onClick={handleGoogleMapsButtonClicked}

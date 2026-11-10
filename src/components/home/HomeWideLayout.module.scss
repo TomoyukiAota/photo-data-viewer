@@ -14,6 +14,20 @@
   @include splitter-hover;
 }
 
+// TL;DR: The two panes keep their sides in a language written from right to
+// left: the photo and the map on the left, the data on the right.
+// Details: react-reflex has no right-to-left mode. With its panes laid out from
+// the right, as the page's direction would have them, the splitter between them
+// moves against the mouse. So the panes are laid out from the left, and what is
+// inside each follows the page again.
+:global([dir='rtl']) .side-by-side {
+  direction: ltr;
+
+  > :global(.reflex-element) {
+    direction: rtl;
+  }
+}
+
 .image-and-map-container {
   overflow-y: hidden !important; // Handle the weird issue that the scrollbar appears when image/map panes are evenly split (i.e. default)
 }

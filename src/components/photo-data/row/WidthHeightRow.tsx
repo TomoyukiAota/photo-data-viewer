@@ -24,7 +24,10 @@ const WidthHeightRow: React.FC = () => {
   }
 
   const { width, height } = dimensions;
-  return <div>{t('photoData.general.dimensions', { width, height })}</div>;
+  // Numbers alone are written from left to right in every language.
+  return (
+    <div dir='auto'>{t('photoData.general.dimensions', { width, height })}</div>
+  );
 };
 
 export default WidthHeightRow;
