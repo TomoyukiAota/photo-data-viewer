@@ -77,6 +77,8 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
+Two tests run in a browser set to Japanese (`ja-JP`); their screenshots
+(`*-ja.png`) also use the system's Japanese fonts.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.

@@ -1,16 +1,24 @@
 // Disabling @next/next/no-img-element to rotate the photo and place the rotate icon
 /* eslint-disable @next/next/no-img-element */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { IconDataUrl } from '../../icons/icon-data-url';
 import classes from './PhotoImage.module.scss';
 
 const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
   props
 ) => {
+  const { t } = useTranslation();
   const photoContainerRef = useRef<HTMLDivElement>(null);
   const photoImgRef = useRef<HTMLImageElement>(null);
   const rotateIconRef = useRef<HTMLImageElement>(null);
+
+  // The address of the image the browser could not show, if it is the current
+  // one: the next photo is given to the same component, and gets an <img> again.
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const isUnsupported = failedUrl === props.url;
 
   useEffect(() => {
     const photoImg = photoImgRef.current;
@@ -63,12 +71,7 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
   };
 
   const handlePhotoImgOnError = () => {
-    const photoImg = photoImgRef.current;
-    if (!photoImg) return;
-
-    photoImg.onerror = null;
-    photoImg.outerHTML =
-      '<div style="color: white">Unsupported File Format</div>';
+    setFailedUrl(props.url);
   };
 
   return (
@@ -78,19 +81,23 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
       onMouseLeave={handleOnMouseLeave}
     >
       <div className={classes['photo-img-container']} ref={photoContainerRef}>
-        <img
-          className={classes['photo-img']}
-          src={props.url}
-          alt={props.alt}
-          ref={photoImgRef}
-          onError={handlePhotoImgOnError}
-        />
+        {isUnsupported ? (
+          <div style={{ color: 'white' }}>{t('photo.unsupportedFileFormat')}</div>
+        ) : (
+          <img
+            className={classes['photo-img']}
+            src={props.url}
+            alt={props.alt}
+            ref={photoImgRef}
+            onError={handlePhotoImgOnError}
+          />
+        )}
       </div>
       <img
         className={classes['rotate-icon']}
         src={IconDataUrl.rotate}
-        alt='Rotate photo'
-        title='Rotate photo'
+        alt={t('photo.rotate')}
+        title={t('photo.rotate')}
         width='40'
         height='40'
         style={{ opacity: 0 }}

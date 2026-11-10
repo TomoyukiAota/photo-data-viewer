@@ -3,7 +3,7 @@ import { useContext, useRef, useState } from 'react';
 import { getAppName } from '../../app-integration/app-name';
 import PhotoImage from '../../components/photo-image/PhotoImage';
 import PhotoLoadingText from '../../components/photo-image/PhotoLoadingText';
-import PhotoText from '../../components/photo-image/PhotoText';
+import PhotoPlaceholderText from '../../components/photo-image/PhotoPlaceholderText';
 import { describeError } from '../../analytics/event-fields';
 import { PhotoDisplayDetails, trackDisplayedPhoto, trackLoadedPhoto } from '../../analytics/track-event';
 import { convertHeifToJpeg } from '../../utils/convert-heif-to-jpeg';
@@ -53,9 +53,7 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [loadedPhotoData, setLoadedPhotoData] =
     useState<LoadedPhotoData | null>(null);
 
-  const initialLoadedPhotoImage = (
-    <PhotoText>The selected photo will be displayed here.</PhotoText>
-  );
+  const initialLoadedPhotoImage = <PhotoPlaceholderText />;
 
   const [loadedPhotoImage, setLoadedPhotoImage] = useState(
     () => initialLoadedPhotoImage

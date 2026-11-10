@@ -13,25 +13,28 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import classes from './AppMenu.module.scss';
 
 interface Page {
   pathname: string;
-  displayName: string;
+  /** The key of the page's name in src/locales. */
+  nameKey: 'menu.home' | 'menu.demo' | 'menu.settings' | 'menu.about';
   icon: React.JSX.Element;
 }
 
 const pages: Page[] = [
-  { pathname: '/', displayName: 'Home', icon: <HomeIcon /> },
-  { pathname: '/demo', displayName: 'Demo', icon: <PlayArrowIcon /> },
-  { pathname: '/settings', displayName: 'Settings', icon: <SettingsIcon /> },
-  { pathname: '/about', displayName: 'About', icon: <InfoIcon /> },
+  { pathname: '/', nameKey: 'menu.home', icon: <HomeIcon /> },
+  { pathname: '/demo', nameKey: 'menu.demo', icon: <PlayArrowIcon /> },
+  { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
+  { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
 ];
 
 const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
   props,
 ) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
@@ -60,12 +63,12 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
       <IconButton
         size='large'
         color='inherit'
-        aria-label='menu'
+        aria-label={t('menu.buttonLabel')}
         onClick={handleOpenMenu}
       >
         <div className={classes['menu-icon-wrapper']}>
           <MenuIcon className={classes['menu-icon']} />
-          <span className={classes['menu-icon-text']}>MENU</span>
+          <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
         </div>
       </IconButton>
       <Menu
@@ -90,7 +93,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
           const isCurrentPage = router.pathname === page.pathname;
           return (
             <MenuItem
-              key={page.displayName}
+              key={page.pathname}
               onClick={() => handleMenuItemClicked(page)}
             >
               <ListItemIcon>
@@ -99,7 +102,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
                 />
               </ListItemIcon>
               <ListItemIcon>{page.icon}</ListItemIcon>
-              <ListItemText>{page.displayName}</ListItemText>
+              <ListItemText>{t(page.nameKey)}</ListItemText>
             </MenuItem>
           );
         })}

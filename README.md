@@ -18,6 +18,13 @@ The updated application supports these browser versions and later:
 See [upgrade results](./docs/tasks/20261031_dependency-upgrades/evidence/RESULTS.md) for validation
 coverage and known limitations.
 
+## Languages
+
+The application is available in English and Japanese, following the browser's
+language by default. To add a language or improve a translation, see
+[TRANSLATING.md](./docs/TRANSLATING.md); it takes a GitHub account and nothing
+else.
+
 ## To contribute to this project
 
 Please refer to [CONTRIBUTING.md](./docs/CONTRIBUTING.md).

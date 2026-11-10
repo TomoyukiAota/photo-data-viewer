@@ -30,17 +30,27 @@ export namespace DateTimeFormat {
     export type DateFormatType = typeof DateFormat_List[number];
     export type ClockSystemFormatType = typeof ClockSystemFormat_List[number];
 
-    export const getDayjsFormatString = (dateFormat: DateFormatType, clockSystemFormat: ClockSystemFormatType): string => {
+    /**
+     * The dayjs format of a date and time as the user set them, with the day of
+     * the week between them. `weekdayPattern` is how the language writes the day
+     * of the week: `ddd`, its short name, or more around it, such as `(ddd)` in
+     * Japanese (`dateTime.weekdayPattern` in src/locales).
+     */
+    export const getDayjsFormatString = (
+      dateFormat: DateFormatType,
+      clockSystemFormat: ClockSystemFormatType,
+      weekdayPattern = 'ddd',
+    ): string => {
       const dateFormatMap = new Map<DateFormatType, string>();
-      dateFormatMap.set(ForUser.DateFormat_ISO8601Like, 'YYYY-MM-DD ddd');
-      dateFormatMap.set(ForUser.DateFormat_YYYYMMDD, 'YYYY/MM/DD ddd');
-      dateFormatMap.set(ForUser.DateFormat_DDMMYYYY, 'DD/MM/YYYY ddd');
-      dateFormatMap.set(ForUser.DateFormat_MMDDYYYY, 'MM/DD/YYYY ddd');
+      dateFormatMap.set(ForUser.DateFormat_ISO8601Like, 'YYYY-MM-DD');
+      dateFormatMap.set(ForUser.DateFormat_YYYYMMDD, 'YYYY/MM/DD');
+      dateFormatMap.set(ForUser.DateFormat_DDMMYYYY, 'DD/MM/YYYY');
+      dateFormatMap.set(ForUser.DateFormat_MMDDYYYY, 'MM/DD/YYYY');
       const dayjsDateFormat = dateFormatMap.get(dateFormat);
-      const dayjsFormat = clockSystemFormat === ForUser.ClockSystemFormat_24h
-        ? `${dayjsDateFormat} HH:mm:ss`
-        : `${dayjsDateFormat} hh:mm:ss a`;
-      return dayjsFormat;
+      const dayjsTimeFormat = clockSystemFormat === ForUser.ClockSystemFormat_24h
+        ? 'HH:mm:ss'
+        : 'hh:mm:ss a';
+      return `${dayjsDateFormat} ${weekdayPattern} ${dayjsTimeFormat}`;
     };
   }
 }

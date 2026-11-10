@@ -1,6 +1,9 @@
 import { UserSettingKey } from '../utils/user-settings';
 import { AppIntegration } from './app-integration';
 
+// The `language` parameter is read where the language is decided
+// (src/i18n/resolve-language.ts), as the code that shows the texts loads before
+// this runs.
 export function loadPlmSettings() {
   if (!AppIntegration.isPlm) return;
 

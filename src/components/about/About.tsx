@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Link from 'next/link';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { IconDataUrl } from '../../icons/icon-data-url';
 import { appName } from '../../app-integration/app-name';
@@ -9,7 +10,10 @@ import { openUrl } from '../../utils/open-url';
 import classes from './About.module.scss';
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
   const profileIconWidthHeight = '40px'; // Specifying width and height of <img> instead of using CSS to avoid flickering when switching pages
+
+  // The descriptions given to the analytics stay English, whatever the language.
   const handleXFormerlyTwitterProfileIconClicked = () => {
     openUrl(
       'https://x.com/TomoyukiAota',
@@ -30,52 +34,66 @@ const About: React.FC = () => {
       <div className={classes['app-name']}>{appName.standalone}</div>
       <div className={classes['messages']}>
         <div>
-          This application fetches EXIF data from your file within your browser,{' '}
-          <br />
-          so the file is kept within your browser and not sent to any servers.
+          <Trans i18nKey='about.keptInBrowser' />
         </div>
         <div>
-          To improve this application, it collects usage information, such as{' '}
-          <br />
-          which pages are opened, what kind of photo was loaded and which{' '}
-          <br />
-          errors occurred, along with your IP address and the approximate{' '}
-          <br />
-          location derived from it. You can turn this off in{' '}
-          <Link href='/settings'>Settings</Link>.
+          <Trans
+            i18nKey='about.usageData'
+            components={{ settingsLink: <Link href='/settings' /> }}
+          />
         </div>
         <div>
-          If you find any bugs or issues, please submit them in{' '}
-          <a
-            href='https://github.com/TomoyukiAota/photo-data-viewer/issues'
-            target='_blank'
-            rel='noopener'
-          >
-            GitHub Issues
-          </a>
-          .
+          <Trans
+            i18nKey='about.reportIssues'
+            components={{
+              issuesLink: (
+                <a
+                  href='https://github.com/TomoyukiAota/photo-data-viewer/issues'
+                  target='_blank'
+                  rel='noopener'
+                />
+              ),
+            }}
+          />
         </div>
         <div>
-          The source code of this application is hosted on{' '}
-          <a
-            href='https://github.com/TomoyukiAota/photo-data-viewer'
-            target='_blank'
-            rel='noopener'
-          >
-            GitHub
-          </a>
-          .
+          <Trans
+            i18nKey='about.sourceCode'
+            components={{
+              gitHubLink: (
+                <a
+                  href='https://github.com/TomoyukiAota/photo-data-viewer'
+                  target='_blank'
+                  rel='noopener'
+                />
+              ),
+            }}
+          />
+        </div>
+        <div>
+          <Trans
+            i18nKey='about.translations'
+            components={{
+              guideLink: (
+                <a
+                  href='https://github.com/TomoyukiAota/photo-data-viewer/blob/main/docs/TRANSLATING.md'
+                  target='_blank'
+                  rel='noopener'
+                />
+              ),
+            }}
+          />
         </div>
       </div>
       <div className={classes['developed-by']}>
         <span className={classes['developed-by-message']}>
-          This application is developed by Tomoyuki Aota.
+          {t('about.developedBy')}
         </span>
         <img
           className={classes['x-formerly-twitter-profile-icon']}
           src={IconDataUrl.xFormerlyTwitterLogo}
-          alt='X (Formerly Twitter) Profile'
-          title='Open X (Formerly Twitter) Profile'
+          alt={t('about.xProfile.alt')}
+          title={t('about.xProfile.title')}
           width={profileIconWidthHeight}
           height={profileIconWidthHeight}
           onClick={handleXFormerlyTwitterProfileIconClicked}
@@ -83,24 +101,26 @@ const About: React.FC = () => {
         <img
           className={classes['github-profile-icon']}
           src={IconDataUrl.gitHubLogo}
-          alt='GitHub Profile'
-          title='Open GitHub Profile'
+          alt={t('about.gitHubProfile.alt')}
+          title={t('about.gitHubProfile.title')}
           width={profileIconWidthHeight}
           height={profileIconWidthHeight}
           onClick={handleGitHubProfileIconClicked}
         />
       </div>
       <div className={classes['plm']}>
-        Want to see the map for the locations of many photos all at once?
-        <br />{' '}
-        <a
-          href='https://tomoyukiaota.github.io/photo-location-map/'
-          target='_blank'
-          rel='noopener'
-        >
-          Photo Location Map
-        </a>{' '}
-        is available for such purposes.
+        <Trans
+          i18nKey='about.photoLocationMap'
+          components={{
+            plmLink: (
+              <a
+                href='https://tomoyukiaota.github.io/photo-location-map/'
+                target='_blank'
+                rel='noopener'
+              />
+            ),
+          }}
+        />
       </div>
     </div>
   );

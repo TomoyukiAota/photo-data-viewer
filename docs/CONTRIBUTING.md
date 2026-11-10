@@ -52,3 +52,10 @@ npm run dev:plm
 ```
 
 Open http://localhost:3100 from Photo Location Map to see the app.
+
+## Translations
+
+The texts of the app are in `src/locales/<code>.json`, one file per language,
+with English (`en.json`) as the source. [TRANSLATING.md](./TRANSLATING.md)
+explains how to add a language or improve a translation from GitHub's web
+editor, and what the check in CI verifies.

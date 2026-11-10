@@ -1,7 +1,14 @@
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'react-i18next';
+
+/** Shown while the map's code is being loaded. */
+const MapLoading: React.FC = () => {
+  const { t } = useTranslation();
+  return <p>{t('map.loading')}</p>;
+};
 
 const LeafletContent = dynamic(() => import('./LeafletContent'), {
-  loading: () => <p>A map is loading</p>,
+  loading: () => <MapLoading />,
   ssr: false,
 });
 

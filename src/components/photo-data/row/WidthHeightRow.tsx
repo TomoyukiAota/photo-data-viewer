@@ -1,16 +1,18 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import PhotoDimensionsContext from '../../../context/photo-dimensions/photo-dimensions-context';
-import classes from './WidthHeightRow.module.scss';
 
 const WidthHeightRow: React.FC = () => {
+  const { t } = useTranslation();
   const { dimensions, loadStatus } = useContext(PhotoDimensionsContext);
 
   if (loadStatus === 'Not Loaded') {
     return <div />; // at app start
   } else if (loadStatus === 'Loading') {
-    return <div>Loading...</div>;
+    return <div>{t('photoData.loading')}</div>;
   } else if (loadStatus === 'Load Failed') {
-    return <div>Not Available</div>;
+    return <div>{t('photoData.notAvailable')}</div>;
   }
 
   if (!dimensions) {
@@ -22,11 +24,7 @@ const WidthHeightRow: React.FC = () => {
   }
 
   const { width, height } = dimensions;
-  return (
-    <div>
-      {width} x {height}
-    </div>
-  );
+  return <div>{t('photoData.general.dimensions', { width, height })}</div>;
 };
 
 export default WidthHeightRow;

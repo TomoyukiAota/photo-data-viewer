@@ -5,7 +5,9 @@ import { UserSettingKey } from '../utils/user-settings';
 
 export default function Document() {
   return (
-    <Html>
+    // English until the language is applied in the browser (src/i18n/i18n.ts),
+    // which changes this attribute.
+    <Html lang='en'>
       <Head>
         <link
           rel='stylesheet'

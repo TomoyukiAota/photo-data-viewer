@@ -1,3 +1,4 @@
+import { languageSettingAuto } from '../i18n/languages';
 import { DateTimeFormat } from './date-time-format';
 
 export const UserSettingKey = {
@@ -6,6 +7,8 @@ export const UserSettingKey = {
   WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',
   WideLayoutPhotoImagePaneFlex: 'WideLayoutPhotoImagePaneFlex',
   SendUsageData: 'SendUsageData',
+  /** `auto` for the browser's language, or a language code of src/i18n/languages.ts. */
+  Language: 'Language',
 } as const;
 
 export type UserSettingKeyType = typeof UserSettingKey[keyof typeof UserSettingKey];
@@ -18,6 +21,7 @@ export const UserSettingDefaultValue = {
   WideLayoutPhotoDataPaneFlex: wideLayoutPaneFlexDefaultValue,
   WideLayoutPhotoImagePaneFlex: wideLayoutPaneFlexDefaultValue,
   SendUsageData: true,
+  Language: languageSettingAuto,
 } as const;
 
 export function readUserSettingAsNumber(key: UserSettingKeyType, defaultValue: number): number {

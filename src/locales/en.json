@@ -1,0 +1,120 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Home",
+    "demo": "Demo",
+    "settings": "Settings",
+    "about": "About"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Settings - {{appName}}",
+    "about": "About - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Select your photo to display EXIF data.",
+    "selectPhoto": "Select Photo",
+    "tabs": {
+      "data": "Data",
+      "map": "Map",
+      "photo": "Photo"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "The selected photo will be displayed here.",
+    "loading": "Loading the selected photo...",
+    "rotate": "Rotate photo",
+    "unsupportedFileFormat": "Unsupported File Format"
+  },
+  "map": {
+    "loading": "A map is loading",
+    "locationNotAvailable": "Location data (latitude and longitude) is not available.",
+    "cannotBeShown": "The map cannot be shown."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "General",
+      "details": "Details",
+      "rawData": "Raw Data"
+    },
+    "columns": {
+      "name": "Name",
+      "value": "Value"
+    },
+    "noData": "No data",
+    "notAvailable": "Not Available",
+    "loading": "Loading...",
+    "general": {
+      "fileName": "File Name",
+      "fileSize": "File Size",
+      "widthHeight": "Width x Height",
+      "dateTaken": "Date Taken",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "dimensions": "{{width}} x {{height}}",
+      "showInGoogleMaps": "Show in Google Maps",
+      "showInGoogleStreetView": "Show in Google Street View",
+      "iosNote": "For iOS users, iOS removes some EXIF data (e.g. latitude and longitude) in some cases. Please read <pageLink>this page</pageLink> for details."
+    },
+    "rawData": {
+      "description": "Below is the raw data gotten with <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Unsupported File Format",
+    "message": "EXIF data is not available.",
+    "close": "Close"
+  },
+  "pageNotShown": {
+    "message": "Something went wrong, and this page cannot be shown.",
+    "reload": "Reload"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Once \"Run Demo\" button is clicked, this application behaves as if <photoLink>this photo</photoLink> is selected.",
+    "runDemo": "Run Demo"
+  },
+  "settings": {
+    "title": "Settings",
+    "savedInBrowser": "Settings are saved in your browser.",
+    "language": {
+      "title": "Language",
+      "label": "Language",
+      "auto": "Browser's language ({{language}})"
+    },
+    "dateTime": {
+      "title": "Date & Time Format",
+      "dateFormat": "Date Format",
+      "clockSystem": "12- or 24-hour",
+      "clock12": "12-hour",
+      "clock24": "24-hour",
+      "example": "Example"
+    },
+    "usageData": {
+      "title": "Usage Data",
+      "send": "Send usage data to improve this application",
+      "note": "What is sent is described on the About page."
+    }
+  },
+  "about": {
+    "keptInBrowser": "This application fetches EXIF data from your file within your browser, <br/>so the file is kept within your browser and not sent to any servers.",
+    "usageData": "To improve this application, it collects usage information, such as <br/>which pages are opened, what kind of photo was loaded and which <br/>errors occurred, along with your IP address and the approximate <br/>location derived from it. You can turn this off in <settingsLink>Settings</settingsLink>.",
+    "reportIssues": "If you find any bugs or issues, please submit them in <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "The source code of this application is hosted on <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Translations into other languages are welcome: see <guideLink>how to translate this application</guideLink>.",
+    "developedBy": "This application is developed by Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X (Formerly Twitter) Profile",
+      "title": "Open X (Formerly Twitter) Profile"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub Profile",
+      "title": "Open GitHub Profile"
+    },
+    "photoLocationMap": "Want to see the map for the locations of many photos all at once?<br/> <plmLink>Photo Location Map</plmLink> is available for such purposes."
+  }
+}

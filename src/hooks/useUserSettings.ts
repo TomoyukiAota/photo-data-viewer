@@ -12,12 +12,14 @@ export const useUserSettings = () => {
   const wideLayoutPhotoDataPaneFlex = useLocalStorage<number>(UserSettingKey.WideLayoutPhotoDataPaneFlex, UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex);
   const wideLayoutPhotoImagePaneFlex = useLocalStorage<number>(UserSettingKey.WideLayoutPhotoImagePaneFlex, UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex);
   const sendUsageData = useLocalStorage<boolean>(UserSettingKey.SendUsageData, UserSettingDefaultValue.SendUsageData);
+  const language = useLocalStorage<string>(UserSettingKey.Language, UserSettingDefaultValue.Language);
   const userSettings = {
     dateFormat: dateFormat as DateTimeFormat.ForUser.DateFormatType,
     clockSystemFormat: clockSystemFormat as DateTimeFormat.ForUser.ClockSystemFormatType,
     wideLayoutPhotoDataPaneFlex,
     wideLayoutPhotoImagePaneFlex,
     sendUsageData,
+    language,
   }
   const setUserSetting = (key: UserSettingKeyType, value: any) => {
     if (key === UserSettingKey.SendUsageData) {
@@ -44,6 +46,7 @@ export const useUserSettingsTracker = () => {
     trackLoadedUserSetting(UserSettingKey.ClockSystemFormat, userSettings.clockSystemFormat);
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoDataPaneFlex, userSettings.wideLayoutPhotoDataPaneFlex.toString());
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoImagePaneFlex, userSettings.wideLayoutPhotoImagePaneFlex.toString());
+    trackLoadedUserSetting(UserSettingKey.Language, userSettings.language);
   }
 
   return { trackLoadedUserSettings };
@@ -62,6 +65,7 @@ export function initializeUserSettingsIfNeeded() {
   setIfUninitialized(UserSettingKey.ClockSystemFormat, UserSettingDefaultValue.ClockSystemFormat);
   setIfUninitialized(UserSettingKey.WideLayoutPhotoDataPaneFlex, UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex);
   setIfUninitialized(UserSettingKey.WideLayoutPhotoImagePaneFlex, UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex);
+  setIfUninitialized(UserSettingKey.Language, UserSettingDefaultValue.Language);
 }
 
 // Runs initializeUserSettingsIfNeeded after every commit. Not during render: storing a

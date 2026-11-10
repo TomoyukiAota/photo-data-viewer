@@ -103,18 +103,26 @@ app.whenReady().then(async () => {
       .executeJavaScript(`new Promise((resolve, reject) => {
       const start = Date.now();
       const timer = setInterval(() => {
-        const img = document.querySelector('img[alt]');
-        if (img && img.alt === ${JSON.stringify(process.env.PDV_ELECTRON_PHOTO)} && img.naturalWidth > 0) {
-          clearInterval(timer);
-          resolve({ title: document.title, width: img.naturalWidth, height: img.naturalHeight,
-            electron: typeof process === 'undefined' ? null : process.versions.electron,
-            nodeInPage: typeof require !== 'undefined' || typeof process !== 'undefined', text: document.body.innerText,
-            fileInputCount: document.querySelectorAll('input[type=file]').length,
-            menuVisible: document.querySelector('button[aria-label=menu]').getBoundingClientRect().width > 0,
-            dateFormat: localStorage.getItem('DateFormat'),
-            clockSystemFormat: localStorage.getItem('ClockSystemFormat') });
-        } else if (Date.now() - start > 20000) {
-          clearInterval(timer); reject(new Error('Photo did not load: ' + document.body.innerText + JSON.stringify({next: !!window.next, sameGlobal: typeof global !== 'undefined' && global === window, chunks: globalThis.webpackChunk_N_E?.length, push: String(globalThis.webpackChunk_N_E?.push).slice(0,100)})));
+        try {
+          const img = document.querySelector('img[alt]');
+          if (img && img.alt === ${JSON.stringify(process.env.PDV_ELECTRON_PHOTO)} && img.naturalWidth > 0) {
+            clearInterval(timer);
+            // The menu button is the only button with an aria-label; the label itself is translated.
+            const menuButton = document.querySelector('button[aria-label]');
+            if (!menuButton) throw new Error('The menu button was not found');
+            resolve({ title: document.title, width: img.naturalWidth, height: img.naturalHeight,
+              electron: typeof process === 'undefined' ? null : process.versions.electron,
+              nodeInPage: typeof require !== 'undefined' || typeof process !== 'undefined', text: document.body.innerText,
+              fileInputCount: document.querySelectorAll('input[type=file]').length,
+              menuVisible: menuButton.getBoundingClientRect().width > 0,
+              dateFormat: localStorage.getItem('DateFormat'),
+              clockSystemFormat: localStorage.getItem('ClockSystemFormat'),
+              lang: document.documentElement.lang });
+          } else if (Date.now() - start > 20000) {
+            clearInterval(timer); reject(new Error('Photo did not load: ' + document.body.innerText + JSON.stringify({next: !!window.next, sameGlobal: typeof global !== 'undefined' && global === window, chunks: globalThis.webpackChunk_N_E?.length, push: String(globalThis.webpackChunk_N_E?.push).slice(0,100)})));
+          }
+        } catch (error) {
+          clearInterval(timer); reject(error); // An error here would otherwise leave this promise pending.
         }
       }, 50);
     })`);
