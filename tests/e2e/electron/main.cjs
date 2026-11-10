@@ -117,7 +117,8 @@ app.whenReady().then(async () => {
               menuVisible: menuButton.getBoundingClientRect().width > 0,
               dateFormat: localStorage.getItem('DateFormat'),
               clockSystemFormat: localStorage.getItem('ClockSystemFormat'),
-              lang: document.documentElement.lang });
+              lang: document.documentElement.lang,
+              dir: document.documentElement.dir });
           } else if (Date.now() - start > 20000) {
             clearInterval(timer); reject(new Error('Photo did not load: ' + document.body.innerText + JSON.stringify({next: !!window.next, sameGlobal: typeof global !== 'undefined' && global === window, chunks: globalThis.webpackChunk_N_E?.length, push: String(globalThis.webpackChunk_N_E?.push).slice(0,100)})));
           }
