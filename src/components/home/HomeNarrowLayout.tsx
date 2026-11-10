@@ -54,9 +54,12 @@ const HomeNarrowLayout: React.FC<{
         )}
         <ReflexElement>
           <div className={classes['tab-container']}>
+            {/* Scrollable, for a language whose labels are wider than a phone's window. */}
             <Tabs
               value={selectedTabName}
               onChange={handleTabsChange}
+              variant='scrollable'
+              scrollButtons='auto'
               sx={{
                 borderBottom: 1,
                 borderColor: 'divider',

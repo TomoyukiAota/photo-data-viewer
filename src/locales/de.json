@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "Menü",
+    "label": "MENÜ",
+    "home": "Start",
+    "demo": "Demo",
+    "settings": "Einstellungen",
+    "language": "Sprache (Language)",
+    "about": "Info"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Einstellungen - {{appName}}",
+    "language": "Sprache - {{appName}}",
+    "about": "Info - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Foto auswählen, um die EXIF-Daten anzuzeigen.",
+    "selectPhoto": "Foto auswählen",
+    "tabs": {
+      "data": "Daten",
+      "map": "Karte",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Das ausgewählte Foto wird hier angezeigt.",
+    "loading": "Das ausgewählte Foto wird geladen...",
+    "rotate": "Foto drehen",
+    "unsupportedFileFormat": "Nicht unterstütztes Dateiformat"
+  },
+  "map": {
+    "loading": "Die Karte wird geladen",
+    "locationNotAvailable": "Standortdaten (Breiten- und Längengrad) sind nicht verfügbar.",
+    "cannotBeShown": "Die Karte kann nicht angezeigt werden."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Allgemein",
+      "details": "Details",
+      "rawData": "Rohdaten"
+    },
+    "columns": {
+      "name": "Name",
+      "value": "Wert"
+    },
+    "noData": "Keine Daten",
+    "notAvailable": "Nicht verfügbar",
+    "loading": "Wird geladen...",
+    "general": {
+      "fileName": "Dateiname",
+      "fileSize": "Dateigröße",
+      "widthHeight": "Breite × Höhe",
+      "dateTaken": "Aufnahme\u00addatum",
+      "latitude": "Breitengrad",
+      "longitude": "Längengrad",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "In Google Maps anzeigen",
+      "showInGoogleStreetView": "In Google Street View anzeigen",
+      "iosNote": "Hinweis für iOS: iOS entfernt in manchen Fällen einige EXIF-Daten (z. B. Breiten- und Längengrad). Einzelheiten finden Sie auf <pageLink>dieser Seite</pageLink>."
+    },
+    "rawData": {
+      "description": "Unten stehen die Rohdaten, die mit <exifrLink>exifr</exifrLink> ausgelesen wurden."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Nicht unterstütztes Dateiformat",
+    "message": "EXIF-Daten sind nicht verfügbar.",
+    "close": "Schließen"
+  },
+  "pageNotShown": {
+    "message": "Es ist ein Fehler aufgetreten, und diese Seite kann nicht angezeigt werden.",
+    "reload": "Neu laden"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Nach einem Klick auf „Demo starten“ verhält sich diese App so, als wäre <photoLink>dieses Foto</photoLink> ausgewählt worden.",
+    "runDemo": "Demo starten"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "savedInBrowser": "Die Einstellungen werden in Ihrem Browser gespeichert.",
+    "dateTime": {
+      "title": "Datums- und Uhrzeitformat",
+      "dateFormat": "Datumsformat",
+      "clockSystem": "12/24 Stunden",
+      "clock12": "12 Stunden",
+      "clock24": "24 Stunden",
+      "example": "Beispiel"
+    },
+    "usageData": {
+      "title": "Nutzungsdaten",
+      "send": "Nutzungsdaten senden, um diese App zu verbessern",
+      "note": "Was gesendet wird, ist auf der Seite „Info“ beschrieben."
+    }
+  },
+  "language": {
+    "title": "Sprache",
+    "useBrowserSetting": "Browsereinstellung verwenden ({{language}})",
+    "search": "Suchen",
+    "noLanguagesFound": "Keine Sprachen gefunden",
+    "loadFailed": "Die Sprache konnte nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+  },
+  "about": {
+    "keptInBrowser": "Diese App liest die EXIF-Daten Ihrer Datei direkt in Ihrem Browser aus. <br/>Die Datei bleibt daher in Ihrem Browser und wird an keinen Server gesendet.",
+    "usageData": "Zur Verbesserung dieser App werden Nutzungsinformationen erfasst, etwa <br/>welche Seiten geöffnet werden, welches Dateiformat das geladene Foto hat und <br/>welche Fehler auftreten, zusammen mit Ihrer IP-Adresse und dem daraus <br/>abgeleiteten ungefähren Standort. Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
+    "reportIssues": "Wenn Sie Fehler oder Probleme finden, melden Sie diese bitte unter <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Der Quellcode dieser App ist auf <gitHubLink>GitHub</gitHubLink> verfügbar.",
+    "translations": "Übersetzungen in weitere Sprachen sind willkommen: siehe <guideLink>So übersetzen Sie diese App</guideLink>.",
+    "developedBy": "Diese App wird von Tomoyuki Aota entwickelt.",
+    "xProfile": {
+      "alt": "X-Profil (ehemals Twitter)",
+      "title": "X-Profil (ehemals Twitter) öffnen"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-Profil",
+      "title": "GitHub-Profil öffnen"
+    },
+    "photoLocationMap": "Möchten Sie die Aufnahmeorte vieler Fotos auf einmal auf einer Karte sehen?<br/> Dafür gibt es <plmLink>Photo Location Map</plmLink>."
+  }
+}

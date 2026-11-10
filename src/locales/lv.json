@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "izvēlne",
+    "label": "IZVĒLNE",
+    "home": "Sākums",
+    "demo": "Demonstrācija",
+    "settings": "Iestatījumi",
+    "language": "Valoda (Language)",
+    "about": "Par"
+  },
+  "pageTitle": {
+    "demo": "Demonstrācija - {{appName}}",
+    "settings": "Iestatījumi - {{appName}}",
+    "language": "Valoda - {{appName}}",
+    "about": "Par - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Atlasiet fotoattēlu, lai skatītu EXIF datus.",
+    "selectPhoto": "Atlasīt fotoattēlu",
+    "tabs": {
+      "data": "Dati",
+      "map": "Karte",
+      "photo": "Fotoattēls"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Atlasītais fotoattēls tiks parādīts šeit.",
+    "loading": "Notiek atlasītā fotoattēla ielāde...",
+    "rotate": "Pagriezt fotoattēlu",
+    "unsupportedFileFormat": "Neatbalstīts faila formāts"
+  },
+  "map": {
+    "loading": "Notiek kartes ielāde",
+    "locationNotAvailable": "Atrašanās vietas dati (ģeogrāfiskais platums un garums) nav pieejami.",
+    "cannotBeShown": "Karti nevar parādīt."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Vispārīgi",
+      "details": "Detalizēti",
+      "rawData": "Neapstrādātie dati"
+    },
+    "columns": {
+      "name": "Nosaukums",
+      "value": "Vērtība"
+    },
+    "noData": "Nav datu",
+    "notAvailable": "Nav pieejams",
+    "loading": "Notiek ielāde...",
+    "general": {
+      "fileName": "Faila nosaukums",
+      "fileSize": "Faila lielums",
+      "widthHeight": "Platums × Augstums",
+      "dateTaken": "Uzņemšanas datums",
+      "latitude": "Ģeogr. platums",
+      "longitude": "Ģeogr. garums",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Rādīt pakalpojumā Google Maps",
+      "showInGoogleStreetView": "Rādīt pakalpojumā Google Street View",
+      "iosNote": "iOS lietotājiem: dažos gadījumos iOS noņem daļu EXIF datu (piem., ģeogrāfisko platumu un garumu). Plašāku informāciju skatiet <pageLink>šajā lapā</pageLink>."
+    },
+    "rawData": {
+      "description": "Tālāk ir neapstrādātie dati, kas iegūti ar <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Neatbalstīts faila formāts",
+    "message": "EXIF dati nav pieejami.",
+    "close": "Aizvērt"
+  },
+  "pageNotShown": {
+    "message": "Radās kļūda, un šo lapu nevar parādīt.",
+    "reload": "Ielādēt vēlreiz"
+  },
+  "demo": {
+    "title": "Demonstrācija",
+    "description": "Noklikšķinot uz pogas “Palaist demonstrāciju”, lietotne darbojas tā, it kā būtu atlasīts <photoLink>šis fotoattēls</photoLink>.",
+    "runDemo": "Palaist demonstrāciju"
+  },
+  "settings": {
+    "title": "Iestatījumi",
+    "savedInBrowser": "Iestatījumi tiek saglabāti jūsu pārlūkprogrammā.",
+    "dateTime": {
+      "title": "Datuma un laika formāts",
+      "dateFormat": "Datuma formāts",
+      "clockSystem": "12 vai 24 stundas",
+      "clock12": "12 stundas",
+      "clock24": "24 stundas",
+      "example": "Piemērs"
+    },
+    "usageData": {
+      "title": "Lietošanas dati",
+      "send": "Sūtīt lietošanas datus, lai uzlabotu šo lietotni",
+      "note": "Tas, kas tiek sūtīts, ir aprakstīts lapā “Par”."
+    }
+  },
+  "language": {
+    "title": "Valoda",
+    "useBrowserSetting": "Izmantot pārlūkprogrammas iestatījumu ({{language}})",
+    "search": "Meklēt",
+    "noLanguagesFound": "Valodas nav atrastas",
+    "loadFailed": "Valodu neizdevās ielādēt. Pārbaudiet savienojumu un mēģiniet vēlreiz."
+  },
+  "about": {
+    "keptInBrowser": "Šī lietotne nolasa EXIF datus no jūsu faila jūsu pārlūkprogrammā, <br/>tāpēc fails paliek pārlūkprogrammā un netiek nosūtīts uz serveriem.",
+    "usageData": "Lai uzlabotu šo lietotni, tiek vākta informācija par lietošanu, piemēram, <br/>kuras lapas tiek atvērtas, kāds ir ielādētā fotoattēla faila formāts un kādas <br/>kļūdas radās, kā arī jūsu IP adrese un no tās izsecinātā aptuvenā <br/>atrašanās vieta. To varat izslēgt lapā <settingsLink>Iestatījumi</settingsLink>.",
+    "reportIssues": "Ja atrodat kļūdas vai problēmas, lūdzu, ziņojiet par tām vietnē <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Šīs lietotnes pirmkods atrodas vietnē <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Tulkojumi citās valodās ir laipni gaidīti: skatiet, <guideLink>kā tulkot šo lietotni</guideLink>.",
+    "developedBy": "Šo lietotni izstrādā Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X (agrāk Twitter) profils",
+      "title": "Atvērt X (agrāk Twitter) profilu"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub profils",
+      "title": "Atvērt GitHub profilu"
+    },
+    "photoLocationMap": "Vai vēlaties kartē vienlaikus redzēt daudzu fotoattēlu atrašanās vietas?<br/> Tam ir pieejama <plmLink>Photo Location Map</plmLink>."
+  }
+}

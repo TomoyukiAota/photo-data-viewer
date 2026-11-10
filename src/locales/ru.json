@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "меню",
+    "label": "МЕНЮ",
+    "home": "Главная",
+    "demo": "Демо",
+    "settings": "Настройки",
+    "language": "Язык (Language)",
+    "about": "О приложении"
+  },
+  "pageTitle": {
+    "demo": "Демо - {{appName}}",
+    "settings": "Настройки - {{appName}}",
+    "language": "Язык - {{appName}}",
+    "about": "О приложении - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Выберите фото, чтобы увидеть данные EXIF.",
+    "selectPhoto": "Выбрать фото",
+    "tabs": {
+      "data": "Данные",
+      "map": "Карта",
+      "photo": "Фото"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Выбранное фото будет показано здесь.",
+    "loading": "Загрузка выбранного фото...",
+    "rotate": "Повернуть фото",
+    "unsupportedFileFormat": "Неподдерживаемый формат файла"
+  },
+  "map": {
+    "loading": "Карта загружается",
+    "locationNotAvailable": "Данные о местоположении (широта и долгота) недоступны.",
+    "cannotBeShown": "Не удаётся показать карту."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Общие",
+      "details": "Подробности",
+      "rawData": "Исходные данные"
+    },
+    "columns": {
+      "name": "Название",
+      "value": "Значение"
+    },
+    "noData": "Нет данных",
+    "notAvailable": "Недоступно",
+    "loading": "Загрузка...",
+    "general": {
+      "fileName": "Имя файла",
+      "fileSize": "Размер файла",
+      "widthHeight": "Ширина × Высота",
+      "dateTaken": "Дата съёмки",
+      "latitude": "Широта",
+      "longitude": "Долгота",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Показать в Google Maps",
+      "showInGoogleStreetView": "Показать в Google Street View",
+      "iosNote": "Для пользователей iOS: в некоторых случаях iOS удаляет часть данных EXIF (например, широту и долготу). Подробности см. на <pageLink>этой странице</pageLink>."
+    },
+    "rawData": {
+      "description": "Ниже приведены исходные данные, полученные с помощью <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Неподдерживаемый формат файла",
+    "message": "Данные EXIF недоступны.",
+    "close": "Закрыть"
+  },
+  "pageNotShown": {
+    "message": "Что-то пошло не так, и эту страницу не удаётся показать.",
+    "reload": "Перезагрузить"
+  },
+  "demo": {
+    "title": "Демо",
+    "description": "После нажатия кнопки «Запустить демо» приложение работает так, как если бы было выбрано <photoLink>это фото</photoLink>.",
+    "runDemo": "Запустить демо"
+  },
+  "settings": {
+    "title": "Настройки",
+    "savedInBrowser": "Настройки сохраняются в вашем браузере.",
+    "dateTime": {
+      "title": "Формат даты и времени",
+      "dateFormat": "Формат даты",
+      "clockSystem": "12 или 24 часа",
+      "clock12": "12 часов",
+      "clock24": "24 часа",
+      "example": "Пример"
+    },
+    "usageData": {
+      "title": "Данные об использовании",
+      "send": "Отправлять данные об использовании, чтобы улучшить это приложение",
+      "note": "Что именно отправляется, описано на странице «О приложении»."
+    }
+  },
+  "language": {
+    "title": "Язык",
+    "useBrowserSetting": "Использовать настройку браузера ({{language}})",
+    "search": "Поиск",
+    "noLanguagesFound": "Языки не найдены",
+    "loadFailed": "Не удалось загрузить язык. Проверьте подключение и повторите попытку."
+  },
+  "about": {
+    "keptInBrowser": "Это приложение считывает данные EXIF из вашего файла прямо в браузере, <br/>поэтому файл остаётся в браузере и не отправляется ни на какие серверы.",
+    "usageData": "Чтобы улучшать это приложение, собирается информация об использовании, например <br/>какие страницы открываются, какой формат файла у загруженного фото и какие <br/>ошибки произошли, вместе с вашим IP-адресом и определённым по нему <br/>приблизительным местоположением. Это можно отключить в <settingsLink>настройках</settingsLink>.",
+    "reportIssues": "Если вы нашли ошибки или проблемы, сообщите о них в <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Исходный код этого приложения размещён на <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Переводы на другие языки приветствуются: см. <guideLink>как перевести это приложение</guideLink>.",
+    "developedBy": "Это приложение разрабатывает Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Профиль в X (ранее Twitter)",
+      "title": "Открыть профиль в X (ранее Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Профиль на GitHub",
+      "title": "Открыть профиль на GitHub"
+    },
+    "photoLocationMap": "Хотите увидеть на карте места съёмки сразу многих фото?<br/> Для этого есть <plmLink>Photo Location Map</plmLink>."
+  }
+}

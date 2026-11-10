@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Trang chủ",
+    "demo": "Demo",
+    "settings": "Cài đặt",
+    "language": "Ngôn ngữ (Language)",
+    "about": "Giới thiệu"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Cài đặt - {{appName}}",
+    "language": "Ngôn ngữ - {{appName}}",
+    "about": "Giới thiệu - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Chọn ảnh của bạn để hiển thị dữ liệu EXIF.",
+    "selectPhoto": "Chọn ảnh",
+    "tabs": {
+      "data": "Dữ liệu",
+      "map": "Bản đồ",
+      "photo": "Ảnh"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Ảnh đã chọn sẽ được hiển thị tại đây.",
+    "loading": "Đang tải ảnh đã chọn...",
+    "rotate": "Xoay ảnh",
+    "unsupportedFileFormat": "Định dạng tệp không được hỗ trợ"
+  },
+  "map": {
+    "loading": "Đang tải bản đồ",
+    "locationNotAvailable": "Không có dữ liệu vị trí (vĩ độ và kinh độ).",
+    "cannotBeShown": "Không thể hiển thị bản đồ."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Chung",
+      "details": "Chi tiết",
+      "rawData": "Dữ liệu thô"
+    },
+    "columns": {
+      "name": "Tên",
+      "value": "Giá trị"
+    },
+    "noData": "Không có dữ liệu",
+    "notAvailable": "Không có",
+    "loading": "Đang tải...",
+    "general": {
+      "fileName": "Tên tệp",
+      "fileSize": "Kích thước tệp",
+      "widthHeight": "Rộng × Cao",
+      "dateTaken": "Ngày chụp",
+      "latitude": "Vĩ độ",
+      "longitude": "Kinh độ",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Hiển thị trong Google Maps",
+      "showInGoogleStreetView": "Hiển thị trong Google Street View",
+      "iosNote": "Đối với người dùng iOS: trong một số trường hợp, iOS xóa một số dữ liệu EXIF (ví dụ: vĩ độ và kinh độ). Vui lòng đọc <pageLink>trang này</pageLink> để biết chi tiết."
+    },
+    "rawData": {
+      "description": "Dưới đây là dữ liệu thô lấy được bằng <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Định dạng tệp không được hỗ trợ",
+    "message": "Không có dữ liệu EXIF.",
+    "close": "Đóng"
+  },
+  "pageNotShown": {
+    "message": "Đã xảy ra sự cố và không thể hiển thị trang này.",
+    "reload": "Tải lại"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Khi bấm nút “Chạy demo”, ứng dụng này hoạt động như thể <photoLink>ảnh này</photoLink> đã được chọn.",
+    "runDemo": "Chạy demo"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "savedInBrowser": "Cài đặt được lưu trong trình duyệt của bạn.",
+    "dateTime": {
+      "title": "Định dạng ngày và giờ",
+      "dateFormat": "Định dạng ngày",
+      "clockSystem": "12 hoặc 24 giờ",
+      "clock12": "12 giờ",
+      "clock24": "24 giờ",
+      "example": "Ví dụ"
+    },
+    "usageData": {
+      "title": "Dữ liệu sử dụng",
+      "send": "Gửi dữ liệu sử dụng để cải thiện ứng dụng này",
+      "note": "Những gì được gửi được mô tả trên trang Giới thiệu."
+    }
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "useBrowserSetting": "Dùng cài đặt của trình duyệt ({{language}})",
+    "search": "Tìm kiếm",
+    "noLanguagesFound": "Không tìm thấy ngôn ngữ nào",
+    "loadFailed": "Không thể tải ngôn ngữ. Hãy kiểm tra kết nối rồi thử lại."
+  },
+  "about": {
+    "keptInBrowser": "Ứng dụng này lấy dữ liệu EXIF từ tệp của bạn ngay trong trình duyệt của bạn, <br/>vì vậy tệp được giữ trong trình duyệt và không được gửi đến bất kỳ máy chủ nào.",
+    "usageData": "Để cải thiện ứng dụng này, thông tin sử dụng được thu thập, chẳng hạn như <br/>những trang nào được mở, định dạng tệp của ảnh đã tải và những lỗi nào <br/>đã xảy ra, cùng với địa chỉ IP của bạn và vị trí gần đúng <br/>được suy ra từ địa chỉ đó. Bạn có thể tắt tính năng này trong <settingsLink>Cài đặt</settingsLink>.",
+    "reportIssues": "Nếu bạn tìm thấy lỗi hoặc sự cố, vui lòng gửi tại <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Mã nguồn của ứng dụng này được lưu trữ trên <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Hoan nghênh các bản dịch sang ngôn ngữ khác: xem <guideLink>cách dịch ứng dụng này</guideLink>.",
+    "developedBy": "Ứng dụng này được phát triển bởi Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Hồ sơ X (trước đây là Twitter)",
+      "title": "Mở hồ sơ X (trước đây là Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Hồ sơ GitHub",
+      "title": "Mở hồ sơ GitHub"
+    },
+    "photoLocationMap": "Bạn muốn xem vị trí của nhiều ảnh trên bản đồ cùng một lúc?<br/> <plmLink>Photo Location Map</plmLink> có sẵn cho mục đích đó."
+  }
+}

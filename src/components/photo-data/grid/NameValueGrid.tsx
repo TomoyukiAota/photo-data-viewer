@@ -29,7 +29,13 @@ const NameValueGrid: React.FC<{
   className?: string;
   rows: NameValueGridRow[];
   columnExtensions: ColumnExtension[];
-}> = ({ rows, columnExtensions }) => {
+  /**
+   * Lets a name that is wider than its column continue on the next line, rather
+   * than being cut: for names that are translated, which some languages write
+   * longer than the column is on a phone.
+   */
+  wrapNames?: boolean;
+}> = ({ rows, columnExtensions, wrapNames }) => {
   const { t } = useTranslation();
   const columns = [
     { name: 'name', title: t('photoData.columns.name') },
@@ -73,7 +79,14 @@ const NameValueGrid: React.FC<{
                 {rows.map((row) => (
                   <TableRow key={row.id}>
                     {columns.map((column) => (
-                      <TableCell key={column.name}>
+                      <TableCell
+                        key={column.name}
+                        className={
+                          wrapNames && column.name === 'name'
+                            ? classes.wrap
+                            : undefined
+                        }
+                      >
                         {row[column.name]}
                       </TableCell>
                     ))}

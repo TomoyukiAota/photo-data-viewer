@@ -40,6 +40,7 @@ const PhotoDataGeneral: React.FC<{ className?: string }> = () => {
         <NameValueGrid
           rows={rows}
           columnExtensions={[{ columnName: 'name', width: nameColumnWidth }]}
+          wrapNames
         />
       </div>
       {isIosMessageVisible && (

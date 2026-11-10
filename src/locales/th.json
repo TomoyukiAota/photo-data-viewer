@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "เมนู",
+    "label": "เมนู",
+    "home": "หน้าแรก",
+    "demo": "สาธิต",
+    "settings": "การตั้งค่า",
+    "language": "ภาษา (Language)",
+    "about": "เกี่ยวกับ"
+  },
+  "pageTitle": {
+    "demo": "สาธิต - {{appName}}",
+    "settings": "การตั้งค่า - {{appName}}",
+    "language": "ภาษา - {{appName}}",
+    "about": "เกี่ยวกับ - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "เลือกรูปภาพของคุณเพื่อแสดงข้อมูล EXIF",
+    "selectPhoto": "เลือกรูปภาพ",
+    "tabs": {
+      "data": "ข้อมูล",
+      "map": "แผนที่",
+      "photo": "รูปภาพ"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "รูปภาพที่เลือกจะแสดงที่นี่",
+    "loading": "กำลังโหลดรูปภาพที่เลือก...",
+    "rotate": "หมุนรูปภาพ",
+    "unsupportedFileFormat": "รูปแบบไฟล์ที่ไม่รองรับ"
+  },
+  "map": {
+    "loading": "กำลังโหลดแผนที่",
+    "locationNotAvailable": "ไม่มีข้อมูลตำแหน่ง (ละติจูดและลองจิจูด)",
+    "cannotBeShown": "ไม่สามารถแสดงแผนที่ได้"
+  },
+  "photoData": {
+    "tabs": {
+      "general": "ทั่วไป",
+      "details": "รายละเอียด",
+      "rawData": "ข้อมูลดิบ"
+    },
+    "columns": {
+      "name": "ชื่อ",
+      "value": "ค่า"
+    },
+    "noData": "ไม่มีข้อมูล",
+    "notAvailable": "ไม่มี",
+    "loading": "กำลังโหลด...",
+    "general": {
+      "fileName": "ชื่อไฟล์",
+      "fileSize": "ขนาดไฟล์",
+      "widthHeight": "กว้าง × สูง",
+      "dateTaken": "วันที่ถ่าย",
+      "latitude": "ละติจูด",
+      "longitude": "ลองจิจูด",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "แสดงใน Google Maps",
+      "showInGoogleStreetView": "แสดงใน Google Street View",
+      "iosNote": "สำหรับผู้ใช้ iOS: ในบางกรณี iOS จะลบข้อมูล EXIF บางส่วน (เช่น ละติจูดและลองจิจูด) โปรดอ่านรายละเอียดที่<pageLink>หน้านี้</pageLink>"
+    },
+    "rawData": {
+      "description": "ด้านล่างคือข้อมูลดิบที่ได้จาก <exifrLink>exifr</exifrLink>"
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "รูปแบบไฟล์ที่ไม่รองรับ",
+    "message": "ไม่มีข้อมูล EXIF",
+    "close": "ปิด"
+  },
+  "pageNotShown": {
+    "message": "เกิดข้อผิดพลาดบางอย่าง และไม่สามารถแสดงหน้านี้ได้",
+    "reload": "โหลดใหม่"
+  },
+  "demo": {
+    "title": "สาธิต",
+    "description": "เมื่อคลิกปุ่ม “เรียกใช้การสาธิต” แอปนี้จะทำงานเสมือนว่าได้เลือก<photoLink>รูปภาพนี้</photoLink>",
+    "runDemo": "เรียกใช้การสาธิต"
+  },
+  "settings": {
+    "title": "การตั้งค่า",
+    "savedInBrowser": "การตั้งค่าจะถูกบันทึกไว้ในเบราว์เซอร์ของคุณ",
+    "dateTime": {
+      "title": "รูปแบบวันที่และเวลา",
+      "dateFormat": "รูปแบบวันที่",
+      "clockSystem": "12/24 ชั่วโมง",
+      "clock12": "12 ชั่วโมง",
+      "clock24": "24 ชั่วโมง",
+      "example": "ตัวอย่าง"
+    },
+    "usageData": {
+      "title": "ข้อมูลการใช้งาน",
+      "send": "ส่งข้อมูลการใช้งานเพื่อปรับปรุงแอปนี้",
+      "note": "สิ่งที่ส่งมีอธิบายไว้ในหน้าเกี่ยวกับ"
+    }
+  },
+  "language": {
+    "title": "ภาษา",
+    "useBrowserSetting": "ใช้การตั้งค่าของเบราว์เซอร์ ({{language}})",
+    "search": "ค้นหา",
+    "noLanguagesFound": "ไม่พบภาษา",
+    "loadFailed": "ไม่สามารถโหลดภาษาได้ โปรดตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง"
+  },
+  "about": {
+    "keptInBrowser": "แอปนี้อ่านข้อมูล EXIF จากไฟล์ของคุณภายในเบราว์เซอร์ของคุณ <br/>ไฟล์จึงอยู่ในเบราว์เซอร์ของคุณและไม่ถูกส่งไปยังเซิร์ฟเวอร์ใด ๆ",
+    "usageData": "เพื่อปรับปรุงแอปนี้ จะมีการเก็บรวบรวมข้อมูลการใช้งาน เช่น <br/>หน้าที่เปิด รูปแบบไฟล์ของรูปภาพที่โหลด และข้อผิดพลาดที่เกิดขึ้น <br/>พร้อมกับที่อยู่ IP ของคุณและตำแหน่งโดยประมาณที่ได้จากที่อยู่ IP นั้น <br/>คุณสามารถปิดได้ใน<settingsLink>การตั้งค่า</settingsLink>",
+    "reportIssues": "หากพบข้อบกพร่องหรือปัญหา โปรดแจ้งใน <issuesLink>GitHub Issues</issuesLink>",
+    "sourceCode": "ซอร์สโค้ดของแอปนี้อยู่บน <gitHubLink>GitHub</gitHubLink>",
+    "translations": "ยินดีรับคำแปลเป็นภาษาอื่น ๆ: ดู<guideLink>วิธีแปลแอปนี้</guideLink>",
+    "developedBy": "แอปนี้พัฒนาโดย Tomoyuki Aota",
+    "xProfile": {
+      "alt": "โปรไฟล์ X (เดิมคือ Twitter)",
+      "title": "เปิดโปรไฟล์ X (เดิมคือ Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "โปรไฟล์ GitHub",
+      "title": "เปิดโปรไฟล์ GitHub"
+    },
+    "photoLocationMap": "ต้องการดูตำแหน่งของรูปภาพจำนวนมากบนแผนที่พร้อมกันใช่ไหม<br/> <plmLink>Photo Location Map</plmLink> พร้อมให้ใช้งานสำหรับการนี้"
+  }
+}

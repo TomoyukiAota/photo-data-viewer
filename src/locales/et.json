@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menüü",
+    "label": "MENÜÜ",
+    "home": "Avaleht",
+    "demo": "Demo",
+    "settings": "Seaded",
+    "language": "Keel (Language)",
+    "about": "Teave"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Seaded - {{appName}}",
+    "language": "Keel - {{appName}}",
+    "about": "Teave - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Valige foto, et näha selle EXIF-andmeid.",
+    "selectPhoto": "Vali foto",
+    "tabs": {
+      "data": "Andmed",
+      "map": "Kaart",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Valitud foto kuvatakse siin.",
+    "loading": "Valitud foto laadimine...",
+    "rotate": "Pööra fotot",
+    "unsupportedFileFormat": "Toetamata failivorming"
+  },
+  "map": {
+    "loading": "Kaardi laadimine",
+    "locationNotAvailable": "Asukohaandmed (laius- ja pikkuskraad) pole saadaval.",
+    "cannotBeShown": "Kaarti ei saa kuvada."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Üldine",
+      "details": "Üksikasjad",
+      "rawData": "Toorandmed"
+    },
+    "columns": {
+      "name": "Nimi",
+      "value": "Väärtus"
+    },
+    "noData": "Andmed puuduvad",
+    "notAvailable": "Pole saadaval",
+    "loading": "Laadimine...",
+    "general": {
+      "fileName": "Faili nimi",
+      "fileSize": "Faili suurus",
+      "widthHeight": "Laius × Kõrgus",
+      "dateTaken": "Pildistamise kuupäev",
+      "latitude": "Laiuskraad",
+      "longitude": "Pikkuskraad",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Kuva Google Mapsis",
+      "showInGoogleStreetView": "Kuva Google Street View's",
+      "iosNote": "iOS-i kasutajatele: iOS eemaldab mõnel juhul osa EXIF-andmeid (nt laius- ja pikkuskraadi). Üksikasju leiate <pageLink>sellelt lehelt</pageLink>."
+    },
+    "rawData": {
+      "description": "Allpool on <exifrLink>exifr</exifrLink>-iga saadud toorandmed."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Toetamata failivorming",
+    "message": "EXIF-andmed pole saadaval.",
+    "close": "Sule"
+  },
+  "pageNotShown": {
+    "message": "Midagi läks valesti ja seda lehte ei saa kuvada.",
+    "reload": "Laadi uuesti"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Kui klõpsate nuppu „Käivita demo“, käitub rakendus nii, nagu oleks valitud <photoLink>see foto</photoLink>.",
+    "runDemo": "Käivita demo"
+  },
+  "settings": {
+    "title": "Seaded",
+    "savedInBrowser": "Seaded salvestatakse teie brauserisse.",
+    "dateTime": {
+      "title": "Kuupäeva ja kellaaja vorming",
+      "dateFormat": "Kuupäevavorming",
+      "clockSystem": "12 või 24 tundi",
+      "clock12": "12 tundi",
+      "clock24": "24 tundi",
+      "example": "Näide"
+    },
+    "usageData": {
+      "title": "Kasutusandmed",
+      "send": "Saada kasutusandmeid, et aidata rakendust paremaks muuta",
+      "note": "Mida saadetakse, on kirjeldatud lehel „Teave“."
+    }
+  },
+  "language": {
+    "title": "Keel",
+    "useBrowserSetting": "Kasuta brauseri seadet ({{language}})",
+    "search": "Otsi",
+    "noLanguagesFound": "Keeli ei leitud",
+    "loadFailed": "Keelt ei õnnestunud laadida. Kontrollige ühendust ja proovige uuesti."
+  },
+  "about": {
+    "keptInBrowser": "See rakendus loeb EXIF-andmed teie failist teie brauseris, <br/>seega jääb fail teie brauserisse ja seda ei saadeta ühtegi serverisse.",
+    "usageData": "Rakenduse täiustamiseks kogutakse kasutusteavet, näiteks <br/>milliseid lehti avatakse, mis failivormingus on laaditud foto ja millised <br/>vead ilmnesid, koos teie IP-aadressi ja sellest tuletatud ligikaudse <br/>asukohaga. Saate selle välja lülitada <settingsLink>seadetes</settingsLink>.",
+    "reportIssues": "Kui leiate vigu või probleeme, andke neist palun teada lehel <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Selle rakenduse lähtekood asub <gitHubLink>GitHubis</gitHubLink>.",
+    "translations": "Tõlked teistesse keeltesse on teretulnud: vaadake, <guideLink>kuidas seda rakendust tõlkida</guideLink>.",
+    "developedBy": "Selle rakenduse on välja töötanud Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X-i (endise Twitteri) profiil",
+      "title": "Ava X-i (endise Twitteri) profiil"
+    },
+    "gitHubProfile": {
+      "alt": "GitHubi profiil",
+      "title": "Ava GitHubi profiil"
+    },
+    "photoLocationMap": "Kas soovite näha kaardil paljude fotode asukohti korraga?<br/> Selleks on olemas <plmLink>Photo Location Map</plmLink>."
+  }
+}

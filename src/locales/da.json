@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Hjem",
+    "demo": "Demo",
+    "settings": "Indstillinger",
+    "language": "Sprog (Language)",
+    "about": "Om"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Indstillinger - {{appName}}",
+    "language": "Sprog - {{appName}}",
+    "about": "Om - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Vælg dit foto for at se EXIF-data.",
+    "selectPhoto": "Vælg foto",
+    "tabs": {
+      "data": "Data",
+      "map": "Kort",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Det valgte foto vises her.",
+    "loading": "Indlæser det valgte foto...",
+    "rotate": "Roter foto",
+    "unsupportedFileFormat": "Filformatet understøttes ikke"
+  },
+  "map": {
+    "loading": "Kortet indlæses",
+    "locationNotAvailable": "Lokalitetsdata (breddegrad og længdegrad) er ikke tilgængelige.",
+    "cannotBeShown": "Kortet kan ikke vises."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Generelt",
+      "details": "Detaljer",
+      "rawData": "Rådata"
+    },
+    "columns": {
+      "name": "Navn",
+      "value": "Værdi"
+    },
+    "noData": "Ingen data",
+    "notAvailable": "Ikke tilgængelig",
+    "loading": "Indlæser...",
+    "general": {
+      "fileName": "Filnavn",
+      "fileSize": "Filstørrelse",
+      "widthHeight": "Bredde × Højde",
+      "dateTaken": "Optagelses\u00addato",
+      "latitude": "Breddegrad",
+      "longitude": "Længdegrad",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Vis i Google Maps",
+      "showInGoogleStreetView": "Vis i Google Street View",
+      "iosNote": "Til iOS-brugere: iOS fjerner i nogle tilfælde visse EXIF-data (f.eks. breddegrad og længdegrad). Læs <pageLink>denne side</pageLink> for at få flere oplysninger."
+    },
+    "rawData": {
+      "description": "Nedenfor ses de rådata, der er hentet med <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Filformatet understøttes ikke",
+    "message": "EXIF-data er ikke tilgængelige.",
+    "close": "Luk"
+  },
+  "pageNotShown": {
+    "message": "Noget gik galt, og denne side kan ikke vises.",
+    "reload": "Genindlæs"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Når du klikker på knappen “Kør demo”, opfører appen sig, som om <photoLink>dette foto</photoLink> er valgt.",
+    "runDemo": "Kør demo"
+  },
+  "settings": {
+    "title": "Indstillinger",
+    "savedInBrowser": "Indstillingerne gemmes i din browser.",
+    "dateTime": {
+      "title": "Dato- og tidsformat",
+      "dateFormat": "Datoformat",
+      "clockSystem": "12/24 timer",
+      "clock12": "12 timer",
+      "clock24": "24 timer",
+      "example": "Eksempel"
+    },
+    "usageData": {
+      "title": "Brugsdata",
+      "send": "Send brugsdata for at forbedre denne app",
+      "note": "Hvad der sendes, er beskrevet på siden Om."
+    }
+  },
+  "language": {
+    "title": "Sprog",
+    "useBrowserSetting": "Brug browserens indstilling ({{language}})",
+    "search": "Søg",
+    "noLanguagesFound": "Ingen sprog fundet",
+    "loadFailed": "Sproget kunne ikke indlæses. Kontrollér din forbindelse, og prøv igen."
+  },
+  "about": {
+    "keptInBrowser": "Denne app henter EXIF-data fra din fil i din browser, <br/>så filen bliver i din browser og sendes ikke til nogen servere.",
+    "usageData": "For at forbedre denne app indsamles der oplysninger om brugen, f.eks. <br/>hvilke sider der åbnes, hvilket filformat det indlæste foto har, og hvilke <br/>fejl der opstår, sammen med din IP-adresse og den omtrentlige <br/>placering, der udledes af den. Du kan slå dette fra i <settingsLink>Indstillinger</settingsLink>.",
+    "reportIssues": "Hvis du finder fejl eller problemer, bedes du indberette dem i <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Kildekoden til denne app ligger på <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Oversættelser til andre sprog er velkomne: se <guideLink>hvordan du oversætter denne app</guideLink>.",
+    "developedBy": "Denne app er udviklet af Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X-profil (tidligere Twitter)",
+      "title": "Åbn X-profil (tidligere Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-profil",
+      "title": "Åbn GitHub-profil"
+    },
+    "photoLocationMap": "Vil du se på et kort, hvor mange fotos er taget, på én gang?<br/> <plmLink>Photo Location Map</plmLink> er lavet til det formål."
+  }
+}

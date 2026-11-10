@@ -1,3 +1,4 @@
+import { languageCodes } from './languages';
 import {
   browserLanguage,
   currentLanguage,
@@ -19,19 +20,63 @@ const standalone = {
 };
 
 describe('matchLanguage', () => {
+  it('matches every code of the list as it is, which Photo Location Map passes', () => {
+    for (const code of languageCodes) {
+      expect(matchLanguage([code])).toBe(code);
+    }
+  });
+
   it('matches a tag by its language when the region is not a language of its own', () => {
     expect(matchLanguage(['ja-JP'])).toBe('ja');
     expect(matchLanguage(['en-GB'])).toBe('en');
+    expect(matchLanguage(['es-419'])).toBe('es');
+    expect(matchLanguage(['fr-CA'])).toBe('fr');
+    expect(matchLanguage(['nb-NO'])).toBe('nb');
+  });
+
+  it('matches a tag without its last parts when the list has it so', () => {
+    expect(matchLanguage(['zh-Hant-TW'])).toBe('zh-Hant');
+    expect(matchLanguage(['zh-Hans-HK'])).toBe('zh-Hans');
+    expect(matchLanguage(['sr-Latn-RS'])).toBe('sr-Latn');
+  });
+
+  it('takes Chinese by the script that its region writes', () => {
+    expect(matchLanguage(['zh-TW'])).toBe('zh-Hant');
+    expect(matchLanguage(['zh-HK'])).toBe('zh-Hant');
+    expect(matchLanguage(['zh-MO'])).toBe('zh-Hant');
+    expect(matchLanguage(['zh-CN'])).toBe('zh-Hans');
+    expect(matchLanguage(['zh-SG'])).toBe('zh-Hans');
+    expect(matchLanguage(['zh'])).toBe('zh-Hans');
+  });
+
+  it('takes Portuguese as that of Brazil, or of Portugal for any other region', () => {
+    expect(matchLanguage(['pt'])).toBe('pt-BR');
+    expect(matchLanguage(['pt-BR'])).toBe('pt-BR');
+    expect(matchLanguage(['pt-PT'])).toBe('pt-PT');
+    expect(matchLanguage(['pt-AO'])).toBe('pt-PT');
+  });
+
+  it('takes Norwegian as Bokmål, and Serbian in Latin letters', () => {
+    expect(matchLanguage(['no'])).toBe('nb');
+    expect(matchLanguage(['no-NO'])).toBe('nb');
+    expect(matchLanguage(['nn-NO'])).toBe('nb');
+    expect(matchLanguage(['sr'])).toBe('sr-Latn');
+    expect(matchLanguage(['sr-RS'])).toBe('sr-Latn');
+    expect(matchLanguage(['sr-Cyrl-RS'])).toBe('sr-Latn');
   });
 
   it('takes the first tag that has a translation, however its case is written', () => {
     expect(matchLanguage(['xx-XX', 'JA', 'en'])).toBe('ja');
     expect(matchLanguage(['en-US', 'ja'])).toBe('en');
+    expect(matchLanguage(['ZH-tw'])).toBe('zh-Hant');
+    expect(matchLanguage(['PT-br'])).toBe('pt-BR');
+    expect(matchLanguage(['sr-latn'])).toBe('sr-Latn');
   });
 
   it('gives null when no tag has a translation', () => {
     expect(matchLanguage(['xx', 'yy-YY', 'zz-Zzzz'])).toBeNull();
     expect(matchLanguage([])).toBeNull();
+    expect(matchLanguage([''])).toBeNull();
   });
 });
 
@@ -66,6 +111,9 @@ describe('resolveLanguage, in Photo Location Map', () => {
   it('follows the language parameter, matched like a browser language', () => {
     expect(resolveLanguage({ ...plm, languageParam: 'ja' })).toBe('ja');
     expect(resolveLanguage({ ...plm, languageParam: 'ja-JP' })).toBe('ja');
+    expect(resolveLanguage({ ...plm, languageParam: 'zh-Hant' })).toBe('zh-Hant');
+    expect(resolveLanguage({ ...plm, languageParam: 'pt-BR' })).toBe('pt-BR');
+    expect(resolveLanguage({ ...plm, languageParam: 'sr-Latn' })).toBe('sr-Latn');
   });
 
   it("is English without a parameter it has a translation for, whatever the machine's language or a saved setting", () => {

@@ -49,6 +49,12 @@
     text-overflow: ellipsis;
   }
 
+  // A name that may take more than one line (wrapNames).
+  td.wrap {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
   .heading {
     display: flex;
   }

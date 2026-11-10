@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "меню",
+    "label": "МЕНЮ",
+    "home": "Начало",
+    "demo": "Демо",
+    "settings": "Настройки",
+    "language": "Език (Language)",
+    "about": "Информация"
+  },
+  "pageTitle": {
+    "demo": "Демо - {{appName}}",
+    "settings": "Настройки - {{appName}}",
+    "language": "Език - {{appName}}",
+    "about": "Информация - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Изберете снимка, за да видите EXIF данните.",
+    "selectPhoto": "Избор на снимка",
+    "tabs": {
+      "data": "Данни",
+      "map": "Карта",
+      "photo": "Снимка"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Избраната снимка ще се покаже тук.",
+    "loading": "Избраната снимка се зарежда...",
+    "rotate": "Завъртане на снимката",
+    "unsupportedFileFormat": "Неподдържан файлов формат"
+  },
+  "map": {
+    "loading": "Картата се зарежда",
+    "locationNotAvailable": "Няма данни за местоположение (географска ширина и дължина).",
+    "cannotBeShown": "Картата не може да бъде показана."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Общи",
+      "details": "Подробности",
+      "rawData": "Сурови данни"
+    },
+    "columns": {
+      "name": "Име",
+      "value": "Стойност"
+    },
+    "noData": "Няма данни",
+    "notAvailable": "Не е налично",
+    "loading": "Зареждане...",
+    "general": {
+      "fileName": "Име на файла",
+      "fileSize": "Размер на файла",
+      "widthHeight": "Ширина × Височина",
+      "dateTaken": "Дата на заснемане",
+      "latitude": "Геогр. шир.",
+      "longitude": "Геогр. дълж.",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Показване в Google Maps",
+      "showInGoogleStreetView": "Показване в Google Street View",
+      "iosNote": "За потребителите на iOS: в някои случаи iOS премахва част от EXIF данните (напр. географската ширина и дължина). За подробности прочетете <pageLink>тази страница</pageLink>."
+    },
+    "rawData": {
+      "description": "По-долу са суровите данни, получени с <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Неподдържан файлов формат",
+    "message": "Няма EXIF данни.",
+    "close": "Затваряне"
+  },
+  "pageNotShown": {
+    "message": "Възникна проблем и тази страница не може да бъде показана.",
+    "reload": "Презареждане"
+  },
+  "demo": {
+    "title": "Демо",
+    "description": "Когато щракнете върху бутона „Стартиране на демото“, приложението работи така, сякаш е избрана <photoLink>тази снимка</photoLink>.",
+    "runDemo": "Стартиране на демото"
+  },
+  "settings": {
+    "title": "Настройки",
+    "savedInBrowser": "Настройките се запазват във вашия браузър.",
+    "dateTime": {
+      "title": "Формат на датата и часа",
+      "dateFormat": "Формат на датата",
+      "clockSystem": "12 или 24 часа",
+      "clock12": "12 часа",
+      "clock24": "24 часа",
+      "example": "Пример"
+    },
+    "usageData": {
+      "title": "Данни за използването",
+      "send": "Изпращане на данни за използването с цел подобряване на приложението",
+      "note": "Какво се изпраща, е описано на страницата „Информация“."
+    }
+  },
+  "language": {
+    "title": "Език",
+    "useBrowserSetting": "Използване на настройката на браузъра ({{language}})",
+    "search": "Търсене",
+    "noLanguagesFound": "Няма намерени езици",
+    "loadFailed": "Езикът не можа да бъде зареден. Проверете връзката си и опитайте отново."
+  },
+  "about": {
+    "keptInBrowser": "Това приложение извлича EXIF данните от вашия файл във вашия браузър, <br/>така че файлът остава в браузъра и не се изпраща до никакви сървъри.",
+    "usageData": "С цел подобряване на приложението се събира информация за използването му, <br/>например кои страници се отварят, какъв е файловият формат на заредената снимка <br/>и какви грешки възникват, заедно с вашия IP адрес и приблизителното <br/>местоположение, определено по него. Можете да изключите това в <settingsLink>Настройки</settingsLink>.",
+    "reportIssues": "Ако откриете грешки или проблеми, моля, съобщете за тях в <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Изходният код на това приложение е публикуван в <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Преводите на други езици са добре дошли: вижте <guideLink>как да преведете това приложение</guideLink>.",
+    "developedBy": "Това приложение се разработва от Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Профил в X (преди Twitter)",
+      "title": "Отваряне на профила в X (преди Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Профил в GitHub",
+      "title": "Отваряне на профила в GitHub"
+    },
+    "photoLocationMap": "Искате да видите на карта местата на много снимки наведнъж?<br/> За тази цел можете да използвате <plmLink>Photo Location Map</plmLink>."
+  }
+}

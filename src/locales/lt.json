@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "meniu",
+    "label": "MENIU",
+    "home": "Pradžia",
+    "demo": "Demonstracija",
+    "settings": "Nustatymai",
+    "language": "Kalba (Language)",
+    "about": "Apie"
+  },
+  "pageTitle": {
+    "demo": "Demonstracija - {{appName}}",
+    "settings": "Nustatymai - {{appName}}",
+    "language": "Kalba - {{appName}}",
+    "about": "Apie - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Pasirinkite nuotrauką, kad pamatytumėte EXIF duomenis.",
+    "selectPhoto": "Pasirinkti nuotrauką",
+    "tabs": {
+      "data": "Duomenys",
+      "map": "Žemėlapis",
+      "photo": "Nuotrauka"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Pasirinkta nuotrauka bus rodoma čia.",
+    "loading": "Įkeliama pasirinkta nuotrauka...",
+    "rotate": "Pasukti nuotrauką",
+    "unsupportedFileFormat": "Nepalaikomas failo formatas"
+  },
+  "map": {
+    "loading": "Žemėlapis įkeliamas",
+    "locationNotAvailable": "Vietos duomenų (platumos ir ilgumos) nėra.",
+    "cannotBeShown": "Žemėlapio parodyti negalima."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Bendra",
+      "details": "Išsamiau",
+      "rawData": "Neapdoroti duomenys"
+    },
+    "columns": {
+      "name": "Pavadinimas",
+      "value": "Reikšmė"
+    },
+    "noData": "Duomenų nėra",
+    "notAvailable": "Nėra",
+    "loading": "Įkeliama...",
+    "general": {
+      "fileName": "Failo pavadinimas",
+      "fileSize": "Failo dydis",
+      "widthHeight": "Plotis × Aukštis",
+      "dateTaken": "Fotografavimo data",
+      "latitude": "Platuma",
+      "longitude": "Ilguma",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Rodyti „Google Maps“",
+      "showInGoogleStreetView": "Rodyti „Google Street View“",
+      "iosNote": "„iOS“ naudotojams: kai kuriais atvejais „iOS“ pašalina dalį EXIF duomenų (pvz., platumą ir ilgumą). Daugiau informacijos rasite <pageLink>šiame puslapyje</pageLink>."
+    },
+    "rawData": {
+      "description": "Toliau pateikiami neapdoroti duomenys, gauti naudojant <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Nepalaikomas failo formatas",
+    "message": "EXIF duomenų nėra.",
+    "close": "Uždaryti"
+  },
+  "pageNotShown": {
+    "message": "Įvyko klaida, todėl šio puslapio parodyti negalima.",
+    "reload": "Įkelti iš naujo"
+  },
+  "demo": {
+    "title": "Demonstracija",
+    "description": "Spustelėjus mygtuką „Paleisti demonstraciją“, programa veikia taip, lyg būtų pasirinkta <photoLink>ši nuotrauka</photoLink>.",
+    "runDemo": "Paleisti demonstraciją"
+  },
+  "settings": {
+    "title": "Nustatymai",
+    "savedInBrowser": "Nustatymai išsaugomi jūsų naršyklėje.",
+    "dateTime": {
+      "title": "Datos ir laiko formatas",
+      "dateFormat": "Datos formatas",
+      "clockSystem": "12 arba 24 val.",
+      "clock12": "12 val.",
+      "clock24": "24 val.",
+      "example": "Pavyzdys"
+    },
+    "usageData": {
+      "title": "Naudojimo duomenys",
+      "send": "Siųsti naudojimo duomenis, kad ši programa būtų tobulinama",
+      "note": "Kas siunčiama, aprašyta puslapyje „Apie“."
+    }
+  },
+  "language": {
+    "title": "Kalba",
+    "useBrowserSetting": "Naudoti naršyklės nustatymą ({{language}})",
+    "search": "Ieškoti",
+    "noLanguagesFound": "Kalbų nerasta",
+    "loadFailed": "Nepavyko įkelti kalbos. Patikrinkite ryšį ir bandykite dar kartą."
+  },
+  "about": {
+    "keptInBrowser": "Ši programa EXIF duomenis iš jūsų failo nuskaito jūsų naršyklėje, <br/>todėl failas lieka naršyklėje ir nėra siunčiamas į jokius serverius.",
+    "usageData": "Siekiant tobulinti šią programą, renkama naudojimo informacija, pavyzdžiui, <br/>kurie puslapiai atidaromi, kokio failo formato nuotrauka įkelta ir kokios <br/>klaidos įvyko, kartu su jūsų IP adresu ir pagal jį nustatyta apytiksle <br/>vieta. Tai galite išjungti puslapyje <settingsLink>Nustatymai</settingsLink>.",
+    "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Šios programos išeities kodas laikomas <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Vertimai į kitas kalbas yra laukiami: žr. <guideLink>kaip išversti šią programą</guideLink>.",
+    "developedBy": "Šią programą kuria Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X (anksčiau „Twitter“) profilis",
+      "title": "Atidaryti X (anksčiau „Twitter“) profilį"
+    },
+    "gitHubProfile": {
+      "alt": "„GitHub“ profilis",
+      "title": "Atidaryti „GitHub“ profilį"
+    },
+    "photoLocationMap": "Norite žemėlapyje iš karto matyti daugelio nuotraukų vietas?<br/> Tam skirta <plmLink>Photo Location Map</plmLink>."
+  }
+}
