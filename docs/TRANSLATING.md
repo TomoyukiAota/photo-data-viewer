@@ -100,6 +100,9 @@ reviews the pull request:
   exifr, GitHub, Google, iOS, Photo Location Map, Tomoyuki Aota, Twitter. An
   ending may follow a name (`GitHubissa`).
 - `dateTime.weekdayPattern`, when the file has it, contains `ddd`.
+- A character that is not drawn is written as an escape, so that whoever reads
+  the file sees that it is there: `\u00a0` for a no-break space, `\u00ad` for a
+  soft hyphen.
 - Every file is listed in `src/i18n/languages.ts` with a name in the language
   and in English, and what a language loads there is its own file and a dayjs
   locale that exists. The list is in the order of the names.
@@ -132,7 +135,7 @@ take longer with every language.
   on phones ("File Name", "Width x Height", "Date Taken", ...). A name that is
   wider continues on a second line, between two words. A single long word is
   broken wherever the column ends, unless you mark where it may be broken with
-  a soft hyphen, written `­`: `Aufnahme­datum`.
+  a soft hyphen, written `\u00ad`: `Aufnahme\u00addatum`.
 - `photoData.general.latitude` and `photoData.general.longitude` are one row of
   the table, on two lines beside the two numbers. Keep each to one line of that
   column, with an abbreviation if your language needs one

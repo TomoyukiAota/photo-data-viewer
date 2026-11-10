@@ -40,7 +40,7 @@ export function foldForSearch(text: string): string {
   return text
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '');
+    .replace(/[\u0300-\u036f]/g, '');
 }
 
 /** Whether an entry is listed for what is typed in the search field: any part of its label or of its keywords. */

@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Afficher dans Google Maps",
       "showInGoogleStreetView": "Afficher dans Google Street View",
-      "iosNote": "Pour les utilisateurs d’iOS : dans certains cas, iOS supprime certaines données EXIF (par exemple la latitude et la longitude). Consultez <pageLink>cette page</pageLink> pour en savoir plus."
+      "iosNote": "Pour les utilisateurs d’iOS\u00a0: dans certains cas, iOS supprime certaines données EXIF (par exemple la latitude et la longitude). Consultez <pageLink>cette page</pageLink> pour en savoir plus."
     },
     "rawData": {
       "description": "Voici les données brutes obtenues avec <exifrLink>exifr</exifrLink>."
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Démo",
-    "description": "Lorsque vous cliquez sur le bouton « Lancer la démo », l’application se comporte comme si <photoLink>cette photo</photoLink> avait été sélectionnée.",
+    "description": "Lorsque vous cliquez sur le bouton «\u00a0Lancer la démo\u00a0», l’application se comporte comme si <photoLink>cette photo</photoLink> avait été sélectionnée.",
     "runDemo": "Lancer la démo"
   },
   "settings": {
@@ -105,11 +105,11 @@
     "loadFailed": "Impossible de charger la langue. Vérifiez votre connexion, puis réessayez."
   },
   "about": {
-    "keptInBrowser": "Cette application lit les données EXIF de votre fichier dans votre navigateur ; <br/>le fichier reste donc dans votre navigateur et n’est envoyé à aucun serveur.",
+    "keptInBrowser": "Cette application lit les données EXIF de votre fichier dans votre navigateur\u00a0; <br/>le fichier reste donc dans votre navigateur et n’est envoyé à aucun serveur.",
     "usageData": "Pour améliorer cette application, des informations d’utilisation sont collectées, <br/>comme les pages ouvertes, le format de fichier de la photo chargée et les <br/>erreurs survenues, ainsi que votre adresse IP et la localisation approximative <br/>qui en est déduite. Vous pouvez désactiver cela dans les <settingsLink>Paramètres</settingsLink>.",
     "reportIssues": "Si vous trouvez des bogues ou des problèmes, signalez-les dans <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Le code source de cette application est hébergé sur <gitHubLink>GitHub</gitHubLink>.",
-    "translations": "Les traductions dans d’autres langues sont les bienvenues : voir <guideLink>comment traduire cette application</guideLink>.",
+    "translations": "Les traductions dans d’autres langues sont les bienvenues\u00a0: voir <guideLink>comment traduire cette application</guideLink>.",
     "developedBy": "Cette application est développée par Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil X (anciennement Twitter)",
@@ -119,6 +119,6 @@
       "alt": "Profil GitHub",
       "title": "Ouvrir le profil GitHub"
     },
-    "photoLocationMap": "Vous voulez voir sur une carte les lieux de nombreuses photos à la fois ?<br/> <plmLink>Photo Location Map</plmLink> est fait pour cela."
+    "photoLocationMap": "Vous voulez voir sur une carte les lieux de nombreuses photos à la fois\u00a0?<br/> <plmLink>Photo Location Map</plmLink> est fait pour cela."
   }
 }
