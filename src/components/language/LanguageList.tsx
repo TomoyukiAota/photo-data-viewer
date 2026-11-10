@@ -150,6 +150,9 @@ const LanguageList: React.FC<{
           role='listbox'
           aria-label={t('language.title')}
           hidden={listed.length === 0}
+          // Not a stop of the Tab key itself: Firefox makes one of every box
+          // that scrolls, before the entry that the Tab key is to reach.
+          tabIndex={-1}
           onKeyDown={handleKeyDown}
         >
           {listed.map((item) => (

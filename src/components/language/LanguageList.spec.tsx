@@ -82,6 +82,8 @@ describe('the keyboard', () => {
     renderList('ja');
     const reachable = options().filter((element) => element.tabIndex === 0);
     expect(reachable.map((element) => element.textContent)).toEqual(['日本語']);
+    // Not the box itself, which Firefox would stop at as it scrolls.
+    expect(screen.getByRole('listbox').tabIndex).toBe(-1);
   });
 
   it('moves the focus along the list with the arrow keys, from either end to the other', () => {
