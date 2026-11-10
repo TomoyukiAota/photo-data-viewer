@@ -7,7 +7,7 @@ export const UserSettingKey = {
   WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',
   WideLayoutPhotoImagePaneFlex: 'WideLayoutPhotoImagePaneFlex',
   SendUsageData: 'SendUsageData',
-  /** `auto` for the browser's language, or a language code of src/i18n/languages.ts. */
+  /** `auto` for the browser's language, or a language code of src/i18n/languages.ts; chosen on the Language page. */
   Language: 'Language',
 } as const;
 

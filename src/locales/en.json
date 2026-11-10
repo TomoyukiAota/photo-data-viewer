@@ -5,11 +5,13 @@
     "home": "Home",
     "demo": "Demo",
     "settings": "Settings",
+    "language": "Language",
     "about": "About"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Settings - {{appName}}",
+    "language": "Language - {{appName}}",
     "about": "About - {{appName}}"
   },
   "dateTime": {
@@ -81,11 +83,6 @@
   "settings": {
     "title": "Settings",
     "savedInBrowser": "Settings are saved in your browser.",
-    "language": {
-      "title": "Language",
-      "label": "Language",
-      "auto": "Browser's language ({{language}})"
-    },
     "dateTime": {
       "title": "Date & Time Format",
       "dateFormat": "Date Format",
@@ -99,6 +96,13 @@
       "send": "Send usage data to improve this application",
       "note": "What is sent is described on the About page."
     }
+  },
+  "language": {
+    "title": "Language",
+    "useBrowserSetting": "Use browser setting ({{language}})",
+    "search": "Search",
+    "noLanguagesFound": "No languages found",
+    "loadFailed": "The language could not be loaded. Check your connection, then try again."
   },
   "about": {
     "keptInBrowser": "This application fetches EXIF data from your file within your browser, <br/>so the file is kept within your browser and not sent to any servers.",

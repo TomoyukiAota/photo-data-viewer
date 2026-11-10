@@ -10,14 +10,6 @@ import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
 import { useUserSettings } from '../../hooks/useUserSettings';
-import { applyLanguage } from '../../i18n/i18n';
-import {
-  getLanguage,
-  isLanguageCode,
-  languages,
-  languageSettingAuto,
-} from '../../i18n/languages';
-import { browserLanguage, currentLanguage } from '../../i18n/resolve-language';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import { UserSettingKey } from '../../utils/user-settings';
 import classes from './UserSettings.module.scss';
@@ -26,19 +18,6 @@ const UserSettings: React.FC = () => {
   const { t } = useTranslation();
   const { userSettings, setUserSetting } = useUserSettings();
   const photoCtx = useContext(PhotoContext);
-
-  // A saved value that names no language the app has is shown as the default.
-  const language =
-    userSettings.language === languageSettingAuto ||
-    isLanguageCode(userSettings.language)
-      ? userSettings.language
-      : languageSettingAuto;
-  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
-    setUserSetting(UserSettingKey.Language, event.target.value);
-    // Before the photo is loaded again, so that its dates are in the language.
-    applyLanguage(currentLanguage());
-    photoCtx.reloadPhoto();
-  };
 
   const dateFormat = userSettings.dateFormat;
   const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
@@ -76,35 +55,6 @@ const UserSettings: React.FC = () => {
       <div className={classes['page-title']}>{t('settings.title')}</div>
       <div className={classes['page-description']}>
         <div>{t('settings.savedInBrowser')}</div>
-      </div>
-      <div className={classes['language-settings']}>
-        <div className={classes['language-settings-title']}>
-          {t('settings.language.title')}
-        </div>
-        <FormControl sx={{ minWidth: 150 }}>
-          <InputLabel id='language'>{t('settings.language.label')}</InputLabel>
-          <Select
-            labelId='language'
-            value={language}
-            label={t('settings.language.label')}
-            onChange={handleLanguageChange}
-          >
-            <MenuItem value={languageSettingAuto}>
-              {t('settings.language.auto', {
-                language: getLanguage(browserLanguage()).name,
-              })}
-            </MenuItem>
-            {languages.map((item) => {
-              // Each language under its own name, so that a user who cannot read
-              // the current language still finds theirs.
-              return (
-                <MenuItem value={item.code} key={item.code}>
-                  {item.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
       </div>
       <div className={classes['date-time-settings']}>
         <div className={classes['date-time-settings-title']}>

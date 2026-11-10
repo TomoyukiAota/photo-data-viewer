@@ -14,6 +14,7 @@ export const GA4_PAGE_TITLES: Readonly<Record<string, string>> = {
   '/': pageTitleDefaultValue.index,
   '/demo': pageTitleDefaultValue.demo,
   '/settings': pageTitleDefaultValue.settings,
+  '/language': pageTitleDefaultValue.language,
   '/about': pageTitleDefaultValue.about,
 };
 

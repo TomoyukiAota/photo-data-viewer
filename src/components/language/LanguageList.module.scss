@@ -1,0 +1,136 @@
+// The list of languages and its search field, which look like the list in
+// Photo Location Map's Language dialog and Settings dialog: its sizes and
+// colors are that list's.
+
+$row-height: 32px;
+$scrollbar-width: 12px;
+$border: 1px solid #7f7f7f;
+$primary: rgb(63, 81, 181); // The primary color of Photo Location Map.
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// As wide as the box, and as high as one of its entries.
+.search {
+  width: 100%;
+  height: $row-height;
+  margin: 0;
+  padding: 6px 12px;
+  border: $border;
+  border-radius: 0;
+  background: white;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  line-height: 20px;
+  appearance: none; // Safari draws a search field rounded otherwise.
+
+  &::placeholder {
+    color: #6e6e6e;
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: -2px;
+  }
+
+  // Safari on iOS zooms the page in when a field with smaller text is focused.
+  @media (pointer: coarse) {
+    font-size: 16px;
+  }
+}
+
+.box {
+  border: $border;
+  background: white;
+}
+
+// At most seven entries, and a scrollbar for more.
+.languages {
+  position: relative; // The entries' offsetTop is measured from here.
+  max-height: 7 * $row-height;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+
+  // TL;DR: A scrollbar of the list's own, which stays in view while there are
+  // more entries than the box shows, where the browser lets a page draw one.
+  // Details: macOS hides its scrollbar until the list is scrolled, so a box that
+  // ends between two entries looks like the whole list. Chrome, Edge and Safari
+  // on macOS draw a scrollbar styled this way in place of the system's, at all
+  // times. Firefox has no such styling: it takes the colors below, and shows
+  // the scrollbar when the system does. Safari on iOS takes neither.
+  &::-webkit-scrollbar {
+    width: $scrollbar-width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  // The border leaves the thumb narrower than its track, and rounded at both ends.
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid #f1f1f1;
+    border-radius: $scrollbar-width * 0.5;
+    background: #8a8a8a;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #6e6e6e;
+  }
+
+  // Not in Chrome or Edge, where these colors would replace the styling above.
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-color: #8a8a8a #f1f1f1;
+  }
+}
+
+.language {
+  min-height: $row-height;
+  padding: 6px 12px;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: start;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  &[aria-selected='true'] {
+    background: $primary;
+    color: white;
+  }
+
+  // The keyboard's focus, which the arrow keys move; Space or Enter chooses the
+  // entry under it. The ring is the primary color on white, and white on the
+  // primary color of the chosen entry.
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: -2px;
+  }
+
+  &[aria-selected='true']:focus-visible {
+    outline-color: white;
+    outline-offset: -4px;
+  }
+}
+
+// Said in the box, in the place of the entries, when the search finds none.
+.no-languages {
+  min-height: $row-height;
+  padding: 6px 12px;
+  font-size: 15px;
+  line-height: 20px;
+  color: #6e6e6e;
+
+  &:empty {
+    display: none;
+  }
+}

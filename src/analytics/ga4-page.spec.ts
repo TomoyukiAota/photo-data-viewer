@@ -13,6 +13,7 @@ describe('ga4PageFields', () => {
   it("gives each page its own title, never the photo's file name", () => {
     expect(ga4PageFields('https://photo-data-viewer.vercel.app/?photoPath=%2Ftmp%2Fa.jpg').page_title).toBe('Photo Data Viewer');
     expect(ga4PageFields('https://photo-data-viewer.vercel.app/settings').page_title).toBe('Settings - Photo Data Viewer');
+    expect(ga4PageFields('https://photo-data-viewer.vercel.app/language').page_title).toBe('Language - Photo Data Viewer');
     expect(ga4PageFields('https://photo-data-viewer.vercel.app/somewhere-else').page_title).toBe('Photo Data Viewer');
   });
 });

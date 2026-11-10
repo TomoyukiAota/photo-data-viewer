@@ -45,19 +45,44 @@ function tags(text: string): string {
     .join(' ');
 }
 
+/**
+ * The names that a translation keeps as the English text writes them
+ * (docs/TRANSLATING.md). The application's own name is a placeholder.
+ */
+const names = [
+  'EXIF',
+  'exifr',
+  'GitHub',
+  'Google',
+  'iOS',
+  'Photo Location Map',
+  'Tomoyuki Aota',
+  'Twitter',
+];
+
 const english = flatten(en);
 
 it('lists every language in src/i18n/languages.ts once, with a file for each', () => {
   const codes = languages.map((language) => language.code);
   expect(new Set(codes).size).toBe(codes.length);
-  for (const code of codes) expect(files).toContain(`${code}.json`);
+  expect(codes.map((code) => `${code}.json`).sort()).toEqual(files);
 });
 
-it('loads the dayjs locale of every language, which the days of the week come from', () => {
-  // A locale is loaded by importing it in languages.ts; one that is not stays
-  // silently at the previous language when it is set.
+it('names every language in the language itself and in English, which the Language page lists and searches', () => {
   for (const language of languages) {
-    expect(Object.keys(dayjs.Ls)).toContain(language.dayjsLocale);
+    expect(language.name.trim()).not.toBe('');
+    expect(language.englishName.trim()).not.toBe('');
+  }
+});
+
+it("loads every language's own file, and its dayjs locale, which the days of the week come from", async () => {
+  // What `load` in languages.ts names for each language. A dayjs locale that
+  // is not loaded stays silently at the previous language when it is set.
+  for (const language of languages) {
+    const { translation, dayjsLocale } = await language.load();
+    const file = readFileSync(join(__dirname, `${language.code}.json`), 'utf8');
+    expect({ [language.code]: translation }).toEqual({ [language.code]: JSON.parse(file) });
+    expect(Object.keys(dayjs.Ls)).toContain(dayjsLocale);
   }
 });
 
@@ -100,6 +125,15 @@ describe.each(files)('%s', (file) => {
   it('keeps the <tags> of each English text', () => {
     const different = Object.keys(texts).filter(
       (key) => key in english && tags(texts[key]) !== tags(english[key]),
+    );
+    expect(different).toEqual([]);
+  });
+
+  it('keeps the names of each English text as they are written', () => {
+    const different = Object.keys(texts).filter(
+      (key) =>
+        key in english &&
+        names.some((name) => english[key].includes(name) && !texts[key].includes(name)),
     );
     expect(different).toEqual([]);
   });

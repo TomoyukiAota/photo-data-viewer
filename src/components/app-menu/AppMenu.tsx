@@ -8,6 +8,7 @@ import {
 import { Check } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -20,7 +21,12 @@ import classes from './AppMenu.module.scss';
 interface Page {
   pathname: string;
   /** The key of the page's name in src/locales. */
-  nameKey: 'menu.home' | 'menu.demo' | 'menu.settings' | 'menu.about';
+  nameKey:
+    | 'menu.home'
+    | 'menu.demo'
+    | 'menu.settings'
+    | 'menu.language'
+    | 'menu.about';
   icon: React.JSX.Element;
 }
 
@@ -28,6 +34,7 @@ const pages: Page[] = [
   { pathname: '/', nameKey: 'menu.home', icon: <HomeIcon /> },
   { pathname: '/demo', nameKey: 'menu.demo', icon: <PlayArrowIcon /> },
   { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
+  { pathname: '/language', nameKey: 'menu.language', icon: <LanguageIcon /> },
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
 ];
 

@@ -5,11 +5,13 @@
     "home": "ホーム",
     "demo": "デモ",
     "settings": "設定",
+    "language": "言語 (Language)",
     "about": "このアプリについて"
   },
   "pageTitle": {
     "demo": "デモ - {{appName}}",
     "settings": "設定 - {{appName}}",
+    "language": "言語 - {{appName}}",
     "about": "このアプリについて - {{appName}}"
   },
   "dateTime": {
@@ -81,11 +83,6 @@
   "settings": {
     "title": "設定",
     "savedInBrowser": "設定はブラウザに保存されます。",
-    "language": {
-      "title": "言語",
-      "label": "言語",
-      "auto": "ブラウザの設定に従う（{{language}}）"
-    },
     "dateTime": {
       "title": "日時の形式",
       "dateFormat": "日付の形式",
@@ -99,6 +96,13 @@
       "send": "使用状況データを送信して、このアプリの改善に協力する",
       "note": "送信する内容は「このアプリについて」のページに記載しています。"
     }
+  },
+  "language": {
+    "title": "言語",
+    "useBrowserSetting": "ブラウザの設定に従う（{{language}}）",
+    "search": "検索",
+    "noLanguagesFound": "言語が見つかりません",
+    "loadFailed": "言語を読み込めませんでした。接続を確認して、もう一度お試しください。"
   },
   "about": {
     "keptInBrowser": "このアプリは、ブラウザ内部でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザ内部で処理され、サーバーには送信されません。",

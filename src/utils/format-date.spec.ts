@@ -20,11 +20,11 @@ it.each([
   expect(formatDate('2019-11-25T14:53:29')).toBe(expected);
 });
 
-it('writes the day of the week as the language does: in parentheses in Japanese', () => {
-  applyLanguage('ja');
+it('writes the day of the week as the language does: in parentheses in Japanese', async () => {
+  await applyLanguage('ja');
   expect(formatDate('2019-11-25T14:53:29')).toBe('2019-11-25 (月) 14:53:29');
   localStorage.setItem('ClockSystemFormat', '12-hour');
   expect(formatDate('2019-11-25T14:53:29')).toBe('2019-11-25 (月) 02:53:29 午後');
-  applyLanguage('en');
+  await applyLanguage('en');
   expect(formatDate('2019-11-25T14:53:29')).toBe('2019-11-25 Mon 02:53:29 pm');
 });
