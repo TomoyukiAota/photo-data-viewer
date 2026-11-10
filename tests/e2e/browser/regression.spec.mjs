@@ -248,13 +248,15 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await expect(page).toHaveTitle('Language - Photo Data Viewer');
 
   // A list box: the browser's language first, chosen until another is, then
-  // each language under its own name.
+  // each language under its own name, those in Latin letters by alphabet.
   const list = page.getByRole('listbox');
   const options = list.getByRole('option');
   const chosen = list.locator('[aria-selected="true"]');
   await expect(list).toHaveAccessibleName('Language');
   await expect(options).toHaveCount(43);
   await expect(options.first()).toHaveText('Use browser setting (English)');
+  await expect(options.nth(1)).toHaveText('Bahasa Indonesia');
+  await expect(options.last()).toHaveText('繁體中文');
   await expect(chosen).toHaveText(['Use browser setting (English)']);
   await expect(
     list.getByRole('option', { name: '日本語', exact: true }),
@@ -280,13 +282,13 @@ test('the Language page lists the languages, narrows them down, and applies the 
   // name, its English name or its code.
   const search = page.getByRole('searchbox', { name: 'Search', exact: true });
   await search.fill('cestina');
-  await expect(options).toHaveText(['čeština']);
+  await expect(options).toHaveText(['Čeština']);
   await search.fill('GERMAN');
   await expect(options).toHaveText(['Deutsch']);
   await search.fill('pt-');
   await expect(options).toHaveText([
-    'português (Brasil)',
-    'português (Portugal)',
+    'Português (Brasil)',
+    'Português (Portugal)',
   ]);
   await search.fill('no such language');
   await expect(options).toHaveCount(0);
@@ -321,7 +323,7 @@ test('the Language page lists the languages, narrows them down, and applies the 
   ).toBeFocused();
   await page.keyboard.press('ArrowUp');
   await expect(
-    list.getByRole('option', { name: 'dansk', exact: true }),
+    list.getByRole('option', { name: 'Dansk', exact: true }),
   ).toBeFocused();
   await page.keyboard.press('Home');
   await expect(options.first()).toBeFocused();
@@ -505,10 +507,15 @@ test.describe('in a browser whose language is Japanese', () => {
     const chosen = list.locator('[aria-selected="true"]');
     await expect(list).toHaveAccessibleName('言語');
     await expect(chosen).toHaveText(['ブラウザの設定に従う（日本語）']);
-    await expect(
-      page.getByRole('searchbox', { name: '検索', exact: true }),
-    ).toBeVisible();
+    const search = page.getByRole('searchbox', { name: '検索', exact: true });
+    await expect(search).toBeVisible();
     await snapshot(page, 'language-ja');
+
+    // The search also finds a language by its name in the language of the
+    // page, which the browser knows.
+    await search.fill('ドイツ語');
+    await expect(list.getByRole('option')).toHaveText(['Deutsch']);
+    await search.fill('');
 
     await list.getByRole('option', { name: 'English', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');

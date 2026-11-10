@@ -8,7 +8,7 @@ Node 26.13.0 and npm 11.20.0, in the working tree of the branch
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 33 suites, 536 tests, in about a second                           |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 33 suites, 542 tests, in about a second                           |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
 | `npm run test:e2e` (Chromium)                        | Passed: 19 tests, 3 of them new, in 26 s                                  |
 | `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 19 tests; the screenshots as described below                      |
@@ -24,9 +24,9 @@ browser suite.
 ## The tests do not multiply with the languages
 
 - The unit test of the translation files, `src/locales/locales.spec.ts`, checks
-  every file: 42 files, 7 checks each, and 3 for the list as a whole, 297 tests
+  every file: 42 files, 7 checks each, and 4 for the list as a whole, 298 tests
   in 0.3 s. It also loads every language as the app does, and compares what it
-  got with the file.
+  got with the file, and holds the list to the order of its names.
 - The browser suite has English, Japanese and Arabic: 3 more tests than before,
   for 42 languages in place of 2.
 - Looking at every language in a browser was done once, with scripts that are
@@ -41,6 +41,8 @@ Taken with Chrome on this Mac, like the others.
   on the Settings page.
 - `language.png`, `language-ja.png`: new, the Language page. Headless Chrome
   draws no scrollbars, so the list is shown without the one that a window has.
+  They and `language-ar.png` were taken again when the maintainer fixed the
+  names and their order.
 - `loaded-general-ar.png`, `narrow-loaded-ar.png`, `settings-ar.png`,
   `language-ar.png`: new, in Arabic, laid out from the right.
 - Every other screenshot is unchanged, which is the check that English and

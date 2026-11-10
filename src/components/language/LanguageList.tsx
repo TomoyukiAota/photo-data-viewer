@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -8,7 +8,11 @@ import {
   languageSettingAuto,
 } from '../../i18n/languages';
 import { browserLanguage } from '../../i18n/resolve-language';
-import { LanguageListItem, matchesSearch } from './language-search';
+import {
+  LanguageListItem,
+  languageNamesIn,
+  matchesSearch,
+} from './language-search';
 import classes from './LanguageList.module.scss';
 
 /** Scrolls the list, and nothing around it, by as little as shows the entry. */
@@ -34,8 +38,8 @@ function showInList(list: HTMLElement, entry: HTMLElement): void {
  * that scrolls. The arrow keys, Home and End move the keyboard's focus along
  * the list, and Space or Enter chooses the entry under it. The search is
  * without regard to case or diacritics, and finds a language by its own name,
- * its English name or its code. The chosen entry stays chosen while the search
- * hides it.
+ * its English name, its name in the language the page is shown in, or its
+ * code. The chosen entry stays chosen while the search hides it.
  */
 const LanguageList: React.FC<{
   /** The Language setting that is chosen in the list. */
@@ -49,6 +53,11 @@ const LanguageList: React.FC<{
   const [search, setSearch] = useState('');
   /** The entry the keyboard's focus was on last. */
   const [focused, setFocused] = useState<LanguageSetting | null>(null);
+  /** Each language's name in the language of the page: ドイツ語 finds Deutsch in Japanese. */
+  const nameInPageLanguage = useMemo(
+    () => languageNamesIn(i18n.language),
+    [i18n.language],
+  );
 
   const items: LanguageListItem[] = [
     {
@@ -63,7 +72,11 @@ const LanguageList: React.FC<{
       setting: language.code,
       label: language.name,
       labelLanguage: language.code,
-      keywords: [language.englishName, language.code],
+      keywords: [
+        language.englishName,
+        language.code,
+        nameInPageLanguage(language.code),
+      ],
     })),
   ];
   const listed = items.filter((item) => matchesSearch(item, search));

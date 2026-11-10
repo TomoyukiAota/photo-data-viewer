@@ -68,6 +68,14 @@ it('lists every language in src/i18n/languages.ts once, with a file for each', (
   expect(codes.map((code) => `${code}.json`).sort()).toEqual(files);
 });
 
+it('lists the languages by their names: those in Latin letters by alphabet, then the other scripts', () => {
+  // The order of Photo Location Map's list as well, and the one in which a
+  // collator for English sorts the names. A new language goes where its name
+  // comes in it.
+  const names = languages.map((language) => language.name);
+  expect(names).toEqual([...names].sort(new Intl.Collator('en').compare));
+});
+
 it('names every language in the language itself and in English, which the Language page lists and searches', () => {
   for (const language of languages) {
     expect(language.name.trim()).not.toBe('');

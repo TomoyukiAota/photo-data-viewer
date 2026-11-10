@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { applyLanguage } from '../../i18n/i18n';
 import { languages, LanguageSetting } from '../../i18n/languages';
 import LanguageList from './LanguageList';
 
@@ -225,5 +226,25 @@ describe('the search field', () => {
     search('japan');
     fireEvent.click(option('日本語'));
     expect(onChoose.mock.calls).toEqual([['ja']]);
+  });
+});
+
+describe('in a page shown in Japanese', () => {
+  afterEach(() => act(() => applyLanguage('en')));
+
+  it('finds a language by its name in Japanese as well, which the browser knows', async () => {
+    await act(() => applyLanguage('ja'));
+    renderList('auto');
+    const field = screen.getByRole('searchbox', { name: '検索' });
+
+    fireEvent.change(field, { target: { value: 'ドイツ語' } });
+    expect(labels()).toEqual(['Deutsch']);
+
+    fireEvent.change(field, { target: { value: 'ポルトガル語' } });
+    expect(labels()).toEqual(['Português (Brasil)', 'Português (Portugal)']);
+
+    // Its own name, its English name and its code find it as in any language.
+    fireEvent.change(field, { target: { value: 'german' } });
+    expect(labels()).toEqual(['Deutsch']);
   });
 });

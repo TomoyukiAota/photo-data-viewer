@@ -8,8 +8,31 @@ export interface LanguageListItem {
   label: string;
   /** The language that the label is written in, by which it is drawn and read aloud. */
   labelLanguage: string;
-  /** What the search finds the entry by, besides its label: a language's English name and its code. */
+  /**
+   * What the search finds the entry by, besides its label: a language's English
+   * name, its code, and its name in the language the page is shown in.
+   */
   keywords: readonly string[];
+}
+
+/**
+ * What gives a language's name in another language, by its code: "ドイツ語" for
+ * `de` in Japanese. The browser has the names (`Intl.DisplayNames`), so the app
+ * needs no table of them. It gives an empty text where the browser has none.
+ */
+export function languageNamesIn(language: string): (code: string) => string {
+  try {
+    const names = new Intl.DisplayNames([language], { type: 'language' });
+    return (code) => {
+      try {
+        return names.of(code) ?? '';
+      } catch {
+        return ''; // A code that the browser does not take for a language's.
+      }
+    };
+  } catch {
+    return () => ''; // A browser without the names, or a language it does not take.
+  }
 }
 
 /** A text as the search compares it: in lower case and without diacritics, so that "cestina" finds "čeština". */

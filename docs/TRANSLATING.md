@@ -36,8 +36,10 @@ finds the texts by them.
    the language alone (`de`, `fr`, `ko`) unless a region or a script matters
    for the text (`pt-BR`, `zh-Hant`). Paste the content of `src/locales/en.json`
    into it and translate every text.
-3. Add the language to the list in `src/i18n/languages.ts`, where its code
-   comes in alphabetical order. For German, say:
+3. Add the language to the list in `src/i18n/languages.ts`, where its name
+   comes: the names written in Latin letters are in the order of the alphabet,
+   and the other scripts follow them. The check tells you when the place is not
+   the right one. For German, say:
 
    ```ts
    {
@@ -49,9 +51,12 @@ finds the texts by them.
    },
    ```
 
-   - `name` is the language's name written in the language itself, and
-     `englishName` its name in English. The Language page lists the first, and
-     its search finds the language by either.
+   - `name` is the language's name written in the language itself, with a
+     capital letter where its script has them, as macOS lists languages
+     (`Français`, `Norsk bokmål`), and `englishName` its name in English. The
+     Language page lists the first. Its search finds the language by either,
+     by its code, and by its name in the language the page is shown in, which
+     the browser knows.
    - `direction` is `rtl` for a language written from right to left, as Arabic
      and Hebrew are, and `ltr` for any other.
    - `load` names your file and the language's dayjs locale, which has the days
@@ -97,7 +102,7 @@ reviews the pull request:
 - `dateTime.weekdayPattern`, when the file has it, contains `ddd`.
 - Every file is listed in `src/i18n/languages.ts` with a name in the language
   and in English, and what a language loads there is its own file and a dayjs
-  locale that exists.
+  locale that exists. The list is in the order of the names.
 
 To run it on your computer, set the repository up as
 [CONTRIBUTING.md](./CONTRIBUTING.md) says, then:
@@ -189,54 +194,55 @@ language does not have.
 
 ## Languages
 
-The languages are those that Windows and macOS are localized in. "Machine
-translation" means that the texts were written by a machine and that no
-speaker of the language has reviewed them yet.
+The languages are those that Windows and macOS are localized in, in the order
+of the list on the Language page. "Machine translation" means that the texts
+were written by a machine and that no speaker of the language has reviewed
+them yet.
 
-| Code      | Language              | Name in the language   | Status                                |
-| --------- | --------------------- | ---------------------- | ------------------------------------- |
-| `ar`      | Arabic                | العربية                | Machine translation, not reviewed yet |
-| `bg`      | Bulgarian             | български              | Machine translation, not reviewed yet |
-| `ca`      | Catalan               | català                 | Machine translation, not reviewed yet |
-| `cs`      | Czech                 | čeština                | Machine translation, not reviewed yet |
-| `da`      | Danish                | dansk                  | Machine translation, not reviewed yet |
-| `de`      | German                | Deutsch                | Machine translation, not reviewed yet |
-| `el`      | Greek                 | Ελληνικά               | Machine translation, not reviewed yet |
-| `en`      | English               | English                | The source                            |
-| `es`      | Spanish               | español                | Machine translation, not reviewed yet |
-| `et`      | Estonian              | eesti                  | Machine translation, not reviewed yet |
-| `eu`      | Basque                | euskara                | Machine translation, not reviewed yet |
-| `fi`      | Finnish               | suomi                  | Machine translation, not reviewed yet |
-| `fr`      | French                | français               | Machine translation, not reviewed yet |
-| `gl`      | Galician              | galego                 | Machine translation, not reviewed yet |
-| `he`      | Hebrew                | עברית                  | Machine translation, not reviewed yet |
-| `hi`      | Hindi                 | हिन्दी                 | Machine translation, not reviewed yet |
-| `hr`      | Croatian              | hrvatski               | Machine translation, not reviewed yet |
-| `hu`      | Hungarian             | magyar                 | Machine translation, not reviewed yet |
-| `id`      | Indonesian            | Bahasa Indonesia       | Machine translation, not reviewed yet |
-| `it`      | Italian               | italiano               | Machine translation, not reviewed yet |
-| `ja`      | Japanese              | 日本語                 | Reviewed by the maintainer, except the texts of the Language page |
-| `ko`      | Korean                | 한국어                 | Machine translation, not reviewed yet |
-| `lt`      | Lithuanian            | lietuvių               | Machine translation, not reviewed yet |
-| `lv`      | Latvian               | latviešu               | Machine translation, not reviewed yet |
-| `ms`      | Malay                 | Bahasa Melayu          | Machine translation, not reviewed yet |
-| `nb`      | Norwegian Bokmål      | norsk bokmål           | Machine translation, not reviewed yet |
-| `nl`      | Dutch                 | Nederlands             | Machine translation, not reviewed yet |
-| `pl`      | Polish                | polski                 | Machine translation, not reviewed yet |
-| `pt-BR`   | Portuguese (Brazil)   | português (Brasil)     | Machine translation, not reviewed yet |
-| `pt-PT`   | Portuguese (Portugal) | português (Portugal)   | Machine translation, not reviewed yet |
-| `ro`      | Romanian              | română                 | Machine translation, not reviewed yet |
-| `ru`      | Russian               | русский                | Machine translation, not reviewed yet |
-| `sk`      | Slovak                | slovenčina             | Machine translation, not reviewed yet |
-| `sl`      | Slovenian             | slovenščina            | Machine translation, not reviewed yet |
-| `sr-Latn` | Serbian (Latin)       | srpski (latinica)      | Machine translation, not reviewed yet |
-| `sv`      | Swedish               | svenska                | Machine translation, not reviewed yet |
-| `th`      | Thai                  | ไทย                    | Machine translation, not reviewed yet |
-| `tr`      | Turkish               | Türkçe                 | Machine translation, not reviewed yet |
-| `uk`      | Ukrainian             | українська             | Machine translation, not reviewed yet |
-| `vi`      | Vietnamese            | Tiếng Việt             | Machine translation, not reviewed yet |
-| `zh-Hans` | Chinese (Simplified)  | 简体中文               | Machine translation, not reviewed yet |
-| `zh-Hant` | Chinese (Traditional) | 繁體中文               | Machine translation, not reviewed yet |
+| Name in the language   | Code      | Language              | Status                                |
+| ---------------------- | --------- | --------------------- | ------------------------------------- |
+| Bahasa Indonesia       | `id`      | Indonesian            | Machine translation, not reviewed yet |
+| Bahasa Melayu          | `ms`      | Malay                 | Machine translation, not reviewed yet |
+| Català                 | `ca`      | Catalan               | Machine translation, not reviewed yet |
+| Čeština                | `cs`      | Czech                 | Machine translation, not reviewed yet |
+| Dansk                  | `da`      | Danish                | Machine translation, not reviewed yet |
+| Deutsch                | `de`      | German                | Machine translation, not reviewed yet |
+| Eesti                  | `et`      | Estonian              | Machine translation, not reviewed yet |
+| English                | `en`      | English               | The source                            |
+| Español                | `es`      | Spanish               | Machine translation, not reviewed yet |
+| Euskara                | `eu`      | Basque                | Machine translation, not reviewed yet |
+| Français               | `fr`      | French                | Machine translation, not reviewed yet |
+| Galego                 | `gl`      | Galician              | Machine translation, not reviewed yet |
+| Hrvatski               | `hr`      | Croatian              | Machine translation, not reviewed yet |
+| Italiano               | `it`      | Italian               | Machine translation, not reviewed yet |
+| Latviešu               | `lv`      | Latvian               | Machine translation, not reviewed yet |
+| Lietuvių               | `lt`      | Lithuanian            | Machine translation, not reviewed yet |
+| Magyar                 | `hu`      | Hungarian             | Machine translation, not reviewed yet |
+| Nederlands             | `nl`      | Dutch                 | Machine translation, not reviewed yet |
+| Norsk bokmål           | `nb`      | Norwegian Bokmål      | Machine translation, not reviewed yet |
+| Polski                 | `pl`      | Polish                | Machine translation, not reviewed yet |
+| Português (Brasil)     | `pt-BR`   | Portuguese (Brazil)   | Machine translation, not reviewed yet |
+| Português (Portugal)   | `pt-PT`   | Portuguese (Portugal) | Machine translation, not reviewed yet |
+| Română                 | `ro`      | Romanian              | Machine translation, not reviewed yet |
+| Slovenčina             | `sk`      | Slovak                | Machine translation, not reviewed yet |
+| Slovenščina            | `sl`      | Slovenian             | Machine translation, not reviewed yet |
+| Srpski (latinica)      | `sr-Latn` | Serbian (Latin)       | Machine translation, not reviewed yet |
+| Suomi                  | `fi`      | Finnish               | Machine translation, not reviewed yet |
+| Svenska                | `sv`      | Swedish               | Machine translation, not reviewed yet |
+| Tiếng Việt             | `vi`      | Vietnamese            | Machine translation, not reviewed yet |
+| Türkçe                 | `tr`      | Turkish               | Machine translation, not reviewed yet |
+| Ελληνικά               | `el`      | Greek                 | Machine translation, not reviewed yet |
+| Български              | `bg`      | Bulgarian             | Machine translation, not reviewed yet |
+| Русский                | `ru`      | Russian               | Machine translation, not reviewed yet |
+| Українська             | `uk`      | Ukrainian             | Machine translation, not reviewed yet |
+| עברית                  | `he`      | Hebrew                | Machine translation, not reviewed yet |
+| العربية                | `ar`      | Arabic                | Machine translation, not reviewed yet |
+| हिन्दी                 | `hi`      | Hindi                 | Machine translation, not reviewed yet |
+| ไทย                    | `th`      | Thai                  | Machine translation, not reviewed yet |
+| 한국어                    | `ko`      | Korean                | Machine translation, not reviewed yet |
+| 日本語                    | `ja`      | Japanese              | Reviewed by the maintainer, except the texts of the Language page |
+| 简体中文                   | `zh-Hans` | Chinese (Simplified)  | Machine translation, not reviewed yet |
+| 繁體中文                   | `zh-Hant` | Chinese (Traditional) | Machine translation, not reviewed yet |
 
 When a language is added, add it here with who reviewed it, or "Machine
 translation, not reviewed yet" until a speaker has.

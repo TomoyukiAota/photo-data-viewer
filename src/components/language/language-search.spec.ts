@@ -1,17 +1,23 @@
-import { foldForSearch, LanguageListItem, matchesSearch } from './language-search';
+import {
+  foldForSearch,
+  LanguageListItem,
+  languageNamesIn,
+  matchesSearch,
+} from './language-search';
 
+// As the list has them in a page shown in Japanese.
 const czech: LanguageListItem = {
   setting: 'en', // Which setting it stands for makes no difference to the search.
-  label: 'čeština',
+  label: 'Čeština',
   labelLanguage: 'cs',
-  keywords: ['Czech', 'cs'],
+  keywords: ['Czech', 'cs', 'チェコ語'],
 };
 
 const brazilianPortuguese: LanguageListItem = {
   setting: 'en',
-  label: 'português (Brasil)',
+  label: 'Português (Brasil)',
   labelLanguage: 'pt-BR',
-  keywords: ['Portuguese (Brazil)', 'pt-BR'],
+  keywords: ['Portuguese (Brazil)', 'pt-BR', 'ポルトガル語 (ブラジル)'],
 };
 
 describe('foldForSearch', () => {
@@ -48,6 +54,12 @@ describe('matchesSearch', () => {
     expect(matchesSearch(brazilianPortuguese, 'brazil')).toBe(true);
   });
 
+  it('finds a language by its name in the language the page is shown in', () => {
+    expect(matchesSearch(czech, 'チェコ')).toBe(true);
+    expect(matchesSearch(brazilianPortuguese, 'ポルトガル語')).toBe(true);
+    expect(matchesSearch(czech, 'ポルトガル語')).toBe(false);
+  });
+
   it('finds a language by its code', () => {
     expect(matchesSearch(czech, 'cs')).toBe(true);
     expect(matchesSearch(brazilianPortuguese, 'PT-br')).toBe(true);
@@ -77,5 +89,25 @@ describe('matchesSearch', () => {
     expect(matchesSearch(browser, 'browser')).toBe(true);
     expect(matchesSearch(browser, 'eng')).toBe(true);
     expect(matchesSearch(browser, 'en-US')).toBe(false);
+  });
+});
+
+describe('languageNamesIn', () => {
+  it("gives a language's name in another language, which the browser knows", () => {
+    expect(languageNamesIn('ja')('de')).toBe('ドイツ語');
+    expect(languageNamesIn('en')('de')).toBe('German');
+    expect(languageNamesIn('de')('ja')).toBe('Japanisch');
+  });
+
+  it('names the languages that the list has under a script or a region', () => {
+    const inEnglish = languageNamesIn('en');
+    expect(inEnglish('zh-Hant')).toContain('Chinese');
+    expect(inEnglish('pt-BR')).toContain('Portuguese');
+    expect(inEnglish('sr-Latn')).toContain('Serbian');
+  });
+
+  it('gives an empty text for what is no language code, or in what is no language', () => {
+    expect(languageNamesIn('ja')('not a code')).toBe('');
+    expect(languageNamesIn('not a language')('de')).toBe('');
   });
 });

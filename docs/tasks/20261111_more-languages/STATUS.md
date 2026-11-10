@@ -19,8 +19,9 @@ localized in, and to ask for the language in the same way:
 
 ## Current state
 
-All of it is implemented and checked locally. Nothing is pushed; the maintainer
-decides that after reading the report.
+All of it is implemented and checked locally, and is in a pull request from
+this branch. It is not merged: merging publishes the app, which is the
+maintainer's to do.
 
 - **42 languages** (`src/i18n/languages.ts`, `src/locales/`). The 40 new
   translations are machine translation that no speaker has reviewed;
@@ -47,7 +48,15 @@ second look.
   ブラウザの設定に従う（日本語）, which is the text the maintainer reviewed for
   the select it replaces. It parallels Photo Location Map's "Use system setting
   (English)".
-- **The order is that of the codes**, as the list of languages was given.
+- **The names and their order are the maintainer's**, fixed after the first
+  report, and Photo Location Map's too: each language under its own name,
+  capitalized as macOS lists them, those in Latin letters by alphabet and then
+  the other scripts. It is the order in which a collator for English sorts the
+  names, and the check of the translation files holds the list to it.
+- **The search also finds a language by its name in the language of the
+  page**, as the maintainer added: ドイツ語 finds Deutsch in a page shown in
+  Japanese. The browser has those names (`Intl.DisplayNames`), so the app has
+  no table of them.
 - **The search finds the first entry by its text alone** ("browser",
   "setting"), not by the language it stands for.
 - **"No languages found" is said inside the box**, in the place of the entries,
@@ -138,7 +147,7 @@ those of the Settings page.
 
 Nothing is left to implement. What remains is the maintainer's:
 
-- Read the report and decide on pushing, the pull request and the deployment.
+- Review the pull request, and merge it when the app is to be published.
 - Bring the words that this app shares with Photo Location Map into line, once
   its translations exist: [the words chosen](./evidence/TERMS.md) lists them.
 - Run the Electron suite as `docs/DEVELOPMENT.md` says.
