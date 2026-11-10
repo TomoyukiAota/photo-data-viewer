@@ -44,15 +44,20 @@ $primary: rgb(63, 81, 181); // The primary color of Photo Location Map.
   }
 }
 
+// TL;DR: A box of seven entries, whatever the search leaves of the list.
+// Details: A box that shrank with its list would move everything below it
+// while the user types. With no match, the line that says so is in the box.
 .box {
+  box-sizing: content-box; // Seven entries inside the border.
+  height: 7 * $row-height;
   border: $border;
   background: white;
 }
 
-// At most seven entries, and a scrollbar for more.
+// The entries, which scroll when there are more than the box shows.
 .languages {
   position: relative; // The entries' offsetTop is measured from here.
-  max-height: 7 * $row-height;
+  max-height: 100%;
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -129,8 +134,12 @@ $primary: rgb(63, 81, 181); // The primary color of Photo Location Map.
   font-size: 15px;
   line-height: 20px;
   color: #6e6e6e;
+  text-align: start;
 
+  // Without a text, it takes no room, but stays in the page, so that a screen
+  // reader says the text when it comes.
   &:empty {
-    display: none;
+    min-height: 0;
+    padding: 0;
   }
 }

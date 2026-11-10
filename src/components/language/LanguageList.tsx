@@ -28,6 +28,20 @@ function showInList(list: HTMLElement, entry: HTMLElement): void {
 }
 
 /**
+ * Whether the field can take the keyboard's focus without anything else
+ * happening: no keyboard coming up on the screen, and nothing to scroll to.
+ */
+function canTakeFocusQuietly(field: HTMLElement): boolean {
+  // A mouse or a trackpad, so a keyboard that is not on the screen.
+  const hasKeyboard =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const { top, bottom } = field.getBoundingClientRect();
+  const isInView = top >= 0 && bottom <= window.innerHeight;
+  return hasKeyboard && isInView;
+}
+
+/**
  * The list to choose the Language setting from, with a field above it that
  * narrows the list down: the browser's language first, with the language that it
  * stands for in this browser, then each language under its own name, so that a
@@ -36,11 +50,13 @@ function showInList(list: HTMLElement, entry: HTMLElement): void {
  * TL;DR: It looks and works like the list in Photo Location Map, so that the
  * two applications ask for the language in the same way.
  * Details: a list box of which one entry is chosen, in a box of seven entries
- * that scrolls. The arrow keys, Home and End move the keyboard's focus along
- * the list, and Space or Enter chooses the entry under it. The search is
- * without regard to case or diacritics, and finds a language by its own name,
- * its English name, its name in the language the page is shown in, or its
- * code. The chosen entry stays chosen while the search hides it.
+ * that scrolls. The box keeps that height whatever the search leaves, so that
+ * nothing below it moves while the user types. The arrow keys, Home and End
+ * move the keyboard's focus along the list, and Space or Enter chooses the
+ * entry under it. The search is without regard to case or diacritics, and
+ * finds a language by its own name, its English name, its name in the language
+ * the page is shown in, or its code. The chosen entry stays chosen while the
+ * search hides it.
  */
 const LanguageList: React.FC<{
   /** The Language setting that is chosen in the list. */
@@ -51,6 +67,7 @@ const LanguageList: React.FC<{
   const { t, i18n } = useTranslation();
   const listId = useId();
   const listRef = useRef<HTMLUListElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState('');
   /** The entry the keyboard's focus was on last. */
   const [focused, setFocused] = useState<LanguageSetting | null>(null);
@@ -92,6 +109,20 @@ const LanguageList: React.FC<{
     listed.find((item) => item.setting === selected) ??
     listed[0]
   )?.setting;
+
+  // TL;DR: The search field has the keyboard's focus when the page opens, so
+  // that the user can type at once, where that changes nothing else.
+  // Details: In Photo Location Map the list is in a dialog, which gives its
+  // search field the focus. A page is more careful. Where the user types on the
+  // screen, the focus would bring the keyboard up over the list before they
+  // asked for it; and a field outside the window would be scrolled to. In
+  // either case the focus stays where it is.
+  useEffect(() => {
+    const field = searchRef.current;
+    if (field && canTakeFocusQuietly(field)) {
+      field.focus({ preventScroll: true });
+    }
+  }, []);
 
   // With more languages than the box shows at once, the chosen one may be below
   // its edge: it is shown when the page opens and when the search is cleared.
@@ -147,6 +178,7 @@ const LanguageList: React.FC<{
   return (
     <div className={classes.container}>
       <input
+        ref={searchRef}
         type='search'
         className={classes.search}
         value={search}
@@ -189,6 +221,7 @@ const LanguageList: React.FC<{
             </li>
           ))}
         </ul>
+        {/* In the page while it is empty, so that a screen reader says the text when it comes. */}
         <div className={classes['no-languages']} role='status'>
           {listed.length === 0 ? t('language.noLanguagesFound') : ''}
         </div>

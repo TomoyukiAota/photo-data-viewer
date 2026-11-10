@@ -247,6 +247,12 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await expect(page).toHaveURL(/\/language$/);
   await expect(page).toHaveTitle('Language - Photo Data Viewer');
 
+  // The search field has the focus when the page opens, as a keyboard is at
+  // hand in this browser, and the page is not scrolled for it.
+  const search = page.getByRole('searchbox', { name: 'Search', exact: true });
+  await expect(search).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+
   // A list box: the browser's language first, chosen until another is, then
   // each language under its own name, those in Latin letters by alphabet.
   const list = page.getByRole('listbox');
@@ -269,6 +275,17 @@ test('the Language page lists the languages, narrows them down, and applies the 
       element.scrollHeight > element.clientHeight,
     ]),
   ).toEqual([224, true]);
+  // The line that says when the search finds no language is in the page from
+  // the start, empty and without height, so that a screen reader says it when
+  // it comes.
+  const status = page.getByRole('status');
+  await expect(status).toBeAttached();
+  await expect(status).toHaveText('');
+  // Found without its role, which a hidden list has not: the list is hidden
+  // while the search finds no language.
+  const box = page.locator('[role="listbox"]').locator('xpath=..');
+  const boxHeight = (await box.boundingBox()).height;
+  expect(boxHeight).toBe(226); // Seven entries and the border.
   if (browserName === 'chromium') {
     expect(
       await list.evaluate(
@@ -279,10 +296,11 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await snapshot(page, 'language');
 
   // The search is without regard to case or diacritics, by a language's own
-  // name, its English name or its code.
-  const search = page.getByRole('searchbox', { name: 'Search', exact: true });
+  // name, its English name or its code. The box keeps its height whatever the
+  // search leaves, so that nothing below it moves while the user types.
   await search.fill('cestina');
   await expect(options).toHaveText(['Čeština']);
+  expect((await box.boundingBox()).height).toBe(boxHeight);
   await search.fill('GERMAN');
   await expect(options).toHaveText(['Deutsch']);
   await search.fill('pt-');
@@ -292,7 +310,15 @@ test('the Language page lists the languages, narrows them down, and applies the 
   ]);
   await search.fill('no such language');
   await expect(options).toHaveCount(0);
-  await expect(page.getByRole('status')).toHaveText('No languages found');
+  await expect(status).toHaveText('No languages found');
+  // The line is in the box, in the place of the entries.
+  const statusBox = await status.boundingBox();
+  const emptyBox = await box.boundingBox();
+  expect(emptyBox.height).toBe(boxHeight);
+  expect(statusBox.y).toBeGreaterThanOrEqual(emptyBox.y);
+  expect(statusBox.y + statusBox.height).toBeLessThan(
+    emptyBox.y + emptyBox.height,
+  );
   // The chosen entry stays chosen while the search hides it.
   await search.fill('');
   await expect(chosen).toHaveText(['Use browser setting (English)']);
@@ -508,7 +534,7 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(list).toHaveAccessibleName('言語');
     await expect(chosen).toHaveText(['ブラウザの設定に従う（日本語）']);
     const search = page.getByRole('searchbox', { name: '検索', exact: true });
-    await expect(search).toBeVisible();
+    await expect(search).toBeFocused();
     await snapshot(page, 'language-ja');
 
     // The search also finds a language by its name in the language of the
@@ -538,6 +564,36 @@ test.describe('in a browser whose language is Japanese', () => {
     ).toBeVisible();
     await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
     await snapshot(page, 'about-ja');
+  });
+});
+
+test.describe('on a phone', () => {
+  // A device that is touched, which Playwright emulates in Chromium alone.
+  test.skip(
+    ({ browserName }) => browserName !== 'chromium',
+    'Playwright emulates a touch device in Chromium alone.',
+  );
+  test.use({
+    viewport: { width: 375, height: 667 },
+    isMobile: true,
+    hasTouch: true,
+  });
+
+  test('the Language page leaves the focus alone, so that the keyboard stays down until the user asks for it', async ({
+    page,
+  }) => {
+    await page.goto('/language');
+    // What the page goes by: the main pointer is a finger.
+    expect(
+      await page.evaluate(() => window.matchMedia('(pointer: coarse)').matches),
+    ).toBe(true);
+    const search = page.getByRole('searchbox', { name: 'Search', exact: true });
+    await expect(search).toBeVisible();
+    await expect(page.getByRole('option')).toHaveCount(43);
+    await expect(search).not.toBeFocused();
+    expect(await page.evaluate(() => document.activeElement.tagName)).toBe(
+      'BODY',
+    );
   });
 });
 

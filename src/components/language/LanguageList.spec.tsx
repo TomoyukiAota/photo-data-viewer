@@ -229,6 +229,76 @@ describe('the search field', () => {
   });
 });
 
+describe('when the page opens', () => {
+  /** Makes the browser one with a mouse (`true`) or one that is touched (`false`). */
+  function pointer(isMouse: boolean) {
+    window.matchMedia = jest.fn((query: string) => ({
+      matches: isMouse && query === '(hover: hover) and (pointer: fine)',
+    })) as unknown as typeof window.matchMedia;
+  }
+
+  const focus = jest.spyOn(HTMLElement.prototype, 'focus');
+  const rect = jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect');
+
+  beforeEach(() => {
+    focus.mockClear();
+    rect.mockReset();
+  });
+
+  afterEach(() => {
+    // jsdom has no matchMedia of its own.
+    delete (window as { matchMedia?: unknown }).matchMedia;
+  });
+
+  afterAll(() => {
+    focus.mockRestore();
+    rect.mockRestore();
+  });
+
+  it('gives the search field the focus, without scrolling the page, where the user types on a keyboard', () => {
+    pointer(true);
+    rect.mockReturnValue({ top: 300, bottom: 332 } as DOMRect);
+    renderList();
+    expect(document.activeElement).toBe(searchField());
+    expect(focus.mock.calls).toEqual([[{ preventScroll: true }]]);
+  });
+
+  it('leaves the focus where it is on a phone, where it would bring up the keyboard', () => {
+    pointer(false);
+    rect.mockReturnValue({ top: 300, bottom: 332 } as DOMRect);
+    renderList();
+    expect(document.activeElement).toBe(document.body);
+    expect(focus).not.toHaveBeenCalled();
+  });
+
+  it('leaves the focus where it is while the field is outside the window, which would be scrolled', () => {
+    pointer(true);
+    rect.mockReturnValue({
+      top: window.innerHeight - 10,
+      bottom: window.innerHeight + 22,
+    } as DOMRect);
+    renderList();
+    expect(document.activeElement).toBe(document.body);
+    expect(focus).not.toHaveBeenCalled();
+  });
+
+  it('leaves the focus where it is in a browser that does not tell how the user points', () => {
+    rect.mockReturnValue({ top: 300, bottom: 332 } as DOMRect);
+    renderList();
+    expect(document.activeElement).toBe(document.body);
+  });
+
+  it('keeps the focus where the user put it when the list is drawn again', () => {
+    pointer(true);
+    rect.mockReturnValue({ top: 300, bottom: 332 } as DOMRect);
+    const { rerender, onChoose } = renderList('auto');
+    const japanese = option('日本語');
+    japanese.focus();
+    rerender(<LanguageList selected='ja' onChoose={onChoose} />);
+    expect(document.activeElement).toBe(japanese);
+  });
+});
+
 describe('in a page shown in Arabic, which is written from right to left', () => {
   afterEach(() => act(() => applyLanguage('en')));
 
