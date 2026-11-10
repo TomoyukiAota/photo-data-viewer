@@ -77,8 +77,13 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Two tests run in a browser set to Japanese (`ja-JP`); their screenshots
-(`*-ja.png`) also use the system's Japanese fonts.
+Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
+Arabic (`ar-EG`), the one language written from right to left that the suite
+covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
+for those languages. The suite stays with these three languages: every
+translation file is checked by the unit test `src/locales/locales.spec.ts`
+instead, which takes no longer with more languages
+([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
@@ -95,6 +100,9 @@ CFFIXED_USER_HOME="$PWD/.upgrade-artifacts/firefox-home" PDV_BROWSER=firefox npm
 
 This setting applies to that command and its child processes. See the
 [upstream issue](https://github.com/microsoft/playwright/issues/42768).
+
+Headless Chrome and Firefox draw no scrollbars, so the screenshot of the
+Language page shows its list without the scrollbar that a window shows.
 
 `PDV_DEV=1 npm run test:e2e` starts a development server on port 3200 and runs
 navigation/photo regression checks, including the About-to-Settings link. Close

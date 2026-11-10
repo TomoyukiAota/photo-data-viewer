@@ -58,6 +58,11 @@ it, and are worth a second look:
 
 ## Resuming
 
+The work continued in [More languages](../20261111_more-languages/STATUS.md):
+40 more languages, a Language page in place of the select on the Settings
+page, each language fetched when it is shown, and the layout from the right
+for Arabic and Hebrew. What is said above describes the app before that.
+
 Nothing is left to implement in this repository. What remains is the
 maintainer's:
 
