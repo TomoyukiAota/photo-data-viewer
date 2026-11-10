@@ -229,6 +229,23 @@ describe('the search field', () => {
   });
 });
 
+describe('in a page shown in Arabic, which is written from right to left', () => {
+  afterEach(() => act(() => applyLanguage('en')));
+
+  it("keeps the name of the browser's language together in the first entry", async () => {
+    await act(() => applyLanguage('ar'));
+    renderList('auto');
+    const start = String.fromCodePoint(0x2068);
+    const end = String.fromCodePoint(0x2069);
+    expect(labels()[0]).toBe(`استخدام إعداد المتصفح (${start}English${end})`);
+
+    // What is typed finds it as it is read, without those two characters.
+    const field = screen.getByRole('searchbox', { name: 'بحث' });
+    fireEvent.change(field, { target: { value: '(english)' } });
+    expect(labels()).toEqual([`استخدام إعداد المتصفح (${start}English${end})`]);
+  });
+});
+
 describe('in a page shown in Japanese', () => {
   afterEach(() => act(() => applyLanguage('en')));
 

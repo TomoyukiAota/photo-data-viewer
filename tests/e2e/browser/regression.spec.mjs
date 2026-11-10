@@ -600,8 +600,11 @@ test.describe('in a browser whose language is Arabic', () => {
       .getByRole('menuitem', { name: 'اللغة (Language)', exact: true })
       .click();
     const list = page.getByRole('listbox');
+    // The language's name is a value put into the text: in a language written
+    // from right to left it is between U+2068 and U+2069, which are not drawn
+    // and keep it together.
     await expect(list.locator('[aria-selected="true"]')).toHaveText([
-      'استخدام إعداد المتصفح (العربية)',
+      'استخدام إعداد المتصفح (\u2068العربية\u2069)',
     ]);
     await snapshot(page, 'language-ar');
 

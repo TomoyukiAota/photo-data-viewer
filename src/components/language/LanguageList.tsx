@@ -8,6 +8,7 @@ import {
   languageSettingAuto,
 } from '../../i18n/languages';
 import { browserLanguage } from '../../i18n/resolve-language';
+import { valuesIn } from '../../i18n/text-values';
 import {
   LanguageListItem,
   languageNamesIn,
@@ -62,9 +63,12 @@ const LanguageList: React.FC<{
   const items: LanguageListItem[] = [
     {
       setting: languageSettingAuto,
-      label: t('language.useBrowserSetting', {
-        language: getLanguage(browserLanguage()).name,
-      }),
+      label: t(
+        'language.useBrowserSetting',
+        valuesIn(i18n.language, {
+          language: getLanguage(browserLanguage()).name,
+        }),
+      ),
       labelLanguage: i18n.language,
       keywords: [],
     },

@@ -39,6 +39,12 @@ describe('foldForSearch', () => {
     expect(foldForSearch('日本語')).toBe('日本語');
     expect(foldForSearch('עברית')).toBe('עברית');
   });
+
+  it("leaves out the characters that keep a value's direction, which are not drawn", () => {
+    const start = String.fromCodePoint(0x2068);
+    const end = String.fromCodePoint(0x2069);
+    expect(foldForSearch(`(${start}English${end})`)).toBe('(english)');
+  });
 });
 
 describe('matchesSearch', () => {

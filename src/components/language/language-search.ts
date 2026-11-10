@@ -35,12 +35,17 @@ export function languageNamesIn(language: string): (code: string) => string {
   }
 }
 
-/** A text as the search compares it: in lower case and without diacritics, so that "cestina" finds "čeština". */
+/**
+ * A text as the search compares it: in lower case and without diacritics, so
+ * that "cestina" finds "čeština". The characters that keep a value's direction
+ * in a right-to-left language (U+2066 to U+2069), which are not drawn, are
+ * left out as well.
+ */
 export function foldForSearch(text: string): string {
   return text
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+    .replace(/[\u0300-\u036f\u2066-\u2069]/g, '');
 }
 
 /** Whether an entry is listed for what is typed in the search field: any part of its label or of its keywords. */
