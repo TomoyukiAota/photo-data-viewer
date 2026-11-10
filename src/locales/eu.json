@@ -73,7 +73,7 @@
   },
   "pageNotShown": {
     "message": "Arazoren bat gertatu da, eta ezin da orri hau erakutsi.",
-    "reload": "Kargatu berriro"
+    "reload": "Birkargatu"
   },
   "demo": {
     "title": "Demoa",
@@ -84,7 +84,7 @@
     "title": "Ezarpenak",
     "savedInBrowser": "Ezarpenak zure nabigatzailean gordetzen dira.",
     "dateTime": {
-      "title": "Data eta orduaren formatua",
+      "title": "Dataren eta orduaren formatua",
       "dateFormat": "Dataren formatua",
       "clockSystem": "12 edo 24 ordu",
       "clock12": "12 ordu",
@@ -109,11 +109,11 @@
     "usageData": "Aplikazio hau hobetzeko, erabilerari buruzko informazioa biltzen da, hala nola <br/>zein orri irekitzen diren, kargatutako argazkiak zer fitxategi-formatu duen eta zer <br/>errore gertatu diren, zure IP helbidearekin eta hartatik ondorioztatutako gutxi <br/>gorabeherako kokapenarekin batera. <settingsLink>Ezarpenak</settingsLink> orrian desaktiba dezakezu.",
     "reportIssues": "Akatsik edo arazorik aurkitzen baduzu, jakinarazi <issuesLink>GitHub Issues</issuesLink> atalean.",
     "sourceCode": "Aplikazio honen iturburu-kodea <gitHubLink>GitHub</gitHubLink>-en dago.",
-    "translations": "Beste hizkuntza batzuetarako itzulpenak ongi etorriak dira: ikusi <guideLink>nola itzuli aplikazio hau</guideLink>.",
+    "translations": "Beste hizkuntza batzuetarako itzulpenak ongi etorriak dira: ikusi <guideLink>aplikazio hau nola itzuli</guideLink>.",
     "developedBy": "Aplikazio hau Tomoyuki Aotak garatu du.",
     "xProfile": {
-      "alt": "X-ko profila (lehen Twitter)",
-      "title": "Ireki X-ko profila (lehen Twitter)"
+      "alt": "X-ko (lehen Twitter) profila",
+      "title": "Ireki X-ko (lehen Twitter) profila"
     },
     "gitHubProfile": {
       "alt": "GitHub-eko profila",

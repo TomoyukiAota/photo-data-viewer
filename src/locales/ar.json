@@ -58,7 +58,7 @@
       "latitude": "خط العرض",
       "longitude": "خط الطول",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "العرض في Google Maps",
+      "showInGoogleMaps": "العرض في خرائط Google",
       "showInGoogleStreetView": "العرض في Google Street View",
       "iosNote": "لمستخدمي iOS: يزيل iOS بعض بيانات EXIF (مثل خط العرض وخط الطول) في بعض الحالات. يُرجى قراءة <pageLink>هذه الصفحة</pageLink> لمعرفة التفاصيل."
     },

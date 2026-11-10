@@ -2,7 +2,7 @@
   "menu": {
     "buttonLabel": "menü",
     "label": "MENÜ",
-    "home": "Ana Sayfa",
+    "home": "Ana sayfa",
     "demo": "Demo",
     "settings": "Ayarlar",
     "language": "Dil (Language)",
@@ -30,7 +30,7 @@
     "willBeDisplayedHere": "Seçilen fotoğraf burada görüntülenecek.",
     "loading": "Seçilen fotoğraf yükleniyor...",
     "rotate": "Fotoğrafı döndür",
-    "unsupportedFileFormat": "Desteklenmeyen Dosya Biçimi"
+    "unsupportedFileFormat": "Desteklenmeyen dosya biçimi"
   },
   "map": {
     "loading": "Harita yükleniyor",
@@ -41,7 +41,7 @@
     "tabs": {
       "general": "Genel",
       "details": "Ayrıntılar",
-      "rawData": "Ham Veriler"
+      "rawData": "Ham veriler"
     },
     "columns": {
       "name": "Ad",
@@ -51,14 +51,14 @@
     "notAvailable": "Kullanılamıyor",
     "loading": "Yükleniyor...",
     "general": {
-      "fileName": "Dosya Adı",
-      "fileSize": "Dosya Boyutu",
+      "fileName": "Dosya adı",
+      "fileSize": "Dosya boyutu",
       "widthHeight": "Genişlik × Yükseklik",
-      "dateTaken": "Çekim Tarihi",
+      "dateTaken": "Çekim tarihi",
       "latitude": "Enlem",
       "longitude": "Boylam",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Google Maps'te göster",
+      "showInGoogleMaps": "Google Haritalar'da göster",
       "showInGoogleStreetView": "Google Street View'da göster",
       "iosNote": "iOS kullanıcıları için: iOS bazı durumlarda bazı EXIF verilerini (ör. enlem ve boylam) kaldırır. Ayrıntılar için lütfen <pageLink>bu sayfayı</pageLink> okuyun."
     },
@@ -67,13 +67,13 @@
     }
   },
   "unsupportedFileDialog": {
-    "title": "Desteklenmeyen Dosya Biçimi",
+    "title": "Desteklenmeyen dosya biçimi",
     "message": "EXIF verileri kullanılamıyor.",
     "close": "Kapat"
   },
   "pageNotShown": {
     "message": "Bir sorun oluştu ve bu sayfa gösterilemiyor.",
-    "reload": "Yeniden Yükle"
+    "reload": "Yeniden yükle"
   },
   "demo": {
     "title": "Demo",
@@ -84,15 +84,15 @@
     "title": "Ayarlar",
     "savedInBrowser": "Ayarlar tarayıcınıza kaydedilir.",
     "dateTime": {
-      "title": "Tarih ve Saat Biçimi",
-      "dateFormat": "Tarih Biçimi",
+      "title": "Tarih ve saat biçimi",
+      "dateFormat": "Tarih biçimi",
       "clockSystem": "12 veya 24 saat",
       "clock12": "12 saat",
       "clock24": "24 saat",
       "example": "Örnek"
     },
     "usageData": {
-      "title": "Kullanım Verileri",
+      "title": "Kullanım verileri",
       "send": "Bu uygulamayı geliştirmek için kullanım verilerini gönder",
       "note": "Nelerin gönderildiği Hakkında sayfasında açıklanmıştır."
     }
@@ -109,15 +109,15 @@
     "usageData": "Bu uygulamayı geliştirmek için kullanım bilgileri toplanır; örneğin <br/>hangi sayfaların açıldığı, yüklenen fotoğrafın dosya biçimi ve hangi <br/>hataların oluştuğu, IP adresiniz ve ondan çıkarılan yaklaşık <br/>konumla birlikte. Bunu <settingsLink>Ayarlar</settingsLink> bölümünden kapatabilirsiniz.",
     "reportIssues": "Hata veya sorun bulursanız lütfen bunları <issuesLink>GitHub Issues</issuesLink> üzerinden bildirin.",
     "sourceCode": "Bu uygulamanın kaynak kodu <gitHubLink>GitHub</gitHubLink> üzerinde barındırılmaktadır.",
-    "translations": "Diğer dillere çeviriler memnuniyetle karşılanır: <guideLink>bu uygulamanın nasıl çevrileceğine</guideLink> bakın.",
+    "translations": "Başka dillere çeviriler memnuniyetle karşılanır: <guideLink>bu uygulamanın nasıl çevrileceğine</guideLink> bakın.",
     "developedBy": "Bu uygulama Tomoyuki Aota tarafından geliştirilmektedir.",
     "xProfile": {
-      "alt": "X (Eski Adıyla Twitter) Profili",
-      "title": "X (Eski Adıyla Twitter) Profilini Aç"
+      "alt": "X (eski adıyla Twitter) profili",
+      "title": "X (eski adıyla Twitter) profilini aç"
     },
     "gitHubProfile": {
-      "alt": "GitHub Profili",
-      "title": "GitHub Profilini Aç"
+      "alt": "GitHub profili",
+      "title": "GitHub profilini aç"
     },
     "photoLocationMap": "Birçok fotoğrafın konumunu haritada aynı anda görmek ister misiniz?<br/> Bunun için <plmLink>Photo Location Map</plmLink> kullanılabilir."
   }

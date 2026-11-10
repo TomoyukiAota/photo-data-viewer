@@ -73,7 +73,7 @@
   },
   "pageNotShown": {
     "message": "Radās kļūda, un šo lapu nevar parādīt.",
-    "reload": "Ielādēt vēlreiz"
+    "reload": "Pārlādēt"
   },
   "demo": {
     "title": "Demonstrācija",
@@ -101,7 +101,7 @@
     "title": "Valoda",
     "useBrowserSetting": "Izmantot pārlūkprogrammas iestatījumu ({{language}})",
     "search": "Meklēt",
-    "noLanguagesFound": "Valodas nav atrastas",
+    "noLanguagesFound": "Nav atrasta neviena valoda",
     "loadFailed": "Valodu neizdevās ielādēt. Pārbaudiet savienojumu un mēģiniet vēlreiz."
   },
   "about": {
@@ -112,8 +112,8 @@
     "translations": "Tulkojumi citās valodās ir laipni gaidīti: skatiet, <guideLink>kā tulkot šo lietotni</guideLink>.",
     "developedBy": "Šo lietotni izstrādā Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X (agrāk Twitter) profils",
-      "title": "Atvērt X (agrāk Twitter) profilu"
+      "alt": "X (iepriekš Twitter) profils",
+      "title": "Atvērt X (iepriekš Twitter) profilu"
     },
     "gitHubProfile": {
       "alt": "GitHub profils",

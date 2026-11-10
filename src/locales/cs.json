@@ -58,7 +58,7 @@
       "latitude": "Zeměp. šířka",
       "longitude": "Zeměp. délka",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Zobrazit v Google Maps",
+      "showInGoogleMaps": "Zobrazit v Mapách Google",
       "showInGoogleStreetView": "Zobrazit v Google Street View",
       "iosNote": "Pro uživatele iOS: systém iOS v některých případech odstraňuje některá data EXIF (např. zeměpisnou šířku a délku). Podrobnosti najdete na <pageLink>této stránce</pageLink>."
     },
@@ -92,8 +92,8 @@
       "example": "Příklad"
     },
     "usageData": {
-      "title": "Data o používání",
-      "send": "Odesílat data o používání a pomoci tak aplikaci vylepšit",
+      "title": "Údaje o používání",
+      "send": "Odesílat údaje o používání a pomoci tak aplikaci vylepšit",
       "note": "Co se odesílá, je popsáno na stránce „O aplikaci“."
     }
   },
@@ -109,11 +109,11 @@
     "usageData": "Kvůli vylepšování aplikace se shromažďují informace o jejím používání, například <br/>které stránky se otevírají, jaký formát souboru má načtená fotka a k jakým <br/>chybám došlo, spolu s vaší IP adresou a přibližnou polohou, která je z ní <br/>odvozena. Můžete to vypnout v <settingsLink>Nastavení</settingsLink>.",
     "reportIssues": "Pokud narazíte na chyby nebo problémy, nahlaste je prosím v <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Zdrojový kód této aplikace je umístěn na <gitHubLink>GitHubu</gitHubLink>.",
-    "translations": "Překlady do dalších jazyků jsou vítány: podívejte se, <guideLink>jak tuto aplikaci přeložit</guideLink>.",
+    "translations": "Překlady do dalších jazyků jsou vítány: viz <guideLink>jak tuto aplikaci přeložit</guideLink>.",
     "developedBy": "Tuto aplikaci vyvíjí Tomoyuki Aota.",
     "xProfile": {
-      "alt": "Profil na X (dříve Twitter)",
-      "title": "Otevřít profil na X (dříve Twitter)"
+      "alt": "Profil na síti X (dříve Twitter)",
+      "title": "Otevřít profil na síti X (dříve Twitter)"
     },
     "gitHubProfile": {
       "alt": "Profil na GitHubu",

@@ -18,18 +18,18 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Selectați fotografia pentru a afișa datele EXIF.",
-    "selectPhoto": "Selectați fotografia",
+    "selectYourPhoto": "Selectați o poză pentru a afișa datele EXIF.",
+    "selectPhoto": "Selectează o poză",
     "tabs": {
       "data": "Date",
       "map": "Hartă",
-      "photo": "Fotografie"
+      "photo": "Poză"
     }
   },
   "photo": {
-    "willBeDisplayedHere": "Fotografia selectată va fi afișată aici.",
-    "loading": "Se încarcă fotografia selectată...",
-    "rotate": "Rotiți fotografia",
+    "willBeDisplayedHere": "Poza selectată va fi afișată aici.",
+    "loading": "Se încarcă poza selectată...",
+    "rotate": "Rotește poza",
     "unsupportedFileFormat": "Format de fișier neacceptat"
   },
   "map": {
@@ -58,8 +58,8 @@
       "latitude": "Latitudine",
       "longitude": "Longitudine",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Afișați în Google Maps",
-      "showInGoogleStreetView": "Afișați în Google Street View",
+      "showInGoogleMaps": "Afișează în Google Maps",
+      "showInGoogleStreetView": "Afișează în Google Street View",
       "iosNote": "Pentru utilizatorii iOS: în unele cazuri, iOS elimină anumite date EXIF (de ex., latitudinea și longitudinea). Citiți <pageLink>această pagină</pageLink> pentru detalii."
     },
     "rawData": {
@@ -69,23 +69,23 @@
   "unsupportedFileDialog": {
     "title": "Format de fișier neacceptat",
     "message": "Datele EXIF nu sunt disponibile.",
-    "close": "Închideți"
+    "close": "Închide"
   },
   "pageNotShown": {
     "message": "A apărut o problemă, iar această pagină nu poate fi afișată.",
-    "reload": "Reîncărcați"
+    "reload": "Reîncarcă"
   },
   "demo": {
     "title": "Demo",
-    "description": "Când faceți clic pe butonul „Rulați demo”, aplicația se comportă ca și cum ar fi fost selectată <photoLink>această fotografie</photoLink>.",
-    "runDemo": "Rulați demo"
+    "description": "Când faceți clic pe butonul „Rulează demo”, aplicația se comportă ca și cum ar fi fost selectată <photoLink>această poză</photoLink>.",
+    "runDemo": "Rulează demo"
   },
   "settings": {
     "title": "Setări",
     "savedInBrowser": "Setările sunt salvate în browserul dvs.",
     "dateTime": {
-      "title": "Format dată și oră",
-      "dateFormat": "Format dată",
+      "title": "Formatul datei și al orei",
+      "dateFormat": "Formatul datei",
       "clockSystem": "12/24 de ore",
       "clock12": "12 ore",
       "clock24": "24 de ore",
@@ -93,32 +93,32 @@
     },
     "usageData": {
       "title": "Date de utilizare",
-      "send": "Trimiteți date de utilizare pentru a îmbunătăți această aplicație",
+      "send": "Trimite date de utilizare pentru a îmbunătăți această aplicație",
       "note": "Ce se trimite este descris în pagina Despre."
     }
   },
   "language": {
     "title": "Limbă",
-    "useBrowserSetting": "Folosiți setarea browserului ({{language}})",
-    "search": "Căutați",
+    "useBrowserSetting": "Folosește setarea browserului ({{language}})",
+    "search": "Caută",
     "noLanguagesFound": "Nu s-a găsit nicio limbă",
     "loadFailed": "Limba nu a putut fi încărcată. Verificați conexiunea și încercați din nou."
   },
   "about": {
     "keptInBrowser": "Această aplicație preia datele EXIF din fișierul dvs. în browserul dvs., <br/>astfel încât fișierul rămâne în browser și nu este trimis către niciun server.",
-    "usageData": "Pentru a îmbunătăți această aplicație, se colectează informații de utilizare, cum ar fi <br/>ce pagini sunt deschise, ce format de fișier are fotografia încărcată și ce <br/>erori au apărut, împreună cu adresa dvs. IP și locația aproximativă <br/>dedusă din aceasta. Puteți dezactiva acest lucru în <settingsLink>Setări</settingsLink>.",
+    "usageData": "Pentru a îmbunătăți această aplicație, se colectează informații de utilizare, cum ar fi <br/>ce pagini sunt deschise, ce format de fișier are poza încărcată și ce <br/>erori au apărut, împreună cu adresa dvs. IP și locația aproximativă <br/>dedusă din aceasta. Puteți dezactiva acest lucru în <settingsLink>Setări</settingsLink>.",
     "reportIssues": "Dacă găsiți erori sau probleme, vă rugăm să le semnalați în <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Codul sursă al acestei aplicații este găzduit pe <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Traducerile în alte limbi sunt binevenite: vedeți <guideLink>cum se traduce această aplicație</guideLink>.",
     "developedBy": "Această aplicație este dezvoltată de Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil X (fostul Twitter)",
-      "title": "Deschideți profilul X (fostul Twitter)"
+      "title": "Deschide profilul X (fostul Twitter)"
     },
     "gitHubProfile": {
       "alt": "Profil GitHub",
-      "title": "Deschideți profilul GitHub"
+      "title": "Deschide profilul GitHub"
     },
-    "photoLocationMap": "Doriți să vedeți pe hartă locurile mai multor fotografii deodată?<br/> <plmLink>Photo Location Map</plmLink> este disponibil în acest scop."
+    "photoLocationMap": "Doriți să vedeți pe hartă locurile mai multor poze deodată?<br/> <plmLink>Photo Location Map</plmLink> este disponibil în acest scop."
   }
 }

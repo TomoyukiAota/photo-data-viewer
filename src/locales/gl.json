@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Seleccione a súa foto para ver os datos EXIF.",
+    "selectYourPhoto": "Selecciona a túa foto para ver os datos EXIF.",
     "selectPhoto": "Seleccionar foto",
     "tabs": {
       "data": "Datos",
@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Mostrar en Google Maps",
       "showInGoogleStreetView": "Mostrar en Google Street View",
-      "iosNote": "Para usuarios de iOS: nalgúns casos, iOS elimina algúns datos EXIF (p. ex., a latitude e a lonxitude). Lea <pageLink>esta páxina</pageLink> para obter máis información."
+      "iosNote": "Para usuarios de iOS: nalgúns casos, iOS elimina algúns datos EXIF (p. ex., a latitude e a lonxitude). Le <pageLink>esta páxina</pageLink> para obter máis información."
     },
     "rawData": {
       "description": "A continuación móstranse os datos en bruto obtidos con <exifrLink>exifr</exifrLink>."
@@ -73,7 +73,7 @@
   },
   "pageNotShown": {
     "message": "Produciuse un erro e non se pode mostrar esta páxina.",
-    "reload": "Volver cargar"
+    "reload": "Recargar"
   },
   "demo": {
     "title": "Demostración",
@@ -82,7 +82,7 @@
   },
   "settings": {
     "title": "Configuración",
-    "savedInBrowser": "A configuración gárdase no seu navegador.",
+    "savedInBrowser": "A configuración gárdase no teu navegador.",
     "dateTime": {
       "title": "Formato de data e hora",
       "dateFormat": "Formato de data",
@@ -102,14 +102,14 @@
     "useBrowserSetting": "Usar a configuración do navegador ({{language}})",
     "search": "Buscar",
     "noLanguagesFound": "Non se atopou ningún idioma",
-    "loadFailed": "Non se puido cargar o idioma. Comprobe a conexión e ténteo de novo."
+    "loadFailed": "Non se puido cargar o idioma. Comproba a conexión e téntao de novo."
   },
   "about": {
-    "keptInBrowser": "Esta aplicación obtén os datos EXIF do seu ficheiro dentro do seu navegador, <br/>polo que o ficheiro permanece no navegador e non se envía a ningún servidor.",
-    "usageData": "Para mellorar esta aplicación, recóllese información de uso, como <br/>que páxinas se abren, que formato de ficheiro ten a foto cargada e que <br/>erros se producen, xunto co seu enderezo IP e a localización aproximada <br/>que se deduce del. Pode desactivalo en <settingsLink>Configuración</settingsLink>.",
-    "reportIssues": "Se atopa erros ou problemas, comuníqueos en <issuesLink>GitHub Issues</issuesLink>.",
+    "keptInBrowser": "Esta aplicación obtén os datos EXIF do teu ficheiro dentro do teu navegador, <br/>polo que o ficheiro permanece no navegador e non se envía a ningún servidor.",
+    "usageData": "Para mellorar esta aplicación, recóllese información de uso, como <br/>que páxinas se abren, que formato de ficheiro ten a foto cargada e que <br/>erros se producen, xunto co teu enderezo IP e a localización aproximada <br/>que se deduce del. Podes desactivalo en <settingsLink>Configuración</settingsLink>.",
+    "reportIssues": "Se atopas erros ou problemas, comunícaos en <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "O código fonte desta aplicación está aloxado en <gitHubLink>GitHub</gitHubLink>.",
-    "translations": "As traducións a outros idiomas son benvidas: consulte <guideLink>como traducir esta aplicación</guideLink>.",
+    "translations": "As traducións a outros idiomas son benvidas: consulta <guideLink>como traducir esta aplicación</guideLink>.",
     "developedBy": "Esta aplicación está desenvolvida por Tomoyuki Aota.",
     "xProfile": {
       "alt": "Perfil de X (antes Twitter)",
@@ -119,6 +119,6 @@
       "alt": "Perfil de GitHub",
       "title": "Abrir o perfil de GitHub"
     },
-    "photoLocationMap": "Quere ver nun mapa as localizacións de moitas fotos á vez?<br/> <plmLink>Photo Location Map</plmLink> está dispoñible para iso."
+    "photoLocationMap": "Queres ver nun mapa as localizacións de moitas fotos á vez?<br/> <plmLink>Photo Location Map</plmLink> está dispoñible para iso."
   }
 }

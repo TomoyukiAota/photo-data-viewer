@@ -109,7 +109,7 @@
     "usageData": "Per millorar aquesta aplicació, es recull informació d'ús, com ara <br/>quines pàgines s'obren, quin format de fitxer té la foto carregada i quins <br/>errors es produeixen, juntament amb la vostra adreça IP i la ubicació <br/>aproximada que se'n dedueix. Podeu desactivar-ho a <settingsLink>Configuració</settingsLink>.",
     "reportIssues": "Si trobeu errors o problemes, comuniqueu-los a <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "El codi font d'aquesta aplicació està allotjat a <gitHubLink>GitHub</gitHubLink>.",
-    "translations": "Les traduccions a altres idiomes són benvingudes: vegeu <guideLink>com es tradueix aquesta aplicació</guideLink>.",
+    "translations": "Les traduccions a altres idiomes són benvingudes: consulteu <guideLink>com es tradueix aquesta aplicació</guideLink>.",
     "developedBy": "Aquesta aplicació està desenvolupada per Tomoyuki Aota.",
     "xProfile": {
       "alt": "Perfil d'X (abans Twitter)",

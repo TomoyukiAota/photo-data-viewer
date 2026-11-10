@@ -58,8 +58,8 @@
       "latitude": "纬度",
       "longitude": "经度",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "在 Google Maps 中显示",
-      "showInGoogleStreetView": "在 Google Street View 中显示",
+      "showInGoogleMaps": "在 Google 地图中显示",
+      "showInGoogleStreetView": "在 Google 街景中显示",
       "iosNote": "iOS 用户请注意：在某些情况下，iOS 会移除部分 EXIF 数据（例如纬度和经度）。有关详细信息，请阅读<pageLink>此页面</pageLink>。"
     },
     "rawData": {
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "演示",
-    "description": "点击“运行演示”按钮后，本应用的行为如同选择了<photoLink>这张照片</photoLink>。",
+    "description": "点击“运行演示”按钮后，此应用的行为如同选择了<photoLink>这张照片</photoLink>。",
     "runDemo": "运行演示"
   },
   "settings": {
@@ -92,25 +92,25 @@
       "example": "示例"
     },
     "usageData": {
-      "title": "使用数据",
-      "send": "发送使用数据以改进本应用",
+      "title": "使用情况数据",
+      "send": "发送使用情况数据以改进此应用",
       "note": "发送的内容在“关于”页面中说明。"
     }
   },
   "language": {
     "title": "语言",
-    "useBrowserSetting": "使用浏览器设置（{{language}}）",
+    "useBrowserSetting": "跟随浏览器设置（{{language}}）",
     "search": "搜索",
     "noLanguagesFound": "未找到语言",
     "loadFailed": "无法加载该语言。请检查网络连接，然后重试。"
   },
   "about": {
-    "keptInBrowser": "本应用在你的浏览器内从文件中读取 EXIF 数据，<br/>因此文件保留在浏览器中，不会发送到任何服务器。",
-    "usageData": "为了改进本应用，我们会收集使用信息，例如打开了哪些页面、<br/>所加载照片的文件格式以及发生了哪些错误，<br/>同时收集你的 IP 地址以及由此推断出的大致位置。<br/>你可以在<settingsLink>设置</settingsLink>中关闭此功能。",
+    "keptInBrowser": "此应用在你的浏览器内从文件中读取 EXIF 数据，<br/>因此文件保留在浏览器中，不会发送到任何服务器。",
+    "usageData": "为改进此应用，我们会收集使用情况信息，例如打开了哪些页面、<br/>所加载照片的文件格式以及发生了哪些错误，<br/>同时收集你的 IP 地址以及由此推断出的大致位置。<br/>你可以在<settingsLink>设置</settingsLink>中关闭此功能。",
     "reportIssues": "如果发现任何错误或问题，请在 <issuesLink>GitHub Issues</issuesLink> 中提交。",
-    "sourceCode": "本应用的源代码托管在 <gitHubLink>GitHub</gitHubLink> 上。",
-    "translations": "欢迎翻译成其他语言：请参阅<guideLink>如何翻译本应用</guideLink>。",
-    "developedBy": "本应用由 Tomoyuki Aota 开发。",
+    "sourceCode": "此应用的源代码托管在 <gitHubLink>GitHub</gitHubLink> 上。",
+    "translations": "欢迎将此应用翻译成其他语言：请参阅<guideLink>如何翻译此应用</guideLink>。",
+    "developedBy": "此应用由 Tomoyuki Aota 开发。",
     "xProfile": {
       "alt": "X（原 Twitter）个人资料",
       "title": "打开 X（原 Twitter）个人资料"

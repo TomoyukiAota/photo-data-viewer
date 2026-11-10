@@ -109,7 +109,7 @@
     "usageData": "เพื่อปรับปรุงแอปนี้ จะมีการเก็บรวบรวมข้อมูลการใช้งาน เช่น <br/>หน้าที่เปิด รูปแบบไฟล์ของรูปภาพที่โหลด และข้อผิดพลาดที่เกิดขึ้น <br/>พร้อมกับที่อยู่ IP ของคุณและตำแหน่งโดยประมาณที่ได้จากที่อยู่ IP นั้น <br/>คุณสามารถปิดได้ใน<settingsLink>การตั้งค่า</settingsLink>",
     "reportIssues": "หากพบข้อบกพร่องหรือปัญหา โปรดแจ้งใน <issuesLink>GitHub Issues</issuesLink>",
     "sourceCode": "ซอร์สโค้ดของแอปนี้อยู่บน <gitHubLink>GitHub</gitHubLink>",
-    "translations": "ยินดีรับคำแปลเป็นภาษาอื่น ๆ: ดู<guideLink>วิธีแปลแอปนี้</guideLink>",
+    "translations": "ยินดีรับคำแปลเป็นภาษาอื่น: โปรดดู<guideLink>วิธีแปลแอปนี้</guideLink>",
     "developedBy": "แอปนี้พัฒนาโดย Tomoyuki Aota",
     "xProfile": {
       "alt": "โปรไฟล์ X (เดิมคือ Twitter)",

@@ -19,7 +19,7 @@
   },
   "home": {
     "selectYourPhoto": "Selecteer je foto om de EXIF-gegevens te bekijken.",
-    "selectPhoto": "Foto selecteren",
+    "selectPhoto": "Selecteer foto",
     "tabs": {
       "data": "Gegevens",
       "map": "Kaart",
@@ -29,7 +29,7 @@
   "photo": {
     "willBeDisplayedHere": "De geselecteerde foto wordt hier weergegeven.",
     "loading": "De geselecteerde foto wordt geladen...",
-    "rotate": "Foto draaien",
+    "rotate": "Roteer foto",
     "unsupportedFileFormat": "Niet-ondersteunde bestandsindeling"
   },
   "map": {
@@ -58,8 +58,8 @@
       "latitude": "Breedtegraad",
       "longitude": "Lengtegraad",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Weergeven in Google Maps",
-      "showInGoogleStreetView": "Weergeven in Google Street View",
+      "showInGoogleMaps": "Toon in Google Maps",
+      "showInGoogleStreetView": "Toon in Google Street View",
       "iosNote": "Voor iOS-gebruikers: iOS verwijdert in sommige gevallen bepaalde EXIF-gegevens (bijv. breedtegraad en lengtegraad). Lees <pageLink>deze pagina</pageLink> voor meer informatie."
     },
     "rawData": {
@@ -69,16 +69,16 @@
   "unsupportedFileDialog": {
     "title": "Niet-ondersteunde bestandsindeling",
     "message": "EXIF-gegevens zijn niet beschikbaar.",
-    "close": "Sluiten"
+    "close": "Sluit"
   },
   "pageNotShown": {
     "message": "Er is iets misgegaan en deze pagina kan niet worden weergegeven.",
-    "reload": "Opnieuw laden"
+    "reload": "Laad opnieuw"
   },
   "demo": {
     "title": "Demo",
-    "description": "Wanneer je op de knop ‘Demo starten’ klikt, gedraagt de app zich alsof <photoLink>deze foto</photoLink> is geselecteerd.",
-    "runDemo": "Demo starten"
+    "description": "Wanneer je op de knop ‘Start demo’ klikt, gedraagt de app zich alsof <photoLink>deze foto</photoLink> is geselecteerd.",
+    "runDemo": "Start demo"
   },
   "settings": {
     "title": "Instellingen",
@@ -93,14 +93,14 @@
     },
     "usageData": {
       "title": "Gebruiksgegevens",
-      "send": "Gebruiksgegevens verzenden om deze app te verbeteren",
+      "send": "Verstuur gebruiksgegevens om deze app te verbeteren",
       "note": "Wat er wordt verzonden, staat beschreven op de pagina Over."
     }
   },
   "language": {
     "title": "Taal",
-    "useBrowserSetting": "Browserinstelling gebruiken ({{language}})",
-    "search": "Zoeken",
+    "useBrowserSetting": "Gebruik de instelling van de browser ({{language}})",
+    "search": "Zoek",
     "noLanguagesFound": "Geen talen gevonden",
     "loadFailed": "De taal kan niet worden geladen. Controleer je verbinding en probeer het opnieuw."
   },
@@ -112,12 +112,12 @@
     "translations": "Vertalingen in andere talen zijn welkom: zie <guideLink>hoe je deze app vertaalt</guideLink>.",
     "developedBy": "Deze app is ontwikkeld door Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X-profiel (voorheen Twitter)",
-      "title": "X-profiel (voorheen Twitter) openen"
+      "alt": "Profiel op X (voorheen Twitter)",
+      "title": "Open het profiel op X (voorheen Twitter)"
     },
     "gitHubProfile": {
       "alt": "GitHub-profiel",
-      "title": "GitHub-profiel openen"
+      "title": "Open het GitHub-profiel"
     },
     "photoLocationMap": "Wil je de locaties van veel foto's tegelijk op een kaart zien?<br/> Daarvoor is <plmLink>Photo Location Map</plmLink> beschikbaar."
   }

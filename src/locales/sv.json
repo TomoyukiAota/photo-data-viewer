@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Välj din bild för att visa EXIF-data.",
+    "selectYourPhoto": "Välj din bild för att visa EXIF-information.",
     "selectPhoto": "Välj bild",
     "tabs": {
       "data": "Data",
@@ -34,7 +34,7 @@
   },
   "map": {
     "loading": "Kartan läses in",
-    "locationNotAvailable": "Platsdata (latitud och longitud) är inte tillgängliga.",
+    "locationNotAvailable": "Platsinformation (latitud och longitud) är inte tillgänglig.",
     "cannotBeShown": "Kartan kan inte visas."
   },
   "photoData": {
@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Visa i Google Maps",
       "showInGoogleStreetView": "Visa i Google Street View",
-      "iosNote": "För iOS-användare: iOS tar i vissa fall bort en del EXIF-data (t.ex. latitud och longitud). Läs <pageLink>den här sidan</pageLink> för mer information."
+      "iosNote": "För iOS-användare: iOS tar i vissa fall bort en del EXIF-information (t.ex. latitud och longitud). Läs mer på <pageLink>den här sidan</pageLink>."
     },
     "rawData": {
       "description": "Nedan visas rådata som hämtats med <exifrLink>exifr</exifrLink>."
@@ -68,7 +68,7 @@
   },
   "unsupportedFileDialog": {
     "title": "Filformatet stöds inte",
-    "message": "EXIF-data är inte tillgängliga.",
+    "message": "EXIF-information är inte tillgänglig.",
     "close": "Stäng"
   },
   "pageNotShown": {
@@ -105,19 +105,19 @@
     "loadFailed": "Språket kunde inte läsas in. Kontrollera anslutningen och försök igen."
   },
   "about": {
-    "keptInBrowser": "Den här appen hämtar EXIF-data från din fil i din webbläsare, <br/>så filen stannar i webbläsaren och skickas inte till någon server.",
+    "keptInBrowser": "Den här appen hämtar EXIF-information från din fil i din webbläsare, <br/>så filen stannar i webbläsaren och skickas inte till någon server.",
     "usageData": "För att förbättra den här appen samlas användningsinformation in, till exempel <br/>vilka sidor som öppnas, vilket filformat den inlästa bilden har och vilka <br/>fel som uppstår, tillsammans med din IP-adress och den ungefärliga <br/>plats som härleds från den. Du kan stänga av detta i <settingsLink>Inställningar</settingsLink>.",
     "reportIssues": "Om du hittar buggar eller problem får du gärna rapportera dem i <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Källkoden till den här appen finns på <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Översättningar till andra språk är välkomna: se <guideLink>hur du översätter den här appen</guideLink>.",
     "developedBy": "Den här appen utvecklas av Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X-profil (tidigare Twitter)",
-      "title": "Öppna X-profil (tidigare Twitter)"
+      "alt": "Profil på X (tidigare Twitter)",
+      "title": "Öppna profilen på X (tidigare Twitter)"
     },
     "gitHubProfile": {
       "alt": "GitHub-profil",
-      "title": "Öppna GitHub-profil"
+      "title": "Öppna GitHub-profilen"
     },
     "photoLocationMap": "Vill du se platserna för många bilder på en karta på en gång?<br/> <plmLink>Photo Location Map</plmLink> finns för det ändamålet."
   }

@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Odaberite fotografiju za prikaz EXIF podataka.",
+    "selectYourPhoto": "Odaberite fotografiju za prikaz podataka EXIF.",
     "selectPhoto": "Odaberi fotografiju",
     "tabs": {
       "data": "Podaci",
@@ -58,9 +58,9 @@
       "latitude": "Zemlj. širina",
       "longitude": "Zemlj. dužina",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Prikaži u Google Maps",
+      "showInGoogleMaps": "Prikaži u Google kartama",
       "showInGoogleStreetView": "Prikaži u Google Street View",
-      "iosNote": "Za korisnike iOS-a: iOS u nekim slučajevima uklanja dio EXIF podataka (npr. zemljopisnu širinu i dužinu). Pojedinosti pročitajte na <pageLink>ovoj stranici</pageLink>."
+      "iosNote": "Za korisnike iOS-a: iOS u nekim slučajevima uklanja dio podataka EXIF (npr. zemljopisnu širinu i dužinu). Pojedinosti pročitajte na <pageLink>ovoj stranici</pageLink>."
     },
     "rawData": {
       "description": "U nastavku su neobrađeni podaci dobiveni pomoću <exifrLink>exifr</exifrLink>."
@@ -68,7 +68,7 @@
   },
   "unsupportedFileDialog": {
     "title": "Nepodržani format datoteke",
-    "message": "EXIF podaci nisu dostupni.",
+    "message": "Podaci EXIF nisu dostupni.",
     "close": "Zatvori"
   },
   "pageNotShown": {
@@ -92,8 +92,8 @@
       "example": "Primjer"
     },
     "usageData": {
-      "title": "Podaci o upotrebi",
-      "send": "Šalji podatke o upotrebi radi poboljšanja ove aplikacije",
+      "title": "Podaci o korištenju",
+      "send": "Šalji podatke o korištenju radi poboljšanja ove aplikacije",
       "note": "Što se šalje, opisano je na stranici „O aplikaciji”."
     }
   },
@@ -105,19 +105,19 @@
     "loadFailed": "Jezik nije moguće učitati. Provjerite vezu i pokušajte ponovno."
   },
   "about": {
-    "keptInBrowser": "Ova aplikacija čita EXIF podatke iz vaše datoteke unutar vašeg preglednika, <br/>pa datoteka ostaje u vašem pregledniku i ne šalje se ni na jedan poslužitelj.",
-    "usageData": "Radi poboljšanja ove aplikacije prikupljaju se podaci o upotrebi, primjerice <br/>koje se stranice otvaraju, koji je format datoteke učitane fotografije i koje su se <br/>pogreške dogodile, zajedno s vašom IP adresom i približnom lokacijom <br/>izvedenom iz nje. To možete isključiti u <settingsLink>Postavkama</settingsLink>.",
+    "keptInBrowser": "Ova aplikacija čita podatke EXIF iz vaše datoteke unutar vašeg preglednika, <br/>pa datoteka ostaje u vašem pregledniku i ne šalje se ni na jedan poslužitelj.",
+    "usageData": "Radi poboljšanja ove aplikacije prikupljaju se podaci o korištenju, primjerice <br/>koje se stranice otvaraju, koji je format datoteke učitane fotografije i koje su se <br/>pogreške dogodile, zajedno s vašom IP adresom i približnom lokacijom <br/>izvedenom iz nje. To možete isključiti u <settingsLink>Postavkama</settingsLink>.",
     "reportIssues": "Ako pronađete pogreške ili probleme, prijavite ih na <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Izvorni kod ove aplikacije nalazi se na <gitHubLink>GitHubu</gitHubLink>.",
     "translations": "Prijevodi na druge jezike su dobrodošli: pogledajte <guideLink>kako prevesti ovu aplikaciju</guideLink>.",
     "developedBy": "Ovu aplikaciju razvija Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X profil (bivši Twitter)",
-      "title": "Otvori X profil (bivši Twitter)"
+      "alt": "Profil na X-u (bivši Twitter)",
+      "title": "Otvori profil na X-u (bivši Twitter)"
     },
     "gitHubProfile": {
-      "alt": "GitHub profil",
-      "title": "Otvori GitHub profil"
+      "alt": "Profil na GitHubu",
+      "title": "Otvori profil na GitHubu"
     },
     "photoLocationMap": "Želite na karti vidjeti lokacije mnogo fotografija odjednom?<br/> Za to je dostupan <plmLink>Photo Location Map</plmLink>."
   }

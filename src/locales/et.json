@@ -69,7 +69,7 @@
   "unsupportedFileDialog": {
     "title": "Toetamata failivorming",
     "message": "EXIF-andmed pole saadaval.",
-    "close": "Sule"
+    "close": "Sulge"
   },
   "pageNotShown": {
     "message": "Midagi läks valesti ja seda lehte ei saa kuvada.",
@@ -85,7 +85,7 @@
     "savedInBrowser": "Seaded salvestatakse teie brauserisse.",
     "dateTime": {
       "title": "Kuupäeva ja kellaaja vorming",
-      "dateFormat": "Kuupäevavorming",
+      "dateFormat": "Kuupäeva vorming",
       "clockSystem": "12 või 24 tundi",
       "clock12": "12 tundi",
       "clock24": "24 tundi",
@@ -112,8 +112,8 @@
     "translations": "Tõlked teistesse keeltesse on teretulnud: vaadake, <guideLink>kuidas seda rakendust tõlkida</guideLink>.",
     "developedBy": "Selle rakenduse on välja töötanud Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X-i (endise Twitteri) profiil",
-      "title": "Ava X-i (endise Twitteri) profiil"
+      "alt": "X-i (endine Twitter) profiil",
+      "title": "Ava X-i (endine Twitter) profiil"
     },
     "gitHubProfile": {
       "alt": "GitHubi profiil",

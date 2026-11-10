@@ -84,8 +84,8 @@
     "title": "Impostazioni",
     "savedInBrowser": "Le impostazioni vengono salvate nel tuo browser.",
     "dateTime": {
-      "title": "Formato data e ora",
-      "dateFormat": "Formato data",
+      "title": "Formato di data e ora",
+      "dateFormat": "Formato della data",
       "clockSystem": "12 o 24 ore",
       "clock12": "12 ore",
       "clock24": "24 ore",

@@ -18,18 +18,18 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Válasszon ki egy fényképet az EXIF-adatok megjelenítéséhez.",
-    "selectPhoto": "Fénykép kiválasztása",
+    "selectYourPhoto": "Válasszon ki egy fotót az EXIF-adatok megjelenítéséhez.",
+    "selectPhoto": "Fotó kiválasztása",
     "tabs": {
       "data": "Adatok",
       "map": "Térkép",
-      "photo": "Fénykép"
+      "photo": "Fotó"
     }
   },
   "photo": {
-    "willBeDisplayedHere": "A kiválasztott fénykép itt jelenik meg.",
-    "loading": "A kiválasztott fénykép betöltése...",
-    "rotate": "Fénykép elforgatása",
+    "willBeDisplayedHere": "A kiválasztott fotó itt jelenik meg.",
+    "loading": "A kiválasztott fotó betöltése...",
+    "rotate": "Fotó elforgatása",
     "unsupportedFileFormat": "Nem támogatott fájlformátum"
   },
   "map": {
@@ -58,7 +58,7 @@
       "latitude": "Földr. szél.",
       "longitude": "Földr. hossz.",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Megjelenítés a Google Mapsben",
+      "showInGoogleMaps": "Megjelenítés a Google Térképben",
       "showInGoogleStreetView": "Megjelenítés a Google Street View-ban",
       "iosNote": "iOS-felhasználóknak: az iOS bizonyos esetekben eltávolít egyes EXIF-adatokat (pl. a földrajzi szélességet és hosszúságot). A részletekért olvassa el <pageLink>ezt az oldalt</pageLink>."
     },
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Demó",
-    "description": "A „Demó futtatása” gombra kattintva az alkalmazás úgy viselkedik, mintha <photoLink>ezt a fényképet</photoLink> választotta volna ki.",
+    "description": "A „Demó futtatása” gombra kattintva az alkalmazás úgy viselkedik, mintha <photoLink>ezt a fotót</photoLink> választotta volna ki.",
     "runDemo": "Demó futtatása"
   },
   "settings": {
@@ -106,19 +106,19 @@
   },
   "about": {
     "keptInBrowser": "Ez az alkalmazás a böngészőjén belül olvassa ki az EXIF-adatokat a fájljából, <br/>így a fájl a böngészőjében marad, és nem kerül elküldésre semmilyen szerverre.",
-    "usageData": "Az alkalmazás fejlesztése érdekében használati információkat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fénykép és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
+    "usageData": "Az alkalmazás fejlesztése érdekében használati információkat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fotó és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
     "reportIssues": "Ha hibát vagy problémát talál, kérjük, jelezze a <issuesLink>GitHub Issues</issuesLink> oldalon.",
     "sourceCode": "Az alkalmazás forráskódja a <gitHubLink>GitHubon</gitHubLink> érhető el.",
-    "translations": "Szívesen fogadjuk a más nyelvekre készült fordításokat: lásd <guideLink>az alkalmazás lefordításának módját</guideLink>.",
+    "translations": "Szívesen fogadjuk a más nyelvekre készült fordításokat: lásd <guideLink>az alkalmazás fordításának módját</guideLink>.",
     "developedBy": "Az alkalmazást Tomoyuki Aota fejleszti.",
     "xProfile": {
       "alt": "X-profil (korábban Twitter)",
-      "title": "X-profil (korábban Twitter) megnyitása"
+      "title": "Az X-profil (korábban Twitter) megnyitása"
     },
     "gitHubProfile": {
       "alt": "GitHub-profil",
-      "title": "GitHub-profil megnyitása"
+      "title": "A GitHub-profil megnyitása"
     },
-    "photoLocationMap": "Szeretné egyszerre, térképen látni sok fénykép készítési helyét?<br/> Erre szolgál a <plmLink>Photo Location Map</plmLink>."
+    "photoLocationMap": "Szeretné egyszerre, térképen látni sok fotó készítési helyét?<br/> Erre szolgál a <plmLink>Photo Location Map</plmLink>."
   }
 }

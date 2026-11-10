@@ -87,8 +87,8 @@
       "title": "Datos ir laiko formatas",
       "dateFormat": "Datos formatas",
       "clockSystem": "12 arba 24 val.",
-      "clock12": "12 val.",
-      "clock24": "24 val.",
+      "clock12": "12 valandų",
+      "clock24": "24 valandos",
       "example": "Pavyzdys"
     },
     "usageData": {
@@ -107,13 +107,13 @@
   "about": {
     "keptInBrowser": "Ši programa EXIF duomenis iš jūsų failo nuskaito jūsų naršyklėje, <br/>todėl failas lieka naršyklėje ir nėra siunčiamas į jokius serverius.",
     "usageData": "Siekiant tobulinti šią programą, renkama naudojimo informacija, pavyzdžiui, <br/>kurie puslapiai atidaromi, kokio failo formato nuotrauka įkelta ir kokios <br/>klaidos įvyko, kartu su jūsų IP adresu ir pagal jį nustatyta apytiksle <br/>vieta. Tai galite išjungti puslapyje <settingsLink>Nustatymai</settingsLink>.",
-    "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas <issuesLink>GitHub Issues</issuesLink>.",
-    "sourceCode": "Šios programos išeities kodas laikomas <gitHubLink>GitHub</gitHubLink>.",
-    "translations": "Vertimai į kitas kalbas yra laukiami: žr. <guideLink>kaip išversti šią programą</guideLink>.",
+    "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas <issuesLink>„GitHub Issues“</issuesLink>.",
+    "sourceCode": "Šios programos išeitinis kodas laikomas <gitHubLink>„GitHub“</gitHubLink>.",
+    "translations": "Vertimai į kitas kalbas yra laukiami: žr., <guideLink>kaip išversti šią programą</guideLink>.",
     "developedBy": "Šią programą kuria Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X (anksčiau „Twitter“) profilis",
-      "title": "Atidaryti X (anksčiau „Twitter“) profilį"
+      "alt": "„X“ (anksčiau „Twitter“) profilis",
+      "title": "Atidaryti „X“ (anksčiau „Twitter“) profilį"
     },
     "gitHubProfile": {
       "alt": "„GitHub“ profilis",

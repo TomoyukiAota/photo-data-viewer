@@ -30,7 +30,7 @@
     "willBeDisplayedHere": "Foto yang dipilih akan ditampilkan di sini.",
     "loading": "Memuat foto yang dipilih...",
     "rotate": "Putar foto",
-    "unsupportedFileFormat": "Format File Tidak Didukung"
+    "unsupportedFileFormat": "Format file tidak didukung"
   },
   "map": {
     "loading": "Peta sedang dimuat",
@@ -48,13 +48,13 @@
       "value": "Nilai"
     },
     "noData": "Tidak ada data",
-    "notAvailable": "Tidak Tersedia",
+    "notAvailable": "Tidak tersedia",
     "loading": "Memuat...",
     "general": {
-      "fileName": "Nama File",
-      "fileSize": "Ukuran File",
+      "fileName": "Nama file",
+      "fileSize": "Ukuran file",
       "widthHeight": "Lebar × Tinggi",
-      "dateTaken": "Tanggal Diambil",
+      "dateTaken": "Tanggal diambil",
       "latitude": "Lintang",
       "longitude": "Bujur",
       "dimensions": "{{width}} × {{height}}",
@@ -67,13 +67,13 @@
     }
   },
   "unsupportedFileDialog": {
-    "title": "Format File Tidak Didukung",
+    "title": "Format file tidak didukung",
     "message": "Data EXIF tidak tersedia.",
     "close": "Tutup"
   },
   "pageNotShown": {
     "message": "Terjadi kesalahan, dan halaman ini tidak dapat ditampilkan.",
-    "reload": "Muat Ulang"
+    "reload": "Muat ulang"
   },
   "demo": {
     "title": "Demo",
@@ -84,15 +84,15 @@
     "title": "Pengaturan",
     "savedInBrowser": "Pengaturan disimpan di browser Anda.",
     "dateTime": {
-      "title": "Format Tanggal & Waktu",
-      "dateFormat": "Format Tanggal",
+      "title": "Format tanggal dan waktu",
+      "dateFormat": "Format tanggal",
       "clockSystem": "12 atau 24 jam",
       "clock12": "12 jam",
       "clock24": "24 jam",
       "example": "Contoh"
     },
     "usageData": {
-      "title": "Data Penggunaan",
+      "title": "Data penggunaan",
       "send": "Kirim data penggunaan untuk meningkatkan aplikasi ini",
       "note": "Apa yang dikirim dijelaskan di halaman Tentang."
     }
@@ -109,15 +109,15 @@
     "usageData": "Untuk meningkatkan aplikasi ini, informasi penggunaan dikumpulkan, seperti <br/>halaman mana yang dibuka, format file foto yang dimuat, dan kesalahan <br/>yang terjadi, beserta alamat IP Anda dan perkiraan lokasi <br/>yang diperoleh darinya. Anda dapat menonaktifkannya di <settingsLink>Pengaturan</settingsLink>.",
     "reportIssues": "Jika Anda menemukan bug atau masalah, laporkan di <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kode sumber aplikasi ini di-hosting di <gitHubLink>GitHub</gitHubLink>.",
-    "translations": "Terjemahan ke bahasa lain sangat diterima: lihat <guideLink>cara menerjemahkan aplikasi ini</guideLink>.",
+    "translations": "Terjemahan ke bahasa lain sangat diharapkan: lihat <guideLink>cara menerjemahkan aplikasi ini</guideLink>.",
     "developedBy": "Aplikasi ini dikembangkan oleh Tomoyuki Aota.",
     "xProfile": {
-      "alt": "Profil X (Sebelumnya Twitter)",
-      "title": "Buka Profil X (Sebelumnya Twitter)"
+      "alt": "Profil X (sebelumnya Twitter)",
+      "title": "Buka profil X (sebelumnya Twitter)"
     },
     "gitHubProfile": {
       "alt": "Profil GitHub",
-      "title": "Buka Profil GitHub"
+      "title": "Buka profil GitHub"
     },
     "photoLocationMap": "Ingin melihat peta lokasi banyak foto sekaligus?<br/> <plmLink>Photo Location Map</plmLink> tersedia untuk keperluan itu."
   }

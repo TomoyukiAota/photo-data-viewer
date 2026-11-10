@@ -58,7 +58,7 @@
       "latitude": "Zem. širina",
       "longitude": "Zem. dolžina",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Prikaži v Google Maps",
+      "showInGoogleMaps": "Prikaži v Google Zemljevidih",
       "showInGoogleStreetView": "Prikaži v Google Street View",
       "iosNote": "Za uporabnike sistema iOS: iOS v nekaterih primerih odstrani nekatere podatke EXIF (npr. zemljepisno širino in dolžino). Podrobnosti preberite na <pageLink>tej strani</pageLink>."
     },
@@ -100,7 +100,7 @@
   "language": {
     "title": "Jezik",
     "useBrowserSetting": "Uporabi nastavitev brskalnika ({{language}})",
-    "search": "Iskanje",
+    "search": "Išči",
     "noLanguagesFound": "Ni najdenih jezikov",
     "loadFailed": "Jezika ni bilo mogoče naložiti. Preverite povezavo in poskusite znova."
   },
@@ -109,15 +109,15 @@
     "usageData": "Za izboljšanje te aplikacije se zbirajo podatki o uporabi, na primer <br/>katere strani se odpirajo, kakšna je oblika zapisa naložene fotografije in katere <br/>napake so se zgodile, skupaj z vašim naslovom IP in približno lokacijo, <br/>ki je izpeljana iz njega. To lahko izklopite v <settingsLink>Nastavitvah</settingsLink>.",
     "reportIssues": "Če najdete napake ali težave, jih sporočite v <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Izvorna koda te aplikacije je na voljo v <gitHubLink>GitHubu</gitHubLink>.",
-    "translations": "Prevodi v druge jezike so dobrodošli: oglejte si, <guideLink>kako prevesti to aplikacijo</guideLink>.",
+    "translations": "Prevodi v druge jezike so dobrodošli: glejte <guideLink>kako prevesti to aplikacijo</guideLink>.",
     "developedBy": "To aplikacijo razvija Tomoyuki Aota.",
     "xProfile": {
-      "alt": "Profil X (prej Twitter)",
-      "title": "Odpri profil X (prej Twitter)"
+      "alt": "Profil v omrežju X (prej Twitter)",
+      "title": "Odpri profil v omrežju X (prej Twitter)"
     },
     "gitHubProfile": {
-      "alt": "Profil GitHub",
-      "title": "Odpri profil GitHub"
+      "alt": "Profil v GitHubu",
+      "title": "Odpri profil v GitHubu"
     },
     "photoLocationMap": "Želite na zemljevidu hkrati videti lokacije številnih fotografij?<br/> Za to je na voljo <plmLink>Photo Location Map</plmLink>."
   }

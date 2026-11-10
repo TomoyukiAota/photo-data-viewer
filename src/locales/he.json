@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "בחרו תמונה כדי להציג את נתוני ה-EXIF.",
+    "selectYourPhoto": "יש לבחור תמונה כדי להציג את נתוני ה-EXIF.",
     "selectPhoto": "בחירת תמונה",
     "tabs": {
       "data": "נתונים",
@@ -58,9 +58,9 @@
       "latitude": "קו רוחב",
       "longitude": "קו אורך",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "הצגה ב-Google Maps",
+      "showInGoogleMaps": "הצגה במפות Google",
       "showInGoogleStreetView": "הצגה ב-Google Street View",
-      "iosNote": "למשתמשי iOS: במקרים מסוימים iOS מסיר חלק מנתוני ה-EXIF (לדוגמה, קו רוחב וקו אורך). לפרטים, קראו את <pageLink>הדף הזה</pageLink>."
+      "iosNote": "למשתמשי iOS: במקרים מסוימים iOS מסיר חלק מנתוני ה-EXIF (לדוגמה, קו רוחב וקו אורך). לפרטים, אפשר לעיין ב<pageLink>דף הזה</pageLink>."
     },
     "rawData": {
       "description": "להלן הנתונים הגולמיים שהתקבלו באמצעות <exifrLink>exifr</exifrLink>."
@@ -82,7 +82,7 @@
   },
   "settings": {
     "title": "הגדרות",
-    "savedInBrowser": "ההגדרות נשמרות בדפדפן שלכם.",
+    "savedInBrowser": "ההגדרות נשמרות בדפדפן שלך.",
     "dateTime": {
       "title": "תבנית תאריך ושעה",
       "dateFormat": "תבנית תאריך",
@@ -102,14 +102,14 @@
     "useBrowserSetting": "שימוש בהגדרת הדפדפן ({{language}})",
     "search": "חיפוש",
     "noLanguagesFound": "לא נמצאו שפות",
-    "loadFailed": "לא ניתן היה לטעון את השפה. בדקו את החיבור ונסו שוב."
+    "loadFailed": "לא ניתן היה לטעון את השפה. יש לבדוק את החיבור ולנסות שוב."
   },
   "about": {
-    "keptInBrowser": "היישום קורא את נתוני ה-EXIF מהקובץ שלכם בתוך הדפדפן, <br/>ולכן הקובץ נשאר בדפדפן ואינו נשלח לשום שרת.",
-    "usageData": "כדי לשפר את היישום, נאסף מידע על השימוש, כגון <br/>אילו דפים נפתחים, מהי תבנית הקובץ של התמונה שנטענה ואילו <br/>שגיאות אירעו, יחד עם כתובת ה-IP שלכם והמיקום המשוער <br/>הנגזר ממנה. ניתן לכבות זאת ב<settingsLink>הגדרות</settingsLink>.",
-    "reportIssues": "אם מצאתם באגים או בעיות, דווחו עליהם ב-<issuesLink>GitHub Issues</issuesLink>.",
+    "keptInBrowser": "היישום קורא את נתוני ה-EXIF מהקובץ שלך בתוך הדפדפן, <br/>ולכן הקובץ נשאר בדפדפן ואינו נשלח לשום שרת.",
+    "usageData": "כדי לשפר את היישום, נאסף מידע על השימוש, כגון <br/>אילו דפים נפתחים, מהי תבנית הקובץ של התמונה שנטענה ואילו <br/>שגיאות אירעו, יחד עם כתובת ה-IP שלך והמיקום המשוער <br/>הנגזר ממנה. ניתן לכבות זאת ב<settingsLink>הגדרות</settingsLink>.",
+    "reportIssues": "אם מצאת באגים או בעיות, אפשר לדווח עליהם ב-<issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "קוד המקור של היישום מתארח ב-<gitHubLink>GitHub</gitHubLink>.",
-    "translations": "תרגומים לשפות נוספות יתקבלו בברכה: ראו <guideLink>כיצד לתרגם את היישום</guideLink>.",
+    "translations": "תרגומים לשפות נוספות יתקבלו בברכה: אפשר לעיין ב<guideLink>הסבר על תרגום היישום</guideLink>.",
     "developedBy": "היישום מפותח על ידי Tomoyuki Aota.",
     "xProfile": {
       "alt": "פרופיל X (לשעבר Twitter)",
@@ -119,6 +119,6 @@
       "alt": "פרופיל GitHub",
       "title": "פתיחת פרופיל GitHub"
     },
-    "photoLocationMap": "רוצים לראות על מפה את המיקומים של תמונות רבות בבת אחת?<br/> לשם כך קיים <plmLink>Photo Location Map</plmLink>."
+    "photoLocationMap": "רוצה לראות על מפה את המיקומים של תמונות רבות בבת אחת?<br/> לשם כך קיים <plmLink>Photo Location Map</plmLink>."
   }
 }

@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Velg bildet ditt for å vise EXIF-data.",
+    "selectYourPhoto": "Velg bildet ditt for å vise EXIF-informasjon.",
     "selectPhoto": "Velg bilde",
     "tabs": {
       "data": "Data",
@@ -34,7 +34,7 @@
   },
   "map": {
     "loading": "Kartet lastes inn",
-    "locationNotAvailable": "Posisjonsdata (breddegrad og lengdegrad) er ikke tilgjengelig.",
+    "locationNotAvailable": "Stedsinformasjon (breddegrad og lengdegrad) er ikke tilgjengelig.",
     "cannotBeShown": "Kartet kan ikke vises."
   },
   "photoData": {
@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Vis i Google Maps",
       "showInGoogleStreetView": "Vis i Google Street View",
-      "iosNote": "For iOS-brukere: iOS fjerner i noen tilfeller enkelte EXIF-data (f.eks. breddegrad og lengdegrad). Les <pageLink>denne siden</pageLink> for mer informasjon."
+      "iosNote": "For iOS-brukere: iOS fjerner i noen tilfeller deler av EXIF-informasjonen (f.eks. breddegrad og lengdegrad). Les mer på <pageLink>denne siden</pageLink>."
     },
     "rawData": {
       "description": "Nedenfor vises rådataene som er hentet med <exifrLink>exifr</exifrLink>."
@@ -68,7 +68,7 @@
   },
   "unsupportedFileDialog": {
     "title": "Filformatet støttes ikke",
-    "message": "EXIF-data er ikke tilgjengelig.",
+    "message": "EXIF-informasjon er ikke tilgjengelig.",
     "close": "Lukk"
   },
   "pageNotShown": {
@@ -105,19 +105,19 @@
     "loadFailed": "Språket kunne ikke lastes inn. Kontroller tilkoblingen, og prøv på nytt."
   },
   "about": {
-    "keptInBrowser": "Denne appen henter EXIF-data fra filen din i nettleseren din, <br/>så filen blir værende i nettleseren og sendes ikke til noen servere.",
+    "keptInBrowser": "Denne appen henter EXIF-informasjon fra filen din i nettleseren din, <br/>så filen blir værende i nettleseren og sendes ikke til noen servere.",
     "usageData": "For å forbedre denne appen samles det inn bruksinformasjon, for eksempel <br/>hvilke sider som åpnes, hvilket filformat det innlastede bildet har, og hvilke <br/>feil som oppstår, sammen med IP-adressen din og den omtrentlige <br/>posisjonen som utledes av den. Du kan slå dette av i <settingsLink>Innstillinger</settingsLink>.",
     "reportIssues": "Hvis du finner feil eller problemer, kan du melde dem i <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kildekoden til denne appen ligger på <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Oversettelser til andre språk er velkomne: se <guideLink>hvordan du oversetter denne appen</guideLink>.",
     "developedBy": "Denne appen er utviklet av Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X-profil (tidligere Twitter)",
-      "title": "Åpne X-profil (tidligere Twitter)"
+      "alt": "Profil på X (tidligere Twitter)",
+      "title": "Åpne profilen på X (tidligere Twitter)"
     },
     "gitHubProfile": {
       "alt": "GitHub-profil",
-      "title": "Åpne GitHub-profil"
+      "title": "Åpne GitHub-profilen"
     },
     "photoLocationMap": "Vil du se på et kart hvor mange bilder er tatt, på én gang?<br/> <plmLink>Photo Location Map</plmLink> er laget for det."
   }

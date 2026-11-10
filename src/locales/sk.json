@@ -58,7 +58,7 @@
       "latitude": "Zemep. šírka",
       "longitude": "Zemep. dĺžka",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Zobraziť v Google Maps",
+      "showInGoogleMaps": "Zobraziť v Mapách Google",
       "showInGoogleStreetView": "Zobraziť v Google Street View",
       "iosNote": "Pre používateľov iOS: systém iOS v niektorých prípadoch odstraňuje niektoré údaje EXIF (napr. zemepisnú šírku a dĺžku). Podrobnosti nájdete na <pageLink>tejto stránke</pageLink>."
     },
@@ -112,8 +112,8 @@
     "translations": "Preklady do ďalších jazykov sú vítané: pozrite si, <guideLink>ako túto aplikáciu preložiť</guideLink>.",
     "developedBy": "Túto aplikáciu vyvíja Tomoyuki Aota.",
     "xProfile": {
-      "alt": "Profil na X (predtým Twitter)",
-      "title": "Otvoriť profil na X (predtým Twitter)"
+      "alt": "Profil na sieti X (predtým Twitter)",
+      "title": "Otvoriť profil na sieti X (predtým Twitter)"
     },
     "gitHubProfile": {
       "alt": "Profil na GitHube",

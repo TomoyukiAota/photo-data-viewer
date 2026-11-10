@@ -100,7 +100,7 @@
   "language": {
     "title": "Kieli",
     "useBrowserSetting": "Käytä selaimen asetusta ({{language}})",
-    "search": "Haku",
+    "search": "Hae",
     "noLanguagesFound": "Kieliä ei löytynyt",
     "loadFailed": "Kielen lataaminen epäonnistui. Tarkista yhteys ja yritä uudelleen."
   },
@@ -109,11 +109,11 @@
     "usageData": "Sovelluksen parantamiseksi kerätään käyttötietoja, kuten <br/>mitä sivuja avataan, missä tiedostomuodossa ladattu kuva on ja mitä <br/>virheitä tapahtuu, sekä IP-osoitteesi ja siitä päätelty likimääräinen <br/>sijainti. Voit poistaa tämän käytöstä <settingsLink>asetuksissa</settingsLink>.",
     "reportIssues": "Jos löydät virheitä tai ongelmia, ilmoita niistä <issuesLink>GitHub Issues</issuesLink> -sivulla.",
     "sourceCode": "Tämän sovelluksen lähdekoodi on <gitHubLink>GitHubissa</gitHubLink>.",
-    "translations": "Käännökset muille kielille ovat tervetulleita: katso, <guideLink>miten tämä sovellus käännetään</guideLink>.",
+    "translations": "Käännökset muille kielille ovat tervetulleita: katso <guideLink>miten tämä sovellus käännetään</guideLink>.",
     "developedBy": "Tämän sovelluksen on kehittänyt Tomoyuki Aota.",
     "xProfile": {
-      "alt": "X-profiili (entinen Twitter)",
-      "title": "Avaa X-profiili (entinen Twitter)"
+      "alt": "X-profiili (aiemmin Twitter)",
+      "title": "Avaa X-profiili (aiemmin Twitter)"
     },
     "gitHubProfile": {
       "alt": "GitHub-profiili",

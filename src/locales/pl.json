@@ -34,7 +34,7 @@
   },
   "map": {
     "loading": "Wczytywanie mapy",
-    "locationNotAvailable": "Dane o lokalizacji (szerokość i długość geograficzna) są niedostępne.",
+    "locationNotAvailable": "Dane o położeniu (szerokość i długość geograficzna) są niedostępne.",
     "cannotBeShown": "Nie można wyświetlić mapy."
   },
   "photoData": {
@@ -58,7 +58,7 @@
       "latitude": "Szer. geogr.",
       "longitude": "Dł. geogr.",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Pokaż w Google Maps",
+      "showInGoogleMaps": "Pokaż w Mapach Google",
       "showInGoogleStreetView": "Pokaż w Google Street View",
       "iosNote": "Dla użytkowników iOS: w niektórych przypadkach iOS usuwa część danych EXIF (np. szerokość i długość geograficzną). Szczegóły znajdziesz na <pageLink>tej stronie</pageLink>."
     },
@@ -84,11 +84,11 @@
     "title": "Ustawienia",
     "savedInBrowser": "Ustawienia są zapisywane w Twojej przeglądarce.",
     "dateTime": {
-      "title": "Format daty i godziny",
+      "title": "Format daty i czasu",
       "dateFormat": "Format daty",
-      "clockSystem": "12 lub 24 godz.",
-      "clock12": "12 godz.",
-      "clock24": "24 godz.",
+      "clockSystem": "12 lub 24 godziny",
+      "clock12": "12 godzin",
+      "clock24": "24 godziny",
       "example": "Przykład"
     },
     "usageData": {

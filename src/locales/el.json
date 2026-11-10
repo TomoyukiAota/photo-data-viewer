@@ -58,7 +58,7 @@
       "latitude": "Γεωγρ. πλάτος",
       "longitude": "Γεωγρ. μήκος",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Εμφάνιση στο Google Maps",
+      "showInGoogleMaps": "Εμφάνιση στους Χάρτες Google",
       "showInGoogleStreetView": "Εμφάνιση στο Google Street View",
       "iosNote": "Για χρήστες iOS: σε ορισμένες περιπτώσεις το iOS αφαιρεί κάποια δεδομένα EXIF (π.χ. γεωγραφικό πλάτος και μήκος). Διαβάστε <pageLink>αυτήν τη σελίδα</pageLink> για λεπτομέρειες."
     },
@@ -113,11 +113,11 @@
     "developedBy": "Αυτή η εφαρμογή αναπτύσσεται από τον Tomoyuki Aota.",
     "xProfile": {
       "alt": "Προφίλ στο X (πρώην Twitter)",
-      "title": "Άνοιγμα προφίλ στο X (πρώην Twitter)"
+      "title": "Άνοιγμα του προφίλ στο X (πρώην Twitter)"
     },
     "gitHubProfile": {
       "alt": "Προφίλ στο GitHub",
-      "title": "Άνοιγμα προφίλ στο GitHub"
+      "title": "Άνοιγμα του προφίλ στο GitHub"
     },
     "photoLocationMap": "Θέλετε να δείτε στον χάρτη τις τοποθεσίες πολλών φωτογραφιών ταυτόχρονα;<br/> Για αυτόν τον σκοπό υπάρχει το <plmLink>Photo Location Map</plmLink>."
   }

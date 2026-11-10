@@ -85,7 +85,7 @@
     "savedInBrowser": "As configurações são salvas no seu navegador.",
     "dateTime": {
       "title": "Formato de data e hora",
-      "dateFormat": "Formato de data",
+      "dateFormat": "Formato da data",
       "clockSystem": "12 ou 24 horas",
       "clock12": "12 horas",
       "clock24": "24 horas",
@@ -99,7 +99,7 @@
   },
   "language": {
     "title": "Idioma",
-    "useBrowserSetting": "Usar a configuração do navegador ({{language}})",
+    "useBrowserSetting": "Usar o ajuste do navegador ({{language}})",
     "search": "Buscar",
     "noLanguagesFound": "Nenhum idioma encontrado",
     "loadFailed": "Não foi possível carregar o idioma. Verifique sua conexão e tente novamente."
@@ -113,11 +113,11 @@
     "developedBy": "Este aplicativo é desenvolvido por Tomoyuki Aota.",
     "xProfile": {
       "alt": "Perfil no X (antigo Twitter)",
-      "title": "Abrir perfil no X (antigo Twitter)"
+      "title": "Abrir o perfil no X (antigo Twitter)"
     },
     "gitHubProfile": {
       "alt": "Perfil no GitHub",
-      "title": "Abrir perfil no GitHub"
+      "title": "Abrir o perfil no GitHub"
     },
     "photoLocationMap": "Quer ver no mapa os locais de muitas fotos de uma só vez?<br/> O <plmLink>Photo Location Map</plmLink> está disponível para isso."
   }

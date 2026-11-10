@@ -99,7 +99,7 @@
   },
   "language": {
     "title": "Sprache",
-    "useBrowserSetting": "Browsereinstellung verwenden ({{language}})",
+    "useBrowserSetting": "Einstellung des Browsers verwenden ({{language}})",
     "search": "Suchen",
     "noLanguagesFound": "Keine Sprachen gefunden",
     "loadFailed": "Die Sprache konnte nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
@@ -109,11 +109,11 @@
     "usageData": "Zur Verbesserung dieser App werden Nutzungsinformationen erfasst, etwa <br/>welche Seiten geöffnet werden, welches Dateiformat das geladene Foto hat und <br/>welche Fehler auftreten, zusammen mit Ihrer IP-Adresse und dem daraus <br/>abgeleiteten ungefähren Standort. Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
     "reportIssues": "Wenn Sie Fehler oder Probleme finden, melden Sie diese bitte unter <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Der Quellcode dieser App ist auf <gitHubLink>GitHub</gitHubLink> verfügbar.",
-    "translations": "Übersetzungen in weitere Sprachen sind willkommen: siehe <guideLink>So übersetzen Sie diese App</guideLink>.",
+    "translations": "Übersetzungen in andere Sprachen sind willkommen: siehe <guideLink>So übersetzen Sie diese App</guideLink>.",
     "developedBy": "Diese App wird von Tomoyuki Aota entwickelt.",
     "xProfile": {
-      "alt": "X-Profil (ehemals Twitter)",
-      "title": "X-Profil (ehemals Twitter) öffnen"
+      "alt": "Profil auf X (ehemals Twitter)",
+      "title": "Profil auf X (ehemals Twitter) öffnen"
     },
     "gitHubProfile": {
       "alt": "GitHub-Profil",

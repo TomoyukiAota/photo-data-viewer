@@ -328,7 +328,7 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await page.keyboard.press('Home');
   await expect(options.first()).toBeFocused();
   await expect(options.first()).toHaveText(
-    'Browsereinstellung verwenden (English)',
+    'Einstellung des Browsers verwenden (English)',
   );
   await page.keyboard.press('Space');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
