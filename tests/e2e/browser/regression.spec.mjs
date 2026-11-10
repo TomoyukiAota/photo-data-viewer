@@ -59,6 +59,9 @@ async function snapshot(page, name) {
     await expect(page.locator('.leaflet-container')).toBeVisible();
   }
   await page.evaluate(() => document.fonts.ready);
+  // The menu's backdrop stays over the page for a moment after the menu is
+  // closed, without fading.
+  await expect(page.locator('#menu-appbar')).toBeHidden();
   if (process.env.PDV_VISUAL) {
     await expect(page).toHaveScreenshot(`${name}.png`, {
       animations: 'disabled',
@@ -233,6 +236,107 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   expect(errors).toEqual([]);
 });
 
+test('the Language page lists the languages, narrows them down, and applies the one chosen', async ({
+  page,
+  browserName,
+}) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await navigate(page, 'Language');
+  await expect(page).toHaveURL(/\/language$/);
+  await expect(page).toHaveTitle('Language - Photo Data Viewer');
+
+  // A list box: the browser's language first, chosen until another is, then
+  // each language under its own name.
+  const list = page.getByRole('listbox');
+  const options = list.getByRole('option');
+  const chosen = list.locator('[aria-selected="true"]');
+  await expect(list).toHaveAccessibleName('Language');
+  await expect(options).toHaveCount(43);
+  await expect(options.first()).toHaveText('Use browser setting (English)');
+  await expect(chosen).toHaveText(['Use browser setting (English)']);
+  await expect(
+    list.getByRole('option', { name: '日本語', exact: true }),
+  ).toHaveAttribute('lang', 'ja');
+  // A box of seven entries of 32px, which scrolls for the others, with a
+  // scrollbar of its own where the browser lets the page draw one.
+  expect(
+    await list.evaluate((element) => [
+      element.clientHeight,
+      element.scrollHeight > element.clientHeight,
+    ]),
+  ).toEqual([224, true]);
+  if (browserName === 'chromium') {
+    expect(
+      await list.evaluate(
+        (element) => getComputedStyle(element, '::-webkit-scrollbar').width,
+      ),
+    ).toBe('12px');
+  }
+  await snapshot(page, 'language');
+
+  // The search is without regard to case or diacritics, by a language's own
+  // name, its English name or its code.
+  const search = page.getByRole('searchbox', { name: 'Search', exact: true });
+  await search.fill('cestina');
+  await expect(options).toHaveText(['čeština']);
+  await search.fill('GERMAN');
+  await expect(options).toHaveText(['Deutsch']);
+  await search.fill('pt-');
+  await expect(options).toHaveText([
+    'português (Brasil)',
+    'português (Portugal)',
+  ]);
+  await search.fill('no such language');
+  await expect(options).toHaveCount(0);
+  await expect(page.getByRole('status')).toHaveText('No languages found');
+  // The chosen entry stays chosen while the search hides it.
+  await search.fill('');
+  await expect(chosen).toHaveText(['Use browser setting (English)']);
+
+  // Tab reaches the list, and Enter chooses the entry under the focus. Its
+  // texts are fetched then, and the page is in the language at once.
+  await search.fill('deu');
+  await search.press('Tab');
+  await expect(options.first()).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  await expect(page).toHaveTitle('Sprache - Photo Data Viewer');
+  await expect(list).toHaveAccessibleName('Sprache');
+  await expect(chosen).toHaveText(['Deutsch']);
+  expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
+    'de',
+  );
+
+  // The arrow keys and Home move along the list, and Space chooses.
+  const germanSearch = page.getByRole('searchbox', {
+    name: 'Suchen',
+    exact: true,
+  });
+  await germanSearch.fill('');
+  await germanSearch.press('Tab');
+  await expect(
+    list.getByRole('option', { name: 'Deutsch', exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press('ArrowUp');
+  await expect(
+    list.getByRole('option', { name: 'dansk', exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press('Home');
+  await expect(options.first()).toBeFocused();
+  await expect(options.first()).toHaveText(
+    'Browsereinstellung verwenden (English)',
+  );
+  await page.keyboard.press('Space');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(chosen).toHaveText(['Use browser setting (English)']);
+  expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
+    'auto',
+  );
+  expect(errors).toEqual([]);
+});
+
 test('no EXIF and malformed files retain the existing dialog and image behavior', async ({
   page,
 }) => {
@@ -360,16 +464,12 @@ test('narrow photo, metadata, and map tabs retain their layout', async ({
 });
 
 // The suite above runs with the en-US locale (playwright.config.mjs); these run
-// as a browser set to Japanese, the first translation.
+// as a browser set to Japanese, the first translation. The other languages are
+// checked by the unit test of the translation files, not here.
 test.describe('in a browser whose language is Japanese', () => {
   test.use({ locale: 'ja-JP' });
 
-  // The select by its role: right after an option is chosen, its list is still
-  // closing, and getByLabel would find the list as well.
-  const languageSelect = (page, label) =>
-    page.getByRole('combobox', { name: label, exact: true });
-
-  test('the app is in Japanese, and the language chosen in Settings is kept', async ({
+  test('the app is in Japanese, and the language chosen on the Language page is kept', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 320, height: 800 });
@@ -392,17 +492,33 @@ test.describe('in a browser whose language is Japanese', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.getByRole('button', { name: 'メニュー', exact: true }).click();
     await page.getByRole('menuitem', { name: '設定', exact: true }).click();
-    await expect(languageSelect(page, '言語')).toHaveText(
-      'ブラウザの設定に従う（日本語）',
-    );
+    await expect(page.getByLabel('日付の形式', { exact: true })).toBeVisible();
     await snapshot(page, 'settings-ja');
-    await languageSelect(page, '言語').click();
-    await page.getByRole('option', { name: 'English', exact: true }).click();
-    await expect(languageSelect(page, 'Language')).toHaveText('English');
+
+    // The Language page, which the menu names in English as well, for someone
+    // who cannot read Japanese.
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page
+      .getByRole('menuitem', { name: '言語 (Language)', exact: true })
+      .click();
+    const list = page.getByRole('listbox');
+    const chosen = list.locator('[aria-selected="true"]');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(chosen).toHaveText(['ブラウザの設定に従う（日本語）']);
+    await expect(
+      page.getByRole('searchbox', { name: '検索', exact: true }),
+    ).toBeVisible();
+    await snapshot(page, 'language-ja');
+
+    await list.getByRole('option', { name: 'English', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.getByLabel('Date Format', { exact: true })).toBeVisible();
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(chosen).toHaveText(['English']);
+    await expect(list.getByRole('option').first()).toHaveText(
+      'Use browser setting (日本語)',
+    );
     await page.reload();
-    await expect(languageSelect(page, 'Language')).toHaveText('English');
+    await expect(chosen).toHaveText(['English']);
     expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
       'en',
     );
@@ -415,5 +531,92 @@ test.describe('in a browser whose language is Japanese', () => {
     ).toBeVisible();
     await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
     await snapshot(page, 'about-ja');
+  });
+});
+
+// One language written from right to left, for which the layout is mirrored.
+test.describe('in a browser whose language is Arabic', () => {
+  test.use({ locale: 'ar-EG' });
+
+  test('the app is in Arabic and laid out from the right', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await loadPhoto(page);
+
+    // The menu is where a line ends, at the left, and a name is to the right
+    // of its value.
+    const menuButton = page.getByRole('button', {
+      name: 'القائمة',
+      exact: true,
+    });
+    expect((await menuButton.boundingBox()).x).toBeLessThan(100);
+    const name = page.getByRole('cell', { name: 'اسم الملف', exact: true });
+    const value = page.getByRole('cell', { name: 'demo.jpg', exact: true });
+    expect((await name.boundingBox()).x).toBeGreaterThan(
+      (await value.boundingBox()).x,
+    );
+    // A photo's data keeps its own direction, so that "3.09 MB" is not shown
+    // as "MB 3.09", and a minus sign stays before its number.
+    await expect(page.getByText('3.09 MB', { exact: true })).toHaveCSS(
+      'direction',
+      'ltr',
+    );
+    await expect(page.getByText(/-122\.005661/)).toHaveCSS('direction', 'ltr');
+    await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
+    await snapshot(page, 'loaded-general-ar');
+
+    // The panes keep their sides, and the splitter between them follows the
+    // mouse.
+    const vertical = page.locator(
+      '.reflex-container.vertical > .reflex-splitter',
+    );
+    const box = await vertical.boundingBox();
+    await page.mouse.move(box.x + 4, box.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(box.x - 96, box.y + 100, { steps: 5 });
+    await page.mouse.up();
+    const movedBox = await vertical.boundingBox();
+    expect(Math.abs(movedBox.x - (box.x - 100))).toBeLessThanOrEqual(2);
+
+    await menuButton.click();
+    await page.getByRole('menuitem', { name: 'الإعدادات', exact: true }).click();
+    await expect(
+      page.getByLabel('تنسيق التاريخ', { exact: true }),
+    ).toBeVisible();
+    await snapshot(page, 'settings-ar');
+
+    await menuButton.click();
+    await page
+      .getByRole('menuitem', { name: 'اللغة (Language)', exact: true })
+      .click();
+    const list = page.getByRole('listbox');
+    await expect(list.locator('[aria-selected="true"]')).toHaveText([
+      'استخدام إعداد المتصفح (العربية)',
+    ]);
+    await snapshot(page, 'language-ar');
+
+    // A language written from left to right lays the page out from the left
+    // again.
+    await list.getByRole('option', { name: 'English', exact: true }).click();
+    await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+    const englishMenuButton = page.getByRole('button', {
+      name: 'menu',
+      exact: true,
+    });
+    expect((await englishMenuButton.boundingBox()).x).toBeGreaterThan(1100);
+    expect(errors).toEqual([]);
+  });
+
+  test('the narrow layout is laid out from the right as well', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await loadPhoto(page);
+    await snapshot(page, 'narrow-loaded-ar');
   });
 });
