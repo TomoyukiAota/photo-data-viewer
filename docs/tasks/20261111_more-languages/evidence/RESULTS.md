@@ -1,22 +1,25 @@
 # More languages: results
 
-Checked on 2026-11-11 on macOS 27 (Apple silicon, system language Japanese),
-Node 26.13.0 and npm 11.20.0, in the working tree of the branch
-`claude/more-languages-and-language-page-96bbc5`. Every browser ran headless.
+Checked on 2026-11-11 and 2026-11-12 on macOS 27 (Apple silicon, system
+language Japanese), Node 26.13.0 and npm 11.20.0, in the working tree of the
+branch `claude/more-languages-and-language-page-96bbc5`. Every browser ran
+headless. The numbers under [Checks](#checks) are those of 2026-11-12, after
+the translations were read through again and the layout was made one for
+every language.
 
 ## Checks
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 35 suites, 624 tests, in about two seconds                        |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 39 suites, 638 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
-| `npm run test:e2e` (Chromium)                        | Passed: 20 tests, 4 of them new, in 26 s                                  |
-| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 20 tests; the screenshots as described below                      |
-| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 19 tests, after the list's box was taken out of the Tab key's stops; the one for a phone is skipped, as Playwright emulates a touch device in Chromium alone |
+| `npm run test:e2e` (Chromium)                        | Passed: 23 tests, 7 of them new, in 29 s                                  |
+| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 23 tests; the screenshots as described below                      |
+| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 22 tests, after the list's box was taken out of the Tab key's stops; the one for a touch device is skipped, as Playwright emulates one in Chromium alone |
 | `PDV_DEV=1 npm run test:e2e`                         | Passed: 1 test                                                            |
 | `npm run test:electron`                              | **Not run**; see [In Photo Location Map](#in-photo-location-map)          |
-| A clean `npm ci`                                     | The three known deprecation warnings only; 731 packages, 3 more than before |
-| `npm audit`                                          | 26 advisories, the number before; none names a package added here         |
+| A clean `npm ci`                                     | On 2026-11-11: the three known deprecation warnings only; 731 packages, 3 more than before. No dependency changed since |
+| `npm audit`                                          | On 2026-11-11: 26 advisories, the number before; none names a package added here |
 
 Before this work, `main` had 27 suites and 198 tests, and 16 tests in the
 browser suite.
@@ -29,35 +32,66 @@ browser suite.
   got with the file, and holds the list to the order of its names.
 - One unit test writes a date in each of the 42 languages, in every format of
   the settings, and tells if a digit is not one of 0 to 9.
-- The browser suite has English, Japanese and Arabic, and one test for a
-  phone: 4 more tests than before, for 42 languages in place of 2.
-- Looking at every language in a browser was done once, with scripts that are
-  not part of the repository; see [Every language at the width of a
-  phone](#every-language-at-the-width-of-a-phone).
+- The browser suite has English, Japanese and Arabic, one test for a touch
+  device, and three tests in Polish at the width of a phone, which stands for
+  the languages that write more than English does: 7 more tests than before,
+  for 42 languages in place of 2. The Polish tests find their elements by
+  where they are and name no Polish text, so a change of a translation does
+  not break them.
+- Unit tests hold the layout's parts to what they are for: each name of the
+  latitude and the longitude on the line of its number, the header's room for
+  the menu's button, the names of the Settings page's fields tied to their
+  fields, and every value of the General tab but the file's name free to take
+  a second line.
+- Looking at every language in a browser is done with scripts that are not
+  part of the repository; see [Every language at the width of a
+  phone](#every-language-at-the-width-of-a-phone) and [Every language again,
+  with one layout](#every-language-again-with-one-layout).
 
 ## Screenshots
 
-Taken with Chrome on this Mac, like the others.
+Taken with Chrome on this Mac, like the others. Of the 26, 9 changed on
+2026-11-12 and 17 did not.
 
-- `settings.png`, `settings-ja.png`: updated. The Language section is no longer
-  on the Settings page.
-- `language.png`, `language-ja.png`: new, the Language page. Headless Chrome
-  draws no scrollbars, so the list is shown without the one that a window has.
-  They and `language-ar.png` were taken again when the maintainer fixed the
-  names and their order, when the search field got the focus, whose ring the
-  field has in them, and when the search field got its magnifying glass.
-- `about-ja.png`: updated, for one word of the sentence that welcomes
-  translations (`他の言語`) and for the word for a map (`マップ`), which are
-  Photo Location Map's now.
-- `narrow-loaded-ja.png`: updated, for the Map tab's label (`マップ`). The
-  tabs and everything else are where they were.
-- `loaded-general-ar.png`, `narrow-loaded-ar.png`, `settings-ar.png`,
-  `language-ar.png`: new, in Arabic, laid out from the right.
-- Every other screenshot is unchanged, which is the check that English and
-  Japanese are laid out as before: the six of the empty Home page, the three of
-  a loaded photo's tabs, `heif-general.png`, `empty-details.png`,
-  `unsupported-dialog.png`, `narrow-loaded.png`, `narrow-photo.png`,
-  `about.png` and `demo.png`.
+- `settings.png`, `settings-ja.png`, `settings-ar.png`: on 2026-11-11 the
+  Language section left the Settings page (the Arabic one was new then). On
+  2026-11-12 the two fields of the date and time got their names above them,
+  in place of MUI's label in the field's border, and are less high; what is
+  under them moved up with them.
+- `loaded-general-ar.png`, `narrow-loaded-ar.png`: new on 2026-11-11, in
+  Arabic, laid out from the right. On 2026-11-12 one word changed in them,
+  the label of the Raw Data tab, which the review of the translations
+  changed; no other pixel differs.
+- `home-1280.png`, `home-1201.png`, `empty-details.png`,
+  `unsupported-dialog.png`: on 2026-11-12, the text in the photo's place
+  ("The selected photo will be displayed here.", "Unsupported File Format")
+  is drawn a pixel lower, and no other pixel differs. The pane is 331 pixels
+  high where it was 330.98: the panes were given 669.98 pixels under the
+  header by react-reflex, and have the 670 that are there now that the header
+  is not one of them. The text is in the middle of the pane, at 286.5 pixels
+  where it was at 286.48, which the browser draws a pixel apart.
+- `language.png`, `language-ja.png`, `language-ar.png`: new on 2026-11-11, the
+  Language page. Headless Chrome draws no scrollbars, so the list is shown
+  without the one that a window has. They were taken again when the
+  maintainer fixed the names and their order, when the search field got the
+  focus, whose ring the field has in them, and when the search field got its
+  magnifying glass.
+- `about-ja.png`: updated on 2026-11-11, for one word of the sentence that
+  welcomes translations (`他の言語`) and for the word for a map (`マップ`),
+  which are Photo Location Map's now.
+- `narrow-loaded-ja.png`: updated on 2026-11-11, for the Map tab's label
+  (`マップ`). The tabs and everything else are where they were.
+- Every other screenshot is as it was on `main`, which is the check that
+  English and Japanese are laid out as before outside the Settings page: the
+  four other screenshots of the empty Home page (`home-1200.png`,
+  `home-1199.png`, `home-600.png`, `home-320.png`), the three of a loaded
+  photo's tabs, `heif-general.png`, `narrow-loaded.png`, `narrow-photo.png`,
+  `about.png` and `demo.png`. The layout of 2026-11-12 changed none of them,
+  nor the three of the Language page, `about-ja.png` and
+  `narrow-loaded-ja.png`.
+
+The changed screenshots were compared with the earlier ones pixel by pixel,
+at any difference, to find what moved in each.
 
 Two of them caught mistakes on the way, which were corrected:
 
@@ -125,6 +159,70 @@ The list was looked at with one match and with none, in English and in Arabic:
 the box stays 226 px high (seven entries and its border), and "No languages
 found" is at the top of it.
 
+## Every language again, with one layout
+
+On 2026-11-12, after the translations were read through again and the rules
+that shortened texts for room were withdrawn, a script opened the built app in
+headless Chrome in each of the 42 languages, at 320, 390 and 1280 pixels wide,
+in every state that shows a text: the Home page empty, with a photo and with
+a file that cannot be read (its three tabs on a phone, the dialog, the
+messages in the photo's and the map's place), the Settings page with each
+clock and with each of its menus open, the Language page with its list and
+with no match, the About and Demo pages, and the menu: 18 states on a phone
+and 13 at 1280 pixels. In each it looked for a text that is cut or runs out of
+its box, a page wider than the window, a text under the menu's button, a name
+of the latitude or the longitude that is not beside its number, a word of the
+table's names divided without need, and a last line of one or two letters. A
+second script measured the values of the General tab, which the first leaves
+out as a photo's own data, in every language at 320, 375 and 390 pixels, with
+each clock and for a photo without EXIF data.
+
+Every state was also looked at, language by language, in pictures of 14
+languages side by side: at 320 pixels the Home page with a photo, the
+Settings page from top to bottom, the dialog, the two messages, the menu, the
+list's first entry, and the About and Demo pages; at 390 pixels the Home page
+with a photo and the Settings page; at 1280 pixels the header, the data's
+pane, the panes without a photo, and the Settings and About pages.
+
+With the layout as it was and the reviewed texts, the scripts found:
+
+| What                                                             | Languages                                                       | What was done                                                    |
+| ---------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
+| The name of the clock's field cut, in MUI's label, at every width | 29, such as `da`, `fr`, `pl`, `ru`, `th`                        | The names are above the fields                                   |
+| The clock's field or its name past the window's edge at 320 px    | 30; at 390 px `cs` and `sk`                                     | The fields are one under the other where they do not fit side by side |
+| The Settings page wider than the window at 320 px                 | `de`, `et`, `hu`, `nb`, `sv`                                    | The same                                                         |
+| The two names of the latitude and the longitude on four lines, beside two numbers on two | `bg`, `cs`, `el`, `hr`, `hu`, `lv`, `pl`, `sk`, `sl`, `sr-Latn` | Each name shares a line of a grid with its number                |
+| The date cut at 320 px with the 12-hour clock                     | `ru` by 12 px, `zh-Hans` and `zh-Hant` by 1 px                  | A value continues on the next line                               |
+| A last line of one or two letters                                 | `da`, `es`, `ja`, `ko`, `th`, `zh-Hans`, `zh-Hant`              | `text-wrap: pretty` for every text                               |
+
+Looking at the pictures, and the scripts run again on the way, found more,
+each corrected in the layout:
+
+| What                                                                                   | Where                                             | What was done                                               |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------- |
+| The dialog's title, message and button touched where the first two took two lines each | 14 languages at 320 px, such as `de`, `es`, `fr`  | A least space between them                                  |
+| A title of two lines with a letter alone on the second (`…ファイル形式で / す`)         | `ja`, in the dialog; as on `main`                 | Lines of about the same length, ending between two phrases  |
+| The message in the map's place on two lines where it had one, once it had space inside | `ja`                                              | The space is added to the box, not taken from the sentence  |
+| The text in the photo's place on two lines at 320 px where it had one                  | `en`                                              | 6 pixels of space at each side, which leaves it one line    |
+| A word of the table's names divided though it fitted (`Zeměpis-ná šířka`)              | `cs`, `it`, `ro`, `sk`                            | `text-wrap: pretty` is kept away from the names             |
+| A date divided inside its day of the week (`周 / 六`)                                   | `zh-Hans`, `zh-Hant`, with the 12-hour clock      | A value is divided at a space                               |
+| The About page ended at its last line where it is longer than the window               | Every language at 320 px; as on `main`            | Space under the last text                                   |
+| A line starting with a long vowel mark (`…のペ / ージ`)                                 | `ja`, the Settings page at 320 px; as on `main`   | `line-break: strict` for every text                         |
+
+The last run, on the build that the checks above ran on, found no text cut,
+none out of its box or out of the window, no page wider than the window, each
+name beside its number, and no value cut. What it still notes are last lines
+of two letters in Chinese, Japanese and Korean, each a whole word (`数据。`),
+where `text-wrap: pretty` took a letter more to the line: the header's
+sentence in Chinese at 320 pixels, and sentences of the About and Settings
+pages.
+
+The script was checked against itself: run on the version before these
+changes, it has to find what is known to be wrong there. That showed that one
+of its tests had been leaving out every element of a page laid out from left
+to right, since the latitude and the longitude were given a direction of
+their own. The numbers above are from the corrected script.
+
 ## A language that could not be fetched at the start
 
 The built app was opened in a headless browser with Japanese saved and the file
@@ -164,7 +262,8 @@ German, which the app is to ignore there.
 | `zh-TW`    | `zh-Hant` | `ltr`    | 一般            | 16/03/2019 週六 05:29:58 下午 |
 
 In each, the title was "demo.jpg - Photo Location Map", the menu was hidden,
-and no error was logged.
+and no error was logged. It was run again on 2026-11-12, after the layout was
+changed, with the same nine results.
 
 ## Right to left
 
@@ -186,6 +285,16 @@ and About pages:
 
 ## Found on the way
 
+- **react-reflex gives its panes a little less than the room they have**:
+  669.98 pixels of 670 under a header of 130. With the header out of the
+  panes, they have all of it, which moved a text in the middle of a pane by
+  what the browser draws as a pixel
+  ([Screenshots](#screenshots)).
+- **MUI sets the margin of a dialog's title to none**, over a margin given by
+  a class of the app. The space above the title is in the dialog's padding.
+- **A table cell lets a text on one line run through its padding** before it
+  is cut. A value that may take a second line does the same, so that the
+  dates that filled the cell stay on one line.
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.

@@ -1,7 +1,10 @@
+// The 50 pixels under the last text are for a window that the page is longer
+// than, as a phone's is: the page ended at its last line there. The Settings
+// page has the same under its last section.
 // prettier-ignore
 .container {
   width: 100%;
-  padding: 130px 20px 0 20px;
+  padding: 130px 20px 50px 20px;
 
   display: grid;
   justify-content: center;

@@ -39,6 +39,36 @@ const pages: Page[] = [
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
 ];
 
+/** What the menu's button shows: the icon, and the word for a menu under it. */
+const AppMenuFace: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <div className={classes['menu-icon-wrapper']}>
+      <MenuIcon className={classes['menu-icon']} />
+      <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
+    </div>
+  );
+};
+
+/**
+ * Room as wide as the menu's button, for a page to keep free where the button
+ * lies over it, at the end of its first lines.
+ *
+ * TL;DR: It is the button's own content, not drawn, so it is as wide as the
+ * button in every language.
+ * Details: The button is as wide as the word under its icon, which differs
+ * from language to language (MENU, メニュー, IZBORNIK). A width set here in
+ * pixels would be too small for one of them, or leave a gap for the others.
+ */
+export const AppMenuRoom: React.FC<{ className?: string }> = (props) => (
+  <div
+    className={`${classes.room} ${props.className ?? ''}`}
+    aria-hidden='true'
+  >
+    <AppMenuFace />
+  </div>
+);
+
 const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
   props,
 ) => {
@@ -75,10 +105,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         aria-label={t('menu.buttonLabel')}
         onClick={handleOpenMenu}
       >
-        <div className={classes['menu-icon-wrapper']}>
-          <MenuIcon className={classes['menu-icon']} />
-          <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
-        </div>
+        <AppMenuFace />
       </IconButton>
       <Menu
         id='menu-appbar'
@@ -104,6 +131,8 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
             <MenuItem
               key={page.pathname}
               onClick={() => handleMenuItemClicked(page)}
+              // A name wider than the window continues on the next line.
+              sx={{ whiteSpace: 'normal' }}
             >
               <ListItemIcon>
                 <Check

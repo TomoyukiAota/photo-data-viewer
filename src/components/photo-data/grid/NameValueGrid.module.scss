@@ -39,6 +39,10 @@
     padding-top: 4px;
     padding-bottom: 4px;
     line-height: 24px;
+    // The two headings are translated: one wider than its column continues on
+    // the next line.
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   td {
@@ -48,10 +52,28 @@
     text-overflow: ellipsis;
   }
 
-  // A name that may take more than one line (wrapNames).
+  // TL;DR: A name that may take more than one line (wrapNames): it is never
+  // cut, whatever its length in a language.
+  // Details: It continues on the next line between two words. A word wider
+  // than the column is divided where the language divides its words, with a
+  // hyphen, where the browser knows how; where it does not, the word goes on
+  // at the column's end, which is still all of it. `text-wrap: wrap` keeps
+  // the page's `pretty` away from the names: with it, the browser divided a
+  // word that fitted on a line ("Zeměpis-ná šířka") to make the two lines
+  // more alike.
   td.wrap {
     white-space: normal;
+    text-wrap: wrap;
     overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  // A row that lays out its own names and values (`whole`): the cell is its
+  // box alone.
+  td.whole {
+    padding: 0;
+    white-space: normal;
+    overflow: visible;
   }
 
   .heading {

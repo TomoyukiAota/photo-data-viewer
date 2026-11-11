@@ -5,6 +5,10 @@ Started on 2026-11-11, on the branch
 continues [Multiple languages](../20261108_multiple-languages/STATUS.md). See
 the [results](./evidence/RESULTS.md) and [the words chosen](./evidence/TERMS.md).
 
+On 2026-11-12 the 40 machine translations were read through again, and the
+layout was made one for every language:
+[One layout for every language](#one-layout-for-every-language).
+
 ## What was asked
 
 Photo Location Map got its first translation and a list to choose the language
@@ -25,7 +29,10 @@ maintainer's to do.
 
 - **42 languages** (`src/i18n/languages.ts`, `src/locales/`). The 40 new
   translations are machine translation that no speaker has reviewed;
-  `docs/TRANSLATING.md` says so for each.
+  `docs/TRANSLATING.md` says so for each. A machine read them through again,
+  in rounds, for a wording that is more natural or more accurate.
+- **One layout for every language**, which holds whatever length a language's
+  words and sentences have. No text is shortened or abbreviated for room.
 - **A Language page** (`/language`), which the menu opens, with the list
   (`src/components/language/`). The Settings page no longer has a Language
   section.
@@ -124,16 +131,21 @@ both applications:
   exception: they are written as Google names them in the language, as Photo
   Location Map writes them and as Japanese did already (`Google マップ`, `Mapy
   Google`). At first the 40 new languages kept the English names.
-- **Latitude and Longitude are abbreviated in ten languages**, a few words
-  carry a soft hyphen, and "12- or 24-hour" is `12/24` in twelve: see
-  [the words chosen](./evidence/TERMS.md).
+- **Nothing is abbreviated for room.** At first Latitude and Longitude were
+  abbreviated in ten languages and "12- or 24-hour" was `12/24` in twelve,
+  so that they fitted where they are shown. Both are written out since the
+  layout was made to hold them: see
+  [One layout for every language](#one-layout-for-every-language). A few long
+  words of the table carry a soft hyphen, which says where they are best
+  divided.
 
 ### The words shared with Photo Location Map
 
 Photo Location Map's 42 translations were compared with this app's, and 324
-texts in 40 languages were changed to its words:
-[the words chosen](./evidence/TERMS.md) lists what was taken and what is kept
-different.
+texts in 40 languages were changed to its words. The review that followed
+changed the two applications together.
+[The words chosen](./evidence/TERMS.md) lists what was taken, what the review
+changed and what still differs.
 
 - **Its word is taken unless this app's is clearly the better one**: for the
   texts that are the same in English in both, and for the words inside the
@@ -144,17 +156,20 @@ different.
   Romanian, the informal form in Galician, forms that address no one in
   Hebrew, and a capital on the first word alone in Indonesian, Malay and
   Turkish.
-- **Kept different**, each with its reason in that file: the label "12- or
-  24-hour" in five languages, where the longer form is cut in this app's
-  field; "Twitter" in Latin letters in Arabic; the no-break space of French;
-  the verb for rotating in Finnish; the verb for choosing a photo in five
-  languages, where Photo Location Map's is the one for marking.
-- **The label "12- or 24-hour" stays short here**, `12/24` and the word for
-  hours, in those five languages (`cs`, `da`, `nb`, `ro`, `th`): the maintainer
-  decided so when asked, and that Photo Location Map takes the short form, as
-  it has it in eight other languages. The other way was to make this app's
-  field wider, from 110 to about 125 pixels, which would change the Settings
-  page in every language.
+- **Nothing is kept different any more** for the texts that are the same in
+  English in both. Five differences were kept at first, each for a reason:
+  the label "12- or 24-hour" in five languages, "Twitter" in Latin letters in
+  Arabic, the no-break space of French, the verb for rotating in Finnish, and
+  the word for usage data in Polish. The review settled each in both
+  applications. The verb for choosing a photo still differs in five
+  languages, where Photo Location Map's is the one for marking: the English
+  texts differ there too.
+- **The label "12- or 24-hour" was short here for a day**, `12/24` and the
+  word for hours, where the longer form was cut in this app's field: the
+  maintainer decided so when asked, and Photo Location Map took the short
+  form. The maintainer's later decision that the wording comes before the
+  layout withdrew it: the label names the setting as the language does, and
+  the field is as wide as it needs.
 - **Japanese**: the sentence that welcomes translations is Photo Location
   Map's (`他の言語`). A map is `マップ`, as Photo Location Map writes it, in the
   four texts that name one: the Map tab, the two messages in its place, and
@@ -165,22 +180,91 @@ different.
   written as the characters themselves, and the guide showed a soft hyphen as
   one.
 
-### Longer texts
+### One layout for every language
 
-Every language was looked at with a script at 320 and 375 pixels wide. About
-half had labels cut off. The layout takes them, rather than the translations
-being shortened:
+On 2026-11-12 the maintainer decided how the layout and the texts relate, in
+three instructions:
 
-- The tabs scroll when their labels are wider than the window, without MUI's
-  scroll buttons, which appeared with nothing to scroll.
-- A name in the General tab continues on a second line.
-- The Run Demo button grows with its text.
+1. A natural and accurate translation comes before the layout, by far. The
+   layout is to be changed for the texts, and readily.
+2. The layout is not to differ from language to language: it is one layout
+   for every language, in which a language's texts may be longer or shorter.
+3. "Longer or shorter" is the length of a language's words and of its
+   sentences.
 
-English and Japanese are laid out as before. Of their screenshots, the two of
-the Settings page changed, which lost the Language section, and two in
-Japanese changed for their words alone, with nothing moved: `about-ja.png` and
-`narrow-loaded-ja.png`. The [results](./evidence/RESULTS.md#screenshots) list
-them.
+So no text is shortened or abbreviated for room, no style or size is set for
+one language, and the same rules hold everywhere: a sentence continues on the
+next line, a word wider than its place is divided and never cut, and a box is
+as large as its text needs. What was changed for it:
+
+- **The header** is as high as its sentence and its button need, and at least
+  the 130 pixels that it had. It was a pane of a fixed height, in which a
+  sentence of three lines pushed the button out of view on a phone. It is
+  above the panes now, not one of them, in both layouts.
+- **The menu's button** has room kept for it at the end of the header, by an
+  invisible copy of its icon and its word, so that the sentence ends before
+  the button whatever the word under the icon is. The word may be wider than
+  the icon's 40 pixels (`IZBORNIK`), up to the button's 64.
+- **The names of the General tab's table** continue on the next line between
+  two words. A word wider than the column is divided as the language divides
+  its words, with a hyphen (`hyphens: auto`), where the browser knows the
+  language; a soft hyphen in the text says where, if the translator knows
+  better. Where the browser cannot, the word goes on at the column's end,
+  which is still all of it.
+- **The latitude and the longitude** are a grid of their own in their row:
+  each name shares a line of the grid with its number, so the number stays
+  beside the name however many lines the name takes. They were two names in
+  one cell and two numbers in the next, which came apart when a name took two
+  lines.
+- **The values of the General tab** continue on the next line as well, all
+  but the file's name, which stays on one line and is cut where the column
+  ends, as it always was. A date has the day of the week and AM or PM as the
+  language writes them: with a 12-hour clock, a Russian date was cut on a
+  phone (`… 05:29:58 веч`), and a Chinese one by a pixel. It is divided
+  between its day and its time now (`2019-03-16 сбт / 05:29:58 вечера`).
+- **The fields of the Settings page** have their names above them, in place of
+  MUI's label in the field's border, which is cut when it is wider than the
+  field and cannot take a second line. A field is as wide as the wider of its
+  name and its choice; the two fields are side by side where both fit, and one
+  under the other where they do not; a name wider than the window continues
+  on the next line. This changes the page in English and Japanese too.
+- **The dialog for a file that cannot be read** is as wide and as high as its
+  texts need, from 250 by 150 pixels up to the window's width. Its title and
+  its message are divided into lines of about the same length
+  (`text-wrap: balance`), and its three parts keep a space between them.
+- **The message in the map's place** has the 280 pixels for its sentence that
+  it had, with 12 more on each side inside the box, and is as high as its
+  lines. In a narrower pane the box is narrower.
+- **The messages in the photo's place** continue on the next line, in the
+  middle of the pane and clear of its edges.
+- **The menu's entries** continue on the next line, and the About page ends
+  with space under its last text where it is longer than the window.
+- **The tabs scroll** when their labels are wider than the window, without
+  MUI's scroll buttons, which appeared with nothing to scroll, and the Run
+  Demo button grows with its text. Both are from 2026-11-11.
+- **For every text**, the last line is not left with a letter or a short word
+  alone (`text-wrap: pretty`), and no line starts with a small kana or a long
+  vowel mark (`line-break: strict`). Both matter most in the languages that
+  write no spaces between their words. In the header's sentence, the dialog
+  and the messages in the map's and the photo's place, a line of Japanese
+  ends between two phrases (`word-break: auto-phrase`). A browser that does
+  not know one of these divides the text as it always did.
+
+Two things were weighed and left:
+
+- **The names' column of the table stays 130 pixels wide on a phone.** A wider
+  one would keep more names on one line on the larger phones, but the values
+  beside it need the rest: a date with a 12-hour clock fills the values'
+  column at 320 pixels in a dozen languages, Japanese among them.
+- **The tabs scroll, and do not take two lines.** A label of one long word
+  (`Fotografija`) does not fit a third of a phone's width, and would be
+  divided.
+
+English and Japanese: the Settings page looks different, as said above, and
+a Japanese title of two lines in the dialog is `対応していない / ファイル形式です`,
+where it was `…ファイル形式で / す`. Everything else is where it was. The
+[results](./evidence/RESULTS.md#screenshots) list the screenshots that changed
+and why.
 
 ### Fetching each language when it is shown
 
@@ -233,7 +317,14 @@ them.
 
 ## Not verified
 
-- **The 40 translations**: no speaker has read them.
+- **The 40 translations**: no speaker has read them. The review was a
+  machine's, as the translations were.
+- **How a browser other than Chrome divides the texts.** The division of a
+  word by the language's rules, the last line that is not left alone and the
+  phrases of Japanese were looked at in Chrome on macOS. Chrome divides words
+  in most of the languages, not in Bulgarian, Latvian, Lithuanian and Turkish.
+  A browser that knows none of it shows every text whole all the same, on
+  lines divided as before.
 - **The Electron suite was not run**: starting Electron can bring an
   application to the front on the machine in use. It gained the page's
   direction in its report, and one case for Arabic. The app as Photo Location

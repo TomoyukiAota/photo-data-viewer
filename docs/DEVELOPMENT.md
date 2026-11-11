@@ -80,13 +80,22 @@ Roboto font used by the reference application.
 Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
-for those languages. The suite stays with these three languages: every
-translation file is checked by the unit test `src/locales/locales.spec.ts`
-instead, which takes no longer with more languages
+for those languages. The suite stays with these three languages and Polish
+(below): every translation file is checked by the unit test
+`src/locales/locales.spec.ts` instead, which takes no longer with more
+languages
 ([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
-One test runs as a phone, where the Language page leaves the keyboard's focus
-alone. Playwright emulates a touch device in Chromium alone, so the test is
-skipped in Firefox.
+Three tests run in Polish at the width of a phone (320 pixels). Polish stands
+for the languages that write more than English does: its sentences take more
+lines, and its names of the latitude and the longitude take two each. The
+tests hold the layout to what it is made for, that a text of any length is
+shown whole: the header as high as its text, each name beside its number, a
+field as wide as its name, the dialog and the messages uncut. They find their
+elements by where they are and name no Polish text, so that a change of a
+translation does not break them.
+One test runs as a phone that is touched, where the Language page leaves the
+keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
+so the test is skipped in Firefox.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.

@@ -30,6 +30,26 @@ it('cuts a name that is wider than its column, unless names may take a second li
   expect(wrapping.map((cell) => cell.textContent)).toEqual(['Make', 'File Name']);
 });
 
+it('gives a row that lays out its own names and values the whole width, and tells it how wide the names\' column is', () => {
+  render(
+    <NameValueGrid
+      rows={[
+        ...rows,
+        { id: 2, parentId: null, name: '', value: '', whole: <div data-testid='whole'>Latitude 37.33</div> },
+      ]}
+      columnExtensions={[{ columnName: 'name', width: 130 }]}
+    />,
+  );
+  const cell = screen.getByTestId('whole').closest('td') as HTMLTableCellElement;
+
+  expect(cell.colSpan).toBe(2);
+  expect(cell.className).toContain('whole');
+  expect(cell.parentElement?.children).toHaveLength(1);
+  expect(screen.getByRole('table').style.getPropertyValue('--name-column-width')).toBe('130px');
+  // The other rows are a name and a value, as before.
+  expect(cells()).toHaveLength(5);
+});
+
 it('says so when there is no data', () => {
   render(<NameValueGrid rows={[]} columnExtensions={[]} />);
   expect(screen.getByText('No data')).toBeTruthy();

@@ -10,19 +10,31 @@ import { openTabWithoutOpener } from '../../../utils/open-url';
 
 import classes from './LatLngRow.module.scss';
 
+/**
+ * The latitude and the longitude of the photo, as one row of the General
+ * tab's table, with the buttons that show the place in Google Maps and in
+ * Google Street View.
+ *
+ * TL;DR: Each of the two names is beside its number, however many lines the
+ * name takes.
+ * Details: The row had the two names in one cell and the two numbers in the
+ * next, each on two lines. Where a language writes a name on two lines
+ * ("Szerokość geograficzna" in a phone's column), the names took four lines
+ * and the numbers two, so a number was no longer beside its name. The row is
+ * a grid of its own instead (`whole` in NameValueGrid): a name and its number
+ * share a line of the grid, which is as high as the taller of the two.
+ */
 const LatLngRow: React.FC<{
-  className?: string;
   loadedPhotoData?: LoadedPhotoData | null;
+  /** The size of the text, as the other rows of the table have it. */
+  style?: React.CSSProperties;
 }> = (props) => {
   const { t } = useTranslation();
-  if (!props?.loadedPhotoData?.isFileLoaded) {
-    return <div />;
-  }
-  if (!props?.loadedPhotoData?.exif?.isLatLngAvailable) {
-    return <div>{t('photoData.notAvailable')}</div>;
-  }
-
-  const { latitude, longitude } = props?.loadedPhotoData?.exif;
+  const isFileLoaded = Boolean(props.loadedPhotoData?.isFileLoaded);
+  const exif = props.loadedPhotoData?.exif;
+  const isLatLngAvailable = isFileLoaded && Boolean(exif?.isLatLngAvailable);
+  const latitude = exif?.latitude;
+  const longitude = exif?.longitude;
 
   // The descriptions given to the analytics stay English, whatever the language.
   const handleGoogleMapsButtonClicked = () => {
@@ -49,37 +61,53 @@ const LatLngRow: React.FC<{
   };
 
   return (
-    <div className={classes.row}>
-      {/* From left to right in every language, so that a minus sign stays before its number. */}
-      <div className={classes['lat-lng-text']} dir='ltr'>
-        {latitude?.toFixed(6) ?? ''}
-        <br />
-        {longitude?.toFixed(6) ?? ''}
+    <div className={classes.row} style={props.style}>
+      <div className={`${classes.name} ${classes.latitude}`}>
+        {t('photoData.general.latitude')}
       </div>
-      <div className={classes.buttons}>
-        <IconButton
-          className={classes['google-maps-button']}
-          onClick={handleGoogleMapsButtonClicked}
-          title={t('photoData.general.showInGoogleMaps')}
-        >
-          <img
-            className={classes['google-maps-icon']}
-            src={IconDataUrl.googleMapsIcon}
-            alt={t('photoData.general.showInGoogleMaps')}
-          />
-        </IconButton>
-        <IconButton
-          className={classes['google-street-view-button']}
-          onClick={handleGoogleStreetViewButtonClicked}
-          title={t('photoData.general.showInGoogleStreetView')}
-        >
-          <img
-            className={classes['google-street-view-icon']}
-            src={IconDataUrl.googleStreetViewIcon}
-            alt={t('photoData.general.showInGoogleStreetView')}
-          />
-        </IconButton>
+      <div className={`${classes.name} ${classes.longitude}`}>
+        {t('photoData.general.longitude')}
       </div>
+      {isLatLngAvailable && (
+        <>
+          {/* From left to right in every language, so that a minus sign stays before its number. */}
+          <div className={`${classes.number} ${classes.latitude}`} dir='ltr'>
+            {latitude?.toFixed(6) ?? ''}
+          </div>
+          <div className={`${classes.number} ${classes.longitude}`} dir='ltr'>
+            {longitude?.toFixed(6) ?? ''}
+          </div>
+          <div className={classes.buttons}>
+            <IconButton
+              className={classes['google-maps-button']}
+              onClick={handleGoogleMapsButtonClicked}
+              title={t('photoData.general.showInGoogleMaps')}
+            >
+              <img
+                className={classes['google-maps-icon']}
+                src={IconDataUrl.googleMapsIcon}
+                alt={t('photoData.general.showInGoogleMaps')}
+              />
+            </IconButton>
+            <IconButton
+              className={classes['google-street-view-button']}
+              onClick={handleGoogleStreetViewButtonClicked}
+              title={t('photoData.general.showInGoogleStreetView')}
+            >
+              <img
+                className={classes['google-street-view-icon']}
+                src={IconDataUrl.googleStreetViewIcon}
+                alt={t('photoData.general.showInGoogleStreetView')}
+              />
+            </IconButton>
+          </div>
+        </>
+      )}
+      {isFileLoaded && !isLatLngAvailable && (
+        <div className={classes['not-available']}>
+          {t('photoData.notAvailable')}
+        </div>
+      )}
     </div>
   );
 };

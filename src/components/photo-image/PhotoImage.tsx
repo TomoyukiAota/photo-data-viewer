@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { IconDataUrl } from '../../icons/icon-data-url';
 import classes from './PhotoImage.module.scss';
+import PhotoText from './PhotoText';
 
 const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
   props
@@ -82,7 +83,9 @@ const PhotoImage: React.FC<{ className?: string; url: string; alt: string }> = (
     >
       <div className={classes['photo-img-container']} ref={photoContainerRef}>
         {isUnsupported ? (
-          <div style={{ color: 'white' }}>{t('photo.unsupportedFileFormat')}</div>
+          // As the other texts in the photo's place: in the middle, on as
+          // many lines as a language needs in a narrow pane.
+          <PhotoText>{t('photo.unsupportedFileFormat')}</PhotoText>
         ) : (
           <img
             className={classes['photo-img']}

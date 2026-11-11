@@ -14,69 +14,55 @@ const HomeWideLayout: React.FC<{
   photoMap: React.JSX.Element;
   photoData: React.JSX.Element;
 }> = (props) => {
-  const headerHeight = 130;
   const isHeaderVisible = AppIntegration.isStandalone;
 
   const gutterCtx = useContext(GutterPositionContext).wideLayout;
 
   return (
     <div className={homeClasses.home}>
-      <ReflexContainer orientation='horizontal'>
-        {isHeaderVisible && (
+      {/* As high as its texts need; the panes have the rest of the window. */}
+      {isHeaderVisible && props.header}
+      <div className={homeClasses.main}>
+        <ReflexContainer
+          orientation='vertical'
+          className={classes['side-by-side']}
+        >
           <ReflexElement
-            minSize={headerHeight}
-            maxSize={headerHeight}
-            style={{
-              height: `${headerHeight}px`,
-              minHeight: `${headerHeight}px`,
-              maxHeight: `${headerHeight}px`,
-            }}
+            minSize={100}
+            className={classes['image-and-map-container']}
           >
-            {props.header}
+            <ReflexContainer orientation='horizontal'>
+              <ReflexElement
+                minSize={100}
+                flex={gutterCtx.photoImagePaneFlex}
+                onStopResize={(event) =>
+                  gutterCtx.setPhotoImagePaneFlex(event.component.props.flex)
+                }
+              >
+                {props.photoImage}
+              </ReflexElement>
+              <ReflexSplitter
+                className={classes['horizontal-splitter']}
+                style={{ height: '8px', border: 0 }}
+              />
+              <ReflexElement minSize={100}>{props.photoMap}</ReflexElement>
+            </ReflexContainer>
           </ReflexElement>
-        )}
-        <ReflexElement>
-          <ReflexContainer
-            orientation='vertical'
-            className={classes['side-by-side']}
+          <ReflexSplitter
+            className={classes['vertical-splitter']}
+            style={{ width: '8px', border: 0 }}
+          />
+          <ReflexElement
+            minSize={100}
+            flex={gutterCtx.photoDataPaneFlex}
+            onStopResize={(event) =>
+              gutterCtx.setPhotoDataPaneFlex(event.component.props.flex)
+            }
           >
-            <ReflexElement
-              minSize={100}
-              className={classes['image-and-map-container']}
-            >
-              <ReflexContainer orientation='horizontal'>
-                <ReflexElement
-                  minSize={100}
-                  flex={gutterCtx.photoImagePaneFlex}
-                  onStopResize={(event) =>
-                    gutterCtx.setPhotoImagePaneFlex(event.component.props.flex)
-                  }
-                >
-                  {props.photoImage}
-                </ReflexElement>
-                <ReflexSplitter
-                  className={classes['horizontal-splitter']}
-                  style={{ height: '8px', border: 0 }}
-                />
-                <ReflexElement minSize={100}>{props.photoMap}</ReflexElement>
-              </ReflexContainer>
-            </ReflexElement>
-            <ReflexSplitter
-              className={classes['vertical-splitter']}
-              style={{ width: '8px', border: 0 }}
-            />
-            <ReflexElement
-              minSize={100}
-              flex={gutterCtx.photoDataPaneFlex}
-              onStopResize={(event) =>
-                gutterCtx.setPhotoDataPaneFlex(event.component.props.flex)
-              }
-            >
-              {props.photoData}
-            </ReflexElement>
-          </ReflexContainer>
-        </ReflexElement>
-      </ReflexContainer>
+            {props.photoData}
+          </ReflexElement>
+        </ReflexContainer>
+      </div>
     </div>
   );
 };

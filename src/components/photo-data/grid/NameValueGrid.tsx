@@ -16,7 +16,16 @@ export interface NameAndValue {
   value: string | number | React.JSX.Element;
 }
 
-export interface NameValueGridRow extends IGridRowData, NameAndValue {}
+export interface NameValueGridRow extends IGridRowData, NameAndValue {
+  /**
+   * What fills the whole row, in place of a name and a value: for a row that
+   * lays out names and values of its own, as the one of the latitude and the
+   * longitude does. The width of the names' column is given to it as
+   * `--name-column-width`, so that its names and values stand under the other
+   * rows'.
+   */
+  whole?: React.JSX.Element;
+}
 
 interface ColumnExtension {
   columnName: 'name' | 'value';
@@ -59,6 +68,9 @@ const NameValueGrid: React.FC<{
                   (total, width) => total + (width ?? 120),
                   0,
                 ),
+                ...({
+                  '--name-column-width': `${widths[0] ?? 120}px`,
+                } as React.CSSProperties),
               }}
             >
               <colgroup>
@@ -78,26 +90,35 @@ const NameValueGrid: React.FC<{
               <TableBody>
                 {rows.map((row) => (
                   <TableRow key={row.id}>
-                    {columns.map((column) => (
+                    {row.whole ? (
                       <TableCell
-                        key={column.name}
-                        className={
-                          wrapNames && column.name === 'name'
-                            ? classes.wrap
-                            : undefined
-                        }
-                        // Plain text is a photo's data, in whatever language it is
-                        // written: it takes its own direction, so that "f/2.8" or
-                        // "3.09 MB" keeps its order in a right-to-left language.
-                        dir={
-                          typeof row[column.name] === 'object'
-                            ? undefined
-                            : 'auto'
-                        }
+                        colSpan={columns.length}
+                        className={classes.whole}
                       >
-                        {row[column.name]}
+                        {row.whole}
                       </TableCell>
-                    ))}
+                    ) : (
+                      columns.map((column) => (
+                        <TableCell
+                          key={column.name}
+                          className={
+                            wrapNames && column.name === 'name'
+                              ? classes.wrap
+                              : undefined
+                          }
+                          // Plain text is a photo's data, in whatever language it is
+                          // written: it takes its own direction, so that "f/2.8" or
+                          // "3.09 MB" keeps its order in a right-to-left language.
+                          dir={
+                            typeof row[column.name] === 'object'
+                              ? undefined
+                              : 'auto'
+                          }
+                        >
+                          {row[column.name]}
+                        </TableCell>
+                      ))
+                    )}
                   </TableRow>
                 ))}
                 {!rows.length && (

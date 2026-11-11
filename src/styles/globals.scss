@@ -7,6 +7,22 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+// TL;DR: The last line of a text is not left with a word or a letter alone.
+// Details: A language that writes no spaces between its words, as Chinese
+// and Japanese do, may end a line anywhere, so a sentence a little longer
+// than its line left its last letter on a line of its own ("…EXIF 数 / 据。");
+// a short last word did the same in the other languages. The browsers that
+// know `text-wrap: pretty` (Chrome, Edge and Safari) take a word more to that
+// line instead; the others divide the text as they always did. It changes
+// nothing in a text that fits on one line.
+// `line-break: strict` is for the same languages: no line starts with a
+// small kana or a long vowel mark ("…のペ / ージ"), which the default rules
+// allow.
+body {
+  text-wrap: pretty;
+  line-break: strict;
+}
+
 #__next {
   height: 100%;
 }

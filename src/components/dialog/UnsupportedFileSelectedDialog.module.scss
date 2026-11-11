@@ -1,10 +1,23 @@
+// TL;DR: At least 250 by 150 pixels, and larger where a language's texts need
+// more: they continue on the next line and are never cut.
+// Details: A text that takes two lines is divided into lines of about the
+// same length (text-wrap: balance), so that no line is left with a word or a
+// letter alone: "対応していない / ファイル形式です", not "…ファイル形 / 式です".
+// In a language that writes no spaces between its words, a line ends between
+// two phrases where the browser can tell them (word-break: auto-phrase, which
+// Chrome knows for Japanese); a browser that knows neither divides the text
+// as it divides any other.
 // prettier-ignore
 .dialog {
-  width: 250px;
-  height: 150px;
-  padding: 10px 0;
+  min-width: 250px;
+  max-width: 100%;
+  min-height: 150px;
+  padding: 14px 20px 10px; // 10 pixels, and above the title the least space that it keeps (see below).
 
   text-align: center;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  word-break: auto-phrase;
 
   display: grid;
   grid:
@@ -17,12 +30,21 @@
   .close-button-container { grid-area: close-button-container; }
 }
 
+// TL;DR: The three keep a space between them when the texts fill the dialog.
+// Details: In the 150 pixels, the room that the texts leave is shared by the
+// three rows, which puts 1 part of it above the title, 2 between the title
+// and the message and 3 between the message and the button. The least of
+// each is 4, 8 and 12 pixels, in the same proportion, so that the dialog
+// looks the same as without them wherever the texts leave more room than
+// that. The 4 pixels above the title are in the dialog's padding, as MUI
+// sets the title's own margin to none.
 .title {
   align-self: center;
 }
 
 .message {
   align-self: center;
+  margin-block: 8px 12px;
 }
 
 .close-button-container {

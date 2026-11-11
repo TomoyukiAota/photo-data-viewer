@@ -1,6 +1,17 @@
+// TL;DR: The icon with the word for a menu under it. The button is as wide
+// and as high as the word needs, and never smaller than it is in English.
+// Details: The word differs in length from language to language (MENU,
+// メニュー, IZBORNIK). It may reach into the button's padding, as メニュー always
+// has, so the button keeps its size up to a word as wide as the button, and
+// grows with a longer one. From 120 pixels on, the word continues on a second
+// line, so that the button does not take the header's width on a phone.
+$button-padding: 12px; // The padding of MUI's large icon button.
+
 .menu-icon-wrapper {
-  height: 40px;
-  width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  width: max-content;
+  max-width: 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,5 +23,15 @@
 
 .menu-icon-text {
   font-size: 12px; // Smaller than 10px doesn't take effect in Chrome, but it does in iPhone's Safari.
-  white-space: nowrap; // メニュー, the Japanese label, is wider than the wrapper; it overflows into the button's padding instead of wrapping.
+  margin-inline: -$button-padding; // Into the button's padding.
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+// Room as wide as the menu's button (AppMenuRoom): the button's content with
+// the button's own padding around it, and nothing of it drawn.
+.room {
+  flex: none;
+  padding: $button-padding;
+  visibility: hidden;
 }

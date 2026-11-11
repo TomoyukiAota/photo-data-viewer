@@ -1,6 +1,4 @@
-import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
@@ -13,6 +11,15 @@ import { useUserSettings } from '../../hooks/useUserSettings';
 import { DateTimeFormat } from '../../utils/date-time-format';
 import { UserSettingKey } from '../../utils/user-settings';
 import classes from './UserSettings.module.scss';
+
+/**
+ * A text of a select, whether shown in the field or in its menu, may take more
+ * than one line: it is never cut, however long a language writes it.
+ */
+const wrappingSelect = {
+  '& .MuiSelect-select': { whiteSpace: 'normal', overflowWrap: 'anywhere' },
+} as const;
+const wrappingChoice = { whiteSpace: 'normal', overflowWrap: 'anywhere' } as const;
 
 const UserSettings: React.FC = () => {
   const { t } = useTranslation();
@@ -60,48 +67,62 @@ const UserSettings: React.FC = () => {
         <div className={classes['date-time-settings-title']}>
           {t('settings.dateTime.title')}
         </div>
+        {/*
+          TL;DR: Each field has its name above it, and is as wide as its name
+          and its choices need, in every language.
+          Details: The name was drawn on the field's border, on one line, and
+          was cut where a language's name was wider than the field ("12- oder
+          24-Stunden-Format"). Above the field it takes as many lines as it
+          needs, and the field is as wide as the name. The two fields are side
+          by side while the window has room for both, and one under the other
+          on a phone.
+        */}
         <div className={classes['date-time-settings-select']}>
-          <FormControl sx={{ minWidth: 150 }}>
-            <InputLabel id='date-format'>
+          <div className={classes.field}>
+            <div id='date-format' className={classes['field-name']}>
               {t('settings.dateTime.dateFormat')}
-            </InputLabel>
+            </div>
             <Select
               labelId='date-format'
               value={dateFormat}
-              label={t('settings.dateTime.dateFormat')}
               onChange={handleDateFormatChange}
+              size='small'
+              sx={{ minWidth: 150, ...wrappingSelect }}
             >
               {DateTimeFormat.ForUser.DateFormat_List.map((value) => {
                 return (
-                  <MenuItem value={value} key={value}>
+                  <MenuItem value={value} key={value} sx={wrappingChoice}>
                     {value}
                   </MenuItem>
                 );
               })}
             </Select>
-          </FormControl>
-          <FormControl sx={{ minWidth: 110 }}>
-            <InputLabel id='clock-system-format'>
+          </div>
+          <div className={classes.field}>
+            <div id='clock-system-format' className={classes['field-name']}>
               {t('settings.dateTime.clockSystem')}
-            </InputLabel>
+            </div>
             <Select
               labelId='clock-system-format'
               value={clockSystemFormat}
-              label={t('settings.dateTime.clockSystem')}
               onChange={handleClockSystemFormatChange}
+              size='small'
+              sx={{ minWidth: 110, ...wrappingSelect }}
             >
               {DateTimeFormat.ForUser.ClockSystemFormat_List.map((value) => {
                 return (
-                  <MenuItem value={value} key={value}>
+                  <MenuItem value={value} key={value} sx={wrappingChoice}>
                     {clockSystemFormatLabel[value]}
                   </MenuItem>
                 );
               })}
             </Select>
-          </FormControl>
+          </div>
         </div>
         <div className={classes['date-time-settings-example']}>
-          <div>{t('settings.dateTime.example')}</div>
+          <div className={classes['field-name']}>
+            {t('settings.dateTime.example')}
+          </div>
           <div>{dateTimeExample}</div>
         </div>
       </div>

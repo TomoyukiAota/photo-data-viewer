@@ -42,16 +42,37 @@
   font-weight: bold;
 }
 
+// Side by side while the window has room for both, one under the other
+// otherwise.
 .date-time-settings-select {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 16px 10px;
 }
 
+// A field under its name. It is as wide as the wider of the two, and no wider
+// than the page.
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.field-name {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  overflow-wrap: anywhere;
+}
+
+// The example under its name, as a field is under its own.
 .date-time-settings-example {
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  overflow-wrap: anywhere;
 }
 
 .usage-data-settings {

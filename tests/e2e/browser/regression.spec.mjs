@@ -610,6 +610,139 @@ test.describe('in a browser whose language is Japanese', () => {
   });
 });
 
+// TL;DR: The layout is one for every language, and holds whatever the length
+// of a language's words and sentences is. Polish stands for the languages
+// that write more than English does.
+// Details: Nothing here names a Polish text: the elements are found by where
+// they are, so that a change of a translation does not break the test.
+test.describe('in a language with longer words (Polish), on a phone', () => {
+  test.use({ locale: 'pl-PL', viewport: { width: 320, height: 667 } });
+
+  const centre = (box) => box.y + box.height / 2;
+  /** Whether a text is cut, sideways or in height, by the box that it is in. */
+  const isCut = (locator) =>
+    locator.evaluate(
+      (element) =>
+        element.scrollWidth > element.clientWidth + 1 ||
+        element.scrollHeight > element.clientHeight + 1,
+    );
+  const pageIsWiderThanTheWindow = (page) =>
+    page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+
+  test('the header is as high as its text, and a name of the table stays beside its number', async ({
+    page,
+  }) => {
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // The sentence takes more lines than in English, and the header grows
+    // with it: the button under the sentence is all in view, above the tabs,
+    // and the sentence ends before the menu's button.
+    const button = page
+      .locator('input[type=file]')
+      .locator('xpath=preceding-sibling::button');
+    const sentence = button.locator('xpath=preceding-sibling::div');
+    const menuButton = page.locator('button[aria-label]').first();
+    await expect(button).toBeInViewport({ ratio: 1 });
+    const buttonBox = await button.boundingBox();
+    const sentenceBox = await sentence.boundingBox();
+    const menuBox = await menuButton.boundingBox();
+    const tabsBox = await page.getByRole('tablist').first().boundingBox();
+    expect(sentenceBox.height).toBeGreaterThan(30); // More than one line.
+    expect(buttonBox.y + buttonBox.height).toBeLessThanOrEqual(tabsBox.y);
+    expect(sentenceBox.x + sentenceBox.width).toBeLessThanOrEqual(menuBox.x);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+
+    // Each of the latitude and the longitude has its name beside its number,
+    // though the name takes two lines of the names' column here.
+    await loadPhoto(page);
+    const row = page.getByText('37.332558', { exact: true }).locator('xpath=..');
+    const [latitudeName, longitudeName, latitude, longitude] = await Promise.all(
+      [0, 1, 2, 3].map((n) => row.locator('> div').nth(n).boundingBox()),
+    );
+    expect(latitudeName.height).toBeGreaterThan(30); // On two lines.
+    expect(Math.abs(centre(latitudeName) - centre(latitude))).toBeLessThanOrEqual(1);
+    expect(Math.abs(centre(longitudeName) - centre(longitude))).toBeLessThanOrEqual(1);
+    expect(longitudeName.y).toBeGreaterThanOrEqual(
+      latitudeName.y + latitudeName.height,
+    );
+    // No name of the table is cut, and the table is no wider than the window.
+    for (const name of await page.locator('tbody td:first-child').all()) {
+      expect(await isCut(name)).toBe(false);
+    }
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+    expect(errors).toEqual([]);
+  });
+
+  test('a field of the Settings page is as wide as its name, which is not cut', async ({
+    page,
+  }) => {
+    await page.goto('/settings');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+    for (const id of ['date-format', 'clock-system-format']) {
+      const name = page.locator(`#${id}`);
+      const field = page.locator(`[aria-labelledby~="${id}"]`);
+      await expect(name).toBeInViewport({ ratio: 1 });
+      await expect(field).toBeInViewport({ ratio: 1 });
+      expect(await isCut(name)).toBe(false);
+      expect(await isCut(field)).toBe(false);
+      // The name is above its field, and the field is as wide as the name or
+      // wider.
+      const nameBox = await name.boundingBox();
+      const fieldBox = await field.locator('xpath=..').boundingBox();
+      expect(nameBox.y + nameBox.height).toBeLessThanOrEqual(fieldBox.y);
+      expect(fieldBox.width).toBeGreaterThanOrEqual(nameBox.width - 1);
+    }
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+  });
+
+  test('the dialog and the messages for a file that cannot be read are whole', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+    await page.locator('input[type=file]').setInputFiles({
+      name: 'broken.jpg',
+      mimeType: 'image/jpeg',
+      buffer: Buffer.from('invalid'),
+    });
+
+    // The dialog is all in the window, and its title, its message and its
+    // button are one under another with a space between them, though the
+    // title takes two lines here.
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeInViewport({ ratio: 1 });
+    const parts = dialog.locator('> div > *');
+    await expect(parts).toHaveCount(3);
+    const [title, message, close] = await Promise.all(
+      [0, 1, 2].map((n) => parts.nth(n).boundingBox()),
+    );
+    expect(title.height).toBeGreaterThan(40); // On two lines.
+    expect(message.y - (title.y + title.height)).toBeGreaterThanOrEqual(8);
+    expect(close.y - (message.y + message.height)).toBeGreaterThanOrEqual(8);
+    expect(await isCut(dialog.locator('> div'))).toBe(false);
+    await dialog.getByRole('button').click();
+    await expect(dialog).toBeHidden();
+
+    // The message in the map's place is in a box as high as its lines, inside
+    // the pane; the one in the photo's place is inside the pane as well.
+    const tabs = page.getByRole('tablist').first().getByRole('tab');
+    await tabs.nth(1).click();
+    const mapMessage = page.locator('[class*="overlay-content"]');
+    await expect(mapMessage).toBeInViewport({ ratio: 1 });
+    expect(await isCut(mapMessage)).toBe(false);
+    await tabs.nth(2).click();
+    const photoMessage = page.locator('[class*="PhotoText_text"]');
+    await expect(photoMessage).toBeInViewport({ ratio: 1 });
+    expect(await isCut(photoMessage)).toBe(false);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+  });
+});
+
 test.describe('on a phone', () => {
   // A device that is touched, which Playwright emulates in Chromium alone.
   test.skip(
