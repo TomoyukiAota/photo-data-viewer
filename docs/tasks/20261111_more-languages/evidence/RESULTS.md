@@ -8,7 +8,7 @@ Node 26.13.0 and npm 11.20.0, in the working tree of the branch
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 35 suites, 601 tests, in about two seconds                        |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 35 suites, 606 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
 | `npm run test:e2e` (Chromium)                        | Passed: 20 tests, 4 of them new, in 26 s                                  |
 | `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 20 tests; the screenshots as described below                      |
@@ -124,6 +124,21 @@ other labels fit, or scroll with the tabs.
 The list was looked at with one match and with none, in English and in Arabic:
 the box stays 226 px high (seven entries and its border), and "No languages
 found" is at the top of it.
+
+## A language that could not be fetched at the start
+
+The built app was opened in a headless browser with Japanese saved and the file
+of its texts blocked, on the Language page:
+
+| Step                                             | Shown in | Chosen entry | What the page says                      |
+| ------------------------------------------------ | -------- | ------------ | --------------------------------------- |
+| The start, with the file blocked                 | `en`     | 日本語       | Nothing                                 |
+| 日本語 chosen again, the file still blocked      | `en`     | 日本語       | "The language could not be loaded. ..." |
+| 日本語 chosen again, the file no longer blocked  | `ja`     | 日本語       | Nothing                                 |
+
+The setting stayed `ja` throughout. With the keyboard, Enter on the chosen
+entry did the same. Before, choosing the chosen entry did nothing, and the page
+had to be loaded again.
 
 ## In Photo Location Map
 

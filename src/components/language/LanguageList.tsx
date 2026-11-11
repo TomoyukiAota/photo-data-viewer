@@ -61,9 +61,16 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
 const LanguageList: React.FC<{
   /** The Language setting that is chosen in the list. */
   selected: LanguageSetting;
-  /** Called with the entry the user chose, unless it is the chosen one already. */
+  /**
+   * Whether choosing the chosen entry again is a choice as well. It is not
+   * while the app is shown in that entry's language, as there is nothing to do;
+   * it is while the app is shown in another, so that the user can ask for the
+   * language again.
+   */
+  canChooseSelected?: boolean;
+  /** Called with the entry the user chose, unless it is the chosen one already and that is no choice. */
   onChoose: (setting: LanguageSetting) => void;
-}> = ({ selected, onChoose }) => {
+}> = ({ selected, canChooseSelected = false, onChoose }) => {
   const { t, i18n } = useTranslation();
   const listId = useId();
   const listRef = useRef<HTMLUListElement>(null);
@@ -144,7 +151,7 @@ const LanguageList: React.FC<{
   };
 
   const choose = (setting: LanguageSetting) => {
-    if (setting !== selected) onChoose(setting);
+    if (setting !== selected || canChooseSelected) onChoose(setting);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {

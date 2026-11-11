@@ -158,6 +158,13 @@ them.
   English and the setting stays; on the Language page, a line says so, and the
   app and the setting stay as they were. The error is reported as one that
   nothing handled, so it is recorded with the others.
+- **The chosen entry asks for its language again while the app is not shown
+  in it.** After a start in English without the saved language, that
+  language's entry is the chosen one on the Language page, and choosing it
+  would do nothing, as it does while its language is the one shown. It fetches
+  the language again there, and so does the entry that follows the browser.
+  The setting is the saved one, so nothing is saved or recorded as a change.
+  The review of the pull request found this.
 
 ### Right to left
 

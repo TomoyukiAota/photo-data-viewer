@@ -76,6 +76,20 @@ describe('the list', () => {
     expect(onChoose).not.toHaveBeenCalled();
     expect(chosen()).toEqual(['日本語']);
   });
+
+  it('tells that the chosen entry was chosen again where the page takes that for a choice', () => {
+    const onChoose = jest.fn();
+    render(<LanguageList selected='ja' canChooseSelected onChoose={onChoose} />);
+    const japanese = option('日本語');
+
+    fireEvent.click(japanese);
+    japanese.focus();
+    fireEvent.keyDown(japanese, { key: 'Enter' });
+    fireEvent.keyDown(japanese, { key: ' ' });
+
+    expect(onChoose.mock.calls).toEqual([['ja'], ['ja'], ['ja']]);
+    expect(chosen()).toEqual(['日本語']);
+  });
 });
 
 describe('the keyboard', () => {

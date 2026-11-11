@@ -118,3 +118,63 @@ it('says so when the language cannot be fetched, and leaves the app and the sett
   expect(i18next.language).toBe('ja');
   expect(localStorage.getItem('Language')).toBe('ja');
 });
+
+it('does nothing when the chosen entry is chosen again while the app is shown in its language', async () => {
+  renderPage();
+  await choose('Use browser setting (English)');
+
+  expect(loadLanguage).not.toHaveBeenCalled();
+  expect(trackChangedUserSetting).not.toHaveBeenCalled();
+  expect(reloadPhoto).not.toHaveBeenCalled();
+});
+
+it('asks for the saved language again when its entry is chosen while the app is shown in English without it', async () => {
+  // As after a start at which Japanese could not be fetched: the app is in
+  // English, and the setting is kept.
+  localStorage.setItem('Language', 'ja');
+  renderPage();
+  expect(i18next.language).toBe('en');
+  expect(chosen()).toEqual(['日本語']);
+
+  await choose('日本語');
+
+  expect(i18next.language).toBe('ja');
+  expect(chosen()).toEqual(['日本語']);
+  expect(reloadPhoto).toHaveBeenCalledTimes(1);
+  // The setting is the one that was saved: nothing changed, so no change is recorded.
+  expect(localStorage.getItem('Language')).toBe('ja');
+  expect(trackChangedUserSetting).not.toHaveBeenCalled();
+});
+
+it("asks for the browser's language again in the same way, and keeps following the browser", async () => {
+  // The app is shown in Japanese, in a browser that asks for English, while
+  // the setting follows the browser.
+  await act(() => applyLanguage('ja'));
+  renderPage();
+  expect(chosen()).toEqual(['ブラウザの設定に従う（English）']);
+  const saved = localStorage.getItem('Language');
+
+  await choose('ブラウザの設定に従う（English）');
+
+  expect(i18next.language).toBe('en');
+  expect(chosen()).toEqual(['Use browser setting (English)']);
+  expect(localStorage.getItem('Language')).toBe(saved);
+  expect(trackChangedUserSetting).not.toHaveBeenCalled();
+});
+
+it('says so when the language asked for again cannot be fetched, and can be asked for once more', async () => {
+  localStorage.setItem('Language', 'ja');
+  jest.mocked(loadLanguage).mockRejectedValueOnce(new Error('Loading chunk failed'));
+  renderPage();
+
+  await choose('日本語');
+  expect(screen.getByRole('alert').textContent).toBe(
+    'The language could not be loaded. Check your connection, then try again.',
+  );
+  expect(i18next.language).toBe('en');
+  expect(chosen()).toEqual(['日本語']);
+
+  await choose('日本語');
+  expect(screen.queryByRole('alert')).toBeNull();
+  expect(i18next.language).toBe('ja');
+});
