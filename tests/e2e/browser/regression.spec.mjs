@@ -81,9 +81,29 @@ async function loadPhoto(page) {
   ).toBeVisible();
 }
 
+/** The address of the page that each entry of the menu opens, by the entry's name in English. */
+const menuPaths = {
+  Home: '/',
+  Demo: '/demo',
+  Settings: '/settings',
+  Language: '/language',
+  About: '/about',
+};
+
+/**
+ * Opens a page from the menu, and waits until the page's address is the new
+ * one.
+ *
+ * TL;DR: What follows is to see the new page, not the one before it.
+ * Details: The entry changes the page a moment after the click. `snapshot`
+ * goes by the address to tell whether to wait for the map: called while the
+ * address was still the Home page's, it waited for a map on the Settings page,
+ * which has none, and the test failed now and then on a slow machine.
+ */
 async function navigate(page, name) {
   await page.getByRole('button', { name: 'menu', exact: true }).click();
   await page.getByRole('menuitem', { name, exact: true }).click();
+  await page.waitForURL((url) => url.pathname === menuPaths[name]);
 }
 
 async function expectTruncated(cell) {

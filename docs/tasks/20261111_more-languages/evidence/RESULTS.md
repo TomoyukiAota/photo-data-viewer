@@ -189,6 +189,12 @@ and About pages:
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.
+- **The browser suite could wait for a map on the Settings page**, which has
+  none. Its helper that opens a page from the menu returned at the click,
+  before the page's address had changed, and the helper that takes a
+  screenshot goes by the address to tell whether to wait for the map. It
+  failed once in CI, on Ubuntu, in a test that this work did not change; the
+  two helpers are `main`'s. The first now waits for the new address.
 - **MUI's scroll buttons on tabs** appear when a tab is less than 99% in view.
   The tab bar here is a pixel lower than its tabs while the table under it is
   tall, so the buttons appeared with nothing to scroll.
