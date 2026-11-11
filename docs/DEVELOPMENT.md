@@ -90,7 +90,7 @@ for the languages that write more than English does: its sentences take more
 lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, each name beside its number, a
-field as wide as its name, the dialog and the messages uncut. They find their
+field as wide as its label, the dialog and the messages uncut. They find their
 elements by where they are and name no Polish text, so that a change of a
 translation does not break them.
 One test runs as a phone that is touched, where the Language page leaves the

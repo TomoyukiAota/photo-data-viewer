@@ -9,10 +9,8 @@
   // middle as well, and clear of the pane's edges.
   // Details: The 6 pixels on each side are what the English sentence leaves
   // free in a window of 320 pixels, the narrowest, so that it stays on one
-  // line there as it always was. A line ends between two phrases where the
-  // browser can tell them (see the header's styles).
+  // line there as it always was.
   padding: 0 6px;
   text-align: center;
   overflow-wrap: anywhere;
-  word-break: auto-phrase;
 }

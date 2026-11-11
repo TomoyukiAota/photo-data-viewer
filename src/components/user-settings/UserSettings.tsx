@@ -1,4 +1,6 @@
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
@@ -20,6 +22,41 @@ const wrappingSelect = {
   '& .MuiSelect-select': { whiteSpace: 'normal', overflowWrap: 'anywhere' },
 } as const;
 const wrappingChoice = { whiteSpace: 'normal', overflowWrap: 'anywhere' } as const;
+
+/** A field has no width of its own: it is as wide as the box that it is in. */
+const asWideAsItsBox = { width: 0, minWidth: '100%' } as const;
+
+/**
+ * The box around a field of the date and time, which gives the field its
+ * width.
+ *
+ * TL;DR: A field is as wide as its label and its widest choice need, in any
+ * language, and never narrower than it is in English (`minWidth`).
+ * Details: MUI draws a field's label on the field's border, on one line, and
+ * cuts it with "…" where it is wider than the field, which is as wide as the
+ * chosen value. Once the translations named the clock's setting as their
+ * languages do ("12- oder 24-Stunden-Format"), the label was cut in 29
+ * languages. The box lays out the label and the choices without showing them
+ * (see the styles), and the field fills the box. A width set for the longest
+ * language would leave the others with room that they do not need; this one
+ * follows each language, and is what it was in English and Japanese.
+ */
+const FieldBox: React.FC<
+  React.PropsWithChildren<{
+    label: string;
+    choices: readonly string[];
+    minWidth: number;
+  }>
+> = (props) => (
+  <div
+    className={classes['field-box']}
+    style={{ minWidth: props.minWidth }}
+    data-label={props.label}
+    data-choices={props.choices.join('\n')}
+  >
+    {props.children}
+  </div>
+);
 
 const UserSettings: React.FC = () => {
   const { t } = useTranslation();
@@ -67,62 +104,64 @@ const UserSettings: React.FC = () => {
         <div className={classes['date-time-settings-title']}>
           {t('settings.dateTime.title')}
         </div>
-        {/*
-          TL;DR: Each field has its name above it, and is as wide as its name
-          and its choices need, in every language.
-          Details: The name was drawn on the field's border, on one line, and
-          was cut where a language's name was wider than the field ("12- oder
-          24-Stunden-Format"). Above the field it takes as many lines as it
-          needs, and the field is as wide as the name. The two fields are side
-          by side while the window has room for both, and one under the other
-          on a phone.
-        */}
         <div className={classes['date-time-settings-select']}>
-          <div className={classes.field}>
-            <div id='date-format' className={classes['field-name']}>
-              {t('settings.dateTime.dateFormat')}
-            </div>
-            <Select
-              labelId='date-format'
-              value={dateFormat}
-              onChange={handleDateFormatChange}
-              size='small'
-              sx={{ minWidth: 150, ...wrappingSelect }}
-            >
-              {DateTimeFormat.ForUser.DateFormat_List.map((value) => {
-                return (
-                  <MenuItem value={value} key={value} sx={wrappingChoice}>
-                    {value}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </div>
-          <div className={classes.field}>
-            <div id='clock-system-format' className={classes['field-name']}>
-              {t('settings.dateTime.clockSystem')}
-            </div>
-            <Select
-              labelId='clock-system-format'
-              value={clockSystemFormat}
-              onChange={handleClockSystemFormatChange}
-              size='small'
-              sx={{ minWidth: 110, ...wrappingSelect }}
-            >
-              {DateTimeFormat.ForUser.ClockSystemFormat_List.map((value) => {
-                return (
-                  <MenuItem value={value} key={value} sx={wrappingChoice}>
-                    {clockSystemFormatLabel[value]}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </div>
+          <FieldBox
+            label={t('settings.dateTime.dateFormat')}
+            choices={DateTimeFormat.ForUser.DateFormat_List}
+            minWidth={150}
+          >
+            <FormControl sx={asWideAsItsBox}>
+              <InputLabel id='date-format'>
+                {t('settings.dateTime.dateFormat')}
+              </InputLabel>
+              <Select
+                labelId='date-format'
+                value={dateFormat}
+                label={t('settings.dateTime.dateFormat')}
+                onChange={handleDateFormatChange}
+                sx={wrappingSelect}
+              >
+                {DateTimeFormat.ForUser.DateFormat_List.map((value) => {
+                  return (
+                    <MenuItem value={value} key={value} sx={wrappingChoice}>
+                      {value}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </FieldBox>
+          <FieldBox
+            label={t('settings.dateTime.clockSystem')}
+            choices={DateTimeFormat.ForUser.ClockSystemFormat_List.map(
+              (value) => clockSystemFormatLabel[value],
+            )}
+            minWidth={110}
+          >
+            <FormControl sx={asWideAsItsBox}>
+              <InputLabel id='clock-system-format'>
+                {t('settings.dateTime.clockSystem')}
+              </InputLabel>
+              <Select
+                labelId='clock-system-format'
+                value={clockSystemFormat}
+                label={t('settings.dateTime.clockSystem')}
+                onChange={handleClockSystemFormatChange}
+                sx={wrappingSelect}
+              >
+                {DateTimeFormat.ForUser.ClockSystemFormat_List.map((value) => {
+                  return (
+                    <MenuItem value={value} key={value} sx={wrappingChoice}>
+                      {clockSystemFormatLabel[value]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </FieldBox>
         </div>
         <div className={classes['date-time-settings-example']}>
-          <div className={classes['field-name']}>
-            {t('settings.dateTime.example')}
-          </div>
+          <div>{t('settings.dateTime.example')}</div>
           <div>{dateTimeExample}</div>
         </div>
       </div>

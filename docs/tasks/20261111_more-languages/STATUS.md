@@ -183,7 +183,7 @@ changed and what still differs.
 ### One layout for every language
 
 On 2026-11-12 the maintainer decided how the layout and the texts relate, in
-three instructions:
+four instructions:
 
 1. A natural and accurate translation comes before the layout, by far. The
    layout is to be changed for the texts, and readily.
@@ -191,11 +191,17 @@ three instructions:
    for every language, in which a language's texts may be longer or shorter.
 3. "Longer or shorter" is the length of a language's words and of its
    sentences.
+4. The layout is not to be sized for the longest language either, which
+   leaves the others with room that they do not need: it stretches and
+   shrinks with each language's texts, and never breaks. What fits in English
+   keeps the size that it has there.
 
 So no text is shortened or abbreviated for room, no style or size is set for
-one language, and the same rules hold everywhere: a sentence continues on the
-next line, a word wider than its place is divided and never cut, and a box is
-as large as its text needs. What was changed for it:
+one language or for the longest, and the same rules hold everywhere: a
+sentence continues on the next line, a word wider than its place is divided
+and never cut, a box is as large as its own text needs, and two things side
+by side are one under the other where they do not fit. What was changed for
+it:
 
 - **The header** is as high as its sentence and its button need, and at least
   the 130 pixels that it had. It was a pane of a fixed height, in which a
@@ -222,19 +228,28 @@ as large as its text needs. What was changed for it:
   language writes them: with a 12-hour clock, a Russian date was cut on a
   phone (`… 05:29:58 веч`), and a Chinese one by a pixel. It is divided
   between its day and its time now (`2019-03-16 сбт / 05:29:58 вечера`).
-- **The fields of the Settings page** have their names above them, in place of
-  MUI's label in the field's border, which is cut when it is wider than the
-  field and cannot take a second line. A field is as wide as the wider of its
-  name and its choice; the two fields are side by side where both fit, and one
-  under the other where they do not; a name wider than the window continues
-  on the next line. This changes the page in English and Japanese too.
+- **The fields of the Settings page** are as wide as their labels and their
+  widest choices need, and never narrower than in English (150 and 110
+  pixels). MUI draws a field's label on the field's border, on one line, and
+  cuts it where it is wider than the field: with the reviewed texts, in 29
+  languages. Each field is in a box that lays out its label and its choices
+  without showing them, and fills the box; Photo Location Map sizes its
+  fields the same way. The two fields are side by side where both fit, as in
+  English, and one under the other where they do not. At first the names
+  were put above the fields, which holds for a name of any length but
+  changed the page in English and Japanese; the maintainer's fourth
+  instruction took that back. What is left open by it: a label wider than
+  the window would be cut by MUI. The longest, Slovak's, makes its field 234
+  pixels wide, of the 280 that a window of 320 has.
 - **The dialog for a file that cannot be read** is as wide and as high as its
   texts need, from 250 by 150 pixels up to the window's width. Its title and
   its message are divided into lines of about the same length
   (`text-wrap: balance`), and its three parts keep a space between them.
 - **The message in the map's place** has the 280 pixels for its sentence that
-  it had, with 12 more on each side inside the box, and is as high as its
-  lines. In a narrower pane the box is narrower.
+  it had, and is as high as its lines. The box has 4 more pixels at each
+  side, which is as far as the English sentence was from the box's edges: the
+  Ukrainian sentence's first line is as wide as the 280 pixels, and touched
+  them. In a narrower pane the box is narrower.
 - **The messages in the photo's place** continue on the next line, in the
   middle of the pane and clear of its edges.
 - **The menu's entries** continue on the next line, and the About page ends
@@ -243,12 +258,15 @@ as large as its text needs. What was changed for it:
   MUI's scroll buttons, which appeared with nothing to scroll, and the Run
   Demo button grows with its text. Both are from 2026-11-11.
 - **For every text**, the last line is not left with a letter or a short word
-  alone (`text-wrap: pretty`), and no line starts with a small kana or a long
-  vowel mark (`line-break: strict`). Both matter most in the languages that
-  write no spaces between their words. In the header's sentence, the dialog
-  and the messages in the map's and the photo's place, a line of Japanese
-  ends between two phrases (`word-break: auto-phrase`). A browser that does
-  not know one of these divides the text as it always did.
+  alone (`text-wrap: pretty`), no line starts with a small kana or a long
+  vowel mark (`line-break: strict`), and a line of Japanese ends between two
+  phrases (`word-break: auto-phrase`). They matter most in the languages
+  that write no spaces between their words. A line of Korean, which does
+  write them, ends between two words (`word-break: keep-all` for Korean): a
+  browser ends it between any two letters otherwise. That is a rule of how
+  the language is written, as the division of a word is, not a size or a
+  place for one language. A browser that does not know one of these divides
+  the text as it always did.
 
 Two things were weighed and left:
 
@@ -260,9 +278,14 @@ Two things were weighed and left:
   (`Fotografija`) does not fit a third of a phone's width, and would be
   divided.
 
-English and Japanese: the Settings page looks different, as said above, and
-a Japanese title of two lines in the dialog is `対応していない / ファイル形式です`,
-where it was `…ファイル形式で / す`. Everything else is where it was. The
+English and Japanese are laid out as they were: of their screenshots, four
+differ, by a text drawn a pixel lower, and the two of the Settings page are
+the ones from before this change. What differs for a reader of the two is how
+some texts are divided into lines where they take more than one, on a phone
+above all: a Japanese title of two lines in the dialog is
+`対応していない / ファイル形式です`, where it was `…ファイル形式で / す`;
+Japanese sentences end their lines between phrases; and the box of the
+message in the map's place is 8 pixels wider. The
 [results](./evidence/RESULTS.md#screenshots) list the screenshots that changed
 and why.
 

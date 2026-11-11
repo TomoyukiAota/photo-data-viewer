@@ -3,10 +3,7 @@
 // Details: A text that takes two lines is divided into lines of about the
 // same length (text-wrap: balance), so that no line is left with a word or a
 // letter alone: "対応していない / ファイル形式です", not "…ファイル形 / 式です".
-// In a language that writes no spaces between its words, a line ends between
-// two phrases where the browser can tell them (word-break: auto-phrase, which
-// Chrome knows for Japanese); a browser that knows neither divides the text
-// as it divides any other.
+// A browser that does not know how divides the text as it divides any other.
 // prettier-ignore
 .dialog {
   min-width: 250px;
@@ -17,7 +14,6 @@
   text-align: center;
   overflow-wrap: anywhere;
   text-wrap: balance;
-  word-break: auto-phrase;
 
   display: grid;
   grid:

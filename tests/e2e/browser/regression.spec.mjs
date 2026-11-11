@@ -229,6 +229,14 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
     .toBeLessThanOrEqual(1);
   await navigate(page, 'Settings');
   await snapshot(page, 'settings');
+  // The fields follow their texts in every language, and in English they
+  // are as wide as they always were.
+  const fieldWidths = await page
+    .locator('[data-label]')
+    .evaluateAll((boxes) =>
+      boxes.map((box) => Math.round(box.getBoundingClientRect().width)),
+    );
+  expect(fieldWidths).toEqual([150, 110]);
   await page.getByLabel('Date Format', { exact: true }).click();
   await page.getByRole('option', { name: 'DD/MM/YYYY', exact: true }).click();
   await page.reload();
@@ -678,25 +686,29 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(errors).toEqual([]);
   });
 
-  test('a field of the Settings page is as wide as its name, which is not cut', async ({
+  test('a field of the Settings page is as wide as its label, which is not cut', async ({
     page,
   }) => {
     await page.goto('/settings');
     await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
     for (const id of ['date-format', 'clock-system-format']) {
-      const name = page.locator(`#${id}`);
+      // The label on the field's border, which MUI cuts with "…" where it is
+      // wider than the field, and the field's chosen value.
+      const label = page.locator(`#${id}`);
       const field = page.locator(`[aria-labelledby~="${id}"]`);
-      await expect(name).toBeInViewport({ ratio: 1 });
+      await expect(label).toBeInViewport({ ratio: 1 });
       await expect(field).toBeInViewport({ ratio: 1 });
-      expect(await isCut(name)).toBe(false);
+      expect(await isCut(label)).toBe(false);
       expect(await isCut(field)).toBe(false);
-      // The name is above its field, and the field is as wide as the name or
-      // wider.
-      const nameBox = await name.boundingBox();
-      const fieldBox = await field.locator('xpath=..').boundingBox();
-      expect(nameBox.y + nameBox.height).toBeLessThanOrEqual(fieldBox.y);
-      expect(fieldBox.width).toBeGreaterThanOrEqual(nameBox.width - 1);
     }
+    // The clock's field follows its label: it is wider than the 110 pixels
+    // that it has in English, and the two fields are one under the other,
+    // as they do not fit side by side here.
+    const [dateBox, clockBox] = await Promise.all(
+      [0, 1].map((n) => page.locator('[data-label]').nth(n).boundingBox()),
+    );
+    expect(clockBox.width).toBeGreaterThan(110);
+    expect(clockBox.y).toBeGreaterThan(dateBox.y + dateBox.height);
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
 

@@ -50,14 +50,16 @@ browser suite.
 
 ## Screenshots
 
-Taken with Chrome on this Mac, like the others. Of the 26, 9 changed on
-2026-11-12 and 17 did not.
+Taken with Chrome on this Mac, like the others. Of the 26, 7 changed on
+2026-11-12 and 19 did not.
 
-- `settings.png`, `settings-ja.png`, `settings-ar.png`: on 2026-11-11 the
-  Language section left the Settings page (the Arabic one was new then). On
-  2026-11-12 the two fields of the date and time got their names above them,
-  in place of MUI's label in the field's border, and are less high; what is
-  under them moved up with them.
+- `settings.png`, `settings-ja.png`: on 2026-11-11 the Language section left
+  the Settings page. On 2026-11-12 they did not change: the two fields of
+  the date and time follow their texts now, and in English and Japanese they
+  are as wide as they were.
+- `settings-ar.png`: new on 2026-11-11. On 2026-11-12 the label of the
+  clock's field is the reviewed one, which is longer, and the field is as
+  wide as it needs.
 - `loaded-general-ar.png`, `narrow-loaded-ar.png`: new on 2026-11-11, in
   Arabic, laid out from the right. On 2026-11-12 one word changed in them,
   the label of the Raw Data tab, which the review of the translations
@@ -188,7 +190,7 @@ With the layout as it was and the reviewed texts, the scripts found:
 
 | What                                                             | Languages                                                       | What was done                                                    |
 | ---------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
-| The name of the clock's field cut, in MUI's label, at every width | 29, such as `da`, `fr`, `pl`, `ru`, `th`                        | The names are above the fields                                   |
+| The name of the clock's field cut, in MUI's label, at every width | 29, such as `da`, `fr`, `pl`, `ru`, `th`                        | A field is as wide as its label and its widest choice need       |
 | The clock's field or its name past the window's edge at 320 px    | 30; at 390 px `cs` and `sk`                                     | The fields are one under the other where they do not fit side by side |
 | The Settings page wider than the window at 320 px                 | `de`, `et`, `hu`, `nb`, `sv`                                    | The same                                                         |
 | The two names of the latitude and the longitude on four lines, beside two numbers on two | `bg`, `cs`, `el`, `hr`, `hu`, `lv`, `pl`, `sk`, `sl`, `sr-Latn` | Each name shares a line of a grid with its number                |
@@ -203,6 +205,10 @@ each corrected in the layout:
 | The dialog's title, message and button touched where the first two took two lines each | 14 languages at 320 px, such as `de`, `es`, `fr`  | A least space between them                                  |
 | A title of two lines with a letter alone on the second (`…ファイル形式で / す`)         | `ja`, in the dialog; as on `main`                 | Lines of about the same length, ending between two phrases  |
 | The message in the map's place on two lines where it had one, once it had space inside | `ja`                                              | The space is added to the box, not taken from the sentence  |
+| A line of that message as wide as its box, touching the box's edges                    | `uk`; within 2 px in `hi` and `he`                | 4 pixels at each side, as far as English was from the edges |
+| The Settings page looked different, with the fields' names above them                  | `en`, `ja`, and every other language              | MUI's labels again, in boxes that follow their texts        |
+| A line ending inside a word (`방 / 법`)                                                  | `ko`, such as the About page at 390 px            | `word-break: keep-all` for Korean                           |
+| A line ending inside a phrase (`…クリックする / と、`)                                   | `ja`; as on `main`                                | `word-break: auto-phrase` for every text                    |
 | The text in the photo's place on two lines at 320 px where it had one                  | `en`                                              | 6 pixels of space at each side, which leaves it one line    |
 | A word of the table's names divided though it fitted (`Zeměpis-ná šířka`)              | `cs`, `it`, `ro`, `sk`                            | `text-wrap: pretty` is kept away from the names             |
 | A date divided inside its day of the week (`周 / 六`)                                   | `zh-Hans`, `zh-Hant`, with the 12-hour clock      | A value is divided at a space                               |
@@ -211,11 +217,17 @@ each corrected in the layout:
 
 The last run, on the build that the checks above ran on, found no text cut,
 none out of its box or out of the window, no page wider than the window, each
-name beside its number, and no value cut. What it still notes are last lines
-of two letters in Chinese, Japanese and Korean, each a whole word (`数据。`),
-where `text-wrap: pretty` took a letter more to the line: the header's
-sentence in Chinese at 320 pixels, and sentences of the About and Settings
-pages.
+name beside its number, no label of a field cut, and no value cut. What it
+still notes are last lines of two letters in Chinese, and one in Korean, each
+a whole word (`数据。`), where `text-wrap: pretty` took a letter more to the
+line: the header's sentence in Chinese at 320 pixels, and sentences of the
+About and Settings pages.
+
+The fields of the Settings page were measured in every language at 320
+pixels: the date's field is 150 pixels wide in all of them, as in English,
+and the clock's is from 110 pixels (English, Arabic, Korean) to 234
+(Slovak), as its label needs. The two are side by side in six languages
+there, and one under the other in the others.
 
 The script was checked against itself: run on the version before these
 changes, it has to find what is known to be wrong there. That showed that one

@@ -19,22 +19,26 @@
   transform: translate(-50%, -50%);
   z-index: 1101; // Set to 1101 to place .overlay-content right above .overlay
   background-color: #eeeeee;
-  // TL;DR: 280 pixels for the sentence, as it always had, and higher than 80
-  // where a language's sentence takes more lines: it is never cut.
-  // Details: The box was 280 by 80 pixels with no space inside, so a line as
-  // wide as the box touched its edges. The 12 pixels on each side are added
-  // to the box and not taken from the sentence, so that a sentence that had
-  // one line or two keeps them (the Japanese one is a single line of 266
-  // pixels). In a pane that is narrower, the box is narrower. In a language
-  // that writes no spaces a line ends between two phrases, where the browser
-  // can tell them (see the header's styles).
-  width: 304px;
+  // TL;DR: 280 pixels for the sentence, as it always had, and higher than
+  // its 80 pixels where a language's sentence takes more lines: it is never
+  // cut.
+  // Details: The box was 280 by 80 pixels with no space inside. The English
+  // sentence fills it on two lines, the first of which ends 4 pixels from
+  // the box's edge, and the Japanese one on one line. A sentence that is
+  // longer in another language takes more lines, and the box grows with
+  // them, with 10 pixels over and under the lines. The Ukrainian sentence's
+  // first line is as wide as the 280 pixels, and touched the box's edges:
+  // the 4 pixels at each side keep every language as far from the edges as
+  // English was. They are added to the box and not taken from the sentence,
+  // so that the English and the Japanese sentences have the lines that they
+  // had. The width is not made for the longest language: it is the one that
+  // the sentence had. In a pane that is narrower, the box is narrower.
+  width: 288px;
   max-width: calc(100% - 16px);
   min-height: 80px;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 10px 4px;
   overflow-wrap: anywhere;
-  word-break: auto-phrase;
 
   display: grid;
   place-items: center;

@@ -18,9 +18,27 @@ body {
 // `line-break: strict` is for the same languages: no line starts with a
 // small kana or a long vowel mark ("…のペ / ージ"), which the default rules
 // allow.
+// `word-break: auto-phrase` ends a line of Japanese between two phrases
+// ("対応していない / ファイル形式です"), where the browser can tell them, which
+// Chrome can; elsewhere, and in the other languages, it is `normal`.
+// `overflow-wrap: break-word` is for a word or a phrase wider than its line,
+// which would run out of it: it continues on the next line.
 body {
   text-wrap: pretty;
   line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: break-word;
+}
+
+// TL;DR: A line of Korean ends between two words.
+// Details: Korean separates its words with spaces, but a browser ends a line
+// between any two of its letters, as it does in Chinese and Japanese, unless
+// it is told to keep the words whole. This is a rule of how the language is
+// written, as the division of a word by its syllables is, not a size or a
+// place for one language: the layout is the same. It is on every element, so
+// that it holds where an element sets another rule for all languages.
+html:lang(ko) * {
+  word-break: keep-all;
 }
 
 #__next {

@@ -4,13 +4,17 @@ The 40 translations added on 2026-11-11 are machine translation, and no
 speaker has reviewed them.
 
 They were read through again on 2026-11-11 and 2026-11-12, by machine as
-well, together with Photo Location Map's and in seven rounds, which changed
-fewer and fewer texts and at last none of this app's. 261 of
-its texts in 40 languages were changed in all, for a
+well, together with Photo Location Map's and its website's, in seven rounds.
+The rounds changed 454, 316, 103, 27, 8, 8 and 2 of the 11,400 texts of the
+three, and the last one none of this app's. 261 of this app's
+3,120 texts in 40 languages were changed in all, for a
 wording that is more natural or more accurate. For some of them the wording
 was looked up in what Microsoft, Apple, Google and Mozilla publish in the
 language (support pages, the texts of macOS and Android, Firefox's
 translations); most are written from what the machine knows of the language.
+The reviewers' reasons and sources are recorded with Photo Location Map's
+part of the review, under `docs/tasks/20261112_translation-review/` in its
+repository.
 
 Photo Location Map got the same 42 languages at the same time. For the words
 that the two applications share, this app has the same word as Photo Location

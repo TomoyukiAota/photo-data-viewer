@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 
 import { applyLanguage } from '../../i18n/i18n';
+import { DateTimeFormat } from '../../utils/date-time-format';
 import UserSettings from './UserSettings';
 
 // What the page records is checked elsewhere, and sent nowhere.
@@ -11,25 +12,33 @@ afterEach(async () => {
   await act(() => applyLanguage('en'));
 });
 
-it('names each field of the date and time by the text above it', () => {
+/** The box around a field, which lays out the field's label and choices to be as wide as they need. */
+function boxOf(field: HTMLElement): HTMLElement {
+  return field.closest('[data-label]') as HTMLElement;
+}
+
+it('has each field of the date and time in a box that knows its label and its choices, which give the field its width', () => {
   render(<UserSettings />);
   const dateFormat = screen.getByRole('combobox', { name: 'Date Format' });
   const clock = screen.getByRole('combobox', { name: '12- or 24-hour' });
 
   expect(dateFormat.textContent).toBe('YYYY-MM-DD');
   expect(clock.textContent).toBe('24-hour');
-  // The name is a text of the page before its field, where it can take as
-  // many lines as a language's name needs; it is not drawn on the field.
-  for (const [field, name] of [
-    [dateFormat, 'Date Format'],
-    [clock, '12- or 24-hour'],
-  ] as const) {
-    const label = screen.getByText(name);
-    expect(label.tagName).not.toBe('LABEL');
-    expect(
-      label.compareDocumentPosition(field) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
-  }
+
+  // The box has the label and every choice, not the chosen one alone, so
+  // that the field is as wide for one choice as for another. It is never
+  // narrower than the field is in English.
+  expect(boxOf(dateFormat).dataset.label).toBe('Date Format');
+  expect(boxOf(dateFormat).dataset.choices?.split('\n')).toEqual([
+    ...DateTimeFormat.ForUser.DateFormat_List,
+  ]);
+  expect(boxOf(dateFormat).style.minWidth).toBe('150px');
+  expect(boxOf(clock).dataset.label).toBe('12- or 24-hour');
+  expect(boxOf(clock).dataset.choices?.split('\n')).toEqual([
+    '12-hour',
+    '24-hour',
+  ]);
+  expect(boxOf(clock).style.minWidth).toBe('110px');
 });
 
 it('names the fields and the choices of the clock in the language', async () => {
@@ -37,6 +46,9 @@ it('names the fields and the choices of the clock in the language', async () => 
   render(<UserSettings />);
   const clock = screen.getByRole('combobox', { name: '12/24 時間制' });
   expect(clock.textContent).toBe('24 時間制');
+  // The box follows the language: it is as wide as these texts need.
+  expect(boxOf(clock).dataset.label).toBe('12/24 時間制');
+  expect(boxOf(clock).dataset.choices).toBe('12 時間制\n24 時間制');
 
   fireEvent.mouseDown(clock);
   expect(

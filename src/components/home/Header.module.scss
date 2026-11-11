@@ -26,13 +26,8 @@
   margin-inline-start: 26px;
 }
 
-// The sentence. In a language that writes no spaces between its words, a
-// line ends between two phrases, where the browser can tell them
-// (word-break: auto-phrase, which Chrome knows for Japanese); in the others
-// it is divided as any text is.
 .text {
   margin-bottom: 15px;
-  word-break: auto-phrase;
 }
 
 .input {
