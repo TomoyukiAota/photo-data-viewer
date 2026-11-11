@@ -51,44 +51,32 @@
   gap: 20px 10px;
 }
 
-// TL;DR: The box of a field (FieldBox), as wide as the field's label and its
-// widest choice need.
-// Details: The box lays out, without showing them, the label and the choices
-// in the sizes that the field shows them in, one over another, and is as wide
-// as the widest of them; the field fills it. The two are in ::before and
-// ::after rather than in elements, so that they are neither read out nor
-// found as texts of the page. Photo Location Map sizes its fields the same
-// way. A box is never wider than the page: a label longer than that is cut
-// by MUI, which no language's is at 320 pixels.
+// TL;DR: The box of a field (FieldBox), as wide as the wider of the field
+// itself and the field's label.
+// Details: The box lays out the label, without showing it, in the size that
+// the field shows it in, over the field, and is as wide as the wider of the
+// two; the field fills it. The label is in ::before rather than in an
+// element, so that it is neither read out nor found as a text of the page.
+// Photo Location Map sizes its fields with such a box too. A box is never
+// wider than the page: a label longer than that is cut by MUI, which no
+// language's is at 320 pixels.
 .field-box {
   display: inline-grid;
   max-width: 100%;
-
-  &::before,
-  &::after {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    white-space: pre; // The choices are one on a line.
-    // The font of MUI's fields.
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    letter-spacing: 0.00938em;
-  }
 
   // The label, which the field shows at three quarters of its size, and the
   // room that MUI keeps free beside it: 24 pixels, and a little for rounding.
   &::before {
     content: attr(data-label);
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    white-space: pre;
+    // The font of MUI's fields.
+    font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 0.75rem;
+    letter-spacing: 0.00938em;
     padding-inline: 13px;
-  }
-
-  // A choice as the field shows the chosen one: 14 pixels before it, and 32
-  // after it, where the arrow is.
-  &::after {
-    content: attr(data-choices);
-    font-size: 1rem;
-    padding-inline: 14px 32px;
   }
 }
 

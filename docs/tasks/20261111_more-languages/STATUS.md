@@ -229,15 +229,19 @@ it:
   phone (`… 05:29:58 веч`), and a Chinese one by a pixel. It is divided
   between its day and its time now (`2019-03-16 сбт / 05:29:58 вечера`).
 - **The fields of the Settings page** are as wide as their labels and their
-  widest choices need, and never narrower than in English (150 and 110
-  pixels). MUI draws a field's label on the field's border, on one line, and
-  cuts it where it is wider than the field: with the reviewed texts, in 29
-  languages. Each field is in a box that lays out its label and its choices
-  without showing them, and fills the box; Photo Location Map sizes its
-  fields the same way. The two fields are side by side where both fit, as in
-  English, and one under the other where they do not. At first the names
-  were put above the fields, which holds for a name of any length but
-  changed the page in English and Japanese; the maintainer's fourth
+  chosen values need, and never narrower than in English (150 and 110
+  pixels). MUI makes a field as wide as its chosen value, draws the field's
+  label on its border, on one line, and cuts the label where it is wider than
+  the field: with the reviewed texts, in 29 languages. Each field is in a box
+  that lays out its label without showing it, and fills the box, so that it
+  is as wide as the wider of the two; Photo Location Map sizes its fields
+  with such a box too. A box that laid out every choice, as Photo Location
+  Map's does, made the English date field 152 pixels wide on Linux, where a
+  choice that is not the chosen one is that wide; the chosen value alone is
+  what the field always followed. The two fields are side by side where both
+  fit, as in English, and one under the other where they do not. At first
+  the names were put above the fields, which holds for a name of any length
+  but changed the page in English and Japanese; the maintainer's fourth
   instruction took that back. What is left open by it: a label wider than
   the window would be cut by MUI. The longest, Slovak's, makes its field 234
   pixels wide, of the 280 that a window of 320 has.

@@ -230,13 +230,17 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   await navigate(page, 'Settings');
   await snapshot(page, 'settings');
   // The fields follow their texts in every language, and in English they
-  // are as wide as they always were.
-  const fieldWidths = await page
-    .locator('[data-label]')
-    .evaluateAll((boxes) =>
-      boxes.map((box) => Math.round(box.getBoundingClientRect().width)),
-    );
-  expect(fieldWidths).toEqual([150, 110]);
+  // are as wide as they always were. The widths are asked for until the page
+  // has its fields: it may not have them yet when its address has changed.
+  await expect
+    .poll(() =>
+      page
+        .locator('[data-label]')
+        .evaluateAll((boxes) =>
+          boxes.map((box) => Math.round(box.getBoundingClientRect().width)),
+        ),
+    )
+    .toEqual([150, 110]);
   await page.getByLabel('Date Format', { exact: true }).click();
   await page.getByRole('option', { name: 'DD/MM/YYYY', exact: true }).click();
   await page.reload();

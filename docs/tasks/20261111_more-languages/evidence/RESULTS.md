@@ -190,7 +190,7 @@ With the layout as it was and the reviewed texts, the scripts found:
 
 | What                                                             | Languages                                                       | What was done                                                    |
 | ---------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
-| The name of the clock's field cut, in MUI's label, at every width | 29, such as `da`, `fr`, `pl`, `ru`, `th`                        | A field is as wide as its label and its widest choice need       |
+| The name of the clock's field cut, in MUI's label, at every width | 29, such as `da`, `fr`, `pl`, `ru`, `th`                        | A field is as wide as its label and its chosen value need        |
 | The clock's field or its name past the window's edge at 320 px    | 30; at 390 px `cs` and `sk`                                     | The fields are one under the other where they do not fit side by side |
 | The Settings page wider than the window at 320 px                 | `de`, `et`, `hu`, `nb`, `sv`                                    | The same                                                         |
 | The two names of the latitude and the longitude on four lines, beside two numbers on two | `bg`, `cs`, `el`, `hr`, `hu`, `lv`, `pl`, `sk`, `sl`, `sr-Latn` | Each name shares a line of a grid with its number                |
@@ -307,6 +307,13 @@ and About pages:
 - **A table cell lets a text on one line run through its padding** before it
   is cut. A value that may take a second line does the same, so that the
   dates that filled the cell stay on one line.
+- **The browser test of the fields' English widths failed in CI**, twice on
+  Ubuntu and once on macOS, where it had passed locally. On Ubuntu the date's
+  field was 152 pixels wide, not 150: its box laid out every choice, and one
+  that is not the chosen one is wider there than on macOS. The box lays out
+  the label alone now, and the field is as wide as its chosen value, as MUI
+  makes it. On macOS the test asked for the widths before the page had its
+  fields; it asks until it has them.
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.

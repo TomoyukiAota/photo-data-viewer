@@ -23,36 +23,29 @@ const wrappingSelect = {
 } as const;
 const wrappingChoice = { whiteSpace: 'normal', overflowWrap: 'anywhere' } as const;
 
-/** A field has no width of its own: it is as wide as the box that it is in. */
-const asWideAsItsBox = { width: 0, minWidth: '100%' } as const;
-
 /**
- * The box around a field of the date and time, which gives the field its
- * width.
+ * The box around a field of the date and time, which makes the field as wide
+ * as its label needs.
  *
- * TL;DR: A field is as wide as its label and its widest choice need, in any
+ * TL;DR: A field is as wide as its label and its chosen value need, in any
  * language, and never narrower than it is in English (`minWidth`).
- * Details: MUI draws a field's label on the field's border, on one line, and
- * cuts it with "…" where it is wider than the field, which is as wide as the
- * chosen value. Once the translations named the clock's setting as their
- * languages do ("12- oder 24-Stunden-Format"), the label was cut in 29
- * languages. The box lays out the label and the choices without showing them
- * (see the styles), and the field fills the box. A width set for the longest
+ * Details: MUI makes a field as wide as its chosen value, draws the field's
+ * label on its border, on one line, and cuts the label with "…" where it is
+ * wider than the field. Once the translations named the clock's setting as
+ * their languages do ("12- oder 24-Stunden-Format"), the label was cut in 29
+ * languages. The box lays out the label without showing it (see the styles),
+ * and the field fills the box: so the field is as wide as the wider of what
+ * MUI gives it and what its label needs. A width set for the longest
  * language would leave the others with room that they do not need; this one
  * follows each language, and is what it was in English and Japanese.
  */
 const FieldBox: React.FC<
-  React.PropsWithChildren<{
-    label: string;
-    choices: readonly string[];
-    minWidth: number;
-  }>
+  React.PropsWithChildren<{ label: string; minWidth: number }>
 > = (props) => (
   <div
     className={classes['field-box']}
     style={{ minWidth: props.minWidth }}
     data-label={props.label}
-    data-choices={props.choices.join('\n')}
   >
     {props.children}
   </div>
@@ -105,12 +98,8 @@ const UserSettings: React.FC = () => {
           {t('settings.dateTime.title')}
         </div>
         <div className={classes['date-time-settings-select']}>
-          <FieldBox
-            label={t('settings.dateTime.dateFormat')}
-            choices={DateTimeFormat.ForUser.DateFormat_List}
-            minWidth={150}
-          >
-            <FormControl sx={asWideAsItsBox}>
+          <FieldBox label={t('settings.dateTime.dateFormat')} minWidth={150}>
+            <FormControl>
               <InputLabel id='date-format'>
                 {t('settings.dateTime.dateFormat')}
               </InputLabel>
@@ -131,14 +120,8 @@ const UserSettings: React.FC = () => {
               </Select>
             </FormControl>
           </FieldBox>
-          <FieldBox
-            label={t('settings.dateTime.clockSystem')}
-            choices={DateTimeFormat.ForUser.ClockSystemFormat_List.map(
-              (value) => clockSystemFormatLabel[value],
-            )}
-            minWidth={110}
-          >
-            <FormControl sx={asWideAsItsBox}>
+          <FieldBox label={t('settings.dateTime.clockSystem')} minWidth={110}>
+            <FormControl>
               <InputLabel id='clock-system-format'>
                 {t('settings.dateTime.clockSystem')}
               </InputLabel>
