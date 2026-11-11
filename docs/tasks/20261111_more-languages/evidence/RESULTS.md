@@ -181,4 +181,5 @@ and About pages:
   overrides the fade, so it stays for a moment after the menu closes and then
   goes at once. Left as it is.
 - **In Japanese at 320 pixels, the header's button ends a pixel inside the
-  header's padding.** This is `main`'s layout, and its screenshot.
+  header's padding.** This is `main`'s layout: the header is the same in
+  `narrow-loaded-ja.png` as it is there.

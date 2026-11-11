@@ -141,8 +141,11 @@ being shortened:
 - A name in the General tab continues on a second line.
 - The Run Demo button grows with its text.
 
-English and Japanese are laid out as before: no screenshot of them changed but
-those of the Settings page.
+English and Japanese are laid out as before. Of their screenshots, the two of
+the Settings page changed, which lost the Language section, and two in
+Japanese changed for their words alone, with nothing moved: `about-ja.png` and
+`narrow-loaded-ja.png`. The [results](./evidence/RESULTS.md#screenshots) list
+them.
 
 ### Fetching each language when it is shown
 
