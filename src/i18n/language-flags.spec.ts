@@ -58,8 +58,10 @@ it('includes in the styles the flags of the languages, and no others, so that th
 it("has the package's license among the app's files, as the package has it", () => {
   // The flags are the package's work, which its license asks to be passed on
   // with. The copy is a file of this repository, so this tells when a new
-  // version of the package changes the text.
+  // version of the package changes the text. The lines are compared however
+  // they end: Git ends them as Windows does where it checks the copy out there.
+  const lines = (file: string) => readFileSync(file, 'utf8').split(/\r?\n/);
   expect(
-    readFileSync(join(root, 'public', 'licenses', 'flag-icons', 'LICENSE'), 'utf8'),
-  ).toBe(readFileSync(join(flagIcons, 'LICENSE'), 'utf8'));
+    lines(join(root, 'public', 'licenses', 'flag-icons', 'LICENSE')),
+  ).toEqual(lines(join(flagIcons, 'LICENSE')));
 });
