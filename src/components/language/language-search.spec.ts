@@ -11,7 +11,6 @@ const czech: LanguageListItem = {
   setting: 'en', // Which setting it stands for makes no difference to the search.
   label: 'Čeština',
   labelLanguage: 'cs',
-  flag: 'cz',
   keywords: ['Czech', 'cs', 'チェコ語'],
 };
 
@@ -19,7 +18,6 @@ const brazilianPortuguese: LanguageListItem = {
   setting: 'en',
   label: 'Português (Brasil)',
   labelLanguage: 'pt-BR',
-  flag: 'br',
   keywords: ['Portuguese (Brazil)', 'pt-BR', 'ポルトガル語 (ブラジル)'],
 };
 
@@ -93,7 +91,6 @@ describe('matchesSearch', () => {
       setting: 'auto',
       label: 'Use browser setting (English)',
       labelLanguage: 'en',
-      flag: 'us',
       keywords: [],
     };
     expect(matchesSearch(browser, 'browser')).toBe(true);
@@ -126,10 +123,9 @@ describe('findByTyping', () => {
   // A list as the page has it, shortened.
   const names = ['Use browser setting (English)', 'Català', 'Čeština', 'Dansk', 'Deutsch', 'English', 'Русский', '日本語'];
   const items: LanguageListItem[] = names.map((label) => ({
-    setting: 'en', // Which setting it stands for, and its flag, make no difference here.
+    setting: 'en', // Which setting it stands for makes no difference here.
     label,
     labelLanguage: 'en',
-    flag: 'us',
     keywords: [],
   }));
   const found = (typed: string, from: number) => names[findByTyping(items, typed, from)];

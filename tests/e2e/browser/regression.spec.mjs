@@ -81,31 +81,6 @@ async function loadPhoto(page) {
   ).toBeVisible();
 }
 
-/**
- * Whether the flag before the name of each entry of the list is drawn from a
- * file that the app has, once those files have arrived. Which flag each
- * language has is checked by the unit tests.
- */
-async function flagsDrawn(list) {
-  return list
-    .locator('[role="option"] > [aria-hidden="true"]')
-    .evaluateAll((flags) =>
-      Promise.all(
-        flags.map((flag) => {
-          const image = new Image();
-          image.src =
-            /url\("?([^")]*)"?\)/.exec(
-              getComputedStyle(flag).backgroundImage,
-            )?.[1] ?? '';
-          return image.decode().then(
-            () => image.naturalWidth > 0,
-            () => false,
-          );
-        }),
-      ),
-    );
-}
-
 async function navigate(page, name) {
   await page.getByRole('button', { name: 'menu', exact: true }).click();
   await page.getByRole('menuitem', { name, exact: true }).click();
@@ -303,16 +278,6 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await expect(
     list.getByRole('option', { name: '日本語', exact: true }),
   ).toHaveAttribute('lang', 'ja');
-  // Each entry has the flag of its language before its name: 20 by 15 pixels,
-  // 8 pixels from the name, and not part of what the entry is called.
-  expect(await flagsDrawn(list)).toEqual(Array(43).fill(true));
-  const firstFlag = await options
-    .first()
-    .locator('[aria-hidden="true"]')
-    .boundingBox();
-  const firstName = await options.first().locator('bdi').boundingBox();
-  expect([firstFlag.width, firstFlag.height]).toEqual([20, 15]);
-  expect(firstName.x - (firstFlag.x + firstFlag.width)).toBe(8);
   // A box of seven entries of 32px, which scrolls for the others, with a
   // scrollbar of its own where the browser lets the page draw one.
   expect(
@@ -592,7 +557,6 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(chosen).toHaveText(['ブラウザの設定に従う（日本語）']);
     const search = page.getByRole('searchbox', { name: '検索', exact: true });
     await expect(search).toBeFocused();
-    expect(await flagsDrawn(list)).toEqual(Array(43).fill(true));
     await snapshot(page, 'language-ja');
 
     // The search also finds a language by its name in the language of the
@@ -729,12 +693,6 @@ test.describe('in a browser whose language is Arabic', () => {
       .boundingBox();
     expect(glass.x - searchBox.x).toBe(8);
     await expect(arabicSearch).toHaveCSS('padding-left', '36px');
-    // The flag of an entry is where its line starts, at the right of its name.
-    expect(await flagsDrawn(list)).toEqual(Array(43).fill(true));
-    const firstEntry = list.getByRole('option').first();
-    const flagBox = await firstEntry.locator('[aria-hidden="true"]').boundingBox();
-    const nameBox = await firstEntry.locator('bdi').boundingBox();
-    expect(flagBox.x - (nameBox.x + nameBox.width)).toBe(8);
     await snapshot(page, 'language-ar');
 
     // A language written from left to right lays the page out from the left

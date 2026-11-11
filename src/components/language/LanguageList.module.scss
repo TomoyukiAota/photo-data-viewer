@@ -2,24 +2,6 @@
 // Photo Location Map's Language dialog and Settings dialog: its sizes and
 // colors are that list's.
 
-// TL;DR: The flags beside the names, from the flag-icons package, as its README
-// says to choose them: the flag of each language (`flag` in
-// src/i18n/languages.ts) and no other, in their rectangular shape only.
-// Details: The build puts each flag that this lists among the app's files, so
-// a flag that no language has would only add to them. A test checks that the
-// list has the flags of the languages (src/i18n/language-flags.spec.ts). The
-// package's license is among the app's files as well
-// (public/licenses/flag-icons).
-@use 'flag-icons/sass/flag-icons' with (
-  $flag-icons-use-square: false,
-  $flag-icons-included-countries: (
-    'arab', 'bg', 'br', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'es-ct', 'es-ga',
-    'es-pv', 'fi', 'fr', 'gr', 'hr', 'hu', 'id', 'il', 'in', 'it', 'jp', 'kr',
-    'lt', 'lv', 'my', 'nl', 'no', 'pl', 'pt', 'ro', 'rs', 'ru', 'se', 'si',
-    'sk', 'th', 'tr', 'tw', 'ua', 'us', 'vn'
-  )
-);
-
 $row-height: 32px;
 $scrollbar-width: 12px;
 $border: 1px solid #7f7f7f;
@@ -170,17 +152,6 @@ $search-icon-gap: 8px; // Between the icon and the field's edge, and its text.
     outline-color: white;
     outline-offset: -4px;
   }
-}
-
-// The flag beside a name, as high as its capital letters, with a thin line
-// around it that keeps the white of a flag apart from the white of the box.
-.flag {
-  width: 20px;
-  height: 15px;
-  margin-inline-end: 8px;
-  vertical-align: -2px;
-  line-height: 15px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 // Said in the box, in the place of the entries, when the search finds none.

@@ -55,21 +55,6 @@ describe('the list', () => {
     ]);
   });
 
-  it("shows the flag of each language before its name, and that of the browser's language before its entry", () => {
-    renderList();
-    const flags = options().map((element) => element.firstElementChild as HTMLElement);
-
-    // The classes of the flag-icons package: a flag, and which one.
-    expect(flags.map((flag) => flag.className.split(' ').filter((name) => name.startsWith('fi')))).toEqual([
-      ['fi', 'fi-us'],
-      ...languages.map((language) => ['fi', `fi-${language.flag}`]),
-    ]);
-    // Not read aloud, and without a text of its own: the name alone is the entry's.
-    expect(flags.every((flag) => flag.getAttribute('aria-hidden') === 'true')).toBe(true);
-    expect(flags.every((flag) => flag.textContent === '')).toBe(true);
-    expect(screen.getByRole('option', { name: '日本語' })).toBeTruthy();
-  });
-
   it('is a list box named Language, of which the chosen setting is the one entry chosen', () => {
     const { rerender, onChoose } = renderList('auto');
     expect(screen.getByRole('listbox', { name: 'Language' })).toBeTruthy();

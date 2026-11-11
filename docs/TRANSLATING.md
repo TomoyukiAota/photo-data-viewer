@@ -46,7 +46,6 @@ finds the texts by them.
      code: 'de',
      englishName: 'German',
      name: 'Deutsch',
-     flag: 'de',
      direction: 'ltr',
      load: () => load(import('../locales/de.json'), import('dayjs/locale/de')),
    },
@@ -58,15 +57,6 @@ finds the texts by them.
      Language page lists the first. Its search finds the language by either,
      by its code, and by its name in the language the page is shown in, which
      the browser knows.
-   - `flag` is the flag shown beside the name in the list, by its name in
-     [flag-icons](https://flagicons.lipis.dev): the code of the language's
-     country in lower case, which
-     `new Intl.Locale('<code>').maximize().region` gives in a browser's
-     console. A language of a region that has a flag of its own has that flag,
-     as Catalan has Catalonia's (`es-ct`). Add the name to
-     `$flag-icons-included-countries` in
-     `src/components/language/LanguageList.module.scss` too, so that the app
-     has the flag; a test checks it.
    - `direction` is `rtl` for a language written from right to left, as Arabic
      and Hebrew are, and `ltr` for any other.
    - `load` names your file and the language's dayjs locale, which has the days
@@ -116,9 +106,6 @@ reviews the pull request:
 - Every file is listed in `src/i18n/languages.ts` with a name in the language
   and in English, and what a language loads there is its own file and a dayjs
   locale that exists. The list is in the order of the names.
-- A language's flag is that of its country, and the list's styles include it.
-  This is checked by a test of its own, `src/i18n/language-flags.spec.ts`,
-  which `npm test -- language-flags` runs.
 
 To run it on your computer, set the repository up as
 [CONTRIBUTING.md](./CONTRIBUTING.md) says, then:

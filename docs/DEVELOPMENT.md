@@ -51,18 +51,6 @@ After dependency changes, check that a clean `npm ci` prints no other
 [deprecation warnings record](./tasks/20261106_deprecation-warnings/STATUS.md)
 describes the check and the alternatives that were evaluated.
 
-### The flags of the Language page
-
-The flags beside the languages' names come from the
-[flag-icons](https://github.com/lipis/flag-icons) package, a development
-dependency, used as its README says: the styles of the list
-(`src/components/language/LanguageList.module.scss`) name the flags to include,
-and the build puts those among the app's files, for the Language page alone.
-The package's license asks to be passed on with its work, so a copy of it is
-served with the app, `public/licenses/flag-icons/LICENSE`. When the package is
-updated, a test (`src/i18n/language-flags.spec.ts`) tells if that copy is no
-longer the package's text.
-
 ## Verification
 
 End-to-end tests live in [`tests/e2e`](../tests/e2e). Both Playwright configuration

@@ -28,8 +28,7 @@ maintainer's to do.
   `docs/TRANSLATING.md` says so for each.
 - **A Language page** (`/language`), which the menu opens, with the list
   (`src/components/language/`). The Settings page no longer has a Language
-  section. Each entry of the list has the flag of its language before its
-  name.
+  section.
 - **Each language is fetched when it is first shown** (`src/i18n/i18n.ts`):
   English is part of the app, and a visitor downloads one other language, not
   41.
@@ -100,42 +99,19 @@ second look.
   macOS.** Firefox takes the colors and shows its scrollbar when the system
   does; Safari on iOS takes neither. No browser lets a page do more.
 
-### The flags
+### No flags
 
 The maintainer asked for a flag beside each language in the lists of both
-applications, after the list was built. This app has them as Photo Location
-Map does.
+applications, and this app had them for a short while, from the flag-icons
+package. The maintainer then decided against them, and they were taken out of
+both applications:
 
-- **The flags are those of the flag-icons package**, 7.6.0, a development
-  dependency, used as its README says: the list's styles name the flags to
-  include, in their rectangular shape, and the build puts those 42 among the
-  app's files.
-- **A language has the flag of the country that Unicode gives it as its
-  likeliest** (`new Intl.Locale(code).maximize().region`): the United States
-  for English, Brazil and Portugal for the two kinds of Portuguese, China and
-  Taiwan for the two of Chinese. Four have a flag of their own: Catalan,
-  Basque and Galician that of their region, and Arabic that of the Arab
-  League. The flag is a field of the language (`src/i18n/languages.ts`), and a
-  test holds it to the rule.
-- **The entry that follows the browser has the flag of the language that it
-  stands for**, as its text names that language.
-- **A flag is before its name**, where the line starts, so at the right in
-  Arabic and Hebrew: 20 by 15 pixels, 8 pixels from the name, with a thin line
-  around it that keeps the white of a flag apart from the white of the box.
-  It is not read aloud, as the name says what the entry is.
-- **The flags are files that the Language page fetches when it opens**, and no
-  other page: 90.8 kB in all with Brotli, of which Serbia's is 41.4 kB and 37
-  of the 42 are 14.1 kB together. They are not fetched as each comes into
-  view, which the package's way of drawing them, as backgrounds, does not
-  allow.
-- **The package's license is served with the app**
-  (`public/licenses/flag-icons/LICENSE`), as it asks to be passed on with the
-  flags. It is a copy in this repository, where Photo Location Map's build
-  copies the file: Next.js serves what is in `public`, and has no step that
-  copies a file there. A test tells when the copy is no longer the package's
-  text.
-- **This app has no menu to choose the language from** besides the list: the
-  select of the Settings page went when the Language page came.
+- **A flag stands for a country, not for a language.** English is the language
+  of many countries, so is Arabic, and a country has more than one language.
+  Any one flag for a language leaves someone out, which is why lists of
+  languages are usually without flags.
+- **The list is read by the languages' names**, each in its own language,
+  which is what a reader looks for.
 
 ### The languages
 
