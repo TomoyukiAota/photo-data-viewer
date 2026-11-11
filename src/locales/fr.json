@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Format de la date et de l’heure",
       "dateFormat": "Format de la date",
-      "clockSystem": "12 ou 24 heures",
+      "clockSystem": "Format 12 ou 24 heures",
       "clock12": "12 heures",
       "clock24": "24 heures",
       "example": "Exemple"
@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Cette application lit les données EXIF de votre fichier dans votre navigateur\u00a0; <br/>le fichier reste donc dans votre navigateur et n’est envoyé à aucun serveur.",
-    "usageData": "Pour améliorer cette application, des informations d’utilisation sont collectées, <br/>comme les pages ouvertes, le format de fichier de la photo chargée et les <br/>erreurs survenues, ainsi que votre adresse IP et la localisation approximative <br/>qui en est déduite. Vous pouvez désactiver cela dans les <settingsLink>Paramètres</settingsLink>.",
+    "usageData": "Pour améliorer cette application, des données d’utilisation sont collectées, <br/>comme les pages ouvertes, le format de fichier de la photo chargée et les <br/>erreurs survenues, ainsi que votre adresse IP et la localisation approximative <br/>qui en est déduite. Vous pouvez désactiver cela dans les <settingsLink>Paramètres</settingsLink>.",
     "reportIssues": "Si vous trouvez des bogues ou des problèmes, signalez-les dans <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Le code source de cette application est hébergé sur <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Les traductions dans d’autres langues sont les bienvenues\u00a0: voir <guideLink>comment traduire cette application</guideLink>.",

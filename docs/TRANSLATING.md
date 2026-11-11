@@ -115,11 +115,23 @@ npm test -- locales
 ```
 
 This check is the only one that covers every language. The tests that open the
-app in a browser stay with English, Japanese and Arabic, so that they do not
-take longer with every language.
+app in a browser stay with English, Japanese, Arabic and Polish, so that they
+do not take longer with every language.
 
 ## Writing the texts
 
+- **A natural and accurate translation comes before the layout.** Write what
+  a speaker of your language would write: the words that widely used software
+  has for the same thing in your language (Windows, macOS, a photo
+  application), in a way that fits this application, which shows the EXIF
+  data of a photo in a browser, on phones too, to anyone who has photos. Do
+  not shorten a text, abbreviate a word or choose a less usual word for the
+  room that it has. The layout is the same in every language and is made to
+  hold for long words and long sentences: a sentence continues on the next
+  line, and a field, a button or a column is as large as its text needs.
+  Where a text is cut, runs out of its box or covers something, that is a bug
+  of the layout: say so in the pull request, or open an issue, and leave the
+  text as it should be.
 - Names stay as they are: Photo Data Viewer, Photo Location Map, EXIF, GitHub,
   exifr.
 - Google's products are written as Google names them in your language, with
@@ -147,19 +159,22 @@ take longer with every language.
   English name is read in its own order.
 - For the words that every application has (Settings, Search, Close, Reload),
   use the words that Windows and macOS use in your language.
-- Texts in the table of the Home page are shown in a column 130 pixels wide
-  on phones ("File Name", "Width x Height", "Date Taken", ...). A name that is
-  wider continues on a second line, between two words. A single long word is
-  broken wherever the column ends, unless you mark where it may be broken with
-  a soft hyphen, written `\u00ad`: `Aufnahme\u00addatum`.
-- `photoData.general.latitude` and `photoData.general.longitude` are one row of
-  the table, on two lines beside the two numbers. Keep each to one line of that
-  column, with an abbreviation if your language needs one
-  (`Szer. geogr.`), so that each name stays beside its number.
-- `settings.dateTime.clockSystem` is the label of a narrow field, and is cut
-  after about 14 letters: `12/24 Stunden` rather than `12 oder 24 Stunden`.
-- The tabs scroll when their labels are wider than the window, so a label need
-  not be shortened for them.
+- The names in the table of the Home page ("File Name", "Width x Height",
+  "Date Taken", "Latitude", "Longitude") are in a column that is narrow on a
+  phone. Write them out in full all the same: a name continues on the next
+  line between two words, and each of the latitude and the longitude stays
+  beside its number. A single word wider than the column is divided as your
+  language divides its words, where the browser knows how. Where you know a
+  better place, you may mark it with a soft hyphen, written `\u00ad`
+  (`Aufnahme\u00addatum`); you need not.
+- `settings.dateTime.clockSystem` is the name of the field that chooses
+  between a clock of 12 hours and one of 24, and `clock12` and `clock24` are
+  its two choices. Name them as the settings of phones and computers do in
+  your language, not as a number of hours, which reads as a length of time:
+  `12- oder 24-Stunden-Format` with `12-Stunden-Format` and
+  `24-Stunden-Format` in German. The field is as wide as its name and its
+  choices need.
+- The tabs scroll when their labels are wider than the window.
 - The days of the week and AM/PM in dates come from dayjs' locale, not from
   the file. The digits of a date are 0 to 9 in every language, as its other
   numbers are. One value in the file is not a text but a dayjs pattern:
@@ -216,8 +231,8 @@ language does not have.
 
 The languages are those that Windows and macOS are localized in, in the order
 of the list on the Language page. "Machine translation" means that the texts
-were written by a machine and that no speaker of the language has reviewed
-them yet.
+were written by a machine, which also read them through again, and that no
+speaker of the language has reviewed them yet.
 
 | Name in the language   | Code      | Language              | Status                                |
 | ---------------------- | --------- | --------------------- | ------------------------------------- |

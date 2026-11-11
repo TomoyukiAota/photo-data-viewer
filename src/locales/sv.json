@@ -53,8 +53,8 @@
     "general": {
       "fileName": "Filnamn",
       "fileSize": "Filstorlek",
-      "widthHeight": "Bredd × Höjd",
-      "dateTaken": "Fotodatum",
+      "widthHeight": "Bredd × höjd",
+      "dateTaken": "Fotograferings\u00addatum",
       "latitude": "Latitud",
       "longitude": "Longitud",
       "dimensions": "{{width}} × {{height}}",
@@ -86,15 +86,15 @@
     "dateTime": {
       "title": "Datum- och tidsformat",
       "dateFormat": "Datumformat",
-      "clockSystem": "12/24 timmar",
-      "clock12": "12 timmar",
-      "clock24": "24 timmar",
+      "clockSystem": "12- eller 24-timmarsklocka",
+      "clock12": "12-timmarsklocka",
+      "clock24": "24-timmarsklocka",
       "example": "Exempel"
     },
     "usageData": {
       "title": "Användningsdata",
       "send": "Skicka användningsdata för att förbättra den här appen",
-      "note": "Vad som skickas beskrivs på sidan Om."
+      "note": "Vad som skickas beskrivs på sidan ”Om”."
     }
   },
   "language": {

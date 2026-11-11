@@ -34,7 +34,7 @@
   },
   "map": {
     "loading": "Harita yükleniyor",
-    "locationNotAvailable": "Konum verileri (enlem ve boylam) kullanılamıyor.",
+    "locationNotAvailable": "Konum verileri (enlem ve boylam) mevcut değil.",
     "cannotBeShown": "Harita gösterilemiyor."
   },
   "photoData": {
@@ -48,7 +48,7 @@
       "value": "Değer"
     },
     "noData": "Veri yok",
-    "notAvailable": "Kullanılamıyor",
+    "notAvailable": "Yok",
     "loading": "Yükleniyor...",
     "general": {
       "fileName": "Dosya adı",
@@ -58,8 +58,8 @@
       "latitude": "Enlem",
       "longitude": "Boylam",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Google Haritalar'da göster",
-      "showInGoogleStreetView": "Google Street View'da göster",
+      "showInGoogleMaps": "Google Haritalar’da göster",
+      "showInGoogleStreetView": "Google Street View’da göster",
       "iosNote": "iOS kullanıcıları için: iOS bazı durumlarda bazı EXIF verilerini (ör. enlem ve boylam) kaldırır. Ayrıntılar için lütfen <pageLink>bu sayfayı</pageLink> okuyun."
     },
     "rawData": {
@@ -68,7 +68,7 @@
   },
   "unsupportedFileDialog": {
     "title": "Desteklenmeyen dosya biçimi",
-    "message": "EXIF verileri kullanılamıyor.",
+    "message": "EXIF verileri mevcut değil.",
     "close": "Kapat"
   },
   "pageNotShown": {
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Tarih ve saat biçimi",
       "dateFormat": "Tarih biçimi",
-      "clockSystem": "12 veya 24 saat",
+      "clockSystem": "12 veya 24 saat biçimi",
       "clock12": "12 saat",
       "clock24": "24 saat",
       "example": "Örnek"

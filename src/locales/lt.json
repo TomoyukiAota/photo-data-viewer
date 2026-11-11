@@ -6,13 +6,13 @@
     "demo": "Demonstracija",
     "settings": "Nustatymai",
     "language": "Kalba (Language)",
-    "about": "Apie"
+    "about": "Apie programą"
   },
   "pageTitle": {
     "demo": "Demonstracija - {{appName}}",
     "settings": "Nustatymai - {{appName}}",
     "language": "Kalba - {{appName}}",
-    "about": "Apie - {{appName}}"
+    "about": "Apie programą - {{appName}}"
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -40,7 +40,7 @@
   "photoData": {
     "tabs": {
       "general": "Bendra",
-      "details": "Išsamiau",
+      "details": "Išsami informacija",
       "rawData": "Neapdoroti duomenys"
     },
     "columns": {
@@ -53,13 +53,13 @@
     "general": {
       "fileName": "Failo pavadinimas",
       "fileSize": "Failo dydis",
-      "widthHeight": "Plotis × Aukštis",
+      "widthHeight": "Plotis × aukštis",
       "dateTaken": "Fotografavimo data",
       "latitude": "Platuma",
       "longitude": "Ilguma",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Rodyti „Google Maps“",
-      "showInGoogleStreetView": "Rodyti „Google Street View“",
+      "showInGoogleMaps": "Rodyti „Google“ žemėlapiuose",
+      "showInGoogleStreetView": "Rodyti naudojant „Google Street View“",
       "iosNote": "„iOS“ naudotojams: kai kuriais atvejais „iOS“ pašalina dalį EXIF duomenų (pvz., platumą ir ilgumą). Daugiau informacijos rasite <pageLink>šiame puslapyje</pageLink>."
     },
     "rawData": {
@@ -82,19 +82,19 @@
   },
   "settings": {
     "title": "Nustatymai",
-    "savedInBrowser": "Nustatymai išsaugomi jūsų naršyklėje.",
+    "savedInBrowser": "Nustatymai įrašomi jūsų naršyklėje.",
     "dateTime": {
       "title": "Datos ir laiko formatas",
       "dateFormat": "Datos formatas",
-      "clockSystem": "12 arba 24 val.",
+      "clockSystem": "12 arba 24 valandų formatas",
       "clock12": "12 valandų",
-      "clock24": "24 valandos",
+      "clock24": "24 valandų",
       "example": "Pavyzdys"
     },
     "usageData": {
       "title": "Naudojimo duomenys",
       "send": "Siųsti naudojimo duomenis, kad ši programa būtų tobulinama",
-      "note": "Kas siunčiama, aprašyta puslapyje „Apie“."
+      "note": "Kas siunčiama, aprašyta puslapyje „Apie programą“."
     }
   },
   "language": {
@@ -107,9 +107,9 @@
   "about": {
     "keptInBrowser": "Ši programa EXIF duomenis iš jūsų failo nuskaito jūsų naršyklėje, <br/>todėl failas lieka naršyklėje ir nėra siunčiamas į jokius serverius.",
     "usageData": "Siekiant tobulinti šią programą, renkama naudojimo informacija, pavyzdžiui, <br/>kurie puslapiai atidaromi, kokio failo formato nuotrauka įkelta ir kokios <br/>klaidos įvyko, kartu su jūsų IP adresu ir pagal jį nustatyta apytiksle <br/>vieta. Tai galite išjungti puslapyje <settingsLink>Nustatymai</settingsLink>.",
-    "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas <issuesLink>„GitHub Issues“</issuesLink>.",
-    "sourceCode": "Šios programos išeitinis kodas laikomas <gitHubLink>„GitHub“</gitHubLink>.",
-    "translations": "Vertimai į kitas kalbas yra laukiami: žr., <guideLink>kaip išversti šią programą</guideLink>.",
+    "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas puslapyje <issuesLink>„GitHub Issues“</issuesLink>.",
+    "sourceCode": "Šios programos pirminis tekstas laikomas platformoje <gitHubLink>„GitHub“</gitHubLink>.",
+    "translations": "Vertimai į kitas kalbas yra laukiami: skaitykite, <guideLink>kaip išversti šią programą</guideLink>.",
     "developedBy": "Šią programą kuria Tomoyuki Aota.",
     "xProfile": {
       "alt": "„X“ (anksčiau „Twitter“) profilis",
@@ -119,6 +119,6 @@
       "alt": "„GitHub“ profilis",
       "title": "Atidaryti „GitHub“ profilį"
     },
-    "photoLocationMap": "Norite žemėlapyje iš karto matyti daugelio nuotraukų vietas?<br/> Tam skirta <plmLink>Photo Location Map</plmLink>."
+    "photoLocationMap": "Ar norite žemėlapyje iš karto matyti daugelio nuotraukų vietas?<br/> Tam skirta programa <plmLink>„Photo Location Map“</plmLink>."
   }
 }

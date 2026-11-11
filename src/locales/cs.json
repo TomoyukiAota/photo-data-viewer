@@ -1,6 +1,6 @@
 {
   "menu": {
-    "buttonLabel": "nabídka",
+    "buttonLabel": "menu",
     "label": "MENU",
     "home": "Domů",
     "demo": "Ukázka",
@@ -53,10 +53,10 @@
     "general": {
       "fileName": "Název souboru",
       "fileSize": "Velikost souboru",
-      "widthHeight": "Šířka × Výška",
+      "widthHeight": "Šířka × výška",
       "dateTaken": "Datum pořízení",
-      "latitude": "Zeměp. šířka",
-      "longitude": "Zeměp. délka",
+      "latitude": "Zeměpisná šířka",
+      "longitude": "Zeměpisná délka",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Zobrazit v Mapách Google",
       "showInGoogleStreetView": "Zobrazit v Google Street View",
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Formát data a času",
       "dateFormat": "Formát data",
-      "clockSystem": "12/24 hodin",
-      "clock12": "12 hodin",
-      "clock24": "24 hodin",
+      "clockSystem": "12hodinový nebo 24hodinový formát",
+      "clock12": "12hodinový",
+      "clock24": "24hodinový",
       "example": "Příklad"
     },
     "usageData": {
@@ -106,10 +106,10 @@
   },
   "about": {
     "keptInBrowser": "Tato aplikace načítá data EXIF z vašeho souboru přímo ve vašem prohlížeči, <br/>takže soubor zůstává v prohlížeči a neodesílá se na žádný server.",
-    "usageData": "Kvůli vylepšování aplikace se shromažďují informace o jejím používání, například <br/>které stránky se otevírají, jaký formát souboru má načtená fotka a k jakým <br/>chybám došlo, spolu s vaší IP adresou a přibližnou polohou, která je z ní <br/>odvozena. Můžete to vypnout v <settingsLink>Nastavení</settingsLink>.",
+    "usageData": "Kvůli vylepšování aplikace se shromažďují údaje o jejím používání, například <br/>které stránky se otevírají, jaký formát souboru má načtená fotka a k jakým <br/>chybám došlo, spolu s vaší IP adresou a přibližnou polohou, která je z ní <br/>odvozena. Můžete to vypnout v <settingsLink>Nastavení</settingsLink>.",
     "reportIssues": "Pokud narazíte na chyby nebo problémy, nahlaste je prosím v <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Zdrojový kód této aplikace je umístěn na <gitHubLink>GitHubu</gitHubLink>.",
-    "translations": "Překlady do dalších jazyků jsou vítány: viz <guideLink>jak tuto aplikaci přeložit</guideLink>.",
+    "translations": "Překlady do dalších jazyků jsou vítány. Přečtěte si, <guideLink>jak tuto aplikaci přeložit</guideLink>.",
     "developedBy": "Tuto aplikaci vyvíjí Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil na síti X (dříve Twitter)",

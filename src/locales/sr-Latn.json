@@ -53,10 +53,10 @@
     "general": {
       "fileName": "Naziv datoteke",
       "fileSize": "Veličina datoteke",
-      "widthHeight": "Širina × Visina",
+      "widthHeight": "Širina × visina",
       "dateTaken": "Datum snimanja",
-      "latitude": "Geogr. širina",
-      "longitude": "Geogr. dužina",
+      "latitude": "Geografska širina",
+      "longitude": "Geografska dužina",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Prikaži u Google mapama",
       "showInGoogleStreetView": "Prikaži u Google Street View",
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Format datuma i vremena",
       "dateFormat": "Format datuma",
-      "clockSystem": "12 ili 24 sata",
-      "clock12": "12 sati",
-      "clock24": "24 sata",
+      "clockSystem": "12-časovni ili 24-časovni format",
+      "clock12": "12-časovni",
+      "clock24": "24-časovni",
       "example": "Primer"
     },
     "usageData": {
@@ -119,6 +119,6 @@
       "alt": "Profil na GitHub-u",
       "title": "Otvori profil na GitHub-u"
     },
-    "photoLocationMap": "Želite da na mapi vidite lokacije mnogo fotografija odjednom?<br/> Za to je dostupan <plmLink>Photo Location Map</plmLink>."
+    "photoLocationMap": "Želite li da na mapi vidite lokacije mnogih fotografija odjednom?<br/> Za to je dostupan <plmLink>Photo Location Map</plmLink>."
   }
 }

@@ -53,7 +53,7 @@
     "general": {
       "fileName": "Filnavn",
       "fileSize": "Filstørrelse",
-      "widthHeight": "Bredde × Høyde",
+      "widthHeight": "Bredde × høyde",
       "dateTaken": "Opptaksdato",
       "latitude": "Breddegrad",
       "longitude": "Lengdegrad",
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Dato- og tidsformat",
       "dateFormat": "Datoformat",
-      "clockSystem": "12/24 timer",
-      "clock12": "12 timer",
-      "clock24": "24 timer",
+      "clockSystem": "12- eller 24-timersklokke",
+      "clock12": "12-timersklokke",
+      "clock24": "24-timersklokke",
       "example": "Eksempel"
     },
     "usageData": {
@@ -110,7 +110,7 @@
     "reportIssues": "Hvis du finner feil eller problemer, kan du melde dem i <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kildekoden til denne appen ligger på <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Oversettelser til andre språk er velkomne: se <guideLink>hvordan du oversetter denne appen</guideLink>.",
-    "developedBy": "Denne appen er utviklet av Tomoyuki Aota.",
+    "developedBy": "Denne appen utvikles av Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil på X (tidligere Twitter)",
       "title": "Åpne profilen på X (tidligere Twitter)"
@@ -119,6 +119,6 @@
       "alt": "GitHub-profil",
       "title": "Åpne GitHub-profilen"
     },
-    "photoLocationMap": "Vil du se på et kart hvor mange bilder er tatt, på én gang?<br/> <plmLink>Photo Location Map</plmLink> er laget for det."
+    "photoLocationMap": "Vil du se stedene for mange bilder på et kart på én gang?<br/> <plmLink>Photo Location Map</plmLink> er laget for det."
   }
 }

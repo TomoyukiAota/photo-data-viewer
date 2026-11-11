@@ -53,7 +53,7 @@
     "general": {
       "fileName": "Bestandsnaam",
       "fileSize": "Bestands\u00adgrootte",
-      "widthHeight": "Breedte × Hoogte",
+      "widthHeight": "Breedte × hoogte",
       "dateTaken": "Opnamedatum",
       "latitude": "Breedtegraad",
       "longitude": "Lengtegraad",
@@ -82,19 +82,19 @@
   },
   "settings": {
     "title": "Instellingen",
-    "savedInBrowser": "De instellingen worden in je browser opgeslagen.",
+    "savedInBrowser": "De instellingen worden in je browser bewaard.",
     "dateTime": {
       "title": "Datum- en tijdnotatie",
       "dateFormat": "Datumnotatie",
-      "clockSystem": "12 of 24 uur",
-      "clock12": "12 uur",
-      "clock24": "24 uur",
+      "clockSystem": "12- of 24-uursnotatie",
+      "clock12": "12-uursnotatie",
+      "clock24": "24-uursnotatie",
       "example": "Voorbeeld"
     },
     "usageData": {
       "title": "Gebruiksgegevens",
       "send": "Verstuur gebruiksgegevens om deze app te verbeteren",
-      "note": "Wat er wordt verzonden, staat beschreven op de pagina Over."
+      "note": "Wat er wordt verzonden, staat beschreven op de pagina ‘Over’."
     }
   },
   "language": {
@@ -106,11 +106,11 @@
   },
   "about": {
     "keptInBrowser": "Deze app haalt de EXIF-gegevens uit je bestand binnen je browser, <br/>dus het bestand blijft in je browser en wordt niet naar een server verzonden.",
-    "usageData": "Om deze app te verbeteren, wordt gebruiksinformatie verzameld, zoals <br/>welke pagina's worden geopend, welke bestandsindeling de geladen foto heeft en welke <br/>fouten optreden, samen met je IP-adres en de geschatte locatie <br/>die daarvan is afgeleid. Je kunt dit uitschakelen in <settingsLink>Instellingen</settingsLink>.",
+    "usageData": "Om deze app te verbeteren, worden gebruiksgegevens verzameld, zoals <br/>welke pagina’s worden geopend, welke bestandsindeling de geladen foto heeft en welke <br/>fouten optreden, samen met je IP-adres en de geschatte locatie <br/>die daarvan is afgeleid. Je kunt dit uitschakelen in <settingsLink>Instellingen</settingsLink>.",
     "reportIssues": "Als je bugs of problemen vindt, meld ze dan in <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "De broncode van deze app staat op <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Vertalingen in andere talen zijn welkom: zie <guideLink>hoe je deze app vertaalt</guideLink>.",
-    "developedBy": "Deze app is ontwikkeld door Tomoyuki Aota.",
+    "developedBy": "Deze app wordt ontwikkeld door Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profiel op X (voorheen Twitter)",
       "title": "Open het profiel op X (voorheen Twitter)"
@@ -119,6 +119,6 @@
       "alt": "GitHub-profiel",
       "title": "Open het GitHub-profiel"
     },
-    "photoLocationMap": "Wil je de locaties van veel foto's tegelijk op een kaart zien?<br/> Daarvoor is <plmLink>Photo Location Map</plmLink> beschikbaar."
+    "photoLocationMap": "Wil je de locaties van veel foto’s tegelijk op een kaart zien?<br/> Daarvoor is <plmLink>Photo Location Map</plmLink> beschikbaar."
   }
 }

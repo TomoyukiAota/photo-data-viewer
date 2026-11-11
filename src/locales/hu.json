@@ -53,13 +53,13 @@
     "general": {
       "fileName": "Fájlnév",
       "fileSize": "Fájlméret",
-      "widthHeight": "Szélesség × Magasság",
+      "widthHeight": "Szélesség × magasság",
       "dateTaken": "Készítés dátuma",
-      "latitude": "Földr. szél.",
-      "longitude": "Földr. hossz.",
+      "latitude": "Földrajzi szélesség",
+      "longitude": "Földrajzi hosszúság",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "Megjelenítés a Google Térképben",
-      "showInGoogleStreetView": "Megjelenítés a Google Street View-ban",
+      "showInGoogleMaps": "Megjelenítés a Google Térképen",
+      "showInGoogleStreetView": "Megjelenítés a Google Utcaképben",
       "iosNote": "iOS-felhasználóknak: az iOS bizonyos esetekben eltávolít egyes EXIF-adatokat (pl. a földrajzi szélességet és hosszúságot). A részletekért olvassa el <pageLink>ezt az oldalt</pageLink>."
     },
     "rawData": {
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Dátum- és időformátum",
       "dateFormat": "Dátumformátum",
-      "clockSystem": "12 vagy 24 órás",
-      "clock12": "12 órás",
-      "clock24": "24 órás",
+      "clockSystem": "12 vagy 24 órás formátum",
+      "clock12": "12 órás formátum",
+      "clock24": "24 órás formátum",
       "example": "Példa"
     },
     "usageData": {
@@ -105,8 +105,8 @@
     "loadFailed": "A nyelvet nem sikerült betölteni. Ellenőrizze a kapcsolatot, majd próbálja újra."
   },
   "about": {
-    "keptInBrowser": "Ez az alkalmazás a böngészőjén belül olvassa ki az EXIF-adatokat a fájljából, <br/>így a fájl a böngészőjében marad, és nem kerül elküldésre semmilyen szerverre.",
-    "usageData": "Az alkalmazás fejlesztése érdekében használati információkat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fotó és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
+    "keptInBrowser": "Ez az alkalmazás a böngészőjén belül olvassa ki az EXIF-adatokat a fájljából, <br/>így a fájl a böngészőjében marad, és semmilyen szerverre nem küldjük el.",
+    "usageData": "Az alkalmazás fejlesztése érdekében használati adatokat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fotó és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
     "reportIssues": "Ha hibát vagy problémát talál, kérjük, jelezze a <issuesLink>GitHub Issues</issuesLink> oldalon.",
     "sourceCode": "Az alkalmazás forráskódja a <gitHubLink>GitHubon</gitHubLink> érhető el.",
     "translations": "Szívesen fogadjuk a más nyelvekre készült fordításokat: lásd <guideLink>az alkalmazás fordításának módját</guideLink>.",

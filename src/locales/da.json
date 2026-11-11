@@ -53,7 +53,7 @@
     "general": {
       "fileName": "Filnavn",
       "fileSize": "Filstørrelse",
-      "widthHeight": "Bredde × Højde",
+      "widthHeight": "Bredde × højde",
       "dateTaken": "Optagelses\u00addato",
       "latitude": "Breddegrad",
       "longitude": "Længdegrad",
@@ -86,15 +86,15 @@
     "dateTime": {
       "title": "Dato- og tidsformat",
       "dateFormat": "Datoformat",
-      "clockSystem": "12/24 timer",
-      "clock12": "12 timer",
-      "clock24": "24 timer",
+      "clockSystem": "12- eller 24-timers ur",
+      "clock12": "12-timers ur",
+      "clock24": "24-timers ur",
       "example": "Eksempel"
     },
     "usageData": {
       "title": "Brugsdata",
       "send": "Send brugsdata for at forbedre denne app",
-      "note": "Hvad der sendes, er beskrevet på siden Om."
+      "note": "Hvad der sendes, er beskrevet på siden “Om”."
     }
   },
   "language": {
@@ -106,11 +106,11 @@
   },
   "about": {
     "keptInBrowser": "Denne app henter EXIF-oplysninger fra din fil i din browser, <br/>så filen bliver i din browser og sendes ikke til nogen servere.",
-    "usageData": "For at forbedre denne app indsamles der oplysninger om brugen, f.eks. <br/>hvilke sider der åbnes, hvilket filformat det indlæste billede har, og hvilke <br/>fejl der opstår, sammen med din IP-adresse og den omtrentlige <br/>placering, der udledes af den. Du kan slå dette fra i <settingsLink>Indstillinger</settingsLink>.",
+    "usageData": "For at forbedre denne app indsamles der brugsoplysninger, f.eks. <br/>hvilke sider der åbnes, hvilket filformat det indlæste billede har, og hvilke <br/>fejl der opstår, sammen med din IP-adresse og den omtrentlige <br/>placering, der udledes af den. Du kan slå dette fra i <settingsLink>Indstillinger</settingsLink>.",
     "reportIssues": "Hvis du finder fejl eller problemer, bedes du indberette dem i <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kildekoden til denne app ligger på <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Oversættelser til andre sprog er velkomne: se <guideLink>hvordan du oversætter denne app</guideLink>.",
-    "developedBy": "Denne app er udviklet af Tomoyuki Aota.",
+    "developedBy": "Denne app udvikles af Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil på X (tidligere Twitter)",
       "title": "Åbn profilen på X (tidligere Twitter)"
@@ -119,6 +119,6 @@
       "alt": "GitHub-profil",
       "title": "Åbn GitHub-profilen"
     },
-    "photoLocationMap": "Vil du se på et kort, hvor mange billeder er taget, på én gang?<br/> <plmLink>Photo Location Map</plmLink> er lavet til det formål."
+    "photoLocationMap": "Vil du se stederne for mange billeder på et kort på én gang?<br/> <plmLink>Photo Location Map</plmLink> er lavet til det formål."
   }
 }

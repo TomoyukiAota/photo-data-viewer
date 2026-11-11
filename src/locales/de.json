@@ -18,7 +18,7 @@
     "weekdayPattern": "ddd"
   },
   "home": {
-    "selectYourPhoto": "Foto auswählen, um die EXIF-Daten anzuzeigen.",
+    "selectYourPhoto": "Wählen Sie ein Foto aus, um die EXIF-Daten anzuzeigen.",
     "selectPhoto": "Foto auswählen",
     "tabs": {
       "data": "Daten",
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Datums- und Uhrzeitformat",
       "dateFormat": "Datumsformat",
-      "clockSystem": "12/24 Stunden",
-      "clock12": "12 Stunden",
-      "clock24": "24 Stunden",
+      "clockSystem": "12- oder 24-Stunden-Format",
+      "clock12": "12-Stunden-Format",
+      "clock24": "24-Stunden-Format",
       "example": "Beispiel"
     },
     "usageData": {
@@ -99,14 +99,14 @@
   },
   "language": {
     "title": "Sprache",
-    "useBrowserSetting": "Einstellung des Browsers verwenden ({{language}})",
+    "useBrowserSetting": "Browsereinstellung verwenden ({{language}})",
     "search": "Suchen",
     "noLanguagesFound": "Keine Sprachen gefunden",
     "loadFailed": "Die Sprache konnte nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
   },
   "about": {
     "keptInBrowser": "Diese App liest die EXIF-Daten Ihrer Datei direkt in Ihrem Browser aus. <br/>Die Datei bleibt daher in Ihrem Browser und wird an keinen Server gesendet.",
-    "usageData": "Zur Verbesserung dieser App werden Nutzungsinformationen erfasst, etwa <br/>welche Seiten geöffnet werden, welches Dateiformat das geladene Foto hat und <br/>welche Fehler auftreten, zusammen mit Ihrer IP-Adresse und dem daraus <br/>abgeleiteten ungefähren Standort. Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
+    "usageData": "Zur Verbesserung dieser App werden Nutzungsdaten erfasst, etwa <br/>welche Seiten geöffnet werden, welches Dateiformat das geladene Foto hat und <br/>welche Fehler auftreten, zusammen mit Ihrer IP-Adresse und dem daraus <br/>abgeleiteten ungefähren Standort. Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
     "reportIssues": "Wenn Sie Fehler oder Probleme finden, melden Sie diese bitte unter <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Der Quellcode dieser App ist auf <gitHubLink>GitHub</gitHubLink> verfügbar.",
     "translations": "Übersetzungen in andere Sprachen sind willkommen: siehe <guideLink>So übersetzen Sie diese App</guideLink>.",

@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Demo",
-    "description": "Setelah tombol \"Jalankan Demo\" diklik, aplikasi ini berperilaku seolah-olah <photoLink>foto ini</photoLink> dipilih.",
+    "description": "Setelah tombol “Jalankan Demo” diklik, aplikasi ini berperilaku seolah-olah <photoLink>foto ini</photoLink> dipilih.",
     "runDemo": "Jalankan Demo"
   },
   "settings": {
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Format tanggal dan waktu",
       "dateFormat": "Format tanggal",
-      "clockSystem": "12 atau 24 jam",
+      "clockSystem": "Format 12 atau 24 jam",
       "clock12": "12 jam",
       "clock24": "24 jam",
       "example": "Contoh"
@@ -108,7 +108,7 @@
     "keptInBrowser": "Aplikasi ini mengambil data EXIF dari file Anda di dalam browser Anda, <br/>sehingga file tetap berada di browser Anda dan tidak dikirim ke server mana pun.",
     "usageData": "Untuk meningkatkan aplikasi ini, informasi penggunaan dikumpulkan, seperti <br/>halaman mana yang dibuka, format file foto yang dimuat, dan kesalahan <br/>yang terjadi, beserta alamat IP Anda dan perkiraan lokasi <br/>yang diperoleh darinya. Anda dapat menonaktifkannya di <settingsLink>Pengaturan</settingsLink>.",
     "reportIssues": "Jika Anda menemukan bug atau masalah, laporkan di <issuesLink>GitHub Issues</issuesLink>.",
-    "sourceCode": "Kode sumber aplikasi ini di-hosting di <gitHubLink>GitHub</gitHubLink>.",
+    "sourceCode": "Kode sumber aplikasi ini tersedia di <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Terjemahan ke bahasa lain sangat diharapkan: lihat <guideLink>cara menerjemahkan aplikasi ini</guideLink>.",
     "developedBy": "Aplikasi ini dikembangkan oleh Tomoyuki Aota.",
     "xProfile": {

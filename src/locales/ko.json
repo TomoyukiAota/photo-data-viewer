@@ -34,7 +34,7 @@
   },
   "map": {
     "loading": "지도를 불러오는 중",
-    "locationNotAvailable": "위치 정보(위도 및 경도)를 사용할 수 없습니다.",
+    "locationNotAvailable": "위치 정보(위도 및 경도)가 없습니다.",
     "cannotBeShown": "지도를 표시할 수 없습니다."
   },
   "photoData": {
@@ -48,7 +48,7 @@
       "value": "값"
     },
     "noData": "데이터 없음",
-    "notAvailable": "사용할 수 없음",
+    "notAvailable": "없음",
     "loading": "불러오는 중...",
     "general": {
       "fileName": "파일 이름",
@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google 지도에서 보기",
       "showInGoogleStreetView": "Google 스트리트 뷰에서 보기",
-      "iosNote": "iOS 사용자의 경우, iOS가 일부 EXIF 데이터(예: 위도 및 경도)를 제거하는 경우가 있습니다. 자세한 내용은 <pageLink>이 페이지</pageLink>를 참조하세요."
+      "iosNote": "iOS에서는 일부 EXIF 데이터(예: 위도 및 경도)가 제거되는 경우가 있습니다. 자세한 내용은 <pageLink>이 페이지</pageLink>를 참조하세요."
     },
     "rawData": {
       "description": "아래는 <exifrLink>exifr</exifrLink>로 가져온 원시 데이터입니다."
@@ -68,7 +68,7 @@
   },
   "unsupportedFileDialog": {
     "title": "지원되지 않는 파일 형식",
-    "message": "EXIF 데이터를 사용할 수 없습니다.",
+    "message": "EXIF 데이터가 없습니다.",
     "close": "닫기"
   },
   "pageNotShown": {
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "데모",
-    "description": "‘데모 실행’ 버튼을 클릭하면 이 앱은 <photoLink>이 사진</photoLink>을 선택한 것처럼 동작합니다.",
+    "description": "“데모 실행” 버튼을 클릭하면 이 앱은 <photoLink>이 사진</photoLink>을 선택한 것처럼 동작합니다.",
     "runDemo": "데모 실행"
   },
   "settings": {
@@ -94,7 +94,7 @@
     "usageData": {
       "title": "사용 데이터",
       "send": "이 앱을 개선하기 위해 사용 데이터 보내기",
-      "note": "보내는 내용은 정보 페이지에 설명되어 있습니다."
+      "note": "보내는 내용은 “정보” 페이지에 설명되어 있습니다."
     }
   },
   "language": {
@@ -108,7 +108,7 @@
     "keptInBrowser": "이 앱은 브라우저 안에서 파일의 EXIF 데이터를 읽습니다. <br/>따라서 파일은 브라우저 안에만 있으며 어떤 서버로도 전송되지 않습니다.",
     "usageData": "이 앱을 개선하기 위해 열어 본 페이지, 불러온 사진의 파일 형식, 발생한 오류 등의 <br/>사용 정보를 IP 주소 및 IP 주소에서 추정한 대략적인 위치와 함께 수집합니다. <br/><settingsLink>설정</settingsLink>에서 이 기능을 끌 수 있습니다.",
     "reportIssues": "버그나 문제를 발견하면 <issuesLink>GitHub Issues</issuesLink>에 알려 주세요.",
-    "sourceCode": "이 앱의 소스 코드는 <gitHubLink>GitHub</gitHubLink>에 있습니다.",
+    "sourceCode": "이 앱의 소스 코드는 <gitHubLink>GitHub</gitHubLink>에 공개되어 있습니다.",
     "translations": "다른 언어로의 번역을 환영합니다. <guideLink>이 앱을 번역하는 방법</guideLink>을 참고하세요.",
     "developedBy": "이 앱은 Tomoyuki Aota가 개발했습니다.",
     "xProfile": {

@@ -395,9 +395,10 @@ test('the Language page lists the languages, narrows them down, and applies the 
   ).toBeFocused();
   await page.keyboard.press('Home');
   await expect(options.first()).toBeFocused();
-  await expect(options.first()).toHaveText(
-    'Einstellung des Browsers verwenden (English)',
-  );
+  // The entry that follows the browser, which names the browser's language.
+  // Its German words are not checked: they are a translation, which a review
+  // may change.
+  await expect(options.first()).toContainText('(English)');
   await page.keyboard.press('Space');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(chosen).toHaveText(['Use browser setting (English)']);

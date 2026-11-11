@@ -53,13 +53,13 @@
     "general": {
       "fileName": "Faili nimi",
       "fileSize": "Faili suurus",
-      "widthHeight": "Laius × Kõrgus",
+      "widthHeight": "Laius × kõrgus",
       "dateTaken": "Pildistamise kuupäev",
       "latitude": "Laiuskraad",
       "longitude": "Pikkuskraad",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Kuva Google Mapsis",
-      "showInGoogleStreetView": "Kuva Google Street View's",
+      "showInGoogleStreetView": "Kuva Google Street View’s",
       "iosNote": "iOS-i kasutajatele: iOS eemaldab mõnel juhul osa EXIF-andmeid (nt laius- ja pikkuskraadi). Üksikasju leiate <pageLink>sellelt lehelt</pageLink>."
     },
     "rawData": {
@@ -86,14 +86,14 @@
     "dateTime": {
       "title": "Kuupäeva ja kellaaja vorming",
       "dateFormat": "Kuupäeva vorming",
-      "clockSystem": "12 või 24 tundi",
-      "clock12": "12 tundi",
-      "clock24": "24 tundi",
+      "clockSystem": "12- või 24-tunnine vorming",
+      "clock12": "12-tunnine vorming",
+      "clock24": "24-tunnine vorming",
       "example": "Näide"
     },
     "usageData": {
       "title": "Kasutusandmed",
-      "send": "Saada kasutusandmeid, et aidata rakendust paremaks muuta",
+      "send": "Saada kasutusandmeid rakenduse täiustamiseks",
       "note": "Mida saadetakse, on kirjeldatud lehel „Teave“."
     }
   },
@@ -110,7 +110,7 @@
     "reportIssues": "Kui leiate vigu või probleeme, andke neist palun teada lehel <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Selle rakenduse lähtekood asub <gitHubLink>GitHubis</gitHubLink>.",
     "translations": "Tõlked teistesse keeltesse on teretulnud: vaadake, <guideLink>kuidas seda rakendust tõlkida</guideLink>.",
-    "developedBy": "Selle rakenduse on välja töötanud Tomoyuki Aota.",
+    "developedBy": "Seda rakendust arendab Tomoyuki Aota.",
     "xProfile": {
       "alt": "X-i (endine Twitter) profiil",
       "title": "Ava X-i (endine Twitter) profiil"

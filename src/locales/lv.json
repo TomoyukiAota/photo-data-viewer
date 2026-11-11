@@ -6,13 +6,13 @@
     "demo": "Demonstrācija",
     "settings": "Iestatījumi",
     "language": "Valoda (Language)",
-    "about": "Par"
+    "about": "Par lietotni"
   },
   "pageTitle": {
     "demo": "Demonstrācija - {{appName}}",
     "settings": "Iestatījumi - {{appName}}",
     "language": "Valoda - {{appName}}",
-    "about": "Par - {{appName}}"
+    "about": "Par lietotni - {{appName}}"
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -40,7 +40,7 @@
   "photoData": {
     "tabs": {
       "general": "Vispārīgi",
-      "details": "Detalizēti",
+      "details": "Detalizēta informācija",
       "rawData": "Neapstrādātie dati"
     },
     "columns": {
@@ -53,10 +53,10 @@
     "general": {
       "fileName": "Faila nosaukums",
       "fileSize": "Faila lielums",
-      "widthHeight": "Platums × Augstums",
+      "widthHeight": "Platums × augstums",
       "dateTaken": "Uzņemšanas datums",
-      "latitude": "Ģeogr. platums",
-      "longitude": "Ģeogr. garums",
+      "latitude": "Ģeogrāfiskais platums",
+      "longitude": "Ģeogrāfiskais garums",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Rādīt pakalpojumā Google Maps",
       "showInGoogleStreetView": "Rādīt pakalpojumā Google Street View",
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Demonstrācija",
-    "description": "Noklikšķinot uz pogas “Palaist demonstrāciju”, lietotne darbojas tā, it kā būtu atlasīts <photoLink>šis fotoattēls</photoLink>.",
+    "description": "Noklikšķinot uz pogas „Palaist demonstrāciju”, lietotne darbojas tā, it kā būtu atlasīts <photoLink>šis fotoattēls</photoLink>.",
     "runDemo": "Palaist demonstrāciju"
   },
   "settings": {
@@ -86,15 +86,15 @@
     "dateTime": {
       "title": "Datuma un laika formāts",
       "dateFormat": "Datuma formāts",
-      "clockSystem": "12 vai 24 stundas",
-      "clock12": "12 stundas",
-      "clock24": "24 stundas",
+      "clockSystem": "12 vai 24 stundu formāts",
+      "clock12": "12 stundu",
+      "clock24": "24 stundu",
       "example": "Piemērs"
     },
     "usageData": {
       "title": "Lietošanas dati",
       "send": "Sūtīt lietošanas datus, lai uzlabotu šo lietotni",
-      "note": "Tas, kas tiek sūtīts, ir aprakstīts lapā “Par”."
+      "note": "Tas, kas tiek sūtīts, ir aprakstīts lapā „Par lietotni”."
     }
   },
   "language": {
@@ -105,8 +105,8 @@
     "loadFailed": "Valodu neizdevās ielādēt. Pārbaudiet savienojumu un mēģiniet vēlreiz."
   },
   "about": {
-    "keptInBrowser": "Šī lietotne nolasa EXIF datus no jūsu faila jūsu pārlūkprogrammā, <br/>tāpēc fails paliek pārlūkprogrammā un netiek nosūtīts uz serveriem.",
-    "usageData": "Lai uzlabotu šo lietotni, tiek vākta informācija par lietošanu, piemēram, <br/>kuras lapas tiek atvērtas, kāds ir ielādētā fotoattēla faila formāts un kādas <br/>kļūdas radās, kā arī jūsu IP adrese un no tās izsecinātā aptuvenā <br/>atrašanās vieta. To varat izslēgt lapā <settingsLink>Iestatījumi</settingsLink>.",
+    "keptInBrowser": "Šī lietotne nolasa EXIF datus no jūsu faila jūsu pārlūkprogrammā, <br/>tāpēc fails paliek pārlūkprogrammā un netiek nosūtīts ne uz vienu serveri.",
+    "usageData": "Lai uzlabotu šo lietotni, tiek apkopota lietošanas informācija, piemēram, <br/>kuras lapas tiek atvērtas, kāds ir ielādētā fotoattēla faila formāts un kādas <br/>kļūdas radās, kā arī jūsu IP adrese un no tās izsecinātā aptuvenā <br/>atrašanās vieta. To varat izslēgt lapā <settingsLink>Iestatījumi</settingsLink>.",
     "reportIssues": "Ja atrodat kļūdas vai problēmas, lūdzu, ziņojiet par tām vietnē <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Šīs lietotnes pirmkods atrodas vietnē <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Tulkojumi citās valodās ir laipni gaidīti: skatiet, <guideLink>kā tulkot šo lietotni</guideLink>.",

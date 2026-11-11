@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Formato de data e hora",
       "dateFormat": "Formato da data",
-      "clockSystem": "12 ou 24 horas",
+      "clockSystem": "Formato de 12 ou 24 horas",
       "clock12": "12 horas",
       "clock24": "24 horas",
       "example": "Exemplo"
@@ -99,14 +99,14 @@
   },
   "language": {
     "title": "Idioma",
-    "useBrowserSetting": "Usar o ajuste do navegador ({{language}})",
+    "useBrowserSetting": "Usar a configuração do navegador ({{language}})",
     "search": "Buscar",
     "noLanguagesFound": "Nenhum idioma encontrado",
     "loadFailed": "Não foi possível carregar o idioma. Verifique sua conexão e tente novamente."
   },
   "about": {
     "keptInBrowser": "Este aplicativo obtém os dados EXIF do seu arquivo dentro do seu navegador, <br/>portanto o arquivo permanece no seu navegador e não é enviado a nenhum servidor.",
-    "usageData": "Para melhorar este aplicativo, são coletadas informações de uso, como <br/>quais páginas são abertas, qual é o formato de arquivo da foto carregada e quais <br/>erros ocorreram, junto com seu endereço IP e a localização aproximada <br/>derivada dele. Você pode desativar isso em <settingsLink>Configurações</settingsLink>.",
+    "usageData": "Para melhorar este aplicativo, são coletados dados de uso, como <br/>quais páginas são abertas, qual é o formato de arquivo da foto carregada e quais <br/>erros ocorreram, junto com seu endereço IP e a localização aproximada <br/>derivada dele. Você pode desativar isso em <settingsLink>Configurações</settingsLink>.",
     "reportIssues": "Se você encontrar bugs ou problemas, informe-os em <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "O código-fonte deste aplicativo está hospedado no <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Traduções para outros idiomas são bem-vindas: veja <guideLink>como traduzir este aplicativo</guideLink>.",

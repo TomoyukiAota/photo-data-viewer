@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Formatul datei și al orei",
       "dateFormat": "Formatul datei",
-      "clockSystem": "12/24 de ore",
+      "clockSystem": "Format de 12 sau 24 de ore",
       "clock12": "12 ore",
       "clock24": "24 de ore",
       "example": "Exemplu"
@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Această aplicație preia datele EXIF din fișierul dvs. în browserul dvs., <br/>astfel încât fișierul rămâne în browser și nu este trimis către niciun server.",
-    "usageData": "Pentru a îmbunătăți această aplicație, se colectează informații de utilizare, cum ar fi <br/>ce pagini sunt deschise, ce format de fișier are poza încărcată și ce <br/>erori au apărut, împreună cu adresa dvs. IP și locația aproximativă <br/>dedusă din aceasta. Puteți dezactiva acest lucru în <settingsLink>Setări</settingsLink>.",
+    "usageData": "Pentru a îmbunătăți această aplicație, se colectează date de utilizare, cum ar fi <br/>ce pagini sunt deschise, ce format de fișier are poza încărcată și ce <br/>erori au apărut, împreună cu adresa dvs. IP și locația aproximativă <br/>dedusă din aceasta. Puteți dezactiva acest lucru în <settingsLink>Setări</settingsLink>.",
     "reportIssues": "Dacă găsiți erori sau probleme, vă rugăm să le semnalați în <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Codul sursă al acestei aplicații este găzduit pe <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Traducerile în alte limbi sunt binevenite: vedeți <guideLink>cum se traduce această aplicație</guideLink>.",
@@ -119,6 +119,6 @@
       "alt": "Profil GitHub",
       "title": "Deschide profilul GitHub"
     },
-    "photoLocationMap": "Doriți să vedeți pe hartă locurile mai multor poze deodată?<br/> <plmLink>Photo Location Map</plmLink> este disponibil în acest scop."
+    "photoLocationMap": "Doriți să vedeți pe hartă locurile unde au fost făcute multe poze, toate deodată?<br/> <plmLink>Photo Location Map</plmLink> este disponibil în acest scop."
   }
 }

@@ -41,7 +41,7 @@
     "tabs": {
       "general": "عام",
       "details": "التفاصيل",
-      "rawData": "البيانات الأولية"
+      "rawData": "البيانات الخام"
     },
     "columns": {
       "name": "الاسم",
@@ -58,12 +58,12 @@
       "latitude": "خط العرض",
       "longitude": "خط الطول",
       "dimensions": "{{width}} × {{height}}",
-      "showInGoogleMaps": "العرض في خرائط Google",
-      "showInGoogleStreetView": "العرض في Google Street View",
+      "showInGoogleMaps": "عرض في خرائط Google",
+      "showInGoogleStreetView": "عرض في Google Street View",
       "iosNote": "لمستخدمي iOS: يزيل iOS بعض بيانات EXIF (مثل خط العرض وخط الطول) في بعض الحالات. يُرجى قراءة <pageLink>هذه الصفحة</pageLink> لمعرفة التفاصيل."
     },
     "rawData": {
-      "description": "فيما يلي البيانات الأولية المستخرجة باستخدام <exifrLink>exifr</exifrLink>."
+      "description": "فيما يلي البيانات الخام المستخرجة باستخدام <exifrLink>exifr</exifrLink>."
     }
   },
   "unsupportedFileDialog": {
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "تنسيق التاريخ والوقت",
       "dateFormat": "تنسيق التاريخ",
-      "clockSystem": "12 أو 24 ساعة",
+      "clockSystem": "نظام 12 أو 24 ساعة",
       "clock12": "12 ساعة",
       "clock24": "24 ساعة",
       "example": "مثال"
@@ -110,7 +110,7 @@
     "reportIssues": "إذا وجدت أي أخطاء أو مشكلات، يُرجى الإبلاغ عنها في <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "الشيفرة المصدرية لهذا التطبيق متاحة على <gitHubLink>GitHub</gitHubLink>.",
     "translations": "نرحّب بالترجمات إلى لغات أخرى: راجع <guideLink>طريقة ترجمة هذا التطبيق</guideLink>.",
-    "developedBy": "طوّر هذا التطبيق Tomoyuki Aota.",
+    "developedBy": "هذا التطبيق من تطوير Tomoyuki Aota.",
     "xProfile": {
       "alt": "الملف الشخصي على X (Twitter سابقًا)",
       "title": "فتح الملف الشخصي على X (Twitter سابقًا)"

@@ -53,10 +53,10 @@
     "general": {
       "fileName": "Ime datoteke",
       "fileSize": "Velikost datoteke",
-      "widthHeight": "Širina × Višina",
-      "dateTaken": "Datum posnetka",
-      "latitude": "Zem. širina",
-      "longitude": "Zem. dolžina",
+      "widthHeight": "Širina × višina",
+      "dateTaken": "Datum zajema",
+      "latitude": "Zemljepisna širina",
+      "longitude": "Zemljepisna dolžina",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Prikaži v Google Zemljevidih",
       "showInGoogleStreetView": "Prikaži v Google Street View",
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Oblika datuma in ure",
       "dateFormat": "Oblika datuma",
-      "clockSystem": "12 ali 24 ur",
-      "clock12": "12 ur",
-      "clock24": "24 ur",
+      "clockSystem": "12-urna ali 24-urna oblika",
+      "clock12": "12-urna",
+      "clock24": "24-urna",
       "example": "Primer"
     },
     "usageData": {
@@ -105,19 +105,19 @@
     "loadFailed": "Jezika ni bilo mogoče naložiti. Preverite povezavo in poskusite znova."
   },
   "about": {
-    "keptInBrowser": "Ta aplikacija prebere podatke EXIF iz vaše datoteke v vašem brskalniku, <br/>zato datoteka ostane v brskalniku in se ne pošlje v noben strežnik.",
+    "keptInBrowser": "Ta aplikacija prebere podatke EXIF iz vaše datoteke v vašem brskalniku, <br/>zato datoteka ostane v brskalniku in se ne pošlje na noben strežnik.",
     "usageData": "Za izboljšanje te aplikacije se zbirajo podatki o uporabi, na primer <br/>katere strani se odpirajo, kakšna je oblika zapisa naložene fotografije in katere <br/>napake so se zgodile, skupaj z vašim naslovom IP in približno lokacijo, <br/>ki je izpeljana iz njega. To lahko izklopite v <settingsLink>Nastavitvah</settingsLink>.",
     "reportIssues": "Če najdete napake ali težave, jih sporočite v <issuesLink>GitHub Issues</issuesLink>.",
-    "sourceCode": "Izvorna koda te aplikacije je na voljo v <gitHubLink>GitHubu</gitHubLink>.",
-    "translations": "Prevodi v druge jezike so dobrodošli: glejte <guideLink>kako prevesti to aplikacijo</guideLink>.",
+    "sourceCode": "Izvorna koda te aplikacije je na voljo na <gitHubLink>GitHubu</gitHubLink>.",
+    "translations": "Prevodi v druge jezike so dobrodošli: oglejte si, <guideLink>kako prevesti to aplikacijo</guideLink>.",
     "developedBy": "To aplikacijo razvija Tomoyuki Aota.",
     "xProfile": {
       "alt": "Profil v omrežju X (prej Twitter)",
       "title": "Odpri profil v omrežju X (prej Twitter)"
     },
     "gitHubProfile": {
-      "alt": "Profil v GitHubu",
-      "title": "Odpri profil v GitHubu"
+      "alt": "Profil na GitHubu",
+      "title": "Odpri profil na GitHubu"
     },
     "photoLocationMap": "Želite na zemljevidu hkrati videti lokacije številnih fotografij?<br/> Za to je na voljo <plmLink>Photo Location Map</plmLink>."
   }

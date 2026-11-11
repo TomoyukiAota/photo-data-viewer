@@ -72,12 +72,12 @@
     "close": "Tutup"
   },
   "pageNotShown": {
-    "message": "Sesuatu telah berlaku, dan halaman ini tidak dapat dipaparkan.",
+    "message": "Ada sesuatu yang tidak kena, dan halaman ini tidak dapat dipaparkan.",
     "reload": "Muat semula"
   },
   "demo": {
     "title": "Demo",
-    "description": "Apabila butang \"Jalankan Demo\" diklik, aplikasi ini berkelakuan seolah-olah <photoLink>foto ini</photoLink> dipilih.",
+    "description": "Apabila butang “Jalankan Demo” diklik, aplikasi ini berkelakuan seolah-olah <photoLink>foto ini</photoLink> dipilih.",
     "runDemo": "Jalankan Demo"
   },
   "settings": {
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Format tarikh dan masa",
       "dateFormat": "Format tarikh",
-      "clockSystem": "12 atau 24 jam",
+      "clockSystem": "Format 12 atau 24 jam",
       "clock12": "12 jam",
       "clock24": "24 jam",
       "example": "Contoh"

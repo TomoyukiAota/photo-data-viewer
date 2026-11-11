@@ -53,13 +53,13 @@
     "general": {
       "fileName": "Tiedostonimi",
       "fileSize": "Tiedostokoko",
-      "widthHeight": "Leveys × Korkeus",
+      "widthHeight": "Leveys × korkeus",
       "dateTaken": "Kuvauspäivä",
       "latitude": "Leveysaste",
       "longitude": "Pituusaste",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Näytä Google Mapsissa",
-      "showInGoogleStreetView": "Näytä Google Street View'ssa",
+      "showInGoogleStreetView": "Näytä Google Street View’ssa",
       "iosNote": "iOS-käyttäjille: iOS poistaa joissakin tapauksissa osan EXIF-tiedoista (esim. leveys- ja pituusasteen). Lue lisätietoja <pageLink>tältä sivulta</pageLink>."
     },
     "rawData": {
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Demo",
-    "description": "Kun napsautat Suorita demo -painiketta, sovellus toimii kuin <photoLink>tämä kuva</photoLink> olisi valittu.",
+    "description": "Kun klikkaat Suorita demo -painiketta, sovellus toimii kuin <photoLink>tämä kuva</photoLink> olisi valittu.",
     "runDemo": "Suorita demo"
   },
   "settings": {
@@ -86,9 +86,9 @@
     "dateTime": {
       "title": "Päivämäärän ja ajan muoto",
       "dateFormat": "Päivämäärän muoto",
-      "clockSystem": "12 tai 24 tuntia",
-      "clock12": "12 tuntia",
-      "clock24": "24 tuntia",
+      "clockSystem": "12 tai 24 tunnin kello",
+      "clock12": "12 tunnin kello",
+      "clock24": "24 tunnin kello",
       "example": "Esimerkki"
     },
     "usageData": {
@@ -109,8 +109,8 @@
     "usageData": "Sovelluksen parantamiseksi kerätään käyttötietoja, kuten <br/>mitä sivuja avataan, missä tiedostomuodossa ladattu kuva on ja mitä <br/>virheitä tapahtuu, sekä IP-osoitteesi ja siitä päätelty likimääräinen <br/>sijainti. Voit poistaa tämän käytöstä <settingsLink>asetuksissa</settingsLink>.",
     "reportIssues": "Jos löydät virheitä tai ongelmia, ilmoita niistä <issuesLink>GitHub Issues</issuesLink> -sivulla.",
     "sourceCode": "Tämän sovelluksen lähdekoodi on <gitHubLink>GitHubissa</gitHubLink>.",
-    "translations": "Käännökset muille kielille ovat tervetulleita: katso <guideLink>miten tämä sovellus käännetään</guideLink>.",
-    "developedBy": "Tämän sovelluksen on kehittänyt Tomoyuki Aota.",
+    "translations": "Käännökset muille kielille ovat tervetulleita: katso, <guideLink>miten tämä sovellus käännetään</guideLink>.",
+    "developedBy": "Tämän sovelluksen kehittäjä on Tomoyuki Aota.",
     "xProfile": {
       "alt": "X-profiili (aiemmin Twitter)",
       "title": "Avaa X-profiili (aiemmin Twitter)"

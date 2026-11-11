@@ -2,7 +2,7 @@
   "menu": {
     "buttonLabel": "菜单",
     "label": "菜单",
-    "home": "主页",
+    "home": "首页",
     "demo": "演示",
     "settings": "设置",
     "language": "语言 (Language)",
@@ -48,7 +48,7 @@
       "value": "值"
     },
     "noData": "无数据",
-    "notAvailable": "不可用",
+    "notAvailable": "无",
     "loading": "正在加载...",
     "general": {
       "fileName": "文件名",
@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "演示",
-    "description": "点击“运行演示”按钮后，此应用的行为如同选择了<photoLink>这张照片</photoLink>。",
+    "description": "点击“运行演示”按钮后，此应用会像选择了<photoLink>这张照片</photoLink>一样运行。",
     "runDemo": "运行演示"
   },
   "settings": {

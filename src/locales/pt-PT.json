@@ -6,13 +6,13 @@
     "demo": "Demonstração",
     "settings": "Definições",
     "language": "Idioma (Language)",
-    "about": "Acerca"
+    "about": "Acerca de"
   },
   "pageTitle": {
     "demo": "Demonstração - {{appName}}",
     "settings": "Definições - {{appName}}",
     "language": "Idioma - {{appName}}",
-    "about": "Acerca - {{appName}}"
+    "about": "Acerca de - {{appName}}"
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Formato de data e hora",
       "dateFormat": "Formato da data",
-      "clockSystem": "12 ou 24 horas",
+      "clockSystem": "Formato de 12 ou 24 horas",
       "clock12": "12 horas",
       "clock24": "24 horas",
       "example": "Exemplo"
@@ -94,7 +94,7 @@
     "usageData": {
       "title": "Dados de utilização",
       "send": "Enviar dados de utilização para melhorar esta aplicação",
-      "note": "O que é enviado está descrito na página Acerca."
+      "note": "O que é enviado está descrito na página «Acerca de»."
     }
   },
   "language": {
@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Esta aplicação obtém os dados EXIF do seu ficheiro dentro do seu navegador, <br/>pelo que o ficheiro permanece no navegador e não é enviado para nenhum servidor.",
-    "usageData": "Para melhorar esta aplicação, são recolhidas informações de utilização, tais como <br/>as páginas que são abertas, o formato de ficheiro da fotografia carregada e os <br/>erros que ocorreram, juntamente com o seu endereço IP e a localização aproximada <br/>que dele se deduz. Pode desativar esta recolha nas <settingsLink>Definições</settingsLink>.",
+    "usageData": "Para melhorar esta aplicação, são recolhidos dados de utilização, tais como <br/>as páginas que são abertas, o formato de ficheiro da fotografia carregada e os <br/>erros que ocorreram, juntamente com o seu endereço IP e a localização aproximada <br/>que dele se deduz. Pode desativar esta recolha nas <settingsLink>Definições</settingsLink>.",
     "reportIssues": "Se encontrar erros ou problemas, comunique-os em <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "O código-fonte desta aplicação está alojado no <gitHubLink>GitHub</gitHubLink>.",
     "translations": "As traduções para outros idiomas são bem-vindas: veja <guideLink>como traduzir esta aplicação</guideLink>.",

@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Formato de data e hora",
       "dateFormat": "Formato de data",
-      "clockSystem": "12 ou 24 horas",
+      "clockSystem": "Formato de 12 ou 24 horas",
       "clock12": "12 horas",
       "clock24": "24 horas",
       "example": "Exemplo"

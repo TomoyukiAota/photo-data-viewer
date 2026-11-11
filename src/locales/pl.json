@@ -53,10 +53,10 @@
     "general": {
       "fileName": "Nazwa pliku",
       "fileSize": "Rozmiar pliku",
-      "widthHeight": "Szerokość × Wysokość",
+      "widthHeight": "Szerokość × wysokość",
       "dateTaken": "Data wykonania",
-      "latitude": "Szer. geogr.",
-      "longitude": "Dł. geogr.",
+      "latitude": "Szerokość geograficzna",
+      "longitude": "Długość geograficzna",
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Pokaż w Mapach Google",
       "showInGoogleStreetView": "Pokaż w Google Street View",
@@ -86,15 +86,15 @@
     "dateTime": {
       "title": "Format daty i czasu",
       "dateFormat": "Format daty",
-      "clockSystem": "12 lub 24 godziny",
-      "clock12": "12 godzin",
-      "clock24": "24 godziny",
+      "clockSystem": "Format 12- lub 24-godzinny",
+      "clock12": "12-godzinny",
+      "clock24": "24-godzinny",
       "example": "Przykład"
     },
     "usageData": {
       "title": "Dane o użytkowaniu",
-      "send": "Wysyłaj dane o użytkowaniu, aby ulepszać tę aplikację",
-      "note": "To, co jest wysyłane, opisano na stronie Informacje."
+      "send": "Wysyłaj dane o użytkowaniu, aby pomóc w ulepszaniu tej aplikacji",
+      "note": "To, co jest wysyłane, opisano na stronie „Informacje”."
     }
   },
   "language": {
@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Ta aplikacja odczytuje dane EXIF z Twojego pliku w Twojej przeglądarce, <br/>więc plik pozostaje w przeglądarce i nie jest wysyłany na żaden serwer.",
-    "usageData": "Aby ulepszać tę aplikację, zbierane są informacje o użytkowaniu, takie jak <br/>otwierane strony, format pliku wczytanego zdjęcia i występujące <br/>błędy, wraz z Twoim adresem IP i ustaloną na jego podstawie przybliżoną <br/>lokalizacją. Możesz to wyłączyć w <settingsLink>Ustawieniach</settingsLink>.",
+    "usageData": "W celu ulepszania tej aplikacji zbierane są dane o jej użytkowaniu, takie jak <br/>otwierane strony, format pliku wczytanego zdjęcia i występujące <br/>błędy, wraz z Twoim adresem IP i ustaloną na jego podstawie przybliżoną <br/>lokalizacją. Możesz to wyłączyć w <settingsLink>Ustawieniach</settingsLink>.",
     "reportIssues": "Jeśli znajdziesz błędy lub problemy, zgłoś je w <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kod źródłowy tej aplikacji jest dostępny w serwisie <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Tłumaczenia na inne języki są mile widziane: zobacz, <guideLink>jak przetłumaczyć tę aplikację</guideLink>.",

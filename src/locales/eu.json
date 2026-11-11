@@ -60,7 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Erakutsi Google Maps-en",
       "showInGoogleStreetView": "Erakutsi Google Street View-n",
-      "iosNote": "iOS erabiltzaileentzat: kasu batzuetan, iOSek EXIF datu batzuk kentzen ditu (adib., latitudea eta longitudea). Xehetasunetarako, irakurri <pageLink>orri hau</pageLink>."
+      "iosNote": "iOS erabiltzaileentzat: kasu batzuetan, iOS-ek EXIF datu batzuk kentzen ditu (adib., latitudea eta longitudea). Xehetasunetarako, irakurri <pageLink>orri hau</pageLink>."
     },
     "rawData": {
       "description": "Jarraian daude <exifrLink>exifr</exifrLink> bidez lortutako datu gordinak."
@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Dataren eta orduaren formatua",
       "dateFormat": "Dataren formatua",
-      "clockSystem": "12 edo 24 ordu",
+      "clockSystem": "12 edo 24 orduko formatua",
       "clock12": "12 ordu",
       "clock24": "24 ordu",
       "example": "Adibidea"

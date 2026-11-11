@@ -86,7 +86,7 @@
     "dateTime": {
       "title": "Định dạng ngày và giờ",
       "dateFormat": "Định dạng ngày",
-      "clockSystem": "12 hoặc 24 giờ",
+      "clockSystem": "Định dạng 12 hoặc 24 giờ",
       "clock12": "12 giờ",
       "clock24": "24 giờ",
       "example": "Ví dụ"
@@ -94,7 +94,7 @@
     "usageData": {
       "title": "Dữ liệu sử dụng",
       "send": "Gửi dữ liệu sử dụng để cải thiện ứng dụng này",
-      "note": "Những gì được gửi được mô tả trên trang Giới thiệu."
+      "note": "Trang “Giới thiệu” cho biết những gì được gửi."
     }
   },
   "language": {
@@ -106,11 +106,11 @@
   },
   "about": {
     "keptInBrowser": "Ứng dụng này lấy dữ liệu EXIF từ tệp của bạn ngay trong trình duyệt của bạn, <br/>vì vậy tệp được giữ trong trình duyệt và không được gửi đến bất kỳ máy chủ nào.",
-    "usageData": "Để cải thiện ứng dụng này, thông tin sử dụng được thu thập, chẳng hạn như <br/>những trang nào được mở, định dạng tệp của ảnh đã tải và những lỗi nào <br/>đã xảy ra, cùng với địa chỉ IP của bạn và vị trí gần đúng <br/>được suy ra từ địa chỉ đó. Bạn có thể tắt tính năng này trong <settingsLink>Cài đặt</settingsLink>.",
-    "reportIssues": "Nếu bạn tìm thấy lỗi hoặc sự cố, vui lòng gửi tại <issuesLink>GitHub Issues</issuesLink>.",
+    "usageData": "Để cải thiện ứng dụng này, ứng dụng thu thập thông tin sử dụng, chẳng hạn như <br/>những trang nào được mở, định dạng tệp của ảnh đã tải và những lỗi nào <br/>đã xảy ra, cùng với địa chỉ IP của bạn và vị trí gần đúng <br/>được suy ra từ địa chỉ đó. Bạn có thể tắt tính năng này trong <settingsLink>Cài đặt</settingsLink>.",
+    "reportIssues": "Nếu bạn tìm thấy lỗi hoặc sự cố, vui lòng báo cáo tại <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Mã nguồn của ứng dụng này được lưu trữ trên <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Rất hoan nghênh các bản dịch sang ngôn ngữ khác: hãy xem <guideLink>cách dịch ứng dụng này</guideLink>.",
-    "developedBy": "Ứng dụng này được phát triển bởi Tomoyuki Aota.",
+    "developedBy": "Ứng dụng này do Tomoyuki Aota phát triển.",
     "xProfile": {
       "alt": "Hồ sơ X (trước đây là Twitter)",
       "title": "Mở hồ sơ X (trước đây là Twitter)"
@@ -119,6 +119,6 @@
       "alt": "Hồ sơ GitHub",
       "title": "Mở hồ sơ GitHub"
     },
-    "photoLocationMap": "Bạn muốn xem vị trí của nhiều ảnh trên bản đồ cùng một lúc?<br/> <plmLink>Photo Location Map</plmLink> có sẵn cho mục đích đó."
+    "photoLocationMap": "Bạn muốn xem vị trí của nhiều ảnh trên bản đồ cùng một lúc?<br/> Bạn có thể dùng <plmLink>Photo Location Map</plmLink> cho việc đó."
   }
 }
