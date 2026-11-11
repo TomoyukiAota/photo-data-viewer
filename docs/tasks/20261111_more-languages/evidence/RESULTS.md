@@ -8,14 +8,14 @@ Node 26.13.0 and npm 11.20.0, in the working tree of the branch
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 35 suites, 623 tests, in about two seconds                        |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 36 suites, 628 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
 | `npm run test:e2e` (Chromium)                        | Passed: 20 tests, 4 of them new, in 26 s                                  |
 | `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 20 tests; the screenshots as described below                      |
 | `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 19 tests, after the list's box was taken out of the Tab key's stops; the one for a phone is skipped, as Playwright emulates a touch device in Chromium alone |
 | `PDV_DEV=1 npm run test:e2e`                         | Passed: 1 test                                                            |
 | `npm run test:electron`                              | **Not run**; see [In Photo Location Map](#in-photo-location-map)          |
-| A clean `npm ci`                                     | The three known deprecation warnings only; 731 packages, 3 more than before |
+| A clean `npm ci`                                     | The three known deprecation warnings only; 732 packages, 4 more than before |
 | `npm audit`                                          | 26 advisories, the number before; none names a package added here         |
 
 Before this work, `main` had 27 suites and 198 tests, and 16 tests in the
@@ -44,8 +44,9 @@ Taken with Chrome on this Mac, like the others.
 - `language.png`, `language-ja.png`: new, the Language page. Headless Chrome
   draws no scrollbars, so the list is shown without the one that a window has.
   They and `language-ar.png` were taken again when the maintainer fixed the
-  names and their order, and once more when the search field got the focus:
-  the field has its ring in them.
+  names and their order, when the search field got the focus, whose ring the
+  field has in them, and when the flags came: the suite waits until each flag
+  is drawn before it takes them.
 - `about-ja.png`: updated, for one word of the sentence that welcomes
   translations (`他の言語`) and for the word for a map (`マップ`), which are
   Photo Location Map's now.
@@ -81,10 +82,17 @@ Compressed with Brotli, as the host serves it; measured from the build.
 | A language's texts, fetched when it is shown               | (in the app) | 1.5 to 2.1 kB |
 | Its dayjs locale, fetched with them                        | (in the app) | up to 0.9 kB |
 | The styles for right-to-left languages, fetched with one   | none   | 2.0 kB   |
+| The flags, fetched when the Language page opens            | none   | 90.8 kB in 42 files |
+| The Language page's styles, which name the flags           | none   | 1.5 kB   |
 
 The 41 languages other than English are 71.6 kB of texts and 24.0 kB of dayjs
 locales together. In the app's own code, they would have been part of every
 first visit.
+
+The flags are 380.7 kB before Brotli. Five of them are most of what is
+fetched: Serbia's 41.4 kB, Spain's 12.2 kB, Croatia's 11.3 kB, the Arab
+League's 6.7 kB and Galicia's 5.1 kB; the other 37 are 14.1 kB together. No
+page but the Language page fetches them.
 
 ## Every language at the width of a phone
 

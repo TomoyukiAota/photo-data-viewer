@@ -49,7 +49,9 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * The list to choose the Language setting from, with a field above it that
  * narrows the list down: the browser's language first, with the language that it
  * stands for in this browser, then each language under its own name, so that a
- * user who cannot read the current language still finds theirs.
+ * user who cannot read the current language still finds theirs. Each entry has
+ * the flag of its language beside it, the browser's that of the language that
+ * it stands for.
  *
  * TL;DR: It looks and works like the list in Photo Location Map, so that the
  * two applications ask for the language in the same way.
@@ -100,12 +102,14 @@ const LanguageList: React.FC<{
         }),
       ),
       labelLanguage: i18n.language,
+      flag: getLanguage(browserLanguage()).flag,
       keywords: [],
     },
     ...languages.map((language) => ({
       setting: language.code,
       label: language.name,
       labelLanguage: language.code,
+      flag: language.flag,
       keywords: [
         language.englishName,
         language.code,
@@ -246,6 +250,11 @@ const LanguageList: React.FC<{
               onClick={() => choose(item.setting)}
               onFocus={() => setFocused(item.setting)}
             >
+              {/* The flag is before the name, at the side where the page's lines start, and is not read aloud. */}
+              <span
+                className={`${classes.flag} ${classes.fi} ${classes[`fi-${item.flag}`]}`}
+                aria-hidden='true'
+              />
               {/* On its own, so that a name written in the other direction than the page keeps its order. */}
               <bdi>{item.label}</bdi>
             </li>
