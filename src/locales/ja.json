@@ -22,7 +22,7 @@
     "selectPhoto": "写真を選択",
     "tabs": {
       "data": "データ",
-      "map": "地図",
+      "map": "マップ",
       "photo": "写真"
     }
   },
@@ -33,9 +33,9 @@
     "unsupportedFileFormat": "対応していないファイル形式です"
   },
   "map": {
-    "loading": "地図を読み込んでいます",
+    "loading": "マップを読み込んでいます",
     "locationNotAvailable": "位置情報（緯度・経度）がありません。",
-    "cannotBeShown": "地図を表示できません。"
+    "cannotBeShown": "マップを表示できません。"
   },
   "photoData": {
     "tabs": {
@@ -119,6 +119,6 @@
       "alt": "GitHub のプロフィール",
       "title": "GitHub のプロフィールを開く"
     },
-    "photoLocationMap": "多くの写真の撮影場所を一度に地図で見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
+    "photoLocationMap": "多くの写真の撮影場所を一度にマップで見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
   }
 }

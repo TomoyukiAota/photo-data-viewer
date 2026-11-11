@@ -101,7 +101,7 @@ second look.
 
 ### The words shared with Photo Location Map
 
-Photo Location Map's 42 translations were compared with this app's, and 320
+Photo Location Map's 42 translations were compared with this app's, and 324
 texts in 40 languages were changed to its words:
 [the words chosen](./evidence/TERMS.md) lists what was taken and what is kept
 different.
@@ -121,8 +121,10 @@ different.
   the verb for rotating in Finnish; the verb for choosing a photo in five
   languages, where Photo Location Map's is the one for marking.
 - **Japanese**: the sentence that welcomes translations is Photo Location
-  Map's (`他の言語`). The Map tab stays `地図`, where Photo Location Map writes
-  `マップ`: both were reviewed by the maintainer, who is asked.
+  Map's (`他の言語`). A map is `マップ`, as Photo Location Map writes it, in the
+  four texts that name one: the Map tab, the two messages in its place, and
+  the sentence about Photo Location Map on the About page. It was `地図`. Both
+  words had been reviewed by the maintainer, who chose this one when asked.
 - **A character that is not drawn is written as an escape** in a translation
   file, and the check holds every file to it. French's no-break spaces were
   written as the characters themselves, and the guide showed a soft hyphen as
@@ -208,7 +210,6 @@ Nothing is left to implement. What remains is the maintainer's:
 - Keep the words that this app shares with Photo Location Map the same in
   both when either changes: [the words chosen](./evidence/TERMS.md) lists them,
   and the ones that are kept different.
-- Decide between `地図` and `マップ` for the Map tab in Japanese.
 - Run the Electron suite as `docs/DEVELOPMENT.md` says.
 - Photo Location Map's lists of languages and of codes must stay the same as
   this app's: a code that it passes and this app does not have is shown in

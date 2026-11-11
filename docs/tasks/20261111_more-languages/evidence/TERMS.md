@@ -16,7 +16,7 @@ files are what the app shows. A soft hyphen in a text is left out here.
 
 ## What was taken from Photo Location Map
 
-320 texts in 40 languages were changed to its words.
+324 texts in 40 languages were changed to its words.
 
 - **The texts that are the same in English in both applications** are its
   texts, in every language: Settings, Close, Reload, the six texts of the date
@@ -45,6 +45,9 @@ files are what the app shows. A soft hyphen in a text is left out here.
 - **Capitals** in Indonesian, Malay and Turkish: a capital on the first word
   alone, except for the main button of a page (`Pilih Foto`), as its Open
   Folder button is written, and for the tabs in Indonesian and Malay.
+- **A map** in Japanese is `マップ`, in the four texts that name one. It was
+  `地図`, and both words had been reviewed by the maintainer, who chose Photo
+  Location Map's.
 
 ## Kept different from Photo Location Map
 
@@ -56,7 +59,6 @@ files are what the app shows. A soft hyphen in a text is left out here.
 | Rotate | `fi` | `Kierrä kuvaa` | `Käännä miniatyyriä` | `Kierrä` is the word for turning a picture; `Käännä` is the one for flipping it. Not looked up. |
 | Usage data, as a heading | `pl` | `Dane o użytkowaniu` | `dane o jej używaniu`, in a sentence | The usual word in a heading. |
 | The verb for choosing a photo | `ar`, `hu`, `nb`, `pl`, `sv` | `اختيار`, `kiválasztása`, `Velg`, `Wybierz`, `Välj` | `تحديد`, `kijelölése`, `Marker`, `Zaznacz`, `Markera` | Not the same action: a file is chosen here, and photos are marked there. |
-| Map | `ja` | `地図` | `マップ` | Both were reviewed by the maintainer, who is asked which one to keep. |
 
 ## Choices that hold for every language
 
@@ -314,7 +316,7 @@ Photo Location Map has "Open Google Maps", "Open Google Street View" and "No pho
 | `hu` | Kezdőlap | Demó | Névjegy | Adatok | Térkép | Fotó | Általános | Részletek | Nyers adatok |
 | `id` | Beranda | Demo | Tentang | Data | Peta | Foto | Umum | Detail | Data Mentah |
 | `it` | Home | Demo | Informazioni | Dati | Mappa | Foto | Generale | Dettagli | Dati grezzi |
-| `ja` | ホーム | デモ | このアプリについて | データ | 地図 | 写真 | 全般 | 詳細 | 生データ |
+| `ja` | ホーム | デモ | このアプリについて | データ | マップ | 写真 | 全般 | 詳細 | 生データ |
 | `ko` | 홈 | 데모 | 정보 | 데이터 | 지도 | 사진 | 일반 | 세부 정보 | 원시 데이터 |
 | `lt` | Pradžia | Demonstracija | Apie | Duomenys | Žemėlapis | Nuotrauka | Bendra | Išsamiau | Neapdoroti duomenys |
 | `lv` | Sākums | Demonstrācija | Par | Dati | Karte | Fotoattēls | Vispārīgi | Detalizēti | Neapstrādātie dati |

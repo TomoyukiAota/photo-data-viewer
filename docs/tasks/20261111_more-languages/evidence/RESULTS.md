@@ -47,14 +47,17 @@ Taken with Chrome on this Mac, like the others.
   names and their order, and once more when the search field got the focus:
   the field has its ring in them.
 - `about-ja.png`: updated, for one word of the sentence that welcomes
-  translations (`他の言語`), which is Photo Location Map's now.
+  translations (`他の言語`) and for the word for a map (`マップ`), which are
+  Photo Location Map's now.
+- `narrow-loaded-ja.png`: updated, for the Map tab's label (`マップ`). The
+  tabs and everything else are where they were.
 - `loaded-general-ar.png`, `narrow-loaded-ar.png`, `settings-ar.png`,
   `language-ar.png`: new, in Arabic, laid out from the right.
 - Every other screenshot is unchanged, which is the check that English and
   Japanese are laid out as before: the six of the empty Home page, the three of
   a loaded photo's tabs, `heif-general.png`, `empty-details.png`,
   `unsupported-dialog.png`, `narrow-loaded.png`, `narrow-photo.png`,
-  `about.png`, `demo.png` and `narrow-loaded-ja.png`.
+  `about.png` and `demo.png`.
 
 Two of them caught mistakes on the way, which were corrected:
 
