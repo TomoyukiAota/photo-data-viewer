@@ -75,12 +75,19 @@ second look.
   keyboard is at hand, and while the field is inside the window, without
   scrolling. Where the user types on the screen, the focus would bring the
   keyboard up over the list, so it is left where it is.
-- **Typing a letter while the list has the focus does nothing.** Photo Location
-  Map's list, made with Angular's CDK, jumps to the entry that starts with the
-  letter; the search field does that here.
+- **A letter typed on the list moves the focus to the next language whose name
+  starts with it**, and letters typed within half a second of each other are
+  taken together, `de` for Deutsch. Photo Location Map's list, made with
+  Angular's CDK, does this, and the WAI-ARIA practices recommend it for a list
+  box of more than seven entries. At first a letter did nothing here, as the
+  search field finds a language; the maintainer chose to add it, so that the
+  two lists work the same. It compares as the search does, without regard to
+  case or diacritics, and moves at once, where the CDK waits for a pause in
+  the typing.
 - **The menu's entry is "言語 (Language)"**: the language's word and the English
   one, as Photo Location Map names its Language tab. The page's title is the
-  word alone. The entry has a globe for an icon.
+  word alone. The entry has a globe for an icon, which shows no script of its
+  own; the maintainer kept it when asked.
 - **The scrollbar that stays in view is Chrome's, Edge's and Safari's on
   macOS.** Firefox takes the colors and shows its scrollbar when the system
   does; Safari on iOS takes neither. No browser lets a page do more.
@@ -88,7 +95,8 @@ second look.
 ### The languages
 
 - **`nn` (Nynorsk) resolves to `nb`** as `no` does, which was not asked for: a
-  reader of Nynorsk reads Bokmål better than English.
+  reader of Nynorsk reads Bokmål better than English. Photo Location Map does
+  the same, and the maintainer kept it when asked.
 - **`zh-MO` is `zh-Hant`, and `zh-SG` and a plain `zh` are `zh-Hans`.** A plain
   `pt` is `pt-BR`; a region other than Brazil is `pt-PT`.
 - **Names stay as the English text writes them.** Google's products are the
@@ -120,6 +128,12 @@ different.
   field; "Twitter" in Latin letters in Arabic; the no-break space of French;
   the verb for rotating in Finnish; the verb for choosing a photo in five
   languages, where Photo Location Map's is the one for marking.
+- **The label "12- or 24-hour" stays short here**, `12/24` and the word for
+  hours, in those five languages (`cs`, `da`, `nb`, `ro`, `th`): the maintainer
+  decided so when asked, and that Photo Location Map takes the short form, as
+  it has it in eight other languages. The other way was to make this app's
+  field wider, from 110 to about 125 pixels, which would change the Settings
+  page in every language.
 - **Japanese**: the sentence that welcomes translations is Photo Location
   Map's (`他の言語`). A map is `マップ`, as Photo Location Map writes it, in the
   four texts that name one: the Map tab, the two messages in its place, and

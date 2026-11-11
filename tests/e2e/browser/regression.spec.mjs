@@ -351,6 +351,17 @@ test('the Language page lists the languages, narrows them down, and applies the 
   await expect(
     list.getByRole('option', { name: 'Dansk', exact: true }),
   ).toBeFocused();
+  // A letter typed on the list moves to the next language whose name starts
+  // with it, and letters typed in quick succession are taken together, as in
+  // Photo Location Map's list.
+  await page.keyboard.press('s');
+  await expect(
+    list.getByRole('option', { name: 'Slovenčina', exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press('v');
+  await expect(
+    list.getByRole('option', { name: 'Svenska', exact: true }),
+  ).toBeFocused();
   await page.keyboard.press('Home');
   await expect(options.first()).toBeFocused();
   await expect(options.first()).toHaveText(

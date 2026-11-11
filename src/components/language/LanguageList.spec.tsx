@@ -164,6 +164,122 @@ describe('the keyboard', () => {
   });
 });
 
+describe('a letter typed on the list', () => {
+  const now = jest.spyOn(Date, 'now');
+
+  /** Types a letter on the entry that has the focus, so many milliseconds after the test's start. */
+  function type(key: string, at: number) {
+    now.mockReturnValue(at);
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key });
+  }
+
+  function focusedLabel(): string | null {
+    return (document.activeElement as HTMLElement).textContent;
+  }
+
+  afterAll(() => now.mockRestore());
+
+  it('moves the focus to the next language whose name starts with it', () => {
+    renderList('auto');
+    options()[0].focus();
+
+    type('d', 10_000);
+    expect(focusedLabel()).toBe('Dansk');
+
+    // After a pause, the same letter goes on to the next one, and round again.
+    type('d', 12_000);
+    expect(focusedLabel()).toBe('Deutsch');
+    type('d', 14_000);
+    expect(focusedLabel()).toBe('Dansk');
+  });
+
+  it('takes letters typed in quick succession together', () => {
+    renderList('auto');
+    options()[0].focus();
+
+    type('s', 10_000);
+    expect(focusedLabel()).toBe('Slovenčina');
+    type('v', 10_200);
+    expect(focusedLabel()).toBe('Svenska');
+
+    // Half a second after the last letter, the next one is on its own.
+    type('e', 10_701);
+    expect(focusedLabel()).toBe('Eesti');
+  });
+
+  it('goes through the languages that start with a letter typed again and again', () => {
+    renderList('auto');
+    options()[0].focus();
+
+    type('p', 10_000);
+    expect(focusedLabel()).toBe('Polski');
+    type('p', 10_100);
+    expect(focusedLabel()).toBe('Português (Brasil)');
+    type('p', 10_200);
+    expect(focusedLabel()).toBe('Português (Portugal)');
+  });
+
+  it('is without regard to case or diacritics', () => {
+    renderList('auto');
+    options()[0].focus();
+
+    type('C', 10_000);
+    expect(focusedLabel()).toBe('Català');
+    type('e', 10_100);
+    expect(focusedLabel()).toBe('Čeština');
+  });
+
+  it('moves the focus without choosing, and leaves the focus where it is when no language starts with it', () => {
+    const { onChoose } = renderList('auto');
+    options()[0].focus();
+
+    type('d', 10_000);
+    type('x', 12_000);
+    expect(focusedLabel()).toBe('Dansk');
+    expect(onChoose).not.toHaveBeenCalled();
+    expect(chosen()).toEqual(['Use browser setting (English)']);
+  });
+
+  it('leaves Space to choose the entry, and a letter with Ctrl or Command to the browser', () => {
+    const { onChoose } = renderList('auto');
+    options()[0].focus();
+
+    type('d', 10_000);
+    now.mockReturnValue(10_100);
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: 'e', ctrlKey: true });
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: 'e', metaKey: true });
+    expect(focusedLabel()).toBe('Dansk');
+
+    type(' ', 10_200);
+    expect(onChoose.mock.calls).toEqual([['da']]);
+  });
+
+  it('leaves a key that is no character, or part of composing one, to the browser', () => {
+    renderList('auto');
+    const first = options()[0];
+    first.focus();
+
+    type('Shift', 10_000);
+    type('Dead', 10_100);
+    now.mockReturnValue(10_200);
+    fireEvent.keyDown(first, { key: 'd', isComposing: true });
+    expect(document.activeElement).toBe(first);
+  });
+
+  it('moves among the languages that the search lists', () => {
+    renderList('auto');
+    search('port');
+    options()[0].focus();
+
+    type('p', 10_000);
+    expect(focusedLabel()).toBe('Português (Portugal)');
+    type('p', 12_000);
+    expect(focusedLabel()).toBe('Português (Brasil)');
+    type('d', 14_000); // Dansk and Deutsch are not listed.
+    expect(focusedLabel()).toBe('Português (Brasil)');
+  });
+});
+
 describe('the search field', () => {
   it('is above the list, which it names as what it narrows down', () => {
     renderList();

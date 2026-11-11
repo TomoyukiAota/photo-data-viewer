@@ -53,7 +53,7 @@ files are what the app shows. A soft hyphen in a text is left out here.
 
 | What | Languages | This app | Photo Location Map | Why |
 | --- | --- | --- | --- | --- |
-| The label "12- or 24-hour" | `cs`, `da`, `nb`, `ro`, `th` | `12/24 hodin`, `12/24 timer`, `12/24 timer`, `12/24 de ore`, `12/24 ชั่วโมง` | `12 nebo 24 hodin`, `12 eller 24 timer`, `12 eller 24 timer`, `12 sau 24 de ore`, `12 หรือ 24 ชั่วโมง` | The label is cut in this app's field, by 1 to 11 pixels. |
+| The label "12- or 24-hour" | `cs`, `da`, `nb`, `ro`, `th` | `12/24 hodin`, `12/24 timer`, `12/24 timer`, `12/24 de ore`, `12/24 ชั่วโมง` | `12 nebo 24 hodin`, `12 eller 24 timer`, `12 eller 24 timer`, `12 sau 24 de ore`, `12 หรือ 24 ชั่วโมง` | The label is cut in this app's field, by 1 to 11 pixels. The maintainer decided that this app keeps the short form, and that Photo Location Map takes it. |
 | The two texts of the X profile | `ar` | `Twitter` | `تويتر` | A name stays as the English text writes it, which the check of the translation files holds every language to. |
 | The sentence that welcomes translations | `fr` | A no-break space before the colon | An ordinary space | French has a no-break space there, so that the colon does not start a line. |
 | Rotate | `fi` | `Kierrä kuvaa` | `Käännä miniatyyriä` | `Kierrä` is the word for turning a picture; `Käännä` is the one for flipping it. Not looked up. |

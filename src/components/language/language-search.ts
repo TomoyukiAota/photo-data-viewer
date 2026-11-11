@@ -56,3 +56,34 @@ export function matchesSearch(item: LanguageListItem, search: string): boolean {
     foldForSearch(text).includes(sought),
   );
 }
+
+/**
+ * Where letters typed on the list lead: the place, among the entries listed,
+ * of the next one whose text starts with them, or -1 when none does. `from` is
+ * the place of the entry that has the keyboard's focus.
+ *
+ * TL;DR: One letter leads to the next entry that starts with it, and letters
+ * typed in quick succession lead to the entry that starts with all of them.
+ * Details: One letter is looked for after the entry with the focus, and from
+ * the top again past the end, so that the letter typed again goes on to the
+ * next language that starts with it; so is one letter typed again and again.
+ * Several letters are looked for from the entry with the focus itself, which
+ * keeps the focus while it still starts with them. The comparison is the
+ * search's: without regard to case or diacritics.
+ */
+export function findByTyping(
+  items: readonly LanguageListItem[],
+  typed: string,
+  from: number,
+): number {
+  const letters = [...foldForSearch(typed)];
+  if (letters.length === 0) return -1;
+  const isOneLetter = letters.every((letter) => letter === letters[0]);
+  const sought = isOneLetter ? letters[0] : letters.join('');
+  const start = isOneLetter ? from + 1 : from;
+  for (let step = 0; step < items.length; step++) {
+    const index = (start + step) % items.length;
+    if (foldForSearch(items[index].label).startsWith(sought)) return index;
+  }
+  return -1;
+}

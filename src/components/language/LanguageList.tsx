@@ -10,11 +10,15 @@ import {
 import { browserLanguage } from '../../i18n/resolve-language';
 import { valuesIn } from '../../i18n/text-values';
 import {
+  findByTyping,
   LanguageListItem,
   languageNamesIn,
   matchesSearch,
 } from './language-search';
 import classes from './LanguageList.module.scss';
+
+/** How long after a letter typed on the list the next one still belongs with it, in milliseconds. */
+const typingPause = 500;
 
 /** Scrolls the list, and nothing around it, by as little as shows the entry. */
 function showInList(list: HTMLElement, entry: HTMLElement): void {
@@ -52,11 +56,11 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * Details: a list box of which one entry is chosen, in a box of seven entries
  * that scrolls. The box keeps that height whatever the search leaves, so that
  * nothing below it moves while the user types. The arrow keys, Home and End
- * move the keyboard's focus along the list, and Space or Enter chooses the
- * entry under it. The search is without regard to case or diacritics, and
- * finds a language by its own name, its English name, its name in the language
- * the page is shown in, or its code. The chosen entry stays chosen while the
- * search hides it.
+ * move the keyboard's focus along the list, a letter moves it to the next
+ * entry that starts with it, and Space or Enter chooses the entry under it.
+ * The search is without regard to case or diacritics, and finds a language by
+ * its own name, its English name, its name in the language the page is shown
+ * in, or its code. The chosen entry stays chosen while the search hides it.
  */
 const LanguageList: React.FC<{
   /** The Language setting that is chosen in the list. */
@@ -78,6 +82,8 @@ const LanguageList: React.FC<{
   const [search, setSearch] = useState('');
   /** The entry the keyboard's focus was on last. */
   const [focused, setFocused] = useState<LanguageSetting | null>(null);
+  /** The letters typed on the list in quick succession, and when the last of them was typed. */
+  const typing = useRef({ letters: '', at: 0 });
   /** Each language's name in the language of the page: ドイツ語 finds Deutsch in Japanese. */
   const nameInPageLanguage = useMemo(
     () => languageNamesIn(i18n.language),
@@ -176,8 +182,25 @@ const LanguageList: React.FC<{
       case ' ':
         choose(listed[index].setting);
         break;
-      default:
-        return;
+      default: {
+        // TL;DR: A letter moves the focus to the next entry whose name starts
+        // with it, as in Photo Location Map's list.
+        // Details: Letters typed in quick succession are taken together, "de"
+        // for Deutsch. The search field narrows the list down; this moves
+        // within what is listed, for someone whose focus is on the list. A
+        // key that is no single character, or part of composing one, is left
+        // to the browser.
+        if (event.key.length !== 1 || event.nativeEvent.isComposing) return;
+        const now = Date.now();
+        const letters =
+          now - typing.current.at <= typingPause
+            ? typing.current.letters + event.key
+            : event.key;
+        typing.current = { letters, at: now };
+        const found = findByTyping(listed, letters, index);
+        if (found >= 0) focusEntry(found);
+        break;
+      }
     }
     event.preventDefault(); // The page does not scroll as well.
   };

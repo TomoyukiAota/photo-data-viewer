@@ -1,4 +1,5 @@
 import {
+  findByTyping,
   foldForSearch,
   LanguageListItem,
   languageNamesIn,
@@ -115,5 +116,65 @@ describe('languageNamesIn', () => {
   it('gives an empty text for what is no language code, or in what is no language', () => {
     expect(languageNamesIn('ja')('not a code')).toBe('');
     expect(languageNamesIn('not a language')('de')).toBe('');
+  });
+});
+
+describe('findByTyping', () => {
+  // A list as the page has it, shortened.
+  const names = ['Use browser setting (English)', 'Català', 'Čeština', 'Dansk', 'Deutsch', 'English', 'Русский', '日本語'];
+  const items: LanguageListItem[] = names.map((label) => ({
+    setting: 'en', // Which setting it stands for makes no difference here.
+    label,
+    labelLanguage: 'en',
+    keywords: [],
+  }));
+  const found = (typed: string, from: number) => names[findByTyping(items, typed, from)];
+
+  it('leads to the next entry that starts with the letter, after the one with the focus', () => {
+    expect(found('d', 0)).toBe('Dansk');
+    expect(found('d', 3)).toBe('Deutsch');
+  });
+
+  it('starts from the top again past the end', () => {
+    expect(found('d', 4)).toBe('Dansk');
+    expect(found('u', 5)).toBe('Use browser setting (English)');
+  });
+
+  it('stays on the entry with the focus when it alone starts with the letter', () => {
+    expect(found('e', 5)).toBe('English');
+  });
+
+  it('takes several letters together, from the entry with the focus itself', () => {
+    expect(found('de', 3)).toBe('Deutsch');
+    expect(found('da', 3)).toBe('Dansk');
+    expect(found('deu', 4)).toBe('Deutsch');
+  });
+
+  it('goes on to the next entry for one letter typed again and again', () => {
+    expect(found('dd', 3)).toBe('Deutsch');
+    expect(found('ddd', 4)).toBe('Dansk');
+  });
+
+  it('compares without regard to case or diacritics, as the search does', () => {
+    expect(found('C', 0)).toBe('Català');
+    expect(found('c', 1)).toBe('Čeština');
+    expect(found('ce', 1)).toBe('Čeština');
+    expect(found('č', 0)).toBe('Català');
+  });
+
+  it('finds a name written in another script by its own letters', () => {
+    expect(found('р', 0)).toBe('Русский');
+    expect(found('日', 0)).toBe('日本語');
+  });
+
+  it('leads nowhere when no entry starts with what is typed, or nothing is typed', () => {
+    expect(findByTyping(items, 'x', 0)).toBe(-1);
+    expect(findByTyping(items, 'dx', 3)).toBe(-1);
+    expect(findByTyping(items, '', 0)).toBe(-1);
+    expect(findByTyping([], 'd', 0)).toBe(-1);
+  });
+
+  it('looks at the start of a name alone, not inside it', () => {
+    expect(findByTyping(items, 'n', 0)).toBe(-1); // "English" and "Dansk" have an n.
   });
 });
