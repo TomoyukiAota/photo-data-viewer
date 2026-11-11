@@ -277,6 +277,17 @@ test('the Language page lists the languages, narrows them down, and applies the 
   const search = page.getByRole('searchbox', { name: 'Search', exact: true });
   await expect(search).toBeFocused();
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  // A magnifying glass is in the search field at its end, the right here, as
+  // search fields usually have one: 20 pixels, 8 from the field's edge, in the
+  // middle of its height, and the field's text ends before it.
+  const searchBox = await search.boundingBox();
+  const glass = await search
+    .locator('xpath=following-sibling::*[1]')
+    .boundingBox();
+  expect([glass.width, glass.height]).toEqual([20, 20]);
+  expect(searchBox.x + searchBox.width - (glass.x + glass.width)).toBe(8);
+  expect(glass.y - searchBox.y).toBe((searchBox.height - glass.height) / 2);
+  await expect(search).toHaveCSS('padding-right', '36px');
 
   // A list box: the browser's language first, chosen until another is, then
   // each language under its own name, those in Latin letters by alphabet.
@@ -709,6 +720,15 @@ test.describe('in a browser whose language is Arabic', () => {
     await expect(list.locator('[aria-selected="true"]')).toHaveText([
       'استخدام إعداد المتصفح (\u2068العربية\u2069)',
     ]);
+    // The magnifying glass of the search field is where its line ends, at the
+    // left.
+    const arabicSearch = page.getByRole('searchbox');
+    const searchBox = await arabicSearch.boundingBox();
+    const glass = await arabicSearch
+      .locator('xpath=following-sibling::*[1]')
+      .boundingBox();
+    expect(glass.x - searchBox.x).toBe(8);
+    await expect(arabicSearch).toHaveCSS('padding-left', '36px');
     // The flag of an entry is where its line starts, at the right of its name.
     expect(await flagsDrawn(list)).toEqual(Array(43).fill(true));
     const firstEntry = list.getByRole('option').first();

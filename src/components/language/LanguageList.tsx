@@ -1,3 +1,4 @@
+import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -211,20 +212,26 @@ const LanguageList: React.FC<{
 
   return (
     <div className={classes.container}>
-      <input
-        ref={searchRef}
-        type='search'
-        className={classes.search}
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-        placeholder={t('language.search')}
-        aria-label={t('language.search')}
-        aria-controls={listId}
-        autoComplete='off'
-        autoCapitalize='off'
-        autoCorrect='off'
-        spellCheck={false}
-      />
+      <div className={classes['search-field']}>
+        <input
+          ref={searchRef}
+          type='search'
+          className={classes.search}
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder={t('language.search')}
+          aria-label={t('language.search')}
+          aria-controls={listId}
+          autoComplete='off'
+          autoCapitalize='off'
+          autoCorrect='off'
+          spellCheck={false}
+        />
+        {/* The usual sign of a search field, at its end. Not read aloud: the field has its name. */}
+        <span className={classes['search-icon']} aria-hidden='true'>
+          <SearchIcon fontSize='inherit' />
+        </span>
+      </div>
       <div className={classes.box}>
         <ul
           id={listId}

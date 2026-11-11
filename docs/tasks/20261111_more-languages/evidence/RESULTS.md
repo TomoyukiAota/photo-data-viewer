@@ -8,7 +8,7 @@ Node 26.13.0 and npm 11.20.0, in the working tree of the branch
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 36 suites, 628 tests, in about two seconds                        |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 36 suites, 629 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
 | `npm run test:e2e` (Chromium)                        | Passed: 20 tests, 4 of them new, in 26 s                                  |
 | `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 20 tests; the screenshots as described below                      |
@@ -45,8 +45,9 @@ Taken with Chrome on this Mac, like the others.
   draws no scrollbars, so the list is shown without the one that a window has.
   They and `language-ar.png` were taken again when the maintainer fixed the
   names and their order, when the search field got the focus, whose ring the
-  field has in them, and when the flags came: the suite waits until each flag
-  is drawn before it takes them.
+  field has in them, when the flags came, and when the search field got its
+  magnifying glass. The suite waits until each flag is drawn before it takes
+  them.
 - `about-ja.png`: updated, for one word of the sentence that welcomes
   translations (`他の言語`) and for the word for a map (`マップ`), which are
   Photo Location Map's now.

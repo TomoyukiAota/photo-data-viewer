@@ -76,6 +76,13 @@ second look.
   keyboard is at hand, and while the field is inside the window, without
   scrolling. Where the user types on the screen, the focus would bring the
   keyboard up over the list, so it is left where it is.
+- **The search field has a magnifying glass at its end**, the usual sign of a
+  search field, which the maintainer asked for in this app, in Photo Location
+  Map and on its website alike. It is 20 pixels, in the grey of the field's
+  placeholder, 8 pixels from the field's edge, where a line ends: at the right,
+  and at the left in Arabic and Hebrew. It is drawn over the field and takes
+  no click, and the field's text and the button that clears it end before it.
+  It is not read aloud, as the field has its name.
 - **A letter typed on the list moves the focus to the next language whose name
   starts with it**, and letters typed within half a second of each other are
   taken together, `de` for Deutsch. Photo Location Map's list, made with

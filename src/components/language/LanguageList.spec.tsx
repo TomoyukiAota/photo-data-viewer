@@ -309,6 +309,18 @@ describe('the search field', () => {
     ).toBeTruthy();
   });
 
+  it('has a magnifying glass after it, the usual sign of a search field, which is not read aloud', () => {
+    renderList();
+    const field = searchField();
+    const icon = field.nextElementSibling as HTMLElement;
+
+    expect(icon.querySelector('[data-testid="SearchIcon"]')).toBeTruthy();
+    expect(icon.getAttribute('aria-hidden')).toBe('true');
+    expect(icon.textContent).toBe('');
+    // The field is still found by its own name, and is the only search field.
+    expect(screen.getAllByRole('searchbox', { name: 'Search' })).toEqual([field]);
+  });
+
   it("narrows the list down as the user types: by a language's own name, its English name or its code", () => {
     renderList();
     search('日本');
