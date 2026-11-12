@@ -94,7 +94,7 @@
     "usageData": {
       "title": "Usage Data",
       "send": "Send usage data to improve this application",
-      "note": "What is sent is described on the About page."
+      "note": "For details on the data sent, see the About page."
     }
   },
   "language": {

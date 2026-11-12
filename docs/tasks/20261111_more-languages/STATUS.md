@@ -133,6 +133,13 @@ both applications:
   maintainer had it changed on 2026-11-13. Its three items are noun phrases
   alike: the pages that are opened, the file format of the loaded photo and
   the errors that occurred.
+- **The English note under the switch of the Settings page** is "For details
+  on the data sent, see the About page." It was "What is sent is described
+  on the About page."; the maintainer had it reworded on 2026-11-13, and
+  chose the form without "please". The app's other English texts are not of
+  one kind there: the sentence that welcomes translations says "see how to
+  translate this application", and the note for iOS users says "Please read
+  this page for details." No translation changed for it.
 - **Names stay as the English text writes them.** Google's products are the
   exception: they are written as Google names them in the language, as Photo
   Location Map writes them and as Japanese did already (`Google マップ`, `Mapy

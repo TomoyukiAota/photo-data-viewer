@@ -5,7 +5,9 @@ language Japanese), Node 26.13.0 and npm 11.20.0, in the working tree of the
 branch `claude/more-languages-and-language-page-96bbc5`. Every browser ran
 headless. The numbers under [Checks](#checks) are those of 2026-11-12, after
 the translations were read through again and the layout was made one for
-every language.
+every language. On 2026-11-13, after two English sentences were reworded,
+`npm run test:all`, `npm run build` and the browser suite in Chromium, Chrome
+and Firefox were run again, with the same results.
 
 ## Checks
 
@@ -56,7 +58,9 @@ Taken with Chrome on this Mac, like the others. Of the 26, 7 changed on
 - `settings.png`, `settings-ja.png`: on 2026-11-11 the Language section left
   the Settings page. On 2026-11-12 they did not change: the two fields of
   the date and time follow their texts now, and in English and Japanese they
-  are as wide as they were.
+  are as wide as they were. `settings.png` was updated on 2026-11-13 for the
+  English note under the switch, which was reworded; that line differs, and
+  no other pixel.
 - `settings-ar.png`: new on 2026-11-11. On 2026-11-12 the label of the
   clock's field is the reviewed one, which is longer, and the field is as
   wide as it needs.
