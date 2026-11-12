@@ -78,19 +78,21 @@ Taken with Chrome on this Mac, like the others. Of the 26, 7 changed on
   maintainer fixed the names and their order, when the search field got the
   focus, whose ring the field has in them, and when the search field got its
   magnifying glass.
+- `about.png`: updated on 2026-11-13, for the English sentence on what is
+  collected, which names the file format of the loaded photo now. The second
+  and the third line of that sentence differ, and no other pixel.
 - `about-ja.png`: updated on 2026-11-11, for one word of the sentence that
   welcomes translations (`他の言語`) and for the word for a map (`マップ`),
   which are Photo Location Map's now.
 - `narrow-loaded-ja.png`: updated on 2026-11-11, for the Map tab's label
   (`マップ`). The tabs and everything else are where they were.
 - Every other screenshot is as it was on `main`, which is the check that
-  English and Japanese are laid out as before outside the Settings page: the
-  four other screenshots of the empty Home page (`home-1200.png`,
-  `home-1199.png`, `home-600.png`, `home-320.png`), the three of a loaded
-  photo's tabs, `heif-general.png`, `narrow-loaded.png`, `narrow-photo.png`,
-  `about.png` and `demo.png`. The layout of 2026-11-12 changed none of them,
-  nor the three of the Language page, `about-ja.png` and
-  `narrow-loaded-ja.png`.
+  English and Japanese are laid out as before: the four other screenshots of
+  the empty Home page (`home-1200.png`, `home-1199.png`, `home-600.png`,
+  `home-320.png`), the three of a loaded photo's tabs, `heif-general.png`,
+  `narrow-loaded.png`, `narrow-photo.png` and `demo.png`. The layout of
+  2026-11-12 changed none of them, nor `about.png`, the three of the Language
+  page, `about-ja.png` and `narrow-loaded-ja.png`.
 
 The changed screenshots were compared with the earlier ones pixel by pixel,
 at any difference, to find what moved in each.

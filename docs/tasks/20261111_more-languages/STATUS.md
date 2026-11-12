@@ -127,6 +127,12 @@ both applications:
   the same, and the maintainer kept it when asked.
 - **`zh-MO` is `zh-Hant`, and `zh-SG` and a plain `zh` are `zh-Hans`.** A plain
   `pt` is `pt-BR`; a region other than Brazil is `pt-PT`.
+- **The English text on usage data names the file format of the loaded
+  photo**, on the About page, as the Japanese text and the 40 translations
+  do, and as is collected. It said "what kind of photo was loaded"; the
+  maintainer had it changed on 2026-11-13. Its three items are noun phrases
+  alike: the pages that are opened, the file format of the loaded photo and
+  the errors that occurred.
 - **Names stay as the English text writes them.** Google's products are the
   exception: they are written as Google names them in the language, as Photo
   Location Map writes them and as Japanese did already (`Google マップ`, `Mapy

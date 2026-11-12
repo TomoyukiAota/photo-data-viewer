@@ -24,7 +24,7 @@ This file lists what was taken from there, what the review changed, what
 still differs and why, and the words in each language, so that a reviewer
 sees them at a glance.
 
-The tables are made from `src/locales/*.json` as they were on 2026-11-12; the
+The tables are made from `src/locales/*.json` as they were on 2026-11-13; the
 files are what the app shows. A soft hyphen in a text is left out here.
 
 ## The wording comes before the layout
@@ -137,9 +137,11 @@ Where the English texts differ, a translation may differ too:
 - **Names are not translated**: Photo Data Viewer, Photo Location Map, EXIF,
   exifr, GitHub, GitHub Issues, iOS, X, Twitter. Google's products are written
   as Google names them in the language, with "Google" as it is.
-- **"what kind of photo was loaded"**, in the About page's text on usage data,
-  is written as "the file format of the loaded photo", as the Japanese text
-  that the maintainer reviewed has it.
+- **"The file format of the loaded photo"**, in the About page's text on
+  usage data, is what every language says, as the Japanese text that the
+  maintainer reviewed has it, and what is collected. The English text said
+  "what kind of photo was loaded" until 2026-11-13, when the maintainer had
+  it say the same.
 - **The menu's entry for the Language page** is the language's word followed by
   `(Language)`, as Photo Location Map writes its Language tab: `Sprache
   (Language)`. The page's title is the word alone.
