@@ -27,9 +27,10 @@ localized in, and to ask for the language in the same way:
 
 ## Current state
 
-All of it is implemented and checked locally, and is in a pull request from
-this branch. It is not merged: merging publishes the app, which is the
-maintainer's to do.
+All of it is implemented and checked locally. It was merged on 2026-11-14
+as `6834366`, and both deployments, the app's own and the one that Photo
+Location Map opens, were checked after it
+([results](./evidence/RESULTS.md#after-the-merge)).
 
 - **42 languages** (`src/i18n/languages.ts`, `src/locales/`). The 40 new
   translations are machine translation that no speaker has reviewed;
@@ -412,11 +413,11 @@ page to another page, which is the one they settled on.
 
 - **The 40 translations**: no speaker has read them. The review was a
   machine's, as the translations were.
-- **That what is recorded about the language arrives.** What the app posts to
-  the analytics backend and gives to Google's tag was read in a headless
-  browser, with both answered or stopped on the machine
-  ([results](./evidence/RESULTS.md#what-is-recorded-about-the-language)). The
-  backend's and GA4's own records were not looked at.
+- **GA4's records of the language.** The analytics backend's were looked at
+  after the merge, on 2026-11-14: the events of a visit arrived as the app
+  sends them, at each of the three moments, and so did the language of the
+  app opened from Photo Location Map 1.12.1
+  ([results](./evidence/RESULTS.md#after-the-merge)). GA4's were not.
 - **How a browser other than Chrome divides the texts.** The division of a
   word by the language's rules, the last line that is not left alone and the
   phrases of Japanese were looked at in Chrome on macOS. Chrome divides words
@@ -440,7 +441,6 @@ page to another page, which is the one they settled on.
 
 Nothing is left to implement. What remains is the maintainer's:
 
-- Review the pull request, and merge it when the app is to be published.
 - Keep the words that this app shares with Photo Location Map the same in
   both when either changes: [the words chosen](./evidence/TERMS.md) lists them,
   and the ones that are kept different.

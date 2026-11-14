@@ -326,6 +326,46 @@ The label of `Left Language Page`, and the parameters of `left_language_page`:
 - The browser suite checks the same in an English and in a Japanese browser,
   the Language page left by the menu and by the browser's Back.
 
+## After the merge
+
+The pull request was merged on 2026-11-14 as `6834366`. Both production
+deployments of it succeeded, the app's own and the one that Photo Location
+Map opens, and so did the CI of `main`.
+
+Both served the merge commit in their scripts, and `/language` answered 200,
+where it had answered 404 before. The two sites were then checked in a
+headless browser, with the requests to the analytics backend answered on the
+machine and those to Google stopped, so that nothing reached the analytics:
+
+- In a browser in English: a photo and its data, the Language page with its
+  43 entries, choosing 日本語, and the three moments' events, addressed to the
+  production backend.
+- In a browser in Japanese, the app in Japanese; in Arabic, laid out from the
+  right.
+- The deployment for Photo Location Map, opened as its isolated window opens
+  it, with `language=ja`: the app in Japanese, the photo from the stand-in for
+  the bridge, and `Language in Use: ja` handed to Photo Location Map.
+
+The analytics backend's records were then looked at. A visit made after the
+deployment, to check it, sent what the app sends at each moment:
+
+- On opening: `Language: auto` and `Language in Use: ja`, the browser's
+  language.
+- Six choices on the Language page: each `Language` change followed by its
+  `Language in Use`, in order: `auto`, `en`, `de`, `fr`, `ko`, `ja`, and
+  `auto` again, which showed Japanese.
+- Seven `Left Language Page`. The language that each visit found on arriving
+  is the one that the changes before it had left, and the two visits that
+  changed nothing have `isChanged` false.
+
+The app opened from Photo Location Map 1.12.1 handed that application
+`Language: auto` and `Language in Use: en`, in that launch, after the other
+settings and before the photo. 1.12.1 passes no language, so the app is in
+English there, as it is designed to be; a release that passes one gets that
+language.
+
+GA4's records were not looked at.
+
 ## Right to left
 
 Looked at in Arabic at a wide and a narrow window, and in Hebrew on the Home
