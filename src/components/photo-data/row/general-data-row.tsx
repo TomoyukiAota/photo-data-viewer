@@ -5,8 +5,17 @@ import { NameAndValue, NameValueGridRow } from '../grid/NameValueGrid';
 import GridRow from './GridRow';
 import LatLngRow from './LatLngRow';
 import WidthHeightRow from './WidthHeightRow';
+import classes from './general-data-row.module.scss';
 
-type TempNameAndValue = NameAndValue | { name: string; value: undefined };
+type TempNameAndValue =
+  | ((NameAndValue | { name: string; value: undefined }) & {
+      /**
+       * The value stays on one line and is cut where the column ends, as a
+       * file's name is. Any other value continues on the next line.
+       */
+      onOneLine?: boolean;
+    })
+  | { whole: React.JSX.Element };
 
 /** The rows of the General tab. `t` translates their names (from useTranslation). */
 export function createGeneralDataRows(
@@ -17,6 +26,7 @@ export function createGeneralDataRows(
   const nameAndValues: TempNameAndValue[] = [
     {
       name: t('photoData.general.fileName'),
+      onOneLine: true,
       value: (
         <GridRow
           loadedPhotoData={loadedPhotoData}
@@ -47,24 +57,34 @@ export function createGeneralDataRows(
       ),
     },
     {
-      name: (
-        <div>
-          {t('photoData.general.latitude')}
-          <br />
-          {t('photoData.general.longitude')}
-        </div>
-      ),
-      value: <LatLngRow loadedPhotoData={loadedPhotoData} />,
+      // One row for the two, which lays out its own names and numbers.
+      whole: <LatLngRow loadedPhotoData={loadedPhotoData} style={fontSize} />,
     },
   ];
 
   const generalDataRows: NameValueGridRow[] = nameAndValues.map(
     (nameAndValue, index) => {
+      if ('whole' in nameAndValue) {
+        return {
+          id: index,
+          parentId: null,
+          name: '',
+          value: '',
+          whole: nameAndValue.whole,
+        };
+      }
       return {
         id: index,
         parentId: null,
         name: <div style={fontSize}>{nameAndValue.name}</div>,
-        value: <div style={fontSize}>{nameAndValue.value ?? ''}</div>,
+        value: (
+          <div
+            style={fontSize}
+            className={nameAndValue.onOneLine ? undefined : classes.wrap}
+          >
+            {nameAndValue.value ?? ''}
+          </div>
+        ),
       };
     }
   );

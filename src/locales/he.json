@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "תפריט",
+    "label": "תפריט",
+    "home": "בית",
+    "demo": "הדגמה",
+    "settings": "הגדרות",
+    "language": "שפה (Language)",
+    "about": "אודות"
+  },
+  "pageTitle": {
+    "demo": "הדגמה - {{appName}}",
+    "settings": "הגדרות - {{appName}}",
+    "language": "שפה - {{appName}}",
+    "about": "אודות - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "יש לבחור תמונה כדי להציג את נתוני ה-EXIF.",
+    "selectPhoto": "בחירת תמונה",
+    "tabs": {
+      "data": "נתונים",
+      "map": "מפה",
+      "photo": "תמונה"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "התמונה שנבחרה תוצג כאן.",
+    "loading": "טוען את התמונה שנבחרה...",
+    "rotate": "סיבוב התמונה",
+    "unsupportedFileFormat": "תבנית הקובץ אינה נתמכת"
+  },
+  "map": {
+    "loading": "המפה נטענת",
+    "locationNotAvailable": "נתוני מיקום (קו רוחב וקו אורך) אינם זמינים.",
+    "cannotBeShown": "לא ניתן להציג את המפה."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "כללי",
+      "details": "פרטים",
+      "rawData": "נתונים גולמיים"
+    },
+    "columns": {
+      "name": "שם",
+      "value": "ערך"
+    },
+    "noData": "אין נתונים",
+    "notAvailable": "לא זמין",
+    "loading": "טוען...",
+    "general": {
+      "fileName": "שם הקובץ",
+      "fileSize": "גודל הקובץ",
+      "widthHeight": "רוחב × גובה",
+      "dateTaken": "תאריך הצילום",
+      "latitude": "קו רוחב",
+      "longitude": "קו אורך",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "הצגה במפות Google",
+      "showInGoogleStreetView": "הצגה ב-Google Street View",
+      "iosNote": "למשתמשי iOS: במקרים מסוימים iOS מסיר חלק מנתוני ה-EXIF (לדוגמה, קו רוחב וקו אורך). לפרטים, אפשר לעיין ב<pageLink>דף הזה</pageLink>."
+    },
+    "rawData": {
+      "description": "להלן הנתונים הגולמיים שהתקבלו באמצעות <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "תבנית הקובץ אינה נתמכת",
+    "message": "נתוני EXIF אינם זמינים.",
+    "close": "סגירה"
+  },
+  "pageNotShown": {
+    "message": "משהו השתבש, ולא ניתן להציג את הדף הזה.",
+    "reload": "טעינה מחדש"
+  },
+  "demo": {
+    "title": "הדגמה",
+    "description": "בלחיצה על הכפתור ״הפעלת ההדגמה״, היישום מתנהג כאילו נבחרה <photoLink>התמונה הזו</photoLink>.",
+    "runDemo": "הפעלת ההדגמה"
+  },
+  "settings": {
+    "title": "הגדרות",
+    "savedInBrowser": "ההגדרות נשמרות בדפדפן שלך.",
+    "dateTime": {
+      "title": "תבנית תאריך ושעה",
+      "dateFormat": "תבנית תאריך",
+      "clockSystem": "שעון 12 או 24 שעות",
+      "clock12": "12 שעות",
+      "clock24": "24 שעות",
+      "example": "דוגמה"
+    },
+    "usageData": {
+      "title": "נתוני שימוש",
+      "send": "שליחת נתוני שימוש כדי לשפר את היישום",
+      "note": "מה שנשלח מתואר בדף ״אודות״."
+    }
+  },
+  "language": {
+    "title": "שפה",
+    "useBrowserSetting": "שימוש בהגדרת הדפדפן ({{language}})",
+    "search": "חיפוש",
+    "noLanguagesFound": "לא נמצאו שפות",
+    "loadFailed": "לא ניתן היה לטעון את השפה. יש לבדוק את החיבור ולנסות שוב."
+  },
+  "about": {
+    "keptInBrowser": "היישום קורא את נתוני ה-EXIF מהקובץ שלך בתוך הדפדפן, <br/>ולכן הקובץ נשאר בדפדפן ואינו נשלח לשום שרת.",
+    "usageData": "כדי לשפר את היישום, נאסף מידע על השימוש, כגון <br/>אילו דפים נפתחים, מהי תבנית הקובץ של התמונה שנטענה ואילו <br/>שגיאות אירעו, יחד עם כתובת ה-IP שלך והמיקום המשוער <br/>הנגזר ממנה. ניתן לכבות זאת ב<settingsLink>הגדרות</settingsLink>.",
+    "reportIssues": "אם מצאת באגים או בעיות, אפשר לדווח עליהם ב-<issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "קוד המקור של היישום מתארח ב-<gitHubLink>GitHub</gitHubLink>.",
+    "translations": "תרגומים לשפות נוספות יתקבלו בברכה: אפשר לעיין ב<guideLink>הסבר על תרגום היישום</guideLink>.",
+    "developedBy": "היישום מפותח על ידי Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "פרופיל X (לשעבר Twitter)",
+      "title": "פתיחת פרופיל X (לשעבר Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "פרופיל GitHub",
+      "title": "פתיחת פרופיל GitHub"
+    },
+    "photoLocationMap": "רוצה לראות על מפה את המיקומים של תמונות רבות בבת אחת?<br/> לשם כך קיים <plmLink>Photo Location Map</plmLink>."
+  }
+}

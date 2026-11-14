@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "मेन्यू",
+    "label": "मेन्यू",
+    "home": "होम",
+    "demo": "डेमो",
+    "settings": "सेटिंग",
+    "language": "भाषा (Language)",
+    "about": "परिचय"
+  },
+  "pageTitle": {
+    "demo": "डेमो - {{appName}}",
+    "settings": "सेटिंग - {{appName}}",
+    "language": "भाषा - {{appName}}",
+    "about": "परिचय - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "EXIF डेटा देखने के लिए अपनी फ़ोटो चुनें।",
+    "selectPhoto": "फ़ोटो चुनें",
+    "tabs": {
+      "data": "डेटा",
+      "map": "मैप",
+      "photo": "फ़ोटो"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "चुनी गई फ़ोटो यहाँ दिखाई जाएगी।",
+    "loading": "चुनी गई फ़ोटो लोड हो रही है...",
+    "rotate": "फ़ोटो घुमाएँ",
+    "unsupportedFileFormat": "असमर्थित फ़ाइल फ़ॉर्मैट"
+  },
+  "map": {
+    "loading": "मैप लोड हो रहा है",
+    "locationNotAvailable": "जगह की जानकारी (अक्षांश और देशांतर) उपलब्ध नहीं है।",
+    "cannotBeShown": "मैप नहीं दिखाया जा सकता।"
+  },
+  "photoData": {
+    "tabs": {
+      "general": "सामान्य",
+      "details": "विवरण",
+      "rawData": "रॉ डेटा"
+    },
+    "columns": {
+      "name": "नाम",
+      "value": "मान"
+    },
+    "noData": "कोई डेटा नहीं",
+    "notAvailable": "उपलब्ध नहीं",
+    "loading": "लोड हो रहा है...",
+    "general": {
+      "fileName": "फ़ाइल का नाम",
+      "fileSize": "फ़ाइल का आकार",
+      "widthHeight": "चौड़ाई × ऊँचाई",
+      "dateTaken": "फ़ोटो लेने की तारीख",
+      "latitude": "अक्षांश",
+      "longitude": "देशांतर",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Google Maps में दिखाएँ",
+      "showInGoogleStreetView": "Google Street View में दिखाएँ",
+      "iosNote": "iOS उपयोगकर्ताओं के लिए: कुछ मामलों में iOS कुछ EXIF डेटा (जैसे अक्षांश और देशांतर) हटा देता है। विवरण के लिए <pageLink>यह पेज</pageLink> पढ़ें।"
+    },
+    "rawData": {
+      "description": "नीचे <exifrLink>exifr</exifrLink> से प्राप्त रॉ डेटा है।"
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "असमर्थित फ़ाइल फ़ॉर्मैट",
+    "message": "EXIF डेटा उपलब्ध नहीं है।",
+    "close": "बंद करें"
+  },
+  "pageNotShown": {
+    "message": "कुछ गड़बड़ हो गई, और यह पेज नहीं दिखाया जा सकता।",
+    "reload": "फिर से लोड करें"
+  },
+  "demo": {
+    "title": "डेमो",
+    "description": "“डेमो चलाएँ” बटन पर क्लिक करने पर, यह ऐप ऐसे काम करता है जैसे <photoLink>यह फ़ोटो</photoLink> चुनी गई हो।",
+    "runDemo": "डेमो चलाएँ"
+  },
+  "settings": {
+    "title": "सेटिंग",
+    "savedInBrowser": "सेटिंग आपके ब्राउज़र में सेव की जाती हैं।",
+    "dateTime": {
+      "title": "तारीख और समय का फ़ॉर्मैट",
+      "dateFormat": "तारीख का फ़ॉर्मैट",
+      "clockSystem": "12 या 24 घंटे का फ़ॉर्मैट",
+      "clock12": "12 घंटे",
+      "clock24": "24 घंटे",
+      "example": "उदाहरण"
+    },
+    "usageData": {
+      "title": "उपयोग डेटा",
+      "send": "इस ऐप को बेहतर बनाने के लिए उपयोग डेटा भेजें",
+      "note": "क्या भेजा जाता है, यह “परिचय” पेज पर बताया गया है।"
+    }
+  },
+  "language": {
+    "title": "भाषा",
+    "useBrowserSetting": "ब्राउज़र की सेटिंग का उपयोग करें ({{language}})",
+    "search": "खोजें",
+    "noLanguagesFound": "कोई भाषा नहीं मिली",
+    "loadFailed": "भाषा लोड नहीं हो सकी। अपना कनेक्शन जाँचें और फिर से कोशिश करें।"
+  },
+  "about": {
+    "keptInBrowser": "यह ऐप आपके ब्राउज़र के भीतर ही आपकी फ़ाइल से EXIF डेटा पढ़ता है, <br/>इसलिए फ़ाइल आपके ब्राउज़र में ही रहती है और किसी सर्वर पर नहीं भेजी जाती।",
+    "usageData": "इस ऐप को बेहतर बनाने के लिए उपयोग की जानकारी इकट्ठा की जाती है, जैसे <br/>कौन-से पेज खोले गए, लोड की गई फ़ोटो का फ़ाइल फ़ॉर्मैट क्या था और कौन-सी <br/>गड़बड़ियाँ हुईं, साथ ही आपका IP पता और उससे निकाली गई <br/>अनुमानित जगह। आप इसे <settingsLink>सेटिंग</settingsLink> में बंद कर सकते हैं।",
+    "reportIssues": "अगर आपको कोई बग या समस्या मिले, तो कृपया उसे <issuesLink>GitHub Issues</issuesLink> में दर्ज करें।",
+    "sourceCode": "इस ऐप का सोर्स कोड <gitHubLink>GitHub</gitHubLink> पर उपलब्ध है।",
+    "translations": "दूसरी भाषाओं में अनुवाद का स्वागत है: <guideLink>इस ऐप का अनुवाद कैसे करें</guideLink> देखें।",
+    "developedBy": "यह ऐप Tomoyuki Aota द्वारा विकसित किया गया है।",
+    "xProfile": {
+      "alt": "X (पहले Twitter) प्रोफ़ाइल",
+      "title": "X (पहले Twitter) प्रोफ़ाइल खोलें"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub प्रोफ़ाइल",
+      "title": "GitHub प्रोफ़ाइल खोलें"
+    },
+    "photoLocationMap": "क्या आप कई फ़ोटो की जगहें एक साथ मैप पर देखना चाहते हैं?<br/> इसके लिए <plmLink>Photo Location Map</plmLink> उपलब्ध है।"
+  }
+}

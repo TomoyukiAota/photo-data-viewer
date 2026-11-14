@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Start",
+    "demo": "Demo",
+    "settings": "Instellingen",
+    "language": "Taal (Language)",
+    "about": "Over"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Instellingen - {{appName}}",
+    "language": "Taal - {{appName}}",
+    "about": "Over - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Selecteer je foto om de EXIF-gegevens te bekijken.",
+    "selectPhoto": "Selecteer foto",
+    "tabs": {
+      "data": "Gegevens",
+      "map": "Kaart",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "De geselecteerde foto wordt hier weergegeven.",
+    "loading": "De geselecteerde foto wordt geladen...",
+    "rotate": "Roteer foto",
+    "unsupportedFileFormat": "Niet-ondersteunde bestandsindeling"
+  },
+  "map": {
+    "loading": "De kaart wordt geladen",
+    "locationNotAvailable": "Locatiegegevens (breedtegraad en lengtegraad) zijn niet beschikbaar.",
+    "cannotBeShown": "De kaart kan niet worden weergegeven."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Algemeen",
+      "details": "Details",
+      "rawData": "Onbewerkte gegevens"
+    },
+    "columns": {
+      "name": "Naam",
+      "value": "Waarde"
+    },
+    "noData": "Geen gegevens",
+    "notAvailable": "Niet beschikbaar",
+    "loading": "Laden...",
+    "general": {
+      "fileName": "Bestandsnaam",
+      "fileSize": "Bestands\u00adgrootte",
+      "widthHeight": "Breedte × hoogte",
+      "dateTaken": "Opnamedatum",
+      "latitude": "Breedtegraad",
+      "longitude": "Lengtegraad",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Toon in Google Maps",
+      "showInGoogleStreetView": "Toon in Google Street View",
+      "iosNote": "Voor iOS-gebruikers: iOS verwijdert in sommige gevallen bepaalde EXIF-gegevens (bijv. breedtegraad en lengtegraad). Lees <pageLink>deze pagina</pageLink> voor meer informatie."
+    },
+    "rawData": {
+      "description": "Hieronder staan de onbewerkte gegevens die met <exifrLink>exifr</exifrLink> zijn opgehaald."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Niet-ondersteunde bestandsindeling",
+    "message": "EXIF-gegevens zijn niet beschikbaar.",
+    "close": "Sluit"
+  },
+  "pageNotShown": {
+    "message": "Er is iets misgegaan en deze pagina kan niet worden weergegeven.",
+    "reload": "Laad opnieuw"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Wanneer je op de knop ‘Start demo’ klikt, gedraagt de app zich alsof <photoLink>deze foto</photoLink> is geselecteerd.",
+    "runDemo": "Start demo"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "savedInBrowser": "De instellingen worden in je browser bewaard.",
+    "dateTime": {
+      "title": "Datum- en tijdnotatie",
+      "dateFormat": "Datumnotatie",
+      "clockSystem": "12- of 24-uursnotatie",
+      "clock12": "12-uursnotatie",
+      "clock24": "24-uursnotatie",
+      "example": "Voorbeeld"
+    },
+    "usageData": {
+      "title": "Gebruiksgegevens",
+      "send": "Verstuur gebruiksgegevens om deze app te verbeteren",
+      "note": "Wat er wordt verzonden, staat beschreven op de pagina ‘Over’."
+    }
+  },
+  "language": {
+    "title": "Taal",
+    "useBrowserSetting": "Gebruik de instelling van de browser ({{language}})",
+    "search": "Zoek",
+    "noLanguagesFound": "Geen talen gevonden",
+    "loadFailed": "De taal kan niet worden geladen. Controleer je verbinding en probeer het opnieuw."
+  },
+  "about": {
+    "keptInBrowser": "Deze app haalt de EXIF-gegevens uit je bestand binnen je browser, <br/>dus het bestand blijft in je browser en wordt niet naar een server verzonden.",
+    "usageData": "Om deze app te verbeteren, worden gebruiksgegevens verzameld, zoals <br/>welke pagina’s worden geopend, welke bestandsindeling de geladen foto heeft en welke <br/>fouten optreden, samen met je IP-adres en de geschatte locatie <br/>die daarvan is afgeleid. Je kunt dit uitschakelen in <settingsLink>Instellingen</settingsLink>.",
+    "reportIssues": "Als je bugs of problemen vindt, meld ze dan in <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "De broncode van deze app staat op <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Vertalingen in andere talen zijn welkom: zie <guideLink>hoe je deze app vertaalt</guideLink>.",
+    "developedBy": "Deze app wordt ontwikkeld door Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Profiel op X (voorheen Twitter)",
+      "title": "Open het profiel op X (voorheen Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-profiel",
+      "title": "Open het GitHub-profiel"
+    },
+    "photoLocationMap": "Wil je de locaties van veel foto’s tegelijk op een kaart zien?<br/> Daarvoor is <plmLink>Photo Location Map</plmLink> beschikbaar."
+  }
+}

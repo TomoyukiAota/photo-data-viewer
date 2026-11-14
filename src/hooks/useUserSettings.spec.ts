@@ -1,14 +1,26 @@
 import { act, render, renderHook } from '@testing-library/react';
 import { createElement } from 'react';
+import {
+  trackLoadedLanguageInUse,
+  trackLoadedUserSetting,
+} from '../analytics/track-event';
+import { applyLanguage, languageReady } from '../i18n/i18n';
 import { useLocalStorage } from './useLocalStorage';
 import {
   changeSendUsageData,
   initializeUserSettingsIfNeeded,
   useUserSettings,
   useUserSettingsInitializer,
+  useUserSettingsTracker,
 } from './useUserSettings';
 
-afterEach(() => localStorage.clear());
+// What is recorded is checked here, and sent nowhere.
+jest.mock('../analytics/track-event');
+
+afterEach(() => {
+  localStorage.clear();
+  jest.clearAllMocks();
+});
 
 const stored = () =>
   Object.fromEntries(
@@ -52,6 +64,36 @@ describe('useUserSettings', () => {
       WideLayoutPhotoDataPaneFlex: '0.5',
       WideLayoutPhotoImagePaneFlex: '0.5',
     });
+  });
+});
+
+describe('useUserSettingsTracker', () => {
+  afterEach(() => act(() => applyLanguage('en')));
+
+  it('records each setting as it is loaded', () => {
+    localStorage.setItem('DateFormat', 'DD/MM/YYYY');
+    localStorage.setItem('Language', 'ja');
+    const { result } = renderHook(() => useUserSettingsTracker());
+    result.current.trackLoadedUserSettings();
+    expect(jest.mocked(trackLoadedUserSetting).mock.calls).toEqual([
+      ['DateFormat', 'DD/MM/YYYY'],
+      ['ClockSystemFormat', '24-hour'],
+      ['WideLayoutPhotoDataPaneFlex', '0.5'],
+      ['WideLayoutPhotoImagePaneFlex', '0.5'],
+      ['Language', 'ja'],
+    ]);
+  });
+
+  // The setting follows the browser here, which does not tell the language.
+  it('records the language the app is shown in beside the Language setting, once the app shows it', async () => {
+    await act(() => applyLanguage('ja'));
+    const { result } = renderHook(() => useUserSettingsTracker());
+    result.current.trackLoadedUserSettings();
+    expect(trackLoadedUserSetting).toHaveBeenCalledWith('Language', 'auto');
+    expect(trackLoadedLanguageInUse).not.toHaveBeenCalled();
+
+    await languageReady;
+    expect(jest.mocked(trackLoadedLanguageInUse).mock.calls).toEqual([['ja']]);
   });
 });
 

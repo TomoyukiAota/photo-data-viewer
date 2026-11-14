@@ -62,3 +62,14 @@ jobs:
         run: npm run test:e2e
         env:
           PDV_DEV: 1
+
+      - name: Upload the browser tests' results of a failure
+        # Playwright writes there what a failed test saw: its trace, with the page's requests, console and
+        # snapshots. The run keeps nothing else of a test. The attempt is in the name, as a job run again uploads
+        # its own, and a name can be used once in a run.
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: browser-test-results-${{ matrix.os }}-attempt-${{ github.run_attempt }}
+          path: test-results
+          if-no-files-found: ignore

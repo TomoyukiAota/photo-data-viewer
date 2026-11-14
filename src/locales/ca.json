@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menú",
+    "label": "MENÚ",
+    "home": "Inici",
+    "demo": "Demostració",
+    "settings": "Configuració",
+    "language": "Idioma (Language)",
+    "about": "Quant a"
+  },
+  "pageTitle": {
+    "demo": "Demostració - {{appName}}",
+    "settings": "Configuració - {{appName}}",
+    "language": "Idioma - {{appName}}",
+    "about": "Quant a - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Seleccioneu una foto per veure’n les dades EXIF.",
+    "selectPhoto": "Selecciona una foto",
+    "tabs": {
+      "data": "Dades",
+      "map": "Mapa",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "La foto seleccionada es mostrarà aquí.",
+    "loading": "S’està carregant la foto seleccionada...",
+    "rotate": "Gira la foto",
+    "unsupportedFileFormat": "Format de fitxer no compatible"
+  },
+  "map": {
+    "loading": "S’està carregant el mapa",
+    "locationNotAvailable": "Les dades d’ubicació (latitud i longitud) no estan disponibles.",
+    "cannotBeShown": "No es pot mostrar el mapa."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "General",
+      "details": "Detalls",
+      "rawData": "Dades en brut"
+    },
+    "columns": {
+      "name": "Nom",
+      "value": "Valor"
+    },
+    "noData": "No hi ha dades",
+    "notAvailable": "No disponible",
+    "loading": "S’està carregant...",
+    "general": {
+      "fileName": "Nom del fitxer",
+      "fileSize": "Mida del fitxer",
+      "widthHeight": "Amplada × Alçada",
+      "dateTaken": "Data de captura",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Mostra a Google Maps",
+      "showInGoogleStreetView": "Mostra a Google Street View",
+      "iosNote": "Per als usuaris d’iOS: en alguns casos, iOS elimina algunes dades EXIF (p. ex., la latitud i la longitud). Llegiu <pageLink>aquesta pàgina</pageLink> per obtenir-ne més informació."
+    },
+    "rawData": {
+      "description": "A continuació es mostren les dades en brut obtingudes amb <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Format de fitxer no compatible",
+    "message": "Les dades EXIF no estan disponibles.",
+    "close": "Tanca"
+  },
+  "pageNotShown": {
+    "message": "S’ha produït un error i aquesta pàgina no es pot mostrar.",
+    "reload": "Torna a carregar"
+  },
+  "demo": {
+    "title": "Demostració",
+    "description": "Quan feu clic al botó «Executa la demostració», l’aplicació es comporta com si haguéssiu seleccionat <photoLink>aquesta foto</photoLink>.",
+    "runDemo": "Executa la demostració"
+  },
+  "settings": {
+    "title": "Configuració",
+    "savedInBrowser": "La configuració es desa al vostre navegador.",
+    "dateTime": {
+      "title": "Format de data i hora",
+      "dateFormat": "Format de data",
+      "clockSystem": "Format de 12 o 24 hores",
+      "clock12": "12 hores",
+      "clock24": "24 hores",
+      "example": "Exemple"
+    },
+    "usageData": {
+      "title": "Dades d’ús",
+      "send": "Envia dades d’ús per millorar aquesta aplicació",
+      "note": "Allò que s’envia es descriu a la pàgina «Quant a»."
+    }
+  },
+  "language": {
+    "title": "Idioma",
+    "useBrowserSetting": "Utilitza la configuració del navegador ({{language}})",
+    "search": "Cerca",
+    "noLanguagesFound": "No s’ha trobat cap idioma",
+    "loadFailed": "No s’ha pogut carregar l’idioma. Comproveu la connexió i torneu-ho a provar."
+  },
+  "about": {
+    "keptInBrowser": "Aquesta aplicació obté les dades EXIF del vostre fitxer dins del navegador, <br/>de manera que el fitxer es queda al navegador i no s’envia a cap servidor.",
+    "usageData": "Per millorar aquesta aplicació, es recull informació d’ús, com ara <br/>quines pàgines s’obren, quin format de fitxer té la foto carregada i quins <br/>errors es produeixen, juntament amb la vostra adreça IP i la ubicació <br/>aproximada que se’n dedueix. Podeu desactivar-ho a <settingsLink>Configuració</settingsLink>.",
+    "reportIssues": "Si trobeu errors o problemes, comuniqueu-los a <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "El codi font d’aquesta aplicació està allotjat a <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Les traduccions a altres idiomes són benvingudes: consulteu <guideLink>com es tradueix aquesta aplicació</guideLink>.",
+    "developedBy": "Aquesta aplicació està desenvolupada per Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Perfil d’X (abans Twitter)",
+      "title": "Obre el perfil d’X (abans Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Perfil de GitHub",
+      "title": "Obre el perfil de GitHub"
+    },
+    "photoLocationMap": "Voleu veure en un mapa les ubicacions de moltes fotos alhora?<br/> <plmLink>Photo Location Map</plmLink> està disponible per a això."
+  }
+}

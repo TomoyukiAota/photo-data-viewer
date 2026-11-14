@@ -77,11 +77,36 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Two tests run in a browser set to Japanese (`ja-JP`); their screenshots
-(`*-ja.png`) also use the system's Japanese fonts.
+Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
+Arabic (`ar-EG`), the one language written from right to left that the suite
+covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
+for those languages. The suite stays with these three languages and Polish
+(below): every translation file is checked by the unit test
+`src/locales/locales.spec.ts` instead, which takes no longer with more
+languages
+([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
+Three tests run in Polish at the width of a phone (320 pixels). Polish stands
+for the languages that write more than English does: its sentences take more
+lines, and its names of the latitude and the longitude take two each. The
+tests hold the layout to what it is made for, that a text of any length is
+shown whole: the header as high as its text, each name beside its number, a
+field as wide as its label, the dialog and the messages uncut. They find their
+elements by where they are and name no Polish text, so that a change of a
+translation does not break them.
+One test runs as a phone that is touched, where the Language page leaves the
+keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
+so the test is skipped in Firefox.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
+
+When a browser test fails in CI, the run keeps Playwright's results as an
+artifact, `browser-test-results-<os>-attempt-<n>`: the failed test's trace,
+with the page's requests, console and snapshots. Download it from the run's
+summary and open the trace with `npx playwright show-trace <trace.zip>`. The
+test's output in the log already says when its page was loaded, the requests
+that failed and the errors on the page. The repository is public, and so are
+its artifacts: a test uses its fixtures and made-up data only.
 
 For Firefox, install Playwright's matching browser with `npx playwright install
 firefox`, then run `PDV_BROWSER=firefox npm run test:e2e`. On macOS 27, a
@@ -95,6 +120,9 @@ CFFIXED_USER_HOME="$PWD/.upgrade-artifacts/firefox-home" PDV_BROWSER=firefox npm
 
 This setting applies to that command and its child processes. See the
 [upstream issue](https://github.com/microsoft/playwright/issues/42768).
+
+Headless Chrome and Firefox draw no scrollbars, so the screenshot of the
+Language page shows its list without the scrollbar that a window shows.
 
 `PDV_DEV=1 npm run test:e2e` starts a development server on port 3200 and runs
 navigation/photo regression checks, including the About-to-Settings link. Close

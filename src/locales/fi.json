@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "valikko",
+    "label": "VALIKKO",
+    "home": "Etusivu",
+    "demo": "Demo",
+    "settings": "Asetukset",
+    "language": "Kieli (Language)",
+    "about": "Tietoja"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Asetukset - {{appName}}",
+    "language": "Kieli - {{appName}}",
+    "about": "Tietoja - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Valitse kuva nähdäksesi sen EXIF-tiedot.",
+    "selectPhoto": "Valitse kuva",
+    "tabs": {
+      "data": "Tiedot",
+      "map": "Kartta",
+      "photo": "Kuva"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Valittu kuva näytetään tässä.",
+    "loading": "Ladataan valittua kuvaa...",
+    "rotate": "Kierrä kuvaa",
+    "unsupportedFileFormat": "Tiedostomuotoa ei tueta"
+  },
+  "map": {
+    "loading": "Karttaa ladataan",
+    "locationNotAvailable": "Sijaintitiedot (leveys- ja pituusaste) eivät ole saatavilla.",
+    "cannotBeShown": "Karttaa ei voi näyttää."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Yleiset",
+      "details": "Lisätiedot",
+      "rawData": "Raakadata"
+    },
+    "columns": {
+      "name": "Nimi",
+      "value": "Arvo"
+    },
+    "noData": "Ei tietoja",
+    "notAvailable": "Ei saatavilla",
+    "loading": "Ladataan...",
+    "general": {
+      "fileName": "Tiedostonimi",
+      "fileSize": "Tiedostokoko",
+      "widthHeight": "Leveys × korkeus",
+      "dateTaken": "Kuvauspäivä",
+      "latitude": "Leveysaste",
+      "longitude": "Pituusaste",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Näytä Google Mapsissa",
+      "showInGoogleStreetView": "Näytä Google Street View’ssa",
+      "iosNote": "iOS-käyttäjille: iOS poistaa joissakin tapauksissa osan EXIF-tiedoista (esim. leveys- ja pituusasteen). Lue lisätietoja <pageLink>tältä sivulta</pageLink>."
+    },
+    "rawData": {
+      "description": "Alla on <exifrLink>exifr</exifrLink>-kirjastolla haettu raakadata."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Tiedostomuotoa ei tueta",
+    "message": "EXIF-tietoja ei ole saatavilla.",
+    "close": "Sulje"
+  },
+  "pageNotShown": {
+    "message": "Jokin meni vikaan, eikä tätä sivua voi näyttää.",
+    "reload": "Lataa uudelleen"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Kun klikkaat Suorita demo -painiketta, sovellus toimii kuin <photoLink>tämä kuva</photoLink> olisi valittu.",
+    "runDemo": "Suorita demo"
+  },
+  "settings": {
+    "title": "Asetukset",
+    "savedInBrowser": "Asetukset tallennetaan selaimeesi.",
+    "dateTime": {
+      "title": "Päivämäärän ja ajan muoto",
+      "dateFormat": "Päivämäärän muoto",
+      "clockSystem": "12 tai 24 tunnin kello",
+      "clock12": "12 tunnin kello",
+      "clock24": "24 tunnin kello",
+      "example": "Esimerkki"
+    },
+    "usageData": {
+      "title": "Käyttötiedot",
+      "send": "Lähetä käyttötietoja sovelluksen parantamiseksi",
+      "note": "Lähetettävät tiedot kuvataan Tietoja-sivulla."
+    }
+  },
+  "language": {
+    "title": "Kieli",
+    "useBrowserSetting": "Käytä selaimen asetusta ({{language}})",
+    "search": "Hae",
+    "noLanguagesFound": "Kieliä ei löytynyt",
+    "loadFailed": "Kielen lataaminen epäonnistui. Tarkista yhteys ja yritä uudelleen."
+  },
+  "about": {
+    "keptInBrowser": "Tämä sovellus lukee EXIF-tiedot tiedostostasi selaimessasi, <br/>joten tiedosto pysyy selaimessasi eikä sitä lähetetä millekään palvelimelle.",
+    "usageData": "Sovelluksen parantamiseksi kerätään käyttötietoja, kuten <br/>mitä sivuja avataan, missä tiedostomuodossa ladattu kuva on ja mitä <br/>virheitä tapahtuu, sekä IP-osoitteesi ja siitä päätelty likimääräinen <br/>sijainti. Voit poistaa tämän käytöstä <settingsLink>asetuksissa</settingsLink>.",
+    "reportIssues": "Jos löydät virheitä tai ongelmia, ilmoita niistä <issuesLink>GitHub Issues</issuesLink> -sivulla.",
+    "sourceCode": "Tämän sovelluksen lähdekoodi on <gitHubLink>GitHubissa</gitHubLink>.",
+    "translations": "Käännökset muille kielille ovat tervetulleita: katso, <guideLink>miten tämä sovellus käännetään</guideLink>.",
+    "developedBy": "Tämän sovelluksen kehittäjä on Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "X-profiili (aiemmin Twitter)",
+      "title": "Avaa X-profiili (aiemmin Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-profiili",
+      "title": "Avaa GitHub-profiili"
+    },
+    "photoLocationMap": "Haluatko nähdä monen kuvan sijainnit kartalla kerralla?<br/> Sitä varten on <plmLink>Photo Location Map</plmLink>."
+  }
+}

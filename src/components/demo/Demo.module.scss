@@ -41,6 +41,9 @@
   place-items: center;
 }
 
-.run-demo-button {
-  width: 120px;
+// Its width in English; wider for a longer text of another language. Under
+// .run-demo, so that it takes precedence over the min-width that MUI gives its
+// buttons, whatever the order of the two style sheets.
+.run-demo .run-demo-button {
+  min-width: 120px;
 }

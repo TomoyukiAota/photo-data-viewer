@@ -20,10 +20,12 @@ coverage and known limitations.
 
 ## Languages
 
-The application is available in English and Japanese, following the browser's
-language by default. To add a language or improve a translation, see
-[TRANSLATING.md](./docs/TRANSLATING.md); it takes a GitHub account and nothing
-else.
+The application is available in the 42 languages that Windows and macOS are
+localized in, following the browser's language by default; another can be
+chosen on its Language page. Most of the translations are machine translation
+that no speaker has reviewed yet. To review or improve one, or to add a
+language, see [TRANSLATING.md](./docs/TRANSLATING.md); it takes a GitHub
+account and nothing else.
 
 ## To contribute to this project
 

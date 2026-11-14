@@ -5,11 +5,13 @@
     "home": "ホーム",
     "demo": "デモ",
     "settings": "設定",
+    "language": "言語 (Language)",
     "about": "このアプリについて"
   },
   "pageTitle": {
     "demo": "デモ - {{appName}}",
     "settings": "設定 - {{appName}}",
+    "language": "言語 - {{appName}}",
     "about": "このアプリについて - {{appName}}"
   },
   "dateTime": {
@@ -20,7 +22,7 @@
     "selectPhoto": "写真を選択",
     "tabs": {
       "data": "データ",
-      "map": "地図",
+      "map": "マップ",
       "photo": "写真"
     }
   },
@@ -31,9 +33,9 @@
     "unsupportedFileFormat": "対応していないファイル形式です"
   },
   "map": {
-    "loading": "地図を読み込んでいます",
+    "loading": "マップを読み込んでいます",
     "locationNotAvailable": "位置情報（緯度・経度）がありません。",
-    "cannotBeShown": "地図を表示できません。"
+    "cannotBeShown": "マップを表示できません。"
   },
   "photoData": {
     "tabs": {
@@ -81,11 +83,6 @@
   "settings": {
     "title": "設定",
     "savedInBrowser": "設定はブラウザに保存されます。",
-    "language": {
-      "title": "言語",
-      "label": "言語",
-      "auto": "ブラウザの設定に従う（{{language}}）"
-    },
     "dateTime": {
       "title": "日時の形式",
       "dateFormat": "日付の形式",
@@ -100,12 +97,19 @@
       "note": "送信する内容は「このアプリについて」のページに記載しています。"
     }
   },
+  "language": {
+    "title": "言語",
+    "useBrowserSetting": "ブラウザの設定に従う（{{language}}）",
+    "search": "検索",
+    "noLanguagesFound": "言語が見つかりません",
+    "loadFailed": "言語を読み込めませんでした。接続を確認して、もう一度お試しください。"
+  },
   "about": {
     "keptInBrowser": "このアプリは、ブラウザ内部でファイルから EXIF データを読み取ります。<br/>ファイルはブラウザ内部で処理され、サーバーには送信されません。",
     "usageData": "このアプリの改善のため、開いたページ、読み込んだ写真のファイル形式、発生したエラーなどの使用状況を、<br/>IP アドレスとそこから推定されるおおよその位置とともに収集しています。<br/>これは<settingsLink>設定</settingsLink>でオフにできます。",
     "reportIssues": "不具合や問題を見つけた場合は、<issuesLink>GitHub Issues</issuesLink> に報告してください。",
     "sourceCode": "このアプリのソースコードは <gitHubLink>GitHub</gitHubLink> で公開しています。",
-    "translations": "ほかの言語への翻訳を歓迎します。<guideLink>翻訳のしかた</guideLink>をご覧ください。",
+    "translations": "他の言語への翻訳を歓迎します。<guideLink>翻訳のしかた</guideLink>をご覧ください。",
     "developedBy": "このアプリは Tomoyuki Aota が開発しています。",
     "xProfile": {
       "alt": "X（旧 Twitter）のプロフィール",
@@ -115,6 +119,6 @@
       "alt": "GitHub のプロフィール",
       "title": "GitHub のプロフィールを開く"
     },
-    "photoLocationMap": "多くの写真の撮影場所を一度に地図で見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
+    "photoLocationMap": "多くの写真の撮影場所を一度にマップで見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
   }
 }

@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menü",
+    "label": "MENÜ",
+    "home": "Kezdőlap",
+    "demo": "Demó",
+    "settings": "Beállítások",
+    "language": "Nyelv (Language)",
+    "about": "Névjegy"
+  },
+  "pageTitle": {
+    "demo": "Demó - {{appName}}",
+    "settings": "Beállítások - {{appName}}",
+    "language": "Nyelv - {{appName}}",
+    "about": "Névjegy - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Válasszon ki egy fotót az EXIF-adatok megjelenítéséhez.",
+    "selectPhoto": "Fotó kiválasztása",
+    "tabs": {
+      "data": "Adatok",
+      "map": "Térkép",
+      "photo": "Fotó"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "A kiválasztott fotó itt jelenik meg.",
+    "loading": "A kiválasztott fotó betöltése...",
+    "rotate": "Fotó elforgatása",
+    "unsupportedFileFormat": "Nem támogatott fájlformátum"
+  },
+  "map": {
+    "loading": "A térkép betöltése folyamatban van",
+    "locationNotAvailable": "A helyadatok (földrajzi szélesség és hosszúság) nem érhetők el.",
+    "cannotBeShown": "A térkép nem jeleníthető meg."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Általános",
+      "details": "Részletek",
+      "rawData": "Nyers adatok"
+    },
+    "columns": {
+      "name": "Név",
+      "value": "Érték"
+    },
+    "noData": "Nincs adat",
+    "notAvailable": "Nem érhető el",
+    "loading": "Betöltés...",
+    "general": {
+      "fileName": "Fájlnév",
+      "fileSize": "Fájlméret",
+      "widthHeight": "Szélesség × magasság",
+      "dateTaken": "Készítés dátuma",
+      "latitude": "Földrajzi szélesség",
+      "longitude": "Földrajzi hosszúság",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Megjelenítés a Google Térképen",
+      "showInGoogleStreetView": "Megjelenítés a Google Utcaképben",
+      "iosNote": "iOS-felhasználóknak: az iOS bizonyos esetekben eltávolít egyes EXIF-adatokat (pl. a földrajzi szélességet és hosszúságot). A részletekért olvassa el <pageLink>ezt az oldalt</pageLink>."
+    },
+    "rawData": {
+      "description": "Alább az <exifrLink>exifr</exifrLink> segítségével kinyert nyers adatok láthatók."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Nem támogatott fájlformátum",
+    "message": "Az EXIF-adatok nem érhetők el.",
+    "close": "Bezárás"
+  },
+  "pageNotShown": {
+    "message": "Hiba történt, ezért ez az oldal nem jeleníthető meg.",
+    "reload": "Újratöltés"
+  },
+  "demo": {
+    "title": "Demó",
+    "description": "A „Demó futtatása” gombra kattintva az alkalmazás úgy viselkedik, mintha <photoLink>ezt a fotót</photoLink> választotta volna ki.",
+    "runDemo": "Demó futtatása"
+  },
+  "settings": {
+    "title": "Beállítások",
+    "savedInBrowser": "A beállításokat a böngészője tárolja.",
+    "dateTime": {
+      "title": "Dátum- és időformátum",
+      "dateFormat": "Dátumformátum",
+      "clockSystem": "12 vagy 24 órás formátum",
+      "clock12": "12 órás formátum",
+      "clock24": "24 órás formátum",
+      "example": "Példa"
+    },
+    "usageData": {
+      "title": "Használati adatok",
+      "send": "Használati adatok küldése az alkalmazás fejlesztéséhez",
+      "note": "Az elküldött adatok leírása a Névjegy oldalon található."
+    }
+  },
+  "language": {
+    "title": "Nyelv",
+    "useBrowserSetting": "A böngésző beállításának használata ({{language}})",
+    "search": "Keresés",
+    "noLanguagesFound": "Nem található nyelv",
+    "loadFailed": "A nyelvet nem sikerült betölteni. Ellenőrizze a kapcsolatot, majd próbálja újra."
+  },
+  "about": {
+    "keptInBrowser": "Ez az alkalmazás a böngészőjén belül olvassa ki az EXIF-adatokat a fájljából, <br/>így a fájl a böngészőjében marad, és semmilyen szerverre nem küldjük el.",
+    "usageData": "Az alkalmazás fejlesztése érdekében használati adatokat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fotó és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
+    "reportIssues": "Ha hibát vagy problémát talál, kérjük, jelezze a <issuesLink>GitHub Issues</issuesLink> oldalon.",
+    "sourceCode": "Az alkalmazás forráskódja a <gitHubLink>GitHubon</gitHubLink> érhető el.",
+    "translations": "Szívesen fogadjuk a más nyelvekre készült fordításokat: lásd <guideLink>az alkalmazás fordításának módját</guideLink>.",
+    "developedBy": "Az alkalmazást Tomoyuki Aota fejleszti.",
+    "xProfile": {
+      "alt": "X-profil (korábban Twitter)",
+      "title": "Az X-profil (korábban Twitter) megnyitása"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-profil",
+      "title": "A GitHub-profil megnyitása"
+    },
+    "photoLocationMap": "Szeretné egyszerre, térképen látni sok fotó készítési helyét?<br/> Erre szolgál a <plmLink>Photo Location Map</plmLink>."
+  }
+}

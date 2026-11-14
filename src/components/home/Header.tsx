@@ -3,6 +3,7 @@ import { useContext, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
+import { AppMenuRoom } from '../app-menu/AppMenu';
 import classes from './Header.module.scss';
 
 const Header: React.FC<{ className?: string }> = (props) => {
@@ -48,8 +49,8 @@ const Header: React.FC<{ className?: string }> = (props) => {
   };
 
   return (
-    <div className={`${props.className} ${classes.header}`}>
-      <div>
+    <div className={`${props.className ?? ''} ${classes.header}`}>
+      <div className={classes.content}>
         <div className={classes.text}>{t('home.selectYourPhoto')}</div>
         <Button
           variant='outlined'
@@ -66,6 +67,8 @@ const Header: React.FC<{ className?: string }> = (props) => {
           className={classes.input}
         />
       </div>
+      {/* The menu's button lies over this end of the header. */}
+      <AppMenuRoom className={classes['menu-room']} />
     </div>
   );
 };

@@ -9,13 +9,11 @@
   grid:
     'page-title'          auto
     'page-description'    auto
-    'language-settings'   auto
     'date-time-settings'  auto
     'usage-data-settings' auto
     / auto;
   .page-title          { grid-area: page-title;          }
   .page-description    { grid-area: page-description;    }
-  .language-settings   { grid-area: language-settings;   }
   .date-time-settings  { grid-area: date-time-settings;  }
   .usage-data-settings { grid-area: usage-data-settings; }
 }
@@ -33,17 +31,6 @@
   }
 }
 
-.language-settings {
-  padding: 50px 0 0 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.language-settings-title {
-  padding: 0 0 20px 0;
-  font-weight: bold;
-}
-
 .date-time-settings {
   padding: 50px 0;
   display: flex;
@@ -55,9 +42,42 @@
   font-weight: bold;
 }
 
+// Side by side while the window has room for both, as they are in English,
+// and one under the other otherwise. The space between two rows leaves room
+// for the label that is on the lower field's border.
 .date-time-settings-select {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 20px 10px;
+}
+
+// TL;DR: The box of a field (FieldBox), as wide as the wider of the field
+// itself and the field's label.
+// Details: The box lays out the label, without showing it, in the size that
+// the field shows it in, over the field, and is as wide as the wider of the
+// two; the field fills it. The label is in ::before rather than in an
+// element, so that it is neither read out nor found as a text of the page.
+// Photo Location Map sizes its fields with such a box too. A box is never
+// wider than the page: a label longer than that is cut by MUI, which no
+// language's is at 320 pixels.
+.field-box {
+  display: inline-grid;
+  max-width: 100%;
+
+  // The label, which the field shows at three quarters of its size, and the
+  // room that MUI keeps free beside it: 24 pixels, and a little for rounding.
+  &::before {
+    content: attr(data-label);
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    white-space: pre;
+    // The font of MUI's fields.
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.00938em;
+    padding-inline: 13px;
+  }
 }
 
 .date-time-settings-example {
@@ -65,6 +85,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-wrap: anywhere;
 }
 
 .usage-data-settings {

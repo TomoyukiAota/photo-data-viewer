@@ -5,4 +5,12 @@
   justify-content: center;
   align-items: center;
   color: white;
+  // TL;DR: A sentence wider than the pane continues on the next line, in the
+  // middle as well, and clear of the pane's edges.
+  // Details: The 6 pixels on each side are what the English sentence leaves
+  // free in a window of 320 pixels, the narrowest, so that it stays on one
+  // line there as it always was.
+  padding: 0 6px;
+  text-align: center;
+  overflow-wrap: anywhere;
 }

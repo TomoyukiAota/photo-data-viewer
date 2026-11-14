@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Accueil",
+    "demo": "Démo",
+    "settings": "Paramètres",
+    "language": "Langue (Language)",
+    "about": "À propos"
+  },
+  "pageTitle": {
+    "demo": "Démo - {{appName}}",
+    "settings": "Paramètres - {{appName}}",
+    "language": "Langue - {{appName}}",
+    "about": "À propos - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Sélectionnez votre photo pour afficher ses données EXIF.",
+    "selectPhoto": "Sélectionner une photo",
+    "tabs": {
+      "data": "Données",
+      "map": "Carte",
+      "photo": "Photo"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "La photo sélectionnée s’affichera ici.",
+    "loading": "Chargement de la photo sélectionnée...",
+    "rotate": "Faire pivoter la photo",
+    "unsupportedFileFormat": "Format de fichier non pris en charge"
+  },
+  "map": {
+    "loading": "Chargement de la carte",
+    "locationNotAvailable": "Les données de localisation (latitude et longitude) ne sont pas disponibles.",
+    "cannotBeShown": "Impossible d’afficher la carte."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Général",
+      "details": "Détails",
+      "rawData": "Données brutes"
+    },
+    "columns": {
+      "name": "Nom",
+      "value": "Valeur"
+    },
+    "noData": "Aucune donnée",
+    "notAvailable": "Non disponible",
+    "loading": "Chargement...",
+    "general": {
+      "fileName": "Nom du fichier",
+      "fileSize": "Taille du fichier",
+      "widthHeight": "Largeur × Hauteur",
+      "dateTaken": "Date de prise de vue",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Afficher dans Google Maps",
+      "showInGoogleStreetView": "Afficher dans Google Street View",
+      "iosNote": "Pour les utilisateurs d’iOS\u00a0: dans certains cas, iOS supprime certaines données EXIF (par exemple la latitude et la longitude). Consultez <pageLink>cette page</pageLink> pour en savoir plus."
+    },
+    "rawData": {
+      "description": "Voici les données brutes obtenues avec <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Format de fichier non pris en charge",
+    "message": "Les données EXIF ne sont pas disponibles.",
+    "close": "Fermer"
+  },
+  "pageNotShown": {
+    "message": "Une erreur s’est produite et cette page ne peut pas être affichée.",
+    "reload": "Recharger"
+  },
+  "demo": {
+    "title": "Démo",
+    "description": "Lorsque vous cliquez sur le bouton «\u00a0Lancer la démo\u00a0», l’application se comporte comme si <photoLink>cette photo</photoLink> avait été sélectionnée.",
+    "runDemo": "Lancer la démo"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "savedInBrowser": "Les paramètres sont enregistrés dans votre navigateur.",
+    "dateTime": {
+      "title": "Format de la date et de l’heure",
+      "dateFormat": "Format de la date",
+      "clockSystem": "Format 12 ou 24 heures",
+      "clock12": "12 heures",
+      "clock24": "24 heures",
+      "example": "Exemple"
+    },
+    "usageData": {
+      "title": "Données d’utilisation",
+      "send": "Envoyer des données d’utilisation pour améliorer cette application",
+      "note": "Ce qui est envoyé est décrit sur la page À propos."
+    }
+  },
+  "language": {
+    "title": "Langue",
+    "useBrowserSetting": "Utiliser le réglage du navigateur ({{language}})",
+    "search": "Rechercher",
+    "noLanguagesFound": "Aucune langue trouvée",
+    "loadFailed": "Impossible de charger la langue. Vérifiez votre connexion, puis réessayez."
+  },
+  "about": {
+    "keptInBrowser": "Cette application lit les données EXIF de votre fichier dans votre navigateur\u00a0; <br/>le fichier reste donc dans votre navigateur et n’est envoyé à aucun serveur.",
+    "usageData": "Pour améliorer cette application, des données d’utilisation sont collectées, <br/>comme les pages ouvertes, le format de fichier de la photo chargée et les <br/>erreurs survenues, ainsi que votre adresse IP et la localisation approximative <br/>qui en est déduite. Vous pouvez désactiver cela dans les <settingsLink>Paramètres</settingsLink>.",
+    "reportIssues": "Si vous trouvez des bogues ou des problèmes, signalez-les dans <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Le code source de cette application est hébergé sur <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Les traductions dans d’autres langues sont les bienvenues\u00a0: voir <guideLink>comment traduire cette application</guideLink>.",
+    "developedBy": "Cette application est développée par Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Profil X (anciennement Twitter)",
+      "title": "Ouvrir le profil X (anciennement Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Profil GitHub",
+      "title": "Ouvrir le profil GitHub"
+    },
+    "photoLocationMap": "Vous voulez voir sur une carte les lieux de nombreuses photos à la fois\u00a0?<br/> <plmLink>Photo Location Map</plmLink> est fait pour cela."
+  }
+}

@@ -8,6 +8,7 @@ import {
 import { Check } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -15,12 +16,18 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useIsRtl } from '../../direction/DirectionProvider';
 import classes from './AppMenu.module.scss';
 
 interface Page {
   pathname: string;
   /** The key of the page's name in src/locales. */
-  nameKey: 'menu.home' | 'menu.demo' | 'menu.settings' | 'menu.about';
+  nameKey:
+    | 'menu.home'
+    | 'menu.demo'
+    | 'menu.settings'
+    | 'menu.language'
+    | 'menu.about';
   icon: React.JSX.Element;
 }
 
@@ -28,13 +35,45 @@ const pages: Page[] = [
   { pathname: '/', nameKey: 'menu.home', icon: <HomeIcon /> },
   { pathname: '/demo', nameKey: 'menu.demo', icon: <PlayArrowIcon /> },
   { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
+  { pathname: '/language', nameKey: 'menu.language', icon: <LanguageIcon /> },
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
 ];
+
+/** What the menu's button shows: the icon, and the word for a menu under it. */
+const AppMenuFace: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <div className={classes['menu-icon-wrapper']}>
+      <MenuIcon className={classes['menu-icon']} />
+      <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
+    </div>
+  );
+};
+
+/**
+ * Room as wide as the menu's button, for a page to keep free where the button
+ * lies over it, at the end of its first lines.
+ *
+ * TL;DR: It is the button's own content, not drawn, so it is as wide as the
+ * button in every language.
+ * Details: The button is as wide as the word under its icon, which differs
+ * from language to language (MENU, メニュー, IZBORNIK). A width set here in
+ * pixels would be too small for one of them, or leave a gap for the others.
+ */
+export const AppMenuRoom: React.FC<{ className?: string }> = (props) => (
+  <div
+    className={`${classes.room} ${props.className ?? ''}`}
+    aria-hidden='true'
+  >
+    <AppMenuFace />
+  </div>
+);
 
 const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
   props,
 ) => {
   const { t } = useTranslation();
+  const isRtl = useIsRtl();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
@@ -56,7 +95,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
       className={props.className}
       style={{
         top: '30px',
-        right: '10px',
+        insetInlineEnd: '10px', // The right, or the left in a language written from right to left.
         display: props.isVisible ? 'block' : 'none',
       }}
     >
@@ -66,17 +105,14 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         aria-label={t('menu.buttonLabel')}
         onClick={handleOpenMenu}
       >
-        <div className={classes['menu-icon-wrapper']}>
-          <MenuIcon className={classes['menu-icon']} />
-          <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
-        </div>
+        <AppMenuFace />
       </IconButton>
       <Menu
         id='menu-appbar'
         anchorEl={anchorElNav}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: isRtl ? 'right' : 'left', // The button's side towards the page.
         }}
         keepMounted
         transformOrigin={{
@@ -95,6 +131,8 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
             <MenuItem
               key={page.pathname}
               onClick={() => handleMenuItemClicked(page)}
+              // A name wider than the window continues on the next line.
+              sx={{ whiteSpace: 'normal' }}
             >
               <ListItemIcon>
                 <Check

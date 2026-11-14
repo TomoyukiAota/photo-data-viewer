@@ -15,7 +15,9 @@ const GridRow: React.FC<{
     return <div>{t('photoData.notAvailable')}</div>;
   }
 
-  return <div>{props.data}</div>;
+  // A photo's data, in whatever language it is written: it takes its own
+  // direction, so that "3.09 MB" keeps its order in a right-to-left language.
+  return <div dir='auto'>{props.data}</div>;
 };
 
 export default GridRow;

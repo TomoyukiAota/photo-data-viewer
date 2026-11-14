@@ -132,12 +132,31 @@ for (const [window, env] of [
     );
     const result = await runInElectron('demo.jpg', env, { language: 'ja' });
     expect(result.lang).toBe('ja');
+    expect(result.dir).toBe('ltr');
     expect(result.text).toContain('全般'); // The General tab.
     expect(result.text).not.toContain('General');
     expect(result.title).toBe('demo.jpg - Photo Location Map');
     expect(result.errors).toEqual([]);
   });
 }
+
+test('embedded mode lays a language written from right to left out from the right, in the isolated window', async () => {
+  test.skip(
+    !process.env.PDV_ELECTRON_PATH,
+    'Set PDV_ELECTRON_PATH to the companion-compatible Electron executable.',
+  );
+  const result = await runInElectron(
+    'demo.jpg',
+    { PDV_ELECTRON_HOST: 'isolated' },
+    { language: 'ar' },
+  );
+  expect(result.lang).toBe('ar');
+  expect(result.dir).toBe('rtl');
+  expect(result.text).toContain('عام'); // The General tab.
+  expect(result.text).not.toContain('General');
+  expect(result.title).toBe('demo.jpg - Photo Location Map');
+  expect(result.errors).toEqual([]);
+});
 
 for (const transport of ['url', 'ipc']) {
   for (const filename of ['demo.jpg', 'demo.heic']) {

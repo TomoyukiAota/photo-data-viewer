@@ -5,8 +5,11 @@ import { Ga4EventName, isValidGa4Name } from './ga4-event-name';
 import {
   trackAppIntegrationMode,
   trackChangedAppLayout,
+  trackChangedLanguageInUse,
   trackChangedUserSetting,
   trackDisplayedPhoto,
+  trackLeftLanguagePage,
+  trackLoadedLanguageInUse,
   trackLoadedPhoto,
   trackLoadedUserSetting,
   trackOpenedUnsupportedFileDialog,
@@ -54,6 +57,12 @@ describe('track-event', () => {
     trackChangedAppLayout('isWideLayout', 'True');
     trackAppIntegrationMode();
     trackPageLoaded();
+    trackLoadedLanguageInUse('fr');
+    trackChangedLanguageInUse('ja');
+    trackLeftLanguagePage(
+      { languageSetting: 'ja', languageInUse: 'ja' },
+      { languageSetting: 'auto', languageInUse: 'fr' },
+    );
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -93,6 +102,9 @@ describe('track-event', () => {
       'App Layout / App Layout',
       'Environment / App Integration Mode',
       'Page / Page Loaded',
+      'User Setting / Loaded User Setting',
+      'User Setting / Changed User Setting',
+      'Language Page / Left Language Page',
     ]);
   });
 
@@ -147,5 +159,66 @@ describe('track-event', () => {
   it('sends where a URL was opened from, and what for, as GA4 parameters', () => {
     const opened = sent().find((event) => event.category === 'Opened URL');
     expect(opened?.ga4Params).toEqual({ from: 'Home Page', url_description: 'Show in Google Maps' });
+  });
+
+  it('sends the language the app is shown in as the settings are, when they are loaded and when it is changed', () => {
+    const labels = (action: string) =>
+      sent().filter((event) => event.action === action).map((event) => event.label);
+    expect(labels('Loaded User Setting')).toEqual(['DateFormat: YYYY/MM/DD', 'Language in Use: fr']);
+    expect(labels('Changed User Setting')).toEqual(['SendUsageData: false', 'Language in Use: ja']);
+  });
+
+  describe('when the Language page is left', () => {
+    const left = () => sent().find((event) => event.action === 'Left Language Page');
+
+    it('sends the language settled on, and the one found on arriving', () => {
+      expect(left()?.label).toEqual({
+        languageSetting: 'ja',
+        languageInUse: 'ja',
+        languageSettingOnArrival: 'auto',
+        languageInUseOnArrival: 'fr',
+        isChanged: true,
+      });
+    });
+
+    it('says that nothing changed when the language is the one found on arriving', () => {
+      jest.clearAllMocks();
+      const found = { languageSetting: 'auto', languageInUse: 'fr' };
+      trackLeftLanguagePage({ ...found }, found);
+      expect(left()?.label).toMatchObject({ languageSetting: 'auto', languageInUse: 'fr', isChanged: false });
+    });
+
+    it('says that it changed when the setting is another one for the same language', () => {
+      jest.clearAllMocks();
+      trackLeftLanguagePage(
+        { languageSetting: 'fr', languageInUse: 'fr' },
+        { languageSetting: 'auto', languageInUse: 'fr' },
+      );
+      expect(left()?.label).toMatchObject({ isChanged: true });
+    });
+
+    it('leaves out what is not known of the arrival', () => {
+      jest.clearAllMocks();
+      trackLeftLanguagePage({ languageSetting: 'ja', languageInUse: 'ja' }, null);
+      expect(left()?.label).toEqual({
+        languageSetting: 'ja',
+        languageInUse: 'ja',
+        languageSettingOnArrival: undefined,
+        languageInUseOnArrival: undefined,
+        isChanged: undefined,
+      });
+    });
+
+    // GA4 collects `language`, the browser's, with every event.
+    it('gives GA4 no parameter named language', () => {
+      const label = left()?.label;
+      expect(typeof label === 'object' ? Object.keys(toGa4Params(label)) : null).toEqual([
+        'language_setting',
+        'language_in_use',
+        'language_setting_on_arrival',
+        'language_in_use_on_arrival',
+        'is_changed',
+      ]);
+    });
   });
 });

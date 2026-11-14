@@ -148,6 +148,50 @@ export function trackChangedUserSetting(key: string, value: string) {
   });
 }
 
+// The name under which the language the app is shown in is recorded, beside the
+// Language setting, when the settings are loaded and when the language is changed.
+// TL;DR: The setting alone does not tell the language.
+// Details: The setting can follow the browser (`auto`). In Photo Location Map's
+// window the language is the one that app passes, whatever the setting. A language
+// that cannot be fetched leaves the app in English. Photo Location Map records its
+// own language under the same name.
+const LANGUAGE_IN_USE = 'Language in Use';
+
+export function trackLoadedLanguageInUse(language: string) {
+  trackLoadedUserSetting(LANGUAGE_IN_USE, language);
+}
+
+export function trackChangedLanguageInUse(language: string) {
+  trackChangedUserSetting(LANGUAGE_IN_USE, language);
+}
+
+/** The language at one moment: the Language setting (`auto` or a language code) and the language the app is shown in. */
+export interface LanguageState {
+  languageSetting: string;
+  languageInUse: string;
+}
+
+// When the visitor leaves the Language page for another page of the app: the
+// language they settled on, and the one they found on arriving, which tells whether
+// the visit changed it. No field is named `language`: GA4 collects a parameter of
+// that name with every event, the browser's language.
+export function trackLeftLanguagePage(now: LanguageState, onArrival: LanguageState | null) {
+  trackEvent({
+    category: 'Language Page',
+    action: 'Left Language Page',
+    label: {
+      languageSetting: now.languageSetting,
+      languageInUse: now.languageInUse,
+      languageSettingOnArrival: onArrival?.languageSetting,
+      languageInUseOnArrival: onArrival?.languageInUse,
+      isChanged: onArrival
+        ? now.languageSetting !== onArrival.languageSetting || now.languageInUse !== onArrival.languageInUse
+        : undefined,
+    },
+    ga4Name: Ga4EventName.LeftLanguagePage,
+  });
+}
+
 export function trackChangedAppLayout(key: string, value: string) {
   trackEvent({ category: 'App Layout', action: 'App Layout', label: `${key}: ${value}`, ga4Name: Ga4EventName.AppLayout });
 }

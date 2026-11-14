@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menua",
+    "label": "MENUA",
+    "home": "Hasiera",
+    "demo": "Demoa",
+    "settings": "Ezarpenak",
+    "language": "Hizkuntza (Language)",
+    "about": "Honi buruz"
+  },
+  "pageTitle": {
+    "demo": "Demoa - {{appName}}",
+    "settings": "Ezarpenak - {{appName}}",
+    "language": "Hizkuntza - {{appName}}",
+    "about": "Honi buruz - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Hautatu argazki bat EXIF datuak ikusteko.",
+    "selectPhoto": "Hautatu argazkia",
+    "tabs": {
+      "data": "Datuak",
+      "map": "Mapa",
+      "photo": "Argazkia"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Hautatutako argazkia hemen bistaratuko da.",
+    "loading": "Hautatutako argazkia kargatzen...",
+    "rotate": "Biratu argazkia",
+    "unsupportedFileFormat": "Fitxategi-formatua ez da onartzen"
+  },
+  "map": {
+    "loading": "Mapa kargatzen ari da",
+    "locationNotAvailable": "Kokapen-datuak (latitudea eta longitudea) ez daude erabilgarri.",
+    "cannotBeShown": "Ezin da mapa erakutsi."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Orokorra",
+      "details": "Xehetasunak",
+      "rawData": "Datu gordinak"
+    },
+    "columns": {
+      "name": "Izena",
+      "value": "Balioa"
+    },
+    "noData": "Ez dago daturik",
+    "notAvailable": "Ez dago erabilgarri",
+    "loading": "Kargatzen...",
+    "general": {
+      "fileName": "Fitxategi-izena",
+      "fileSize": "Fitxategi-tamaina",
+      "widthHeight": "Zabalera × Altuera",
+      "dateTaken": "Ateratze-data",
+      "latitude": "Latitudea",
+      "longitude": "Longitudea",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Erakutsi Google Maps-en",
+      "showInGoogleStreetView": "Erakutsi Google Street View-n",
+      "iosNote": "iOS erabiltzaileentzat: kasu batzuetan, iOS-ek EXIF datu batzuk kentzen ditu (adib., latitudea eta longitudea). Xehetasunetarako, irakurri <pageLink>orri hau</pageLink>."
+    },
+    "rawData": {
+      "description": "Jarraian daude <exifrLink>exifr</exifrLink> bidez lortutako datu gordinak."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Fitxategi-formatua ez da onartzen",
+    "message": "EXIF datuak ez daude erabilgarri.",
+    "close": "Itxi"
+  },
+  "pageNotShown": {
+    "message": "Arazoren bat gertatu da, eta ezin da orri hau erakutsi.",
+    "reload": "Birkargatu"
+  },
+  "demo": {
+    "title": "Demoa",
+    "description": "«Exekutatu demoa» botoia sakatzean, aplikazioak <photoLink>argazki hau</photoLink> hautatu balitz bezala jokatzen du.",
+    "runDemo": "Exekutatu demoa"
+  },
+  "settings": {
+    "title": "Ezarpenak",
+    "savedInBrowser": "Ezarpenak zure nabigatzailean gordetzen dira.",
+    "dateTime": {
+      "title": "Dataren eta orduaren formatua",
+      "dateFormat": "Dataren formatua",
+      "clockSystem": "12 edo 24 orduko formatua",
+      "clock12": "12 ordu",
+      "clock24": "24 ordu",
+      "example": "Adibidea"
+    },
+    "usageData": {
+      "title": "Erabilera-datuak",
+      "send": "Bidali erabilera-datuak aplikazio hau hobetzeko",
+      "note": "Zer bidaltzen den «Honi buruz» orrian azaltzen da."
+    }
+  },
+  "language": {
+    "title": "Hizkuntza",
+    "useBrowserSetting": "Erabili nabigatzailearen ezarpena ({{language}})",
+    "search": "Bilatu",
+    "noLanguagesFound": "Ez da hizkuntzarik aurkitu",
+    "loadFailed": "Ezin izan da hizkuntza kargatu. Egiaztatu konexioa eta saiatu berriro."
+  },
+  "about": {
+    "keptInBrowser": "Aplikazio honek zure nabigatzailean bertan irakurtzen ditu zure fitxategiko EXIF datuak; <br/>beraz, fitxategia zure nabigatzailean geratzen da eta ez da inongo zerbitzarira bidaltzen.",
+    "usageData": "Aplikazio hau hobetzeko, erabilerari buruzko informazioa biltzen da, hala nola <br/>zein orri irekitzen diren, kargatutako argazkiak zer fitxategi-formatu duen eta zer <br/>errore gertatu diren, zure IP helbidearekin eta hartatik ondorioztatutako gutxi <br/>gorabeherako kokapenarekin batera. <settingsLink>Ezarpenak</settingsLink> orrian desaktiba dezakezu.",
+    "reportIssues": "Akatsik edo arazorik aurkitzen baduzu, jakinarazi <issuesLink>GitHub Issues</issuesLink> atalean.",
+    "sourceCode": "Aplikazio honen iturburu-kodea <gitHubLink>GitHub</gitHubLink>-en dago.",
+    "translations": "Beste hizkuntza batzuetarako itzulpenak ongi etorriak dira: ikusi <guideLink>aplikazio hau nola itzuli</guideLink>.",
+    "developedBy": "Aplikazio hau Tomoyuki Aotak garatu du.",
+    "xProfile": {
+      "alt": "X-ko (lehen Twitter) profila",
+      "title": "Ireki X-ko (lehen Twitter) profila"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub-eko profila",
+      "title": "Ireki GitHub-eko profila"
+    },
+    "photoLocationMap": "Argazki askoren kokapenak mapa batean aldi berean ikusi nahi dituzu?<br/> Horretarako dago <plmLink>Photo Location Map</plmLink>."
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "meni",
+    "label": "MENI",
+    "home": "Početna",
+    "demo": "Demo",
+    "settings": "Podešavanja",
+    "language": "Jezik (Language)",
+    "about": "O aplikaciji"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Podešavanja - {{appName}}",
+    "language": "Jezik - {{appName}}",
+    "about": "O aplikaciji - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Izaberite fotografiju da biste videli podatke EXIF.",
+    "selectPhoto": "Izaberi fotografiju",
+    "tabs": {
+      "data": "Podaci",
+      "map": "Mapa",
+      "photo": "Fotografija"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Izabrana fotografija će biti prikazana ovde.",
+    "loading": "Učitavanje izabrane fotografije...",
+    "rotate": "Rotiraj fotografiju",
+    "unsupportedFileFormat": "Nepodržani format datoteke"
+  },
+  "map": {
+    "loading": "Mapa se učitava",
+    "locationNotAvailable": "Podaci o lokaciji (geografska širina i dužina) nisu dostupni.",
+    "cannotBeShown": "Mapu nije moguće prikazati."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Opšte",
+      "details": "Detalji",
+      "rawData": "Neobrađeni podaci"
+    },
+    "columns": {
+      "name": "Naziv",
+      "value": "Vrednost"
+    },
+    "noData": "Nema podataka",
+    "notAvailable": "Nije dostupno",
+    "loading": "Učitavanje...",
+    "general": {
+      "fileName": "Naziv datoteke",
+      "fileSize": "Veličina datoteke",
+      "widthHeight": "Širina × visina",
+      "dateTaken": "Datum snimanja",
+      "latitude": "Geografska širina",
+      "longitude": "Geografska dužina",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Prikaži u Google mapama",
+      "showInGoogleStreetView": "Prikaži u Google Street View",
+      "iosNote": "Za korisnike iOS-a: iOS u nekim slučajevima uklanja deo podataka EXIF (npr. geografsku širinu i dužinu). Detalje pročitajte na <pageLink>ovoj stranici</pageLink>."
+    },
+    "rawData": {
+      "description": "Ispod su neobrađeni podaci dobijeni pomoću <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Nepodržani format datoteke",
+    "message": "Podaci EXIF nisu dostupni.",
+    "close": "Zatvori"
+  },
+  "pageNotShown": {
+    "message": "Nešto nije u redu i ovu stranicu nije moguće prikazati.",
+    "reload": "Učitaj ponovo"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Kada kliknete na dugme „Pokreni demo“, aplikacija se ponaša kao da je izabrana <photoLink>ova fotografija</photoLink>.",
+    "runDemo": "Pokreni demo"
+  },
+  "settings": {
+    "title": "Podešavanja",
+    "savedInBrowser": "Podešavanja se čuvaju u vašem pregledaču.",
+    "dateTime": {
+      "title": "Format datuma i vremena",
+      "dateFormat": "Format datuma",
+      "clockSystem": "12-časovni ili 24-časovni format",
+      "clock12": "12-časovni",
+      "clock24": "24-časovni",
+      "example": "Primer"
+    },
+    "usageData": {
+      "title": "Podaci o korišćenju",
+      "send": "Šalji podatke o korišćenju radi poboljšanja ove aplikacije",
+      "note": "Šta se šalje, opisano je na stranici „O aplikaciji“."
+    }
+  },
+  "language": {
+    "title": "Jezik",
+    "useBrowserSetting": "Koristi podešavanje pregledača ({{language}})",
+    "search": "Pretraži",
+    "noLanguagesFound": "Nije pronađen nijedan jezik",
+    "loadFailed": "Jezik nije moguće učitati. Proverite vezu i pokušajte ponovo."
+  },
+  "about": {
+    "keptInBrowser": "Ova aplikacija čita podatke EXIF iz vaše datoteke unutar vašeg pregledača, <br/>pa datoteka ostaje u pregledaču i ne šalje se ni na jedan server.",
+    "usageData": "Radi poboljšanja ove aplikacije prikupljaju se podaci o korišćenju, na primer <br/>koje se stranice otvaraju, koji je format datoteke učitane fotografije i koje su se <br/>greške dogodile, zajedno sa vašom IP adresom i približnom lokacijom <br/>izvedenom iz nje. To možete isključiti u <settingsLink>Podešavanjima</settingsLink>.",
+    "reportIssues": "Ako pronađete greške ili probleme, prijavite ih na <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Izvorni kôd ove aplikacije nalazi se na <gitHubLink>GitHub-u</gitHubLink>.",
+    "translations": "Prevodi na druge jezike su dobrodošli: pogledajte <guideLink>kako prevesti ovu aplikaciju</guideLink>.",
+    "developedBy": "Ovu aplikaciju razvija Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Profil na mreži X (ranije Twitter)",
+      "title": "Otvori profil na mreži X (ranije Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Profil na GitHub-u",
+      "title": "Otvori profil na GitHub-u"
+    },
+    "photoLocationMap": "Želite li da na mapi vidite lokacije mnogih fotografija odjednom?<br/> Za to je dostupan <plmLink>Photo Location Map</plmLink>."
+  }
+}

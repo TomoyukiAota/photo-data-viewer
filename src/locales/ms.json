@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Laman utama",
+    "demo": "Demo",
+    "settings": "Tetapan",
+    "language": "Bahasa (Language)",
+    "about": "Perihal"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Tetapan - {{appName}}",
+    "language": "Bahasa - {{appName}}",
+    "about": "Perihal - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Pilih foto anda untuk memaparkan data EXIF.",
+    "selectPhoto": "Pilih Foto",
+    "tabs": {
+      "data": "Data",
+      "map": "Peta",
+      "photo": "Foto"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Foto yang dipilih akan dipaparkan di sini.",
+    "loading": "Memuatkan foto yang dipilih...",
+    "rotate": "Putar foto",
+    "unsupportedFileFormat": "Format fail tidak disokong"
+  },
+  "map": {
+    "loading": "Peta sedang dimuatkan",
+    "locationNotAvailable": "Data lokasi (latitud dan longitud) tidak tersedia.",
+    "cannotBeShown": "Peta tidak dapat dipaparkan."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Umum",
+      "details": "Butiran",
+      "rawData": "Data Mentah"
+    },
+    "columns": {
+      "name": "Nama",
+      "value": "Nilai"
+    },
+    "noData": "Tiada data",
+    "notAvailable": "Tidak tersedia",
+    "loading": "Memuatkan...",
+    "general": {
+      "fileName": "Nama fail",
+      "fileSize": "Saiz fail",
+      "widthHeight": "Lebar × Tinggi",
+      "dateTaken": "Tarikh diambil",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Tunjukkan dalam Google Maps",
+      "showInGoogleStreetView": "Tunjukkan dalam Google Street View",
+      "iosNote": "Bagi pengguna iOS: dalam sesetengah keadaan, iOS mengalih keluar sebahagian data EXIF (cth. latitud dan longitud). Sila baca <pageLink>halaman ini</pageLink> untuk butiran."
+    },
+    "rawData": {
+      "description": "Di bawah ialah data mentah yang diperoleh dengan <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Format fail tidak disokong",
+    "message": "Data EXIF tidak tersedia.",
+    "close": "Tutup"
+  },
+  "pageNotShown": {
+    "message": "Ada sesuatu yang tidak kena, dan halaman ini tidak dapat dipaparkan.",
+    "reload": "Muat semula"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "Apabila butang “Jalankan Demo” diklik, aplikasi ini berkelakuan seolah-olah <photoLink>foto ini</photoLink> dipilih.",
+    "runDemo": "Jalankan Demo"
+  },
+  "settings": {
+    "title": "Tetapan",
+    "savedInBrowser": "Tetapan disimpan dalam pelayar anda.",
+    "dateTime": {
+      "title": "Format tarikh dan masa",
+      "dateFormat": "Format tarikh",
+      "clockSystem": "Format 12 atau 24 jam",
+      "clock12": "12 jam",
+      "clock24": "24 jam",
+      "example": "Contoh"
+    },
+    "usageData": {
+      "title": "Data penggunaan",
+      "send": "Hantar data penggunaan untuk menambah baik aplikasi ini",
+      "note": "Apa yang dihantar diterangkan pada halaman Perihal."
+    }
+  },
+  "language": {
+    "title": "Bahasa",
+    "useBrowserSetting": "Guna tetapan pelayar ({{language}})",
+    "search": "Cari",
+    "noLanguagesFound": "Tiada bahasa ditemui",
+    "loadFailed": "Bahasa tidak dapat dimuatkan. Semak sambungan anda, kemudian cuba lagi."
+  },
+  "about": {
+    "keptInBrowser": "Aplikasi ini mengambil data EXIF daripada fail anda di dalam pelayar anda, <br/>jadi fail itu kekal di dalam pelayar anda dan tidak dihantar ke mana-mana pelayan.",
+    "usageData": "Untuk menambah baik aplikasi ini, maklumat penggunaan dikumpulkan, seperti <br/>halaman yang dibuka, format fail foto yang dimuatkan dan ralat <br/>yang berlaku, bersama alamat IP anda dan anggaran lokasi <br/>yang diperoleh daripadanya. Anda boleh mematikannya dalam <settingsLink>Tetapan</settingsLink>.",
+    "reportIssues": "Jika anda menemui pepijat atau masalah, sila laporkan dalam <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Kod sumber aplikasi ini dihoskan di <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "Terjemahan ke bahasa lain amat dialu-alukan: lihat <guideLink>cara menterjemah aplikasi ini</guideLink>.",
+    "developedBy": "Aplikasi ini dibangunkan oleh Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Profil X (dahulunya Twitter)",
+      "title": "Buka profil X (dahulunya Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Profil GitHub",
+      "title": "Buka profil GitHub"
+    },
+    "photoLocationMap": "Ingin melihat peta lokasi banyak foto sekali gus?<br/> <plmLink>Photo Location Map</plmLink> tersedia untuk tujuan itu."
+  }
+}

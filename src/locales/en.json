@@ -5,11 +5,13 @@
     "home": "Home",
     "demo": "Demo",
     "settings": "Settings",
+    "language": "Language",
     "about": "About"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Settings - {{appName}}",
+    "language": "Language - {{appName}}",
     "about": "About - {{appName}}"
   },
   "dateTime": {
@@ -81,11 +83,6 @@
   "settings": {
     "title": "Settings",
     "savedInBrowser": "Settings are saved in your browser.",
-    "language": {
-      "title": "Language",
-      "label": "Language",
-      "auto": "Browser's language ({{language}})"
-    },
     "dateTime": {
       "title": "Date & Time Format",
       "dateFormat": "Date Format",
@@ -97,12 +94,19 @@
     "usageData": {
       "title": "Usage Data",
       "send": "Send usage data to improve this application",
-      "note": "What is sent is described on the About page."
+      "note": "For details on the data sent, see the About page."
     }
+  },
+  "language": {
+    "title": "Language",
+    "useBrowserSetting": "Use browser setting ({{language}})",
+    "search": "Search",
+    "noLanguagesFound": "No languages found",
+    "loadFailed": "The language could not be loaded. Check your connection, then try again."
   },
   "about": {
     "keptInBrowser": "This application fetches EXIF data from your file within your browser, <br/>so the file is kept within your browser and not sent to any servers.",
-    "usageData": "To improve this application, it collects usage information, such as <br/>which pages are opened, what kind of photo was loaded and which <br/>errors occurred, along with your IP address and the approximate <br/>location derived from it. You can turn this off in <settingsLink>Settings</settingsLink>.",
+    "usageData": "To improve this application, it collects usage information, such as <br/>the pages that are opened, the file format of the loaded photo and <br/>the errors that occurred, along with your IP address and the approximate <br/>location derived from it. You can turn this off in <settingsLink>Settings</settingsLink>.",
     "reportIssues": "If you find any bugs or issues, please submit them in <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "The source code of this application is hosted on <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Translations into other languages are welcome: see <guideLink>how to translate this application</guideLink>.",

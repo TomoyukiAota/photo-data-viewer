@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "菜单",
+    "label": "菜单",
+    "home": "首页",
+    "demo": "演示",
+    "settings": "设置",
+    "language": "语言 (Language)",
+    "about": "关于"
+  },
+  "pageTitle": {
+    "demo": "演示 - {{appName}}",
+    "settings": "设置 - {{appName}}",
+    "language": "语言 - {{appName}}",
+    "about": "关于 - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "选择照片以显示 EXIF 数据。",
+    "selectPhoto": "选择照片",
+    "tabs": {
+      "data": "数据",
+      "map": "地图",
+      "photo": "照片"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "所选照片将显示在此处。",
+    "loading": "正在加载所选照片...",
+    "rotate": "旋转照片",
+    "unsupportedFileFormat": "不支持的文件格式"
+  },
+  "map": {
+    "loading": "正在加载地图",
+    "locationNotAvailable": "位置数据（纬度和经度）不可用。",
+    "cannotBeShown": "无法显示地图。"
+  },
+  "photoData": {
+    "tabs": {
+      "general": "常规",
+      "details": "详细信息",
+      "rawData": "原始数据"
+    },
+    "columns": {
+      "name": "名称",
+      "value": "值"
+    },
+    "noData": "无数据",
+    "notAvailable": "无",
+    "loading": "正在加载...",
+    "general": {
+      "fileName": "文件名",
+      "fileSize": "文件大小",
+      "widthHeight": "宽度 × 高度",
+      "dateTaken": "拍摄日期",
+      "latitude": "纬度",
+      "longitude": "经度",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "在 Google 地图中显示",
+      "showInGoogleStreetView": "在 Google 街景中显示",
+      "iosNote": "iOS 用户请注意：在某些情况下，iOS 会移除部分 EXIF 数据（例如纬度和经度）。有关详细信息，请阅读<pageLink>此页面</pageLink>。"
+    },
+    "rawData": {
+      "description": "以下是通过 <exifrLink>exifr</exifrLink> 获取的原始数据。"
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "不支持的文件格式",
+    "message": "EXIF 数据不可用。",
+    "close": "关闭"
+  },
+  "pageNotShown": {
+    "message": "出了点问题，无法显示此页面。",
+    "reload": "重新加载"
+  },
+  "demo": {
+    "title": "演示",
+    "description": "点击“运行演示”按钮后，此应用会像选择了<photoLink>这张照片</photoLink>一样运行。",
+    "runDemo": "运行演示"
+  },
+  "settings": {
+    "title": "设置",
+    "savedInBrowser": "设置保存在你的浏览器中。",
+    "dateTime": {
+      "title": "日期和时间格式",
+      "dateFormat": "日期格式",
+      "clockSystem": "12/24 小时制",
+      "clock12": "12 小时制",
+      "clock24": "24 小时制",
+      "example": "示例"
+    },
+    "usageData": {
+      "title": "使用情况数据",
+      "send": "发送使用情况数据以改进此应用",
+      "note": "发送的内容在“关于”页面中说明。"
+    }
+  },
+  "language": {
+    "title": "语言",
+    "useBrowserSetting": "跟随浏览器设置（{{language}}）",
+    "search": "搜索",
+    "noLanguagesFound": "未找到语言",
+    "loadFailed": "无法加载该语言。请检查网络连接，然后重试。"
+  },
+  "about": {
+    "keptInBrowser": "此应用在你的浏览器内从文件中读取 EXIF 数据，<br/>因此文件保留在浏览器中，不会发送到任何服务器。",
+    "usageData": "为改进此应用，我们会收集使用情况信息，例如打开了哪些页面、<br/>所加载照片的文件格式以及发生了哪些错误，<br/>同时收集你的 IP 地址以及由此推断出的大致位置。<br/>你可以在<settingsLink>设置</settingsLink>中关闭此功能。",
+    "reportIssues": "如果发现任何错误或问题，请在 <issuesLink>GitHub Issues</issuesLink> 中提交。",
+    "sourceCode": "此应用的源代码托管在 <gitHubLink>GitHub</gitHubLink> 上。",
+    "translations": "欢迎将此应用翻译成其他语言：请参阅<guideLink>如何翻译此应用</guideLink>。",
+    "developedBy": "此应用由 Tomoyuki Aota 开发。",
+    "xProfile": {
+      "alt": "X（原 Twitter）个人资料",
+      "title": "打开 X（原 Twitter）个人资料"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub 个人资料",
+      "title": "打开 GitHub 个人资料"
+    },
+    "photoLocationMap": "想在地图上一次查看许多照片的拍摄地点吗？<br/>可以使用 <plmLink>Photo Location Map</plmLink>。"
+  }
+}

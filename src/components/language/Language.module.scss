@@ -1,0 +1,32 @@
+// prettier-ignore
+.container {
+  width: 100%;
+  padding: 130px 20px 0 20px;
+
+  // One column, as wide as the list is in Photo Location Map, or as the window
+  // when that is narrower.
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid:
+    'page-title'    auto
+    'language-list' auto
+    / minmax(0, 360px);
+  .page-title    { grid-area: page-title;    }
+  .language-list { grid-area: language-list; }
+}
+
+.page-title {
+  font-size: 28px;
+  text-align: center;
+}
+
+.language-list {
+  padding: 50px 0;
+}
+
+.load-failed {
+  padding: 15px 0 0 0;
+  font-size: 15px;
+  color: #c62828;
+}

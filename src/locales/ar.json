@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "القائمة",
+    "label": "القائمة",
+    "home": "الرئيسية",
+    "demo": "عرض توضيحي",
+    "settings": "الإعدادات",
+    "language": "اللغة (Language)",
+    "about": "حول"
+  },
+  "pageTitle": {
+    "demo": "عرض توضيحي - {{appName}}",
+    "settings": "الإعدادات - {{appName}}",
+    "language": "اللغة - {{appName}}",
+    "about": "حول - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "اختر صورتك لعرض بيانات EXIF.",
+    "selectPhoto": "اختيار صورة",
+    "tabs": {
+      "data": "البيانات",
+      "map": "الخريطة",
+      "photo": "الصورة"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "ستُعرض الصورة المختارة هنا.",
+    "loading": "جارٍ تحميل الصورة المختارة...",
+    "rotate": "تدوير الصورة",
+    "unsupportedFileFormat": "تنسيق الملف غير مدعوم"
+  },
+  "map": {
+    "loading": "جارٍ تحميل الخريطة",
+    "locationNotAvailable": "بيانات الموقع (خط العرض وخط الطول) غير متوفرة.",
+    "cannotBeShown": "تعذّر عرض الخريطة."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "عام",
+      "details": "التفاصيل",
+      "rawData": "البيانات الخام"
+    },
+    "columns": {
+      "name": "الاسم",
+      "value": "القيمة"
+    },
+    "noData": "لا توجد بيانات",
+    "notAvailable": "غير متوفر",
+    "loading": "جارٍ التحميل...",
+    "general": {
+      "fileName": "اسم الملف",
+      "fileSize": "حجم الملف",
+      "widthHeight": "العرض × الارتفاع",
+      "dateTaken": "تاريخ الالتقاط",
+      "latitude": "خط العرض",
+      "longitude": "خط الطول",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "عرض في خرائط Google",
+      "showInGoogleStreetView": "عرض في Google Street View",
+      "iosNote": "لمستخدمي iOS: يزيل iOS بعض بيانات EXIF (مثل خط العرض وخط الطول) في بعض الحالات. يُرجى قراءة <pageLink>هذه الصفحة</pageLink> لمعرفة التفاصيل."
+    },
+    "rawData": {
+      "description": "فيما يلي البيانات الخام المستخرجة باستخدام <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "تنسيق الملف غير مدعوم",
+    "message": "بيانات EXIF غير متوفرة.",
+    "close": "إغلاق"
+  },
+  "pageNotShown": {
+    "message": "حدث خطأ ما، وتعذّر عرض هذه الصفحة.",
+    "reload": "إعادة التحميل"
+  },
+  "demo": {
+    "title": "عرض توضيحي",
+    "description": "عند النقر على زر «تشغيل العرض التوضيحي»، يعمل هذا التطبيق كما لو أنك اخترت <photoLink>هذه الصورة</photoLink>.",
+    "runDemo": "تشغيل العرض التوضيحي"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "savedInBrowser": "تُحفظ الإعدادات في متصفحك.",
+    "dateTime": {
+      "title": "تنسيق التاريخ والوقت",
+      "dateFormat": "تنسيق التاريخ",
+      "clockSystem": "نظام 12 أو 24 ساعة",
+      "clock12": "12 ساعة",
+      "clock24": "24 ساعة",
+      "example": "مثال"
+    },
+    "usageData": {
+      "title": "بيانات الاستخدام",
+      "send": "إرسال بيانات الاستخدام لتحسين هذا التطبيق",
+      "note": "ما يُرسَل موضّح في صفحة «حول»."
+    }
+  },
+  "language": {
+    "title": "اللغة",
+    "useBrowserSetting": "استخدام إعداد المتصفح ({{language}})",
+    "search": "بحث",
+    "noLanguagesFound": "لم يُعثر على أي لغة",
+    "loadFailed": "تعذّر تحميل اللغة. تحقق من اتصالك ثم حاول مرة أخرى."
+  },
+  "about": {
+    "keptInBrowser": "يقرأ هذا التطبيق بيانات EXIF من ملفك داخل متصفحك، <br/>لذا يبقى الملف داخل متصفحك ولا يُرسَل إلى أي خادم.",
+    "usageData": "لتحسين هذا التطبيق، تُجمع معلومات عن الاستخدام، مثل <br/>الصفحات التي تُفتح وتنسيق ملف الصورة المحمّلة والأخطاء <br/>التي تحدث، مع عنوان IP الخاص بك والموقع التقريبي <br/>المستنتج منه. يمكنك إيقاف ذلك من <settingsLink>الإعدادات</settingsLink>.",
+    "reportIssues": "إذا وجدت أي أخطاء أو مشكلات، يُرجى الإبلاغ عنها في <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "الشيفرة المصدرية لهذا التطبيق متاحة على <gitHubLink>GitHub</gitHubLink>.",
+    "translations": "نرحّب بالترجمات إلى لغات أخرى: راجع <guideLink>طريقة ترجمة هذا التطبيق</guideLink>.",
+    "developedBy": "هذا التطبيق من تطوير Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "الملف الشخصي على X (Twitter سابقًا)",
+      "title": "فتح الملف الشخصي على X (Twitter سابقًا)"
+    },
+    "gitHubProfile": {
+      "alt": "الملف الشخصي على GitHub",
+      "title": "فتح الملف الشخصي على GitHub"
+    },
+    "photoLocationMap": "هل تريد رؤية أماكن التقاط صور كثيرة على الخريطة دفعة واحدة؟<br/> يمكنك استخدام <plmLink>Photo Location Map</plmLink> لهذا الغرض."
+  }
+}

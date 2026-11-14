@@ -1,10 +1,22 @@
 // CSS selectors are intentionally defined within .row to increase their specificity.
 // This is because there was a case that the style was not applied due to insufficient specificy
 // only in production build. (Development build is okay, so it happens only in production build for some reason.)
+
+// TL;DR: A grid of two lines: on each, a name and its number; beside both, the
+// buttons. It fills its row of the table and looks like the other rows.
+// Details: The names' column is as wide as the table's (--name-column-width,
+// from NameValueGrid), and the paddings are those of the table's cells, so
+// that names stand under names and values under values. A line of the grid is
+// as high as the taller of its name and its number, so a name that takes two
+// lines keeps its number beside it.
 .row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns:
+    var(--name-column-width, 130px)
+    max-content
+    minmax(0, 1fr);
   align-items: center;
+  padding-block: 2px; // As a cell of the table.
 
   button {
     background-color: rgba(0, 0, 0, 0.04);
@@ -14,9 +26,47 @@
     }
   }
 
-  .lat-lng-text {
-    margin-right: 30px;
+  .latitude {
+    grid-row: 1;
+  }
+
+  .longitude {
+    grid-row: 2;
+  }
+
+  // As a name of the table (td.wrap in NameValueGrid): it continues on the
+  // next line, and is never cut.
+  .name {
+    grid-column: 1;
+    padding-inline: 24px 8px;
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .number {
+    grid-column: 2;
+    padding-inline: 8px;
     text-align: right;
+    white-space: nowrap;
+  }
+
+  // Said once for both, in the middle of the two lines.
+  .not-available {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 2;
+    padding-inline: 8px;
+  }
+
+  // Beside both numbers. The space between the numbers and the buttons is the
+  // buttons', as the numbers have a direction of their own.
+  .buttons {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    margin-inline-start: 22px;
   }
 
   .google-maps-button {
@@ -29,7 +79,7 @@
   }
 
   .google-street-view-button {
-    margin-left: 10px;
+    margin-inline-start: 10px;
     padding: 2px;
     border-radius: 20%;
   }

@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menü",
+    "label": "MENÜ",
+    "home": "Ana sayfa",
+    "demo": "Demo",
+    "settings": "Ayarlar",
+    "language": "Dil (Language)",
+    "about": "Hakkında"
+  },
+  "pageTitle": {
+    "demo": "Demo - {{appName}}",
+    "settings": "Ayarlar - {{appName}}",
+    "language": "Dil - {{appName}}",
+    "about": "Hakkında - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "EXIF verilerini görüntülemek için fotoğrafınızı seçin.",
+    "selectPhoto": "Fotoğraf Seç",
+    "tabs": {
+      "data": "Veriler",
+      "map": "Harita",
+      "photo": "Fotoğraf"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Seçilen fotoğraf burada görüntülenecek.",
+    "loading": "Seçilen fotoğraf yükleniyor...",
+    "rotate": "Fotoğrafı döndür",
+    "unsupportedFileFormat": "Desteklenmeyen dosya biçimi"
+  },
+  "map": {
+    "loading": "Harita yükleniyor",
+    "locationNotAvailable": "Konum verileri (enlem ve boylam) mevcut değil.",
+    "cannotBeShown": "Harita gösterilemiyor."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Genel",
+      "details": "Ayrıntılar",
+      "rawData": "Ham veriler"
+    },
+    "columns": {
+      "name": "Ad",
+      "value": "Değer"
+    },
+    "noData": "Veri yok",
+    "notAvailable": "Yok",
+    "loading": "Yükleniyor...",
+    "general": {
+      "fileName": "Dosya adı",
+      "fileSize": "Dosya boyutu",
+      "widthHeight": "Genişlik × Yükseklik",
+      "dateTaken": "Çekim tarihi",
+      "latitude": "Enlem",
+      "longitude": "Boylam",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Google Haritalar’da göster",
+      "showInGoogleStreetView": "Google Street View’da göster",
+      "iosNote": "iOS kullanıcıları için: iOS bazı durumlarda bazı EXIF verilerini (ör. enlem ve boylam) kaldırır. Ayrıntılar için lütfen <pageLink>bu sayfayı</pageLink> okuyun."
+    },
+    "rawData": {
+      "description": "Aşağıda <exifrLink>exifr</exifrLink> ile alınan ham veriler yer almaktadır."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Desteklenmeyen dosya biçimi",
+    "message": "EXIF verileri mevcut değil.",
+    "close": "Kapat"
+  },
+  "pageNotShown": {
+    "message": "Bir sorun oluştu ve bu sayfa gösterilemiyor.",
+    "reload": "Yeniden yükle"
+  },
+  "demo": {
+    "title": "Demo",
+    "description": "“Demoyu Çalıştır” düğmesine tıklandığında, bu uygulama <photoLink>bu fotoğraf</photoLink> seçilmiş gibi davranır.",
+    "runDemo": "Demoyu Çalıştır"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "savedInBrowser": "Ayarlar tarayıcınıza kaydedilir.",
+    "dateTime": {
+      "title": "Tarih ve saat biçimi",
+      "dateFormat": "Tarih biçimi",
+      "clockSystem": "12 veya 24 saat biçimi",
+      "clock12": "12 saat",
+      "clock24": "24 saat",
+      "example": "Örnek"
+    },
+    "usageData": {
+      "title": "Kullanım verileri",
+      "send": "Bu uygulamayı geliştirmek için kullanım verilerini gönder",
+      "note": "Nelerin gönderildiği Hakkında sayfasında açıklanmıştır."
+    }
+  },
+  "language": {
+    "title": "Dil",
+    "useBrowserSetting": "Tarayıcı ayarını kullan ({{language}})",
+    "search": "Ara",
+    "noLanguagesFound": "Dil bulunamadı",
+    "loadFailed": "Dil yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin."
+  },
+  "about": {
+    "keptInBrowser": "Bu uygulama, EXIF verilerini dosyanızdan tarayıcınızın içinde alır; <br/>bu nedenle dosya tarayıcınızda kalır ve hiçbir sunucuya gönderilmez.",
+    "usageData": "Bu uygulamayı geliştirmek için kullanım bilgileri toplanır; örneğin <br/>hangi sayfaların açıldığı, yüklenen fotoğrafın dosya biçimi ve hangi <br/>hataların oluştuğu, IP adresiniz ve ondan çıkarılan yaklaşık <br/>konumla birlikte. Bunu <settingsLink>Ayarlar</settingsLink> bölümünden kapatabilirsiniz.",
+    "reportIssues": "Hata veya sorun bulursanız lütfen bunları <issuesLink>GitHub Issues</issuesLink> üzerinden bildirin.",
+    "sourceCode": "Bu uygulamanın kaynak kodu <gitHubLink>GitHub</gitHubLink> üzerinde barındırılmaktadır.",
+    "translations": "Başka dillere çeviriler memnuniyetle karşılanır: <guideLink>bu uygulamanın nasıl çevrileceğine</guideLink> bakın.",
+    "developedBy": "Bu uygulama Tomoyuki Aota tarafından geliştirilmektedir.",
+    "xProfile": {
+      "alt": "X (eski adıyla Twitter) profili",
+      "title": "X (eski adıyla Twitter) profilini aç"
+    },
+    "gitHubProfile": {
+      "alt": "GitHub profili",
+      "title": "GitHub profilini aç"
+    },
+    "photoLocationMap": "Birçok fotoğrafın konumunu haritada aynı anda görmek ister misiniz?<br/> Bunun için <plmLink>Photo Location Map</plmLink> kullanılabilir."
+  }
+}

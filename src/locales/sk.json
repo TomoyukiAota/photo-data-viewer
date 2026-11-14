@@ -1,0 +1,124 @@
+{
+  "menu": {
+    "buttonLabel": "menu",
+    "label": "MENU",
+    "home": "Domov",
+    "demo": "Ukážka",
+    "settings": "Nastavenia",
+    "language": "Jazyk (Language)",
+    "about": "O aplikácii"
+  },
+  "pageTitle": {
+    "demo": "Ukážka - {{appName}}",
+    "settings": "Nastavenia - {{appName}}",
+    "language": "Jazyk - {{appName}}",
+    "about": "O aplikácii - {{appName}}"
+  },
+  "dateTime": {
+    "weekdayPattern": "ddd"
+  },
+  "home": {
+    "selectYourPhoto": "Vyberte fotku a zobrazia sa jej údaje EXIF.",
+    "selectPhoto": "Vybrať fotku",
+    "tabs": {
+      "data": "Údaje",
+      "map": "Mapa",
+      "photo": "Fotka"
+    }
+  },
+  "photo": {
+    "willBeDisplayedHere": "Tu sa zobrazí vybraná fotka.",
+    "loading": "Načítava sa vybraná fotka...",
+    "rotate": "Otočiť fotku",
+    "unsupportedFileFormat": "Nepodporovaný formát súboru"
+  },
+  "map": {
+    "loading": "Načítava sa mapa",
+    "locationNotAvailable": "Údaje o polohe (zemepisná šírka a dĺžka) nie sú k dispozícii.",
+    "cannotBeShown": "Mapu nie je možné zobraziť."
+  },
+  "photoData": {
+    "tabs": {
+      "general": "Všeobecné",
+      "details": "Podrobnosti",
+      "rawData": "Nespracované údaje"
+    },
+    "columns": {
+      "name": "Názov",
+      "value": "Hodnota"
+    },
+    "noData": "Žiadne údaje",
+    "notAvailable": "Nie je k dispozícii",
+    "loading": "Načítava sa...",
+    "general": {
+      "fileName": "Názov súboru",
+      "fileSize": "Veľkosť súboru",
+      "widthHeight": "Šírka × výška",
+      "dateTaken": "Dátum nasnímania",
+      "latitude": "Zemepisná šírka",
+      "longitude": "Zemepisná dĺžka",
+      "dimensions": "{{width}} × {{height}}",
+      "showInGoogleMaps": "Zobraziť v Mapách Google",
+      "showInGoogleStreetView": "Zobraziť v Google Street View",
+      "iosNote": "Pre používateľov iOS: systém iOS v niektorých prípadoch odstraňuje niektoré údaje EXIF (napr. zemepisnú šírku a dĺžku). Podrobnosti nájdete na <pageLink>tejto stránke</pageLink>."
+    },
+    "rawData": {
+      "description": "Nižšie sú nespracované údaje získané pomocou <exifrLink>exifr</exifrLink>."
+    }
+  },
+  "unsupportedFileDialog": {
+    "title": "Nepodporovaný formát súboru",
+    "message": "Údaje EXIF nie sú k dispozícii.",
+    "close": "Zavrieť"
+  },
+  "pageNotShown": {
+    "message": "Niečo sa pokazilo a túto stránku nie je možné zobraziť.",
+    "reload": "Načítať znova"
+  },
+  "demo": {
+    "title": "Ukážka",
+    "description": "Po kliknutí na tlačidlo „Spustiť ukážku“ sa aplikácia správa, akoby bola vybraná <photoLink>táto fotka</photoLink>.",
+    "runDemo": "Spustiť ukážku"
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "savedInBrowser": "Nastavenia sa ukladajú vo vašom prehliadači.",
+    "dateTime": {
+      "title": "Formát dátumu a času",
+      "dateFormat": "Formát dátumu",
+      "clockSystem": "12-hodinový alebo 24-hodinový formát",
+      "clock12": "12-hodinový",
+      "clock24": "24-hodinový",
+      "example": "Príklad"
+    },
+    "usageData": {
+      "title": "Údaje o používaní",
+      "send": "Odosielať údaje o používaní a pomôcť tak aplikáciu vylepšiť",
+      "note": "Čo sa odosiela, je opísané na stránke „O aplikácii“."
+    }
+  },
+  "language": {
+    "title": "Jazyk",
+    "useBrowserSetting": "Použiť nastavenie prehliadača ({{language}})",
+    "search": "Hľadať",
+    "noLanguagesFound": "Nenašli sa žiadne jazyky",
+    "loadFailed": "Jazyk sa nepodarilo načítať. Skontrolujte pripojenie a skúste to znova."
+  },
+  "about": {
+    "keptInBrowser": "Táto aplikácia načítava údaje EXIF z vášho súboru priamo vo vašom prehliadači, <br/>takže súbor zostáva v prehliadači a neodosiela sa na žiadny server.",
+    "usageData": "Na účely vylepšovania aplikácie sa zhromažďujú údaje o jej používaní, napríklad <br/>ktoré stránky sa otvárajú, aký formát súboru má načítaná fotka a aké <br/>chyby sa vyskytli, spolu s vašou IP adresou a približnou polohou, ktorá je z nej <br/>odvodená. Môžete to vypnúť v <settingsLink>Nastaveniach</settingsLink>.",
+    "reportIssues": "Ak nájdete chyby alebo problémy, nahláste ich, prosím, v <issuesLink>GitHub Issues</issuesLink>.",
+    "sourceCode": "Zdrojový kód tejto aplikácie je umiestnený na <gitHubLink>GitHube</gitHubLink>.",
+    "translations": "Preklady do ďalších jazykov sú vítané: pozrite si, <guideLink>ako túto aplikáciu preložiť</guideLink>.",
+    "developedBy": "Túto aplikáciu vyvíja Tomoyuki Aota.",
+    "xProfile": {
+      "alt": "Profil na sieti X (predtým Twitter)",
+      "title": "Otvoriť profil na sieti X (predtým Twitter)"
+    },
+    "gitHubProfile": {
+      "alt": "Profil na GitHube",
+      "title": "Otvoriť profil na GitHube"
+    },
+    "photoLocationMap": "Chcete na mape vidieť miesta nasnímania mnohých fotiek naraz?<br/> Na to slúži <plmLink>Photo Location Map</plmLink>."
+  }
+}
