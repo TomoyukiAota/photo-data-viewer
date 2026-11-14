@@ -117,7 +117,7 @@ async function navigate(page, name) {
  * after it was recorded. That happened once in CI, on Windows, where the
  * test failed with nothing received after five seconds. What made the
  * request fail is not known: it could not be made to happen again, and CI
- * keeps no trace of a test.
+ * kept no trace of a test then.
  */
 const SENT_TIMEOUT = 15000;
 
@@ -220,10 +220,11 @@ function shortUrl(url, appOrigin) {
 
 // TL;DR: A test that fails shows how its page was loaded, the requests that
 // failed and the errors on the page.
-// Details: CI keeps no trace of a test, so its output is all that a failure
-// there shows. A test failed once on Windows with the Home page never drawn,
-// in the development mode: whether a request of the page failed, the page
-// was loaded again or nothing happened at all could not be told.
+// Details: It is what a failure in CI shows at a glance; the run keeps the
+// test's trace as well (ci.yml). A test failed once on Windows with the Home
+// page never drawn, in the development mode, when CI kept no trace: whether
+// a request of the page failed, the page was loaded again or nothing
+// happened at all could not be told.
 test.beforeEach(async ({ page }, testInfo) => {
   const started = Date.now();
   const appOrigin = new URL(testInfo.project.use.baseURL).origin;

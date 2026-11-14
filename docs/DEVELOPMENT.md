@@ -100,6 +100,14 @@ For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
 
+When a browser test fails in CI, the run keeps Playwright's results as an
+artifact, `browser-test-results-<os>-attempt-<n>`: the failed test's trace,
+with the page's requests, console and snapshots. Download it from the run's
+summary and open the trace with `npx playwright show-trace <trace.zip>`. The
+test's output in the log already says when its page was loaded, the requests
+that failed and the errors on the page. The repository is public, and so are
+its artifacts: a test uses its fixtures and made-up data only.
+
 For Firefox, install Playwright's matching browser with `npx playwright install
 firefox`, then run `PDV_BROWSER=firefox npm run test:e2e`. On macOS 27, a
 `Could not find profile folder` startup error can occur while Firefox resolves

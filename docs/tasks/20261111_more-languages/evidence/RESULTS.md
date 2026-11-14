@@ -386,7 +386,8 @@ and About pages:
   both failures, but neither could be made to happen here, and nothing in
   the app runs before that script. Every browser test now shows, when it
   fails, when its page was loaded, the requests that failed and the errors on
-  the page.
+  the page. And CI keeps Playwright's results of a failed browser test, with
+  its trace, as an artifact of the run, which the maintainer asked for.
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.
