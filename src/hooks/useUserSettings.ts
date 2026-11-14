@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { applyUsageDataSetting } from '../analytics/analytics';
-import { trackChangedUserSetting, trackLoadedUserSetting } from '../analytics/track-event';
+import { trackChangedUserSetting, trackLoadedLanguageInUse, trackLoadedUserSetting } from '../analytics/track-event';
+import i18next, { languageReady } from '../i18n/i18n';
 import { DateTimeFormat } from '../utils/date-time-format';
 import { UserSettingDefaultValue, UserSettingKey, UserSettingKeyType } from '../utils/user-settings';
 import { readStorage, useLocalStorage, writeStorage } from './useLocalStorage';
@@ -47,6 +48,10 @@ export const useUserSettingsTracker = () => {
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoDataPaneFlex, userSettings.wideLayoutPhotoDataPaneFlex.toString());
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoImagePaneFlex, userSettings.wideLayoutPhotoImagePaneFlex.toString());
     trackLoadedUserSetting(UserSettingKey.Language, userSettings.language);
+    // The language the app is shown in, which the setting does not tell (see
+    // trackLoadedLanguageInUse). Recorded once the app shows the language it
+    // starts in: until then it is English, whatever the app is about to show.
+    languageReady.then(() => trackLoadedLanguageInUse(i18next.language));
   }
 
   return { trackLoadedUserSettings };

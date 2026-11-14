@@ -1,23 +1,28 @@
 # More languages: results
 
-Checked on 2026-11-11 and 2026-11-12 on macOS 27 (Apple silicon, system
-language Japanese), Node 26.13.0 and npm 11.20.0, in the working tree of the
-branch `claude/more-languages-and-language-page-96bbc5`. Every browser ran
-headless. The numbers under [Checks](#checks) are those of 2026-11-12, after
-the translations were read through again and the layout was made one for
-every language. On 2026-11-13, after two English sentences were reworded,
-`npm run test:all`, `npm run build` and the browser suite in Chromium, Chrome
-and Firefox were run again, with the same results.
+Checked on 2026-11-11, 2026-11-12 and 2026-11-14 on macOS 27 (Apple silicon,
+system language Japanese), Node 26.13.0 and npm 11.20.0, in the working tree
+of the branch `claude/more-languages-and-language-page-96bbc5`. Every browser
+ran headless. The numbers under [Checks](#checks) are those of 2026-11-14,
+after the language that the app is shown in was added to what the usage data
+records.
+
+On 2026-11-12, after the translations were read through again and the layout
+was made one for every language, there were 39 suites and 638 unit tests, and
+23 tests in the browser suite (22 in Firefox), and all passed. They passed
+again on 2026-11-13, after two English sentences were reworded
+(`npm run test:all`, `npm run build` and the browser suite in Chromium,
+Chrome and Firefox).
 
 ## Checks
 
 | Command                                              | Result                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| `npm run test:all` (lint, typecheck, Jest)           | Passed: 39 suites, 638 tests, in about two seconds                        |
+| `npm run test:all` (lint, typecheck, Jest)           | Passed: 40 suites, 658 tests, in about two seconds                        |
 | `npm run build`, `npm run build:plm`                 | Passed                                                                    |
-| `npm run test:e2e` (Chromium)                        | Passed: 23 tests, 7 of them new, in 29 s                                  |
-| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 23 tests; the screenshots as described below                      |
-| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 22 tests, after the list's box was taken out of the Tab key's stops; the one for a touch device is skipped, as Playwright emulates one in Chromium alone |
+| `npm run test:e2e` (Chromium)                        | Passed: 25 tests, 9 of them new, in 43 s                                  |
+| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`         | Passed: 25 tests; the screenshots as described below                      |
+| `PDV_BROWSER=firefox npm run test:e2e`               | Passed: 24 tests, after the list's box was taken out of the Tab key's stops; the one for a touch device is skipped, as Playwright emulates one in Chromium alone |
 | `PDV_DEV=1 npm run test:e2e`                         | Passed: 1 test                                                            |
 | `npm run test:electron`                              | **Not run**; see [In Photo Location Map](#in-photo-location-map)          |
 | A clean `npm ci`                                     | On 2026-11-11: the three known deprecation warnings only; 731 packages, 3 more than before. No dependency changed since |
@@ -35,11 +40,11 @@ browser suite.
 - One unit test writes a date in each of the 42 languages, in every format of
   the settings, and tells if a digit is not one of 0 to 9.
 - The browser suite has English, Japanese and Arabic, one test for a touch
-  device, and three tests in Polish at the width of a phone, which stands for
-  the languages that write more than English does: 7 more tests than before,
-  for 42 languages in place of 2. The Polish tests find their elements by
-  where they are and name no Polish text, so a change of a translation does
-  not break them.
+  device, three tests in Polish at the width of a phone, which stands for
+  the languages that write more than English does, and two tests of what is
+  recorded about the language: 9 more tests than before, for 42 languages in
+  place of 2. The Polish tests find their elements by where they are and name
+  no Polish text, so a change of a translation does not break them.
 - Unit tests hold the layout's parts to what they are for: each name of the
   latitude and the longitude on the line of its number, the header's room for
   the menu's button, the names of the Settings page's fields tied to their
@@ -99,7 +104,9 @@ Taken with Chrome on this Mac, like the others. Of the 26, 7 changed on
   page, `about-ja.png` and `narrow-loaded-ja.png`.
 
 The changed screenshots were compared with the earlier ones pixel by pixel,
-at any difference, to find what moved in each.
+at any difference, to find what moved in each. None changed on 2026-11-14,
+when the language shown was added to what is recorded: nothing that is shown
+changed.
 
 Two of them caught mistakes on the way, which were corrected:
 
@@ -282,6 +289,42 @@ German, which the app is to ignore there.
 In each, the title was "demo.jpg - Photo Location Map", the menu was hidden,
 and no error was logged. It was run again on 2026-11-12, after the layout was
 changed, with the same nine results.
+
+## What is recorded about the language
+
+On 2026-11-14 the built app was opened in headless Chrome set to French, and
+what it posts to the analytics backend and gives to Google's tag was read.
+Nothing left the machine: the requests to the backend were answered on it,
+those to Google were stopped, and the calls to Google's tag were read from
+the page.
+
+| Step                                         | Posted to the backend                                                 | Given to Google's tag                               |
+| -------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------- |
+| The app is opened, nothing chosen            | `Loaded User Setting`: `Language: auto`, then `Language in Use: fr`   | `loaded_user_setting`, with the same two labels     |
+| 日本語 is chosen on the Language page        | `Changed User Setting`: `Language: ja`, then `Language in Use: ja`    | `changed_user_setting`, with the same two labels    |
+| The Settings page is opened from the menu    | `Left Language Page`, with the label below                            | `left_language_page`, with the parameters below     |
+| The app is opened again                      | `Loaded User Setting`: `Language: ja`, then `Language in Use: ja`     | `loaded_user_setting`, with the same two labels     |
+| The app is opened with "Send usage data" off | Nothing                                                               | Nothing: the tag is not loaded                      |
+
+The label of `Left Language Page`, and the parameters of `left_language_page`:
+
+```
+{"languageSetting":"ja","languageInUse":"ja","languageSettingOnArrival":"auto","languageInUseOnArrival":"fr","isChanged":true}
+{"event_category":"Language Page","language_setting":"ja","language_in_use":"ja","language_setting_on_arrival":"auto","language_in_use_on_arrival":"fr","is_changed":true,"value":""}
+```
+
+- Before, the first step gave `Language: auto` alone, which does not tell
+  that the app was shown in French, and leaving the Language page gave
+  nothing.
+- `Page Loaded` carries the browser's languages (`fr-FR`), as before.
+- In the build for Photo Location Map, opened as its isolated window opens it
+  with `language=ja`, in a browser set to English, the app handed that
+  application `Loaded User Setting` with `Language: auto`, the setting saved
+  in that window, which is not used there, and then `Language in Use: ja`.
+  Before, the language that Photo Location Map passed was in none of the
+  events.
+- The browser suite checks the same in an English and in a Japanese browser,
+  the Language page left by the menu and by the browser's Back.
 
 ## Right to left
 

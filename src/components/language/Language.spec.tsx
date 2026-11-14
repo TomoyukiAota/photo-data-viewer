@@ -1,6 +1,9 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { trackChangedUserSetting } from '../../analytics/track-event';
+import {
+  trackChangedLanguageInUse,
+  trackChangedUserSetting,
+} from '../../analytics/track-event';
 import PhotoContext from '../../context/photo/photo-context';
 import i18next, { applyLanguage, loadLanguage } from '../../i18n/i18n';
 import Language from './Language';
@@ -74,6 +77,7 @@ it('shows the app in the language chosen, at once, and saves and records the cho
   expect(chosen()).toEqual(['日本語']);
   expect(localStorage.getItem('Language')).toBe('ja');
   expect(trackChangedUserSetting).toHaveBeenCalledWith('Language', 'ja');
+  expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
 });
 
 it('loads the photo again after the language is applied, for its dates', async () => {
@@ -96,6 +100,9 @@ it('follows the browser again when its entry is chosen', async () => {
   expect(i18next.language).toBe('en');
   expect(chosen()).toEqual(['Use browser setting (English)']);
   expect(localStorage.getItem('Language')).toBe('auto');
+  // The setting does not tell the language then, so the language shown is recorded beside it.
+  expect(trackChangedUserSetting).toHaveBeenCalledWith('Language', 'auto');
+  expect(trackChangedLanguageInUse).toHaveBeenCalledWith('en');
 });
 
 it('says so when the language cannot be fetched, and leaves the app and the setting as they were', async () => {
@@ -110,6 +117,7 @@ it('says so when the language cannot be fetched, and leaves the app and the sett
   expect(chosen()).toEqual(['Use browser setting (English)']);
   expect(localStorage.getItem('Language')).toBe('auto');
   expect(trackChangedUserSetting).not.toHaveBeenCalled();
+  expect(trackChangedLanguageInUse).not.toHaveBeenCalled();
   expect(reloadPhoto).not.toHaveBeenCalled();
 
   // Choosing it again tries again.
@@ -117,6 +125,7 @@ it('says so when the language cannot be fetched, and leaves the app and the sett
   expect(screen.queryByRole('alert')).toBeNull();
   expect(i18next.language).toBe('ja');
   expect(localStorage.getItem('Language')).toBe('ja');
+  expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
 });
 
 it('does nothing when the chosen entry is chosen again while the app is shown in its language', async () => {
@@ -125,6 +134,7 @@ it('does nothing when the chosen entry is chosen again while the app is shown in
 
   expect(loadLanguage).not.toHaveBeenCalled();
   expect(trackChangedUserSetting).not.toHaveBeenCalled();
+  expect(trackChangedLanguageInUse).not.toHaveBeenCalled();
   expect(reloadPhoto).not.toHaveBeenCalled();
 });
 
@@ -141,9 +151,11 @@ it('asks for the saved language again when its entry is chosen while the app is 
   expect(i18next.language).toBe('ja');
   expect(chosen()).toEqual(['日本語']);
   expect(reloadPhoto).toHaveBeenCalledTimes(1);
-  // The setting is the one that was saved: nothing changed, so no change is recorded.
+  // The setting is the one that was saved: it did not change, so no change of
+  // it is recorded. The language shown did, from English.
   expect(localStorage.getItem('Language')).toBe('ja');
   expect(trackChangedUserSetting).not.toHaveBeenCalled();
+  expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
 });
 
 it("asks for the browser's language again in the same way, and keeps following the browser", async () => {
@@ -160,6 +172,7 @@ it("asks for the browser's language again in the same way, and keeps following t
   expect(chosen()).toEqual(['Use browser setting (English)']);
   expect(localStorage.getItem('Language')).toBe(saved);
   expect(trackChangedUserSetting).not.toHaveBeenCalled();
+  expect(trackChangedLanguageInUse).toHaveBeenCalledWith('en');
 });
 
 it('says so when the language asked for again cannot be fetched, and can be asked for once more', async () => {

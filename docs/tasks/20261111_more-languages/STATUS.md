@@ -9,6 +9,10 @@ On 2026-11-12 the 40 machine translations were read through again, and the
 layout was made one for every language:
 [One layout for every language](#one-layout-for-every-language).
 
+On 2026-11-14 the usage data was made to tell the language that the app is
+shown in, and the language that a visitor leaves the Language page with:
+[What is recorded about the language](#what-is-recorded-about-the-language).
+
 ## What was asked
 
 Photo Location Map got its first translation and a list to choose the language
@@ -47,6 +51,10 @@ maintainer's to do.
   both**, in each language: its translations, which were written at the same
   time, are the glossary. The list, the texts of a right-to-left language and
   the dates work as they do there.
+- **The usage data tells the language**: the setting and the language that
+  the app is shown in, when the app is opened, when a language is chosen, and
+  when the Language page is left for another page
+  (`src/analytics/track-event.ts`, `src/hooks/useLanguagePageTracker.ts`).
 
 ## Decisions taken on the way
 
@@ -355,10 +363,60 @@ and why.
   with a plugin that this app does not use, so nothing had to change; a unit
   test now tells if that changes.
 
+### What is recorded about the language
+
+The maintainer asked on 2026-11-14 to know three things from the usage data:
+the visitor's language when the app is opened, each change of the language on
+the Language page, and the language when the visitor goes from the Language
+page to another page, which is the one they settled on.
+
+| When                                        | Event                         | What it carries                                                                                                     |
+| ------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| The app is opened                           | `Loaded User Setting`, twice  | `Language: auto`, the setting, and `Language in Use: fr`, the language that the app is shown in                      |
+| A language is chosen on the Language page   | `Changed User Setting`, twice | `Language: ja` and `Language in Use: ja`                                                                            |
+| The Language page is left for another page  | `Left Language Page`          | `languageSetting` and `languageInUse`, the two as they were when the page was opened (`…OnArrival`), and `isChanged` |
+
+- **The setting was recorded already**, when the app is opened and when it is
+  changed, since the app has had more than one language. What is new is the
+  language shown, and the event of leaving the page.
+- **The language shown is recorded beside the setting**, which alone does not
+  tell it. The setting is `auto` until a language is chosen, which follows
+  the browser. In Photo Location Map's window the language is the one that
+  application passes, whatever the setting. A language that cannot be fetched
+  leaves the app in English. Photo Location Map records its own language
+  under the same name, `Language in Use`.
+- **It is recorded once the app shows the language that it starts in**: until
+  then the language in use is English, whatever the app is about to show.
+- **Leaving is the router's `routeChangeComplete`**, which the app's root
+  listens to: the menu, and the browser's Back and Forward. The Language page
+  does not listen itself, as it is gone by then; and recording as it is taken
+  away would also record as it is opened in development, where React mounts a
+  component twice. A visit that changed nothing is recorded as well, with
+  `isChanged` false.
+- **Closing the tab, or going to another site, records nothing**: it is no
+  change of page. The last change recorded tells the language then, and so
+  does the next time the app is opened.
+- **No field is named `language`**: GA4 collects a parameter of that name
+  with every event, the browser's language.
+- **In GA4, a parameter of an event is shown in reports once it is registered
+  as a custom dimension**: `language_setting`, `language_in_use`,
+  `language_setting_on_arrival`, `language_in_use_on_arrival` and
+  `is_changed` of `left_language_page`.
+- **Nothing else changed in what is collected.** The browser's languages were
+  sent already, with `Page Loaded`, and nothing is sent while "Send usage
+  data" is off. In Photo Location Map's window, the setting recorded is the
+  one saved in that window, which is not used there; the language in use is
+  the one to go by.
+
 ## Not verified
 
 - **The 40 translations**: no speaker has read them. The review was a
   machine's, as the translations were.
+- **That what is recorded about the language arrives.** What the app posts to
+  the analytics backend and gives to Google's tag was read in a headless
+  browser, with both answered or stopped on the machine
+  ([results](./evidence/RESULTS.md#what-is-recorded-about-the-language)). The
+  backend's and GA4's own records were not looked at.
 - **How a browser other than Chrome divides the texts.** The division of a
   word by the language's rules, the last line that is not left alone and the
   phrases of Japanese were looked at in Chrome on macOS. Chrome divides words

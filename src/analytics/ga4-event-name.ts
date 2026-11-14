@@ -13,6 +13,7 @@ export const Ga4EventName = {
   OpenedUrl: 'opened_url',
   LoadedUserSetting: 'loaded_user_setting',
   ChangedUserSetting: 'changed_user_setting',
+  LeftLanguagePage: 'left_language_page',
   AppLayout: 'app_layout',
   AppIntegrationMode: 'app_integration_mode',
   UnhandledError: 'unhandled_error',

@@ -106,6 +106,38 @@ async function navigate(page, name) {
   await page.waitForURL((url) => url.pathname === menuPaths[name]);
 }
 
+/**
+ * Collects the events that the page sends to the analytics backend, which
+ * this answers in place of the route that answers them for every test.
+ */
+async function collectEvents(page) {
+  const events = [];
+  await page.route(
+    /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
+    (route) => {
+      events.push(...JSON.parse(route.request().postData()).events);
+      return route.fulfill({ status: 204, body: '' });
+    },
+  );
+  return events;
+}
+
+/** What the events say of the language under an action: the labels, in order. */
+function languageLabels(events, action) {
+  return events
+    .filter(
+      (event) => event.action === action && /^Language/.test(event.label),
+    )
+    .map((event) => event.label);
+}
+
+/** What was recorded each time the Language page was left, in order. */
+function leftLanguagePage(events) {
+  return events
+    .filter((event) => event.action === 'Left Language Page')
+    .map((event) => JSON.parse(event.label));
+}
+
 async function expectTruncated(cell) {
   await expect(cell).toHaveCSS('white-space', 'nowrap');
   await expect(cell).toHaveCSS('overflow-x', 'hidden');
@@ -507,6 +539,67 @@ test('errors nothing handled are sent to the analytics backend', async ({
     ]);
 });
 
+test('the language is recorded when the app opens, when it is changed, and when the Language page is left', async ({
+  page,
+}) => {
+  const events = await collectEvents(page);
+
+  // When the app opens: the setting, which follows the browser until a
+  // language is chosen, and the language that the app is shown in.
+  await page.goto('/');
+  await expect
+    .poll(() => languageLabels(events, 'Loaded User Setting'))
+    .toEqual(['Language: auto', 'Language in Use: en']);
+
+  // When a language is chosen on the Language page.
+  await navigate(page, 'Language');
+  await page
+    .getByRole('listbox')
+    .getByRole('option', { name: '日本語', exact: true })
+    .click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+  await expect
+    .poll(() => languageLabels(events, 'Changed User Setting'))
+    .toEqual(['Language: ja', 'Language in Use: ja']);
+  expect(leftLanguagePage(events)).toEqual([]);
+
+  // When the Language page is left for another page, by the menu: the
+  // language settled on, and the one found on arriving.
+  await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+  await page.getByRole('menuitem', { name: '設定', exact: true }).click();
+  await page.waitForURL((url) => url.pathname === '/settings');
+  const changed = {
+    languageSetting: 'ja',
+    languageInUse: 'ja',
+    languageSettingOnArrival: 'auto',
+    languageInUseOnArrival: 'en',
+    isChanged: true,
+  };
+  await expect.poll(() => leftLanguagePage(events)).toEqual([changed]);
+
+  // By the browser's Back as well, and when nothing was chosen. Going back to
+  // the Language page records nothing; going back from it does.
+  await page.goBack();
+  await page.waitForURL((url) => url.pathname === '/language');
+  await page.goBack();
+  await page.waitForURL((url) => url.pathname === '/');
+  await expect
+    .poll(() => leftLanguagePage(events))
+    .toEqual([
+      changed,
+      {
+        languageSetting: 'ja',
+        languageInUse: 'ja',
+        languageSettingOnArrival: 'ja',
+        languageInUseOnArrival: 'ja',
+        isChanged: false,
+      },
+    ]);
+  // The app was opened once, and the language changed once.
+  expect(languageLabels(events, 'Loaded User Setting')).toHaveLength(2);
+  expect(languageLabels(events, 'Changed User Setting')).toHaveLength(2);
+});
+
 test('HEIF decoding preserves image dimensions and displayed metadata', async ({
   page,
 }) => {
@@ -610,6 +703,34 @@ test.describe('in a browser whose language is Japanese', () => {
     expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
       'en',
     );
+  });
+
+  // The setting follows the browser here, and so does not tell the language.
+  // Japanese is fetched before the app is shown, and recorded once it is.
+  test('the language shown is recorded beside the setting, also on the Language page as the first page', async ({
+    page,
+  }) => {
+    const events = await collectEvents(page);
+    await page.goto('/language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+    await expect
+      .poll(() => languageLabels(events, 'Loaded User Setting'))
+      .toEqual(['Language: auto', 'Language in Use: ja']);
+
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page.getByRole('menuitem', { name: 'ホーム', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/');
+    await expect
+      .poll(() => leftLanguagePage(events))
+      .toEqual([
+        {
+          languageSetting: 'auto',
+          languageInUse: 'ja',
+          languageSettingOnArrival: 'auto',
+          languageInUseOnArrival: 'ja',
+          isChanged: false,
+        },
+      ]);
   });
 
   test('the About page is in Japanese', async ({ page }) => {

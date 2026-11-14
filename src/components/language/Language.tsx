@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { trackChangedLanguageInUse } from '../../analytics/track-event';
 import PhotoContext from '../../context/photo/photo-context';
 import { useUserSettings } from '../../hooks/useUserSettings';
 import { applyLanguage, loadLanguage } from '../../i18n/i18n';
@@ -71,6 +72,10 @@ const Language: React.FC = () => {
     // Asking again for the language of the saved setting changes no setting.
     if (setting !== saved) setUserSetting(UserSettingKey.Language, setting);
     await applyLanguage(language); // At once, as the language is loaded.
+    // The language shown now, beside the setting, which does not tell it when
+    // it follows the browser. Also when the setting stayed and its language
+    // was asked for again: the language shown changed then.
+    trackChangedLanguageInUse(language);
     setChoosing(null);
     // After the language is applied, so that the photo's dates are in it.
     photoCtx.reloadPhoto();
