@@ -77,7 +77,7 @@
   },
   "demo": {
     "title": "Demonstrācija",
-    "description": "Noklikšķinot uz pogas „Palaist demonstrāciju”, lietotne darbojas tā, it kā būtu atlasīts <photoLink>šis fotoattēls</photoLink>.",
+    "description": "Noklikšķinot uz pogas “Palaist demonstrāciju”, lietotne darbojas tā, it kā būtu atlasīts <photoLink>šis fotoattēls</photoLink>.",
     "runDemo": "Palaist demonstrāciju"
   },
   "settings": {
@@ -94,7 +94,7 @@
     "usageData": {
       "title": "Lietošanas dati",
       "send": "Sūtīt lietošanas datus, lai uzlabotu šo lietotni",
-      "note": "Tas, kas tiek sūtīts, ir aprakstīts lapā „Par lietotni”."
+      "note": "Tas, kas tiek sūtīts, ir aprakstīts lapā “Par lietotni”."
     }
   },
   "language": {

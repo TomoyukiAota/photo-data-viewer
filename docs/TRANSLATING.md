@@ -140,8 +140,9 @@ do not take longer with every language.
 - The words that this app shares with
   [Photo Location Map](https://github.com/TomoyukiAota/photo-location-map) are
   the same in both: Language, Search, "No languages found", Settings, Close,
-  Reload, the settings of the date and time, "location data", the profile
-  links, and the words for a photo, a file and EXIF data. Its translations are
+  Reload, the settings of the date and time, "location data", "Date Taken"
+  (which its sort has too), the profile links, and the words for a photo, a
+  file and EXIF data. Its translations are
   in `src-shared/i18n/locales/<code>.json` of its repository. When you change
   such a word here, look there, and say in the pull request when the two now
   differ.
@@ -159,6 +160,9 @@ do not take longer with every language.
   English name is read in its own order.
 - For the words that every application has (Settings, Search, Close, Reload),
   use the words that Windows and macOS use in your language.
+- Quotation marks are those of your language's software: “ ” in English, 「 」
+  in Japanese, « » in French, and “ ” in Latvian, as Photo Location Map has
+  them.
 - The names in the table of the Home page ("File Name", "Width x Height",
   "Date Taken", "Latitude", "Longitude") are in a column that is narrow on a
   phone. Write them out in full all the same: a name continues on the next
