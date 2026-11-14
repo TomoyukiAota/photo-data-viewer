@@ -209,6 +209,60 @@ test('long filenames retain the original single-line clipping', async ({ page })
   }
 });
 
+/** What each test's page did besides what the test looks at, for a test that fails. */
+const pageActivity = new WeakMap();
+
+/** A request as a failure shows it: the app's own by its path, another site's by its host and path. */
+function shortUrl(url, appOrigin) {
+  const { origin, host, pathname } = new URL(url);
+  return (origin === appOrigin ? pathname : `${host}${pathname}`).slice(0, 80);
+}
+
+// TL;DR: A test that fails shows how its page was loaded, the requests that
+// failed and the errors on the page.
+// Details: CI keeps no trace of a test, so its output is all that a failure
+// there shows. A test failed once on Windows with the Home page never drawn,
+// in the development mode: whether a request of the page failed, the page
+// was loaded again or nothing happened at all could not be told.
+test.beforeEach(async ({ page }, testInfo) => {
+  const started = Date.now();
+  const appOrigin = new URL(testInfo.project.use.baseURL).origin;
+  const activity = { loads: [], failedRequests: [], errors: [] };
+  pageActivity.set(page, activity);
+  page.on('load', () =>
+    activity.loads.push(`${((Date.now() - started) / 1000).toFixed(1)} s`),
+  );
+  page.on('requestfailed', (request) =>
+    activity.failedRequests.push(
+      `${request.failure()?.errorText} ${request.method()} ${shortUrl(request.url(), appOrigin)}`,
+    ),
+  );
+  page.on('console', (message) => {
+    if (message.type() === 'error') activity.errors.push(message.text());
+  });
+  page.on('pageerror', (error) => activity.errors.push(error.message));
+});
+
+test.afterEach(async ({ page }, testInfo) => {
+  const activity = pageActivity.get(page);
+  if (!activity || testInfo.status === testInfo.expectedStatus) return;
+  // The reporter prints the first 300 characters of each.
+  await testInfo.attach('page loads and failed requests', {
+    body: [
+      `Loads: ${activity.loads.length} (${activity.loads.join(', ')} after the start)`,
+      `Failed requests: ${activity.failedRequests.length}`,
+      ...activity.failedRequests,
+    ].join('\n'),
+    contentType: 'text/plain',
+  });
+  if (activity.errors.length > 0) {
+    await testInfo.attach('errors on the page', {
+      body: activity.errors.join('\n'),
+      contentType: 'text/plain',
+    });
+  }
+});
+
 test.beforeEach(async ({ page }) => {
   // Keep baseline captures independent of map servers, and GA.
   await page.route(

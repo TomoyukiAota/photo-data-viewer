@@ -375,6 +375,18 @@ and About pages:
   the app logged about sending and how often the page was loaded, as CI keeps
   no trace of a test. What made the request fail is not known. The test of
   the errors that are sent waits five seconds still, as it did not fail.
+- **The next commit's CI failed on Windows too, in another test**: the one
+  that runs in the development mode, in the same run of the two (the one for
+  the push). The Home page was never drawn in 90 seconds, and the page's
+  script never connected to the development server, which the passing run
+  did two seconds after the test started. The 40 runs on Windows before took
+  18 to 37 seconds for that step, and the other run of the same commit 25.
+  Blocking the app's main script on this Mac gave the same failure: the page
+  is loaded, and nothing is drawn. So a request of the page that failed fits
+  both failures, but neither could be made to happen here, and nothing in
+  the app runs before that script. Every browser test now shows, when it
+  fails, when its page was loaded, the requests that failed and the errors on
+  the page.
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.
