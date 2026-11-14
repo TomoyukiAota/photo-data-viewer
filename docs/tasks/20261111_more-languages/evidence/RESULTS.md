@@ -363,6 +363,18 @@ and About pages:
   the label alone now, and the field is as wide as its chosen value, as MUI
   makes it. On macOS the test asked for the widths before the page had its
   fields; it asks until it has them.
+- **The browser test of what is recorded about the language failed once in
+  CI**, on Windows, in one of the two runs of a commit: the event of leaving
+  the Language page had not arrived after five seconds, which is how long
+  `expect` waits. It did not fail in 214 tries on this Mac, with the page's
+  processor slowed down and several pages at once: the event arrived about a
+  second after the page changed. What fits is a request that failed. The app
+  then tries again five seconds later, so the event arrives after six, a
+  second after the test stopped waiting; a request made to fail on purpose
+  gave just that. The two tests wait 15 seconds now, and a failure shows what
+  the app logged about sending and how often the page was loaded, as CI keeps
+  no trace of a test. What made the request fail is not known. The test of
+  the errors that are sent waits five seconds still, as it did not fail.
 - **Firefox makes a stop of the Tab key of every box that scrolls.** The list
   took two presses to reach: the box, then the entry. The box is no longer a
   stop itself.

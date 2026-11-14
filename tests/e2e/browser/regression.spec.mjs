@@ -107,19 +107,61 @@ async function navigate(page, name) {
 }
 
 /**
+ * How long to wait for an event to reach the analytics backend.
+ *
+ * TL;DR: Longer than the five seconds of `expect`, which end before the app
+ * tries a second time.
+ * Details: The app sends an event a second after it is recorded, and when
+ * the request fails it tries again five seconds later
+ * (src/analytics/pdv-backend/sender.ts): the event then arrives six seconds
+ * after it was recorded. That happened once in CI, on Windows, where the
+ * test failed with nothing received after five seconds. What made the
+ * request fail is not known: it could not be made to happen again, and CI
+ * keeps no trace of a test.
+ */
+const SENT_TIMEOUT = 15000;
+
+/**
  * Collects the events that the page sends to the analytics backend, which
- * this answers in place of the route that answers them for every test.
+ * this answers in place of the route that answers them for every test, and
+ * what the app logs about sending them.
  */
 async function collectEvents(page) {
-  const events = [];
+  const sent = { events: [], log: [], pageLoads: 0 };
+  page.on('load', () => sent.pageLoads++);
+  page.on('console', (message) => {
+    if (message.text().startsWith('[Analytics]')) sent.log.push(message.text());
+  });
   await page.route(
     /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
     (route) => {
-      events.push(...JSON.parse(route.request().postData()).events);
+      sent.events.push(...JSON.parse(route.request().postData()).events);
       return route.fulfill({ status: 204, body: '' });
     },
   );
-  return events;
+  return sent;
+}
+
+/**
+ * Waits until what `read` finds in the events sent is `expected`.
+ *
+ * When it does not come, the failure has what the app logged about sending,
+ * and how often the page was loaded: a request that failed, an event that
+ * was never recorded and a change of page that loaded the page anew look
+ * the same otherwise.
+ */
+async function expectSent(sent, read, expected) {
+  try {
+    await expect
+      .poll(() => read(sent.events), { timeout: SENT_TIMEOUT })
+      .toEqual(expected);
+  } catch (error) {
+    await test.info().attach('what the app logged about sending', {
+      body: [`Page loads: ${sent.pageLoads}`, ...sent.log].join('\n'),
+      contentType: 'text/plain',
+    });
+    throw error;
+  }
 }
 
 /** What the events say of the language under an action: the labels, in order. */
@@ -542,14 +584,14 @@ test('errors nothing handled are sent to the analytics backend', async ({
 test('the language is recorded when the app opens, when it is changed, and when the Language page is left', async ({
   page,
 }) => {
-  const events = await collectEvents(page);
+  const sent = await collectEvents(page);
+  const loaded = (events) => languageLabels(events, 'Loaded User Setting');
+  const changed = (events) => languageLabels(events, 'Changed User Setting');
 
   // When the app opens: the setting, which follows the browser until a
   // language is chosen, and the language that the app is shown in.
   await page.goto('/');
-  await expect
-    .poll(() => languageLabels(events, 'Loaded User Setting'))
-    .toEqual(['Language: auto', 'Language in Use: en']);
+  await expectSent(sent, loaded, ['Language: auto', 'Language in Use: en']);
 
   // When a language is chosen on the Language page.
   await navigate(page, 'Language');
@@ -558,24 +600,22 @@ test('the language is recorded when the app opens, when it is changed, and when 
     .getByRole('option', { name: '日本語', exact: true })
     .click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
-  await expect
-    .poll(() => languageLabels(events, 'Changed User Setting'))
-    .toEqual(['Language: ja', 'Language in Use: ja']);
-  expect(leftLanguagePage(events)).toEqual([]);
+  await expectSent(sent, changed, ['Language: ja', 'Language in Use: ja']);
+  expect(leftLanguagePage(sent.events)).toEqual([]);
 
   // When the Language page is left for another page, by the menu: the
   // language settled on, and the one found on arriving.
   await page.getByRole('button', { name: 'メニュー', exact: true }).click();
   await page.getByRole('menuitem', { name: '設定', exact: true }).click();
   await page.waitForURL((url) => url.pathname === '/settings');
-  const changed = {
+  const leftWithJapanese = {
     languageSetting: 'ja',
     languageInUse: 'ja',
     languageSettingOnArrival: 'auto',
     languageInUseOnArrival: 'en',
     isChanged: true,
   };
-  await expect.poll(() => leftLanguagePage(events)).toEqual([changed]);
+  await expectSent(sent, leftLanguagePage, [leftWithJapanese]);
 
   // By the browser's Back as well, and when nothing was chosen. Going back to
   // the Language page records nothing; going back from it does.
@@ -583,21 +623,19 @@ test('the language is recorded when the app opens, when it is changed, and when 
   await page.waitForURL((url) => url.pathname === '/language');
   await page.goBack();
   await page.waitForURL((url) => url.pathname === '/');
-  await expect
-    .poll(() => leftLanguagePage(events))
-    .toEqual([
-      changed,
-      {
-        languageSetting: 'ja',
-        languageInUse: 'ja',
-        languageSettingOnArrival: 'ja',
-        languageInUseOnArrival: 'ja',
-        isChanged: false,
-      },
-    ]);
+  await expectSent(sent, leftLanguagePage, [
+    leftWithJapanese,
+    {
+      languageSetting: 'ja',
+      languageInUse: 'ja',
+      languageSettingOnArrival: 'ja',
+      languageInUseOnArrival: 'ja',
+      isChanged: false,
+    },
+  ]);
   // The app was opened once, and the language changed once.
-  expect(languageLabels(events, 'Loaded User Setting')).toHaveLength(2);
-  expect(languageLabels(events, 'Changed User Setting')).toHaveLength(2);
+  expect(loaded(sent.events)).toHaveLength(2);
+  expect(changed(sent.events)).toHaveLength(2);
 });
 
 test('HEIF decoding preserves image dimensions and displayed metadata', async ({
@@ -710,27 +748,27 @@ test.describe('in a browser whose language is Japanese', () => {
   test('the language shown is recorded beside the setting, also on the Language page as the first page', async ({
     page,
   }) => {
-    const events = await collectEvents(page);
+    const sent = await collectEvents(page);
     await page.goto('/language');
     await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
-    await expect
-      .poll(() => languageLabels(events, 'Loaded User Setting'))
-      .toEqual(['Language: auto', 'Language in Use: ja']);
+    await expectSent(
+      sent,
+      (events) => languageLabels(events, 'Loaded User Setting'),
+      ['Language: auto', 'Language in Use: ja'],
+    );
 
     await page.getByRole('button', { name: 'メニュー', exact: true }).click();
     await page.getByRole('menuitem', { name: 'ホーム', exact: true }).click();
     await page.waitForURL((url) => url.pathname === '/');
-    await expect
-      .poll(() => leftLanguagePage(events))
-      .toEqual([
-        {
-          languageSetting: 'auto',
-          languageInUse: 'ja',
-          languageSettingOnArrival: 'auto',
-          languageInUseOnArrival: 'ja',
-          isChanged: false,
-        },
-      ]);
+    await expectSent(sent, leftLanguagePage, [
+      {
+        languageSetting: 'auto',
+        languageInUse: 'ja',
+        languageSettingOnArrival: 'auto',
+        languageInUseOnArrival: 'ja',
+        isChanged: false,
+      },
+    ]);
   });
 
   test('the About page is in Japanese', async ({ page }) => {
