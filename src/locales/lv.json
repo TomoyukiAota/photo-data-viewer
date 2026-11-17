@@ -24,6 +24,14 @@
       "data": "Dati",
       "map": "Karte",
       "photo": "Fotoattēls"
+    },
+    "layout": {
+      "buttonLabel": "izkārtojums",
+      "label": "IZKĀRTOJUMS",
+      "auto": "Automātiski",
+      "autoDescription": "Blakus platā logā, cilnēs šaurā",
+      "sideBySide": "Blakus",
+      "tabs": "Cilnes"
     }
   },
   "photo": {

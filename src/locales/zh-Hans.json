@@ -24,6 +24,14 @@
       "data": "数据",
       "map": "地图",
       "photo": "照片"
+    },
+    "layout": {
+      "buttonLabel": "布局",
+      "label": "布局",
+      "auto": "自动",
+      "autoDescription": "窗口较宽时并排显示，较窄时以标签页显示",
+      "sideBySide": "并排",
+      "tabs": "标签页"
     }
   },
   "photo": {

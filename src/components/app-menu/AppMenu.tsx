@@ -5,6 +5,7 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
 import { Check } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
@@ -39,15 +40,25 @@ const pages: Page[] = [
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
 ];
 
+/**
+ * What a button of the header shows: an icon, and a word under it. The menu's
+ * button is made so, and the layout's button before it (LayoutMenu), so that
+ * the two look alike.
+ */
+export const HeaderButtonFace: React.FC<{
+  Icon: typeof SvgIcon;
+  label: string;
+}> = ({ Icon, label }) => (
+  <div className={classes.face}>
+    <Icon className={classes['face-icon']} />
+    <span className={classes['face-text']}>{label}</span>
+  </div>
+);
+
 /** What the menu's button shows: the icon, and the word for a menu under it. */
 const AppMenuFace: React.FC = () => {
   const { t } = useTranslation();
-  return (
-    <div className={classes['menu-icon-wrapper']}>
-      <MenuIcon className={classes['menu-icon']} />
-      <span className={classes['menu-icon-text']}>{t('menu.label')}</span>
-    </div>
-  );
+  return <HeaderButtonFace Icon={MenuIcon} label={t('menu.label')} />;
 };
 
 /**

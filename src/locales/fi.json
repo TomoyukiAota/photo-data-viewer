@@ -24,6 +24,14 @@
       "data": "Tiedot",
       "map": "Kartta",
       "photo": "Kuva"
+    },
+    "layout": {
+      "buttonLabel": "asettelu",
+      "label": "ASETTELU",
+      "auto": "Automaattinen",
+      "autoDescription": "Rinnakkain leveässä ikkunassa, välilehdillä kapeassa",
+      "sideBySide": "Rinnakkain",
+      "tabs": "Välilehdet"
     }
   },
   "photo": {

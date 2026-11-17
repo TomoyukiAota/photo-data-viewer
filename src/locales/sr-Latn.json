@@ -24,6 +24,14 @@
       "data": "Podaci",
       "map": "Mapa",
       "photo": "Fotografija"
+    },
+    "layout": {
+      "buttonLabel": "raspored",
+      "label": "RASPORED",
+      "auto": "Automatski",
+      "autoDescription": "Jedno pored drugog u širokom prozoru, na karticama u uskom",
+      "sideBySide": "Jedno pored drugog",
+      "tabs": "Kartice"
     }
   },
   "photo": {

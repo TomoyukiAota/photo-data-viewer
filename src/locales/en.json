@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Map",
       "photo": "Photo"
+    },
+    "layout": {
+      "buttonLabel": "layout",
+      "label": "LAYOUT",
+      "auto": "Automatic",
+      "autoDescription": "Side by side in a wide window, tabs in a narrow one",
+      "sideBySide": "Side by side",
+      "tabs": "Tabs"
     }
   },
   "photo": {

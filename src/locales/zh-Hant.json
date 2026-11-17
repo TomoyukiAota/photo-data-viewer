@@ -24,6 +24,14 @@
       "data": "資料",
       "map": "地圖",
       "photo": "照片"
+    },
+    "layout": {
+      "buttonLabel": "版面配置",
+      "label": "版面配置",
+      "auto": "自動",
+      "autoDescription": "視窗較寬時並排顯示，較窄時以索引標籤顯示",
+      "sideBySide": "並排",
+      "tabs": "索引標籤"
     }
   },
   "photo": {

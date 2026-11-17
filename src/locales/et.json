@@ -24,6 +24,14 @@
       "data": "Andmed",
       "map": "Kaart",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "paigutus",
+      "label": "PAIGUTUS",
+      "auto": "Automaatne",
+      "autoDescription": "Kõrvuti laias aknas, vahekaartidena kitsas",
+      "sideBySide": "Kõrvuti",
+      "tabs": "Vahekaardid"
     }
   },
   "photo": {

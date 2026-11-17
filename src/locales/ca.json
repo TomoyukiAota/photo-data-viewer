@@ -24,6 +24,14 @@
       "data": "Dades",
       "map": "Mapa",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "disposició",
+      "label": "DISPOSICIÓ",
+      "auto": "Automàtica",
+      "autoDescription": "Costat a costat en una finestra ampla, en pestanyes en una d’estreta",
+      "sideBySide": "Costat a costat",
+      "tabs": "Pestanyes"
     }
   },
   "photo": {

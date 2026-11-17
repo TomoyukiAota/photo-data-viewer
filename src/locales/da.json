@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Kort",
       "photo": "Billede"
+    },
+    "layout": {
+      "buttonLabel": "layout",
+      "label": "LAYOUT",
+      "auto": "Automatisk",
+      "autoDescription": "Side om side i et bredt vindue, i faner i et smalt",
+      "sideBySide": "Side om side",
+      "tabs": "Faner"
     }
   },
   "photo": {

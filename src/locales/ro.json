@@ -24,6 +24,14 @@
       "data": "Date",
       "map": "Hartă",
       "photo": "Poză"
+    },
+    "layout": {
+      "buttonLabel": "aspect",
+      "label": "ASPECT",
+      "auto": "Automat",
+      "autoDescription": "Unul lângă altul într-o fereastră lată, în file într-una îngustă",
+      "sideBySide": "Unul lângă altul",
+      "tabs": "File"
     }
   },
   "photo": {

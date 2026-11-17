@@ -24,6 +24,14 @@
       "data": "Dane",
       "map": "Mapa",
       "photo": "Zdjęcie"
+    },
+    "layout": {
+      "buttonLabel": "układ",
+      "label": "UKŁAD",
+      "auto": "Automatyczny",
+      "autoDescription": "Obok siebie w szerokim oknie, na kartach w wąskim",
+      "sideBySide": "Obok siebie",
+      "tabs": "Karty"
     }
   },
   "photo": {

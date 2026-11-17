@@ -24,6 +24,14 @@
       "data": "데이터",
       "map": "지도",
       "photo": "사진"
+    },
+    "layout": {
+      "buttonLabel": "레이아웃",
+      "label": "레이아웃",
+      "auto": "자동",
+      "autoDescription": "창이 넓으면 나란히 보기, 좁으면 탭으로 보기",
+      "sideBySide": "나란히 보기",
+      "tabs": "탭으로 보기"
     }
   },
   "photo": {

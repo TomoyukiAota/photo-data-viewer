@@ -24,6 +24,14 @@
       "data": "Datuak",
       "map": "Mapa",
       "photo": "Argazkia"
+    },
+    "layout": {
+      "buttonLabel": "diseinua",
+      "label": "DISEINUA",
+      "auto": "Automatikoa",
+      "autoDescription": "Elkarren ondoan leiho zabal batean, fitxetan leiho estu batean",
+      "sideBySide": "Elkarren ondoan",
+      "tabs": "Fitxak"
     }
   },
   "photo": {

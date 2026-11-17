@@ -24,6 +24,14 @@
       "data": "Dados",
       "map": "Mapa",
       "photo": "Fotografia"
+    },
+    "layout": {
+      "buttonLabel": "esquema",
+      "label": "ESQUEMA",
+      "auto": "Automático",
+      "autoDescription": "Lado a lado numa janela larga, em separadores numa estreita",
+      "sideBySide": "Lado a lado",
+      "tabs": "Separadores"
     }
   },
   "photo": {

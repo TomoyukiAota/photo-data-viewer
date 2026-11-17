@@ -15,11 +15,13 @@ export const useAppRoot = () => {
 
   useUserSettingsInitializer();
 
+  // Recorded when the window's size changes, and when the layout shown does,
+  // which the user's choice of the layout mode changes too.
   const { trackAppLayout, appLayout } = useAppLayoutTracker();
   useEffect(
     () => trackAppLayout(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [appLayout.windowWidth, appLayout.windowHeight]
+    [appLayout.windowWidth, appLayout.windowHeight, appLayout.isWideLayout]
   );
 
   const { trackLoadedUserSettings } = useUserSettingsTracker();

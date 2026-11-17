@@ -24,6 +24,14 @@
       "data": "データ",
       "map": "マップ",
       "photo": "写真"
+    },
+    "layout": {
+      "buttonLabel": "レイアウト",
+      "label": "レイアウト",
+      "auto": "自動",
+      "autoDescription": "ウィンドウが広いときは並べて表示、狭いときはタブで表示",
+      "sideBySide": "並べて表示",
+      "tabs": "タブで表示"
     }
   },
   "photo": {

@@ -24,6 +24,14 @@
       "data": "Données",
       "map": "Carte",
       "photo": "Photo"
+    },
+    "layout": {
+      "buttonLabel": "disposition",
+      "label": "DISPOSITION",
+      "auto": "Automatique",
+      "autoDescription": "Côte à côte dans une fenêtre large, en onglets dans une fenêtre étroite",
+      "sideBySide": "Côte à côte",
+      "tabs": "Onglets"
     }
   },
   "photo": {

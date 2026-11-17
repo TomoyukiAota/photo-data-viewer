@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Peta",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "tataletak",
+      "label": "TATALETAK",
+      "auto": "Automatik",
+      "autoDescription": "Bersebelahan dalam tetingkap yang lebar, sebagai tab dalam tetingkap yang sempit",
+      "sideBySide": "Bersebelahan",
+      "tabs": "Tab"
     }
   },
   "photo": {

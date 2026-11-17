@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Peta",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "tata letak",
+      "label": "TATA LETAK",
+      "auto": "Otomatis",
+      "autoDescription": "Berdampingan di jendela yang lebar, sebagai tab di jendela yang sempit",
+      "sideBySide": "Berdampingan",
+      "tabs": "Tab"
     }
   },
   "photo": {

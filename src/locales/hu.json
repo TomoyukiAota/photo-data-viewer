@@ -24,6 +24,14 @@
       "data": "Adatok",
       "map": "Térkép",
       "photo": "Fotó"
+    },
+    "layout": {
+      "buttonLabel": "elrendezés",
+      "label": "ELRENDEZÉS",
+      "auto": "Automatikus",
+      "autoDescription": "Széles ablakban egymás mellett, keskeny ablakban lapokon",
+      "sideBySide": "Egymás mellett",
+      "tabs": "Lapok"
     }
   },
   "photo": {

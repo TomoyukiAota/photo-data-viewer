@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Kart",
       "photo": "Bilde"
+    },
+    "layout": {
+      "buttonLabel": "oppsett",
+      "label": "OPPSETT",
+      "auto": "Automatisk",
+      "autoDescription": "Side ved side i et bredt vindu, i faner i et smalt",
+      "sideBySide": "Side ved side",
+      "tabs": "Faner"
     }
   },
   "photo": {

@@ -24,6 +24,14 @@
       "data": "Data",
       "map": "Mapa",
       "photo": "Fotka"
+    },
+    "layout": {
+      "buttonLabel": "rozložení",
+      "label": "ROZLOŽENÍ",
+      "auto": "Automaticky",
+      "autoDescription": "Vedle sebe v širokém okně, na kartách v úzkém",
+      "sideBySide": "Vedle sebe",
+      "tabs": "Karty"
     }
   },
   "photo": {

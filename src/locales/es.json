@@ -24,6 +24,14 @@
       "data": "Datos",
       "map": "Mapa",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "diseño",
+      "label": "DISEÑO",
+      "auto": "Automático",
+      "autoDescription": "En paralelo en una ventana ancha, en pestañas en una estrecha",
+      "sideBySide": "En paralelo",
+      "tabs": "Pestañas"
     }
   },
   "photo": {

@@ -24,6 +24,14 @@
       "data": "Podatki",
       "map": "Zemljevid",
       "photo": "Fotografija"
+    },
+    "layout": {
+      "buttonLabel": "postavitev",
+      "label": "POSTAVITEV",
+      "auto": "Samodejno",
+      "autoDescription": "Drugo ob drugem v širokem oknu, na zavihkih v ozkem",
+      "sideBySide": "Drugo ob drugem",
+      "tabs": "Zavihki"
     }
   },
   "photo": {

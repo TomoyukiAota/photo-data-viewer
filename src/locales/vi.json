@@ -24,6 +24,14 @@
       "data": "Dữ liệu",
       "map": "Bản đồ",
       "photo": "Ảnh"
+    },
+    "layout": {
+      "buttonLabel": "bố trí",
+      "label": "BỐ TRÍ",
+      "auto": "Tự động",
+      "autoDescription": "Cạnh nhau khi cửa sổ rộng, dạng tab khi cửa sổ hẹp",
+      "sideBySide": "Cạnh nhau",
+      "tabs": "Tab"
     }
   },
   "photo": {

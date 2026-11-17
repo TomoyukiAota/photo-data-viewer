@@ -24,6 +24,14 @@
       "data": "Duomenys",
       "map": "Žemėlapis",
       "photo": "Nuotrauka"
+    },
+    "layout": {
+      "buttonLabel": "išdėstymas",
+      "label": "IŠDĖSTYMAS",
+      "auto": "Automatinis",
+      "autoDescription": "Greta plačiame lange, skirtukuose siaurame",
+      "sideBySide": "Greta",
+      "tabs": "Skirtukai"
     }
   },
   "photo": {

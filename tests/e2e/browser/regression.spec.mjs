@@ -732,6 +732,138 @@ test('narrow photo, metadata, and map tabs retain their layout', async ({
   await snapshot(page, 'narrow-photo');
 });
 
+/** Chooses a layout with the layout's button, and waits until its menu is gone. */
+async function chooseLayout(page, name) {
+  await page.getByRole('button', { name: 'layout', exact: true }).click();
+  await page.getByRole('menuitemradio', { name, exact: true }).click();
+  await expect(page.locator('#layout-menu')).toBeHidden();
+}
+
+/** What the events say of the layout mode under an action: the labels, in order. */
+function layoutModeLabels(events, action) {
+  return events
+    .filter(
+      (event) => event.action === action && /^LayoutMode:/.test(event.label),
+    )
+    .map((event) => event.label);
+}
+
+/** The layouts shown, as recorded: whether the panes were side by side, in order. */
+function shownLayouts(events) {
+  return events
+    .filter(
+      (event) =>
+        event.action === 'App Layout' && /^isWideLayout:/.test(event.label),
+    )
+    .map((event) => event.label);
+}
+
+// TL;DR: The button before the menu's chooses the layout: automatic, as the
+// window's width alone decided it before, always side by side, or always
+// tabs.
+// Details: The choice is kept in the browser, and recorded as a setting is.
+// The menu is used with the mouse and with the keyboard, which it gives back
+// to the button: the header stays when the layout under it changes.
+test('the layout is chosen with the button before the menu’s, and is kept and recorded', async ({
+  page,
+}) => {
+  const sent = await collectEvents(page);
+  const panes = page.locator('.reflex-container.vertical');
+  const photoTab = page.getByRole('tab', { name: 'Photo', exact: true });
+  const button = page.getByRole('button', { name: 'layout', exact: true });
+  const menu = page.locator('#layout-menu');
+  const item = (name) => page.getByRole('menuitemradio', { name, exact: true });
+
+  // Automatic, which is what the app starts with: side by side in a wide
+  // window.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await expect(panes).toBeVisible();
+  await expect(photoTab).toHaveCount(0);
+  await expectSent(
+    sent,
+    (events) => layoutModeLabels(events, 'Loaded User Setting'),
+    ['LayoutMode: auto'],
+  );
+
+  // By the keyboard: the menu opens with the focus on the mode chosen, and
+  // the focus is back on the button after a choice.
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(item('Automatic')).toBeFocused();
+  await expect(item('Automatic')).toHaveAttribute('aria-checked', 'true');
+  await expect(item('Side by side')).toHaveAttribute('aria-checked', 'false');
+  await expect(item('Tabs')).toHaveAttribute('aria-checked', 'false');
+  await snapshot(page, 'layout-menu');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await expect(item('Tabs')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(menu).toBeHidden();
+  await expect(button).toBeFocused();
+
+  // Tabs, in the wide window, and after a reload too.
+  await expect(photoTab).toBeVisible();
+  await expect(panes).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem('LayoutMode'))).toBe(
+    'tabs',
+  );
+  await expectSent(
+    sent,
+    (events) => layoutModeLabels(events, 'Changed User Setting'),
+    ['LayoutMode: tabs'],
+  );
+  // The layout shown is recorded when the mode changes it, not only when the
+  // window is resized.
+  await expectSent(sent, (events) => shownLayouts(events).slice(0, 2), [
+    'isWideLayout: True',
+    'isWideLayout: False',
+  ]);
+  await page.reload();
+  await expect(photoTab).toBeVisible();
+  await expect(panes).toHaveCount(0);
+
+  // Side by side, in a phone's width: each pane keeps its room, and the page
+  // is no wider than the window. The table scrolls sideways in its pane.
+  await page.setViewportSize({ width: 320, height: 800 });
+  await chooseLayout(page, 'Side by side');
+  await expect(panes).toBeVisible();
+  await expect(photoTab).toHaveCount(0);
+  await loadPhoto(page);
+  const columns = panes.locator('> .reflex-element');
+  for (const column of await columns.all()) {
+    expect((await column.boundingBox()).width).toBeGreaterThanOrEqual(100);
+  }
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    ),
+  ).toBe(false);
+  // Off the splitter, which the menu's entry was over: it darkens under the
+  // mouse.
+  await page.mouse.move(0, 0);
+  await snapshot(page, 'narrow-side-by-side');
+
+  // Escape leaves the mode as it is.
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(item('Side by side')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await expect(button).toBeFocused();
+  await expect(panes).toBeVisible();
+
+  // Automatic again: tabs, in this window.
+  await chooseLayout(page, 'Automatic');
+  await expect(photoTab).toBeVisible();
+  await expect(panes).toHaveCount(0);
+  await expectSent(
+    sent,
+    (events) => layoutModeLabels(events, 'Changed User Setting'),
+    ['LayoutMode: tabs', 'LayoutMode: sideBySide', 'LayoutMode: auto'],
+  );
+});
+
 // The suite above runs with the en-US locale (playwright.config.mjs); these run
 // as a browser set to Japanese, the first translation. The other languages are
 // checked by the unit test of the translation files, not here.
@@ -867,20 +999,28 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
 
     // The sentence takes more lines than in English, and the header grows
     // with it: the button under the sentence is all in view, above the tabs,
-    // and the sentence ends before the menu's button.
+    // and the sentence ends before the layout's button, which is before the
+    // menu's button and at its height. The layout's button is the one that
+    // opens a menu of its own.
     const button = page
       .locator('input[type=file]')
       .locator('xpath=preceding-sibling::button');
     const sentence = button.locator('xpath=preceding-sibling::div');
-    const menuButton = page.locator('button[aria-label]').first();
+    const menuButton = page.locator('button[aria-label]:not([aria-haspopup])');
+    const layoutButton = page.locator('button[aria-haspopup="true"]');
     await expect(button).toBeInViewport({ ratio: 1 });
+    await expect(layoutButton).toBeInViewport({ ratio: 1 });
     const buttonBox = await button.boundingBox();
     const sentenceBox = await sentence.boundingBox();
     const menuBox = await menuButton.boundingBox();
+    const layoutBox = await layoutButton.boundingBox();
     const tabsBox = await page.getByRole('tablist').first().boundingBox();
     expect(sentenceBox.height).toBeGreaterThan(30); // More than one line.
     expect(buttonBox.y + buttonBox.height).toBeLessThanOrEqual(tabsBox.y);
-    expect(sentenceBox.x + sentenceBox.width).toBeLessThanOrEqual(menuBox.x);
+    expect(sentenceBox.x + sentenceBox.width).toBeLessThanOrEqual(layoutBox.x);
+    expect(layoutBox.x + layoutBox.width).toBeLessThanOrEqual(menuBox.x);
+    expect(Math.abs(layoutBox.y - menuBox.y)).toBeLessThanOrEqual(1);
+    expect(await isCut(layoutButton)).toBe(false);
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
 
     // Each of the latitude and the longitude has its name beside its number,
@@ -902,6 +1042,51 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     }
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
     expect(errors).toEqual([]);
+  });
+
+  test('the menu of the layouts is whole, and the panes side by side stay in the window', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // Each mode's name, and the description under the automatic one, which
+    // takes more than one line here, are whole and in the window.
+    await page.locator('button[aria-haspopup="true"]').click();
+    const menu = page.getByRole('menu');
+    await expect(menu).toBeInViewport({ ratio: 1 });
+    const modes = menu.getByRole('menuitemradio');
+    await expect(modes).toHaveCount(3);
+    const texts = menu.locator('.MuiListItemText-root > *');
+    await expect(texts).toHaveCount(4);
+    for (const text of await texts.all()) {
+      await expect(text).toBeInViewport({ ratio: 1 });
+      expect(await isCut(text)).toBe(false);
+    }
+    expect((await texts.nth(1).boundingBox()).height).toBeGreaterThan(30);
+
+    // Side by side, the second mode: the photo and the map in one column and
+    // the data in the other, each with its room, inside the window.
+    await modes.nth(1).click();
+    await expect(page.locator('#layout-menu')).toBeHidden();
+    await loadPhoto(page);
+    const columns = page.locator(
+      '.reflex-container.vertical > .reflex-element',
+    );
+    await expect(columns).toHaveCount(2);
+    const [left, right] = await Promise.all(
+      [0, 1].map((n) => columns.nth(n).boundingBox()),
+    );
+    expect(left.width).toBeGreaterThanOrEqual(100);
+    expect(right.width).toBeGreaterThanOrEqual(100);
+    expect(left.x + left.width).toBeLessThanOrEqual(right.x);
+    expect(right.x + right.width).toBeLessThanOrEqual(320);
+    await expect(columns.nth(0).locator('img[alt="demo.jpg"]')).toBeVisible();
+    await expect(columns.nth(0).locator('.leaflet-container')).toBeVisible();
+    await expect(
+      columns.nth(1).getByRole('cell', { name: 'demo.jpg', exact: true }),
+    ).toBeVisible();
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
 
   test('a field of the Settings page is as wide as its label, which is not cut', async ({
@@ -1097,6 +1282,34 @@ test.describe('in a browser whose language is Arabic', () => {
     await page.setViewportSize({ width: 320, height: 800 });
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+
+    // The layout's button is before the menu's, at its right and at its
+    // height, and the sentence ends before it, at its right. Its menu is in
+    // the window.
+    const menuButton = page.getByRole('button', {
+      name: 'القائمة',
+      exact: true,
+    });
+    const layoutButton = page.getByRole('button', {
+      name: 'التخطيط',
+      exact: true,
+    });
+    const sentence = page.getByText('اختر صورتك لعرض بيانات EXIF.', {
+      exact: true,
+    });
+    const [menuBox, layoutBox, sentenceBox] = await Promise.all(
+      [menuButton, layoutButton, sentence].map((locator) =>
+        locator.boundingBox(),
+      ),
+    );
+    expect(menuBox.x + menuBox.width).toBeLessThanOrEqual(layoutBox.x);
+    expect(layoutBox.x + layoutBox.width).toBeLessThanOrEqual(sentenceBox.x);
+    expect(Math.abs(layoutBox.y - menuBox.y)).toBeLessThanOrEqual(1);
+    await layoutButton.click();
+    await expect(page.getByRole('menu')).toBeInViewport({ ratio: 1 });
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#layout-menu')).toBeHidden();
+
     await loadPhoto(page);
     await snapshot(page, 'narrow-loaded-ar');
   });
