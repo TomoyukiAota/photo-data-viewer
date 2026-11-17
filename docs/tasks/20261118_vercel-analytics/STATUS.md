@@ -51,9 +51,13 @@ after a few days.
 
 ## Not verified
 
-- **The scripts on Vercel**, and what reaches the dashboards: they exist once
-  the code is deployed and Web Analytics is enabled. The script's paths and
-  requests above are from Vercel's documentation and the scripts' code.
+- **What reaches the dashboards.** On the pull request's preview, the app
+  loaded both scripts from the paths Vercel chose for the build, and loaded
+  neither with the setting off or as Photo Location Map's window
+  ([results](./evidence/RESULTS.md#on-vercel-the-preview-of-the-pull-request)).
+  The scripts send nothing in a browser driven by a test, so the requests
+  that send, `/view` and `/vitals`, are from Vercel's documentation and the
+  scripts' code until a person's visit after the merge shows them.
 - **The Electron suite** was not run, as it opens windows. The app does not
   render the components in Photo Location Map's window, which the unit test
   checks.
@@ -61,6 +65,6 @@ after a few days.
 
 ## Resuming
 
-After the merge, check the requests above on the
-production site, with the setting on and off, and record them in the
-[results](./evidence/RESULTS.md).
+After the merge, check the requests above on the production site in a
+browser that a person uses, with the setting on and off, and the dashboards
+a day later, and record them in the [results](./evidence/RESULTS.md).

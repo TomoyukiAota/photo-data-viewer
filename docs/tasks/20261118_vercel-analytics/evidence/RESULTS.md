@@ -89,6 +89,22 @@ JavaScript of 4,518 and 20,277 bytes, the sizes of Vercel's scripts above:
 Web Analytics was enabled in the project already. <https://pdv-in-plm.vercel.app>
 answered `/_vercel/insights/script.js` with 404.
 
+## On Vercel, the preview of the pull request
+
+On 2026-11-18, the preview deployment of this branch was opened in headless
+Chromium, with the requests to other hosts stopped. Vercel's scripts do
+nothing in a browser driven by automation, so nothing was sent.
+
+| Opened | Scripts the app added | Requests of the page's own address, besides `/` and `/_next/` |
+| --- | --- | --- |
+| `/` | Web Analytics' at `/<16 hex digits>/script.js`, with its `view`, `event` and `session` endpoints under the same path; Speed Insights' at another such path, with `route` `/` and its `vitals` endpoint | The two scripts, answered with 200 |
+| `/`, with "Send usage data" off | None | None |
+| `/?plmBridge=1`, as Photo Location Map's isolated window | None | None |
+
+No error on the page in any. The paths are the ones Vercel chose for the
+build (Resilient Intake), not `/_vercel/...`: the build was given its
+configuration, as the packages read it.
+
 ## Local behavior
 
 On 2026-11-18, on macOS, in headless Chromium. Requests to other hosts were
