@@ -14,6 +14,13 @@
     "language": "Språk - {{appName}}",
     "about": "Om - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Se EXIF-informasjonen for bildet ditt i nettleseren: opptaksdato, sted på et kart, kameraet og kamerainnstillingene. Bildet sendes ikke til noen server.",
+    "demo": "Prøv {{appName}} med et eksempelbilde, og se hvilken EXIF-informasjon appen viser: opptaksdato, sted på et kart, kameraet og kamerainnstillingene.",
+    "settings": "Velg hvordan {{appName}} skriver dato og klokkeslett, og om appen sender bruksdata. Innstillingene lagres i nettleseren din.",
+    "language": "Velg språket {{appName}} vises på, eller la appen følge språket i nettleseren din.",
+    "about": "Slik leser {{appName}} bildet ditt i nettleseren uten å sende det til noen server, hvilke bruksdata appen samler inn, kildekoden og hvem som utvikler den."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Filformatet støttes ikke",
     "message": "EXIF-informasjon er ikke tilgjengelig.",
     "close": "Lukk"
+  },
+  "dropPhoto": {
+    "dropHere": "Slipp bildet her for å velge det.",
+    "title": "Er du sikker på at du vil velge dette bildet?",
+    "cancel": "Avbryt",
+    "select": "Velg"
   },
   "pageNotShown": {
     "message": "Noe gikk galt, og denne siden kan ikke vises.",

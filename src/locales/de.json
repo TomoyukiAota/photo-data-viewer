@@ -14,6 +14,13 @@
     "language": "Sprache - {{appName}}",
     "about": "Info - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Zeigen Sie die EXIF-Daten Ihres Fotos direkt im Browser an: Aufnahmedatum, Standort auf einer Karte, Kamera und ihre Einstellungen. Das Foto wird an keinen Server gesendet.",
+    "demo": "Probieren Sie {{appName}} mit einem Beispielfoto aus und sehen Sie, welche EXIF-Daten die App anzeigt: Aufnahmedatum, Standort auf einer Karte, Kamera und ihre Einstellungen.",
+    "settings": "Legen Sie fest, wie {{appName}} Datum und Uhrzeit schreibt und ob die App Nutzungsdaten sendet. Die Einstellungen werden in Ihrem Browser gespeichert.",
+    "language": "Wählen Sie die Sprache, in der {{appName}} angezeigt wird, oder lassen Sie die App der Sprache Ihres Browsers folgen.",
+    "about": "Wie {{appName}} Ihr Foto im Browser liest, ohne es an einen Server zu senden, welche Nutzungsdaten die App erfasst, ihr Quellcode und wer sie entwickelt."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Nicht unterstütztes Dateiformat",
     "message": "EXIF-Daten sind nicht verfügbar.",
     "close": "Schließen"
+  },
+  "dropPhoto": {
+    "dropHere": "Legen Sie das Foto hier ab, um es auszuwählen.",
+    "title": "Möchten Sie dieses Foto wirklich auswählen?",
+    "cancel": "Abbrechen",
+    "select": "Auswählen"
   },
   "pageNotShown": {
     "message": "Es ist ein Fehler aufgetreten, und diese Seite kann nicht angezeigt werden.",

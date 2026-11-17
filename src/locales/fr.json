@@ -14,6 +14,13 @@
     "language": "Langue - {{appName}}",
     "about": "À propos - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Affichez les données EXIF de votre photo dans votre navigateur\u00a0: la date de prise de vue, la localisation sur une carte, l’appareil photo et ses réglages. La photo n’est envoyée à aucun serveur.",
+    "demo": "Essayez {{appName}} avec une photo d’exemple et découvrez les données EXIF que l’application affiche\u00a0: la date de prise de vue, la localisation sur une carte, l’appareil photo et ses réglages.",
+    "settings": "Choisissez comment {{appName}} écrit les dates et les heures, et si l’application envoie des données d’utilisation. Les paramètres sont enregistrés dans votre navigateur.",
+    "language": "Choisissez la langue dans laquelle {{appName}} s’affiche, ou laissez l’application suivre la langue de votre navigateur.",
+    "about": "Comment {{appName}} lit votre photo dans votre navigateur sans l’envoyer à aucun serveur, les données d’utilisation que l’application collecte, son code source et qui la développe."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Format de fichier non pris en charge",
     "message": "Les données EXIF ne sont pas disponibles.",
     "close": "Fermer"
+  },
+  "dropPhoto": {
+    "dropHere": "Déposez la photo ici pour la sélectionner.",
+    "title": "Voulez-vous vraiment sélectionner cette photo\u00a0?",
+    "cancel": "Annuler",
+    "select": "Sélectionner"
   },
   "pageNotShown": {
     "message": "Une erreur s’est produite et cette page ne peut pas être affichée.",

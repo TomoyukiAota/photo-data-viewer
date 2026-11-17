@@ -14,6 +14,13 @@
     "language": "Idioma - {{appName}}",
     "about": "Acerca de - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Consulta os datos EXIF da túa foto no navegador: a data de captura, a localización nun mapa, a cámara e a súa configuración. A foto non se envía a ningún servidor.",
+    "demo": "Proba {{appName}} cunha foto de exemplo e descubre os datos EXIF que mostra: a data de captura, a localización nun mapa, a cámara e a súa configuración.",
+    "settings": "Escolle como escribe {{appName}} as datas e as horas, e se envía datos de uso. A configuración gárdase no teu navegador.",
+    "language": "Escolle o idioma no que se mostra {{appName}} ou deixa que siga o idioma do teu navegador.",
+    "about": "Como le {{appName}} a túa foto no navegador sen enviala a ningún servidor, que datos de uso recolle, o seu código fonte e quen o desenvolve."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Formato de ficheiro non compatible",
     "message": "Os datos EXIF non están dispoñibles.",
     "close": "Pechar"
+  },
+  "dropPhoto": {
+    "dropHere": "Solta a foto aquí para seleccionala.",
+    "title": "Seguro que queres seleccionar esta foto?",
+    "cancel": "Cancelar",
+    "select": "Seleccionar"
   },
   "pageNotShown": {
     "message": "Produciuse un erro e non se pode mostrar esta páxina.",

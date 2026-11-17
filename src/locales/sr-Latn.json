@@ -14,6 +14,13 @@
     "language": "Jezik - {{appName}}",
     "about": "O aplikaciji - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Pogledajte podatke EXIF svoje fotografije u pregledaču: datum snimanja, lokaciju na mapi, fotoaparat i njegova podešavanja. Fotografija se ne šalje ni na jedan server.",
+    "demo": "Isprobajte aplikaciju {{appName}} sa primerom fotografije i pogledajte koje podatke EXIF prikazuje: datum snimanja, lokaciju na mapi, fotoaparat i njegova podešavanja.",
+    "settings": "Izaberite kako aplikacija {{appName}} zapisuje datum i vreme i da li šalje podatke o korišćenju. Podešavanja se čuvaju u vašem pregledaču.",
+    "language": "Izaberite jezik na kom se prikazuje aplikacija {{appName}} ili neka prati jezik vašeg pregledača.",
+    "about": "Kako aplikacija {{appName}} čita vašu fotografiju u pregledaču bez slanja na bilo koji server, koje podatke o korišćenju prikuplja, njen izvorni kôd i ko je razvija."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Nepodržani format datoteke",
     "message": "Podaci EXIF nisu dostupni.",
     "close": "Zatvori"
+  },
+  "dropPhoto": {
+    "dropHere": "Otpustite fotografiju ovde da biste je izabrali.",
+    "title": "Da li ste sigurni da želite da izaberete ovu fotografiju?",
+    "cancel": "Otkaži",
+    "select": "Izaberi"
   },
   "pageNotShown": {
     "message": "Nešto nije u redu i ovu stranicu nije moguće prikazati.",

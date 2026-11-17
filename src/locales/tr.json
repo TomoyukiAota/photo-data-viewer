@@ -14,6 +14,13 @@
     "language": "Dil - {{appName}}",
     "about": "Hakkında - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Fotoğrafınızın EXIF verilerini tarayıcınızda görüntüleyin: çekim tarihi, haritadaki konum, kamera ve ayarları. Fotoğraf hiçbir sunucuya gönderilmez.",
+    "demo": "{{appName}} uygulamasını örnek bir fotoğrafla deneyin ve gösterdiği EXIF verilerini görün: çekim tarihi, haritadaki konum, kamera ve ayarları.",
+    "settings": "{{appName}} uygulamasının tarihleri ve saatleri nasıl yazacağını ve kullanım verilerini gönderip göndermeyeceğini seçin. Ayarlar tarayıcınıza kaydedilir.",
+    "language": "{{appName}} uygulamasının görüntüleneceği dili seçin veya tarayıcınızın dilini izlemesine izin verin.",
+    "about": "{{appName}} uygulamasının fotoğrafınızı hiçbir sunucuya göndermeden tarayıcınızda nasıl okuduğu, topladığı kullanım verileri, kaynak kodu ve onu kimin geliştirdiği."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Desteklenmeyen dosya biçimi",
     "message": "EXIF verileri mevcut değil.",
     "close": "Kapat"
+  },
+  "dropPhoto": {
+    "dropHere": "Seçmek için fotoğrafı buraya bırakın.",
+    "title": "Bu fotoğrafı seçmek istediğinizden emin misiniz?",
+    "cancel": "Vazgeç",
+    "select": "Seç"
   },
   "pageNotShown": {
     "message": "Bir sorun oluştu ve bu sayfa gösterilemiyor.",

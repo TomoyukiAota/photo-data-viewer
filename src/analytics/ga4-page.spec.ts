@@ -16,4 +16,13 @@ describe('ga4PageFields', () => {
     expect(ga4PageFields('https://photo-data-viewer.vercel.app/language').page_title).toBe('Language - Photo Data Viewer');
     expect(ga4PageFields('https://photo-data-viewer.vercel.app/somewhere-else').page_title).toBe('Photo Data Viewer');
   });
+
+  it("gives a page at a language's address the page's title, and keeps the language in the address", () => {
+    expect(ga4PageFields('https://photo-data-viewer.vercel.app/ja/about')).toEqual({
+      page_location: 'https://photo-data-viewer.vercel.app/ja/about',
+      page_title: 'About - Photo Data Viewer',
+    });
+    expect(ga4PageFields('https://photo-data-viewer.vercel.app/pt-BR').page_title).toBe('Photo Data Viewer');
+    expect(ga4PageFields('https://photo-data-viewer.vercel.app/zh-Hant/settings').page_title).toBe('Settings - Photo Data Viewer');
+  });
 });

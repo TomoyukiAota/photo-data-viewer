@@ -1,5 +1,6 @@
 import { AppIntegration } from '../app-integration/app-integration';
 import { UserSettingKey } from '../utils/user-settings';
+import { languageOfPath } from './address';
 import {
   defaultLanguage,
   isLanguageCode,
@@ -17,6 +18,8 @@ export interface LanguageSources {
   isPlm: boolean;
   /** `language` in the address, which Photo Location Map passes. */
   languageParam: string | null;
+  /** The language that the address names, as `/ja/about` does (address.ts). */
+  pathLanguage: LanguageCode | null;
   /** The Language setting: `auto` (the browser's language) or a language code. */
   languageSetting: string | null;
   /** `navigator.languages`, the most preferred first. */
@@ -98,14 +101,16 @@ export function matchLanguage(tags: readonly string[]): LanguageCode | null {
  * The language to show the app in. Embedded in Photo Location Map: the language
  * it passes, or English, as its own window is English; the machine's language
  * is not followed, so that the data is not in another language than the window
- * around it. Standalone: the Language setting unless it is `auto`, then the
- * browser's languages, then English.
+ * around it. Standalone: the language that the address names, so that a page is
+ * in the language that a search engine shows it in; then the Language setting
+ * unless it is `auto`, then the browser's languages, then English.
  */
 export function resolveLanguage(sources: LanguageSources): LanguageCode {
   if (sources.isPlm) {
     const passed = sources.languageParam ? [sources.languageParam] : [];
     return matchLanguage(passed) ?? defaultLanguage;
   }
+  if (sources.pathLanguage) return sources.pathLanguage;
   const setting = sources.languageSetting;
   if (setting && setting !== languageSettingAuto && isLanguageCode(setting)) {
     return setting;
@@ -116,7 +121,13 @@ export function resolveLanguage(sources: LanguageSources): LanguageCode {
 /** The sources as this browser has them. On the server, there are none. */
 export function readLanguageSources(): LanguageSources {
   if (typeof window === 'undefined') {
-    return { isPlm: false, languageParam: null, languageSetting: null, browserLanguages: [] };
+    return {
+      isPlm: false,
+      languageParam: null,
+      pathLanguage: null,
+      languageSetting: null,
+      browserLanguages: [],
+    };
   }
   let languageSetting: string | null = null;
   try {
@@ -127,6 +138,7 @@ export function readLanguageSources(): LanguageSources {
   return {
     isPlm: AppIntegration.isPlm,
     languageParam: new URL(window.location.href).searchParams.get(LANGUAGE_PARAM),
+    pathLanguage: languageOfPath(window.location.pathname),
     languageSetting,
     browserLanguages: navigator.languages?.length
       ? navigator.languages

@@ -7,6 +7,7 @@ export const Ga4EventName = {
   LoadedPhoto: 'loaded_photo',
   DisplayedPhoto: 'displayed_photo',
   OpenedUnsupportedFileDialog: 'opened_unsupported_file_dialog',
+  OpenedDropPhotoDialog: 'opened_drop_photo_dialog',
   RanDemo: 'ran_demo',
   PageHidden: 'page_hidden',
   PageLoaded: 'page_loaded',

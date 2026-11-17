@@ -14,6 +14,13 @@
     "language": "Nyelv - {{appName}}",
     "about": "Névjegy - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Tekintse meg fotója EXIF-adatait a böngészőjében: a készítés dátumát, a helyet a térképen, a fényképezőgépet és annak beállításait. A fotót semmilyen szerverre nem küldjük el.",
+    "demo": "Próbálja ki a {{appName}} alkalmazást egy mintafotóval, és nézze meg, milyen EXIF-adatokat jelenít meg: a készítés dátumát, a helyet a térképen, a fényképezőgépet és annak beállításait.",
+    "settings": "Válassza ki, hogyan írja a {{appName}} a dátumot és az időt, és küldjön-e használati adatokat. A beállításokat a böngészője tárolja.",
+    "language": "Válassza ki, milyen nyelven jelenjen meg a {{appName}}, vagy kövesse a böngészője nyelvét.",
+    "about": "Hogyan olvassa be a {{appName}} a fotóját a böngészőben anélkül, hogy bármilyen szerverre elküldené, milyen használati adatokat gyűjt, a forráskódja és ki fejleszti."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -71,6 +78,12 @@
     "title": "Nem támogatott fájlformátum",
     "message": "Az EXIF-adatok nem érhetők el.",
     "close": "Bezárás"
+  },
+  "dropPhoto": {
+    "dropHere": "Dobja ide a fotót a kiválasztásához.",
+    "title": "Biztosan kiválasztja ezt a fotót?",
+    "cancel": "Mégsem",
+    "select": "Kiválasztás"
   },
   "pageNotShown": {
     "message": "Hiba történt, ezért ez az oldal nem jeleníthető meg.",
