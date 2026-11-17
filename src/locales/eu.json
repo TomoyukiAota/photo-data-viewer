@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Erakutsi Google Maps-en",
       "showInGoogleStreetView": "Erakutsi Google Street View-n",
+      "showInGoogleEarth": "Erakutsi Google Earth-en",
       "iosNote": "iOS erabiltzaileentzat: kasu batzuetan, iOS-ek EXIF datu batzuk kentzen ditu (adib., latitudea eta longitudea). Xehetasunetarako, irakurri <pageLink>orri hau</pageLink>."
     },
     "rawData": {

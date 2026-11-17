@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Vis i Google Maps",
       "showInGoogleStreetView": "Vis i Google Street View",
+      "showInGoogleEarth": "Vis i Google Earth",
       "iosNote": "For iOS-brukere: iOS fjerner i noen tilfeller deler av EXIF-informasjonen (f.eks. breddegrad og lengdegrad). Les mer på <pageLink>denne siden</pageLink>."
     },
     "rawData": {

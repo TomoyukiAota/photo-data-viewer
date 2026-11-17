@@ -3,6 +3,7 @@
 import IconButton from '@mui/material/IconButton';
 import { useTranslation } from 'react-i18next';
 
+import { AppIntegration } from '../../../app-integration/app-integration';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { trackOpenUrl } from '../../../analytics/track-event';
 import { IconDataUrl } from '../../../icons/icon-data-url';
@@ -12,8 +13,8 @@ import classes from './LatLngRow.module.scss';
 
 /**
  * The latitude and the longitude of the photo, as one row of the General
- * tab's table, with the buttons that show the place in Google Maps and in
- * Google Street View.
+ * tab's table, with the buttons that show the place in Google Maps, in
+ * Google Street View and in Google Earth.
  *
  * TL;DR: Each of the two names is beside its number, however many lines the
  * name takes.
@@ -60,6 +61,30 @@ const LatLngRow: React.FC<{
     );
   };
 
+  // Google Earth searches for the coordinates: it goes to the place and marks
+  // it with a pin. An address with only the view (/web/@latitude,longitude,...)
+  // goes there without a pin.
+  const handleGoogleEarthButtonClicked = () => {
+    openTabWithoutOpener(
+      `https://earth.google.com/web/search/${latitude},${longitude}`
+    );
+    trackOpenUrl(
+      'https://earth.google.com/web/search/ with latitude and longitude',
+      'Show in Google Earth',
+      'Home Page'
+    );
+  };
+
+  // TL;DR: Not in Photo Location Map, which would record the photo's
+  // coordinates in its usage data.
+  // Details: Photo Location Map opens the address of a button in the browser
+  // and records the address with it, without the coordinates only for an
+  // address of Google Maps (modifyUrlForAnalyticsIfNeeded in
+  // src-main/photo-data-viewer/launch-photo-data-viewer.ts of
+  // https://github.com/TomoyukiAota/photo-location-map). This app is served to
+  // every version of it, and cannot tell which version it is in.
+  const isGoogleEarthButtonShown = !AppIntegration.isPlm;
+
   return (
     <div className={classes.row} style={props.style}>
       <div className={`${classes.name} ${classes.latitude}`}>
@@ -100,6 +125,19 @@ const LatLngRow: React.FC<{
                 alt={t('photoData.general.showInGoogleStreetView')}
               />
             </IconButton>
+            {isGoogleEarthButtonShown && (
+              <IconButton
+                className={classes['google-earth-button']}
+                onClick={handleGoogleEarthButtonClicked}
+                title={t('photoData.general.showInGoogleEarth')}
+              >
+                <img
+                  className={classes['google-earth-icon']}
+                  src={IconDataUrl.googleEarthIcon}
+                  alt={t('photoData.general.showInGoogleEarth')}
+                />
+              </IconButton>
+            )}
           </div>
         </>
       )}

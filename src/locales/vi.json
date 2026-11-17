@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Hiển thị trong Google Maps",
       "showInGoogleStreetView": "Hiển thị trong Google Street View",
+      "showInGoogleEarth": "Hiển thị trong Google Earth",
       "iosNote": "Đối với người dùng iOS: trong một số trường hợp, iOS xóa một số dữ liệu EXIF (ví dụ: vĩ độ và kinh độ). Vui lòng đọc <pageLink>trang này</pageLink> để biết chi tiết."
     },
     "rawData": {

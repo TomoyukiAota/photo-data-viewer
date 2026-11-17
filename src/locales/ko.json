@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google 지도에서 보기",
       "showInGoogleStreetView": "Google 스트리트 뷰에서 보기",
+      "showInGoogleEarth": "Google 어스에서 보기",
       "iosNote": "iOS에서는 일부 EXIF 데이터(예: 위도 및 경도)가 제거되는 경우가 있습니다. 자세한 내용은 <pageLink>이 페이지</pageLink>를 참조하세요."
     },
     "rawData": {

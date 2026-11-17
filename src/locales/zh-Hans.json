@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "在 Google 地图中显示",
       "showInGoogleStreetView": "在 Google 街景中显示",
+      "showInGoogleEarth": "在 Google 地球中显示",
       "iosNote": "iOS 用户请注意：在某些情况下，iOS 会移除部分 EXIF 数据（例如纬度和经度）。有关详细信息，请阅读<pageLink>此页面</pageLink>。"
     },
     "rawData": {

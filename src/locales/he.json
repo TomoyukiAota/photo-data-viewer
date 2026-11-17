@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "הצגה במפות Google",
       "showInGoogleStreetView": "הצגה ב-Google Street View",
+      "showInGoogleEarth": "הצגה ב-Google Earth",
       "iosNote": "למשתמשי iOS: במקרים מסוימים iOS מסיר חלק מנתוני ה-EXIF (לדוגמה, קו רוחב וקו אורך). לפרטים, אפשר לעיין ב<pageLink>דף הזה</pageLink>."
     },
     "rawData": {

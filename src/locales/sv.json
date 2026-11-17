@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Visa i Google Maps",
       "showInGoogleStreetView": "Visa i Google Street View",
+      "showInGoogleEarth": "Visa i Google Earth",
       "iosNote": "För iOS-användare: iOS tar i vissa fall bort en del EXIF-information (t.ex. latitud och longitud). Läs mer på <pageLink>den här sidan</pageLink>."
     },
     "rawData": {

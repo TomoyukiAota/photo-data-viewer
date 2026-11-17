@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google Haritalar’da göster",
       "showInGoogleStreetView": "Google Street View’da göster",
+      "showInGoogleEarth": "Google Earth’te göster",
       "iosNote": "iOS kullanıcıları için: iOS bazı durumlarda bazı EXIF verilerini (ör. enlem ve boylam) kaldırır. Ayrıntılar için lütfen <pageLink>bu sayfayı</pageLink> okuyun."
     },
     "rawData": {

@@ -59,14 +59,19 @@
   }
 
   // Beside both numbers. The space between the numbers and the buttons is the
-  // buttons', as the numbers have a direction of their own.
+  // buttons', as the numbers have a direction of their own. Where the rest of
+  // the row is narrower than the buttons, as on a phone, they continue on the
+  // next line: none is cut, and none goes out of the window. With 16 pixels
+  // before them, two fit on a line at 320 pixels; with 22, each took a line.
   .buttons {
     grid-column: 3;
     grid-row: 1 / span 2;
     justify-self: start;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    margin-inline-start: 22px;
+    gap: 6px 10px;
+    margin-inline-start: 16px;
   }
 
   .google-maps-button {
@@ -79,12 +84,20 @@
   }
 
   .google-street-view-button {
-    margin-inline-start: 10px;
     padding: 2px;
     border-radius: 20%;
   }
 
   .google-street-view-icon {
     height: 30px;
+  }
+
+  .google-earth-button {
+    padding: 4px;
+    border-radius: 20%;
+  }
+
+  .google-earth-icon {
+    height: 25px;
   }
 }

@@ -60,6 +60,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Näytä Google Mapsissa",
       "showInGoogleStreetView": "Näytä Google Street View’ssa",
+      "showInGoogleEarth": "Näytä Google Earthissa",
       "iosNote": "iOS-käyttäjille: iOS poistaa joissakin tapauksissa osan EXIF-tiedoista (esim. leveys- ja pituusasteen). Lue lisätietoja <pageLink>tältä sivulta</pageLink>."
     },
     "rawData": {

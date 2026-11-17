@@ -597,6 +597,91 @@ test('a photo whose GPS values are empty is shown without a location', async ({
   expect(errors).toEqual([]);
 });
 
+/**
+ * Checks the three buttons beside the numbers of the latitude and the
+ * longitude of the photo loaded: each is all in the window, beside the
+ * numbers on the side where a line ends (the left, in a language written
+ * from right to left), and none covers another. Returns their boxes.
+ */
+async function expectButtonsBesideNumbers(page, { rightToLeft = false } = {}) {
+  const row = page.getByText('37.332558', { exact: true }).locator('xpath=..');
+  const buttons = row.getByRole('button');
+  await expect(buttons).toHaveCount(3);
+  const numbers = await Promise.all(
+    [2, 3].map((n) => row.locator('> div').nth(n).boundingBox()),
+  );
+  const boxes = [];
+  for (const button of await buttons.all()) {
+    await expect(button).toBeInViewport({ ratio: 1 });
+    boxes.push(await button.boundingBox());
+  }
+  for (const box of boxes) {
+    for (const number of numbers) {
+      if (rightToLeft) {
+        expect(box.x + box.width).toBeLessThanOrEqual(number.x);
+      } else {
+        expect(box.x).toBeGreaterThanOrEqual(number.x + number.width);
+      }
+    }
+  }
+  const overlap = (a, b) =>
+    a.x < b.x + b.width &&
+    b.x < a.x + a.width &&
+    a.y < b.y + b.height &&
+    b.y < a.y + a.height;
+  boxes.forEach((a, i) =>
+    boxes.slice(i + 1).forEach((b) => expect(overlap(a, b)).toBe(false)),
+  );
+  return boxes;
+}
+
+test('the buttons beside the coordinates are on one line, and the Google Earth button opens the place, which the usage data does not record', async ({
+  page,
+  context,
+}) => {
+  const sent = await collectEvents(page);
+  // The new tab gets a page of the test's in place of Google Earth.
+  await context.route(/^https:\/\/earth\.google\.com\//, (route) =>
+    route.fulfill({ contentType: 'text/html', body: '<title>Earth</title>' }),
+  );
+  await page.goto('/');
+  await loadPhoto(page);
+  const centres = (await expectButtonsBesideNumbers(page)).map(
+    (box) => box.y + box.height / 2,
+  );
+  expect(Math.max(...centres) - Math.min(...centres)).toBeLessThanOrEqual(1);
+
+  const opened = page.waitForEvent('popup');
+  await page
+    .getByRole('button', { name: 'Show in Google Earth', exact: true })
+    .click();
+  const tab = await opened;
+  await tab.waitForLoadState();
+  // A search for the coordinates, which Google Earth marks with a pin. The
+  // tab cannot reach this page.
+  expect(tab.url()).toMatch(
+    /^https:\/\/earth\.google\.com\/web\/search\/37\.332558\d*,-122\.005661\d*$/,
+  );
+  expect(await tab.evaluate(() => window.opener)).toBeNull();
+
+  // The usage data says which button was used, and not where the photo was
+  // taken.
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.category === 'Opened URL')
+        .map((event) => [event.action, event.label]),
+    [
+      [
+        '[Home Page] Opened URL for Show in Google Earth',
+        'https://earth.google.com/web/search/ with latitude and longitude',
+      ],
+    ],
+  );
+  expect(JSON.stringify(sent.events)).not.toMatch(/37\.33|122\.00/);
+});
+
 test('errors nothing handled are sent to the analytics backend', async ({
   page,
 }) => {
@@ -724,6 +809,8 @@ test('narrow photo, metadata, and map tabs retain their layout', async ({
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/');
   await loadPhoto(page);
+  // The buttons beside the coordinates do not fit on one line here.
+  await expectButtonsBesideNumbers(page);
   await snapshot(page, 'narrow-loaded');
   await page.getByRole('tab', { name: 'Map', exact: true }).click();
   await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
@@ -896,6 +983,8 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(longitudeName.y).toBeGreaterThanOrEqual(
       latitudeName.y + latitudeName.height,
     );
+    // The buttons beside the numbers are all in the window as well.
+    await expectButtonsBesideNumbers(page);
     // No name of the table is cut, and the table is no wider than the window.
     for (const name of await page.locator('tbody td:first-child').all()) {
       expect(await isCut(name)).toBe(false);
@@ -1034,6 +1123,8 @@ test.describe('in a browser whose language is Arabic', () => {
       'ltr',
     );
     await expect(page.getByText(/-122\.005661/)).toHaveCSS('direction', 'ltr');
+    // The buttons beside the numbers are on their left, where a line ends.
+    await expectButtonsBesideNumbers(page, { rightToLeft: true });
     await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
     await snapshot(page, 'loaded-general-ar');
 
@@ -1098,6 +1189,7 @@ test.describe('in a browser whose language is Arabic', () => {
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     await loadPhoto(page);
+    await expectButtonsBesideNumbers(page, { rightToLeft: true });
     await snapshot(page, 'narrow-loaded-ar');
   });
 });
