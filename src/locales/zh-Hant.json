@@ -71,6 +71,12 @@
     "message": "無法取得 EXIF 資料。",
     "close": "關閉"
   },
+  "dropPhoto": {
+    "dropHere": "將照片拖放到這裡進行選取。",
+    "title": "確定要選取這張照片嗎？",
+    "cancel": "取消",
+    "select": "選取"
+  },
   "pageNotShown": {
     "message": "發生問題，無法顯示此頁面。",
     "reload": "重新載入"

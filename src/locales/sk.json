@@ -71,6 +71,12 @@
     "message": "Údaje EXIF nie sú k dispozícii.",
     "close": "Zavrieť"
   },
+  "dropPhoto": {
+    "dropHere": "Pustite fotku sem, ak ju chcete vybrať.",
+    "title": "Naozaj chcete vybrať túto fotku?",
+    "cancel": "Zrušiť",
+    "select": "Vybrať"
+  },
   "pageNotShown": {
     "message": "Niečo sa pokazilo a túto stránku nie je možné zobraziť.",
     "reload": "Načítať znova"

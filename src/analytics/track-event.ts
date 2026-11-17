@@ -11,6 +11,8 @@ export interface PhotoLoadDetails {
   isReload: boolean;
   /** Loaded by the demo, which is the same photo every time. */
   isDemo: boolean;
+  /** Dropped on the page, rather than chosen with the button. */
+  isDropped: boolean;
 }
 
 // One event when a photo's file and EXIF data are read, with the details as fields.
@@ -35,6 +37,7 @@ export function trackLoadedPhoto(data: LoadedPhotoData, details: PhotoLoadDetail
       exifMs: Math.round(details.exifMs),
       isReload: details.isReload,
       isDemo: details.isDemo,
+      isDropped: details.isDropped,
     },
     ga4Name: Ga4EventName.LoadedPhoto,
   });
@@ -64,6 +67,7 @@ export function trackDisplayedPhoto(details: PhotoDisplayDetails) {
       loadMs: Math.round(details.loadMs),
       isReload: details.isReload,
       isDemo: details.isDemo,
+      isDropped: details.isDropped,
     },
     ga4Name: Ga4EventName.DisplayedPhoto,
   });
@@ -74,6 +78,18 @@ export function trackOpenedUnsupportedFileDialog() {
     category: 'Dialog',
     action: 'Opened Unsupported File Dialog',
     ga4Name: Ga4EventName.OpenedUnsupportedFileDialog,
+  });
+}
+
+// When the dialog that asks before a dropped photo is selected opens, with the
+// number of files dropped together, of which it asks about the first. A dialog
+// that was cancelled is one with no Loaded Photo after it that has isDropped.
+export function trackOpenedDropPhotoDialog(fileCount: number) {
+  trackEvent({
+    category: 'Dialog',
+    action: 'Opened Drop Photo Dialog',
+    label: { fileCount },
+    ga4Name: Ga4EventName.OpenedDropPhotoDialog,
   });
 }
 

@@ -71,6 +71,12 @@
     "message": "Data EXIF tidak tersedia.",
     "close": "Tutup"
   },
+  "dropPhoto": {
+    "dropHere": "Lepaskan foto di sini untuk memilihnya.",
+    "title": "Apakah Anda yakin ingin memilih foto ini?",
+    "cancel": "Batal",
+    "select": "Pilih"
+  },
   "pageNotShown": {
     "message": "Terjadi kesalahan, dan halaman ini tidak dapat ditampilkan.",
     "reload": "Muat ulang"

@@ -81,6 +81,48 @@ async function loadPhoto(page) {
   ).toBeVisible();
 }
 
+/** demo.jpg, as a file that is dragged and dropped. */
+const photoFile = { name: 'demo.jpg', mimeType: 'image/jpeg', buffer: photo };
+
+/**
+ * Drags files from outside the browser over the page, as from the file
+ * manager, and gives what they are dragged with, to drop them with.
+ *
+ * TL;DR: The drag's events are dispatched, with a DataTransfer that holds
+ * the files.
+ * Details: Playwright cannot drag a file from outside the browser: a drag of
+ * its own starts in the page, which the app leaves alone. A browser does not
+ * let a page set the drop effect of a DataTransfer that the page made, so
+ * what the pointer shows is checked by the unit test
+ * (src/components/drop-photo/DropPhoto.spec.tsx).
+ */
+async function dragFiles(page, files, target = page.locator('#__next')) {
+  const dataTransfer = await page.evaluateHandle(
+    (files) => {
+      const transfer = new DataTransfer();
+      for (const { name, type, base64 } of files) {
+        const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+        transfer.items.add(new File([bytes], name, { type }));
+      }
+      return transfer;
+    },
+    files.map(({ name, mimeType, buffer }) => ({
+      name,
+      type: mimeType,
+      base64: buffer.toString('base64'),
+    })),
+  );
+  await target.dispatchEvent('dragenter', { dataTransfer });
+  await target.dispatchEvent('dragover', { dataTransfer });
+  return dataTransfer;
+}
+
+/** Drags files from outside the browser over the page and drops them there. */
+async function dropFiles(page, files, target = page.locator('#__next')) {
+  const dataTransfer = await dragFiles(page, files, target);
+  await target.dispatchEvent('drop', { dataTransfer });
+}
+
 /** The address of the page that each entry of the menu opens, by the entry's name in English. */
 const menuPaths = {
   Home: '/',
@@ -574,6 +616,172 @@ test('no EXIF and malformed files retain the existing dialog and image behavior'
   ).toBeVisible();
 });
 
+test('a photo dropped on the page is selected once the dialog asks, and recorded as dropped', async ({
+  page,
+}) => {
+  const sent = await collectEvents(page);
+  await page.goto('/');
+  const placeholder = page.getByText(
+    'The selected photo will be displayed here.',
+    { exact: true },
+  );
+
+  // While the file is over the page, a veil says that the app takes it.
+  const dataTransfer = await dragFiles(page, [photoFile], placeholder);
+  const veil = page.getByText('Drop the photo here to select it.', {
+    exact: true,
+  });
+  await expect(veil).toBeVisible();
+  await snapshot(page, 'drop-veil');
+
+  // Dropped, it is not selected until the dialog asks, which names it.
+  await placeholder.dispatchEvent('drop', { dataTransfer });
+  await expect(veil).toBeHidden();
+  const dialog = page.getByRole('dialog', {
+    name: 'Are you sure you want to select this photo?',
+    exact: true,
+  });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText('demo.jpg');
+  const select = dialog.getByRole('button', { name: 'Select', exact: true });
+  await expect(select).toBeFocused();
+  await snapshot(page, 'drop-dialog');
+
+  // Cancel, or Escape, selects nothing.
+  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(dialog).toBeHidden();
+  await dropFiles(page, [photoFile]);
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(placeholder).toBeVisible();
+
+  // Enter selects it, as Select has the focus.
+  await dropFiles(page, [photoFile]);
+  await expect(select).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(
+    page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveTitle(/demo.jpg/);
+
+  // A drag that starts in the page, as the shown photo dragged by the mouse
+  // does, is the page's own, though the browser gives the photo with it as a
+  // file: the app leaves it to the browser, which does not open it.
+  // Playwright's own drag gives the target no file, so the events are
+  // dispatched.
+  const isOwnDragTaken = await page.evaluate(() => {
+    const image = document.querySelector('img[alt="demo.jpg"]');
+    const app = document.querySelector('#__next');
+    const transfer = new DataTransfer();
+    transfer.items.add(new File(['x'], 'demo.jpg', { type: 'image/jpeg' }));
+    const fire = (target, type) => {
+      const event = new DragEvent(type, {
+        dataTransfer: transfer,
+        bubbles: true,
+        cancelable: true,
+      });
+      target.dispatchEvent(event);
+      return event.defaultPrevented;
+    };
+    fire(image, 'dragstart');
+    const taken = [fire(app, 'dragenter'), fire(app, 'dragover'), fire(app, 'drop')];
+    fire(image, 'dragend');
+    return taken;
+  });
+  expect(isOwnDragTaken).toEqual([false, false, false]);
+  await expect(dialog).toBeHidden();
+  // A file from outside, after it, is taken again.
+  await dropFiles(page, [photoFile]);
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  // The usage data has the dialog each time it asked, and the photo as one
+  // dropped.
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.action === 'Opened Drop Photo Dialog')
+        .map((event) => JSON.parse(event.label)),
+    [{ fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }],
+  );
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.action === 'Loaded Photo')
+        .map((event) => JSON.parse(event.label))
+        .map(({ isDropped, isReload, isDemo }) => ({ isDropped, isReload, isDemo })),
+    [{ isDropped: true, isReload: false, isDemo: false }],
+  );
+});
+
+test('a photo dropped on another page is selected on the Home page, and of several files the first', async ({
+  page,
+}) => {
+  await page.goto('/settings');
+  await dropFiles(page, [
+    { ...photoFile, name: 'first.jpg' },
+    { ...photoFile, name: 'second.jpg' },
+  ]);
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toContainText('first.jpg');
+  await expect(dialog).not.toContainText('second.jpg');
+  await dialog.getByRole('button', { name: 'Select', exact: true }).click();
+  await page.waitForURL((url) => url.pathname === '/');
+  await expect(
+    page.getByRole('cell', { name: 'first.jpg', exact: true }),
+  ).toBeVisible();
+});
+
+test('a dropped file that is not a photo gets the dialog that one chosen with the button gets, and text dragged is left alone', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  // Text and links that are dragged carry no file: no veil, and the browser
+  // does with them what it did.
+  const isTextTaken = await page.evaluate(() => {
+    const transfer = new DataTransfer();
+    transfer.setData('text/plain', 'https://example.com/');
+    const event = new DragEvent('dragover', {
+      dataTransfer: transfer,
+      bubbles: true,
+      cancelable: true,
+    });
+    document.querySelector('#__next').dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(isTextTaken).toBe(false);
+  await expect(
+    page.getByText('Drop the photo here to select it.', { exact: true }),
+  ).toBeHidden();
+
+  await dropFiles(page, [
+    { name: 'broken.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('invalid') },
+  ]);
+  await page
+    .getByRole('dialog')
+    .getByRole('button', { name: 'Select', exact: true })
+    .click();
+  const unsupported = page
+    .getByRole('dialog')
+    .filter({ hasText: 'EXIF data is not available.' });
+  await expect(unsupported).toBeVisible();
+
+  // A file dropped on that dialog is refused: no dialog asks about it. The
+  // app opens a dialog as the drop is handled, so it would be there by now.
+  await dropFiles(page, [photoFile], unsupported);
+  await expect(page.getByRole('dialog')).toHaveCount(1);
+  await unsupported.getByRole('button', { name: 'Close', exact: true }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(
+    page.getByRole('cell', { name: 'broken.jpg', exact: true }),
+  ).toBeVisible();
+});
+
 test('a photo whose GPS values are empty is shown without a location', async ({
   page,
 }) => {
@@ -971,6 +1179,54 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(await isCut(photoMessage)).toBe(false);
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
+
+  test('the veil over the page and the dialog for a dropped photo are whole', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // The veil's text, under its icon, is all in the window.
+    const dataTransfer = await dragFiles(page, [photoFile]);
+    const veilText = page.locator('[class*="DropPhoto_message"]');
+    await expect(veilText).toBeInViewport({ ratio: 1 });
+    expect(await isCut(veilText)).toBe(false);
+    await page.locator('#__next').dispatchEvent('drop', { dataTransfer });
+
+    // The dialog is all in the window, and its question, the file's name and
+    // its buttons are one under another with a space between them, though
+    // the question takes two lines here.
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeInViewport({ ratio: 1 });
+    const parts = dialog.locator('> div > *');
+    await expect(parts).toHaveCount(3);
+    const [question, fileName, buttons] = await Promise.all(
+      [0, 1, 2].map((n) => parts.nth(n).boundingBox()),
+    );
+    expect(question.height).toBeGreaterThan(40); // On two lines.
+    expect(fileName.y - (question.y + question.height)).toBeGreaterThanOrEqual(8);
+    expect(buttons.y - (fileName.y + fileName.height)).toBeGreaterThanOrEqual(8);
+    expect(await isCut(dialog.locator('> div'))).toBe(false);
+    // The two buttons are whole, side by side or one under the other.
+    const [cancel, select] = await dialog.getByRole('button').all();
+    for (const button of [cancel, select]) {
+      await expect(button).toBeInViewport({ ratio: 1 });
+      expect(await isCut(button)).toBe(false);
+    }
+    const [cancelBox, selectBox] = await Promise.all(
+      [cancel, select].map((button) => button.boundingBox()),
+    );
+    expect(
+      selectBox.x >= cancelBox.x + cancelBox.width ||
+        selectBox.y >= cancelBox.y + cancelBox.height,
+    ).toBe(true);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+
+    await select.click();
+    await expect(
+      page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+    ).toBeVisible();
+  });
 });
 
 test.describe('on a phone', () => {
@@ -1089,6 +1345,35 @@ test.describe('in a browser whose language is Arabic', () => {
     });
     expect((await englishMenuButton.boundingBox()).x).toBeGreaterThan(1100);
     expect(errors).toEqual([]);
+  });
+
+  test('the dialog for a dropped photo is laid out from the right, with the file\'s name in its own order', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await dropFiles(page, [photoFile]);
+    const dialog = page.getByRole('dialog', {
+      name: 'هل تريد بالتأكيد اختيار هذه الصورة؟',
+      exact: true,
+    });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('demo.jpg', { exact: true })).toHaveCSS(
+      'direction',
+      'ltr',
+    );
+    // Cancel, the first, is where a line starts: at the right.
+    const cancel = dialog.getByRole('button', { name: 'إلغاء', exact: true });
+    const select = dialog.getByRole('button', { name: 'اختيار', exact: true });
+    expect((await cancel.boundingBox()).x).toBeGreaterThan(
+      (await select.boundingBox()).x,
+    );
+    await snapshot(page, 'drop-dialog-ar');
+    await select.click();
+    await expect(
+      page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+    ).toBeVisible();
   });
 
   test('the narrow layout is laid out from the right as well', async ({

@@ -71,6 +71,12 @@
     "message": "Không có dữ liệu EXIF.",
     "close": "Đóng"
   },
+  "dropPhoto": {
+    "dropHere": "Thả ảnh vào đây để chọn.",
+    "title": "Bạn có chắc chắn muốn chọn ảnh này không?",
+    "cancel": "Hủy",
+    "select": "Chọn"
+  },
   "pageNotShown": {
     "message": "Đã xảy ra sự cố và không thể hiển thị trang này.",
     "reload": "Tải lại"

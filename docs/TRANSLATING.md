@@ -140,7 +140,7 @@ do not take longer with every language.
 - The words that this app shares with
   [Photo Location Map](https://github.com/TomoyukiAota/photo-location-map) are
   the same in both: Language, Search, "No languages found", Settings, Close,
-  Reload, the settings of the date and time, "location data", "Date Taken"
+  Cancel, Reload, the settings of the date and time, "location data", "Date Taken"
   (which its sort has too), the profile links, and the words for a photo, a
   file and EXIF data. Its translations are
   in `src-shared/i18n/locales/<code>.json` of its repository. When you change
@@ -154,6 +154,12 @@ do not take longer with every language.
   page: the choice to follow the language that the browser is set to.
   `{{language}}` is the name of that language, such as `English`. It parallels
   "Use system setting" in Photo Location Map.
+- `dropPhoto` has the texts of a photo dropped on the page. `dropHere` is
+  shown over the page while a file is dragged over it. `title` is the
+  question of the dialog that asks, once the file is dropped, whether to
+  select it; the file's name is shown under it. `select` is the dialog's
+  button that selects it, with the verb of `home.selectPhoto`, and `cancel`
+  is Photo Location Map's word.
 - A `{{placeholder}}` is written plainly in a language written from right to
   left as well. The app keeps what it puts there together by itself (between
   two characters that are not drawn, U+2068 and U+2069), so that a number or an

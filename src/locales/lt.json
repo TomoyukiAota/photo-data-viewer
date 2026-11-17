@@ -71,6 +71,12 @@
     "message": "EXIF duomenų nėra.",
     "close": "Uždaryti"
   },
+  "dropPhoto": {
+    "dropHere": "Numeskite nuotrauką čia, kad ją pasirinktumėte.",
+    "title": "Ar tikrai norite pasirinkti šią nuotrauką?",
+    "cancel": "Atšaukti",
+    "select": "Pasirinkti"
+  },
   "pageNotShown": {
     "message": "Įvyko klaida, todėl šio puslapio parodyti negalima.",
     "reload": "Įkelti iš naujo"

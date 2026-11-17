@@ -71,6 +71,12 @@
     "message": "EXIF verileri mevcut değil.",
     "close": "Kapat"
   },
+  "dropPhoto": {
+    "dropHere": "Seçmek için fotoğrafı buraya bırakın.",
+    "title": "Bu fotoğrafı seçmek istediğinizden emin misiniz?",
+    "cancel": "Vazgeç",
+    "select": "Seç"
+  },
   "pageNotShown": {
     "message": "Bir sorun oluştu ve bu sayfa gösterilemiyor.",
     "reload": "Yeniden yükle"

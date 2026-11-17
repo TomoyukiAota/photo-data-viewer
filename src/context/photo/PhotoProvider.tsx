@@ -14,7 +14,7 @@ import PageTitleContext from '../page-title/page-title-context';
 import PhotoDimensionsContext from '../photo-dimensions/photo-dimensions-context';
 import { setPhotoDimensions } from '../photo-dimensions/set-photo-dimensions';
 import { createLoadedPhotoData, LoadedPhotoData } from './loaded-photo-data';
-import PhotoContext from './photo-context';
+import PhotoContext, { LoadPhotoOptions } from './photo-context';
 
 async function getBlobForHeif(file: File) {
   const startedAt = performance.now();
@@ -59,12 +59,13 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
     () => initialLoadedPhotoImage
   );
 
-  // Whether the photo shown is the demo's, so that loading it again after a setting changes is recorded as the demo's too.
-  const isDemoPhoto = useRef(false);
+  // How the photo shown was chosen, the demo's or one dropped, so that loading it again after a setting changes is
+  // recorded the same way.
+  const photoOptions = useRef<Required<LoadPhotoOptions>>({ isDemo: false, isDropped: false });
 
   const loadFile = async (
     file: File | undefined,
-    option: { isReload: boolean; isDemo: boolean }
+    option: { isReload: boolean } & Required<LoadPhotoOptions>
   ) => {
     if (!file) return;
 
@@ -84,9 +85,10 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
     const loadStartedAt = performance.now();
     const isReload = !!option?.isReload;
     const isDemo = !!option?.isDemo;
+    const isDropped = !!option?.isDropped;
     const data = await createLoadedPhotoData(file);
     console.log('LoadedPhotoData', data);
-    trackLoadedPhoto(data, { exifMs: performance.now() - loadStartedAt, isReload, isDemo });
+    trackLoadedPhoto(data, { exifMs: performance.now() - loadStartedAt, isReload, isDemo, isDropped });
     setLoadedPhotoData(data);
 
     photoDimensionsCtx.setLoadStatus('Loading');
@@ -100,19 +102,19 @@ const PhotoProvider: React.FC<React.PropsWithChildren> = (props) => {
     const { url, heif } = await getImageUrl(file);
     setLoadedPhotoImage(() => <PhotoImage url={url} alt={file.name} />);
     const dimensions = await setPhotoDimensions(photoDimensionsCtx, url);
-    trackDisplayedPhoto({ dimensions, loadMs: performance.now() - loadStartedAt, heif, isReload, isDemo });
+    trackDisplayedPhoto({ dimensions, loadMs: performance.now() - loadStartedAt, heif, isReload, isDemo, isDropped });
   };
 
-  const loadPhoto = (file: File, options?: { isDemo?: boolean }) => {
+  const loadPhoto = (file: File, options?: LoadPhotoOptions) => {
     console.debug('loadPhoto called. file: ', file);
-    isDemoPhoto.current = !!options?.isDemo;
-    loadFile(file, { isReload: false, isDemo: isDemoPhoto.current });
+    photoOptions.current = { isDemo: !!options?.isDemo, isDropped: !!options?.isDropped };
+    loadFile(file, { isReload: false, ...photoOptions.current });
   };
 
   const reloadPhoto = () => {
     console.debug('reloadPhoto called.');
     const file = loadedPhotoData?.file?.file;
-    loadFile(file, { isReload: true, isDemo: isDemoPhoto.current });
+    loadFile(file, { isReload: true, ...photoOptions.current });
   };
 
   return (
