@@ -14,6 +14,13 @@
     "language": "Idioma - {{appName}}",
     "about": "Sobre - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Veja os dados EXIF da sua foto no navegador: a data da captura, a localização em um mapa, a câmera e as configurações dela. A foto não é enviada a nenhum servidor.",
+    "demo": "Experimente o {{appName}} com uma foto de exemplo e veja os dados EXIF que ele exibe: a data da captura, a localização em um mapa, a câmera e as configurações dela.",
+    "settings": "Escolha como o {{appName}} escreve datas e horas e se ele envia dados de uso. As configurações são salvas no seu navegador.",
+    "language": "Escolha o idioma em que o {{appName}} é exibido ou deixe que ele siga o idioma do seu navegador.",
+    "about": "Como o {{appName}} lê sua foto no navegador sem enviá-la a nenhum servidor, quais dados de uso ele coleta, seu código-fonte e quem o desenvolve."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -68,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Mostrar no Google Maps",
       "showInGoogleStreetView": "Mostrar no Google Street View",
+      "showInGoogleEarth": "Mostrar no Google Earth",
       "iosNote": "Para usuários do iOS: em alguns casos, o iOS remove alguns dados EXIF (por exemplo, latitude e longitude). Leia <pageLink>esta página</pageLink> para saber mais."
     },
     "rawData": {
@@ -78,6 +86,12 @@
     "title": "Formato de arquivo não compatível",
     "message": "Os dados EXIF não estão disponíveis.",
     "close": "Fechar"
+  },
+  "dropPhoto": {
+    "dropHere": "Solte a foto aqui para selecioná-la.",
+    "title": "Tem certeza de que deseja selecionar esta foto?",
+    "cancel": "Cancelar",
+    "select": "Selecionar"
   },
   "pageNotShown": {
     "message": "Algo deu errado, e esta página não pode ser exibida.",

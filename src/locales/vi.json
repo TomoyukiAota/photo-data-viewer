@@ -14,6 +14,13 @@
     "language": "Ngôn ngữ - {{appName}}",
     "about": "Giới thiệu - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Xem dữ liệu EXIF của ảnh ngay trong trình duyệt: ngày chụp, vị trí trên bản đồ, máy ảnh và các cài đặt của máy ảnh. Ảnh không được gửi đến bất kỳ máy chủ nào.",
+    "demo": "Dùng thử {{appName}} với một ảnh mẫu và xem dữ liệu EXIF mà ứng dụng hiển thị: ngày chụp, vị trí trên bản đồ, máy ảnh và các cài đặt của máy ảnh.",
+    "settings": "Chọn cách {{appName}} viết ngày và giờ, và có gửi dữ liệu sử dụng hay không. Cài đặt được lưu trong trình duyệt của bạn.",
+    "language": "Chọn ngôn ngữ hiển thị của {{appName}}, hoặc để ứng dụng theo ngôn ngữ của trình duyệt.",
+    "about": "Cách {{appName}} đọc ảnh của bạn trong trình duyệt mà không gửi đến bất kỳ máy chủ nào, dữ liệu sử dụng mà ứng dụng thu thập, mã nguồn và người phát triển."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -68,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Hiển thị trong Google Maps",
       "showInGoogleStreetView": "Hiển thị trong Google Street View",
+      "showInGoogleEarth": "Hiển thị trong Google Earth",
       "iosNote": "Đối với người dùng iOS: trong một số trường hợp, iOS xóa một số dữ liệu EXIF (ví dụ: vĩ độ và kinh độ). Vui lòng đọc <pageLink>trang này</pageLink> để biết chi tiết."
     },
     "rawData": {
@@ -78,6 +86,12 @@
     "title": "Định dạng tệp không được hỗ trợ",
     "message": "Không có dữ liệu EXIF.",
     "close": "Đóng"
+  },
+  "dropPhoto": {
+    "dropHere": "Thả ảnh vào đây để chọn.",
+    "title": "Bạn có chắc chắn muốn chọn ảnh này không?",
+    "cancel": "Hủy",
+    "select": "Chọn"
   },
   "pageNotShown": {
     "message": "Đã xảy ra sự cố và không thể hiển thị trang này.",

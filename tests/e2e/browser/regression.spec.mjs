@@ -81,6 +81,48 @@ async function loadPhoto(page) {
   ).toBeVisible();
 }
 
+/** demo.jpg, as a file that is dragged and dropped. */
+const photoFile = { name: 'demo.jpg', mimeType: 'image/jpeg', buffer: photo };
+
+/**
+ * Drags files from outside the browser over the page, as from the file
+ * manager, and gives what they are dragged with, to drop them with.
+ *
+ * TL;DR: The drag's events are dispatched, with a DataTransfer that holds
+ * the files.
+ * Details: Playwright cannot drag a file from outside the browser: a drag of
+ * its own starts in the page, which the app leaves alone. A browser does not
+ * let a page set the drop effect of a DataTransfer that the page made, so
+ * what the pointer shows is checked by the unit test
+ * (src/components/drop-photo/DropPhoto.spec.tsx).
+ */
+async function dragFiles(page, files, target = page.locator('#__next')) {
+  const dataTransfer = await page.evaluateHandle(
+    (files) => {
+      const transfer = new DataTransfer();
+      for (const { name, type, base64 } of files) {
+        const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+        transfer.items.add(new File([bytes], name, { type }));
+      }
+      return transfer;
+    },
+    files.map(({ name, mimeType, buffer }) => ({
+      name,
+      type: mimeType,
+      base64: buffer.toString('base64'),
+    })),
+  );
+  await target.dispatchEvent('dragenter', { dataTransfer });
+  await target.dispatchEvent('dragover', { dataTransfer });
+  return dataTransfer;
+}
+
+/** Drags files from outside the browser over the page and drops them there. */
+async function dropFiles(page, files, target = page.locator('#__next')) {
+  const dataTransfer = await dragFiles(page, files, target);
+  await target.dispatchEvent('drop', { dataTransfer });
+}
+
 /** The address of the page that each entry of the menu opens, by the entry's name in English. */
 const menuPaths = {
   Home: '/',
@@ -657,6 +699,172 @@ test('no EXIF and malformed files retain the existing dialog and image behavior'
   ).toBeVisible();
 });
 
+test('a photo dropped on the page is selected once the dialog asks, and recorded as dropped', async ({
+  page,
+}) => {
+  const sent = await collectEvents(page);
+  await page.goto('/');
+  const placeholder = page.getByText(
+    'The selected photo will be displayed here.',
+    { exact: true },
+  );
+
+  // While the file is over the page, a veil says that the app takes it.
+  const dataTransfer = await dragFiles(page, [photoFile], placeholder);
+  const veil = page.getByText('Drop the photo here to select it.', {
+    exact: true,
+  });
+  await expect(veil).toBeVisible();
+  await snapshot(page, 'drop-veil');
+
+  // Dropped, it is not selected until the dialog asks, which names it.
+  await placeholder.dispatchEvent('drop', { dataTransfer });
+  await expect(veil).toBeHidden();
+  const dialog = page.getByRole('dialog', {
+    name: 'Are you sure you want to select this photo?',
+    exact: true,
+  });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText('demo.jpg');
+  const select = dialog.getByRole('button', { name: 'Select', exact: true });
+  await expect(select).toBeFocused();
+  await snapshot(page, 'drop-dialog');
+
+  // Cancel, or Escape, selects nothing.
+  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(dialog).toBeHidden();
+  await dropFiles(page, [photoFile]);
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(placeholder).toBeVisible();
+
+  // Enter selects it, as Select has the focus.
+  await dropFiles(page, [photoFile]);
+  await expect(select).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(
+    page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveTitle(/demo.jpg/);
+
+  // A drag that starts in the page, as the shown photo dragged by the mouse
+  // does, is the page's own, though the browser gives the photo with it as a
+  // file: the app leaves it to the browser, which does not open it.
+  // Playwright's own drag gives the target no file, so the events are
+  // dispatched.
+  const isOwnDragTaken = await page.evaluate(() => {
+    const image = document.querySelector('img[alt="demo.jpg"]');
+    const app = document.querySelector('#__next');
+    const transfer = new DataTransfer();
+    transfer.items.add(new File(['x'], 'demo.jpg', { type: 'image/jpeg' }));
+    const fire = (target, type) => {
+      const event = new DragEvent(type, {
+        dataTransfer: transfer,
+        bubbles: true,
+        cancelable: true,
+      });
+      target.dispatchEvent(event);
+      return event.defaultPrevented;
+    };
+    fire(image, 'dragstart');
+    const taken = [fire(app, 'dragenter'), fire(app, 'dragover'), fire(app, 'drop')];
+    fire(image, 'dragend');
+    return taken;
+  });
+  expect(isOwnDragTaken).toEqual([false, false, false]);
+  await expect(dialog).toBeHidden();
+  // A file from outside, after it, is taken again.
+  await dropFiles(page, [photoFile]);
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  // The usage data has the dialog each time it asked, and the photo as one
+  // dropped.
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.action === 'Opened Drop Photo Dialog')
+        .map((event) => JSON.parse(event.label)),
+    [{ fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }],
+  );
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.action === 'Loaded Photo')
+        .map((event) => JSON.parse(event.label))
+        .map(({ isDropped, isReload, isDemo }) => ({ isDropped, isReload, isDemo })),
+    [{ isDropped: true, isReload: false, isDemo: false }],
+  );
+});
+
+test('a photo dropped on another page is selected on the Home page, and of several files the first', async ({
+  page,
+}) => {
+  await page.goto('/settings');
+  await dropFiles(page, [
+    { ...photoFile, name: 'first.jpg' },
+    { ...photoFile, name: 'second.jpg' },
+  ]);
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toContainText('first.jpg');
+  await expect(dialog).not.toContainText('second.jpg');
+  await dialog.getByRole('button', { name: 'Select', exact: true }).click();
+  await page.waitForURL((url) => url.pathname === '/');
+  await expect(
+    page.getByRole('cell', { name: 'first.jpg', exact: true }),
+  ).toBeVisible();
+});
+
+test('a dropped file that is not a photo gets the dialog that one chosen with the button gets, and text dragged is left alone', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  // Text and links that are dragged carry no file: no veil, and the browser
+  // does with them what it did.
+  const isTextTaken = await page.evaluate(() => {
+    const transfer = new DataTransfer();
+    transfer.setData('text/plain', 'https://example.com/');
+    const event = new DragEvent('dragover', {
+      dataTransfer: transfer,
+      bubbles: true,
+      cancelable: true,
+    });
+    document.querySelector('#__next').dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(isTextTaken).toBe(false);
+  await expect(
+    page.getByText('Drop the photo here to select it.', { exact: true }),
+  ).toBeHidden();
+
+  await dropFiles(page, [
+    { name: 'broken.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('invalid') },
+  ]);
+  await page
+    .getByRole('dialog')
+    .getByRole('button', { name: 'Select', exact: true })
+    .click();
+  const unsupported = page
+    .getByRole('dialog')
+    .filter({ hasText: 'EXIF data is not available.' });
+  await expect(unsupported).toBeVisible();
+
+  // A file dropped on that dialog is refused: no dialog asks about it. The
+  // app opens a dialog as the drop is handled, so it would be there by now.
+  await dropFiles(page, [photoFile], unsupported);
+  await expect(page.getByRole('dialog')).toHaveCount(1);
+  await unsupported.getByRole('button', { name: 'Close', exact: true }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(
+    page.getByRole('cell', { name: 'broken.jpg', exact: true }),
+  ).toBeVisible();
+});
+
 test('a photo whose GPS values are empty is shown without a location', async ({
   page,
 }) => {
@@ -678,6 +886,91 @@ test('a photo whose GPS values are empty is shown without a location', async ({
   await expect(page.locator('.leaflet-container')).toBeVisible();
   await expect(page.locator('.leaflet-marker-icon')).toHaveCount(0);
   expect(errors).toEqual([]);
+});
+
+/**
+ * Checks the three buttons beside the numbers of the latitude and the
+ * longitude of the photo loaded: each is all in the window, beside the
+ * numbers on the side where a line ends (the left, in a language written
+ * from right to left), and none covers another. Returns their boxes.
+ */
+async function expectButtonsBesideNumbers(page, { rightToLeft = false } = {}) {
+  const row = page.getByText('37.332558', { exact: true }).locator('xpath=..');
+  const buttons = row.getByRole('button');
+  await expect(buttons).toHaveCount(3);
+  const numbers = await Promise.all(
+    [2, 3].map((n) => row.locator('> div').nth(n).boundingBox()),
+  );
+  const boxes = [];
+  for (const button of await buttons.all()) {
+    await expect(button).toBeInViewport({ ratio: 1 });
+    boxes.push(await button.boundingBox());
+  }
+  for (const box of boxes) {
+    for (const number of numbers) {
+      if (rightToLeft) {
+        expect(box.x + box.width).toBeLessThanOrEqual(number.x);
+      } else {
+        expect(box.x).toBeGreaterThanOrEqual(number.x + number.width);
+      }
+    }
+  }
+  const overlap = (a, b) =>
+    a.x < b.x + b.width &&
+    b.x < a.x + a.width &&
+    a.y < b.y + b.height &&
+    b.y < a.y + a.height;
+  boxes.forEach((a, i) =>
+    boxes.slice(i + 1).forEach((b) => expect(overlap(a, b)).toBe(false)),
+  );
+  return boxes;
+}
+
+test('the buttons beside the coordinates are on one line, and the Google Earth button opens the place, which the usage data does not record', async ({
+  page,
+  context,
+}) => {
+  const sent = await collectEvents(page);
+  // The new tab gets a page of the test's in place of Google Earth.
+  await context.route(/^https:\/\/earth\.google\.com\//, (route) =>
+    route.fulfill({ contentType: 'text/html', body: '<title>Earth</title>' }),
+  );
+  await page.goto('/');
+  await loadPhoto(page);
+  const centres = (await expectButtonsBesideNumbers(page)).map(
+    (box) => box.y + box.height / 2,
+  );
+  expect(Math.max(...centres) - Math.min(...centres)).toBeLessThanOrEqual(1);
+
+  const opened = page.waitForEvent('popup');
+  await page
+    .getByRole('button', { name: 'Show in Google Earth', exact: true })
+    .click();
+  const tab = await opened;
+  await tab.waitForLoadState();
+  // A search for the coordinates, which Google Earth marks with a pin. The
+  // tab cannot reach this page.
+  expect(tab.url()).toMatch(
+    /^https:\/\/earth\.google\.com\/web\/search\/37\.332558\d*,-122\.005661\d*$/,
+  );
+  expect(await tab.evaluate(() => window.opener)).toBeNull();
+
+  // The usage data says which button was used, and not where the photo was
+  // taken.
+  await expectSent(
+    sent,
+    (events) =>
+      events
+        .filter((event) => event.category === 'Opened URL')
+        .map((event) => [event.action, event.label]),
+    [
+      [
+        '[Home Page] Opened URL for Show in Google Earth',
+        'https://earth.google.com/web/search/ with latitude and longitude',
+      ],
+    ],
+  );
+  expect(JSON.stringify(sent.events)).not.toMatch(/37\.33|122\.00/);
 });
 
 test('errors nothing handled are sent to the analytics backend', async ({
@@ -807,6 +1100,8 @@ test('narrow photo, metadata, and map tabs retain their layout', async ({
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/');
   await loadPhoto(page);
+  // The buttons beside the coordinates do not fit on one line here.
+  await expectButtonsBesideNumbers(page);
   await snapshot(page, 'narrow-loaded');
   await page.getByRole('tab', { name: 'Map', exact: true }).click();
   await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
@@ -1049,6 +1344,206 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
     await snapshot(page, 'about-ja');
   });
+
+  // TL;DR: Nothing is shown in English before the texts of the language
+  // arrive, the title in the tab included.
+  // Details: the page is served with a title for search engines, the app's
+  // name, which is the same in every language (SearchHead.tsx). The texts of
+  // Japanese are held back here, as a slow connection holds them, and so is
+  // anything else that the page fetches after it is served.
+  test('until the Japanese texts arrive, the page shows nothing, and its title is the name of the app', async ({
+    page,
+    request,
+  }) => {
+    const served = await (await request.get('/about')).text();
+    let release;
+    const held = new Promise((resolve) => (release = resolve));
+    let asked;
+    const askedForMore = new Promise((resolve) => (asked = resolve));
+    await page.route('**/_next/static/chunks/**', async (route) => {
+      if (!served.includes(new URL(route.request().url()).pathname)) {
+        asked();
+        await held;
+      }
+      await route.continue();
+    });
+    await page.goto('/about', { waitUntil: 'domcontentloaded' });
+    await askedForMore;
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('#__next')).toBeEmpty();
+    release();
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+  });
+});
+
+// TL;DR: What search engines and link previews read: the head of a page, which
+// SearchHead.tsx gives, robots.txt and the sitemap.
+// Details: a search engine or a link preview that does not run the page reads
+// the page as it is served, which is its head alone, as the app renders nothing
+// until it runs in the browser (_app.tsx). Google runs the page as well, and
+// reads what the page leaves. Each page has an address in each language
+// (next.config.js), which search engines show in that language's results. The
+// wording of the descriptions is checked by the unit tests of SearchHead.
+test.describe('what search engines read', () => {
+  test.describe('as a page is served, before it runs', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('each page has a title, a description and the address that search engines show', async ({
+      page,
+    }) => {
+      for (const path of Object.values(menuPaths)) {
+        const response = await page.goto(path);
+        expect(response.headers()['x-robots-tag']).toBeUndefined();
+        await expect(page).toHaveTitle('Photo Data Viewer');
+        await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+          'content',
+          /\S/,
+        );
+        const address = `https://photo-data-viewer.vercel.app${path}`;
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+          'href',
+          address,
+        );
+        await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+          'content',
+          address,
+        );
+      }
+    });
+
+    test("a page at a language's address has its title and description in that language, and lists the page's address in every language", async ({
+      page,
+    }) => {
+      const response = await page.goto('/ja/about');
+      expect(response.headers()['x-robots-tag']).toBeUndefined();
+      await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+      await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+        'content',
+        /^Photo Data Viewer は写真をサーバーに送信せず/,
+      );
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        'https://photo-data-viewer.vercel.app/ja/about',
+      );
+      const alternates = page.locator('link[rel="alternate"]');
+      await expect(alternates).toHaveCount(43); // The 42 languages, and the address without a language.
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="pt-BR"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/pt-BR/about');
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="x-default"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/about');
+
+      // A language written from right to left is served so.
+      await page.goto('/ar');
+      await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    });
+  });
+
+  test('a page that runs keeps one description and its address, with its own title, and they follow it to another page', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('button', { name: 'Select Photo' }),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/',
+    );
+    await navigate(page, 'About');
+    await expect(page).toHaveTitle('About - Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('title')).toHaveCount(1);
+    await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+  });
+
+  test("a language's address shows the page in that language, whatever the browser's, and the menu keeps it", async ({
+    page,
+  }) => {
+    await page.goto('/ja/about'); // In a browser set to English (playwright.config.mjs).
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page.getByRole('menuitem', { name: '設定', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/ja/settings');
+    await expect(page.getByLabel('日付の形式', { exact: true })).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+  });
+
+  test("the Language page at a language's address opens the address of the language chosen, and Back returns to the first", async ({
+    page,
+  }) => {
+    await page.goto('/ja/language');
+    const list = page.getByRole('listbox');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(list.locator('[aria-selected="true"]')).toHaveText(['日本語']);
+
+    await list.getByRole('option', { name: 'English', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/en/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    await page.goBack();
+    await page.waitForURL((url) => url.pathname === '/ja/language');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+
+    // The browser's language opens the address without a language, whose lang
+    // is the language shown, not the locale that Next.js gives it.
+    await list.getByRole('option').first().click();
+    await page.waitForURL((url) => url.pathname === '/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+
+  test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page in every language', async ({
+    request,
+  }) => {
+    // Served as checked out, which is with CRLF line endings on Windows.
+    const robots = (await (await request.get('/robots.txt')).text()).replace(
+      /\r\n/g,
+      '\n',
+    );
+    expect(robots).toContain('User-agent: *\nAllow: /\n');
+    expect(robots).toContain(
+      'Sitemap: https://photo-data-viewer.vercel.app/sitemap.xml',
+    );
+    const sitemap = await request.get('/sitemap.xml');
+    expect(sitemap.headers()['content-type']).toContain('xml');
+    const addresses = [...(await sitemap.text()).matchAll(/<loc>(.*)<\/loc>/g)].map(
+      ([, address]) => address,
+    );
+    // Without a language, then in each of the 42, for each of the two pages.
+    expect(addresses).toHaveLength(86);
+    expect(addresses).toEqual(
+      expect.arrayContaining([
+        'https://photo-data-viewer.vercel.app/',
+        'https://photo-data-viewer.vercel.app/ja',
+        'https://photo-data-viewer.vercel.app/about',
+        'https://photo-data-viewer.vercel.app/ja/about',
+        'https://photo-data-viewer.vercel.app/zh-Hant/about',
+      ]),
+    );
+    // Each is served.
+    for (const address of ['/ja', '/zh-Hant/about']) {
+      expect((await request.get(address)).status()).toBe(200);
+    }
+  });
 });
 
 // TL;DR: The layout is one for every language, and holds whatever the length
@@ -1119,6 +1614,8 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(longitudeName.y).toBeGreaterThanOrEqual(
       latitudeName.y + latitudeName.height,
     );
+    // The buttons beside the numbers are all in the window as well.
+    await expectButtonsBesideNumbers(page);
     // No name of the table is cut, and the table is no wider than the window.
     for (const name of await page.locator('tbody td:first-child').all()) {
       expect(await isCut(name)).toBe(false);
@@ -1239,6 +1736,54 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(await isCut(photoMessage)).toBe(false);
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
+
+  test('the veil over the page and the dialog for a dropped photo are whole', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // The veil's text, under its icon, is all in the window.
+    const dataTransfer = await dragFiles(page, [photoFile]);
+    const veilText = page.locator('[class*="DropPhoto_message"]');
+    await expect(veilText).toBeInViewport({ ratio: 1 });
+    expect(await isCut(veilText)).toBe(false);
+    await page.locator('#__next').dispatchEvent('drop', { dataTransfer });
+
+    // The dialog is all in the window, and its question, the file's name and
+    // its buttons are one under another with a space between them, though
+    // the question takes two lines here.
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeInViewport({ ratio: 1 });
+    const parts = dialog.locator('> div > *');
+    await expect(parts).toHaveCount(3);
+    const [question, fileName, buttons] = await Promise.all(
+      [0, 1, 2].map((n) => parts.nth(n).boundingBox()),
+    );
+    expect(question.height).toBeGreaterThan(40); // On two lines.
+    expect(fileName.y - (question.y + question.height)).toBeGreaterThanOrEqual(8);
+    expect(buttons.y - (fileName.y + fileName.height)).toBeGreaterThanOrEqual(8);
+    expect(await isCut(dialog.locator('> div'))).toBe(false);
+    // The two buttons are whole, side by side or one under the other.
+    const [cancel, select] = await dialog.getByRole('button').all();
+    for (const button of [cancel, select]) {
+      await expect(button).toBeInViewport({ ratio: 1 });
+      expect(await isCut(button)).toBe(false);
+    }
+    const [cancelBox, selectBox] = await Promise.all(
+      [cancel, select].map((button) => button.boundingBox()),
+    );
+    expect(
+      selectBox.x >= cancelBox.x + cancelBox.width ||
+        selectBox.y >= cancelBox.y + cancelBox.height,
+    ).toBe(true);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+
+    await select.click();
+    await expect(
+      page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+    ).toBeVisible();
+  });
 });
 
 test.describe('on a phone', () => {
@@ -1302,6 +1847,8 @@ test.describe('in a browser whose language is Arabic', () => {
       'ltr',
     );
     await expect(page.getByText(/-122\.005661/)).toHaveCSS('direction', 'ltr');
+    // The buttons beside the numbers are on their left, where a line ends.
+    await expectButtonsBesideNumbers(page, { rightToLeft: true });
     await expect(page.locator('.leaflet-marker-icon')).toBeVisible();
     await snapshot(page, 'loaded-general-ar');
 
@@ -1359,6 +1906,35 @@ test.describe('in a browser whose language is Arabic', () => {
     expect(errors).toEqual([]);
   });
 
+  test('the dialog for a dropped photo is laid out from the right, with the file\'s name in its own order', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await dropFiles(page, [photoFile]);
+    const dialog = page.getByRole('dialog', {
+      name: 'هل تريد بالتأكيد اختيار هذه الصورة؟',
+      exact: true,
+    });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('demo.jpg', { exact: true })).toHaveCSS(
+      'direction',
+      'ltr',
+    );
+    // Cancel, the first, is where a line starts: at the right.
+    const cancel = dialog.getByRole('button', { name: 'إلغاء', exact: true });
+    const select = dialog.getByRole('button', { name: 'اختيار', exact: true });
+    expect((await cancel.boundingBox()).x).toBeGreaterThan(
+      (await select.boundingBox()).x,
+    );
+    await snapshot(page, 'drop-dialog-ar');
+    await select.click();
+    await expect(
+      page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+    ).toBeVisible();
+  });
+
   test('the narrow layout is laid out from the right as well', async ({
     page,
   }) => {
@@ -1394,6 +1970,7 @@ test.describe('in a browser whose language is Arabic', () => {
     await expect(page.locator('#layout-menu')).toBeHidden();
 
     await loadPhoto(page);
+    await expectButtonsBesideNumbers(page, { rightToLeft: true });
     await snapshot(page, 'narrow-loaded-ar');
   });
 });

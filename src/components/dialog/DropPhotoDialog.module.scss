@@ -1,0 +1,32 @@
+// The look that the app's dialogs share (_dialog.scss).
+@use 'dialog';
+
+.dialog {
+  @include dialog.box;
+}
+
+.title {
+  @include dialog.title;
+}
+
+// The name of the file.
+.message {
+  @include dialog.message;
+}
+
+// TL;DR: The two buttons are side by side, and one under the other where they
+// do not fit.
+// Details: Their labels are as long as a language writes them, and a dialog
+// is no wider than a phone's window. The first is at the start of the line:
+// at the left, and at the right in a language written from right to left.
+.buttons {
+  @include dialog.buttons;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+
+  > button {
+    @include dialog.button;
+  }
+}

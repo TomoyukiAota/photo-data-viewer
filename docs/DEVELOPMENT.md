@@ -77,7 +77,7 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
+Three tests run in a browser set to Japanese (`ja-JP`) and three in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
 for those languages. The suite stays with these three languages and Polish
@@ -85,15 +85,22 @@ for those languages. The suite stays with these three languages and Polish
 `src/locales/locales.spec.ts` instead, which takes no longer with more
 languages
 ([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
-Four tests run in Polish at the width of a phone (320 pixels). Polish stands
+Five tests run in Polish at the width of a phone (320 pixels). Polish stands
 for the languages that write more than English does: its sentences take more
 lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, which ends before its buttons,
-each name beside its number, a field as wide as its label, the dialog, the
-messages and the menu of the layouts uncut, and the split panes inside the
-window. They find their elements by where they are and name no Polish text,
-so that a change of a translation does not break them.
+each name beside its number, a field as wide as its label, the dialogs, the
+veil over a page that a file is dragged over, the messages and the menu of
+the layouts uncut, and the split panes inside the window. They find their
+elements by where they are and name no Polish text, so that a change of a
+translation does not break them.
+The tests of a photo dropped on the page dispatch the drag's events, with a
+`DataTransfer` that holds the file: Playwright cannot drag a file from outside
+the browser, and its own drag, which starts in the page, gives the page no
+file. A browser does not let a page set the drop effect of a `DataTransfer`
+that the page made, so what the pointer shows over the page and over a dialog
+is checked by the unit test `src/components/drop-photo/DropPhoto.spec.tsx`.
 One test runs as a phone that is touched, where the Language page leaves the
 keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
 so the test is skipped in Firefox.
@@ -159,6 +166,36 @@ commit the files it writes. The web app manifest,
 of the installed app; the
 [installable app record](./tasks/20261118_installable-app/PLAN.md) says why each
 is there.
+
+## Search engines
+
+Every page has an address in each language, such as `/ja/about`, besides the
+one without a language, `/about` (`i18n` in [`next.config.js`](../next.config.js),
+[`address.ts`](../src/i18n/address.ts)). The address of a language shows the
+page in it, whatever the setting; the one without a language shows the language
+of the setting or the browser, as it always did. Next.js prerenders each page
+once for each language, and gives the address without a language the locale
+`default`; it redirects nothing by the browser's language.
+
+The app renders nothing until it runs in the browser, so each page is served
+with its head alone: the head that search engines and link previews read, from
+[`SearchHead.tsx`](../src/components/search-head/SearchHead.tsx), with the
+texts that the page's `getStaticProps` gives in the language of its address
+(`pageTitle` and `pageDescription` in the translation files). It has the page's
+title, description and canonical address, its address in every language
+(`hreflang`, and `x-default` for the one without a language), and Open Graph's
+and X's tags. The address without a language is served in English, with the
+app's name as the title, which is the same in every language; the page sets its
+own title once it is shown. [`robots.txt`](../public/robots.txt) names
+[the sitemap](../public/sitemap.xml), which lists the Home page and the About
+page at every address. The deployment for Photo Location Map has no addresses
+for the languages, is served without that head, and is sent with
+`X-Robots-Tag: noindex`.
+
+To see what a page is served with, `curl` it, or open it in a browser with
+JavaScript turned off. The ways to show the languages in search results that
+were weighed are in
+[the task record](./tasks/20261118_search-results/evidence/LANGUAGES.md).
 
 ## Task records
 

@@ -14,6 +14,13 @@
     "language": "Jezik - {{appName}}",
     "about": "O aplikaciji - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Pogledajte podatke EXIF svoje fotografije u pregledniku: datum snimanja, lokaciju na karti, fotoaparat i njegove postavke. Fotografija se ne šalje ni na jedan poslužitelj.",
+    "demo": "Isprobajte aplikaciju {{appName}} s oglednom fotografijom i pogledajte koje podatke EXIF prikazuje: datum snimanja, lokaciju na karti, fotoaparat i njegove postavke.",
+    "settings": "Odaberite kako aplikacija {{appName}} zapisuje datum i vrijeme te šalje li podatke o korištenju. Postavke se spremaju u vašem pregledniku.",
+    "language": "Odaberite jezik na kojem se prikazuje aplikacija {{appName}} ili neka slijedi jezik vašeg preglednika.",
+    "about": "Kako aplikacija {{appName}} čita vašu fotografiju u pregledniku bez slanja na ikakav poslužitelj, koje podatke o korištenju prikuplja, njezin izvorni kod i tko je razvija."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -68,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Prikaži na Google kartama",
       "showInGoogleStreetView": "Prikaži na Google Street Viewu",
+      "showInGoogleEarth": "Prikaži u Google Earthu",
       "iosNote": "Za korisnike iOS-a: iOS u nekim slučajevima uklanja dio podataka EXIF (npr. zemljopisnu širinu i dužinu). Pojedinosti pročitajte na <pageLink>ovoj stranici</pageLink>."
     },
     "rawData": {
@@ -78,6 +86,12 @@
     "title": "Nepodržani format datoteke",
     "message": "Podaci EXIF nisu dostupni.",
     "close": "Zatvori"
+  },
+  "dropPhoto": {
+    "dropHere": "Ispustite fotografiju ovdje da biste je odabrali.",
+    "title": "Jeste li sigurni da želite odabrati ovu fotografiju?",
+    "cancel": "Odustani",
+    "select": "Odaberi"
   },
   "pageNotShown": {
     "message": "Nešto je pošlo po zlu i ovu stranicu nije moguće prikazati.",
