@@ -41,10 +41,9 @@ after a few days.
 
 ## Decisions for the maintainer
 
-- **Web Analytics is a second view of what GA4 shows**, counted more fully.
-  If one place for page views is enough, removing `<Analytics>` from
-  `VercelAnalytics.tsx` and the package leaves Speed Insights alone; the About
-  page needs no change for that.
+- **Web Analytics and GA4 are both kept**, the maintainer decided on
+  2026-11-18. Web Analytics is a second view of what GA4 shows, counted more
+  fully.
 - **Speed Insights' allowance**: 10,000 events over 30 days, about 2,000 to
   3,000 page loads. Once the dashboard has a week of data, **Usage**, under
   **Observability**, shows how fast the allowance is used. If it would run
