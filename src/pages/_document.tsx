@@ -17,6 +17,17 @@ export default function Document() {
           rel='stylesheet'
           href='https://fonts.googleapis.com/icon?family=Material+Icons'
         />
+        {/* The web app manifest, with which Chrome and Edge offer to install the app, which then
+            opens in a window of its own; Safari's Add to Dock and Add to Home Screen read it too. The
+            icon for iPhone and iPad is apple-touch-icon (docs/tasks/20261118_installable-app). The
+            deployment in Photo Location Map, built with PDV_IN_PLM=True, is shown in that
+            application's window, and has neither. */}
+        {process.env.PDV_IN_PLM !== 'True' && (
+          <>
+            <link rel='manifest' href='/manifest.webmanifest' />
+            <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+          </>
+        )}
         {/* Google Analytics. When usage data is turned off in Settings (src/analytics/opt-out.ts),
             gtag.js is not loaded and not configured, and the property it reads to send nothing is
             set as well. Turning it on again does what the first branch does (setDisabled in ga4.ts).

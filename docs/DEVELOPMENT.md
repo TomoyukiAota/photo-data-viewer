@@ -97,6 +97,12 @@ so that a change of a translation does not break them.
 One test runs as a phone that is touched, where the Language page leaves the
 keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
 so the test is skipped in Firefox.
+One test asks Chrome, through the DevTools protocol, whether the app can be
+installed as an app of its own. The headless shell that Playwright runs by
+default does not check that, and Chrome installs nothing from an Incognito
+window, so the test opens Playwright's full Chromium, which
+`npx playwright install chromium` installs beside the shell, in a profile of
+its own, without a window as well. It is skipped in Firefox.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
@@ -141,6 +147,18 @@ companion's current Electron too: `npm run test:electron -- --grep "isolated win
 Tests create disposable profiles.
 `PDV_ELECTRON_BASE_URL=http://localhost:3100` can target an already running
 `npm run dev:plm` server instead of starting a production one.
+
+## The app's icon
+
+The icon of the installed app, the icon for iPhone and iPad and the favicon
+(`public/icons/`, `public/apple-touch-icon.png` and `public/favicon.ico`) are
+drawn by [`scripts/generate-icons.mjs`](../scripts/generate-icons.mjs), which
+holds the drawing. After changing it, run `node scripts/generate-icons.mjs` and
+commit the files it writes. The web app manifest,
+[`public/manifest.webmanifest`](../public/manifest.webmanifest), lists the icons
+of the installed app; the
+[installable app record](./tasks/20261118_installable-app/PLAN.md) says why each
+is there.
 
 ## Task records
 
