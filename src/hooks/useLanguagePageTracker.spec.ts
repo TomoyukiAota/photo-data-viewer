@@ -190,6 +190,19 @@ describe('useLanguagePageTracker', () => {
     ]);
   });
 
+  it('takes an address of the Language page in another language for the same page', async () => {
+    // Choosing a language on /ja/language opens /de/language (Language.tsx).
+    window.history.replaceState(null, '', '/ja/language');
+    const { changeTo } = router();
+    renderHook(() => useLanguagePageTracker());
+    await act(() => languageReady);
+
+    changeTo('/de/language');
+    expect(trackLeftLanguagePage).not.toHaveBeenCalled();
+    changeTo('/de');
+    expect(trackLeftLanguagePage).toHaveBeenCalledTimes(1);
+  });
+
   it('stops listening when the app is taken away', async () => {
     const { handlers, events } = router();
     const { unmount } = renderHook(() => useLanguagePageTracker());

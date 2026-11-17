@@ -14,6 +14,13 @@
     "language": "語言 - {{appName}}",
     "about": "關於 - {{appName}}"
   },
+  "pageDescription": {
+    "home": "在瀏覽器中查看照片的 EXIF 資料：拍攝日期、地圖上的位置、相機及其設定。照片不會傳送到任何伺服器。",
+    "demo": "用範例照片試用 {{appName}}，查看它顯示的 EXIF 資料：拍攝日期、地圖上的位置、相機及其設定。",
+    "settings": "選擇 {{appName}} 如何顯示日期與時間，以及是否傳送使用情況資料。設定會儲存在你的瀏覽器中。",
+    "language": "選擇 {{appName}} 的顯示語言，或讓它依照瀏覽器的語言。",
+    "about": "了解 {{appName}} 如何在瀏覽器中讀取你的照片而不將其傳送到任何伺服器、它收集哪些使用情況資料、它的原始碼以及開發者。"
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "不支援的檔案格式",
     "message": "無法取得 EXIF 資料。",
     "close": "關閉"
+  },
+  "dropPhoto": {
+    "dropHere": "將照片拖放到這裡進行選取。",
+    "title": "確定要選取這張照片嗎？",
+    "cancel": "取消",
+    "select": "選取"
   },
   "pageNotShown": {
     "message": "發生問題，無法顯示此頁面。",

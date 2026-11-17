@@ -14,6 +14,13 @@
     "language": "Språk - {{appName}}",
     "about": "Om - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Visa EXIF-informationen för din bild i webbläsaren: fotograferingsdatum, plats på en karta, kameran och dess inställningar. Bilden skickas inte till någon server.",
+    "demo": "Prova {{appName}} med en exempelbild och se vilken EXIF-information appen visar: fotograferingsdatum, plats på en karta, kameran och dess inställningar.",
+    "settings": "Välj hur {{appName}} skriver datum och tid, och om appen skickar användningsdata. Inställningarna sparas i din webbläsare.",
+    "language": "Välj vilket språk {{appName}} visas på, eller låt appen följa din webbläsares språk.",
+    "about": "Så läser {{appName}} din bild i webbläsaren utan att skicka den till någon server, vilka användningsdata appen samlar in, källkoden och vem som utvecklar den."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "Filformatet stöds inte",
     "message": "EXIF-information är inte tillgänglig.",
     "close": "Stäng"
+  },
+  "dropPhoto": {
+    "dropHere": "Släpp bilden här för att välja den.",
+    "title": "Vill du verkligen välja den här bilden?",
+    "cancel": "Avbryt",
+    "select": "Välj"
   },
   "pageNotShown": {
     "message": "Något gick fel och den här sidan kan inte visas.",

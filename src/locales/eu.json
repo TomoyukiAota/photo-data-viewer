@@ -14,6 +14,13 @@
     "language": "Hizkuntza - {{appName}}",
     "about": "Honi buruz - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Ikusi zure argazkiaren EXIF datuak nabigatzailean bertan: ateratze-data, kokapena mapan, kamera eta haren ezarpenak. Argazkia ez da inongo zerbitzarira bidaltzen.",
+    "demo": "Probatu {{appName}} adibideko argazki batekin, eta ikusi zer EXIF datu erakusten dituen: ateratze-data, kokapena mapan, kamera eta haren ezarpenak.",
+    "settings": "Aukeratu nola idazten dituen {{appName}} aplikazioak data eta ordua, eta erabilera-datuak bidaltzen dituen ala ez. Ezarpenak zure nabigatzailean gordetzen dira.",
+    "language": "Aukeratu zer hizkuntzatan erakusten den {{appName}}, edo utzi zure nabigatzailearen hizkuntzari jarraitzen.",
+    "about": "Nola irakurtzen duen {{appName}} aplikazioak zure argazkia nabigatzailean inongo zerbitzarira bidali gabe, zer erabilera-datu biltzen dituen, haren iturburu-kodea eta nork garatzen duen."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "Fitxategi-formatua ez da onartzen",
     "message": "EXIF datuak ez daude erabilgarri.",
     "close": "Itxi"
+  },
+  "dropPhoto": {
+    "dropHere": "Jaregin argazkia hemen hautatzeko.",
+    "title": "Ziur argazki hau hautatu nahi duzula?",
+    "cancel": "Utzi",
+    "select": "Hautatu"
   },
   "pageNotShown": {
     "message": "Arazoren bat gertatu da, eta ezin da orri hau erakutsi.",

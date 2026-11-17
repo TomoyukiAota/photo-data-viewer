@@ -12,6 +12,7 @@ import {
   trackLoadedLanguageInUse,
   trackLoadedPhoto,
   trackLoadedUserSetting,
+  trackOpenedDropPhotoDialog,
   trackOpenedUnsupportedFileDialog,
   trackOpenUrl,
   trackPageHidden,
@@ -40,15 +41,17 @@ function photo(): LoadedPhotoData {
 
 describe('track-event', () => {
   beforeEach(() => {
-    trackLoadedPhoto(photo(), { exifMs: 34.6, isReload: false, isDemo: false });
+    trackLoadedPhoto(photo(), { exifMs: 34.6, isReload: false, isDemo: false, isDropped: true });
     trackDisplayedPhoto({
       dimensions: { width: 4032, height: 3024 },
       loadMs: 812.4,
       heif: { result: 'converted', decodeMs: 650.2 },
       isReload: false,
       isDemo: true,
+      isDropped: false,
     });
     trackOpenedUnsupportedFileDialog();
+    trackOpenedDropPhotoDialog(2);
     trackRanDemo();
     trackPageHidden({ secondsSinceLoad: 95.4, visibleSeconds: 80.6 });
     trackOpenUrl('https://maps.google.com/ with query parameters', 'Show in Google Maps', 'Home Page');
@@ -94,6 +97,7 @@ describe('track-event', () => {
       'Loaded Photo / Loaded Photo',
       'Loaded Photo / Displayed Photo',
       'Dialog / Opened Unsupported File Dialog',
+      'Dialog / Opened Drop Photo Dialog',
       'Demo / Ran Demo',
       'Page / Page Hidden',
       'Opened URL / [Home Page] Opened URL for Show in Google Maps',
@@ -117,7 +121,7 @@ describe('track-event', () => {
     });
   });
 
-  it('sends a photo load as one event, with the names of its EXIF fields and not their values', () => {
+  it('sends a photo load as one event, with the names of its EXIF fields and not their values, and how it was chosen', () => {
     expect(sent()[0].label).toEqual({
       extension: 'jpg',
       mimeType: 'image/jpeg',
@@ -132,6 +136,7 @@ describe('track-event', () => {
       exifMs: 35,
       isReload: false,
       isDemo: false,
+      isDropped: true,
     });
   });
 
@@ -147,13 +152,20 @@ describe('track-event', () => {
       loadMs: 812,
       isReload: false,
       isDemo: true,
+      isDropped: false,
     });
   });
 
   it('sends a photo that could not be shown as failed', () => {
     jest.clearAllMocks();
-    trackDisplayedPhoto({ dimensions: null, loadMs: 100, isReload: false, isDemo: false });
+    trackDisplayedPhoto({ dimensions: null, loadMs: 100, isReload: false, isDemo: false, isDropped: false });
     expect(sent()[0].label).toMatchObject({ result: 'failed', isHeif: false, width: undefined });
+  });
+
+  it('sends how many files were dropped together when the dialog of a dropped photo opens', () => {
+    const opened = sent().find((event) => event.action === 'Opened Drop Photo Dialog');
+    expect(opened?.label).toEqual({ fileCount: 2 });
+    expect(toGa4Params(opened?.label as Record<string, number>)).toEqual({ file_count: 2 });
   });
 
   it('sends where a URL was opened from, and what for, as GA4 parameters', () => {

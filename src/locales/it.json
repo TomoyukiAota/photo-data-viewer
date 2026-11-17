@@ -14,6 +14,13 @@
     "language": "Lingua - {{appName}}",
     "about": "Informazioni - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Visualizza i dati EXIF della tua foto nel browser: la data di scatto, la posizione su una mappa, la fotocamera e le sue impostazioni. La foto non viene inviata ad alcun server.",
+    "demo": "Prova {{appName}} con una foto di esempio e scopri i dati EXIF che mostra: la data di scatto, la posizione su una mappa, la fotocamera e le sue impostazioni.",
+    "settings": "Scegli come {{appName}} scrive date e orari e se invia dati di utilizzo. Le impostazioni vengono salvate nel tuo browser.",
+    "language": "Scegli la lingua in cui viene mostrato {{appName}}, oppure lascia che segua la lingua del tuo browser.",
+    "about": "Come {{appName}} legge la tua foto nel browser senza inviarla ad alcun server, quali dati di utilizzo raccoglie, il suo codice sorgente e chi lo sviluppa."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "Formato file non supportato",
     "message": "I dati EXIF non sono disponibili.",
     "close": "Chiudi"
+  },
+  "dropPhoto": {
+    "dropHere": "Rilascia qui la foto per selezionarla.",
+    "title": "Vuoi davvero selezionare questa foto?",
+    "cancel": "Annulla",
+    "select": "Seleziona"
   },
   "pageNotShown": {
     "message": "Si è verificato un problema e questa pagina non può essere visualizzata.",

@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { NextRouter, useRouter } from 'next/router';
 
 import {
   trackChangedLanguageInUse,
@@ -17,10 +18,29 @@ jest.mock('../../i18n/i18n', () => {
   return { __esModule: true, ...actual, loadLanguage: jest.fn(actual.loadLanguage) };
 });
 
+// The page reads the language of its address from the router, which opens the
+// address of the language chosen there. A test sets the locale that Next.js
+// gives the address (next.config.js): undefined in the app without addresses
+// for the languages, as in Photo Location Map, or a language's code.
+jest.mock('next/router', () => ({ useRouter: jest.fn() }));
+const push = jest.fn(async () => true);
+let router: Pick<NextRouter, 'locale' | 'asPath' | 'push'>;
+beforeEach(() => {
+  router = { locale: undefined, asPath: '/language', push };
+  jest.mocked(useRouter).mockImplementation(() => router as NextRouter);
+});
+
+/** Opens the page at the address of a language, as the app does when it is opened there. */
+async function atAddressOf(language: string) {
+  window.history.replaceState(null, '', `/${language}/language`);
+  router.locale = language;
+  await act(() => applyLanguage(language as 'ja'));
+}
+
 const reloadPhoto = jest.fn();
 
-function renderPage() {
-  return render(
+function page() {
+  return (
     <PhotoContext.Provider
       value={{
         loadedPhotoData: null,
@@ -30,8 +50,12 @@ function renderPage() {
       }}
     >
       <Language />
-    </PhotoContext.Provider>,
+    </PhotoContext.Provider>
   );
+}
+
+function renderPage() {
+  return render(page());
 }
 
 /** Clicks an entry of the list, and waits for its language to be fetched and shown. */
@@ -51,6 +75,7 @@ function chosen(): (string | null)[] {
 afterEach(async () => {
   jest.clearAllMocks();
   localStorage.clear();
+  window.history.replaceState(null, '', '/');
   await act(() => applyLanguage('en'));
 });
 
@@ -78,6 +103,8 @@ it('shows the app in the language chosen, at once, and saves and records the cho
   expect(localStorage.getItem('Language')).toBe('ja');
   expect(trackChangedUserSetting).toHaveBeenCalledWith('Language', 'ja');
   expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
+  // The address names no language, and stays.
+  expect(push).not.toHaveBeenCalled();
 });
 
 it('loads the photo again after the language is applied, for its dates', async () => {
@@ -190,4 +217,51 @@ it('says so when the language asked for again cannot be fetched, and can be aske
   await choose('日本語');
   expect(screen.queryByRole('alert')).toBeNull();
   expect(i18next.language).toBe('ja');
+});
+
+describe('at an address that names a language', () => {
+  it('has the language of the address chosen, whatever the setting', async () => {
+    localStorage.setItem('Language', 'ja');
+    await atAddressOf('de');
+    renderPage();
+    expect(chosen()).toEqual(['Deutsch']);
+  });
+
+  it('opens the address of the language chosen, and saves it as the setting', async () => {
+    await atAddressOf('de');
+    renderPage();
+    await choose('日本語');
+
+    expect(i18next.language).toBe('ja');
+    expect(push).toHaveBeenCalledWith('/language', undefined, { locale: 'ja' });
+    expect(localStorage.getItem('Language')).toBe('ja');
+    expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
+    expect(reloadPhoto).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens the address without a language for the browser's entry", async () => {
+    await atAddressOf('de');
+    renderPage();
+    await choose('Browsereinstellung verwenden (English)');
+
+    expect(i18next.language).toBe('en');
+    expect(push).toHaveBeenCalledWith('/language', undefined, { locale: 'default' });
+    expect(localStorage.getItem('Language')).toBe('auto');
+  });
+
+  it("follows the address when the browser's Back or Forward changes its language", async () => {
+    await atAddressOf('de');
+    const { rerender } = renderPage();
+
+    // Back, from the address that a choice on the page opened.
+    window.history.replaceState(null, '', '/ja/language');
+    router = { ...router, locale: 'ja' };
+    await act(async () => rerender(page()));
+
+    expect(i18next.language).toBe('ja');
+    expect(chosen()).toEqual(['日本語']);
+    expect(trackChangedLanguageInUse).toHaveBeenCalledWith('ja');
+    expect(reloadPhoto).toHaveBeenCalledTimes(1);
+    expect(push).not.toHaveBeenCalled();
+  });
 });

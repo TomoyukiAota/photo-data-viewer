@@ -14,6 +14,13 @@
     "language": "Jazyk - {{appName}}",
     "about": "O aplikaci - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Zobrazte si data EXIF své fotky přímo v prohlížeči: datum pořízení, polohu na mapě, fotoaparát a jeho nastavení. Fotka se neodesílá na žádný server.",
+    "demo": "Vyzkoušejte aplikaci {{appName}} na ukázkové fotce a podívejte se, jaká data EXIF zobrazí: datum pořízení, polohu na mapě, fotoaparát a jeho nastavení.",
+    "settings": "Zvolte, jak aplikace {{appName}} zapisuje datum a čas a zda odesílá údaje o používání. Nastavení se ukládá ve vašem prohlížeči.",
+    "language": "Zvolte jazyk, ve kterém se aplikace {{appName}} zobrazuje, nebo nechte, ať se řídí jazykem vašeho prohlížeče.",
+    "about": "Jak aplikace {{appName}} čte vaši fotku v prohlížeči, aniž by ji odesílala na server, jaké údaje o používání shromažďuje, její zdrojový kód a kdo ji vyvíjí."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "Nepodporovaný formát souboru",
     "message": "Data EXIF nejsou k dispozici.",
     "close": "Zavřít"
+  },
+  "dropPhoto": {
+    "dropHere": "Pusťte fotku sem, chcete-li ji vybrat.",
+    "title": "Opravdu chcete vybrat tuto fotku?",
+    "cancel": "Zrušit",
+    "select": "Vybrat"
   },
   "pageNotShown": {
     "message": "Něco se pokazilo a tuto stránku nelze zobrazit.",

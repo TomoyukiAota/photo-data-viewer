@@ -14,6 +14,13 @@
     "language": "Idioma - {{appName}}",
     "about": "Quant a - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Vegeu les dades EXIF de la vostra foto al navegador: la data de captura, la ubicació en un mapa, la càmera i la seva configuració. La foto no s’envia a cap servidor.",
+    "demo": "Proveu {{appName}} amb una foto de mostra i vegeu les dades EXIF que mostra: la data de captura, la ubicació en un mapa, la càmera i la seva configuració.",
+    "settings": "Trieu com escriu {{appName}} les dates i les hores, i si envia dades d’ús. La configuració es desa al vostre navegador.",
+    "language": "Trieu l’idioma en què es mostra {{appName}}, o deixeu que segueixi l’idioma del vostre navegador.",
+    "about": "Com llegeix {{appName}} la vostra foto al navegador sense enviar-la a cap servidor, quines dades d’ús recull, el seu codi font i qui el desenvolupa."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
@@ -70,6 +77,12 @@
     "title": "Format de fitxer no compatible",
     "message": "Les dades EXIF no estan disponibles.",
     "close": "Tanca"
+  },
+  "dropPhoto": {
+    "dropHere": "Deixeu anar la foto aquí per seleccionar-la.",
+    "title": "Segur que voleu seleccionar aquesta foto?",
+    "cancel": "Cancel·la",
+    "select": "Selecciona"
   },
   "pageNotShown": {
     "message": "S’ha produït un error i aquesta pàgina no es pot mostrar.",
