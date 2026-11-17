@@ -71,6 +71,12 @@
     "message": "EXIF-informasjon er ikke tilgjengelig.",
     "close": "Lukk"
   },
+  "dropPhoto": {
+    "dropHere": "Slipp bildet her for å velge det.",
+    "title": "Er du sikker på at du vil velge dette bildet?",
+    "cancel": "Avbryt",
+    "select": "Velg"
+  },
   "pageNotShown": {
     "message": "Noe gikk galt, og denne siden kan ikke vises.",
     "reload": "Last inn på nytt"

@@ -1,0 +1,46 @@
+// TL;DR: The whole window, while a file is dragged over the page, under the
+// dialogs and the menu.
+// Details: It shows that the app takes a file dropped anywhere on the page,
+// and says what it does with it; the page stays in view under it, faintly.
+// It takes no click and no drag: the elements under it get them, as they
+// would without it. MUI's dialogs and menus are at 1300, over it; Leaflet's
+// controls are at 1000, under it.
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background-color: rgba(255, 255, 255, 0.85);
+
+  // The dashed line, inside the window's edges.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 2px dashed #1976d2;
+    border-radius: 12px;
+  }
+}
+
+// The icon and the text under it, in the middle, on as many lines as a
+// language needs, on a white ground that hides the page behind them.
+.message {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #1976d2;
+  font-size: 1.25rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}

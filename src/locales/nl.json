@@ -71,6 +71,12 @@
     "message": "EXIF-gegevens zijn niet beschikbaar.",
     "close": "Sluit"
   },
+  "dropPhoto": {
+    "dropHere": "Zet de foto hier neer om deze te selecteren.",
+    "title": "Weet je zeker dat je deze foto wilt selecteren?",
+    "cancel": "Annuleer",
+    "select": "Selecteer"
+  },
   "pageNotShown": {
     "message": "Er is iets misgegaan en deze pagina kan niet worden weergegeven.",
     "reload": "Laad opnieuw"

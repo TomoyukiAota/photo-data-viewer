@@ -71,6 +71,12 @@
     "message": "EXIF データがありません。",
     "close": "閉じる"
   },
+  "dropPhoto": {
+    "dropHere": "ここにドロップすると、この写真を選択します。",
+    "title": "この写真を選択してもよろしいですか？",
+    "cancel": "キャンセル",
+    "select": "選択"
+  },
   "pageNotShown": {
     "message": "問題が発生したため、このページを表示できません。",
     "reload": "再読み込み"

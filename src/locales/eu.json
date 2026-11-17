@@ -71,6 +71,12 @@
     "message": "EXIF datuak ez daude erabilgarri.",
     "close": "Itxi"
   },
+  "dropPhoto": {
+    "dropHere": "Jaregin argazkia hemen hautatzeko.",
+    "title": "Ziur argazki hau hautatu nahi duzula?",
+    "cancel": "Utzi",
+    "select": "Hautatu"
+  },
   "pageNotShown": {
     "message": "Arazoren bat gertatu da, eta ezin da orri hau erakutsi.",
     "reload": "Birkargatu"
