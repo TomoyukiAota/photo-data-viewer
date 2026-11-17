@@ -67,13 +67,33 @@ browser (`setWindowOpenHandler` in
 `openUrl` (`src-shared/url/open-url.ts`), whose event has the address as its
 value. `modifyUrlForAnalyticsIfNeeded` puts a text in its place for an address
 that has `https://maps.google.com/` or `https://www.google.com/maps/`, so as
-not to send the latitude and the longitude. An address of Google Earth would be
-sent as it is.
+not to send the latitude and the longitude. An address of Google Earth was sent
+as it is: in Photo Location Map's e2e case below, without its change, the
+analytics got `https://earth.google.com/web/search/34.69,135.19`.
 
-The Photo Location Map build (`npm run build:plm`), opened in headless Chromium
-as its isolated window opens it (`?plmBridge=1`, with a bridge of version 1 that
-gave the demo photo), shows the Google Maps and Google Street View buttons and
-no Google Earth button, without an error on the page.
+Its change, on its branch `claude/google-earth-address`:
+
+- `modifyUrlForAnalyticsIfNeeded` puts `URL including https://earth.google.com/`
+  in place of an address of Google Earth. A unit test (Electron-Mocha, in the
+  main process) checks the three addresses of this app's buttons and another
+  link, which stays as it is.
+- `createPhotoDataViewerUrl` adds `googleEarth=1` to this app's address.
+- An e2e case opens this app's window from Photo Location Map, opens a link of
+  Google Maps and one of Google Earth from the window as a button does, and
+  checks that the browser gets the two addresses whole, and Amplitude
+  and Mixpanel each `URL including https://maps.google.com/` and
+  `URL including https://earth.google.com/`, with `googleEarth=1` in the
+  window's address. Without the change of `modifyUrlForAnalyticsIfNeeded`, it
+  fails with the address above.
+
+This app's Photo Location Map build (`npm run build:plm`), opened in headless
+Chromium as its isolated window opens it, with a bridge of version 1 that gave
+the demo photo, without an error on the page:
+
+| Address | Buttons |
+| --- | --- |
+| `?plmBridge=1&language=en`, as up to 1.13.0 | Google Maps and Google Street View |
+| `?plmBridge=1&dateFormat=YYYY-MM-DD&clockSystemFormat=24h&language=en&googleEarth=1`, as with the change | Google Maps, Google Street View and Google Earth |
 
 ## The text
 

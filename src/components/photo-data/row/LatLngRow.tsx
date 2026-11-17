@@ -12,6 +12,33 @@ import { openTabWithoutOpener } from '../../../utils/open-url';
 import classes from './LatLngRow.module.scss';
 
 /**
+ * The parameter of the address with which Photo Location Map says that it
+ * records a link to Google Earth that this app opens without the photo's
+ * place (createPhotoDataViewerUrl in
+ * src-main/photo-data-viewer/photo-data-viewer-url.ts of
+ * https://github.com/TomoyukiAota/photo-location-map).
+ */
+const PLM_GOOGLE_EARTH_PARAM = 'googleEarth';
+
+/**
+ * Whether the Google Earth button is shown.
+ *
+ * TL;DR: In Photo Location Map, only where its address says that it records
+ * the button's link without the photo's coordinates.
+ * Details: Photo Location Map opens the address of a button in the browser,
+ * and records the address in its usage data. A version that does not pass
+ * `googleEarth=1` hides the coordinates of an address of Google Maps alone,
+ * and would record those of Google Earth's (modifyUrlForAnalyticsIfNeeded in
+ * src-main/photo-data-viewer/launch-photo-data-viewer.ts there). This app is
+ * served to every version of it.
+ */
+function isGoogleEarthButtonShown(): boolean {
+  if (!AppIntegration.isPlm) return true;
+  const searchParams = new URL(window.location.href).searchParams;
+  return searchParams.get(PLM_GOOGLE_EARTH_PARAM) === '1';
+}
+
+/**
  * The latitude and the longitude of the photo, as one row of the General
  * tab's table, with the buttons that show the place in Google Maps, in
  * Google Street View and in Google Earth.
@@ -75,16 +102,6 @@ const LatLngRow: React.FC<{
     );
   };
 
-  // TL;DR: Not in Photo Location Map, which would record the photo's
-  // coordinates in its usage data.
-  // Details: Photo Location Map opens the address of a button in the browser
-  // and records the address with it, without the coordinates only for an
-  // address of Google Maps (modifyUrlForAnalyticsIfNeeded in
-  // src-main/photo-data-viewer/launch-photo-data-viewer.ts of
-  // https://github.com/TomoyukiAota/photo-location-map). This app is served to
-  // every version of it, and cannot tell which version it is in.
-  const isGoogleEarthButtonShown = !AppIntegration.isPlm;
-
   return (
     <div className={classes.row} style={props.style}>
       <div className={`${classes.name} ${classes.latitude}`}>
@@ -125,7 +142,7 @@ const LatLngRow: React.FC<{
                 alt={t('photoData.general.showInGoogleStreetView')}
               />
             </IconButton>
-            {isGoogleEarthButtonShown && (
+            {isGoogleEarthButtonShown() && (
               <IconButton
                 className={classes['google-earth-button']}
                 onClick={handleGoogleEarthButtonClicked}

@@ -35,16 +35,28 @@ instead of 61 KB).
 
 ## Photo Location Map
 
-The button is not shown in Photo Location Map. Photo Location Map opens a
-button's address in the browser and records the address in its usage data, with
-the coordinates hidden only for an address of Google Maps
-(`modifyUrlForAnalyticsIfNeeded` in
+Photo Location Map opens a button's address in the browser and records the
+address in its usage data. Up to 1.13.0 it hides the coordinates only of an
+address of Google Maps (`modifyUrlForAnalyticsIfNeeded` in
 `src-main/photo-data-viewer/launch-photo-data-viewer.ts` of
-[its repository](https://github.com/TomoyukiAota/photo-location-map)). An
-address of Google Earth would be recorded with the photo's coordinates. This
-app is served to every version of Photo Location Map and cannot tell which one
-it is in, so a change there alone would not be enough for the versions already
-installed.
+[its repository](https://github.com/TomoyukiAota/photo-location-map)), so an
+address of Google Earth would be recorded with the photo's coordinates. This app
+is served to every version of Photo Location Map, and cannot tell which one it
+is in.
+
+So the two change together:
+
+- Photo Location Map hides the coordinates of an address of Google Earth as
+  well, and says so with `googleEarth=1` in this app's address
+  (`createPhotoDataViewerUrl` in
+  `src-main/photo-data-viewer/photo-data-viewer-url.ts` there).
+- This app shows the button in Photo Location Map only where its address has
+  `googleEarth=1`: in the versions that have that change, and not in those
+  installed before it.
+
+A parameter of the address, as `plmBridge=1` already is, rather than a member of
+the bridge: the earlier window, which has Node.js instead, has no bridge, and the
+address is there as soon as the page is.
 
 ## The layout
 
@@ -70,7 +82,12 @@ the others), in the case that the language's "Show in" asks for
 
 - Unit tests (`LatLngRow.spec.tsx`): the three buttons named in the language,
   the address and the tab without an opener, what the usage data records for
-  each button, and no Google Earth button in Photo Location Map.
+  each button, and in Photo Location Map the Google Earth button with
+  `googleEarth=1` and none without it.
+- In Photo Location Map's repository: a unit test of
+  `modifyUrlForAnalyticsIfNeeded`, and an e2e case in which the viewer's window
+  opens the links of Google Maps and Google Earth, which are recorded without
+  the place, with `googleEarth=1` in the viewer's address.
 - Browser tests (`tests/e2e/browser/regression.spec.mjs`): the buttons in the
   window beside the numbers and over none of each other, in English at 1280 and
   320 pixels, in Polish at 320 and in Arabic, wide and narrow; the tab that the

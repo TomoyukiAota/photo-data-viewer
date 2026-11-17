@@ -84,15 +84,28 @@ it('records which button was used in the usage data, and not where the photo was
   expect(JSON.stringify(recorded)).not.toMatch(/37\.33|122\.00/);
 });
 
-// Photo Location Map records the address that a button opens, with the
-// coordinates of an address that is not Google Maps' (LatLngRow.tsx).
-it('has no Google Earth button in Photo Location Map', () => {
-  jest.spyOn(AppIntegration, 'isPlm', 'get').mockReturnValue(true);
-  render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
-  expect(screen.getAllByRole('button').map((button) => button.title)).toEqual([
-    'Show in Google Maps',
-    'Show in Google Street View',
-  ]);
+describe('in Photo Location Map, which records the address that a button opens', () => {
+  beforeEach(() => jest.spyOn(AppIntegration, 'isPlm', 'get').mockReturnValue(true));
+  afterEach(() => window.history.replaceState(null, '', '/'));
+
+  /** The titles of the buttons, with the page opened at `address`, as Photo Location Map opens it. */
+  function buttonsAt(address: string): string[] {
+    window.history.replaceState(null, '', address);
+    render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
+    return screen.getAllByRole('button').map((button) => button.title);
+  }
+
+  it('has the Google Earth button where the address says that its link is recorded without the place', () => {
+    expect(buttonsAt('/?plmBridge=1&language=en&googleEarth=1')).toEqual([
+      'Show in Google Maps',
+      'Show in Google Street View',
+      'Show in Google Earth',
+    ]);
+  });
+
+  it('has no Google Earth button in a version that would record its link with the coordinates', () => {
+    expect(buttonsAt('/?plmBridge=1&language=en')).toEqual(['Show in Google Maps', 'Show in Google Street View']);
+  });
 });
 
 it('says once that the location is not available for a photo without one, and has no buttons then', () => {
