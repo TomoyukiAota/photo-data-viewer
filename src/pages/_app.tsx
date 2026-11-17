@@ -14,6 +14,7 @@ import AppProvider from '../context/AppProvider';
 import DirectionProvider from '../direction/DirectionProvider';
 import { recordErrorsNothingHandled } from '../analytics/record-error';
 import { trackAppIntegrationMode, trackPageLoaded } from '../analytics/track-event';
+import VercelAnalytics from '../analytics/VercelAnalytics';
 import { useAppRoot } from '../hooks/useAppRoot';
 
 import classes from './_app.module.scss';
@@ -49,6 +50,7 @@ function AppRoot({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
           <UnsupportedFileSelectedDialog />
           <LoadPhotoInPlm />
+          <VercelAnalytics />
         </AppProvider>
       </DirectionProvider>
     </ErrorBoundary>

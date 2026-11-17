@@ -19,6 +19,11 @@ Note that there are two deployments of this app.
 
 [1]: https://github.com/TomoyukiAota/photo-location-map
 
+The standalone deployment loads Vercel's Web Analytics and Speed Insights
+([`VercelAnalytics.tsx`](../src/analytics/VercelAnalytics.tsx)), and its Vercel
+project has Web Analytics enabled (**Analytics**, **Enable**). The deployment in
+Photo Location Map loads neither, and needs nothing enabled.
+
 ## Build and run for development
 
 After cloning this repository, install Node.js and npm with this command:

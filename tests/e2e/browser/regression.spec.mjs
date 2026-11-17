@@ -264,8 +264,21 @@ test.afterEach(async ({ page }, testInfo) => {
   }
 });
 
+/**
+ * The scripts of Vercel's Web Analytics and Speed Insights, which exist on
+ * Vercel only (src/analytics/VercelAnalytics.tsx): those that a production
+ * server asks for, and the debug versions that a development server loads from
+ * Vercel.
+ */
+const vercelScripts =
+  /\/_vercel\/(insights|speed-insights)\/script\.js$|va\.vercel-scripts\.com/;
+
 test.beforeEach(async ({ page }) => {
-  // Keep baseline captures independent of map servers, and GA.
+  // Keep baseline captures independent of map servers, and GA. Vercel's
+  // scripts are empty ones, which send nothing.
+  await page.route(vercelScripts, (route) =>
+    route.fulfill({ contentType: 'text/javascript', body: '' }),
+  );
   await page.route(
     /collect-(dev|prod)\.analytics\.photo-data-viewer\.tomoyukiaota\.com/,
     (route) => route.fulfill({ status: 204, body: '' }),
@@ -634,6 +647,92 @@ test('errors nothing handled are sent to the analytics backend', async ({
         pathname: '/',
       }),
     ]);
+});
+
+// The scripts that send to Vercel are Vercel's, and do nothing in a browser
+// driven by a test. What the app gives them is checked instead: the calls it
+// queues for them, which a script takes when it loads, and the function that
+// each passes an event through before sending it.
+test("Vercel's Web Analytics and Speed Insights are loaded only while usage data is sent, and send nothing once it is turned off", async ({
+  page,
+}) => {
+  const scripts = [];
+  page.on('request', (request) => {
+    if (vercelScripts.test(request.url())) {
+      scripts.push(new URL(request.url()).pathname);
+    }
+  });
+  const queued = (queue, name) =>
+    page.evaluate(
+      ([queue, name]) =>
+        window[queue]
+          .filter(([queuedName]) => queuedName === name)
+          .map(([, value]) => value),
+      [queue, name],
+    );
+  const beforeSend = (queue, event) =>
+    page.evaluate(
+      ([queue, event]) =>
+        window[queue].find(([name]) => name === 'beforeSend')[1](event),
+      [queue, event],
+    );
+
+  await page.goto('/');
+  await expect
+    .poll(() => [...scripts].sort())
+    .toEqual([
+      '/_vercel/insights/script.js',
+      '/_vercel/speed-insights/script.js',
+    ]);
+  expect(await queued('vaq', 'pageview')).toEqual([{ route: '/', path: '/' }]);
+  expect(
+    await page
+      .locator('script[src="/_vercel/speed-insights/script.js"]')
+      .getAttribute('data-route'),
+  ).toBe('/');
+
+  // The address goes without the photo's path, which Photo Location Map
+  // passes in it.
+  const origin = new URL(page.url()).origin;
+  const withPhotoPath = `${origin}/?photoPath=%2FUsers%2Fme%2Fphoto.jpg&utm_source=test`;
+  expect(
+    await beforeSend('vaq', { type: 'pageview', url: withPhotoPath }),
+  ).toEqual({ type: 'pageview', url: `${origin}/?utm_source=test` });
+  expect(
+    await beforeSend('siq', { type: 'vital', url: withPhotoPath, route: '/' }),
+  ).toEqual({ type: 'vital', url: `${origin}/?utm_source=test`, route: '/' });
+
+  // A page opened from the menu is a page view of its own.
+  await navigate(page, 'Settings');
+  await expect
+    .poll(() => queued('vaq', 'pageview'))
+    .toEqual([
+      { route: '/', path: '/' },
+      { route: '/settings', path: '/settings' },
+    ]);
+
+  // Turned off, the scripts already loaded are given nothing to send.
+  await page
+    .getByLabel('Send usage data to improve this application')
+    .uncheck();
+  const settingsPage = `${origin}/settings`;
+  expect(
+    await beforeSend('vaq', { type: 'pageview', url: settingsPage }),
+  ).toBeNull();
+  expect(
+    await beforeSend('siq', { type: 'vital', url: settingsPage }),
+  ).toBeNull();
+
+  // Opened while it is off, the app loads neither script.
+  scripts.length = 0;
+  await page.reload();
+  await expect(
+    page.getByLabel('Send usage data to improve this application'),
+  ).not.toBeChecked();
+  expect(scripts).toEqual([]);
+  expect(
+    await page.evaluate(() => [typeof window.vaq, typeof window.siq]),
+  ).toEqual(['undefined', 'undefined']);
 });
 
 test('the language is recorded when the app opens, when it is changed, and when the Language page is left', async ({

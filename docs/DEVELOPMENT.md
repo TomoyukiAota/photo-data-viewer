@@ -77,6 +77,11 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
+The scripts of Vercel's Web Analytics and Speed Insights exist on Vercel only:
+the suite answers them with empty scripts. Elsewhere, a production server is
+asked for `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`
+in vain, and a development server loads Vercel's debug versions, which log to
+the console and send nothing.
 Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
