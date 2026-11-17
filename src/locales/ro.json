@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Afișează în Google Maps",
       "showInGoogleStreetView": "Afișează în Google Street View",
+      "showInGoogleEarth": "Afișează în Google Earth",
       "iosNote": "Pentru utilizatorii iOS: în unele cazuri, iOS elimină anumite date EXIF (de ex., latitudinea și longitudinea). Citiți <pageLink>această pagină</pageLink> pentru detalii."
     },
     "rawData": {

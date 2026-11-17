@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Rodyti „Google“ žemėlapiuose",
       "showInGoogleStreetView": "Rodyti naudojant „Google Street View“",
+      "showInGoogleEarth": "Rodyti naudojant „Google Earth“",
       "iosNote": "„iOS“ naudotojams: kai kuriais atvejais „iOS“ pašalina dalį EXIF duomenų (pvz., platumą ir ilgumą). Daugiau informacijos rasite <pageLink>šiame puslapyje</pageLink>."
     },
     "rawData": {

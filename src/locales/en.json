@@ -67,6 +67,7 @@
       "dimensions": "{{width}} x {{height}}",
       "showInGoogleMaps": "Show in Google Maps",
       "showInGoogleStreetView": "Show in Google Street View",
+      "showInGoogleEarth": "Show in Google Earth",
       "iosNote": "For iOS users, iOS removes some EXIF data (e.g. latitude and longitude) in some cases. Please read <pageLink>this page</pageLink> for details."
     },
     "rawData": {

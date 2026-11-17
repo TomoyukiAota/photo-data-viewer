@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Показати в Google Картах",
       "showInGoogleStreetView": "Показати в Google Street View",
+      "showInGoogleEarth": "Показати в Google Планета Земля",
       "iosNote": "Для користувачів iOS: у деяких випадках iOS видаляє частину даних EXIF (наприклад, широту й довготу). Докладніше читайте на <pageLink>цій сторінці</pageLink>."
     },
     "rawData": {

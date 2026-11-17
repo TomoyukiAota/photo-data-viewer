@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Megjelenítés a Google Térképen",
       "showInGoogleStreetView": "Megjelenítés a Google Utcaképben",
+      "showInGoogleEarth": "Megjelenítés a Google Earthben",
       "iosNote": "iOS-felhasználóknak: az iOS bizonyos esetekben eltávolít egyes EXIF-adatokat (pl. a földrajzi szélességet és hosszúságot). A részletekért olvassa el <pageLink>ezt az oldalt</pageLink>."
     },
     "rawData": {

@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "แสดงใน Google Maps",
       "showInGoogleStreetView": "แสดงใน Google Street View",
+      "showInGoogleEarth": "แสดงใน Google Earth",
       "iosNote": "สำหรับผู้ใช้ iOS: ในบางกรณี iOS จะลบข้อมูล EXIF บางส่วน (เช่น ละติจูดและลองจิจูด) โปรดอ่านรายละเอียดที่<pageLink>หน้านี้</pageLink>"
     },
     "rawData": {

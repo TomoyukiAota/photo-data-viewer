@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google Maps में दिखाएँ",
       "showInGoogleStreetView": "Google Street View में दिखाएँ",
+      "showInGoogleEarth": "Google Earth में दिखाएँ",
       "iosNote": "iOS उपयोगकर्ताओं के लिए: कुछ मामलों में iOS कुछ EXIF डेटा (जैसे अक्षांश और देशांतर) हटा देता है। विवरण के लिए <pageLink>यह पेज</pageLink> पढ़ें।"
     },
     "rawData": {

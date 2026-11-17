@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Toon in Google Maps",
       "showInGoogleStreetView": "Toon in Google Street View",
+      "showInGoogleEarth": "Toon in Google Earth",
       "iosNote": "Voor iOS-gebruikers: iOS verwijdert in sommige gevallen bepaalde EXIF-gegevens (bijv. breedtegraad en lengtegraad). Lees <pageLink>deze pagina</pageLink> voor meer informatie."
     },
     "rawData": {

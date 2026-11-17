@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Rādīt pakalpojumā Google Maps",
       "showInGoogleStreetView": "Rādīt pakalpojumā Google Street View",
+      "showInGoogleEarth": "Rādīt pakalpojumā Google Earth",
       "iosNote": "iOS lietotājiem: dažos gadījumos iOS noņem daļu EXIF datu (piem., ģeogrāfisko platumu un garumu). Plašāku informāciju skatiet <pageLink>šajā lapā</pageLink>."
     },
     "rawData": {

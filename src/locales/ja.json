@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google マップで表示",
       "showInGoogleStreetView": "Google ストリートビューで表示",
+      "showInGoogleEarth": "Google Earth で表示",
       "iosNote": "iOS では、EXIF データの一部（緯度・経度など）が削除される場合があります。詳しくは<pageLink>こちらのページ</pageLink>をご覧ください。"
     },
     "rawData": {

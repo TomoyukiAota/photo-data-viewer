@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Tampilkan di Google Maps",
       "showInGoogleStreetView": "Tampilkan di Google Street View",
+      "showInGoogleEarth": "Tampilkan di Google Earth",
       "iosNote": "Bagi pengguna iOS: dalam beberapa kasus, iOS menghapus sebagian data EXIF (mis. lintang dan bujur). Baca <pageLink>halaman ini</pageLink> untuk detailnya."
     },
     "rawData": {

@@ -67,6 +67,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Prikaži u Google mapama",
       "showInGoogleStreetView": "Prikaži u Google Street View",
+      "showInGoogleEarth": "Prikaži u Google Earth",
       "iosNote": "Za korisnike iOS-a: iOS u nekim slučajevima uklanja deo podataka EXIF (npr. geografsku širinu i dužinu). Detalje pročitajte na <pageLink>ovoj stranici</pageLink>."
     },
     "rawData": {
