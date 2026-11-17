@@ -105,6 +105,18 @@ No error on the page in any. The paths are the ones Vercel chose for the
 build (Resilient Intake), not `/_vercel/...`: the build was given its
 configuration, as the packages read it.
 
+## The addresses of each language
+
+Since each language has addresses of its own, such as `/ja/about`, Vercel's
+components for Next.js are given the page's path without the language, as
+Next.js' router gives it (`usePathname`). On the build, opened at `/ja/about`,
+the page view queued for Web Analytics was `{ route: '/about', path: '/about' }`,
+and Speed Insights' script had the route `/about`; at `/ja`, `/` for both.
+Web Analytics' script sends that path in place of the address, so it counts
+a page in every language as one, `/about`; Speed Insights keeps the address,
+with the route without the language. The language that a page is shown in is
+recorded by GA4 and the analytics backend.
+
 ## Local behavior
 
 On 2026-11-18, on macOS, in headless Chromium. Requests to other hosts were
