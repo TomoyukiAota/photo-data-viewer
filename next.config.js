@@ -2,8 +2,31 @@
 // - In "Build & Development Settings", OUTPUT DIRECTORY needs to be .next_plm
 // - In "Environment Variables", set PDV_IN_PLM=True
 
+const fs = require('fs');
+const path = require('path');
+
 const distDirForPlm = '.next_plm';
 const isPdvInPlm = process.env.PDV_IN_PLM === 'True';
+
+// The codes of the languages, from their translation files (src/locales/<code>.json), each of which
+// src/i18n/languages.ts lists (src/locales/locales.spec.ts checks so).
+const languageCodes = fs
+  .readdirSync(path.join(__dirname, 'src', 'locales'))
+  .filter((file) => file.endsWith('.json'))
+  .map((file) => path.basename(file, '.json'));
+
+// TL;DR: Each language has addresses of its own, such as /ja/about, which search engines show in that language's
+// results. An address without a language, such as /about, is as it always was.
+// Details: /ja/about shows the About page in Japanese, whatever the setting (src/i18n/address.ts), and is served
+// with its head in Japanese (src/components/search-head/SearchHead.tsx). /about shows the language of the setting or
+// the browser. Next.js gives it the locale 'default', which names no language, as its guide does to give the default
+// locale an address of its own; nothing is redirected by the browser's language. The deployment for Photo Location
+// Map has none of this: it is opened at its root, with the language in a parameter.
+const i18n = {
+  locales: ['default', ...languageCodes],
+  defaultLocale: 'default',
+  localeDetection: false,
+};
 
 /** @type {import('next').NextConfig} */
 module.exports = {
@@ -11,6 +34,8 @@ module.exports = {
   distDir: isPdvInPlm ? distDirForPlm : module.exports.distDir,
 
   reactStrictMode: true,
+
+  ...(isPdvInPlm ? {} : { i18n }),
 
   // The deployment for Photo Location Map is opened in its window, not found in a search: search engines are asked
   // not to index any of it. A search finds the standalone deployment (src/components/search-head/SearchHead.tsx).

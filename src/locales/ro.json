@@ -14,6 +14,13 @@
     "language": "Limbă - {{appName}}",
     "about": "Despre - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Vedeți datele EXIF ale pozei dvs. în browser: data fotografierii, locația pe hartă, camera și setările acesteia. Poza nu este trimisă către niciun server.",
+    "demo": "Încercați aplicația {{appName}} cu o poză de exemplu și vedeți ce date EXIF afișează: data fotografierii, locația pe hartă, camera și setările acesteia.",
+    "settings": "Alegeți cum scrie aplicația {{appName}} data și ora și dacă trimite date de utilizare. Setările sunt salvate în browserul dvs.",
+    "language": "Alegeți limba în care este afișată aplicația {{appName}} sau lăsați-o să urmeze limba browserului dvs.",
+    "about": "Cum citește aplicația {{appName}} poza dvs. în browser fără să o trimită către vreun server, ce date de utilizare colectează, codul sursă al aplicației și cine o dezvoltă."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },

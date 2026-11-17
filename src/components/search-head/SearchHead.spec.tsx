@@ -3,7 +3,13 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { AppIntegration } from '../../app-integration/app-integration';
-import SearchHead, { searchPages, SITE_URL } from './SearchHead';
+import { languageCodes } from '../../i18n/languages';
+import SearchHead, {
+  addressOf,
+  SearchHeadProps,
+  searchPages,
+  SITE_URL,
+} from './SearchHead';
 
 // next/head puts its children into the page's head through Next.js' head
 // manager, which a test has not. Rendered as they are, React puts them there
@@ -15,57 +21,94 @@ jest.mock('next/head', () => ({
 
 afterEach(() => jest.restoreAllMocks());
 
+/** The head of the About page in Japanese, as its getStaticProps gives it. */
+const aboutInJapanese: SearchHeadProps = {
+  page: '/about',
+  language: 'ja',
+  title: 'このアプリについて - Photo Data Viewer',
+  description:
+    'Photo Data Viewer は写真をサーバーに送信せず、ブラウザ内部で読み取ります。',
+};
+
+/** The About page at its address without a language, which is in English. */
+const about: SearchHeadProps = {
+  page: '/about',
+  language: null,
+  title: 'About - Photo Data Viewer',
+  description: 'How Photo Data Viewer reads your photo in your browser.',
+};
+
 function content(selector: string): string | null | undefined {
   return document.head.querySelector(selector)?.getAttribute('content');
 }
 
-it.each(Object.keys(searchPages))(
-  'gives %s the title it is served with, its description and its canonical address',
-  (page) => {
-    render(<SearchHead page={page} withTitle />);
-    const url = `${SITE_URL}${page}`;
-    // The app's name, the same in every language.
-    expect(document.title).toBe('Photo Data Viewer');
-    expect(content('meta[name="description"]')).toBe(
-      searchPages[page].description,
-    );
-    expect(
-      document.head
-        .querySelector('link[rel="canonical"]')
-        ?.getAttribute('href'),
-    ).toBe(url);
-    expect(content('meta[property="og:title"]')).toBe(searchPages[page].title);
-    expect(content('meta[property="og:description"]')).toBe(
-      searchPages[page].description,
-    );
-    expect(content('meta[property="og:url"]')).toBe(url);
-    expect(content('meta[property="og:site_name"]')).toBe('Photo Data Viewer');
-  },
-);
+function href(selector: string): string | null | undefined {
+  return document.head.querySelector(selector)?.getAttribute('href');
+}
 
-it('gives the canonical address of the Home page with its slash', () => {
-  render(<SearchHead page='/' />);
-  expect(
-    document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'),
-  ).toBe('https://photo-data-viewer.vercel.app/');
+it('serves a page whose address names a language with its title and description in that language, and that address', () => {
+  render(<SearchHead head={aboutInJapanese} withTitle />);
+  expect(document.title).toBe('このアプリについて - Photo Data Viewer');
+  expect(content('meta[name="description"]')).toBe(aboutInJapanese.description);
+  expect(href('link[rel="canonical"]')).toBe(`${SITE_URL}/ja/about`);
+  expect(content('meta[property="og:title"]')).toBe(aboutInJapanese.title);
+  expect(content('meta[property="og:description"]')).toBe(
+    aboutInJapanese.description,
+  );
+  expect(content('meta[property="og:url"]')).toBe(`${SITE_URL}/ja/about`);
+  expect(content('meta[property="og:site_name"]')).toBe('Photo Data Viewer');
 });
 
-it('leaves the title to the page once the page is shown, and keeps the rest', () => {
-  render(<SearchHead page='/about' />);
-  expect(document.head.querySelector('title')).toBeNull();
-  expect(content('meta[name="description"]')).toBe(
-    searchPages['/about'].description,
+it("serves a page without a language with the app's name as its title, the same in every language", () => {
+  render(<SearchHead head={about} withTitle />);
+  expect(document.title).toBe('Photo Data Viewer');
+  expect(content('meta[name="description"]')).toBe(about.description);
+  expect(href('link[rel="canonical"]')).toBe(`${SITE_URL}/about`);
+  // A link to it is previewed with the page's own title.
+  expect(content('meta[property="og:title"]')).toBe(
+    'About - Photo Data Viewer',
   );
 });
 
-it('has nothing for an address that is not a page of the app', () => {
-  render(<SearchHead page='/404' withTitle />);
+it('lists the address of the page in every language, and the one without a language as x-default', () => {
+  for (const head of [about, aboutInJapanese]) {
+    const { unmount } = render(<SearchHead head={head} />);
+    const alternates = [
+      ...document.head.querySelectorAll('link[rel="alternate"]'),
+    ].map((link) => [link.getAttribute('hreflang'), link.getAttribute('href')]);
+    expect(alternates).toEqual([
+      ...languageCodes.map((code) => [code, `${SITE_URL}/${code}/about`]),
+      ['x-default', `${SITE_URL}/about`],
+    ]);
+    unmount();
+  }
+});
+
+it('gives the Home page its addresses: the root, and each language without a slash after it', () => {
+  expect(addressOf('/', null)).toBe('https://photo-data-viewer.vercel.app/');
+  expect(addressOf('/', 'ja')).toBe('https://photo-data-viewer.vercel.app/ja');
+  expect(addressOf('/', 'pt-BR')).toBe(
+    'https://photo-data-viewer.vercel.app/pt-BR',
+  );
+  expect(addressOf('/language', 'zh-Hant')).toBe(
+    'https://photo-data-viewer.vercel.app/zh-Hant/language',
+  );
+});
+
+it('leaves the title to the page once the page is shown, and keeps the rest', () => {
+  render(<SearchHead head={aboutInJapanese} />);
+  expect(document.head.querySelector('title')).toBeNull();
+  expect(content('meta[name="description"]')).toBe(aboutInJapanese.description);
+});
+
+it('has nothing for a page without props, such as the one for an address that has no page', () => {
+  render(<SearchHead head={undefined} withTitle />);
   expect(document.head.querySelector('title, meta, link')).toBeNull();
 });
 
 it("has nothing in Photo Location Map's window, whose title is the photo's", () => {
-  jest.spyOn(AppIntegration, 'isStandalone', 'get').mockReturnValue(false);
-  render(<SearchHead page='/' withTitle />);
+  jest.spyOn(AppIntegration, 'isPlm', 'get').mockReturnValue(true);
+  render(<SearchHead head={about} withTitle />);
   expect(document.head.querySelector('title, meta, link')).toBeNull();
 });
 
@@ -82,39 +125,61 @@ describe('the files for search engines', () => {
     );
   });
 
-  it('the sitemap lists the canonical addresses of the Home page and the About page', () => {
+  it('the sitemap lists the Home page and the About page, without a language and in each language', () => {
+    // A language that is added gets its two addresses in public/sitemap.xml,
+    // in the order of src/i18n/languages.ts, which this names when they are not there.
     const addresses = [
       ...publicFile('sitemap.xml').matchAll(/<loc>(.*)<\/loc>/g),
     ].map(([, address]) => address);
-    expect(addresses).toEqual([`${SITE_URL}/`, `${SITE_URL}/about`]);
-    // Each is the address that SearchHead gives a page as its canonical one.
-    const canonical = Object.keys(searchPages).map(
-      (page) => `${SITE_URL}${page}`,
+    const expected = (['/', '/about'] as const).flatMap((page) => [
+      addressOf(page, null),
+      ...languageCodes.map((code) => addressOf(page, code)),
+    ]);
+    expect(addresses).toEqual(expected);
+    expect(Object.keys(searchPages)).toEqual(
+      expect.arrayContaining(['/', '/about']),
     );
-    for (const address of addresses) expect(canonical).toContain(address);
   });
 });
 
-describe('the deployment for Photo Location Map', () => {
+describe('next.config.js', () => {
   const original = process.env.PDV_IN_PLM;
   afterEach(() => {
     if (original === undefined) delete process.env.PDV_IN_PLM;
     else process.env.PDV_IN_PLM = original;
   });
 
-  /** The headers that next.config.js gives the responses of a build. */
-  async function headersOfBuild(pdvInPlm: string | undefined) {
+  /** The configuration of a build, standalone or for Photo Location Map. */
+  function configOfBuild(pdvInPlm: string | undefined) {
     if (pdvInPlm === undefined) delete process.env.PDV_IN_PLM;
     else process.env.PDV_IN_PLM = pdvInPlm;
-    let config: { headers: () => Promise<unknown> } | undefined;
+    let config: Record<string, unknown> & {
+      i18n?: {
+        locales: string[];
+        defaultLocale: string;
+        localeDetection: boolean;
+      };
+      headers: () => Promise<unknown>;
+    };
     jest.isolateModules(() => {
       config = require('../../../next.config.js');
     });
-    return config!.headers();
+    return config!;
   }
 
-  it('asks search engines not to index any of it', async () => {
-    expect(await headersOfBuild('True')).toEqual([
+  it('gives the standalone app an address for each language, and one without a language, redirecting nothing by the browser', () => {
+    const { i18n } = configOfBuild(undefined);
+    expect(i18n?.defaultLocale).toBe('default');
+    expect(i18n?.localeDetection).toBe(false);
+    expect([...(i18n?.locales ?? [])].sort()).toEqual(
+      ['default', ...languageCodes].sort(),
+    );
+  });
+
+  it('leaves the deployment for Photo Location Map without addresses for the languages, and asks search engines not to index it', async () => {
+    const config = configOfBuild('True');
+    expect(config.i18n).toBeUndefined();
+    expect(await config.headers()).toEqual([
       {
         source: '/:path*',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
@@ -122,7 +187,7 @@ describe('the deployment for Photo Location Map', () => {
     ]);
   });
 
-  it('is the only one that does', async () => {
-    expect(await headersOfBuild(undefined)).toEqual([]);
+  it('asks nothing of search engines for the standalone app', async () => {
+    expect(await configOfBuild(undefined).headers()).toEqual([]);
   });
 });

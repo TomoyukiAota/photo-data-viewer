@@ -22,7 +22,9 @@ coverage and known limitations.
 
 The application is available in the 42 languages that Windows and macOS are
 localized in, following the browser's language by default; another can be
-chosen on its Language page. Most of the translations are machine translation
+chosen on its Language page. Each language also has an address of its own,
+such as <https://photo-data-viewer.vercel.app/ja> for Japanese, which search
+engines show in that language. Most of the translations are machine translation
 that no speaker has reviewed yet. To review or improve one, or to add a
 language, see [TRANSLATING.md](./docs/TRANSLATING.md); it takes a GitHub
 account and nothing else.

@@ -874,8 +874,9 @@ test.describe('in a browser whose language is Japanese', () => {
 // Details: a search engine or a link preview that does not run the page reads
 // the page as it is served, which is its head alone, as the app renders nothing
 // until it runs in the browser (_app.tsx). Google runs the page as well, and
-// reads what the page leaves. The wording of each description is checked by
-// the unit test of SearchHead.
+// reads what the page leaves. Each page has an address in each language
+// (next.config.js), which search engines show in that language's results. The
+// wording of the descriptions is checked by the unit tests of SearchHead.
 test.describe('what search engines read', () => {
   test.describe('as a page is served, before it runs', () => {
     test.use({ javaScriptEnabled: false });
@@ -901,6 +902,35 @@ test.describe('what search engines read', () => {
           address,
         );
       }
+    });
+
+    test("a page at a language's address has its title and description in that language, and lists the page's address in every language", async ({
+      page,
+    }) => {
+      const response = await page.goto('/ja/about');
+      expect(response.headers()['x-robots-tag']).toBeUndefined();
+      await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+      await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+        'content',
+        /^Photo Data Viewer は写真をサーバーに送信せず/,
+      );
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        'https://photo-data-viewer.vercel.app/ja/about',
+      );
+      const alternates = page.locator('link[rel="alternate"]');
+      await expect(alternates).toHaveCount(43); // The 42 languages, and the address without a language.
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="pt-BR"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/pt-BR/about');
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="x-default"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/about');
+
+      // A language written from right to left is served so.
+      await page.goto('/ar');
+      await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     });
   });
 
@@ -930,7 +960,48 @@ test.describe('what search engines read', () => {
     await expect(page.locator('meta[name="description"]')).toHaveCount(1);
   });
 
-  test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page', async ({
+  test("a language's address shows the page in that language, whatever the browser's, and the menu keeps it", async ({
+    page,
+  }) => {
+    await page.goto('/ja/about'); // In a browser set to English (playwright.config.mjs).
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page.getByRole('menuitem', { name: '設定', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/ja/settings');
+    await expect(page.getByLabel('日付の形式', { exact: true })).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+  });
+
+  test("the Language page at a language's address opens the address of the language chosen, and Back returns to the first", async ({
+    page,
+  }) => {
+    await page.goto('/ja/language');
+    const list = page.getByRole('listbox');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(list.locator('[aria-selected="true"]')).toHaveText(['日本語']);
+
+    await list.getByRole('option', { name: 'English', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/en/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    await page.goBack();
+    await page.waitForURL((url) => url.pathname === '/ja/language');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+
+    // The browser's language opens the address without a language, whose lang
+    // is the language shown, not the locale that Next.js gives it.
+    await list.getByRole('option').first().click();
+    await page.waitForURL((url) => url.pathname === '/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+
+  test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page in every language', async ({
     request,
   }) => {
     const robots = await (await request.get('/robots.txt')).text();
@@ -940,14 +1011,24 @@ test.describe('what search engines read', () => {
     );
     const sitemap = await request.get('/sitemap.xml');
     expect(sitemap.headers()['content-type']).toContain('xml');
-    expect(
-      [...(await sitemap.text()).matchAll(/<loc>(.*)<\/loc>/g)].map(
-        ([, address]) => address,
-      ),
-    ).toEqual([
-      'https://photo-data-viewer.vercel.app/',
-      'https://photo-data-viewer.vercel.app/about',
-    ]);
+    const addresses = [...(await sitemap.text()).matchAll(/<loc>(.*)<\/loc>/g)].map(
+      ([, address]) => address,
+    );
+    // Without a language, then in each of the 42, for each of the two pages.
+    expect(addresses).toHaveLength(86);
+    expect(addresses).toEqual(
+      expect.arrayContaining([
+        'https://photo-data-viewer.vercel.app/',
+        'https://photo-data-viewer.vercel.app/ja',
+        'https://photo-data-viewer.vercel.app/about',
+        'https://photo-data-viewer.vercel.app/ja/about',
+        'https://photo-data-viewer.vercel.app/zh-Hant/about',
+      ]),
+    );
+    // Each is served.
+    for (const address of ['/ja', '/zh-Hant/about']) {
+      expect((await request.get(address)).status()).toBe(200);
+    }
   });
 });
 

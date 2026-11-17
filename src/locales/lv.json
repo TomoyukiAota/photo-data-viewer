@@ -14,6 +14,13 @@
     "language": "Valoda - {{appName}}",
     "about": "Par lietotni - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Skatiet sava fotoattēla EXIF datus pārlūkprogrammā: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus. Fotoattēls netiek nosūtīts ne uz vienu serveri.",
+    "demo": "Izmēģiniet lietotni {{appName}} ar parauga fotoattēlu un apskatiet, kādus EXIF datus tā rāda: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus.",
+    "settings": "Izvēlieties, kā lietotne {{appName}} raksta datumu un laiku un vai tā sūta lietošanas datus. Iestatījumi tiek saglabāti jūsu pārlūkprogrammā.",
+    "language": "Izvēlieties valodu, kurā tiek rādīta lietotne {{appName}}, vai ļaujiet tai izmantot jūsu pārlūkprogrammas valodu.",
+    "about": "Kā lietotne {{appName}} nolasa jūsu fotoattēlu pārlūkprogrammā, nenosūtot to uz serveri, kādus lietošanas datus tā apkopo, tās pirmkods un kas to izstrādā."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },

@@ -14,6 +14,13 @@
     "language": "Bahasa - {{appName}}",
     "about": "Tentang - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Lihat data EXIF foto Anda di browser: tanggal diambil, lokasi di peta, serta kamera dan pengaturannya. Foto tidak dikirim ke server mana pun.",
+    "demo": "Coba {{appName}} dengan foto contoh dan lihat data EXIF yang ditampilkannya: tanggal diambil, lokasi di peta, serta kamera dan pengaturannya.",
+    "settings": "Pilih cara {{appName}} menuliskan tanggal dan waktu, serta apakah aplikasi ini mengirim data penggunaan. Pengaturan disimpan di browser Anda.",
+    "language": "Pilih bahasa yang digunakan untuk menampilkan {{appName}}, atau biarkan mengikuti bahasa browser Anda.",
+    "about": "Cara {{appName}} membaca foto Anda di browser tanpa mengirimkannya ke server mana pun, data penggunaan yang dikumpulkannya, kode sumbernya, dan siapa pengembangnya."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },

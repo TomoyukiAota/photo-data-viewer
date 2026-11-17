@@ -1,14 +1,32 @@
 # Languages in search results: options and recommendation
 
-The app is shown in 42 languages, and each page has one address for all of
-them. This record says how search engines see that, the ways to show the other
-languages in search results, what each costs and risks, and the one
-recommended. It stops at the recommendation: how the language is chosen and how
-the pages are rendered are not changed by this task. That is the maintainer's
-decision.
+The app is shown in 42 languages, and each page had one address for all of
+them. This record says how search engines saw that, the ways to show the other
+languages in search results, what each costs and risks, and the one that was
+recommended at first.
 
-Found on 2026-11-18, at `main` `76bd3b1`, with the change of this task
+Found on 2026-11-18, at `main` `76bd3b1`, with the first change of this task
 ([RESULTS.md](./RESULTS.md)).
+
+## Decision
+
+The maintainer chose to show every language in search results from the start,
+rather than English first ([the recommendation](#recommendation) below). The
+task does it as [option 4](#4-an-address-per-language-as-a-path-ja-jaabout-with-hreflang)
+describes, for all 42 languages at once:
+
+- Every page has an address in each language (`/ja`, `/ja/about`), which shows
+  the page in that language whatever the setting, and is served with its title
+  and description in that language and the page's address in every language
+  (`hreflang`). The address without a language (`/about`) is as it was, the
+  `x-default`, so existing links and Photo Location Map are unaffected.
+- The descriptions are new texts in every translation file
+  (`pageDescription`), machine translation as most of the others, and listed so
+  in [TRANSLATING.md](../../../TRANSLATING.md#languages).
+- The sitemap lists the Home page and the About page at all 86 addresses.
+
+What the option said it takes, and how the task met it, is in
+[STATUS.md](../STATUS.md).
 
 ## How the app gives its languages
 
@@ -54,7 +72,7 @@ So each page is indexed once, in English. The consequences:
 
 ## The options
 
-### 1. English only in search results (what this task does)
+### 1. English only in search results (the first change of this task)
 
 Each page is served with an English description and the app's name as its
 title; Google indexes the English page; the app follows the visitor's language
@@ -157,6 +175,8 @@ that. Still, an indexed page in a language is the app's first impression in
 that language, and 40 of the 42 have not been read by a speaker.
 
 ## Recommendation
+
+What was recommended before the [decision](#decision), kept as it was written:
 
 1. **Now: English in search results, with one address per page** (option 1,
    this task). The app opens in the visitor's language whatever the search

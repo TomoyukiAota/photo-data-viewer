@@ -7,7 +7,10 @@ import {
   resolveLanguage,
 } from './resolve-language';
 
-afterEach(() => localStorage.clear());
+afterEach(() => {
+  localStorage.clear();
+  window.history.replaceState(null, '', '/');
+});
 
 // Languages the app has no translation for are written as tags that no language
 // has (xx, yy-YY), so that adding a translation never breaks these tests.
@@ -15,6 +18,7 @@ afterEach(() => localStorage.clear());
 const standalone = {
   isPlm: false,
   languageParam: null,
+  pathLanguage: null,
   languageSetting: 'auto',
   browserLanguages: ['en-US', 'en'],
 };
@@ -103,6 +107,13 @@ describe('resolveLanguage, standalone', () => {
   it('ignores the language parameter, which is for Photo Location Map', () => {
     expect(resolveLanguage({ ...standalone, languageParam: 'ja' })).toBe('en');
   });
+
+  it('follows the language that the address names, over the setting and the browser', () => {
+    expect(resolveLanguage({ ...standalone, pathLanguage: 'de' })).toBe('de');
+    expect(
+      resolveLanguage({ ...standalone, pathLanguage: 'de', languageSetting: 'ja', browserLanguages: ['ko'] }),
+    ).toBe('de');
+  });
 });
 
 describe('resolveLanguage, in Photo Location Map', () => {
@@ -121,6 +132,10 @@ describe('resolveLanguage, in Photo Location Map', () => {
     expect(resolveLanguage({ ...plm, languageParam: 'xx' })).toBe('en');
     expect(resolveLanguage({ ...plm, languageSetting: 'ja' })).toBe('en');
   });
+
+  it('follows the parameter, not a language in the address, which its deployment does not have', () => {
+    expect(resolveLanguage({ ...plm, languageParam: 'ko', pathLanguage: 'de' })).toBe('ko');
+  });
 });
 
 describe('in this browser', () => {
@@ -129,9 +144,20 @@ describe('in this browser', () => {
     expect(readLanguageSources()).toEqual({
       isPlm: false,
       languageParam: null,
+      pathLanguage: null,
       languageSetting: 'ja',
       browserLanguages: navigator.languages,
     });
+    expect(currentLanguage()).toBe('ja');
+  });
+
+  it('reads the language that the address names, which wins over the setting', () => {
+    localStorage.setItem('Language', 'ja');
+    window.history.replaceState(null, '', '/de/about');
+    expect(readLanguageSources().pathLanguage).toBe('de');
+    expect(currentLanguage()).toBe('de');
+    window.history.replaceState(null, '', '/about');
+    expect(readLanguageSources().pathLanguage).toBeNull();
     expect(currentLanguage()).toBe('ja');
   });
 

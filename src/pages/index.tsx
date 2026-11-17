@@ -3,9 +3,8 @@ import Head from 'next/head';
 import { useContext } from 'react';
 import PageTitleContext from '../context/page-title/page-title-context';
 import Home from '../components/home/Home';
+import { searchHeadStaticProps } from '../components/search-head/search-head-props';
 
-// The description, and the other tags that search engines read, are in
-// SearchHead.tsx.
 const Index: NextPage = () => {
   const { indexPageTitle } = useContext(PageTitleContext);
 
@@ -19,5 +18,8 @@ const Index: NextPage = () => {
     </>
   );
 };
+
+// What search engines read of the page, in the language of its address (SearchHead.tsx).
+export const getStaticProps = searchHeadStaticProps('/');
 
 export default Index;

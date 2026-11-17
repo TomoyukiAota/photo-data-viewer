@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { LanguageState, trackLeftLanguagePage } from '../analytics/track-event';
+import { pageOfPath } from '../i18n/address';
 import i18next, { languageReady } from '../i18n/i18n';
 import { isLanguageSetting, languageSettingAuto } from '../i18n/languages';
 import { UserSettingKey } from '../utils/user-settings';
@@ -76,8 +77,10 @@ export const useLanguagePageTracker = () => {
       read: readLanguageState,
       track: trackLeftLanguagePage,
     });
-    // After a change of page, the address is the new page's.
-    const show = () => visits.shown(window.location.pathname);
+    // After a change of page, the address is the new page's. The page is told by
+    // its path without the language that the address may name: choosing a
+    // language on /ja/language opens /de/language, which is the same page.
+    const show = () => visits.shown(pageOfPath(window.location.pathname));
     let isMounted = true;
     languageReady.then(() => {
       if (!isMounted) return;

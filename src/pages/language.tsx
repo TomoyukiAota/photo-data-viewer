@@ -2,10 +2,10 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import Language from '../components/language/Language';
+import { searchHeadStaticProps } from '../components/search-head/search-head-props';
 
 // The title the browser shows is translated; GA4 records the English one
-// (GA4_PAGE_TITLES in src/analytics/ga4-page.ts). The description, and the
-// other tags that search engines read, are in SearchHead.tsx.
+// (GA4_PAGE_TITLES in src/analytics/ga4-page.ts).
 const LanguagePage: NextPage = () => {
   const { t } = useTranslation();
   return (
@@ -18,5 +18,8 @@ const LanguagePage: NextPage = () => {
     </>
   );
 };
+
+// What search engines read of the page, in the language of its address (SearchHead.tsx).
+export const getStaticProps = searchHeadStaticProps('/language');
 
 export default LanguagePage;

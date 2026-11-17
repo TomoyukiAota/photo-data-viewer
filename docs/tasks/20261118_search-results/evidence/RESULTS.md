@@ -45,9 +45,10 @@ which had other EXIF viewers. Their snippets say what the tool shows (the
 camera, the location, the date taken) and that the photo is read in the
 browser.
 
-## After the change
+## After the first change: one address, in English
 
-Built from this branch: `npm run build`, with `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=`
+The first commit of this task, before the addresses of the languages. Built
+from this branch: `npm run build`, with `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=`
 as for the browser suite, served with `next start -p 3210`; `npm run build:plm`,
 served with `PDV_IN_PLM=True next start -p 3212`.
 
@@ -68,8 +69,9 @@ Every page of the standalone app, `/about` for instance (React adds
 <meta name="twitter:card" content="summary"/>
 ```
 
-The descriptions, in `searchPages` of `SearchHead.tsx`. A search result shows
-about 155 to 160 characters of one on a computer, fewer on a phone.
+The descriptions, now `pageDescription` in `src/locales/en.json`. A search
+result shows about 155 to 160 characters of one on a computer, fewer on a
+phone.
 
 | Page        | Characters | Description                                                                                                                                                  |
 | ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -109,9 +111,76 @@ Each case had one `<title>` and at most one description. The last case is
 what the Home page set before this change as well; the photo's title replaces
 it once Photo Location Map gives the photo.
 
+## After the addresses of the languages
+
+Built as above, from the commit that gives each language its addresses.
+`next build` prerendered 301 static pages: the five pages, the 404 page and
+the 500 page, for each of the 43 locales.
+
+### The addresses
+
+| Address                  | Answer | What it is                                                                       |
+| ------------------------ | ------ | -------------------------------------------------------------------------------- |
+| `/`, `/about`            | 200    | As before: served in English, `lang="en"`, title Photo Data Viewer             |
+| `/ja`, `/ja/about`         | 200    | Served in Japanese, `lang="ja"`                                                |
+| `/ar`                    | 200    | `lang="ar" dir="rtl"`                                                          |
+| `/pt-BR/about`, `/pt-br/about` | 200 | Either case; the canonical address is `/pt-BR/about`                          |
+| `/ja/`                   | 308    | To `/ja`                                                                       |
+| `/default/about`         | 200    | The locale of the address without a language; its canonical address is `/about` |
+| `/xx/about`, `/ja/nonexistent` | 404 | No such language, no such page                                              |
+| `/robots.txt`, `/sitemap.xml` | 200 | Not localized                                                                 |
+
+A redirect from `/default/…` to the address without a language was tried and
+removed: Next.js gives every address without a language the locale `default`
+before it applies redirects, so `/about` and `/robots.txt` redirected to
+themselves.
+
+The head that `/ja/about` is served with (as above, `data-next-head=""` left
+out):
+
+```html
+<html lang="ja" dir="ltr">
+<title>このアプリについて - Photo Data Viewer</title>
+<meta name="description" content="Photo Data Viewer は写真をサーバーに送信せず、ブラウザ内部で読み取ります。収集する使用状況データ、ソースコード、開発者についても説明しています。"/>
+<link rel="canonical" href="https://photo-data-viewer.vercel.app/ja/about"/>
+<link rel="alternate" hrefLang="id" href="https://photo-data-viewer.vercel.app/id/about"/>
+<!-- … one for each of the 42 languages … -->
+<link rel="alternate" hrefLang="x-default" href="https://photo-data-viewer.vercel.app/about"/>
+<meta property="og:title" content="このアプリについて - Photo Data Viewer"/>
+```
+
+React writes the attribute `hrefLang`, which HTML reads as `hreflang`.
+
+### In the browser
+
+Headless Chromium against the standalone server:
+
+| Case                                                                         | Address after it | `lang` | Shown in |
+| ---------------------------------------------------------------------------- | ---------------- | ------ | -------- |
+| A browser set to English opens `/ja/about`                                 | `/ja/about`      | ja     | Japanese; title このアプリについて - Photo Data Viewer from the first byte |
+| The menu, to Settings                                                        | `/ja/settings`   | ja     | Japanese |
+| The Language page there, English chosen                                      | `/en/language`   | en     | English; setting `en` |
+| Back, then Forward                                                           | `/ja/language`, `/en/language` | ja, en | Japanese, English |
+| "Use browser setting" chosen                                                 | `/language`      | en     | English; setting `auto` |
+| A browser set to Japanese opens `/`                                         | `/`              | ja     | Japanese, as before |
+| The same browser opens `/de`                                                | `/de`            | de     | German |
+| `/pt-br`, then the menu, to About                                          | `/pt-BR/about`   | pt-BR  | Portuguese (Brazil) |
+
+Each had one title, one description, one canonical address and 43 alternates,
+and no error on the page. Before `useLanguageAttribute`, `lang` was
+`default` after "Use browser setting": Next.js' router writes the locale into
+`lang` after each change of page.
+
+The deployment for Photo Location Map (`npm run build:plm`, port 3212): `/` is
+served as before, with `lang="en"` and none of the tags, `/ja` is 404, every
+response has `X-Robots-Tag: noindex`, and `/?plmBridge=1&language=ja` shows the
+app in Japanese with no description, canonical address or alternate. Its pages
+now have `getStaticProps`, which gives `searchHead: null` there.
+
 ## Checks
 
-- `npm run test:all`: lint and type check clean; 42 suites, 673 tests pass.
+- `npm run test:all`: lint and type check clean; all suites pass (counts in
+  the pull request).
 - `npm run build` and `npm run build:plm`: pass. Next.js 16.4.3 ended some of
   the runs with exit code 1 after building every page, saying that its version
   has a known vulnerability (`npm audit`: GHSA-mfr8-8qww-v76h, moderate, about
@@ -119,12 +188,14 @@ it once Photo Location Map gives the photo.
   continued with a warning and exit code 0.
 - The browser suite, `PDV_BASE_URL=http://127.0.0.1:3210 PDV_CHROME=1
   PDV_VISUAL=1 npm run test:e2e`, with the visual comparison against the
-  committed screenshots: 29 tests pass, the four new ones among them. No
-  reference screenshot changed: what is drawn on the pages is the same.
+  committed screenshots: all pass (32 with the addresses of the languages), the
+  new ones among them. No reference screenshot changed: what is drawn on the
+  pages is the same.
 - The development-mode smoke test, `PDV_DEV=1` against `next dev` on port
   3211: passes. In development mode, which reports more, the console had no
   warning from React or Next.js on any of the five pages, in English and in
-  Japanese.
+  Japanese, nor on the addresses of the languages (`/ja`, `/ja/about`,
+  `/ar/settings`, `/pt-BR/language`, `/de/demo`).
 - Not run: the Electron suite, which opens windows on the machine, and Firefox.
   The deployment for Photo Location Map was checked with `curl` and headless
   Chromium as above.
