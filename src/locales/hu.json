@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Ez az alkalmazás a böngészőjén belül olvassa ki az EXIF-adatokat a fájljából, <br/>így a fájl a böngészőjében marad, és semmilyen szerverre nem küldjük el.",
-    "usageData": "Az alkalmazás fejlesztése érdekében használati adatokat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen fájlformátumú a betöltött fotó és milyen <br/>hibák fordultak elő, az Ön IP-címével és az abból származtatott hozzávetőleges <br/>tartózkodási hellyel együtt. Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
+    "usageData": "Az alkalmazás fejlesztése érdekében használati adatokat gyűjtünk, például <br/>hogy mely oldalakat nyitják meg, milyen gyorsan töltődnek be és reagálnak, <br/>milyen fájlformátumú a betöltött fotó és milyen hibák fordultak elő, <br/>az Ön IP-címével és az abból származtatott hozzávetőleges tartózkodási hellyel együtt. <br/>Ezt a <settingsLink>Beállítások</settingsLink> oldalon kapcsolhatja ki.",
     "reportIssues": "Ha hibát vagy problémát talál, kérjük, jelezze a <issuesLink>GitHub Issues</issuesLink> oldalon.",
     "sourceCode": "Az alkalmazás forráskódja a <gitHubLink>GitHubon</gitHubLink> érhető el.",
     "translations": "Szívesen fogadjuk a más nyelvekre készült fordításokat: lásd <guideLink>az alkalmazás fordításának módját</guideLink>.",

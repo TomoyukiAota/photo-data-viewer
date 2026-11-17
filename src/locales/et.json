@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "See rakendus loeb EXIF-andmed teie failist teie brauseris, <br/>seega jääb fail teie brauserisse ja seda ei saadeta ühtegi serverisse.",
-    "usageData": "Rakenduse täiustamiseks kogutakse kasutusteavet, näiteks <br/>milliseid lehti avatakse, mis failivormingus on laaditud foto ja millised <br/>vead ilmnesid, koos teie IP-aadressi ja sellest tuletatud ligikaudse <br/>asukohaga. Saate selle välja lülitada <settingsLink>seadetes</settingsLink>.",
+    "usageData": "Rakenduse täiustamiseks kogutakse kasutusteavet, näiteks <br/>milliseid lehti avatakse, kui kaua nende laadimine ja reageerimine aega võtab, <br/>mis failivormingus on laaditud foto ja millised vead ilmnesid, <br/>koos teie IP-aadressi ja sellest tuletatud ligikaudse asukohaga. <br/>Saate selle välja lülitada <settingsLink>seadetes</settingsLink>.",
     "reportIssues": "Kui leiate vigu või probleeme, andke neist palun teada lehel <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Selle rakenduse lähtekood asub <gitHubLink>GitHubis</gitHubLink>.",
     "translations": "Tõlked teistesse keeltesse on teretulnud: vaadake, <guideLink>kuidas seda rakendust tõlkida</guideLink>.",

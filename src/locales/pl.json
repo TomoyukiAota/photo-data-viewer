@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Ta aplikacja odczytuje dane EXIF z Twojego pliku w Twojej przeglądarce, <br/>więc plik pozostaje w przeglądarce i nie jest wysyłany na żaden serwer.",
-    "usageData": "W celu ulepszania tej aplikacji zbierane są dane o jej użytkowaniu, takie jak <br/>otwierane strony, format pliku wczytanego zdjęcia i występujące <br/>błędy, wraz z Twoim adresem IP i ustaloną na jego podstawie przybliżoną <br/>lokalizacją. Możesz to wyłączyć w <settingsLink>Ustawieniach</settingsLink>.",
+    "usageData": "W celu ulepszania tej aplikacji zbierane są dane o jej użytkowaniu, takie jak <br/>otwierane strony, czas ich wczytywania i reagowania, <br/>format pliku wczytanego zdjęcia i występujące błędy, <br/>wraz z Twoim adresem IP i ustaloną na jego podstawie przybliżoną lokalizacją. <br/>Możesz to wyłączyć w <settingsLink>Ustawieniach</settingsLink>.",
     "reportIssues": "Jeśli znajdziesz błędy lub problemy, zgłoś je w <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kod źródłowy tej aplikacji jest dostępny w serwisie <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Tłumaczenia na inne języki są mile widziane: zobacz, <guideLink>jak przetłumaczyć tę aplikację</guideLink>.",

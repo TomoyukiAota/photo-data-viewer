@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Este aplicativo obtém os dados EXIF do seu arquivo dentro do seu navegador, <br/>portanto o arquivo permanece no seu navegador e não é enviado a nenhum servidor.",
-    "usageData": "Para melhorar este aplicativo, são coletados dados de uso, como <br/>quais páginas são abertas, qual é o formato de arquivo da foto carregada e quais <br/>erros ocorreram, junto com seu endereço IP e a localização aproximada <br/>derivada dele. Você pode desativar isso em <settingsLink>Configurações</settingsLink>.",
+    "usageData": "Para melhorar este aplicativo, são coletados dados de uso, como <br/>quais páginas são abertas, quanto tempo levam para carregar e responder, <br/>qual é o formato de arquivo da foto carregada e quais erros ocorreram, <br/>junto com seu endereço IP e a localização aproximada derivada dele. <br/>Você pode desativar isso em <settingsLink>Configurações</settingsLink>.",
     "reportIssues": "Se você encontrar bugs ou problemas, informe-os em <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "O código-fonte deste aplicativo está hospedado no <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Traduções para outros idiomas são bem-vindas: veja <guideLink>como traduzir este aplicativo</guideLink>.",

@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Deze app haalt de EXIF-gegevens uit je bestand binnen je browser, <br/>dus het bestand blijft in je browser en wordt niet naar een server verzonden.",
-    "usageData": "Om deze app te verbeteren, worden gebruiksgegevens verzameld, zoals <br/>welke pagina’s worden geopend, welke bestandsindeling de geladen foto heeft en welke <br/>fouten optreden, samen met je IP-adres en de geschatte locatie <br/>die daarvan is afgeleid. Je kunt dit uitschakelen in <settingsLink>Instellingen</settingsLink>.",
+    "usageData": "Om deze app te verbeteren, worden gebruiksgegevens verzameld, zoals <br/>welke pagina’s worden geopend, hoe lang ze nodig hebben om te laden en te reageren, <br/>welke bestandsindeling de geladen foto heeft en welke fouten optreden, <br/>samen met je IP-adres en de geschatte locatie die daarvan is afgeleid. <br/>Je kunt dit uitschakelen in <settingsLink>Instellingen</settingsLink>.",
     "reportIssues": "Als je bugs of problemen vindt, meld ze dan in <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "De broncode van deze app staat op <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Vertalingen in andere talen zijn welkom: zie <guideLink>hoe je deze app vertaalt</guideLink>.",

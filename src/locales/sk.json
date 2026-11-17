@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Táto aplikácia načítava údaje EXIF z vášho súboru priamo vo vašom prehliadači, <br/>takže súbor zostáva v prehliadači a neodosiela sa na žiadny server.",
-    "usageData": "Na účely vylepšovania aplikácie sa zhromažďujú údaje o jej používaní, napríklad <br/>ktoré stránky sa otvárajú, aký formát súboru má načítaná fotka a aké <br/>chyby sa vyskytli, spolu s vašou IP adresou a približnou polohou, ktorá je z nej <br/>odvodená. Môžete to vypnúť v <settingsLink>Nastaveniach</settingsLink>.",
+    "usageData": "Na účely vylepšovania aplikácie sa zhromažďujú údaje o jej používaní, napríklad <br/>ktoré stránky sa otvárajú, ako rýchlo sa načítavajú a reagujú, <br/>aký formát súboru má načítaná fotka a aké chyby sa vyskytli, <br/>spolu s vašou IP adresou a približnou polohou, ktorá je z nej odvodená. <br/>Môžete to vypnúť v <settingsLink>Nastaveniach</settingsLink>.",
     "reportIssues": "Ak nájdete chyby alebo problémy, nahláste ich, prosím, v <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Zdrojový kód tejto aplikácie je umiestnený na <gitHubLink>GitHube</gitHubLink>.",
     "translations": "Preklady do ďalších jazykov sú vítané: pozrite si, <guideLink>ako túto aplikáciu preložiť</guideLink>.",

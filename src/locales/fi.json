@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Tämä sovellus lukee EXIF-tiedot tiedostostasi selaimessasi, <br/>joten tiedosto pysyy selaimessasi eikä sitä lähetetä millekään palvelimelle.",
-    "usageData": "Sovelluksen parantamiseksi kerätään käyttötietoja, kuten <br/>mitä sivuja avataan, missä tiedostomuodossa ladattu kuva on ja mitä <br/>virheitä tapahtuu, sekä IP-osoitteesi ja siitä päätelty likimääräinen <br/>sijainti. Voit poistaa tämän käytöstä <settingsLink>asetuksissa</settingsLink>.",
+    "usageData": "Sovelluksen parantamiseksi kerätään käyttötietoja, kuten <br/>mitä sivuja avataan, kuinka nopeasti ne latautuvat ja vastaavat, <br/>missä tiedostomuodossa ladattu kuva on ja mitä virheitä tapahtuu, <br/>sekä IP-osoitteesi ja siitä päätelty likimääräinen sijainti. <br/>Voit poistaa tämän käytöstä <settingsLink>asetuksissa</settingsLink>.",
     "reportIssues": "Jos löydät virheitä tai ongelmia, ilmoita niistä <issuesLink>GitHub Issues</issuesLink> -sivulla.",
     "sourceCode": "Tämän sovelluksen lähdekoodi on <gitHubLink>GitHubissa</gitHubLink>.",
     "translations": "Käännökset muille kielille ovat tervetulleita: katso, <guideLink>miten tämä sovellus käännetään</guideLink>.",

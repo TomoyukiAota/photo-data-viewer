@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Bu uygulama, EXIF verilerini dosyanızdan tarayıcınızın içinde alır; <br/>bu nedenle dosya tarayıcınızda kalır ve hiçbir sunucuya gönderilmez.",
-    "usageData": "Bu uygulamayı geliştirmek için kullanım bilgileri toplanır; örneğin <br/>hangi sayfaların açıldığı, yüklenen fotoğrafın dosya biçimi ve hangi <br/>hataların oluştuğu, IP adresiniz ve ondan çıkarılan yaklaşık <br/>konumla birlikte. Bunu <settingsLink>Ayarlar</settingsLink> bölümünden kapatabilirsiniz.",
+    "usageData": "Bu uygulamayı geliştirmek için kullanım bilgileri toplanır; örneğin <br/>hangi sayfaların açıldığı, ne kadar hızlı yüklenip yanıt verdikleri, <br/>yüklenen fotoğrafın dosya biçimi ve hangi hataların oluştuğu, <br/>IP adresiniz ve ondan çıkarılan yaklaşık konumla birlikte. <br/>Bunu <settingsLink>Ayarlar</settingsLink> bölümünden kapatabilirsiniz.",
     "reportIssues": "Hata veya sorun bulursanız lütfen bunları <issuesLink>GitHub Issues</issuesLink> üzerinden bildirin.",
     "sourceCode": "Bu uygulamanın kaynak kodu <gitHubLink>GitHub</gitHubLink> üzerinde barındırılmaktadır.",
     "translations": "Başka dillere çeviriler memnuniyetle karşılanır: <guideLink>bu uygulamanın nasıl çevrileceğine</guideLink> bakın.",

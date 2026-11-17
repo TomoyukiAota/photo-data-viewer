@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "此應用程式在你的瀏覽器內從檔案讀取 EXIF 資料，<br/>因此檔案會保留在瀏覽器中，不會傳送到任何伺服器。",
-    "usageData": "為了改進此應用程式，我們會收集使用情況資訊，例如開啟了哪些頁面、<br/>所載入照片的檔案格式以及發生了哪些錯誤，<br/>同時收集你的 IP 位址以及由此推斷出的大致位置。<br/>你可以在<settingsLink>設定</settingsLink>中關閉此功能。",
+    "usageData": "為了改進此應用程式，我們會收集使用情況資訊，例如開啟了哪些頁面、<br/>頁面載入和回應所花的時間、所載入照片的檔案格式以及發生了哪些錯誤，<br/>同時收集你的 IP 位址以及由此推斷出的大致位置。<br/>你可以在<settingsLink>設定</settingsLink>中關閉此功能。",
     "reportIssues": "如果發現任何錯誤或問題，請在 <issuesLink>GitHub Issues</issuesLink> 中提交。",
     "sourceCode": "此應用程式的原始碼託管於 <gitHubLink>GitHub</gitHubLink>。",
     "translations": "歡迎將此應用程式翻譯成其他語言：請參閱<guideLink>如何翻譯此應用程式</guideLink>。",

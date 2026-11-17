@@ -106,7 +106,7 @@
   },
   "about": {
     "keptInBrowser": "Aplikazio honek zure nabigatzailean bertan irakurtzen ditu zure fitxategiko EXIF datuak; <br/>beraz, fitxategia zure nabigatzailean geratzen da eta ez da inongo zerbitzarira bidaltzen.",
-    "usageData": "Aplikazio hau hobetzeko, erabilerari buruzko informazioa biltzen da, hala nola <br/>zein orri irekitzen diren, kargatutako argazkiak zer fitxategi-formatu duen eta zer <br/>errore gertatu diren, zure IP helbidearekin eta hartatik ondorioztatutako gutxi <br/>gorabeherako kokapenarekin batera. <settingsLink>Ezarpenak</settingsLink> orrian desaktiba dezakezu.",
+    "usageData": "Aplikazio hau hobetzeko, erabilerari buruzko informazioa biltzen da, hala nola <br/>zein orri irekitzen diren, zenbat denbora behar duten kargatzeko eta erantzuteko, <br/>kargatutako argazkiak zer fitxategi-formatu duen eta zer errore gertatu diren, <br/>zure IP helbidearekin eta hartatik ondorioztatutako <br/>gutxi gorabeherako kokapenarekin batera. <settingsLink>Ezarpenak</settingsLink> orrian desaktiba dezakezu.",
     "reportIssues": "Akatsik edo arazorik aurkitzen baduzu, jakinarazi <issuesLink>GitHub Issues</issuesLink> atalean.",
     "sourceCode": "Aplikazio honen iturburu-kodea <gitHubLink>GitHub</gitHubLink>-en dago.",
     "translations": "Beste hizkuntza batzuetarako itzulpenak ongi etorriak dira: ikusi <guideLink>aplikazio hau nola itzuli</guideLink>.",
