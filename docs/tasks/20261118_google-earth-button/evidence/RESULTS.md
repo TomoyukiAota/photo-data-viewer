@@ -71,7 +71,8 @@ not to send the latitude and the longitude. An address of Google Earth was sent
 as it is: in Photo Location Map's e2e case below, without its change, the
 analytics got `https://earth.google.com/web/search/34.69,135.19`.
 
-Its change, on its branch `claude/google-earth-address`:
+Its change, in
+[its pull request #740](https://github.com/TomoyukiAota/photo-location-map/pull/740):
 
 - `modifyUrlForAnalyticsIfNeeded` puts `URL including https://earth.google.com/`
   in place of an address of Google Earth. A unit test (Electron-Mocha, in the
@@ -208,14 +209,27 @@ with this change: the row under it is higher.
 
 ## Checks
 
+On the branch with `main` merged in (with the installable app, which added a
+browser test), except where the table says so:
+
 | Check | Result |
 | --- | --- |
 | `npm ci` | The three known deprecation warnings |
-| `npm run test:all` | Passes; 661 tests |
-| `npm run build` | Passes |
+| `npm run test:all` | Passes; 662 tests |
+| `npm run build` | Passes (before `main` was merged in) |
 | `npm run build:plm` | Passes |
-| Browser suite in Chrome with the visual comparison | 26 passed |
-| Browser suite in Chromium | 26 passed |
-| Browser suite in Firefox | 25 passed, 1 skipped (the touch device, Chromium only) |
-| `PDV_DEV=1` browser test | 1 passed |
+| Browser suite in Chrome with the visual comparison | 27 passed |
+| Browser suite in Chromium | 27 passed |
+| Browser suite in Firefox | 25 passed, 1 skipped, the touch device (before `main` was merged in, with 26 tests) |
+| `PDV_DEV=1` browser test | 1 passed (before `main` was merged in) |
 | `npm run test:electron` | Not run: it opens windows on the machine |
+
+In Photo Location Map's repository, on macOS, with its windows kept off the
+screen:
+
+| Check | Result |
+| --- | --- |
+| `npm run lint:all` | Passes |
+| `npm run test:unit:em:main` | 307 passing, 2 pending |
+| `npm run build:prod` | Passes |
+| `npm run test:e2e`, the whole suite | 55 passed, 1 skipped |

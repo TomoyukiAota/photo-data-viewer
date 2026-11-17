@@ -6,7 +6,9 @@ Started on 2026-11-18. See the [plan](./PLAN.md) and the
 ## Current state
 
 Implemented and checked locally, together with the change in Photo Location
-Map that it needs to show the button there.
+Map that it needs to show the button there: pull requests
+[#80](https://github.com/TomoyukiAota/photo-data-viewer/pull/80) here and
+[#740](https://github.com/TomoyukiAota/photo-location-map/pull/740) there.
 
 - The coordinates row of the General tab has a third button, after the Google
   Maps and Google Street View buttons, which opens
