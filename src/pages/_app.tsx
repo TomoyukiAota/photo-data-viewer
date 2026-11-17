@@ -10,6 +10,7 @@ import AppMenu from '../components/app-menu/AppMenu';
 import UnsupportedFileSelectedDialog from '../components/dialog/UnsupportedFileSelectedDialog';
 import ErrorBoundary from '../components/error-boundary/ErrorBoundary';
 import PageNotShown from '../components/error-boundary/PageNotShown';
+import SearchHead from '../components/search-head/SearchHead';
 import AppProvider from '../context/AppProvider';
 import DirectionProvider from '../direction/DirectionProvider';
 import { recordErrorsNothingHandled } from '../analytics/record-error';
@@ -31,18 +32,22 @@ const getClientSnapshot = () => true;
 const getServerSnapshot = () => false;
 
 /** Every page, with the providers, the menu and the dialogs, inside the error boundary that records an error in rendering. */
-function AppRoot({ Component, pageProps }: AppProps) {
+function AppRoot({ Component, pageProps, router }: AppProps) {
   useAppRoot();
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   // Nothing is rendered either until the texts of the language have arrived
-  // (src/i18n/i18n.ts), so that the page is not shown in English first.
+  // (src/i18n/i18n.ts), so that the page is not shown in English first. Until
+  // then, the page is only the head it is served with, which search engines
+  // read; its title is the app's name, the same in every language
+  // (SearchHead.tsx).
   const languageReady = useLanguageReady();
-  if (!mounted || !languageReady) return <></>;
+  if (!mounted || !languageReady) return <SearchHead page={router.pathname} withTitle />;
 
   // The error boundary Next.js' documentation puts here: it records an error in
   // rendering, which Next.js would otherwise catch before the window could.
   return (
     <ErrorBoundary name='page' fallback={<PageNotShown />}>
+      <SearchHead page={router.pathname} />
       <DirectionProvider>
         <AppProvider>
           <AppMenu className={classes['app-menu']} isVisible={AppIntegration.isStandalone} />

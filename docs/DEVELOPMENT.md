@@ -141,6 +141,24 @@ Tests create disposable profiles.
 `PDV_ELECTRON_BASE_URL=http://localhost:3100` can target an already running
 `npm run dev:plm` server instead of starting a production one.
 
+## Search engines
+
+The app renders nothing until it runs in the browser, so each page is served
+with its head alone: the head that search engines and link previews read, from
+[`SearchHead.tsx`](../src/components/search-head/SearchHead.tsx). It has the
+page's description, its canonical address, Open Graph's and X's tags, and the
+app's name as the title, which is the same in every language; the page sets its
+own title once it is shown. These are in English, as each page has one address
+for every language. [`robots.txt`](../public/robots.txt) names
+[the sitemap](../public/sitemap.xml), which lists the pages to find in a search.
+The deployment for Photo Location Map is served without that head, and with
+`X-Robots-Tag: noindex` ([`next.config.js`](../next.config.js)).
+
+To see what a page is served with, `curl` it, or open it in a browser with
+JavaScript turned off. How the languages appear in search results, and the ways
+to change it, are in
+[the task record](./tasks/20261118_search-results/evidence/LANGUAGES.md).
+
 ## Task records
 
 Keep task-specific plans, progress and evidence under

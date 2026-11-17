@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The pages to find in a search, at their canonical addresses
+     (src/components/search-head/SearchHead.tsx). The others are tools of the
+     app, reached from its menu. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://photo-data-viewer.vercel.app/</loc>
+  </url>
+  <url>
+    <loc>https://photo-data-viewer.vercel.app/about</loc>
+  </url>
+</urlset>

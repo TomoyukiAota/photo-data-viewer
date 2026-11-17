@@ -834,6 +834,121 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
     await snapshot(page, 'about-ja');
   });
+
+  // TL;DR: Nothing is shown in English before the texts of the language
+  // arrive, the title in the tab included.
+  // Details: the page is served with a title for search engines, the app's
+  // name, which is the same in every language (SearchHead.tsx). The texts of
+  // Japanese are held back here, as a slow connection holds them, and so is
+  // anything else that the page fetches after it is served.
+  test('until the Japanese texts arrive, the page shows nothing, and its title is the name of the app', async ({
+    page,
+    request,
+  }) => {
+    const served = await (await request.get('/about')).text();
+    let release;
+    const held = new Promise((resolve) => (release = resolve));
+    let asked;
+    const askedForMore = new Promise((resolve) => (asked = resolve));
+    await page.route('**/_next/static/chunks/**', async (route) => {
+      if (!served.includes(new URL(route.request().url()).pathname)) {
+        asked();
+        await held;
+      }
+      await route.continue();
+    });
+    await page.goto('/about', { waitUntil: 'domcontentloaded' });
+    await askedForMore;
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('#__next')).toBeEmpty();
+    release();
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+  });
+});
+
+// TL;DR: What search engines and link previews read: the head of a page, which
+// SearchHead.tsx gives, robots.txt and the sitemap.
+// Details: a search engine or a link preview that does not run the page reads
+// the page as it is served, which is its head alone, as the app renders nothing
+// until it runs in the browser (_app.tsx). Google runs the page as well, and
+// reads what the page leaves. The wording of each description is checked by
+// the unit test of SearchHead.
+test.describe('what search engines read', () => {
+  test.describe('as a page is served, before it runs', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('each page has a title, a description and the address that search engines show', async ({
+      page,
+    }) => {
+      for (const path of Object.values(menuPaths)) {
+        const response = await page.goto(path);
+        expect(response.headers()['x-robots-tag']).toBeUndefined();
+        await expect(page).toHaveTitle('Photo Data Viewer');
+        await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+          'content',
+          /\S/,
+        );
+        const address = `https://photo-data-viewer.vercel.app${path}`;
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+          'href',
+          address,
+        );
+        await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+          'content',
+          address,
+        );
+      }
+    });
+  });
+
+  test('a page that runs keeps one description and its address, with its own title, and they follow it to another page', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('button', { name: 'Select Photo' }),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/',
+    );
+    await navigate(page, 'About');
+    await expect(page).toHaveTitle('About - Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('title')).toHaveCount(1);
+    await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+  });
+
+  test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page', async ({
+    request,
+  }) => {
+    const robots = await (await request.get('/robots.txt')).text();
+    expect(robots).toContain('User-agent: *\nAllow: /\n');
+    expect(robots).toContain(
+      'Sitemap: https://photo-data-viewer.vercel.app/sitemap.xml',
+    );
+    const sitemap = await request.get('/sitemap.xml');
+    expect(sitemap.headers()['content-type']).toContain('xml');
+    expect(
+      [...(await sitemap.text()).matchAll(/<loc>(.*)<\/loc>/g)].map(
+        ([, address]) => address,
+      ),
+    ).toEqual([
+      'https://photo-data-viewer.vercel.app/',
+      'https://photo-data-viewer.vercel.app/about',
+    ]);
+  });
 });
 
 // TL;DR: The layout is one for every language, and holds whatever the length

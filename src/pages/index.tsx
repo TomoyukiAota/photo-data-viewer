@@ -4,6 +4,8 @@ import { useContext } from 'react';
 import PageTitleContext from '../context/page-title/page-title-context';
 import Home from '../components/home/Home';
 
+// The description, and the other tags that search engines read, are in
+// SearchHead.tsx.
 const Index: NextPage = () => {
   const { indexPageTitle } = useContext(PageTitleContext);
 
@@ -11,7 +13,6 @@ const Index: NextPage = () => {
     <>
       <Head>
         <title>{indexPageTitle}</title>
-        <meta name='description' content='View your photo data.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Home />

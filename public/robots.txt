@@ -1,0 +1,8 @@
+# Search engines may read every page. The sitemap lists the pages to find in a
+# search (src/components/search-head/SearchHead.tsx). The deployment for Photo
+# Location Map serves this file too, and asks them not to index it
+# (next.config.js).
+User-agent: *
+Allow: /
+
+Sitemap: https://photo-data-viewer.vercel.app/sitemap.xml
