@@ -92,9 +92,9 @@ Checked on 2026-11-18, from the sources linked below.
    `<link rel="apple-touch-icon">`, in the standalone deployment alone. The
    build of Photo Location Map's deployment runs with `PDV_IN_PLM=True`, and
    its pages have neither.
-3. **The icon**, a proposal for the owner to approve (see below), in every size
-   that the manifest, Apple's devices and the browser's tab need. The favicon
-   becomes the same icon.
+3. **The icon**, proposed here and approved by the owner (see below), in every
+   size that the manifest, Apple's devices and the browser's tab need. The
+   favicon becomes the same icon.
 4. **`scripts/generate-icons.mjs`** draws the icon and writes every file, in
    Playwright's Chromium without a window, so that a change to the drawing is
    one command.

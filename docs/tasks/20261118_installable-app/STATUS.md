@@ -5,8 +5,9 @@ Started on 2026-11-18. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Implemented, and checked locally in Chromium and Chrome without a window. Not
-deployed yet.
+Implemented, and checked locally in Chromium and Chrome without a window. It
+reaches the users when it is merged into `main`, from which Vercel deploys the
+site.
 
 - The standalone site links a web app manifest. Chrome 157 finds nothing
   missing to install it, and fires `beforeinstallprompt`, as it does when it
@@ -24,17 +25,20 @@ deployed yet.
 - The app does not work offline: not needed to install it, and not without
   risk ([plan](./PLAN.md#working-offline)).
 
-## For the owner to decide
+## Decided
 
-- **The icon is a proposal.** See it in each size and shape in
-  [icon-proposal.png](./evidence/icon-proposal.png); the app's icon itself is
-  `public/icons/icon-512.png`. To change it, change the drawing in
-  `scripts/generate-icons.mjs` and run `node scripts/generate-icons.mjs`
+On 2026-11-18 the owner approved what was proposed:
+
+- **The icon**, as [icon-proposal.png](./evidence/icon-proposal.png) shows it
+  in each size and shape; the app's icon itself is `public/icons/icon-512.png`.
+  To change it, change the drawing in `scripts/generate-icons.mjs` and run
+  `node scripts/generate-icons.mjs`
   ([DEVELOPMENT.md](../../DEVELOPMENT.md#the-apps-icon)).
-- The title bar of the installed app is white, the color of the app's header
-  (`theme_color`). The blue of the icon is the other choice.
-- The manifest has no `short_name`. A phone's home screen shows "Photo Data
-  Viewer", shortened where it is too long.
+- The white title bar of the installed app, the color of the app's header
+  (`theme_color`), rather than the blue of the icon.
+- No `short_name`: a phone's home screen shows "Photo Data Viewer", shortened
+  where it is too long.
+- No working offline for now ([plan](./PLAN.md#working-offline)).
 
 ## Resuming
 
