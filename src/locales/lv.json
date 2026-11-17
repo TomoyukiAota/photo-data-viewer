@@ -31,6 +31,14 @@
       "data": "Dati",
       "map": "Karte",
       "photo": "Fotoattēls"
+    },
+    "layout": {
+      "buttonLabel": "izkārtojums",
+      "label": "IZKĀRTOJUMS",
+      "auto": "Automātiski",
+      "autoDescription": "Sadalītas rūtis platā logā, viena rūts šaurā",
+      "splitPanes": "Sadalītas rūtis",
+      "singlePane": "Viena rūts"
     }
   },
   "photo": {

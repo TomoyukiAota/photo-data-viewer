@@ -194,6 +194,17 @@ do not take longer with every language.
   `24-Stunden-Format` in German. The field is as wide as its name and its
   choices need.
 - The tabs scroll when their labels are wider than the window.
+- `home.layout` is the button before the menu's on the Home page, which
+  chooses how the photo, the map and the data are laid out: `splitPanes`,
+  the photo and the map in one column and the data in another; `singlePane`,
+  one of them at a time, which the tabs Data, Map and Photo choose; and
+  `auto`, which chooses one of the two by the window's width, as
+  `autoDescription` says. `label` is the word under the button's icon,
+  written as `menu.label` is, in capitals where the script has them, and
+  `buttonLabel` the button's name for a screen reader, as `menu.buttonLabel`
+  is. Name the layout and the panes as your language's software does: the
+  word for a layout as Windows' File Explorer and Office name the group of
+  layouts, and a pane as they name the preview pane and the reading pane.
 - The days of the week and AM/PM in dates come from dayjs' locale, not from
   the file. The digits of a date are 0 to 9 in every language, as its other
   numbers are. One value in the file is not a text but a dayjs pattern:

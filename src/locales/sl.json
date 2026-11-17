@@ -31,6 +31,14 @@
       "data": "Podatki",
       "map": "Zemljevid",
       "photo": "Fotografija"
+    },
+    "layout": {
+      "buttonLabel": "postavitev",
+      "label": "POSTAVITEV",
+      "auto": "Samodejno",
+      "autoDescription": "Razdeljena podokna v širokem oknu, eno podokno v ozkem",
+      "splitPanes": "Razdeljena podokna",
+      "singlePane": "Eno podokno"
     }
   },
   "photo": {

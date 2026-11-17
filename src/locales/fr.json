@@ -31,6 +31,14 @@
       "data": "Données",
       "map": "Carte",
       "photo": "Photo"
+    },
+    "layout": {
+      "buttonLabel": "disposition",
+      "label": "DISPOSITION",
+      "auto": "Automatique",
+      "autoDescription": "Volets fractionnés dans une fenêtre large, volet unique dans une fenêtre étroite",
+      "splitPanes": "Volets fractionnés",
+      "singlePane": "Volet unique"
     }
   },
   "photo": {

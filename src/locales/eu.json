@@ -31,6 +31,14 @@
       "data": "Datuak",
       "map": "Mapa",
       "photo": "Argazkia"
+    },
+    "layout": {
+      "buttonLabel": "diseinua",
+      "label": "DISEINUA",
+      "auto": "Automatikoa",
+      "autoDescription": "Panel zatituak leiho zabal batean, panel bakarra leiho estu batean",
+      "splitPanes": "Panel zatituak",
+      "singlePane": "Panel bakarra"
     }
   },
   "photo": {

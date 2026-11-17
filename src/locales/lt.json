@@ -31,6 +31,14 @@
       "data": "Duomenys",
       "map": "Žemėlapis",
       "photo": "Nuotrauka"
+    },
+    "layout": {
+      "buttonLabel": "išdėstymas",
+      "label": "IŠDĖSTYMAS",
+      "auto": "Automatinis",
+      "autoDescription": "Padalytos sritys plačiame lange, viena sritis siaurame",
+      "splitPanes": "Padalytos sritys",
+      "singlePane": "Viena sritis"
     }
   },
   "photo": {

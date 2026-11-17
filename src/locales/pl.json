@@ -31,6 +31,14 @@
       "data": "Dane",
       "map": "Mapa",
       "photo": "Zdjęcie"
+    },
+    "layout": {
+      "buttonLabel": "układ",
+      "label": "UKŁAD",
+      "auto": "Automatyczny",
+      "autoDescription": "Podzielone okienka w szerokim oknie, jedno okienko w wąskim",
+      "splitPanes": "Podzielone okienka",
+      "singlePane": "Jedno okienko"
     }
   },
   "photo": {

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import PhotoContext from '../../context/photo/photo-context';
 import { AppMenuRoom } from '../app-menu/AppMenu';
 import classes from './Header.module.scss';
+import LayoutMenu from './LayoutMenu';
 
 const Header: React.FC<{ className?: string }> = (props) => {
   const { t } = useTranslation();
@@ -67,8 +68,10 @@ const Header: React.FC<{ className?: string }> = (props) => {
           className={classes.input}
         />
       </div>
+      {/* Before the menu's button, at its height. */}
+      <LayoutMenu className={classes['layout-menu']} />
       {/* The menu's button lies over this end of the header. */}
-      <AppMenuRoom className={classes['menu-room']} />
+      <AppMenuRoom />
     </div>
   );
 };

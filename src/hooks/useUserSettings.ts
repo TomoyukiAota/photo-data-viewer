@@ -3,13 +3,14 @@ import { applyUsageDataSetting } from '../analytics/analytics';
 import { trackChangedUserSetting, trackLoadedLanguageInUse, trackLoadedUserSetting } from '../analytics/track-event';
 import i18next, { languageReady } from '../i18n/i18n';
 import { DateTimeFormat } from '../utils/date-time-format';
-import { UserSettingDefaultValue, UserSettingKey, UserSettingKeyType } from '../utils/user-settings';
+import { LayoutModeType, UserSettingDefaultValue, UserSettingKey, UserSettingKeyType } from '../utils/user-settings';
 import { readStorage, useLocalStorage, writeStorage } from './useLocalStorage';
 
 
 export const useUserSettings = () => {
   const dateFormat = useLocalStorage<string>(UserSettingKey.DateFormat, UserSettingDefaultValue.DateFormat);
   const clockSystemFormat = useLocalStorage<string>(UserSettingKey.ClockSystemFormat, UserSettingDefaultValue.ClockSystemFormat);
+  const layoutMode = useLocalStorage<string>(UserSettingKey.LayoutMode, UserSettingDefaultValue.LayoutMode);
   const wideLayoutPhotoDataPaneFlex = useLocalStorage<number>(UserSettingKey.WideLayoutPhotoDataPaneFlex, UserSettingDefaultValue.WideLayoutPhotoDataPaneFlex);
   const wideLayoutPhotoImagePaneFlex = useLocalStorage<number>(UserSettingKey.WideLayoutPhotoImagePaneFlex, UserSettingDefaultValue.WideLayoutPhotoImagePaneFlex);
   const sendUsageData = useLocalStorage<boolean>(UserSettingKey.SendUsageData, UserSettingDefaultValue.SendUsageData);
@@ -17,6 +18,9 @@ export const useUserSettings = () => {
   const userSettings = {
     dateFormat: dateFormat as DateTimeFormat.ForUser.DateFormatType,
     clockSystemFormat: clockSystemFormat as DateTimeFormat.ForUser.ClockSystemFormatType,
+    // As stored. The layout follows useLayoutMode, which reads a value that is
+    // none of the modes as the automatic one.
+    layoutMode: layoutMode as LayoutModeType,
     wideLayoutPhotoDataPaneFlex,
     wideLayoutPhotoImagePaneFlex,
     sendUsageData,
@@ -45,6 +49,7 @@ export const useUserSettingsTracker = () => {
   const trackLoadedUserSettings = () => {
     trackLoadedUserSetting(UserSettingKey.DateFormat, userSettings.dateFormat);
     trackLoadedUserSetting(UserSettingKey.ClockSystemFormat, userSettings.clockSystemFormat);
+    trackLoadedUserSetting(UserSettingKey.LayoutMode, userSettings.layoutMode);
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoDataPaneFlex, userSettings.wideLayoutPhotoDataPaneFlex.toString());
     trackLoadedUserSetting(UserSettingKey.WideLayoutPhotoImagePaneFlex, userSettings.wideLayoutPhotoImagePaneFlex.toString());
     trackLoadedUserSetting(UserSettingKey.Language, userSettings.language);

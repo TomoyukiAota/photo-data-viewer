@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Peta",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "tataletak",
+      "label": "TATALETAK",
+      "auto": "Automatik",
+      "autoDescription": "Anak tetingkap berpisah dalam tetingkap yang lebar, satu anak tetingkap dalam tetingkap yang sempit",
+      "splitPanes": "Anak tetingkap berpisah",
+      "singlePane": "Satu anak tetingkap"
     }
   },
   "photo": {

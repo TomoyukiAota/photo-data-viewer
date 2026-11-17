@@ -31,6 +31,14 @@
       "data": "Date",
       "map": "Hartă",
       "photo": "Poză"
+    },
+    "layout": {
+      "buttonLabel": "aspect",
+      "label": "ASPECT",
+      "auto": "Automat",
+      "autoDescription": "Panouri împărțite într-o fereastră lată, un singur panou într-una îngustă",
+      "splitPanes": "Panouri împărțite",
+      "singlePane": "Un singur panou"
     }
   },
   "photo": {

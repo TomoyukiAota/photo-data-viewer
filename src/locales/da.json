@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Kort",
       "photo": "Billede"
+    },
+    "layout": {
+      "buttonLabel": "layout",
+      "label": "LAYOUT",
+      "auto": "Automatisk",
+      "autoDescription": "Opdelte ruder i et bredt vindue, én rude i et smalt",
+      "splitPanes": "Opdelte ruder",
+      "singlePane": "Én rude"
     }
   },
   "photo": {

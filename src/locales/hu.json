@@ -31,6 +31,14 @@
       "data": "Adatok",
       "map": "Térkép",
       "photo": "Fotó"
+    },
+    "layout": {
+      "buttonLabel": "elrendezés",
+      "label": "ELRENDEZÉS",
+      "auto": "Automatikus",
+      "autoDescription": "Széles ablakban felosztott ablaktáblák, keskeny ablakban egy ablaktábla",
+      "splitPanes": "Felosztott ablaktáblák",
+      "singlePane": "Egy ablaktábla"
     }
   },
   "photo": {

@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Peta",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "tata letak",
+      "label": "TATA LETAK",
+      "auto": "Otomatis",
+      "autoDescription": "Panel terbagi di jendela yang lebar, satu panel di jendela yang sempit",
+      "splitPanes": "Panel terbagi",
+      "singlePane": "Satu panel"
     }
   },
   "photo": {

@@ -31,6 +31,14 @@
       "data": "Podaci",
       "map": "Mapa",
       "photo": "Fotografija"
+    },
+    "layout": {
+      "buttonLabel": "raspored",
+      "label": "RASPORED",
+      "auto": "Automatski",
+      "autoDescription": "Podeljena okna u širokom prozoru, jedno okno u uskom",
+      "splitPanes": "Podeljena okna",
+      "singlePane": "Jedno okno"
     }
   },
   "photo": {

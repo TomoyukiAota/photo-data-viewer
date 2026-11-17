@@ -31,6 +31,14 @@
       "data": "Dữ liệu",
       "map": "Bản đồ",
       "photo": "Ảnh"
+    },
+    "layout": {
+      "buttonLabel": "bố trí",
+      "label": "BỐ TRÍ",
+      "auto": "Tự động",
+      "autoDescription": "Chia ngăn khi cửa sổ rộng, một ngăn khi cửa sổ hẹp",
+      "splitPanes": "Chia ngăn",
+      "singlePane": "Một ngăn"
     }
   },
   "photo": {

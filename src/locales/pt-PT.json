@@ -31,6 +31,14 @@
       "data": "Dados",
       "map": "Mapa",
       "photo": "Fotografia"
+    },
+    "layout": {
+      "buttonLabel": "esquema",
+      "label": "ESQUEMA",
+      "auto": "Automático",
+      "autoDescription": "Painéis divididos numa janela larga, painel único numa estreita",
+      "splitPanes": "Painéis divididos",
+      "singlePane": "Painel único"
     }
   },
   "photo": {

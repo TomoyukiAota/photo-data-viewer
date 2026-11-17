@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Mapa",
       "photo": "Fotka"
+    },
+    "layout": {
+      "buttonLabel": "rozložení",
+      "label": "ROZLOŽENÍ",
+      "auto": "Automaticky",
+      "autoDescription": "Rozdělená podokna v širokém okně, jedno podokno v úzkém",
+      "splitPanes": "Rozdělená podokna",
+      "singlePane": "Jedno podokno"
     }
   },
   "photo": {

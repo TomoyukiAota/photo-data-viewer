@@ -31,6 +31,14 @@
       "data": "Dades",
       "map": "Mapa",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "disposició",
+      "label": "DISPOSICIÓ",
+      "auto": "Automàtica",
+      "autoDescription": "Subfinestres dividides en una finestra ampla, una sola subfinestra en una d’estreta",
+      "splitPanes": "Subfinestres dividides",
+      "singlePane": "Una sola subfinestra"
     }
   },
   "photo": {

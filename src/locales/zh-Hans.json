@@ -31,6 +31,14 @@
       "data": "数据",
       "map": "地图",
       "photo": "照片"
+    },
+    "layout": {
+      "buttonLabel": "布局",
+      "label": "布局",
+      "auto": "自动",
+      "autoDescription": "窗口较宽时拆分窗格，较窄时使用单个窗格",
+      "splitPanes": "拆分窗格",
+      "singlePane": "单个窗格"
     }
   },
   "photo": {

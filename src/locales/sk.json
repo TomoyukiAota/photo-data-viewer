@@ -31,6 +31,14 @@
       "data": "Údaje",
       "map": "Mapa",
       "photo": "Fotka"
+    },
+    "layout": {
+      "buttonLabel": "rozloženie",
+      "label": "ROZLOŽENIE",
+      "auto": "Automaticky",
+      "autoDescription": "Rozdelené tably v širokom okne, jedna tabla v úzkom",
+      "splitPanes": "Rozdelené tably",
+      "singlePane": "Jedna tabla"
     }
   },
   "photo": {

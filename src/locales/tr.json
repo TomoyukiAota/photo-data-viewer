@@ -31,6 +31,14 @@
       "data": "Veriler",
       "map": "Harita",
       "photo": "Fotoğraf"
+    },
+    "layout": {
+      "buttonLabel": "düzen",
+      "label": "DÜZEN",
+      "auto": "Otomatik",
+      "autoDescription": "Geniş pencerede bölünmüş bölmeler, dar pencerede tek bölme",
+      "splitPanes": "Bölünmüş bölmeler",
+      "singlePane": "Tek bölme"
     }
   },
   "photo": {

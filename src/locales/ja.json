@@ -31,6 +31,14 @@
       "data": "データ",
       "map": "マップ",
       "photo": "写真"
+    },
+    "layout": {
+      "buttonLabel": "レイアウト",
+      "label": "レイアウト",
+      "auto": "自動",
+      "autoDescription": "ウィンドウが広いときは表示領域を分割し、狭いときは分割しない",
+      "splitPanes": "表示領域を分割する",
+      "singlePane": "表示領域を分割しない"
     }
   },
   "photo": {
