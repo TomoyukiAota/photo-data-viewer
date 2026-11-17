@@ -113,8 +113,12 @@ it("has nothing in Photo Location Map's window, whose title is the photo's", () 
 });
 
 describe('the files for search engines', () => {
+  // Git on Windows may check the files out with CRLF line endings.
   const publicFile = (name: string) =>
-    readFileSync(join(__dirname, '../../../public', name), 'utf8');
+    readFileSync(join(__dirname, '../../../public', name), 'utf8').replace(
+      /\r\n/g,
+      '\n',
+    );
 
   it('robots.txt lets them read every page, and names the sitemap', () => {
     const robots = publicFile('robots.txt');

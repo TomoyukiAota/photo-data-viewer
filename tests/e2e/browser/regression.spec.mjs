@@ -1087,7 +1087,11 @@ test.describe('what search engines read', () => {
   test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page in every language', async ({
     request,
   }) => {
-    const robots = await (await request.get('/robots.txt')).text();
+    // Served as checked out, which is with CRLF line endings on Windows.
+    const robots = (await (await request.get('/robots.txt')).text()).replace(
+      /\r\n/g,
+      '\n',
+    );
     expect(robots).toContain('User-agent: *\nAllow: /\n');
     expect(robots).toContain(
       'Sitemap: https://photo-data-viewer.vercel.app/sitemap.xml',
