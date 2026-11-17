@@ -78,6 +78,12 @@
     "message": "Datele EXIF nu sunt disponibile.",
     "close": "Închide"
   },
+  "dropPhoto": {
+    "dropHere": "Plasați poza aici pentru a o selecta.",
+    "title": "Sigur doriți să selectați această poză?",
+    "cancel": "Anulează",
+    "select": "Selectează"
+  },
   "pageNotShown": {
     "message": "A apărut o problemă, iar această pagină nu poate fi afișată.",
     "reload": "Reîncarcă"

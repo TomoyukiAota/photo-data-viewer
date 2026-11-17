@@ -7,7 +7,9 @@ import { useSyncExternalStore } from 'react';
 import { AppIntegration } from '../app-integration/app-integration';
 import LoadPhotoInPlm from '../app-integration/LoadPhotoInPlm';
 import AppMenu from '../components/app-menu/AppMenu';
+import DropPhotoDialog from '../components/dialog/DropPhotoDialog';
 import UnsupportedFileSelectedDialog from '../components/dialog/UnsupportedFileSelectedDialog';
+import DropPhoto from '../components/drop-photo/DropPhoto';
 import ErrorBoundary from '../components/error-boundary/ErrorBoundary';
 import PageNotShown from '../components/error-boundary/PageNotShown';
 import SearchHead from '../components/search-head/SearchHead';
@@ -53,6 +55,8 @@ function AppRoot({ Component, pageProps }: AppProps) {
           <AppMenu className={classes['app-menu']} isVisible={AppIntegration.isStandalone} />
           <Component {...pageProps} />
           <UnsupportedFileSelectedDialog />
+          <DropPhotoDialog />
+          <DropPhoto />
           <LoadPhotoInPlm />
         </AppProvider>
       </DirectionProvider>

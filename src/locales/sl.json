@@ -78,6 +78,12 @@
     "message": "Podatki EXIF niso na voljo.",
     "close": "Zapri"
   },
+  "dropPhoto": {
+    "dropHere": "Spustite fotografijo sem, da jo izberete.",
+    "title": "Ali ste prepričani, da želite izbrati to fotografijo?",
+    "cancel": "Prekliči",
+    "select": "Izberi"
+  },
   "pageNotShown": {
     "message": "Prišlo je do napake in te strani ni mogoče prikazati.",
     "reload": "Znova naloži"

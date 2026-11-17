@@ -78,6 +78,12 @@
     "message": "EXIF-oplysninger er ikke tilgængelige.",
     "close": "Luk"
   },
+  "dropPhoto": {
+    "dropHere": "Slip billedet her for at vælge det.",
+    "title": "Er du sikker på, at du vil vælge dette billede?",
+    "cancel": "Annuller",
+    "select": "Vælg"
+  },
   "pageNotShown": {
     "message": "Noget gik galt, og denne side kan ikke vises.",
     "reload": "Genindlæs"

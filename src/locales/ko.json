@@ -78,6 +78,12 @@
     "message": "EXIF 데이터가 없습니다.",
     "close": "닫기"
   },
+  "dropPhoto": {
+    "dropHere": "사진을 선택하려면 여기에 놓으세요.",
+    "title": "이 사진을 선택하시겠습니까?",
+    "cancel": "취소",
+    "select": "선택"
+  },
   "pageNotShown": {
     "message": "문제가 발생하여 이 페이지를 표시할 수 없습니다.",
     "reload": "새로 고침"

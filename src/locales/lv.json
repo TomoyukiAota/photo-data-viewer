@@ -78,6 +78,12 @@
     "message": "EXIF dati nav pieejami.",
     "close": "Aizvērt"
   },
+  "dropPhoto": {
+    "dropHere": "Nometiet fotoattēlu šeit, lai to atlasītu.",
+    "title": "Vai tiešām vēlaties atlasīt šo fotoattēlu?",
+    "cancel": "Atcelt",
+    "select": "Atlasīt"
+  },
   "pageNotShown": {
     "message": "Radās kļūda, un šo lapu nevar parādīt.",
     "reload": "Pārlādēt"

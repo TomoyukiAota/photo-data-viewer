@@ -78,6 +78,12 @@
     "message": "EXIF-tietoja ei ole saatavilla.",
     "close": "Sulje"
   },
+  "dropPhoto": {
+    "dropHere": "Pudota kuva tähän valitaksesi sen.",
+    "title": "Haluatko varmasti valita tämän kuvan?",
+    "cancel": "Peruuta",
+    "select": "Valitse"
+  },
   "pageNotShown": {
     "message": "Jokin meni vikaan, eikä tätä sivua voi näyttää.",
     "reload": "Lataa uudelleen"

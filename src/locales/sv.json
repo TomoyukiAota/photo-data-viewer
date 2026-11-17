@@ -78,6 +78,12 @@
     "message": "EXIF-information är inte tillgänglig.",
     "close": "Stäng"
   },
+  "dropPhoto": {
+    "dropHere": "Släpp bilden här för att välja den.",
+    "title": "Vill du verkligen välja den här bilden?",
+    "cancel": "Avbryt",
+    "select": "Välj"
+  },
   "pageNotShown": {
     "message": "Något gick fel och den här sidan kan inte visas.",
     "reload": "Läs in igen"

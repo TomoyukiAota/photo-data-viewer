@@ -78,6 +78,12 @@
     "message": "Los datos EXIF no están disponibles.",
     "close": "Cerrar"
   },
+  "dropPhoto": {
+    "dropHere": "Suelta la foto aquí para seleccionarla.",
+    "title": "¿Seguro que quieres seleccionar esta foto?",
+    "cancel": "Cancelar",
+    "select": "Seleccionar"
+  },
   "pageNotShown": {
     "message": "Algo ha ido mal y no se puede mostrar esta página.",
     "reload": "Recargar"

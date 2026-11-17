@@ -78,6 +78,12 @@
     "message": "Az EXIF-adatok nem érhetők el.",
     "close": "Bezárás"
   },
+  "dropPhoto": {
+    "dropHere": "Dobja ide a fotót a kiválasztásához.",
+    "title": "Biztosan kiválasztja ezt a fotót?",
+    "cancel": "Mégsem",
+    "select": "Kiválasztás"
+  },
   "pageNotShown": {
     "message": "Hiba történt, ezért ez az oldal nem jeleníthető meg.",
     "reload": "Újratöltés"

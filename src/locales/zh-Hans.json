@@ -78,6 +78,12 @@
     "message": "EXIF 数据不可用。",
     "close": "关闭"
   },
+  "dropPhoto": {
+    "dropHere": "将照片拖放到此处进行选择。",
+    "title": "确定要选择此照片吗？",
+    "cancel": "取消",
+    "select": "选择"
+  },
   "pageNotShown": {
     "message": "出了点问题，无法显示此页面。",
     "reload": "重新加载"

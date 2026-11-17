@@ -78,6 +78,12 @@
     "message": "EXIF data is not available.",
     "close": "Close"
   },
+  "dropPhoto": {
+    "dropHere": "Drop the photo here to select it.",
+    "title": "Are you sure you want to select this photo?",
+    "cancel": "Cancel",
+    "select": "Select"
+  },
   "pageNotShown": {
     "message": "Something went wrong, and this page cannot be shown.",
     "reload": "Reload"

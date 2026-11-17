@@ -78,6 +78,12 @@
     "message": "EXIF-andmed pole saadaval.",
     "close": "Sulge"
   },
+  "dropPhoto": {
+    "dropHere": "Valimiseks lohistage foto siia.",
+    "title": "Kas soovite kindlasti selle foto valida?",
+    "cancel": "Loobu",
+    "select": "Vali"
+  },
   "pageNotShown": {
     "message": "Midagi läks valesti ja seda lehte ei saa kuvada.",
     "reload": "Laadi uuesti"
