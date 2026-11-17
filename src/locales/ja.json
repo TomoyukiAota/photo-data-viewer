@@ -29,9 +29,9 @@
       "buttonLabel": "レイアウト",
       "label": "レイアウト",
       "auto": "自動",
-      "autoDescription": "ウィンドウが広いときは並べて表示、狭いときはタブで表示",
-      "sideBySide": "並べて表示",
-      "tabs": "タブで表示"
+      "autoDescription": "ウィンドウが広いときは表示領域を分割し、狭いときは分割しない",
+      "splitPanes": "表示領域を分割する",
+      "singlePane": "表示領域を分割しない"
     }
   },
   "photo": {

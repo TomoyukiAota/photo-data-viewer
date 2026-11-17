@@ -29,9 +29,9 @@
       "buttonLabel": "esquema",
       "label": "ESQUEMA",
       "auto": "Automático",
-      "autoDescription": "Lado a lado numa janela larga, em separadores numa estreita",
-      "sideBySide": "Lado a lado",
-      "tabs": "Separadores"
+      "autoDescription": "Painéis divididos numa janela larga, painel único numa estreita",
+      "splitPanes": "Painéis divididos",
+      "singlePane": "Painel único"
     }
   },
   "photo": {

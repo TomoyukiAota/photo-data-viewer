@@ -91,9 +91,9 @@ lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, which ends before its buttons,
 each name beside its number, a field as wide as its label, the dialog, the
-messages and the menu of the layouts uncut, and the panes side by side inside
-the window. They find their elements by where they are and name no Polish
-text, so that a change of a translation does not break them.
+messages and the menu of the layouts uncut, and the split panes inside the
+window. They find their elements by where they are and name no Polish text,
+so that a change of a translation does not break them.
 One test runs as a phone that is touched, where the Language page leaves the
 keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
 so the test is skipped in Firefox.

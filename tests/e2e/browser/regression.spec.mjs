@@ -748,7 +748,7 @@ function layoutModeLabels(events, action) {
     .map((event) => event.label);
 }
 
-/** The layouts shown, as recorded: whether the panes were side by side, in order. */
+/** The layouts shown, as recorded: whether the panes were split, in order. */
 function shownLayouts(events) {
   return events
     .filter(
@@ -759,8 +759,8 @@ function shownLayouts(events) {
 }
 
 // TL;DR: The button before the menu's chooses the layout: automatic, as the
-// window's width alone decided it before, always side by side, or always
-// tabs.
+// window's width alone decided it before, always split panes, or always a
+// single pane, which tabs choose what it shows.
 // Details: The choice is kept in the browser, and recorded as a setting is.
 // The menu is used with the mouse and with the keyboard, which it gives back
 // to the button: the header stays when the layout under it changes.
@@ -774,7 +774,7 @@ test('the layout is chosen with the button before the menu’s, and is kept and 
   const menu = page.locator('#layout-menu');
   const item = (name) => page.getByRole('menuitemradio', { name, exact: true });
 
-  // Automatic, which is what the app starts with: side by side in a wide
+  // Automatic, which is what the app starts with: split panes in a wide
   // window.
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
@@ -792,26 +792,26 @@ test('the layout is chosen with the button before the menu’s, and is kept and 
   await page.keyboard.press('Enter');
   await expect(item('Automatic')).toBeFocused();
   await expect(item('Automatic')).toHaveAttribute('aria-checked', 'true');
-  await expect(item('Side by side')).toHaveAttribute('aria-checked', 'false');
-  await expect(item('Tabs')).toHaveAttribute('aria-checked', 'false');
+  await expect(item('Split panes')).toHaveAttribute('aria-checked', 'false');
+  await expect(item('Single pane')).toHaveAttribute('aria-checked', 'false');
   await snapshot(page, 'layout-menu');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('ArrowDown');
-  await expect(item('Tabs')).toBeFocused();
+  await expect(item('Single pane')).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(menu).toBeHidden();
   await expect(button).toBeFocused();
 
-  // Tabs, in the wide window, and after a reload too.
+  // A single pane, in the wide window, and after a reload too.
   await expect(photoTab).toBeVisible();
   await expect(panes).toHaveCount(0);
   expect(await page.evaluate(() => localStorage.getItem('LayoutMode'))).toBe(
-    'tabs',
+    'singlePane',
   );
   await expectSent(
     sent,
     (events) => layoutModeLabels(events, 'Changed User Setting'),
-    ['LayoutMode: tabs'],
+    ['LayoutMode: singlePane'],
   );
   // The layout shown is recorded when the mode changes it, not only when the
   // window is resized.
@@ -823,10 +823,10 @@ test('the layout is chosen with the button before the menu’s, and is kept and 
   await expect(photoTab).toBeVisible();
   await expect(panes).toHaveCount(0);
 
-  // Side by side, in a phone's width: each pane keeps its room, and the page
+  // Split panes, in a phone's width: each pane keeps its room, and the page
   // is no wider than the window. The table scrolls sideways in its pane.
   await page.setViewportSize({ width: 320, height: 800 });
-  await chooseLayout(page, 'Side by side');
+  await chooseLayout(page, 'Split panes');
   await expect(panes).toBeVisible();
   await expect(photoTab).toHaveCount(0);
   await loadPhoto(page);
@@ -842,25 +842,25 @@ test('the layout is chosen with the button before the menu’s, and is kept and 
   // Off the splitter, which the menu's entry was over: it darkens under the
   // mouse.
   await page.mouse.move(0, 0);
-  await snapshot(page, 'narrow-side-by-side');
+  await snapshot(page, 'narrow-split-panes');
 
   // Escape leaves the mode as it is.
   await button.focus();
   await page.keyboard.press('Enter');
-  await expect(item('Side by side')).toBeFocused();
+  await expect(item('Split panes')).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(menu).toBeHidden();
   await expect(button).toBeFocused();
   await expect(panes).toBeVisible();
 
-  // Automatic again: tabs, in this window.
+  // Automatic again: a single pane, in this window.
   await chooseLayout(page, 'Automatic');
   await expect(photoTab).toBeVisible();
   await expect(panes).toHaveCount(0);
   await expectSent(
     sent,
     (events) => layoutModeLabels(events, 'Changed User Setting'),
-    ['LayoutMode: tabs', 'LayoutMode: sideBySide', 'LayoutMode: auto'],
+    ['LayoutMode: singlePane', 'LayoutMode: splitPanes', 'LayoutMode: auto'],
   );
 });
 
@@ -1044,7 +1044,7 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(errors).toEqual([]);
   });
 
-  test('the menu of the layouts is whole, and the panes side by side stay in the window', async ({
+  test('the menu of the layouts is whole, and the split panes stay in the window', async ({
     page,
   }) => {
     await page.goto('/');
@@ -1065,7 +1065,7 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     }
     expect((await texts.nth(1).boundingBox()).height).toBeGreaterThan(30);
 
-    // Side by side, the second mode: the photo and the map in one column and
+    // Split panes, the second mode: the photo and the map in one column and
     // the data in the other, each with its room, inside the window.
     await modes.nth(1).click();
     await expect(page.locator('#layout-menu')).toBeHidden();

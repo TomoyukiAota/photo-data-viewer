@@ -29,9 +29,9 @@
       "buttonLabel": "asettelu",
       "label": "ASETTELU",
       "auto": "Automaattinen",
-      "autoDescription": "Rinnakkain leveässä ikkunassa, välilehdillä kapeassa",
-      "sideBySide": "Rinnakkain",
-      "tabs": "Välilehdet"
+      "autoDescription": "Jaetut ruudut leveässä ikkunassa, yksi ruutu kapeassa",
+      "splitPanes": "Jaetut ruudut",
+      "singlePane": "Yksi ruutu"
     }
   },
   "photo": {

@@ -29,9 +29,9 @@
       "buttonLabel": "disposició",
       "label": "DISPOSICIÓ",
       "auto": "Automàtica",
-      "autoDescription": "Costat a costat en una finestra ampla, en pestanyes en una d’estreta",
-      "sideBySide": "Costat a costat",
-      "tabs": "Pestanyes"
+      "autoDescription": "Subfinestres dividides en una finestra ampla, una sola subfinestra en una d’estreta",
+      "splitPanes": "Subfinestres dividides",
+      "singlePane": "Una sola subfinestra"
     }
   },
   "photo": {

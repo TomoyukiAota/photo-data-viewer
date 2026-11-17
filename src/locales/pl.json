@@ -29,9 +29,9 @@
       "buttonLabel": "układ",
       "label": "UKŁAD",
       "auto": "Automatyczny",
-      "autoDescription": "Obok siebie w szerokim oknie, na kartach w wąskim",
-      "sideBySide": "Obok siebie",
-      "tabs": "Karty"
+      "autoDescription": "Podzielone okienka w szerokim oknie, jedno okienko w wąskim",
+      "splitPanes": "Podzielone okienka",
+      "singlePane": "Jedno okienko"
     }
   },
   "photo": {

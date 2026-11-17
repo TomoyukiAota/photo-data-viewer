@@ -6,7 +6,7 @@ export const UserSettingKey = {
   ClockSystemFormat: 'ClockSystemFormat',
   /** How the Home page lays out its panes (LayoutMode); chosen with the button before the menu's. */
   LayoutMode: 'LayoutMode',
-  /** The sizes of the panes side by side, the layout that the code calls wide. */
+  /** The sizes of the split panes, the layout that the code calls wide. */
   WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',
   WideLayoutPhotoImagePaneFlex: 'WideLayoutPhotoImagePaneFlex',
   SendUsageData: 'SendUsageData',
@@ -17,16 +17,17 @@ export const UserSettingKey = {
 export type UserSettingKeyType = typeof UserSettingKey[keyof typeof UserSettingKey];
 
 /**
- * How the Home page lays out the photo, the map and the data: `sideBySide`, the
- * photo and the map in one column and the data in another (HomeWideLayout);
- * `tabs`, one of the three at a time under tabs (HomeNarrowLayout); or `auto`,
- * side by side in a window wider than 1200 pixels and tabs otherwise, as the
- * window's width alone decided before the user could choose.
+ * How the Home page lays out the photo, the map and the data: `splitPanes`,
+ * the photo and the map in one column and the data in another
+ * (HomeWideLayout); `singlePane`, one of the three at a time, chosen with tabs
+ * (HomeNarrowLayout); or `auto`, split panes in a window wider than 1200
+ * pixels and a single pane otherwise, as the window's width alone decided
+ * before the user could choose.
  */
 export const LayoutMode = {
   Auto: 'auto',
-  SideBySide: 'sideBySide',
-  Tabs: 'tabs',
+  SplitPanes: 'splitPanes',
+  SinglePane: 'singlePane',
 } as const;
 
 export type LayoutModeType = typeof LayoutMode[keyof typeof LayoutMode];
@@ -34,8 +35,8 @@ export type LayoutModeType = typeof LayoutMode[keyof typeof LayoutMode];
 /** The modes, in the order that the menu lists them. */
 export const layoutModes: readonly LayoutModeType[] = [
   LayoutMode.Auto,
-  LayoutMode.SideBySide,
-  LayoutMode.Tabs,
+  LayoutMode.SplitPanes,
+  LayoutMode.SinglePane,
 ];
 
 export function isLayoutMode(value: unknown): value is LayoutModeType {

@@ -7,10 +7,10 @@ import GutterPositionContext from '../../context/gutter-position/gutter-position
 import classes from './HomeWideLayout.module.scss';
 
 /**
- * The photo and the map in one column and the data in another, with splitters
- * between them: the layout under the header in the mode Side by side, or in a
- * wide window. Each pane keeps 100 pixels at least, which two columns have in
- * a phone's window as well.
+ * The split panes: the photo and the map in one column and the data in
+ * another, with splitters between them. The layout under the header in the
+ * mode Split panes, and in a wide window in the automatic one. Each pane keeps
+ * 100 pixels at least, which two columns have in a phone's window as well.
  */
 const HomeWideLayout: React.FC<{
   photoImage: React.JSX.Element;

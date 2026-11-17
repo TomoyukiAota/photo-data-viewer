@@ -70,17 +70,20 @@ it('opens a menu named by the button, of the three modes as radio items, with th
   // Each is named by its name alone; the automatic one says what it does.
   const auto = within(menu).getByRole('menuitemradio', {
     name: 'Automatic',
-    description: 'Side by side in a wide window, tabs in a narrow one',
+    description: 'Split panes in a wide window, a single pane in a narrow one',
     checked: true,
   });
   expect(
     within(menu).getByRole('menuitemradio', {
-      name: 'Side by side',
+      name: 'Split panes',
       checked: false,
     }),
   ).toBe(items[1]);
   expect(
-    within(menu).getByRole('menuitemradio', { name: 'Tabs', checked: false }),
+    within(menu).getByRole('menuitemradio', {
+      name: 'Single pane',
+      checked: false,
+    }),
   ).toBe(items[2]);
   expect(auto).toBe(items[0]);
   expect(document.activeElement).toBe(auto);
@@ -90,11 +93,13 @@ it('stores the mode chosen, records the change, closes the menu and leaves the f
   render(<LayoutMenu />);
   const button = screen.getByRole('button', { name: 'layout' });
   const menu = openMenu(button);
-  fireEvent.click(within(menu).getByRole('menuitemradio', { name: 'Tabs' }));
+  fireEvent.click(
+    within(menu).getByRole('menuitemradio', { name: 'Single pane' }),
+  );
 
-  expect(localStorage.getItem('LayoutMode')).toBe('tabs');
+  expect(localStorage.getItem('LayoutMode')).toBe('singlePane');
   expect(jest.mocked(trackChangedUserSetting).mock.calls).toEqual([
-    ['LayoutMode', 'tabs'],
+    ['LayoutMode', 'singlePane'],
   ]);
   await waitFor(() => expect(screen.queryByRole('menu')).toBeNull());
   expect(document.activeElement).toBe(button);
@@ -107,27 +112,27 @@ it('stores the mode chosen, records the change, closes the menu and leaves the f
   const reopened = openMenu(button);
   expect(
     within(reopened).getByRole('menuitemradio', {
-      name: 'Tabs',
+      name: 'Single pane',
       checked: true,
     }),
   ).toBeTruthy();
   fireEvent.click(
-    within(reopened).getByRole('menuitemradio', { name: 'Side by side' }),
+    within(reopened).getByRole('menuitemradio', { name: 'Split panes' }),
   );
-  expect(localStorage.getItem('LayoutMode')).toBe('sideBySide');
-  expect(iconOf(button)).toBe('SideBySideIcon');
+  expect(localStorage.getItem('LayoutMode')).toBe('splitPanes');
+  expect(iconOf(button)).toBe('SplitPanesIcon');
 });
 
 it('records nothing when the mode chosen is the one that was chosen', async () => {
-  localStorage.setItem('LayoutMode', 'sideBySide');
+  localStorage.setItem('LayoutMode', 'splitPanes');
   render(<LayoutMenu />);
   const menu = openMenu(screen.getByRole('button', { name: 'layout' }));
   fireEvent.click(
-    within(menu).getByRole('menuitemradio', { name: 'Side by side' }),
+    within(menu).getByRole('menuitemradio', { name: 'Split panes' }),
   );
   await waitFor(() => expect(screen.queryByRole('menu')).toBeNull());
   expect(trackChangedUserSetting).not.toHaveBeenCalled();
-  expect(localStorage.getItem('LayoutMode')).toBe('sideBySide');
+  expect(localStorage.getItem('LayoutMode')).toBe('splitPanes');
 });
 
 it('is in the language that the app is shown in', async () => {
@@ -143,5 +148,5 @@ it('is in the language that the app is shown in', async () => {
       .map(
         (item) => item.querySelector('.MuiListItemText-primary')?.textContent,
       ),
-  ).toEqual(['自動', '並べて表示', 'タブで表示']);
+  ).toEqual(['自動', '表示領域を分割する', '表示領域を分割しない']);
 });

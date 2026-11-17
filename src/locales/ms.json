@@ -29,9 +29,9 @@
       "buttonLabel": "tataletak",
       "label": "TATALETAK",
       "auto": "Automatik",
-      "autoDescription": "Bersebelahan dalam tetingkap yang lebar, sebagai tab dalam tetingkap yang sempit",
-      "sideBySide": "Bersebelahan",
-      "tabs": "Tab"
+      "autoDescription": "Anak tetingkap berpisah dalam tetingkap yang lebar, satu anak tetingkap dalam tetingkap yang sempit",
+      "splitPanes": "Anak tetingkap berpisah",
+      "singlePane": "Satu anak tetingkap"
     }
   },
   "photo": {

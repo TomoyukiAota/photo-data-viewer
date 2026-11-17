@@ -29,9 +29,9 @@
       "buttonLabel": "indeling",
       "label": "INDELING",
       "auto": "Automatisch",
-      "autoDescription": "Naast elkaar in een breed venster, in tabbladen in een smal venster",
-      "sideBySide": "Naast elkaar",
-      "tabs": "Tabbladen"
+      "autoDescription": "Gesplitste deelvensters in een breed venster, één deelvenster in een smal venster",
+      "splitPanes": "Gesplitste deelvensters",
+      "singlePane": "Eén deelvenster"
     }
   },
   "photo": {

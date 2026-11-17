@@ -29,9 +29,9 @@
       "buttonLabel": "raspored",
       "label": "RASPORED",
       "auto": "Automatski",
-      "autoDescription": "Jedno pored drugog u širokom prozoru, na karticama u uskom",
-      "sideBySide": "Jedno pored drugog",
-      "tabs": "Kartice"
+      "autoDescription": "Podeljena okna u širokom prozoru, jedno okno u uskom",
+      "splitPanes": "Podeljena okna",
+      "singlePane": "Jedno okno"
     }
   },
   "photo": {

@@ -29,9 +29,9 @@
       "buttonLabel": "layout",
       "label": "LAYOUT",
       "auto": "Automatiskt",
-      "autoDescription": "Sida vid sida i ett brett fönster, i flikar i ett smalt",
-      "sideBySide": "Sida vid sida",
-      "tabs": "Flikar"
+      "autoDescription": "Delade rutor i ett brett fönster, en enda ruta i ett smalt",
+      "splitPanes": "Delade rutor",
+      "singlePane": "En enda ruta"
     }
   },
   "photo": {

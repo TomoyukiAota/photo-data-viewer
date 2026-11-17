@@ -29,9 +29,9 @@
       "buttonLabel": "레이아웃",
       "label": "레이아웃",
       "auto": "자동",
-      "autoDescription": "창이 넓으면 나란히 보기, 좁으면 탭으로 보기",
-      "sideBySide": "나란히 보기",
-      "tabs": "탭으로 보기"
+      "autoDescription": "창이 넓으면 분할 창, 좁으면 단일 창",
+      "splitPanes": "분할 창",
+      "singlePane": "단일 창"
     }
   },
   "photo": {

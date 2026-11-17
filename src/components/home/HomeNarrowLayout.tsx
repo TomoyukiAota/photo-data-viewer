@@ -12,7 +12,11 @@ const TabName = {
   Photo: 'Photo',
 };
 
-/** The photo, the map and the data, one at a time under tabs: the layout under the header in the mode Tabs, or in a narrow window. */
+/**
+ * A single pane: the photo, the map or the data, chosen with tabs. The layout
+ * under the header in the mode Single pane, and in a narrow window in the
+ * automatic one.
+ */
 const HomeNarrowLayout: React.FC<{
   photoImage: React.JSX.Element;
   photoMap: React.JSX.Element;

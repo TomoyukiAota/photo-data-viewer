@@ -29,9 +29,9 @@
       "buttonLabel": "layout",
       "label": "LAYOUT",
       "auto": "Automatic",
-      "autoDescription": "Side by side in a wide window, tabs in a narrow one",
-      "sideBySide": "Side by side",
-      "tabs": "Tabs"
+      "autoDescription": "Split panes in a wide window, a single pane in a narrow one",
+      "splitPanes": "Split panes",
+      "singlePane": "Single pane"
     }
   },
   "photo": {

@@ -29,9 +29,9 @@
       "buttonLabel": "tata letak",
       "label": "TATA LETAK",
       "auto": "Otomatis",
-      "autoDescription": "Berdampingan di jendela yang lebar, sebagai tab di jendela yang sempit",
-      "sideBySide": "Berdampingan",
-      "tabs": "Tab"
+      "autoDescription": "Panel terbagi di jendela yang lebar, satu panel di jendela yang sempit",
+      "splitPanes": "Panel terbagi",
+      "singlePane": "Satu panel"
     }
   },
   "photo": {

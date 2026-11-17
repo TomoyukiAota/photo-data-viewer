@@ -24,9 +24,12 @@ the menu's button.
 
 ### The names
 
-The choice is named **Layout**, and its three modes **Automatic**, **Side by
-side** and **Tabs**. Automatic says what it does under its name: "Side by
-side in a wide window, tabs in a narrow one".
+The choice is named **Layout**, and its three modes **Automatic**, **Split
+panes** and **Single pane**; in Japanese, `自動`, `表示領域を分割する` and
+`表示領域を分割しない`. The maintainer chose these names of the modes, in
+both languages, on 2026-11-18, in place of the ones first proposed (below).
+Automatic says what it does under its name: "Split panes in a wide window,
+a single pane in a narrow one".
 
 - **Layout** is what Outlook on the web calls the group of its reading pane's
   setting, Windows' File Explorer and Thunderbird their arrangements, and
@@ -36,18 +39,19 @@ side in a wide window, tabs in a narrow one".
   window's: the closest precedent there is. macOS' appearance has `Auto`
   too. "Responsive to your screen", Google Calendar's name for its default
   density, says more but reads as a term of web design.
-- **Side by side** and **Tabs** name what the user sees, as Outlook's "Show
-  on the right" and Gmail's "Right of inbox" do, rather than the window
-  they suit ("Wide" and "Narrow", "Desktop" and "Mobile"), which reads wrong
-  once chosen in the other kind of window. "Side by side" is the words of
-  Word's "View Side by Side", which most languages have a translation of.
-  "Tabs" is the control that the user then finds, the tabs Data, Map and
-  Photo.
+- **Split panes** and **Single pane** name what the user sees, as Outlook's
+  "Show on the right" and Gmail's "No split" and "Right of inbox" do, rather
+  than the window they suit ("Wide" and "Narrow", "Desktop" and "Mobile"),
+  which reads wrong once chosen in the other kind of window. A pane is what
+  Windows and Office call such a part of a window (the preview pane, the
+  reading pane), in most languages.
 
-Alternatives weighed, for the user to choose from: "Split" or "Split view"
-for side by side (Gmail's "No split", Apple's Split View); "Single pane",
-"One at a time" or "Tabbed" for the tabs; "Fit to window" or "Responsive"
-for the automatic mode.
+Proposed first were "Side by side" and "Tabs", with "Split" or "Split view",
+"Single pane", "One at a time" or "Tabbed", and "Fit to window" or
+"Responsive" as alternatives.
+
+The menu lists Automatic first, as the default, as the Language page lists
+"Use browser setting" first.
 
 ### The control
 
@@ -58,10 +62,10 @@ as the menu has its pages.
 
 - The button's icon is the chosen mode's, as a theme switcher's shows the
   chosen theme: a dashed circle with a spark for Automatic (MUI's
-  `AutoMode`), two panes stacked beside a tall one for Side by side (MUI's
+  `AutoMode`), two panes stacked beside a tall one for Split panes (MUI's
   `SpaceDashboard`, mirrored to the app's arrangement: the photo and the map
-  on the left, the data on the right), and a window with a tab for Tabs
-  (MUI's `Tab`).
+  on the left, the data on the right), and a window with a tab for Single
+  pane (MUI's `Tab`), whose tabs choose what the pane shows.
 - It is as wide as its word needs in the language, and never narrower than
   the menu's button in English, as that button is. The header keeps it in
   its flow, after the texts, so the texts end before it; it lines up with
@@ -87,9 +91,9 @@ as the menu has its pages.
   the button: the header stays where it is when the layout changes (it was
   rendered anew inside each layout before), so the focus is not lost.
 
-### Side by side in a narrow window
+### Split panes in a narrow window
 
-Side by side is kept at every width, as the user chose it. In a phone's 320
+Split panes are kept at every width, as the user chose them. In a phone's 320
 pixels the two columns are about 150 pixels each; react-reflex keeps each
 pane at least 100 pixels, which two columns and the splitter (208 pixels)
 have in any window that the app supports. The table of the data scrolls
@@ -98,7 +102,7 @@ table, and the page never becomes wider than the window. Automatic stays the
 default, so no one gets this layout without asking for it, and the button
 that changes it back is in the header.
 
-Weighed: showing the tabs in a narrow window whatever the choice, as
+Weighed: showing a single pane in a narrow window whatever the choice, as
 Outlook's reading pane does, would make the choice look broken where it is
 made, on a phone; letting the page scroll sideways breaks what the layout
 holds everywhere else.
@@ -113,12 +117,12 @@ browser's is, and the automatic layout follows it, as today.
 ### Usage data
 
 - The choice is a setting, `LayoutMode`, stored in the browser as the other
-  settings are (`auto`, `sideBySide` or `tabs`, `auto` by default), and is
-  recorded as they are: with the settings loaded when the page is loaded
-  ("Loaded User Setting"), and when the user changes it ("Changed User
-  Setting").
+  settings are (`auto`, `splitPanes` or `singlePane`, `auto` by default),
+  and is recorded as they are: with the settings loaded when the page is
+  loaded ("Loaded User Setting"), and when the user changes it ("Changed
+  User Setting").
 - "App Layout" records the layout that is shown (`isWideLayout`, now true
-  for the side-by-side panes at any width) with the window's size. It is
+  for the split panes at any width) with the window's size. It is
   recorded again when a change of mode changes the layout shown, not only
   when the window is resized.
 - No new event name: GA4 receives `loaded_user_setting`,
@@ -129,10 +133,10 @@ browser's is, and the automatic layout follows it, as today.
 The six texts go into `"home"` (`home.layout`) in every locale file, in the
 words of the language's widely used software (Windows, Office, macOS): its
 word for a layout, as Windows' File Explorer and Office name the group
-(`Układ`, `Disposition`, `レイアウト`), its words for side by side as in
-Word's "View Side by Side" (`Obok siebie`, `Côte à côte`), and its word for
-tabs. The word under the icon is written in capitals where the script has
-them, as `menu.label` is.
+(`Układ`, `Disposition`, `レイアウト`), and its word for a pane, as they name
+the preview pane and the reading pane (`okienko`, `volet`, `Bereich`). The
+word under the icon is written in capitals where the script has them, as
+`menu.label` is. Japanese has the maintainer's words.
 
 ## What must not change
 
@@ -153,7 +157,7 @@ them, as `menu.label` is.
 - Browser suite: choosing each mode by mouse and by keyboard, kept after a
   reload, recorded in the usage data; the header and the menu at 320 pixels
   in Polish and in Arabic, with nothing cut and the page no wider than the
-  window; side by side at 320 pixels. Reference screenshots of the Home page
+  window; split panes at 320 pixels. Reference screenshots of the Home page
   change with the header; each is reviewed.
 - `npm run test:all`, `npm run build`, `npm run build:plm`, and the browser
   suite with the visual comparison on macOS/Chrome.

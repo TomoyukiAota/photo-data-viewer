@@ -29,9 +29,9 @@
       "buttonLabel": "aspect",
       "label": "ASPECT",
       "auto": "Automat",
-      "autoDescription": "Unul lângă altul într-o fereastră lată, în file într-una îngustă",
-      "sideBySide": "Unul lângă altul",
-      "tabs": "File"
+      "autoDescription": "Panouri împărțite într-o fereastră lată, un singur panou într-una îngustă",
+      "splitPanes": "Panouri împărțite",
+      "singlePane": "Un singur panou"
     }
   },
   "photo": {

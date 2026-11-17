@@ -1,7 +1,9 @@
 # Layout of the Home page's panes: results
 
 Checked on 2026-11-18 on macOS 27 with Node 26.13.0 / npm 11.20.0, on the
-branch `claude/pane-layout-mode-4500b2` from `main` at `76bd3b1`.
+branch `claude/pane-layout-mode-4500b2` from `main` at `76bd3b1`. Every check
+below was run again after the maintainer chose the names of the modes, with
+the texts, the tests and the screenshot of the menu changed for them.
 
 ## Commands
 
@@ -37,27 +39,28 @@ button takes), and everything under the header is lower by that line.
   `narrow-loaded-ar`: the button, and the header one line higher.
 
 Two are new: `layout-menu`, the menu open at 1280 pixels in English, and
-`narrow-side-by-side`, the panes side by side at 320 pixels with a photo.
+`narrow-split-panes`, the split panes at 320 pixels with a photo.
 The screenshots of the Settings, About, Demo and Language pages, in English,
 Japanese and Arabic, matched as they were.
 
 ## What the browser suite checks
 
 - **English** (`the layout is chosen with the button before the menu’s, and
-  is kept and recorded`): automatic at 1280 pixels is side by side; the menu
+  is kept and recorded`): automatic at 1280 pixels is split panes; the menu
   opens by Enter with the focus on the mode chosen, the arrow keys move
   along it, Enter chooses, Escape closes it with nothing changed, and the
-  focus is back on the button after each; tabs at 1280 pixels, kept after a
-  reload; side by side at 320 pixels, each pane at least 100 pixels wide and
-  the page no wider than the window; automatic again at 320 pixels is tabs.
+  focus is back on the button after each; a single pane at 1280 pixels, kept
+  after a reload; split panes at 320 pixels, each pane at least 100 pixels
+  wide and the page no wider than the window; automatic again at 320 pixels
+  is a single pane.
   The usage data has `LayoutMode: auto` among the settings loaded, each
   change as "Changed User Setting", and "App Layout" again when the change of
   mode changed the layout shown.
 - **Polish at 320 pixels**: the header's sentence ends before the layout's
   button, which ends before the menu's button, at its height, and is not
   cut; the menu is in the window, with each name and the description whole
-  (the description on two lines); side by side, the photo and the map are in
-  the left column and the data in the right one, inside the window.
+  (the description on two lines); with split panes, the photo and the map
+  are in the left column and the data in the right one, inside the window.
 - **Arabic at 320 pixels**: the layout's button is right of the menu's
   button, at its height, and the sentence starts right of it; the menu is in
   the window.
@@ -65,13 +68,14 @@ Japanese and Arabic, matched as they were.
 ## Checked by hand, headless
 
 - Opened again after each choice, the menu has the focus on the mode chosen
-  then (Tabs, Side by side, Automatic, in turn), and Escape gives the focus
-  back to the button. In jsdom, MUI's menu puts the focus on the first entry
-  when it opens again, so the unit test leaves that to the browser suite.
+  then (Single pane, Split panes, Automatic, in turn), and Escape gives the
+  focus back to the button. In jsdom, MUI's menu puts the focus on the first
+  entry when it opens again, so the unit test leaves that to the browser
+  suite.
 - In Photo Location Map's window (`?plmBridge=1`, which the app takes for its
   isolated window): no header and no button, and the layout is the automatic
-  one whatever is stored: side by side at 1280 pixels with `tabs` stored,
-  tabs at 600 pixels with `sideBySide` stored.
+  one whatever is stored: split panes at 1280 pixels with `singlePane`
+  stored, a single pane at 600 pixels with `splitPanes` stored.
 - The header and the menu at 320 pixels in English, Polish, Arabic,
   Japanese, French and Latvian, the language with the longest word under the
   icon (IZKĀRTOJUMS). The space between the two buttons (8 pixels) was added

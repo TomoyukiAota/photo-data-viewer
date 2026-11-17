@@ -29,9 +29,9 @@
       "buttonLabel": "layout",
       "label": "LAYOUT",
       "auto": "Automatisk",
-      "autoDescription": "Side om side i et bredt vindue, i faner i et smalt",
-      "sideBySide": "Side om side",
-      "tabs": "Faner"
+      "autoDescription": "Opdelte ruder i et bredt vindue, én rude i et smalt",
+      "splitPanes": "Opdelte ruder",
+      "singlePane": "Én rude"
     }
   },
   "photo": {

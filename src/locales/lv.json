@@ -29,9 +29,9 @@
       "buttonLabel": "izkārtojums",
       "label": "IZKĀRTOJUMS",
       "auto": "Automātiski",
-      "autoDescription": "Blakus platā logā, cilnēs šaurā",
-      "sideBySide": "Blakus",
-      "tabs": "Cilnes"
+      "autoDescription": "Sadalītas rūtis platā logā, viena rūts šaurā",
+      "splitPanes": "Sadalītas rūtis",
+      "singlePane": "Viena rūts"
     }
   },
   "photo": {

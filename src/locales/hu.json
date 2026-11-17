@@ -29,9 +29,9 @@
       "buttonLabel": "elrendezés",
       "label": "ELRENDEZÉS",
       "auto": "Automatikus",
-      "autoDescription": "Széles ablakban egymás mellett, keskeny ablakban lapokon",
-      "sideBySide": "Egymás mellett",
-      "tabs": "Lapok"
+      "autoDescription": "Széles ablakban felosztott ablaktáblák, keskeny ablakban egy ablaktábla",
+      "splitPanes": "Felosztott ablaktáblák",
+      "singlePane": "Egy ablaktábla"
     }
   },
   "photo": {

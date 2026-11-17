@@ -29,9 +29,9 @@
       "buttonLabel": "rozloženie",
       "label": "ROZLOŽENIE",
       "auto": "Automaticky",
-      "autoDescription": "Vedľa seba v širokom okne, na kartách v úzkom",
-      "sideBySide": "Vedľa seba",
-      "tabs": "Karty"
+      "autoDescription": "Rozdelené tably v širokom okne, jedna tabla v úzkom",
+      "splitPanes": "Rozdelené tably",
+      "singlePane": "Jedna tabla"
     }
   },
   "photo": {

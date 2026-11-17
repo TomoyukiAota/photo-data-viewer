@@ -29,9 +29,9 @@
       "buttonLabel": "paigutus",
       "label": "PAIGUTUS",
       "auto": "Automaatne",
-      "autoDescription": "Kõrvuti laias aknas, vahekaartidena kitsas",
-      "sideBySide": "Kõrvuti",
-      "tabs": "Vahekaardid"
+      "autoDescription": "Jagatud paanid laias aknas, üks paan kitsas",
+      "splitPanes": "Jagatud paanid",
+      "singlePane": "Üks paan"
     }
   },
   "photo": {

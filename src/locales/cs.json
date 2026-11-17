@@ -29,9 +29,9 @@
       "buttonLabel": "rozložení",
       "label": "ROZLOŽENÍ",
       "auto": "Automaticky",
-      "autoDescription": "Vedle sebe v širokém okně, na kartách v úzkém",
-      "sideBySide": "Vedle sebe",
-      "tabs": "Karty"
+      "autoDescription": "Rozdělená podokna v širokém okně, jedno podokno v úzkém",
+      "splitPanes": "Rozdělená podokna",
+      "singlePane": "Jedno podokno"
     }
   },
   "photo": {

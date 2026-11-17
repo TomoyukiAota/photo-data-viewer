@@ -35,7 +35,7 @@ describe('useUserSettings', () => {
       ClockSystemFormat: '12-hour',
       DateFormat: 'DD/MM/YYYY',
       Language: 'ja',
-      LayoutMode: 'tabs',
+      LayoutMode: 'singlePane',
       SendUsageData: 'false',
       WideLayoutPhotoDataPaneFlex: '0.3',
       WideLayoutPhotoImagePaneFlex: '0.7',
@@ -47,7 +47,7 @@ describe('useUserSettings', () => {
     expect(result.current.userSettings).toEqual({
       dateFormat: 'DD/MM/YYYY',
       clockSystemFormat: '12-hour',
-      layoutMode: 'tabs',
+      layoutMode: 'singlePane',
       wideLayoutPhotoDataPaneFlex: 0.3,
       wideLayoutPhotoImagePaneFlex: 0.7,
       sendUsageData: false,
@@ -76,13 +76,13 @@ describe('useUserSettingsTracker', () => {
   it('records each setting as it is loaded', () => {
     localStorage.setItem('DateFormat', 'DD/MM/YYYY');
     localStorage.setItem('Language', 'ja');
-    localStorage.setItem('LayoutMode', 'sideBySide');
+    localStorage.setItem('LayoutMode', 'splitPanes');
     const { result } = renderHook(() => useUserSettingsTracker());
     result.current.trackLoadedUserSettings();
     expect(jest.mocked(trackLoadedUserSetting).mock.calls).toEqual([
       ['DateFormat', 'DD/MM/YYYY'],
       ['ClockSystemFormat', '24-hour'],
-      ['LayoutMode', 'sideBySide'],
+      ['LayoutMode', 'splitPanes'],
       ['WideLayoutPhotoDataPaneFlex', '0.5'],
       ['WideLayoutPhotoImagePaneFlex', '0.5'],
       ['Language', 'ja'],

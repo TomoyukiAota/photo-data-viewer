@@ -13,19 +13,19 @@ import { useLocalStorage } from './useLocalStorage';
 // browsers is an ES module, so a test of what imports it cannot run.
 
 /**
- * Whether the Home page shows its panes side by side, the layout that the code
- * calls wide (HomeWideLayout), rather than under tabs (HomeNarrowLayout): as
- * the user chose, or, in the automatic mode, when the window is wider than
- * 1200 pixels.
+ * Whether the Home page splits its panes, the layout that the code calls wide
+ * (HomeWideLayout), rather than showing a single pane chosen with tabs
+ * (HomeNarrowLayout): as the user chose, or, in the automatic mode, when the
+ * window is wider than 1200 pixels.
  */
 export function isWideLayout(
   windowWidth: number,
   layoutMode: LayoutModeType,
 ): boolean {
   switch (layoutMode) {
-    case LayoutMode.SideBySide:
+    case LayoutMode.SplitPanes:
       return true;
-    case LayoutMode.Tabs:
+    case LayoutMode.SinglePane:
       return false;
     default:
       return windowWidth > 1200;

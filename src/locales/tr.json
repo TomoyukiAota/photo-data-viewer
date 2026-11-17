@@ -29,9 +29,9 @@
       "buttonLabel": "düzen",
       "label": "DÜZEN",
       "auto": "Otomatik",
-      "autoDescription": "Geniş pencerede yan yana, dar pencerede sekmelerde",
-      "sideBySide": "Yan yana",
-      "tabs": "Sekmeler"
+      "autoDescription": "Geniş pencerede bölünmüş bölmeler, dar pencerede tek bölme",
+      "splitPanes": "Bölünmüş bölmeler",
+      "singlePane": "Tek bölme"
     }
   },
   "photo": {

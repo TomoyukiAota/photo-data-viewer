@@ -29,9 +29,9 @@
       "buttonLabel": "postavitev",
       "label": "POSTAVITEV",
       "auto": "Samodejno",
-      "autoDescription": "Drugo ob drugem v širokem oknu, na zavihkih v ozkem",
-      "sideBySide": "Drugo ob drugem",
-      "tabs": "Zavihki"
+      "autoDescription": "Razdeljena podokna v širokem oknu, eno podokno v ozkem",
+      "splitPanes": "Razdeljena podokna",
+      "singlePane": "Eno podokno"
     }
   },
   "photo": {

@@ -23,21 +23,25 @@ import {
 import { HeaderButtonFace } from '../app-menu/AppMenu';
 
 /**
- * Two panes stacked beside a tall one, as the panes side by side are: the
- * photo and the map on the left, and the data on the right, in a language
- * written from right to left too. It is MUI's SpaceDashboard icon, mirrored.
+ * Two panes stacked beside a tall one, as the split panes are: the photo and
+ * the map on the left, and the data on the right, in a language written from
+ * right to left too. It is MUI's SpaceDashboard icon, mirrored.
  */
-const SideBySideIcon = createSvgIcon(
+const SplitPanesIcon = createSvgIcon(
   <path d='M13 21h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-6zm-2 0H5c-1.1 0-2-.9-2-2v-7h8zM3 10V5c0-1.1.9-2 2-2h6v7z' />,
-  'SideBySide',
+  'SplitPanes',
 );
 
-/** Each mode's icon, and the keys of its texts in src/locales. */
+/**
+ * Each mode's icon, and the keys of its texts in src/locales. The single pane
+ * has a window with a tab: its tabs choose what it shows.
+ */
 const modes: Record<
   LayoutModeType,
   {
     Icon: typeof SvgIcon;
-    nameKey: 'home.layout.auto' | 'home.layout.sideBySide' | 'home.layout.tabs';
+    nameKey:
+      'home.layout.auto' | 'home.layout.splitPanes' | 'home.layout.singlePane';
     descriptionKey?: 'home.layout.autoDescription';
   }
 > = {
@@ -46,11 +50,14 @@ const modes: Record<
     nameKey: 'home.layout.auto',
     descriptionKey: 'home.layout.autoDescription',
   },
-  [LayoutMode.SideBySide]: {
-    Icon: SideBySideIcon,
-    nameKey: 'home.layout.sideBySide',
+  [LayoutMode.SplitPanes]: {
+    Icon: SplitPanesIcon,
+    nameKey: 'home.layout.splitPanes',
   },
-  [LayoutMode.Tabs]: { Icon: TabIcon, nameKey: 'home.layout.tabs' },
+  [LayoutMode.SinglePane]: {
+    Icon: TabIcon,
+    nameKey: 'home.layout.singlePane',
+  },
 };
 
 /** The menu's id, which the button names while the menu is open. There is one header on a page. */

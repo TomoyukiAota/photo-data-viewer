@@ -29,9 +29,9 @@
       "buttonLabel": "disposition",
       "label": "DISPOSITION",
       "auto": "Automatique",
-      "autoDescription": "Côte à côte dans une fenêtre large, en onglets dans une fenêtre étroite",
-      "sideBySide": "Côte à côte",
-      "tabs": "Onglets"
+      "autoDescription": "Volets fractionnés dans une fenêtre large, volet unique dans une fenêtre étroite",
+      "splitPanes": "Volets fractionnés",
+      "singlePane": "Volet unique"
     }
   },
   "photo": {

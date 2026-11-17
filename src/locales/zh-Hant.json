@@ -29,9 +29,9 @@
       "buttonLabel": "版面配置",
       "label": "版面配置",
       "auto": "自動",
-      "autoDescription": "視窗較寬時並排顯示，較窄時以索引標籤顯示",
-      "sideBySide": "並排",
-      "tabs": "索引標籤"
+      "autoDescription": "視窗較寬時分割窗格，較窄時使用單一窗格",
+      "splitPanes": "分割窗格",
+      "singlePane": "單一窗格"
     }
   },
   "photo": {

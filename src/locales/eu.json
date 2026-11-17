@@ -29,9 +29,9 @@
       "buttonLabel": "diseinua",
       "label": "DISEINUA",
       "auto": "Automatikoa",
-      "autoDescription": "Elkarren ondoan leiho zabal batean, fitxetan leiho estu batean",
-      "sideBySide": "Elkarren ondoan",
-      "tabs": "Fitxak"
+      "autoDescription": "Panel zatituak leiho zabal batean, panel bakarra leiho estu batean",
+      "splitPanes": "Panel zatituak",
+      "singlePane": "Panel bakarra"
     }
   },
   "photo": {

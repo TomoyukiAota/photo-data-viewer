@@ -29,9 +29,9 @@
       "buttonLabel": "išdėstymas",
       "label": "IŠDĖSTYMAS",
       "auto": "Automatinis",
-      "autoDescription": "Greta plačiame lange, skirtukuose siaurame",
-      "sideBySide": "Greta",
-      "tabs": "Skirtukai"
+      "autoDescription": "Padalytos sritys plačiame lange, viena sritis siaurame",
+      "splitPanes": "Padalytos sritys",
+      "singlePane": "Viena sritis"
     }
   },
   "photo": {
