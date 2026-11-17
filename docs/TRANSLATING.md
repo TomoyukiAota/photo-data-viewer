@@ -63,8 +63,13 @@ finds the texts by them.
      of the week and AM/PM for dates. The dayjs locales are listed at
      <https://github.com/iamkun/dayjs/tree/dev/src/locale>; most have the
      language's code, in lower case (`pt-br`, `zh-tw`).
-4. Add the language to the table of [languages](#languages) below.
-5. Open a pull request titled `Add <language> translation`. If you can, add a
+4. Add the language's two addresses to `public/sitemap.xml`, which lists the
+   pages for search engines: the Home page, `https://photo-data-viewer.vercel.app/<code>`,
+   and the About page, `https://photo-data-viewer.vercel.app/<code>/about`, each
+   among the addresses of that page, in the order of `src/i18n/languages.ts`.
+   The check names the addresses and where they go.
+5. Add the language to the table of [languages](#languages) below.
+6. Open a pull request titled `Add <language> translation`. If you can, add a
    screenshot of the Home page and the Language page in your language; see
    [Checking how it looks](#checking-how-it-looks).
 
@@ -106,15 +111,19 @@ reviews the pull request:
 - Every file is listed in `src/i18n/languages.ts` with a name in the language
   and in English, and what a language loads there is its own file and a dayjs
   locale that exists. The list is in the order of the names.
+- `public/sitemap.xml` has the addresses of the Home page and the About page in
+  every language (`src/components/search-head/SearchHead.spec.tsx`), and every
+  page has a title and a description for search engines in every language
+  (`search-head-props.spec.ts` there).
 
-To run it on your computer, set the repository up as
+To run them on your computer, set the repository up as
 [CONTRIBUTING.md](./CONTRIBUTING.md) says, then:
 
 ```bash
-npm test -- locales
+npm test -- locales search-head
 ```
 
-This check is the only one that covers every language. The tests that open the
+These checks are the only ones that cover every language. The tests that open the
 app in a browser stay with English, Japanese, Arabic and Polish, so that they
 do not take longer with every language.
 
@@ -195,6 +204,11 @@ do not take longer with every language.
   pattern too, so a word goes in square brackets: `[le] ddd`.
 - English is written in the second person, plainly, without exclamation marks.
   Follow the register that an application's settings page has in your language.
+- `pageDescription` is not shown in the app. Each text is what a search
+  engine shows under the page's title in a search result, for the page's
+  address in your language (`https://photo-data-viewer.vercel.app/<code>/about`).
+  A search result shows about 150 characters of it, fewer in a script whose
+  letters are wide: say first what matters most, as the English text does.
 - The About page says what the application collects (`about.usageData`).
   Translate it faithfully: it is what a user is told about their data.
 - Machine translation can give a first draft, but a wrong text is worse than an
@@ -206,7 +220,8 @@ do not take longer with every language.
 
 With the repository set up ([CONTRIBUTING.md](./CONTRIBUTING.md)), `npm run dev`
 starts the app at <http://localhost:3000>; choose your language on the Language
-page, which the menu opens. Check the Home page with a photo loaded at a narrow
+page, which the menu opens, or open your language's address,
+`http://localhost:3000/<code>` (`/de`, `/ja/about`). Check the Home page with a photo loaded at a narrow
 width (320 and 375 pixels, in the browser's device toolbar) and at a wide one,
 the Settings page and the About page.
 
@@ -229,6 +244,14 @@ right.
   other Chinese is `zh-Hans`; `pt` alone is `pt-BR`, and another region is
   `pt-PT`; `no` and `nn` are `nb`; `sr` is `sr-Latn`
   (`src/i18n/resolve-language.ts`).
+- An address can name its language:
+  `https://photo-data-viewer.vercel.app/ja/about` is the About page in
+  Japanese, whatever the setting and the browser, and every page has such an
+  address in every language. Search engines show it in that language's
+  results. Choosing a language on the Language page of such an address opens
+  the address of the language chosen, or the one without a language for the
+  browser's language. An address without a language, such as `/about`, is
+  shown as above.
 - Inside Photo Location Map: the language Photo Location Map passes in the
   address, matched the same way, or English.
 
@@ -285,7 +308,7 @@ speaker of the language has reviewed them yet.
 | हिन्दी                 | `hi`      | Hindi                 | Machine translation, not reviewed yet |
 | ไทย                    | `th`      | Thai                  | Machine translation, not reviewed yet |
 | 한국어                    | `ko`      | Korean                | Machine translation, not reviewed yet |
-| 日本語                    | `ja`      | Japanese              | Reviewed by the maintainer, except the texts of the Language page |
+| 日本語                    | `ja`      | Japanese              | Reviewed by the maintainer, except the texts of the Language page and `pageDescription` |
 | 简体中文                   | `zh-Hans` | Chinese (Simplified)  | Machine translation, not reviewed yet |
 | 繁體中文                   | `zh-Hant` | Chinese (Traditional) | Machine translation, not reviewed yet |
 

@@ -1125,6 +1125,206 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
     await snapshot(page, 'about-ja');
   });
+
+  // TL;DR: Nothing is shown in English before the texts of the language
+  // arrive, the title in the tab included.
+  // Details: the page is served with a title for search engines, the app's
+  // name, which is the same in every language (SearchHead.tsx). The texts of
+  // Japanese are held back here, as a slow connection holds them, and so is
+  // anything else that the page fetches after it is served.
+  test('until the Japanese texts arrive, the page shows nothing, and its title is the name of the app', async ({
+    page,
+    request,
+  }) => {
+    const served = await (await request.get('/about')).text();
+    let release;
+    const held = new Promise((resolve) => (release = resolve));
+    let asked;
+    const askedForMore = new Promise((resolve) => (asked = resolve));
+    await page.route('**/_next/static/chunks/**', async (route) => {
+      if (!served.includes(new URL(route.request().url()).pathname)) {
+        asked();
+        await held;
+      }
+      await route.continue();
+    });
+    await page.goto('/about', { waitUntil: 'domcontentloaded' });
+    await askedForMore;
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('#__next')).toBeEmpty();
+    release();
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+  });
+});
+
+// TL;DR: What search engines and link previews read: the head of a page, which
+// SearchHead.tsx gives, robots.txt and the sitemap.
+// Details: a search engine or a link preview that does not run the page reads
+// the page as it is served, which is its head alone, as the app renders nothing
+// until it runs in the browser (_app.tsx). Google runs the page as well, and
+// reads what the page leaves. Each page has an address in each language
+// (next.config.js), which search engines show in that language's results. The
+// wording of the descriptions is checked by the unit tests of SearchHead.
+test.describe('what search engines read', () => {
+  test.describe('as a page is served, before it runs', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('each page has a title, a description and the address that search engines show', async ({
+      page,
+    }) => {
+      for (const path of Object.values(menuPaths)) {
+        const response = await page.goto(path);
+        expect(response.headers()['x-robots-tag']).toBeUndefined();
+        await expect(page).toHaveTitle('Photo Data Viewer');
+        await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+          'content',
+          /\S/,
+        );
+        const address = `https://photo-data-viewer.vercel.app${path}`;
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+          'href',
+          address,
+        );
+        await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+          'content',
+          address,
+        );
+      }
+    });
+
+    test("a page at a language's address has its title and description in that language, and lists the page's address in every language", async ({
+      page,
+    }) => {
+      const response = await page.goto('/ja/about');
+      expect(response.headers()['x-robots-tag']).toBeUndefined();
+      await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+      await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+        'content',
+        /^Photo Data Viewer は写真をサーバーに送信せず/,
+      );
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        'https://photo-data-viewer.vercel.app/ja/about',
+      );
+      const alternates = page.locator('link[rel="alternate"]');
+      await expect(alternates).toHaveCount(43); // The 42 languages, and the address without a language.
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="pt-BR"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/pt-BR/about');
+      await expect(
+        page.locator('link[rel="alternate"][hreflang="x-default"]'),
+      ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/about');
+
+      // A language written from right to left is served so.
+      await page.goto('/ar');
+      await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    });
+  });
+
+  test('a page that runs keeps one description and its address, with its own title, and they follow it to another page', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('button', { name: 'Select Photo' }),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/',
+    );
+    await navigate(page, 'About');
+    await expect(page).toHaveTitle('About - Photo Data Viewer');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      'https://photo-data-viewer.vercel.app/about',
+    );
+    await expect(page.locator('title')).toHaveCount(1);
+    await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+  });
+
+  test("a language's address shows the page in that language, whatever the browser's, and the menu keeps it", async ({
+    page,
+  }) => {
+    await page.goto('/ja/about'); // In a browser set to English (playwright.config.mjs).
+    await expect(
+      page.getByText('このアプリは Tomoyuki Aota が開発しています。'),
+    ).toBeVisible();
+    await expect(page).toHaveTitle('このアプリについて - Photo Data Viewer');
+    await page.getByRole('button', { name: 'メニュー', exact: true }).click();
+    await page.getByRole('menuitem', { name: '設定', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/ja/settings');
+    await expect(page.getByLabel('日付の形式', { exact: true })).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+  });
+
+  test("the Language page at a language's address opens the address of the language chosen, and Back returns to the first", async ({
+    page,
+  }) => {
+    await page.goto('/ja/language');
+    const list = page.getByRole('listbox');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(list.locator('[aria-selected="true"]')).toHaveText(['日本語']);
+
+    await list.getByRole('option', { name: 'English', exact: true }).click();
+    await page.waitForURL((url) => url.pathname === '/en/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    await page.goBack();
+    await page.waitForURL((url) => url.pathname === '/ja/language');
+    await expect(list).toHaveAccessibleName('言語');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+
+    // The browser's language opens the address without a language, whose lang
+    // is the language shown, not the locale that Next.js gives it.
+    await list.getByRole('option').first().click();
+    await page.waitForURL((url) => url.pathname === '/language');
+    await expect(list).toHaveAccessibleName('Language');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+
+  test('robots.txt lets search engines read every page, and names the sitemap, which lists the Home page and the About page in every language', async ({
+    request,
+  }) => {
+    // Served as checked out, which is with CRLF line endings on Windows.
+    const robots = (await (await request.get('/robots.txt')).text()).replace(
+      /\r\n/g,
+      '\n',
+    );
+    expect(robots).toContain('User-agent: *\nAllow: /\n');
+    expect(robots).toContain(
+      'Sitemap: https://photo-data-viewer.vercel.app/sitemap.xml',
+    );
+    const sitemap = await request.get('/sitemap.xml');
+    expect(sitemap.headers()['content-type']).toContain('xml');
+    const addresses = [...(await sitemap.text()).matchAll(/<loc>(.*)<\/loc>/g)].map(
+      ([, address]) => address,
+    );
+    // Without a language, then in each of the 42, for each of the two pages.
+    expect(addresses).toHaveLength(86);
+    expect(addresses).toEqual(
+      expect.arrayContaining([
+        'https://photo-data-viewer.vercel.app/',
+        'https://photo-data-viewer.vercel.app/ja',
+        'https://photo-data-viewer.vercel.app/about',
+        'https://photo-data-viewer.vercel.app/ja/about',
+        'https://photo-data-viewer.vercel.app/zh-Hant/about',
+      ]),
+    );
+    // Each is served.
+    for (const address of ['/ja', '/zh-Hant/about']) {
+      expect((await request.get(address)).status()).toBe(200);
+    }
+  });
 });
 
 // TL;DR: The layout is one for every language, and holds whatever the length

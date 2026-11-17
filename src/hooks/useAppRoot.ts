@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { loadPlmSettings } from "../app-integration/plm-settings";
 import usePageView from "../analytics/usePageView";
 import { useAppLayoutTracker } from "./useAppLayout";
+import { useLanguageAttribute } from "./useLanguageAttribute";
 import { useLanguagePageTracker } from "./useLanguagePageTracker";
 import { usePageHiddenTracker } from "./usePageHiddenTracker";
 import { useUserSettingsInitializer, useUserSettingsTracker } from "./useUserSettings";
@@ -10,6 +11,7 @@ export const useAppRoot = () => {
   usePageView();
   usePageHiddenTracker();
   useLanguagePageTracker();
+  useLanguageAttribute();
 
   loadPlmSettings();
 

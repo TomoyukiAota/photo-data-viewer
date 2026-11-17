@@ -166,6 +166,36 @@ of the installed app; the
 [installable app record](./tasks/20261118_installable-app/PLAN.md) says why each
 is there.
 
+## Search engines
+
+Every page has an address in each language, such as `/ja/about`, besides the
+one without a language, `/about` (`i18n` in [`next.config.js`](../next.config.js),
+[`address.ts`](../src/i18n/address.ts)). The address of a language shows the
+page in it, whatever the setting; the one without a language shows the language
+of the setting or the browser, as it always did. Next.js prerenders each page
+once for each language, and gives the address without a language the locale
+`default`; it redirects nothing by the browser's language.
+
+The app renders nothing until it runs in the browser, so each page is served
+with its head alone: the head that search engines and link previews read, from
+[`SearchHead.tsx`](../src/components/search-head/SearchHead.tsx), with the
+texts that the page's `getStaticProps` gives in the language of its address
+(`pageTitle` and `pageDescription` in the translation files). It has the page's
+title, description and canonical address, its address in every language
+(`hreflang`, and `x-default` for the one without a language), and Open Graph's
+and X's tags. The address without a language is served in English, with the
+app's name as the title, which is the same in every language; the page sets its
+own title once it is shown. [`robots.txt`](../public/robots.txt) names
+[the sitemap](../public/sitemap.xml), which lists the Home page and the About
+page at every address. The deployment for Photo Location Map has no addresses
+for the languages, is served without that head, and is sent with
+`X-Robots-Tag: noindex`.
+
+To see what a page is served with, `curl` it, or open it in a browser with
+JavaScript turned off. The ways to show the languages in search results that
+were weighed are in
+[the task record](./tasks/20261118_search-results/evidence/LANGUAGES.md).
+
 ## Task records
 
 Keep task-specific plans, progress and evidence under

@@ -12,10 +12,10 @@ This project uses mise to manage the versions of Node.js and npm, which are defi
 
 Note that there are two deployments of this app.
 
-| Deployment              | Note                                                                                                                |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Standalone              | Hosted on https://photo-data-viewer.vercel.app to be opened from web browsers.                                      |
-| [Photo Location Map][1] | Hosted on https://pdv-in-plm.vercel.app to be opened from Photo Location Map. This URL does not work with browsers. |
+| Deployment              | Note                                                                                                                                                              |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Standalone              | Hosted on https://photo-data-viewer.vercel.app to be opened from web browsers.                                                                                    |
+| [Photo Location Map][1] | Hosted on https://pdv-in-plm.vercel.app to be opened from Photo Location Map. This URL does not work with browsers, and search engines are asked not to index it. |
 
 [1]: https://github.com/TomoyukiAota/photo-location-map
 

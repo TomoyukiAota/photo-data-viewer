@@ -14,6 +14,13 @@
     "language": "Język - {{appName}}",
     "about": "Informacje - {{appName}}"
   },
+  "pageDescription": {
+    "home": "Wyświetl dane EXIF swojego zdjęcia w przeglądarce: datę wykonania, położenie na mapie, aparat i jego ustawienia. Zdjęcie nie jest wysyłane na żaden serwer.",
+    "demo": "Wypróbuj aplikację {{appName}} na przykładowym zdjęciu i zobacz, jakie dane EXIF wyświetla: datę wykonania, położenie na mapie, aparat i jego ustawienia.",
+    "settings": "Wybierz, jak aplikacja {{appName}} zapisuje datę i godzinę oraz czy wysyła dane o użytkowaniu. Ustawienia są zapisywane w Twojej przeglądarce.",
+    "language": "Wybierz język, w którym wyświetlana jest aplikacja {{appName}}, lub pozwól jej używać języka Twojej przeglądarki.",
+    "about": "Jak aplikacja {{appName}} odczytuje Twoje zdjęcie w przeglądarce bez wysyłania go na jakikolwiek serwer, jakie dane o użytkowaniu zbiera, jej kod źródłowy i kto ją rozwija."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },

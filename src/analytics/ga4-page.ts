@@ -1,5 +1,6 @@
 import { appName } from '../app-integration/app-name';
 import { pageTitleDefaultValue } from '../context/page-title/page-title-default-value';
+import { pageOfPath } from '../i18n/address';
 
 // What GA4 records of the page: its address and its title, which gtag.js would
 // otherwise read from the page as it is. Neither may carry the photo: Photo Location
@@ -33,6 +34,6 @@ export function ga4PageFields(href: string): Ga4PageFields {
   url.searchParams.delete(PHOTO_PATH_PARAM);
   return {
     page_location: url.toString(),
-    page_title: GA4_PAGE_TITLES[url.pathname] ?? GA4_FALLBACK_TITLE,
+    page_title: GA4_PAGE_TITLES[pageOfPath(url.pathname)] ?? GA4_FALLBACK_TITLE,
   };
 }

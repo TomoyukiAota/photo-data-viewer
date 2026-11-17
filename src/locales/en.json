@@ -14,6 +14,13 @@
     "language": "Language - {{appName}}",
     "about": "About - {{appName}}"
   },
+  "pageDescription": {
+    "home": "View the EXIF data of your photo in your browser: the date taken, the location on a map, the camera and its settings. The photo is not sent to any server.",
+    "demo": "Try {{appName}} with a sample photo, and see the EXIF data it shows: the date taken, the location on a map, the camera and its settings.",
+    "settings": "Choose how {{appName}} writes dates and times, and whether it sends usage data. The settings are saved in your browser.",
+    "language": "Choose the language that {{appName}} is shown in, or let it follow the language of your browser.",
+    "about": "How {{appName}} reads your photo in your browser without sending it to any server, the usage data it collects, its source code and who develops it."
+  },
   "dateTime": {
     "weekdayPattern": "ddd"
   },
