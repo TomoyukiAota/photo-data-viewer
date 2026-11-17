@@ -77,11 +77,6 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-The scripts of Vercel's Web Analytics and Speed Insights exist on Vercel only:
-the suite answers them with empty scripts. Elsewhere, a production server is
-asked for `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`
-in vain, and a development server loads Vercel's debug versions, which log to
-the console and send nothing.
 Two tests run in a browser set to Japanese (`ja-JP`) and two in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
@@ -128,6 +123,12 @@ This setting applies to that command and its child processes. See the
 
 Headless Chrome and Firefox draw no scrollbars, so the screenshot of the
 Language page shows its list without the scrollbar that a window shows.
+
+The scripts of Vercel's Web Analytics and Speed Insights exist on Vercel only:
+the suite answers them with empty scripts. Elsewhere, a production server is
+asked for `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`
+in vain, and a development server loads Vercel's debug versions, which log to
+the console and send nothing.
 
 `PDV_DEV=1 npm run test:e2e` starts a development server on port 3200 and runs
 navigation/photo regression checks, including the About-to-Settings link. Close
