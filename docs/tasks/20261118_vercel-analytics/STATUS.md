@@ -5,8 +5,8 @@ Started on 2026-11-18. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Implemented and verified locally; it sends nothing until it is deployed, and
-Web Analytics collects once it is enabled in the Vercel project.
+Implemented and verified locally; it sends nothing until it is deployed. Web
+Analytics is enabled in the Vercel project already.
 
 - The standalone app loads Vercel's Web Analytics and Speed Insights while
   "Send usage data" is on (`src/analytics/VercelAnalytics.tsx`). Turned off,
@@ -16,22 +16,18 @@ Web Analytics collects once it is enabled in the Vercel project.
 - The About page says that the time the pages take to load and respond is
   collected, in English and the 41 translations.
 
-## The maintainer's step in Vercel
+## In Vercel
 
-In the dashboard of the `photo-data-viewer` project, before the merge or with
-a redeployment after it:
+Nothing is left to do in the dashboard. On 2026-11-18 the production
+deployment of the `photo-data-viewer` project, which has none of this code
+yet, already answered `/_vercel/insights/script.js` and
+`/_vercel/speed-insights/script.js` with Vercel's scripts: Web Analytics is
+enabled in the project, which is why its **Analytics** page has no **Enable**
+button, and Speed Insights' free tier needs no switch. The `pdv-in-plm`
+project answers with 404, which is as it should be: the app loads neither
+there. Speed Insights Plus, which the dashboard may offer, is for Pro.
 
-1. **Web Analytics**: open **Analytics** and select **Enable**. Vercel adds
-   the routes the script uses with the next deployment, so a deployment of
-   this code made before it asks for a script that is not there; deploying
-   again after enabling fixes that.
-2. **Speed Insights**: open **Speed Insights**. Vercel's documentation of the
-   free tier has no switch to turn on: the deployments include its routes. If
-   the page offers to enable it, enable it; do not choose Speed Insights Plus,
-   which is for Pro.
-3. Nothing in the `pdv-in-plm` project: the app loads neither there.
-
-Then, on <https://photo-data-viewer.vercel.app>, the browser's developer tools
+After the merge, on <https://photo-data-viewer.vercel.app>, the browser's developer tools
 show two scripts of the app's own address loaded after the page (each at a
 path that changes with the deployment), a request ending in `/view` for each
 page opened, and requests ending in `/vitals` soon after the page is shown and
@@ -65,6 +61,6 @@ after a few days.
 
 ## Resuming
 
-After the merge and the maintainer's step, check the requests above on the
+After the merge, check the requests above on the
 production site, with the setting on and off, and record them in the
 [results](./evidence/RESULTS.md).

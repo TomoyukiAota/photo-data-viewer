@@ -104,8 +104,8 @@ From Vercel's documentation, read on 2026-11-18 (links in the
 3. `src/analytics/vercel-analytics.ts`, `beforeSendToVercel`: nothing while usage
    data is off, and the address without the photo's path.
 4. The About page's text on usage data, in English and the 41 translations.
-5. Enabling Web Analytics in the Vercel project is the maintainer's step
-   ([status](./STATUS.md#the-maintainers-step-in-vercel)).
+5. Web Analytics is enabled in the Vercel project already
+   ([status](./STATUS.md#in-vercel)).
 
 ## What must not change
 

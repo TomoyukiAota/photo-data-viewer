@@ -81,6 +81,14 @@ own address).
 The app's code for every page (`pages/_app`) was 525 KB, 215 KB compressed,
 with them.
 
+## On Vercel, before the merge
+
+On 2026-11-18, <https://photo-data-viewer.vercel.app> answered
+`/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js` with
+JavaScript of 4,518 and 20,277 bytes, the sizes of Vercel's scripts above:
+Web Analytics was enabled in the project already. <https://pdv-in-plm.vercel.app>
+answered `/_vercel/insights/script.js` with 404.
+
 ## Local behavior
 
 On 2026-11-18, on macOS, in headless Chromium. Requests to other hosts were
