@@ -308,6 +308,89 @@ for (const width of [1280, 1201, 1200, 1199, 600, 320]) {
   });
 }
 
+// TL;DR: Chrome offers to install the app, which then opens in a window of its
+// own. Edge, built on Chromium, asks for the same.
+// Details: The browser does so when the web app manifest has what it asks for
+// (docs/tasks/20261118_installable-app), and says through the DevTools
+// protocol what is missing, as DevTools' Application panel does. It is asked
+// in a browser of its own: Playwright's usual context is Incognito, where
+// nothing is installed, and the headless shell that Playwright runs by default
+// does not check at all, so this runs the full browser, without a window too.
+test('Chrome offers to install the app, with its name and icons', async ({
+  browserName,
+  headless,
+  launchOptions,
+  playwright,
+}, testInfo) => {
+  test.skip(
+    browserName !== 'chromium',
+    'Chromium alone tells whether a page can be installed.',
+  );
+  const baseURL = testInfo.project.use.baseURL;
+  const appOrigin = new URL(baseURL).origin;
+  const context = await playwright.chromium.launchPersistentContext(
+    testInfo.outputPath('profile'),
+    {
+      ...launchOptions,
+      channel: launchOptions.channel ?? 'chromium',
+      headless,
+      baseURL,
+    },
+  );
+  try {
+    // Nothing but the app is reached: no analytics, fonts or map tiles.
+    await context.route(
+      (url) => url.origin !== appOrigin,
+      (route) => route.abort(),
+    );
+    const page = context.pages()[0] ?? (await context.newPage());
+    // The event that the browser fires when it offers to install the page.
+    await page.addInitScript(() => {
+      window.installOffered = false;
+      window.addEventListener('beforeinstallprompt', () => {
+        window.installOffered = true;
+      });
+    });
+    await page.goto('/');
+    const cdp = await context.newCDPSession(page);
+    expect(await cdp.send('Page.getInstallabilityErrors')).toEqual({
+      installabilityErrors: [],
+    });
+    await expect
+      .poll(() => page.evaluate(() => window.installOffered))
+      .toBe(true);
+
+    const { errors, manifest } = await cdp.send('Page.getAppManifest');
+    expect(errors).toEqual([]);
+    expect(manifest).toMatchObject({
+      name: 'Photo Data Viewer',
+      startUrl: `${appOrigin}/`,
+      scope: `${appOrigin}/`,
+      display: 'kStandalone',
+    });
+    // Each icon is the size that the manifest gives it, read from its PNG
+    // header, so that a size changed in one place alone is found.
+    expect(manifest.icons).toHaveLength(4);
+    for (const icon of [
+      ...manifest.icons,
+      { url: `${appOrigin}/apple-touch-icon.png`, sizes: '180x180' },
+    ]) {
+      const response = await page.request.get(icon.url);
+      expect(response.ok()).toBe(true);
+      const png = await response.body();
+      expect(`${png.readUInt32BE(16)}x${png.readUInt32BE(20)}`).toBe(
+        icon.sizes,
+      );
+    }
+    await expect(page.locator('link[rel=apple-touch-icon]')).toHaveAttribute(
+      'href',
+      '/apple-touch-icon.png',
+    );
+  } finally {
+    await context.close();
+  }
+});
+
 test('photo values, tabs, rotation, splitter persistence, and navigation', async ({
   page,
 }) => {
