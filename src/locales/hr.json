@@ -17,7 +17,7 @@
     "credits": "Zasluge - {{appName}}"
   },
   "pageDescription": {
-    "home": "Pogledajte podatke EXIF svoje fotografije u pregledniku: datum snimanja, lokaciju na karti, fotoaparat i njegove postavke. Fotografija se ne šalje ni na jedan poslužitelj.",
+    "home": "Pogledajte podatke EXIF svoje fotografije u pregledniku: datum snimanja, lokaciju (zemljopisnu širinu i zemljopisnu dužinu) na karti, postavke fotoaparata itd. Fotografija se ne šalje ni na jedan poslužitelj.",
     "demo": "Isprobajte aplikaciju {{appName}} s oglednom fotografijom i pogledajte koje podatke EXIF prikazuje: datum snimanja, lokaciju na karti, fotoaparat i njegove postavke.",
     "settings": "Odaberite kako aplikacija {{appName}} zapisuje datum i vrijeme te šalje li podatke o korištenju. Postavke se spremaju u vašem pregledniku.",
     "language": "Odaberite jezik na kojem se prikazuje aplikacija {{appName}} ili neka slijedi jezik vašeg preglednika.",

@@ -17,7 +17,7 @@
     "credits": "Créditos - {{appName}}"
   },
   "pageDescription": {
-    "home": "Veja os dados EXIF da sua foto no navegador: a data da captura, a localização em um mapa, a câmera e as configurações dela. A foto não é enviada a nenhum servidor.",
+    "home": "Veja os dados EXIF da sua foto no navegador: a data da captura, a localização (latitude e longitude) em um mapa, as configurações da câmera etc. A foto não é enviada a nenhum servidor.",
     "demo": "Experimente o {{appName}} com uma foto de exemplo e veja os dados EXIF que ele exibe: a data da captura, a localização em um mapa, a câmera e as configurações dela.",
     "settings": "Escolha como o {{appName}} escreve datas e horas e se ele envia dados de uso. As configurações são salvas no seu navegador.",
     "language": "Escolha o idioma em que o {{appName}} é exibido ou deixe que ele siga o idioma do seu navegador.",

@@ -17,7 +17,7 @@
     "credits": "Padėkos - {{appName}}"
   },
   "pageDescription": {
-    "home": "Peržiūrėkite savo nuotraukos EXIF duomenis naršyklėje: fotografavimo datą, vietą žemėlapyje, fotoaparatą ir jo nustatymus. Nuotrauka nesiunčiama į jokį serverį.",
+    "home": "Peržiūrėkite savo nuotraukos EXIF duomenis naršyklėje: fotografavimo datą, vietą (platumą ir ilgumą) žemėlapyje, fotoaparato nustatymus ir kt. Nuotrauka nesiunčiama į jokį serverį.",
     "demo": "Išbandykite programą {{appName}} su pavyzdine nuotrauka ir pažiūrėkite, kokius EXIF duomenis ji rodo: fotografavimo datą, vietą žemėlapyje, fotoaparatą ir jo nustatymus.",
     "settings": "Pasirinkite, kaip programa {{appName}} rašo datą ir laiką ir ar ji siunčia naudojimo duomenis. Nustatymai įrašomi jūsų naršyklėje.",
     "language": "Pasirinkite kalbą, kuria rodoma programa {{appName}}, arba leiskite jai naudoti jūsų naršyklės kalbą.",

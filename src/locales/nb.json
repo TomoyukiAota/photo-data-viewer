@@ -17,7 +17,7 @@
     "credits": "Kreditering - {{appName}}"
   },
   "pageDescription": {
-    "home": "Se EXIF-informasjonen for bildet ditt i nettleseren: opptaksdato, sted på et kart, kameraet og kamerainnstillingene. Bildet sendes ikke til noen server.",
+    "home": "Se EXIF-informasjonen for bildet ditt i nettleseren: opptaksdato, sted (breddegrad og lengdegrad) på et kart, kamerainnstillinger osv. Bildet sendes ikke til noen server.",
     "demo": "Prøv {{appName}} med et eksempelbilde, og se hvilken EXIF-informasjon appen viser: opptaksdato, sted på et kart, kameraet og kamerainnstillingene.",
     "settings": "Velg hvordan {{appName}} skriver dato og klokkeslett, og om appen sender bruksdata. Innstillingene lagres i nettleseren din.",
     "language": "Velg språket {{appName}} vises på, eller la appen følge språket i nettleseren din.",

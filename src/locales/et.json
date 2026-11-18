@@ -17,7 +17,7 @@
     "credits": "Tänuavaldused - {{appName}}"
   },
   "pageDescription": {
-    "home": "Vaadake oma foto EXIF-andmeid brauseris: pildistamise kuupäev, asukoht kaardil, kaamera ja selle seaded. Fotot ei saadeta ühtegi serverisse.",
+    "home": "Vaadake oma foto EXIF-andmeid brauseris: pildistamise kuupäev, asukoht (laiuskraad ja pikkuskraad) kaardil, kaamera seaded jne. Fotot ei saadeta ühtegi serverisse.",
     "demo": "Proovige rakendust {{appName}} näidisfotoga ja vaadake, milliseid EXIF-andmeid see näitab: pildistamise kuupäev, asukoht kaardil, kaamera ja selle seaded.",
     "settings": "Valige, kuidas rakendus {{appName}} kuupäeva ja kellaaega kirjutab ning kas see saadab kasutusandmeid. Seaded salvestatakse teie brauserisse.",
     "language": "Valige keel, milles rakendust {{appName}} kuvatakse, või laske sellel järgida teie brauseri keelt.",

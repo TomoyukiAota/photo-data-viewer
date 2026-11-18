@@ -17,7 +17,7 @@
     "credits": "Ghi công - {{appName}}"
   },
   "pageDescription": {
-    "home": "Xem dữ liệu EXIF của ảnh ngay trong trình duyệt: ngày chụp, vị trí trên bản đồ, máy ảnh và các cài đặt của máy ảnh. Ảnh không được gửi đến bất kỳ máy chủ nào.",
+    "home": "Xem dữ liệu EXIF của ảnh ngay trong trình duyệt: ngày chụp, vị trí (vĩ độ và kinh độ) trên bản đồ, các cài đặt máy ảnh, v.v. Ảnh không được gửi đến bất kỳ máy chủ nào.",
     "demo": "Dùng thử {{appName}} với một ảnh mẫu và xem dữ liệu EXIF mà ứng dụng hiển thị: ngày chụp, vị trí trên bản đồ, máy ảnh và các cài đặt của máy ảnh.",
     "settings": "Chọn cách {{appName}} viết ngày và giờ, và có gửi dữ liệu sử dụng hay không. Cài đặt được lưu trong trình duyệt của bạn.",
     "language": "Chọn ngôn ngữ hiển thị của {{appName}}, hoặc để ứng dụng theo ngôn ngữ của trình duyệt.",

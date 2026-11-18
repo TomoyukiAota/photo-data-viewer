@@ -17,7 +17,7 @@
     "credits": "Tekijät - {{appName}}"
   },
   "pageDescription": {
-    "home": "Katso kuvasi EXIF-tiedot selaimessa: kuvauspäivä, sijainti kartalla, kamera ja sen asetukset. Kuvaa ei lähetetä millekään palvelimelle.",
+    "home": "Katso kuvasi EXIF-tiedot selaimessa: kuvauspäivä, sijainti (leveysaste ja pituusaste) kartalla, kameran asetukset jne. Kuvaa ei lähetetä millekään palvelimelle.",
     "demo": "Kokeile {{appName}} -sovellusta esimerkkikuvalla ja katso, mitä EXIF-tietoja se näyttää: kuvauspäivä, sijainti kartalla, kamera ja sen asetukset.",
     "settings": "Valitse, miten {{appName}} kirjoittaa päivämäärät ja kellonajat ja lähettääkö se käyttötietoja. Asetukset tallennetaan selaimeesi.",
     "language": "Valitse kieli, jolla {{appName}} näytetään, tai anna sen seurata selaimesi kieltä.",
