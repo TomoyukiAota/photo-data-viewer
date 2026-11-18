@@ -292,3 +292,59 @@ and did not change; nor did any other screenshot.
 | `npm run build:plm` | Passes |
 | Browser suite in Chrome with the visual comparison | 51 passed (48 before) |
 | `npm run test:electron` | Not run: it opens windows on the machine |
+
+## The check of the usage data, after the merge
+
+The browser test of the button checked that no event sent had the photo's
+place by looking for `37.33` or `122.00` anywhere in the events. On 2026-11-18
+it failed in CI on Ubuntu, in a pull request that did not touch the button
+([run 44311595064](https://github.com/TomoyukiAota/photo-data-viewer/actions/runs/44311595064)),
+though no event had the place: the event of the photo loaded was recorded at
+`2026-11-18T13:16:37.335Z` (`client_ts`), whose seconds are `37.335`. The other
+run of the same commit passed on Ubuntu.
+
+Every event has the time it was recorded at, with three decimals after the
+seconds, and one time in 6,000 has `37.33` in it: 14,400 of the 86,400,000
+thousandths of a second of a day. The test's 15 events are recorded at about
+seven different times, so the test failed in about one run in 850.
+
+The check now looks for the latitude or the longitude with four decimals or
+more, rounded or cut (`/37\.332[56]|122\.005[67]/`), and a comment beside it
+says why: the address that the button opens has every digit of them and the
+page six, and a time has three decimals, never four. Checked on 2026-11-19, on
+macOS with Node 26.13.0 and npm 11.20.0, on a branch from `main` at `42a576e`:
+
+- **The pattern**, run in Node against text, matches the coordinates with four
+  decimals up to every digit (`37.33255833333334`, `-122.00566111111111`),
+  rounded and cut, with the minus sign and without, and the three buttons'
+  addresses as they are, in a label's JSON and percent-encoded. It matches
+  none with three decimals or fewer, no time of a whole day, and nothing in
+  the events of the run that failed, where the old pattern matched the time.
+- **With the page's clock fixed at 13:16:37.335** (`page.clock.setFixedTime`,
+  for the test alone), every event had that time. The test failed with the
+  old check, as in CI, and passes with the new one.
+- **With the place sent on purpose**, in the production build, one way at a
+  time, the test fails:
+
+  | What was sent | What failed |
+  | --- | --- |
+  | The latitude and the longitude, every digit, in the event of the photo loaded | The new check |
+  | The place with four decimals (`37.3326,-122.0057`) as the value of the button's event, which was as expected otherwise | The new check |
+  | The address that the button opens, as the label of its event | The check of the button's event, before the new one |
+
+The unit test of the row (`LatLngRow.spec.tsx`) looks for `37.33` or `122.00`
+in what the buttons give to the usage data. That is their texts alone, without
+a time, so it cannot fail this way, and was left as it is.
+
+The checks below were run again with the change on `main` at `2a54a89`, which
+has [#92](https://github.com/TomoyukiAota/photo-data-viewer/pull/92), and with
+`main` at `ec638cb` merged in, which has
+[#91](https://github.com/TomoyukiAota/photo-data-viewer/pull/91) as well and
+takes away the tests of the language's button:
+
+| Check | Result |
+| --- | --- |
+| `npm run test:all` | Passes; 776 tests (781 on `2a54a89`, 765 on `42a576e`) |
+| `npm run build` | Passes |
+| Browser suite in Chrome with the visual comparison | 52 passed (53 on `2a54a89`, 51 on `42a576e`) |
+| `npm run test:electron` | Not run: it opens windows on the machine |
