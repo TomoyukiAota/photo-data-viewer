@@ -211,3 +211,43 @@ drag and drop, under the veil: a change that light under the veil is under
 the comparison's threshold of a pixel's colour, so it passed. All of them
 were therefore made with `--update-snapshots=all`, which leaves the files
 that did not change as they were, byte for byte.
+
+## The test of the mouse, made steady
+
+Checked on 2026-11-19 on the branch `claude/steady-submenu-hover-test`,
+from `main` at `ec638cb` (#91).
+
+The browser test of the mouse in English failed once in CI, on macOS, in
+the run of #91's pull request (run 44350188843, first attempt), while the
+run of the push of the same commit passed: the submenu did not open on its
+entry. The failure's trace showed why. Playwright took the entry for stable
+0.07 seconds after the click on the menu's button, while the menu still had
+the size that it grows open from: the entry was 144.6 by 20.3 pixels, three
+quarters of its width and nine sixteenths of its height. It put the
+pointer on the entry there, and once the menu had grown, the pointer was on
+Settings. Until Chrome has started a menu's growing, which can take a few
+frames on a slow machine, the menu keeps that size, and Playwright takes it
+for stable.
+
+The two tests of the mouse, in English and in Arabic, now wait until no
+animation moves the entry before the pointer is put on it, and until none
+moves the submenu's modes before they are measured (`untilStill` in the
+browser suite). What they check is as it was, and the app is unchanged.
+
+| Check | Result |
+| --- | --- |
+| The two tests as they were, with the menus' growing started 80 ms late | 2 of 12 runs failed as in CI: the submenu did not open. |
+| The same, started 150 ms late | 7 of 12 failed: the menus were measured while they grew. |
+| The two tests now, started 80, 150 and 400 ms late | 36 of 36 passed. |
+| The two tests now, `--repeat-each=50`, four at a time, in Playwright's Chromium, as in CI | 100 of 100 passed. |
+| The same, `--repeat-each=25`, in Chrome (`PDV_CHROME=1`) | 50 of 50 passed. |
+| `npm run test:all` | Lint and type check clean; 55 suites, 776 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 52 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+A copy of the suite, not kept, started the menus' growing late with a
+`transition-delay` on their paper. Slowing Chrome's CPU 4 and 8 times
+instead, in 20 tries each of the click and the hover that the test starts
+with, left the pointer on the entry every time: there, the growing started
+in time, and Playwright saw it.
