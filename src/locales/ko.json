@@ -6,20 +6,23 @@
     "demo": "데모",
     "settings": "설정",
     "language": "언어 (Language)",
-    "about": "정보"
+    "about": "정보",
+    "credits": "크레딧"
   },
   "pageTitle": {
     "demo": "데모 - {{appName}}",
     "settings": "설정 - {{appName}}",
     "language": "언어 - {{appName}}",
-    "about": "정보 - {{appName}}"
+    "about": "정보 - {{appName}}",
+    "credits": "크레딧 - {{appName}}"
   },
   "pageDescription": {
     "home": "브라우저에서 사진의 EXIF 데이터를 확인하세요. 촬영 날짜, 지도 위의 위치, 카메라와 카메라 설정을 볼 수 있습니다. 사진은 어떤 서버로도 전송되지 않습니다.",
     "demo": "샘플 사진으로 {{appName}} 앱을 사용해 보세요. 촬영 날짜, 지도 위의 위치, 카메라와 카메라 설정 등 앱에 표시되는 EXIF 데이터를 확인할 수 있습니다.",
     "settings": "{{appName}} 앱이 날짜와 시간을 표시하는 방식과 사용 데이터를 보낼지 여부를 선택하세요. 설정은 브라우저에 저장됩니다.",
     "language": "{{appName}} 앱을 표시할 언어를 선택하거나 브라우저의 언어를 따르도록 하세요.",
-    "about": "{{appName}} 앱이 사진을 서버로 보내지 않고 브라우저 안에서 읽는 방식, 수집하는 사용 데이터, 소스 코드, 개발자에 대해 알아보세요."
+    "about": "{{appName}} 앱이 사진을 서버로 보내지 않고 브라우저 안에서 읽는 방식, 수집하는 사용 데이터, 소스 코드, 개발자에 대해 알아보세요.",
+    "credits": "{{appName}} 앱이 사용하는 Flaticon 아이콘과 그 제작자를 소개합니다."
   },
   "dateTime": {
     "weekdayPattern": "(ddd)"
@@ -142,5 +145,9 @@
       "title": "GitHub 프로필 열기"
     },
     "photoLocationMap": "여러 사진의 촬영 위치를 한 번에 지도에서 보고 싶으신가요?<br/> 그럴 때는 <plmLink>Photo Location Map</plmLink>을 이용하세요."
+  },
+  "credits": {
+    "title": "크레딧",
+    "icons": "이 앱은 다음 제작자가 만든 Flaticon 아이콘을 사용합니다."
   }
 }

@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Einstellungen",
     "language": "Sprache (Language)",
-    "about": "Info"
+    "about": "Info",
+    "credits": "Bildnachweise"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Einstellungen - {{appName}}",
     "language": "Sprache - {{appName}}",
-    "about": "Info - {{appName}}"
+    "about": "Info - {{appName}}",
+    "credits": "Bildnachweise - {{appName}}"
   },
   "pageDescription": {
     "home": "Zeigen Sie die EXIF-Daten Ihres Fotos direkt im Browser an: Aufnahmedatum, Standort auf einer Karte, Kamera und ihre Einstellungen. Das Foto wird an keinen Server gesendet.",
     "demo": "Probieren Sie {{appName}} mit einem Beispielfoto aus und sehen Sie, welche EXIF-Daten die App anzeigt: Aufnahmedatum, Standort auf einer Karte, Kamera und ihre Einstellungen.",
     "settings": "Legen Sie fest, wie {{appName}} Datum und Uhrzeit schreibt und ob die App Nutzungsdaten sendet. Die Einstellungen werden in Ihrem Browser gespeichert.",
     "language": "Wählen Sie die Sprache, in der {{appName}} angezeigt wird, oder lassen Sie die App der Sprache Ihres Browsers folgen.",
-    "about": "Wie {{appName}} Ihr Foto im Browser liest, ohne es an einen Server zu senden, welche Nutzungsdaten die App erfasst, ihr Quellcode und wer sie entwickelt."
+    "about": "Wie {{appName}} Ihr Foto im Browser liest, ohne es an einen Server zu senden, welche Nutzungsdaten die App erfasst, ihr Quellcode und wer sie entwickelt.",
+    "credits": "Die Urheber der Symbole, die {{appName}} verwendet und die von Flaticon stammen."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "GitHub-Profil öffnen"
     },
     "photoLocationMap": "Möchten Sie die Aufnahmeorte vieler Fotos auf einmal auf einer Karte sehen?<br/> Dafür gibt es <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Bildnachweise",
+    "icons": "Diese App verwendet Symbole von Flaticon, die von den folgenden Urhebern stammen."
   }
 }

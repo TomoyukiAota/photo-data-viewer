@@ -6,20 +6,23 @@
     "demo": "示範",
     "settings": "設定",
     "language": "語言 (Language)",
-    "about": "關於"
+    "about": "關於",
+    "credits": "致謝"
   },
   "pageTitle": {
     "demo": "示範 - {{appName}}",
     "settings": "設定 - {{appName}}",
     "language": "語言 - {{appName}}",
-    "about": "關於 - {{appName}}"
+    "about": "關於 - {{appName}}",
+    "credits": "致謝 - {{appName}}"
   },
   "pageDescription": {
     "home": "在瀏覽器中查看照片的 EXIF 資料：拍攝日期、地圖上的位置、相機及其設定。照片不會傳送到任何伺服器。",
     "demo": "用範例照片試用 {{appName}}，查看它顯示的 EXIF 資料：拍攝日期、地圖上的位置、相機及其設定。",
     "settings": "選擇 {{appName}} 如何顯示日期與時間，以及是否傳送使用情況資料。設定會儲存在你的瀏覽器中。",
     "language": "選擇 {{appName}} 的顯示語言，或讓它依照瀏覽器的語言。",
-    "about": "了解 {{appName}} 如何在瀏覽器中讀取你的照片而不將其傳送到任何伺服器、它收集哪些使用情況資料、它的原始碼以及開發者。"
+    "about": "了解 {{appName}} 如何在瀏覽器中讀取你的照片而不將其傳送到任何伺服器、它收集哪些使用情況資料、它的原始碼以及開發者。",
+    "credits": "{{appName}} 所用圖示的作者，這些圖示來自 Flaticon。"
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "開啟 GitHub 個人檔案"
     },
     "photoLocationMap": "想在地圖上一次查看許多照片的拍攝地點嗎？<br/>可以使用 <plmLink>Photo Location Map</plmLink>。"
+  },
+  "credits": {
+    "title": "致謝",
+    "icons": "此應用程式使用了 Flaticon 上由以下作者製作的圖示。"
   }
 }

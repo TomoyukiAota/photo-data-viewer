@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Tetapan",
     "language": "Bahasa (Language)",
-    "about": "Perihal"
+    "about": "Perihal",
+    "credits": "Kredit"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Tetapan - {{appName}}",
     "language": "Bahasa - {{appName}}",
-    "about": "Perihal - {{appName}}"
+    "about": "Perihal - {{appName}}",
+    "credits": "Kredit - {{appName}}"
   },
   "pageDescription": {
     "home": "Lihat data EXIF foto anda dalam pelayar: tarikh diambil, lokasi pada peta, serta kamera dan tetapannya. Foto tidak dihantar ke mana-mana pelayan.",
     "demo": "Cuba {{appName}} dengan foto contoh dan lihat data EXIF yang dipaparkannya: tarikh diambil, lokasi pada peta, serta kamera dan tetapannya.",
     "settings": "Pilih cara {{appName}} menulis tarikh dan masa, serta sama ada aplikasi ini menghantar data penggunaan. Tetapan disimpan dalam pelayar anda.",
     "language": "Pilih bahasa paparan {{appName}}, atau biarkan aplikasi ini mengikut bahasa pelayar anda.",
-    "about": "Cara {{appName}} membaca foto anda dalam pelayar tanpa menghantarnya ke mana-mana pelayan, data penggunaan yang dikumpulkannya, kod sumbernya dan siapa yang membangunkannya."
+    "about": "Cara {{appName}} membaca foto anda dalam pelayar tanpa menghantarnya ke mana-mana pelayan, data penggunaan yang dikumpulkannya, kod sumbernya dan siapa yang membangunkannya.",
+    "credits": "Pencipta ikon yang digunakan oleh {{appName}}, yang diambil daripada Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Buka profil GitHub"
     },
     "photoLocationMap": "Ingin melihat peta lokasi banyak foto sekali gus?<br/> <plmLink>Photo Location Map</plmLink> tersedia untuk tujuan itu."
+  },
+  "credits": {
+    "title": "Kredit",
+    "icons": "Aplikasi ini menggunakan ikon daripada Flaticon yang dicipta oleh pencipta berikut."
   }
 }

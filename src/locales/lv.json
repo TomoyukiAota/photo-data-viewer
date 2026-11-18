@@ -6,20 +6,23 @@
     "demo": "Demonstrācija",
     "settings": "Iestatījumi",
     "language": "Valoda (Language)",
-    "about": "Par lietotni"
+    "about": "Par lietotni",
+    "credits": "Pateicības"
   },
   "pageTitle": {
     "demo": "Demonstrācija - {{appName}}",
     "settings": "Iestatījumi - {{appName}}",
     "language": "Valoda - {{appName}}",
-    "about": "Par lietotni - {{appName}}"
+    "about": "Par lietotni - {{appName}}",
+    "credits": "Pateicības - {{appName}}"
   },
   "pageDescription": {
     "home": "Skatiet sava fotoattēla EXIF datus pārlūkprogrammā: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus. Fotoattēls netiek nosūtīts ne uz vienu serveri.",
     "demo": "Izmēģiniet lietotni {{appName}} ar parauga fotoattēlu un apskatiet, kādus EXIF datus tā rāda: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus.",
     "settings": "Izvēlieties, kā lietotne {{appName}} raksta datumu un laiku un vai tā sūta lietošanas datus. Iestatījumi tiek saglabāti jūsu pārlūkprogrammā.",
     "language": "Izvēlieties valodu, kurā tiek rādīta lietotne {{appName}}, vai ļaujiet tai izmantot jūsu pārlūkprogrammas valodu.",
-    "about": "Kā lietotne {{appName}} nolasa jūsu fotoattēlu pārlūkprogrammā, nenosūtot to uz serveri, kādus lietošanas datus tā apkopo, tās pirmkods un kas to izstrādā."
+    "about": "Kā lietotne {{appName}} nolasa jūsu fotoattēlu pārlūkprogrammā, nenosūtot to uz serveri, kādus lietošanas datus tā apkopo, tās pirmkods un kas to izstrādā.",
+    "credits": "Lietotnē {{appName}} izmantoto ikonu autori. Ikonas ir no Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Atvērt GitHub profilu"
     },
     "photoLocationMap": "Vai vēlaties kartē vienlaikus redzēt daudzu fotoattēlu atrašanās vietas?<br/> Tam ir pieejama <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Pateicības",
+    "icons": "Šī lietotne izmanto Flaticon ikonas, kuru autori ir šādi."
   }
 }

@@ -6,20 +6,23 @@
     "demo": "Demonstração",
     "settings": "Definições",
     "language": "Idioma (Language)",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "credits": "Créditos"
   },
   "pageTitle": {
     "demo": "Demonstração - {{appName}}",
     "settings": "Definições - {{appName}}",
     "language": "Idioma - {{appName}}",
-    "about": "Acerca de - {{appName}}"
+    "about": "Acerca de - {{appName}}",
+    "credits": "Créditos - {{appName}}"
   },
   "pageDescription": {
     "home": "Veja os dados EXIF da sua fotografia no navegador: a data da captura, a localização num mapa, a câmara e as respetivas definições. A fotografia não é enviada para nenhum servidor.",
     "demo": "Experimente a aplicação {{appName}} com uma fotografia de exemplo e veja os dados EXIF que mostra: a data da captura, a localização num mapa, a câmara e as respetivas definições.",
     "settings": "Escolha como a aplicação {{appName}} escreve datas e horas e se envia dados de utilização. As definições são guardadas no seu navegador.",
     "language": "Escolha o idioma em que a aplicação {{appName}} é apresentada ou deixe-a seguir o idioma do seu navegador.",
-    "about": "Como a aplicação {{appName}} lê a sua fotografia no navegador sem a enviar para nenhum servidor, os dados de utilização que recolhe, o código-fonte e quem a desenvolve."
+    "about": "Como a aplicação {{appName}} lê a sua fotografia no navegador sem a enviar para nenhum servidor, os dados de utilização que recolhe, o código-fonte e quem a desenvolve.",
+    "credits": "Os autores dos ícones que a aplicação {{appName}} utiliza, provenientes do Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Abrir o perfil no GitHub"
     },
     "photoLocationMap": "Quer ver no mapa os locais de muitas fotografias de uma só vez?<br/> O <plmLink>Photo Location Map</plmLink> está disponível para esse fim."
+  },
+  "credits": {
+    "title": "Créditos",
+    "icons": "Esta aplicação utiliza ícones do Flaticon criados pelos seguintes autores."
   }
 }

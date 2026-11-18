@@ -1,0 +1,72 @@
+// One column, as the Language page has: as wide as its lines, up to 600
+// pixels, or as the window when that is narrower. The 50 pixels under the
+// last line are for a window that the page is longer than, as on the About
+// page.
+// prettier-ignore
+.container {
+  width: 100%;
+  padding: 130px 20px 50px 20px;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid:
+    'page-title' auto
+    'intro'      auto
+    'credits'    auto
+    / minmax(0, 600px);
+  .page-title { grid-area: page-title; }
+  .intro      { grid-area: intro;      }
+  .credits    { grid-area: credits;    }
+}
+
+.page-title {
+  font-size: 28px;
+  text-align: center;
+}
+
+.intro {
+  padding: 50px 0 0 0;
+}
+
+.credits {
+  list-style: none;
+  margin: 0;
+  padding: 20px 0 0 0;
+
+  display: grid;
+  gap: 15px;
+}
+
+// The icons, then the line, which continues under them where the window is
+// narrower than the two.
+.credit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 10px;
+}
+
+.icons {
+  display: flex;
+  gap: 6px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+// As the photo's rotate button has it (PhotoImage.module.scss), in the same
+// size as the other icons.
+.on-dark {
+  box-sizing: border-box;
+  padding: 3px;
+  border-radius: 4px;
+  background-color: #555555;
+}
+
+.line {
+  overflow-wrap: anywhere;
+}

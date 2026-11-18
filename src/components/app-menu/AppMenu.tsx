@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 import { Check } from '@mui/icons-material';
+import AttributionIcon from '@mui/icons-material/Attribution';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -28,7 +29,8 @@ interface Page {
     | 'menu.demo'
     | 'menu.settings'
     | 'menu.language'
-    | 'menu.about';
+    | 'menu.about'
+    | 'menu.credits';
   icon: React.JSX.Element;
 }
 
@@ -38,6 +40,7 @@ const pages: Page[] = [
   { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
   { pathname: '/language', nameKey: 'menu.language', icon: <LanguageIcon /> },
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
+  { pathname: '/credits', nameKey: 'menu.credits', icon: <AttributionIcon /> },
 ];
 
 /**

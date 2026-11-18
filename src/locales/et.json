@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Seaded",
     "language": "Keel (Language)",
-    "about": "Teave"
+    "about": "Teave",
+    "credits": "Tänuavaldused"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Seaded - {{appName}}",
     "language": "Keel - {{appName}}",
-    "about": "Teave - {{appName}}"
+    "about": "Teave - {{appName}}",
+    "credits": "Tänuavaldused - {{appName}}"
   },
   "pageDescription": {
     "home": "Vaadake oma foto EXIF-andmeid brauseris: pildistamise kuupäev, asukoht kaardil, kaamera ja selle seaded. Fotot ei saadeta ühtegi serverisse.",
     "demo": "Proovige rakendust {{appName}} näidisfotoga ja vaadake, milliseid EXIF-andmeid see näitab: pildistamise kuupäev, asukoht kaardil, kaamera ja selle seaded.",
     "settings": "Valige, kuidas rakendus {{appName}} kuupäeva ja kellaaega kirjutab ning kas see saadab kasutusandmeid. Seaded salvestatakse teie brauserisse.",
     "language": "Valige keel, milles rakendust {{appName}} kuvatakse, või laske sellel järgida teie brauseri keelt.",
-    "about": "Kuidas rakendus {{appName}} loeb teie fotot brauseris seda ühtegi serverisse saatmata, milliseid kasutusandmeid see kogub, selle lähtekood ja kes seda arendab."
+    "about": "Kuidas rakendus {{appName}} loeb teie fotot brauseris seda ühtegi serverisse saatmata, milliseid kasutusandmeid see kogub, selle lähtekood ja kes seda arendab.",
+    "credits": "Rakenduse {{appName}} kasutatavate ikoonide autorid. Ikoonid pärinevad Flaticonist."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Ava GitHubi profiil"
     },
     "photoLocationMap": "Kas soovite näha kaardil paljude fotode asukohti korraga?<br/> Selleks on olemas <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Tänuavaldused",
+    "icons": "See rakendus kasutab Flaticoni ikoone, mille autorid on järgmised."
   }
 }

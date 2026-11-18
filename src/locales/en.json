@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Settings",
     "language": "Language",
-    "about": "About"
+    "about": "About",
+    "credits": "Credits"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Settings - {{appName}}",
     "language": "Language - {{appName}}",
-    "about": "About - {{appName}}"
+    "about": "About - {{appName}}",
+    "credits": "Credits - {{appName}}"
   },
   "pageDescription": {
     "home": "View the EXIF data of your photo in your browser: the date taken, the location on a map, the camera and its settings. The photo is not sent to any server.",
     "demo": "Try {{appName}} with a sample photo, and see the EXIF data it shows: the date taken, the location on a map, the camera and its settings.",
     "settings": "Choose how {{appName}} writes dates and times, and whether it sends usage data. The settings are saved in your browser.",
     "language": "Choose the language that {{appName}} is shown in, or let it follow the language of your browser.",
-    "about": "How {{appName}} reads your photo in your browser without sending it to any server, the usage data it collects, its source code and who develops it."
+    "about": "How {{appName}} reads your photo in your browser without sending it to any server, the usage data it collects, its source code and who develops it.",
+    "credits": "The authors of the icons that {{appName}} uses, which are from Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Open GitHub Profile"
     },
     "photoLocationMap": "Want to see the map for the locations of many photos all at once?<br/> <plmLink>Photo Location Map</plmLink> is available for such purposes."
+  },
+  "credits": {
+    "title": "Credits",
+    "icons": "This application uses icons from Flaticon, made by the following authors."
   }
 }

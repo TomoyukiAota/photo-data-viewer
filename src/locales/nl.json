@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Instellingen",
     "language": "Taal (Language)",
-    "about": "Over"
+    "about": "Over",
+    "credits": "Credits"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Instellingen - {{appName}}",
     "language": "Taal - {{appName}}",
-    "about": "Over - {{appName}}"
+    "about": "Over - {{appName}}",
+    "credits": "Credits - {{appName}}"
   },
   "pageDescription": {
     "home": "Bekijk de EXIF-gegevens van je foto in je browser: de opnamedatum, de locatie op een kaart, de camera en de instellingen ervan. De foto wordt niet naar een server verzonden.",
     "demo": "Probeer {{appName}} uit met een voorbeeldfoto en bekijk welke EXIF-gegevens de app toont: de opnamedatum, de locatie op een kaart, de camera en de instellingen ervan.",
     "settings": "Kies hoe {{appName}} datums en tijden schrijft en of de app gebruiksgegevens verstuurt. De instellingen worden in je browser bewaard.",
     "language": "Kies de taal waarin {{appName}} wordt weergegeven, of laat de app de taal van je browser volgen.",
-    "about": "Hoe {{appName}} je foto in je browser leest zonder die naar een server te verzenden, welke gebruiksgegevens de app verzamelt, de broncode en wie de app ontwikkelt."
+    "about": "Hoe {{appName}} je foto in je browser leest zonder die naar een server te verzenden, welke gebruiksgegevens de app verzamelt, de broncode en wie de app ontwikkelt.",
+    "credits": "De makers van de pictogrammen die {{appName}} gebruikt, afkomstig van Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Open het GitHub-profiel"
     },
     "photoLocationMap": "Wil je de locaties van veel foto’s tegelijk op een kaart zien?<br/> Daarvoor is <plmLink>Photo Location Map</plmLink> beschikbaar."
+  },
+  "credits": {
+    "title": "Credits",
+    "icons": "Deze app gebruikt pictogrammen van Flaticon, gemaakt door de volgende makers."
   }
 }

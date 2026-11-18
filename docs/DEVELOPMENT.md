@@ -77,7 +77,7 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Three tests run in a browser set to Japanese (`ja-JP`) and three in one set to
+Three tests run in a browser set to Japanese (`ja-JP`) and four in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
 for those languages. The suite stays with these three languages and Polish
@@ -85,16 +85,16 @@ for those languages. The suite stays with these three languages and Polish
 `src/locales/locales.spec.ts` instead, which takes no longer with more
 languages
 ([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
-Five tests run in Polish at the width of a phone (320 pixels). Polish stands
+Six tests run in Polish at the width of a phone (320 pixels). Polish stands
 for the languages that write more than English does: its sentences take more
 lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, which ends before its buttons,
 each name beside its number, a field as wide as its label, the dialogs, the
-veil over a page that a file is dragged over, the messages and the menu of
-the layouts uncut, and the split panes inside the window. They find their
-elements by where they are and name no Polish text, so that a change of a
-translation does not break them.
+veil over a page that a file is dragged over, the messages, the menu of the
+layouts and the Credits page uncut, and the split panes inside the window.
+They find their elements by where they are and name no Polish text, so that a
+change of a translation does not break them.
 The tests of a photo dropped on the page dispatch the drag's events, with a
 `DataTransfer` that holds the file: Playwright cannot drag a file from outside
 the browser, and its own drag, which starts in the page, gives the page no

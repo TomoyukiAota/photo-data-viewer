@@ -6,20 +6,23 @@
     "demo": "デモ",
     "settings": "設定",
     "language": "言語 (Language)",
-    "about": "このアプリについて"
+    "about": "このアプリについて",
+    "credits": "クレジット"
   },
   "pageTitle": {
     "demo": "デモ - {{appName}}",
     "settings": "設定 - {{appName}}",
     "language": "言語 - {{appName}}",
-    "about": "このアプリについて - {{appName}}"
+    "about": "このアプリについて - {{appName}}",
+    "credits": "クレジット - {{appName}}"
   },
   "pageDescription": {
     "home": "写真の EXIF データをブラウザで表示します。撮影日時、地図上の位置、カメラとその設定などを確認できます。写真はサーバーに送信されません。",
     "demo": "サンプルの写真で {{appName}} を試せます。撮影日時、地図上の位置、カメラとその設定など、表示される EXIF データを確認できます。",
     "settings": "{{appName}} の日時の表示形式と、使用状況データを送信するかどうかを設定します。設定はブラウザに保存されます。",
     "language": "{{appName}} を表示する言語を選択します。ブラウザの言語に従うこともできます。",
-    "about": "{{appName}} は写真をサーバーに送信せず、ブラウザ内部で読み取ります。収集する使用状況データ、ソースコード、開発者についても説明しています。"
+    "about": "{{appName}} は写真をサーバーに送信せず、ブラウザ内部で読み取ります。収集する使用状況データ、ソースコード、開発者についても説明しています。",
+    "credits": "{{appName}} が使用している Flaticon のアイコンと、その作者を記載しています。"
   },
   "dateTime": {
     "weekdayPattern": "(ddd)"
@@ -142,5 +145,9 @@
       "title": "GitHub のプロフィールを開く"
     },
     "photoLocationMap": "多くの写真の撮影場所を一度にマップで見たいですか？<br/>その場合は <plmLink>Photo Location Map</plmLink> をご利用ください。"
+  },
+  "credits": {
+    "title": "クレジット",
+    "icons": "このアプリは、次の作者が作成した Flaticon のアイコンを使用しています。"
   }
 }

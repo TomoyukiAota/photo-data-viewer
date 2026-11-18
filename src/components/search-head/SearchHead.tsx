@@ -31,6 +31,10 @@ export const searchPages = {
     titleKey: 'pageTitle.about',
     descriptionKey: 'pageDescription.about',
   },
+  '/credits': {
+    titleKey: 'pageTitle.credits',
+    descriptionKey: 'pageDescription.credits',
+  },
 } as const;
 
 export type SearchPage = keyof typeof searchPages;
