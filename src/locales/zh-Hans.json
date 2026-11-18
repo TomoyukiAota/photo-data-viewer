@@ -93,7 +93,10 @@
     "dropHere": "拖放照片即可选择。",
     "title": "确定要选择以下照片吗？",
     "cancel": "取消",
-    "select": "选择"
+    "select": "选择",
+    "hintButton": "关于拖放",
+    "hintFinder": "也可以从访达中拖放文件来进行选择。",
+    "hintFileExplorer": "也可以从文件资源管理器中拖放文件来进行选择。"
   },
   "pageNotShown": {
     "message": "出了点问题，无法显示此页面。",

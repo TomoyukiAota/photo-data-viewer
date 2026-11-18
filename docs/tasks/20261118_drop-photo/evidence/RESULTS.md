@@ -38,6 +38,23 @@ smoothed all over the page; it matched in the three runs after, and was
 kept. The texts that grew longest, in Russian, Lithuanian and German, were
 looked at at 320 pixels.
 
+### The button about drag and drop
+
+The button that the maintainer asked for on 2026-11-19
+([the status](../STATUS.md#the-button-about-drag-and-drop)), on the branch
+`claude/drop-hint-button`, from `main` at `9bfe790`:
+
+| Check | Result |
+| --- | --- |
+| `npm run test:all` | Passed: 765 tests in 55 suites |
+| `npm run build` | Passed |
+| `npm run build:plm` | Passed |
+| The browser suite, in Chrome, with the visual comparison | Passed: 51 tests, after 21 screenshots of the Home page were made anew with the button, and `drop-hint.png` was added. Each changed screenshot differs from the one before by the button alone (130 pixels), or, in English at 320 pixels, by the line that it takes under Select Photo |
+| `npm run test:electron` | Not run: it opens windows |
+
+The button and its box were looked at in Chrome in English and Japanese at
+1280 pixels, in Arabic at 600, and in Polish and Japanese at 320.
+
 ## What the tests hold
 
 Unit tests:
@@ -180,3 +197,107 @@ Some choices in them:
 - **The other 40 translations follow the English** since the merge, as the
   maintainer asked. They were written first from "Drop the photo here to
   select it." and "Are you sure you want to select this photo?".
+
+## The names of the file managers
+
+The box of the button about drag and drop names the Finder on a Mac and File
+Explorer elsewhere. The Finder's name is the one of a page of Apple's Mac User
+Guide (`support.apple.com/<language>/guide/mac-help/hlpgl1004/mac`), looked at in
+Chinese (Simplified and Traditional), Arabic, Korean, Thai, Russian,
+Ukrainian, Greek, Hebrew and Hindi: only Chinese (Simplified) and Arabic
+write another name. File Explorer's is the one of Microsoft's page "File
+Explorer in Windows" in the language, whose German page says `Explorer`,
+and `Datei-Explorer` in its text; its Dutch page `Bestandenverkenner`, and
+`Verkenner` in places.
+
+| Code | Finder | File Explorer | Where File Explorer's name is from |
+| --- | --- | --- | --- |
+| `ar` | فايندر | مستكشف الملفات | Microsoft's page |
+| `bg` | Finder | Файлов мениджър | Microsoft's page |
+| `ca` | Finder | Explorador de fitxers | No page in the language |
+| `cs` | Finder | Průzkumník souborů | Microsoft's page |
+| `da` | Finder | Stifinder | Microsoft's page |
+| `de` | Finder | Explorer | Microsoft's page |
+| `el` | Finder | Εξερεύνηση αρχείων | Microsoft's page |
+| `en` | Finder | File Explorer | Microsoft's page |
+| `es` | Finder | Explorador de archivos | Microsoft's page |
+| `et` | Finder | File Explorer | Microsoft's page |
+| `eu` | Finder | File Explorer | No page in the language |
+| `fi` | Finder | Resurssienhallinta | Microsoft's page |
+| `fr` | Finder | Explorateur de fichiers | Microsoft's page |
+| `gl` | Finder | Explorador de ficheiros | No page in the language |
+| `he` | Finder | סייר הקבצים | Microsoft's page |
+| `hi` | Finder | फ़ाइल एक्सप्लोरर | No page in the language |
+| `hr` | Finder | Eksplorer za datoteke | Microsoft's page |
+| `hu` | Finder | Fájlkezelő | Microsoft's page |
+| `id` | Finder | File Explorer | Microsoft's page |
+| `it` | Finder | Esplora file | Microsoft's page |
+| `ja` | Finder | エクスプローラー | Microsoft's page |
+| `ko` | Finder | 파일 탐색기 | Microsoft's page |
+| `lt` | Finder | Failų naršyklė | Microsoft's page |
+| `lv` | Finder | Failu pārlūks | Microsoft's page |
+| `ms` | Finder | File Explorer | No page in the language |
+| `nb` | Finder | Filutforsker | Microsoft's page |
+| `nl` | Finder | Bestandenverkenner | Microsoft's page |
+| `pl` | Finder | Eksplorator plików | Microsoft's page |
+| `pt-BR` | Finder | Explorador de Arquivos | Microsoft's page |
+| `pt-PT` | Finder | Explorador de Ficheiros | Microsoft's page |
+| `ro` | Finder | Explorer | Microsoft's page |
+| `ru` | Finder | Проводник | Microsoft's page |
+| `sk` | Finder | Prieskumník | Microsoft's page |
+| `sl` | Finder | Raziskovalec | Microsoft's page |
+| `sr-Latn` | Finder | Istraživač datoteka | Microsoft's page |
+| `sv` | Finder | Utforskaren | Microsoft's page |
+| `th` | Finder | File Explorer | Microsoft's page |
+| `tr` | Finder | Dosya Gezgini | Microsoft's page |
+| `uk` | Finder | Файловий провідник | Microsoft's page |
+| `vi` | Finder | File Explorer | Microsoft's page |
+| `zh-Hans` | 访达 | 文件资源管理器 | Microsoft's page |
+| `zh-Hant` | Finder | 檔案總管 | Microsoft's page |
+
+### The texts of the button about drag and drop
+
+| Code | hintButton | hintFinder | hintFileExplorer |
+| --- | --- | --- | --- |
+| `ar` | حول السحب والإفلات | يمكنك أيضًا سحب ملف من فايندر وإفلاته لاختياره. | يمكنك أيضًا سحب ملف من مستكشف الملفات وإفلاته لاختياره. |
+| `bg` | За плъзгането и пускането | Можете също да изберете файл, като го плъзнете и пуснете от Finder. | Можете също да изберете файл, като го плъзнете и пуснете от Файловия мениджър. |
+| `ca` | Quant a arrossegar i deixar anar | També podeu seleccionar un fitxer arrossegant-lo i deixant-lo anar des del Finder. | També podeu seleccionar un fitxer arrossegant-lo i deixant-lo anar des de l’Explorador de fitxers. |
+| `cs` | O přetahování | Soubor můžete vybrat také přetažením z Finderu. | Soubor můžete vybrat také přetažením z Průzkumníka souborů. |
+| `da` | Om træk og slip | Du kan også vælge en fil ved at trække og slippe den fra Finder. | Du kan også vælge en fil ved at trække og slippe den fra Stifinder. |
+| `de` | Über Drag & Drop | Sie können eine Datei auch per Drag & Drop aus dem Finder auswählen. | Sie können eine Datei auch per Drag & Drop aus dem Explorer auswählen. |
+| `el` | Σχετικά με τη μεταφορά και απόθεση | Μπορείτε επίσης να επιλέξετε ένα αρχείο σύροντάς το και αφήνοντάς το από το Finder. | Μπορείτε επίσης να επιλέξετε ένα αρχείο σύροντάς το και αφήνοντάς το από την Εξερεύνηση αρχείων. |
+| `en` | About drag and drop | You can also drag and drop a file from Finder to select it. | You can also drag and drop a file from File Explorer to select it. |
+| `es` | Acerca de arrastrar y soltar | También puedes seleccionar un archivo arrastrándolo y soltándolo desde el Finder. | También puedes seleccionar un archivo arrastrándolo y soltándolo desde el Explorador de archivos. |
+| `et` | Lohistamisest | Faili saate valida ka, lohistades selle Finderist. | Faili saate valida ka, lohistades selle File Explorerist. |
+| `eu` | Arrastatu eta jaregiteari buruz | Fitxategi bat Finder-etik arrastatuta eta jareginda ere hauta dezakezu. | Fitxategi bat File Explorer-etik arrastatuta eta jareginda ere hauta dezakezu. |
+| `fi` | Tietoja vetämisestä ja pudottamisesta | Voit valita tiedoston myös vetämällä ja pudottamalla sen Finderista. | Voit valita tiedoston myös vetämällä ja pudottamalla sen Resurssienhallinnasta. |
+| `fr` | À propos du glisser-déposer | Vous pouvez aussi sélectionner un fichier en le faisant glisser depuis le Finder. | Vous pouvez aussi sélectionner un fichier en le faisant glisser depuis l’Explorateur de fichiers. |
+| `gl` | Sobre arrastrar e soltar | Tamén podes seleccionar un ficheiro arrastrándoo e soltándoo desde o Finder. | Tamén podes seleccionar un ficheiro arrastrándoo e soltándoo desde o Explorador de ficheiros. |
+| `he` | מידע על גרירה ושחרור | אפשר גם לבחור קובץ על ידי גרירה ושחרור מ-Finder. | אפשר גם לבחור קובץ על ידי גרירה ושחרור מסייר הקבצים. |
+| `hi` | ड्रैग और ड्रॉप के बारे में | आप Finder से कोई फ़ाइल ड्रैग और ड्रॉप करके भी उसे चुन सकते हैं। | आप फ़ाइल एक्सप्लोरर से कोई फ़ाइल ड्रैग और ड्रॉप करके भी उसे चुन सकते हैं। |
+| `hr` | O povlačenju i ispuštanju | Datoteku možete odabrati i tako da je povučete i ispustite iz Findera. | Datoteku možete odabrati i tako da je povučete i ispustite iz Eksplorera za datoteke. |
+| `hu` | Tudnivalók az áthúzásról | Fájlt úgy is kiválaszthat, hogy áthúzza a Finderből. | Fájlt úgy is kiválaszthat, hogy áthúzza a Fájlkezelőből. |
+| `id` | Tentang seret dan lepas | Anda juga dapat memilih file dengan menyeret dan melepaskannya dari Finder. | Anda juga dapat memilih file dengan menyeret dan melepaskannya dari File Explorer. |
+| `it` | Informazioni sul trascinamento | Puoi anche selezionare un file trascinandolo dal Finder. | Puoi anche selezionare un file trascinandolo da Esplora file. |
+| `ja` | ドラッグアンドドロップについて | Finder からファイルをドラッグアンドドロップして選択することもできます。 | エクスプローラーからファイルをドラッグアンドドロップして選択することもできます。 |
+| `ko` | 끌어서 놓기 정보 | Finder에서 파일을 끌어다 놓아 선택할 수도 있습니다. | 파일 탐색기에서 파일을 끌어다 놓아 선택할 수도 있습니다. |
+| `lt` | Apie vilkimą ir numetimą | Failą taip pat galite pasirinkti nuvilkę jį iš „Finder“. | Failą taip pat galite pasirinkti nuvilkę jį iš Failų naršyklės. |
+| `lv` | Par vilkšanu un nomešanu | Failu var atlasīt arī, velkot un nometot to no Finder. | Failu var atlasīt arī, velkot un nometot to no Failu pārlūka. |
+| `ms` | Perihal seret dan lepas | Anda juga boleh memilih fail dengan menyeret dan melepaskannya dari Finder. | Anda juga boleh memilih fail dengan menyeret dan melepaskannya dari File Explorer. |
+| `nb` | Om dra og slipp | Du kan også velge en fil ved å dra og slippe den fra Finder. | Du kan også velge en fil ved å dra og slippe den fra Filutforsker. |
+| `nl` | Over slepen en neerzetten | Je kunt ook een bestand selecteren door het vanuit de Finder te slepen en neer te zetten. | Je kunt ook een bestand selecteren door het vanuit Bestandenverkenner te slepen en neer te zetten. |
+| `pl` | Informacje o przeciąganiu i upuszczaniu | Możesz też wybrać plik, przeciągając go z Findera i upuszczając. | Możesz też wybrać plik, przeciągając go z Eksploratora plików i upuszczając. |
+| `pt-BR` | Sobre arrastar e soltar | Você também pode selecionar um arquivo arrastando-o e soltando-o a partir do Finder. | Você também pode selecionar um arquivo arrastando-o e soltando-o a partir do Explorador de Arquivos. |
+| `pt-PT` | Acerca de arrastar e largar | Também pode selecionar um ficheiro arrastando-o e largando-o a partir do Finder. | Também pode selecionar um ficheiro arrastando-o e largando-o a partir do Explorador de Ficheiros. |
+| `ro` | Despre glisare și fixare | Puteți selecta un fișier și prin glisarea și fixarea lui din Finder. | Puteți selecta un fișier și prin glisarea și fixarea lui din Explorer. |
+| `ru` | О перетаскивании | Файл также можно выбрать, перетащив его из Finder. | Файл также можно выбрать, перетащив его из Проводника. |
+| `sk` | O potiahnutí a pustení | Súbor môžete vybrať aj tak, že ho potiahnete a pustíte z Findera. | Súbor môžete vybrať aj tak, že ho potiahnete a pustíte z Prieskumníka. |
+| `sl` | O vlečenju in spuščanju | Datoteko lahko izberete tudi tako, da jo povlečete in spustite iz Finderja. | Datoteko lahko izberete tudi tako, da jo povlečete in spustite iz Raziskovalca. |
+| `sr-Latn` | O prevlačenju i otpuštanju | Datoteku možete izabrati i tako što ćete je prevući i otpustiti iz Findera. | Datoteku možete izabrati i tako što ćete je prevući i otpustiti iz Istraživača datoteka. |
+| `sv` | Om dra och släpp | Du kan också välja en fil genom att dra och släppa den från Finder. | Du kan också välja en fil genom att dra och släppa den från Utforskaren. |
+| `th` | เกี่ยวกับการลากและวาง | คุณยังสามารถเลือกไฟล์ได้ด้วยการลากและวางจาก Finder | คุณยังสามารถเลือกไฟล์ได้ด้วยการลากและวางจาก File Explorer |
+| `tr` | Sürükle ve bırak hakkında | Bir dosyayı Finder’dan sürükleyip bırakarak da seçebilirsiniz. | Bir dosyayı Dosya Gezgini’nden sürükleyip bırakarak da seçebilirsiniz. |
+| `uk` | Про перетягування | Файл також можна вибрати, перетягнувши його з Finder. | Файл також можна вибрати, перетягнувши його з Файлового провідника. |
+| `vi` | Giới thiệu về kéo và thả | Bạn cũng có thể chọn tệp bằng cách kéo và thả từ Finder. | Bạn cũng có thể chọn tệp bằng cách kéo và thả từ File Explorer. |
+| `zh-Hans` | 关于拖放 | 也可以从访达中拖放文件来进行选择。 | 也可以从文件资源管理器中拖放文件来进行选择。 |
+| `zh-Hant` | 關於拖放 | 也可以從 Finder 拖放檔案來選取。 | 也可以從檔案總管拖放檔案來選取。 |

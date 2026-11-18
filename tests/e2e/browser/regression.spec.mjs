@@ -965,6 +965,98 @@ test('a dropped file that is not a photo gets the dialog that one chosen with th
   ).toBeVisible();
 });
 
+/**
+ * Makes the page say that it runs on `platform`, as `navigator.platform`
+ * says it: `Win32` on Windows, `MacIntel` on a Mac.
+ */
+async function emulatePlatform(page, platform) {
+  await page.addInitScript((platform) => {
+    Object.defineProperty(Navigator.prototype, 'platform', {
+      get: () => platform,
+      configurable: true,
+    });
+  }, platform);
+}
+
+for (const { platform, system, fileManager } of [
+  { platform: 'Win32', system: 'Windows', fileManager: 'File Explorer' },
+  { platform: 'MacIntel', system: 'a Mac', fileManager: 'Finder' },
+]) {
+  test(`the button beside Select Photo says that a file can be dropped from ${fileManager}, on ${system}`, async ({
+    page,
+  }) => {
+    await emulatePlatform(page, platform);
+    await page.goto('/');
+    const selectPhoto = page.getByRole('button', {
+      name: 'Select Photo',
+      exact: true,
+    });
+    // Found while its box is open as well, when MUI hides what is outside the
+    // box from screen readers.
+    const hint = page.getByRole('button', {
+      name: 'About drag and drop',
+      exact: true,
+      includeHidden: true,
+    });
+
+    // Right beside Select Photo, on its line.
+    const [selectBox, hintBox] = await Promise.all([
+      selectPhoto.boundingBox(),
+      hint.boundingBox(),
+    ]);
+    expect(hintBox.x).toBeGreaterThanOrEqual(selectBox.x + selectBox.width);
+    expect(hintBox.x - (selectBox.x + selectBox.width)).toBeLessThan(10);
+    expect(
+      Math.abs(
+        hintBox.y + hintBox.height / 2 - (selectBox.y + selectBox.height / 2),
+      ),
+    ).toBeLessThanOrEqual(2);
+
+    // The box under it names the file manager of the system.
+    await hint.click();
+    const box = page.getByRole('dialog', {
+      name: `You can also drag and drop a file from ${fileManager} to select it.`,
+      exact: true,
+    });
+    await expect(box).toBeVisible();
+    await expect(hint).toHaveAttribute('aria-expanded', 'true');
+    if (platform === 'Win32') await snapshot(page, 'drop-hint');
+
+    // Escape closes it, and gives the focus back to the button.
+    await page.keyboard.press('Escape');
+    await expect(box).toBeHidden();
+    await expect(hint).toBeFocused();
+    await expect(hint).toHaveAttribute('aria-expanded', 'false');
+
+    // A file dragged into the window closes it, as the page would refuse a
+    // drop over it, a dialog: the drag enters the box's invisible backdrop,
+    // and the page takes the drop.
+    await hint.click();
+    await expect(box).toBeVisible();
+    await page.evaluate(() => {
+      const transfer = new DataTransfer();
+      transfer.items.add(new File(['x'], 'demo.jpg', { type: 'image/jpeg' }));
+      document
+        .querySelector('.MuiPopover-root .MuiBackdrop-root')
+        .dispatchEvent(
+          new DragEvent('dragenter', {
+            dataTransfer: transfer,
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+    });
+    await expect(box).toBeHidden();
+    await dropFiles(page, [photoFile]);
+    await expect(
+      page.getByRole('dialog', {
+        name: 'Are you sure you want to select the photo below?',
+        exact: true,
+      }),
+    ).toBeVisible();
+  });
+}
+
 test('a photo whose GPS values are empty is shown without a location', async ({
   page,
 }) => {
@@ -1998,11 +2090,24 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
 
-  test('the veil over the page and the dialog for a dropped photo are whole', async ({
+  test('the box about drag and drop, the veil over the page and the dialog for a dropped photo are whole', async ({
     page,
   }) => {
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // The box of the button beside Select Photo, which comes after the input
+    // of files, is all in the window, and its sentence is not cut.
+    await page
+      .locator('input[type=file]')
+      .locator('xpath=following-sibling::button')
+      .click();
+    const hintBox = page.getByRole('dialog');
+    await expect(hintBox).toBeInViewport({ ratio: 1 });
+    expect(await isCut(hintBox)).toBe(false);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+    await page.keyboard.press('Escape');
+    await expect(hintBox).toBeHidden();
 
     // The veil's text, under its icon, is all in the window.
     const dataTransfer = await dragFiles(page, [photoFile]);
@@ -2105,6 +2210,18 @@ test.describe('on a phone', () => {
     expect(await page.evaluate(() => document.activeElement.tagName)).toBe(
       'BODY',
     );
+  });
+
+  test('the Home page has no button about drag and drop, as no file is dragged from a file manager with a finger', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('button', { name: 'Select Photo', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'About drag and drop', exact: true }),
+    ).toHaveCount(0);
   });
 });
 

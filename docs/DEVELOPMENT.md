@@ -92,8 +92,8 @@ tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, which ends before the menu's
 button, each name beside its number, a field as wide as its label, the
 dialogs, the veil over a page that a file is dragged over, the messages, the
-submenu of the layouts and the Credits page uncut, and the split panes inside
-the window.
+box of the button about drag and drop, the submenu of the layouts and the
+Credits page uncut, and the split panes inside the window.
 They find their elements by where they are and name no Polish text, so that a
 change of a translation does not break them.
 The tests of a photo dropped on the page dispatch the drag's events, with a
@@ -102,9 +102,15 @@ the browser, and its own drag, which starts in the page, gives the page no
 file. A browser does not let a page set the drop effect of a `DataTransfer`
 that the page made, so what the pointer shows over the page and over a dialog
 is checked by the unit test `src/components/drop-photo/DropPhoto.spec.tsx`.
-One test runs as a phone that is touched, where the Language page leaves the
-keyboard's focus alone. Playwright emulates a touch device in Chromium alone,
-so the test is skipped in Firefox.
+The button about drag and drop beside Select Photo is there where the main
+pointer is a mouse or a trackpad, as in the suite's browser, so the Home
+page's screenshots show it. Its box names the Finder on a Mac and File
+Explorer elsewhere: its tests make the page say that it runs on the one or
+the other (`navigator.platform`), whatever the machine is.
+Two tests run as a phone that is touched: the Language page leaves the
+keyboard's focus alone, and the Home page has no button about drag and drop.
+Playwright emulates a touch device in Chromium alone, so the tests are
+skipped in Firefox.
 One test asks Chrome, through the DevTools protocol, whether the app can be
 installed as an app of its own. The headless shell that Playwright runs by
 default does not check that, and Chrome installs nothing from an Incognito

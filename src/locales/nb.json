@@ -93,7 +93,10 @@
     "dropHere": "Slipp bildet for å velge det.",
     "title": "Er du sikker på at du vil velge bildet nedenfor?",
     "cancel": "Avbryt",
-    "select": "Velg"
+    "select": "Velg",
+    "hintButton": "Om dra og slipp",
+    "hintFinder": "Du kan også velge en fil ved å dra og slippe den fra Finder.",
+    "hintFileExplorer": "Du kan også velge en fil ved å dra og slippe den fra Filutforsker."
   },
   "pageNotShown": {
     "message": "Noe gikk galt, og denne siden kan ikke vises.",

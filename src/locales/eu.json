@@ -93,7 +93,10 @@
     "dropHere": "Jaregin argazkia hautatzeko.",
     "title": "Ziur beheko argazkia hautatu nahi duzula?",
     "cancel": "Utzi",
-    "select": "Hautatu"
+    "select": "Hautatu",
+    "hintButton": "Arrastatu eta jaregiteari buruz",
+    "hintFinder": "Fitxategi bat Finder-etik arrastatuta eta jareginda ere hauta dezakezu.",
+    "hintFileExplorer": "Fitxategi bat File Explorer-etik arrastatuta eta jareginda ere hauta dezakezu."
   },
   "pageNotShown": {
     "message": "Arazoren bat gertatu da, eta ezin da orri hau erakutsi.",

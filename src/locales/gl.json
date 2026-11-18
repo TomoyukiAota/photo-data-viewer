@@ -93,7 +93,10 @@
     "dropHere": "Solta a foto para seleccionala.",
     "title": "Seguro que queres seleccionar a foto seguinte?",
     "cancel": "Cancelar",
-    "select": "Seleccionar"
+    "select": "Seleccionar",
+    "hintButton": "Sobre arrastrar e soltar",
+    "hintFinder": "Tamén podes seleccionar un ficheiro arrastrándoo e soltándoo desde o Finder.",
+    "hintFileExplorer": "Tamén podes seleccionar un ficheiro arrastrándoo e soltándoo desde o Explorador de ficheiros."
   },
   "pageNotShown": {
     "message": "Produciuse un erro e non se pode mostrar esta páxina.",

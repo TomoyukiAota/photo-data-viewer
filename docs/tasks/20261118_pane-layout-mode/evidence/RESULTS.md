@@ -116,13 +116,13 @@ Found and fixed while checking, in a headless browser:
 ## The language's button out of the header
 
 Checked on 2026-11-19 on the branch `claude/remove-header-language-button`,
-from `main` at `9bfe790` (#88).
+with `main` at `6b6deb6` (#90, the button about drag and drop) merged in.
 
 | Command | Result |
 | --- | --- |
-| `npm run test:all` | Lint and type check clean; 53 suites, 753 tests passed. |
+| `npm run test:all` | Lint and type check clean; 54 suites, 760 tests passed. |
 | `npm run build` and `npm run build:plm` | Passed. |
-| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 47 passed, with the visual comparison. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 50 passed, with the visual comparison. |
 | `npm run test:electron`, and the browser suite in Firefox | Not run. |
 
 The browser suite has the button's own test no more; the Polish header test
@@ -132,25 +132,28 @@ the submenu of the layouts is opened.
 
 ### Reference screenshots
 
-Every screenshot that showed the button was made again, 22, and
+Every screenshot that showed the button was made again, 23, and
 `language-picker` was removed. Each was looked at against the one on
-`main`: the button is gone, and at 320 pixels the sentence takes fewer lines
-and what is under the header is higher. Compared, pixel by pixel, with the
-same screenshot before #78 (`3fcd017`):
+`main`, from which it differs, pixel by pixel, only where the button was,
+but at 320 pixels: there the sentence takes fewer lines, two in English
+where it took three, the button about drag and drop is beside Select Photo
+instead of under it, and what is under the header is higher by them.
 
-- The same: `home-1280`, `home-1201`, `home-1199`, `home-600`, `home-320`,
-  `loaded-general`, `empty-details`, `heif-general`, `loaded-general-ar`,
-  `narrow-loaded-ar`, `narrow-loaded-ja`, `narrow-photo`.
-- Different by what was merged after #78: `drop-dialog`, `drop-dialog-ar`
-  and `drop-veil` (the dialog of #86), and `loaded-details` and `loaded-raw`
-  (the photo, by up to 8 of 255 in a channel, as on `main` already).
-  `layout-menu` and `narrow-split-panes` came with #78.
-- Different by 1 or 2 of 255 in a channel, the text of the button under the
-  sentence and the text under a dialog's veil: `home-1200`,
-  `narrow-loaded` and `unsupported-dialog`.
+- `home-1280`, `home-1201`, `home-1200`, `home-1199`, `home-600`,
+  `home-320`.
+- `loaded-general`, `loaded-details`, `loaded-raw`, `empty-details`,
+  `heif-general`, `loaded-general-ar`.
+- `narrow-loaded`, `narrow-photo`, `narrow-loaded-ja`, `narrow-loaded-ar`,
+  `narrow-split-panes`.
+- `unsupported-dialog`, `layout-menu`, `drop-dialog`, `drop-dialog-ar`,
+  `drop-veil`, `drop-hint`.
 
-`drop-veil` on `main` still had the button LAYOUT under the veil: a change
-that light under the veil is under the comparison's threshold of a pixel's
-colour, so it passed. All of them were therefore made with
-`--update-snapshots=all`, which leaves the files that did not change as
-they were, byte for byte.
+Made before #90 was merged, 12 of them were again the screenshots of
+before #78 (`3fcd017`), pixel for pixel, and the others differed from those
+only by what was merged since, or by 1 or 2 of 255 in a channel.
+
+`drop-veil` on `main` still had the button LAYOUT, and not the button about
+drag and drop, under the veil: a change that light under the veil is under
+the comparison's threshold of a pixel's colour, so it passed. All of them
+were therefore made with `--update-snapshots=all`, which leaves the files
+that did not change as they were, byte for byte.

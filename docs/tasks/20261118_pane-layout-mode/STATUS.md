@@ -101,8 +101,9 @@ shown still knows.
 - **The header is as it was before #78** (`Header.tsx`, `Header.module.scss`
   and `Header.spec.tsx`): the room for the menu's button, 26 pixels after
   the texts. At 320 pixels the sentence takes fewer lines than with the
-  button (two in English, where it took three), and everything under the
-  header is higher by them.
+  button (two in English, where it took three), the button about drag and
+  drop (#90) is beside Select Photo instead of under it, and everything
+  under the header is higher by them.
 
 ## What was decided, and by whom
 
