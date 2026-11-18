@@ -15,7 +15,7 @@
     "about": "O aplikaci - {{appName}}"
   },
   "pageDescription": {
-    "home": "Zobrazte si data EXIF své fotky přímo v prohlížeči: datum pořízení, polohu na mapě, fotoaparát a jeho nastavení. Fotka se neodesílá na žádný server.",
+    "home": "Zobrazte si data EXIF své fotky přímo v prohlížeči: datum pořízení, polohu (zeměpisnou šířku a zeměpisnou délku) na mapě, nastavení fotoaparátu atd. Fotka se neodesílá na žádný server.",
     "demo": "Vyzkoušejte aplikaci {{appName}} na ukázkové fotce a podívejte se, jaká data EXIF zobrazí: datum pořízení, polohu na mapě, fotoaparát a jeho nastavení.",
     "settings": "Zvolte, jak aplikace {{appName}} zapisuje datum a čas a zda odesílá údaje o používání. Nastavení se ukládá ve vašem prohlížeči.",
     "language": "Zvolte jazyk, ve kterém se aplikace {{appName}} zobrazuje, nebo nechte, ať se řídí jazykem vašeho prohlížeče.",

@@ -15,7 +15,7 @@
     "about": "Perihal - {{appName}}"
   },
   "pageDescription": {
-    "home": "Lihat data EXIF foto anda dalam pelayar: tarikh diambil, lokasi pada peta, serta kamera dan tetapannya. Foto tidak dihantar ke mana-mana pelayan.",
+    "home": "Lihat data EXIF foto anda dalam pelayar: tarikh diambil, lokasi (latitud dan longitud) pada peta, tetapan kamera dan sebagainya. Foto tidak dihantar ke mana-mana pelayan.",
     "demo": "Cuba {{appName}} dengan foto contoh dan lihat data EXIF yang dipaparkannya: tarikh diambil, lokasi pada peta, serta kamera dan tetapannya.",
     "settings": "Pilih cara {{appName}} menulis tarikh dan masa, serta sama ada aplikasi ini menghantar data penggunaan. Tetapan disimpan dalam pelayar anda.",
     "language": "Pilih bahasa paparan {{appName}}, atau biarkan aplikasi ini mengikut bahasa pelayar anda.",

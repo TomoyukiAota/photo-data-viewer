@@ -15,7 +15,7 @@
     "about": "Informazioni - {{appName}}"
   },
   "pageDescription": {
-    "home": "Visualizza i dati EXIF della tua foto nel browser: la data di scatto, la posizione su una mappa, la fotocamera e le sue impostazioni. La foto non viene inviata ad alcun server.",
+    "home": "Visualizza i dati EXIF della tua foto nel browser: la data di scatto, la posizione (latitudine e longitudine) su una mappa, le impostazioni della fotocamera, ecc. La foto non viene inviata ad alcun server.",
     "demo": "Prova {{appName}} con una foto di esempio e scopri i dati EXIF che mostra: la data di scatto, la posizione su una mappa, la fotocamera e le sue impostazioni.",
     "settings": "Scegli come {{appName}} scrive date e orari e se invia dati di utilizzo. Le impostazioni vengono salvate nel tuo browser.",
     "language": "Scegli la lingua in cui viene mostrato {{appName}}, oppure lascia che segua la lingua del tuo browser.",
