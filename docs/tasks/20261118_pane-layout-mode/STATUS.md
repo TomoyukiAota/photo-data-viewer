@@ -9,7 +9,9 @@ Started on 2026-11-18, on the branch `claude/pane-layout-mode-4500b2`, from
 Merged on 2026-11-18 as the button LAYOUT before the menu's button (#78).
 On the same day the maintainer asked for the choice to be moved into the
 menu, and for a language's button in its place: see
-[In the menu](#in-the-menu-with-the-languages-button-in-its-place).
+[In the menu](#in-the-menu-with-the-languages-button-in-its-place). On
+2026-11-19 the maintainer had that button taken out of the header again:
+see [Out of the header](#the-languages-button-out-of-the-header).
 
 - **The menu's entry Layout** (`src/components/app-menu/LayoutSubmenu.tsx`),
   after the entry Language, with the icon of the split panes, opens a
@@ -37,9 +39,8 @@ menu, and for a language's button in its place: see
   and the modes', inside `"home"` (`home.layout`), as machine translation
   except Japanese's names of the modes; `docs/TRANSLATING.md` says what
   they are for.
-- **A language's button in the header** in the button LAYOUT's place
-  (`src/components/language/LanguagePicker.tsx`), as Photo Location Map's
-  website has one.
+- **The header has the menu's button alone**, as before #78. A language's
+  button was in the button LAYOUT's place for a day, and was taken out.
 
 ## In the menu, with the language's button in its place
 
@@ -81,6 +82,28 @@ of Photo Location Map's website.
 - **The button is on the Home page alone**, in the header, where the button
   LAYOUT was. The other pages have the Language page in the menu.
 
+## The language's button out of the header
+
+Asked by the maintainer on 2026-11-19, while its height was being matched to
+the menu's button beside it: the app follows the browser's language, so few
+users choose another, and they choose it once. A setting chosen so seldom
+belongs in the menu, not beside the header's sentence and its button, which
+are what the Home page is for. The header has the menu's button alone again,
+as it had before #78, and the language is chosen on the Language page, from
+the menu's entry Language, whose globe a user who cannot read the language
+shown still knows.
+
+- **Taken out with the button**: `LanguagePicker` and its unit test, the
+  look of its box in `LanguageList` (`look`, `.popup`), its browser test and
+  `language-picker.png`.
+- **Kept, as the Language page uses it**: `useLanguageChoice`, and the down
+  arrow and Enter from the search field.
+- **The header is as it was before #78** (`Header.tsx`, `Header.module.scss`
+  and `Header.spec.tsx`): the room for the menu's button, 26 pixels after
+  the texts. At 320 pixels the sentence takes fewer lines than with the
+  button (two in English, where it took three), and everything under the
+  header is higher by them.
+
 ## What was decided, and by whom
 
 - The maintainer: the names of the modes, `Split panes`, `Single pane` and
@@ -95,6 +118,6 @@ of Photo Location Map's website.
 ## Resuming
 
 Nothing is pending. A branch merged after this one that changes a
-screenshot of the Home page makes that screenshot again, with the header's
-new button. To change a name, change `home.layout` in every file of
-`src/locales/`.
+screenshot of the Home page makes that screenshot again, with the header
+that has the menu's button alone. To change a name, change `home.layout` in
+every file of `src/locales/`.

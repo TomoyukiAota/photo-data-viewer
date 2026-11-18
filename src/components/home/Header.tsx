@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
 import { AppMenuRoom } from '../app-menu/AppMenu';
-import LanguagePicker from '../language/LanguagePicker';
 import classes from './Header.module.scss';
 
 const Header: React.FC<{ className?: string }> = (props) => {
@@ -68,12 +67,8 @@ const Header: React.FC<{ className?: string }> = (props) => {
           className={classes.input}
         />
       </div>
-      <div className={classes.end}>
-        {/* Before the menu's button, in the middle of its height. */}
-        <LanguagePicker />
-        {/* The menu's button lies over this end of the header. */}
-        <AppMenuRoom />
-      </div>
+      {/* The menu's button lies over this end of the header. */}
+      <AppMenuRoom className={classes['menu-room']} />
     </div>
   );
 };

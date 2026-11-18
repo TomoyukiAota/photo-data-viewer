@@ -23,9 +23,8 @@ function languageOf(setting: LanguageSetting): LanguageCode {
 
 /**
  * The choice of the Language setting from the list of languages, on the
- * Language page and in the language's button of the Home page's header
- * (LanguagePicker): which entry is chosen, and choosing one, which shows the
- * app in its language at once and saves it with the other settings.
+ * Language page: which entry is chosen, and choosing one, which shows the app
+ * in its language at once and saves it with the other settings.
  *
  * TL;DR: On an address that names a language, such as /ja/language, the page
  * is in that language, which is the one chosen in the list, and choosing

@@ -89,11 +89,11 @@ Six tests run in Polish at the width of a phone (320 pixels). Polish stands
 for the languages that write more than English does: its sentences take more
 lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
-shown whole: the header as high as its text, which ends before its buttons,
-each name beside its number, a field as wide as its label, the dialogs, the
-veil over a page that a file is dragged over, the messages, the box of the
-language's button, the submenu of the layouts and the Credits page uncut,
-and the split panes inside the window.
+shown whole: the header as high as its text, which ends before the menu's
+button, each name beside its number, a field as wide as its label, the
+dialogs, the veil over a page that a file is dragged over, the messages, the
+submenu of the layouts and the Credits page uncut, and the split panes inside
+the window.
 They find their elements by where they are and name no Polish text, so that a
 change of a translation does not break them.
 The tests of a photo dropped on the page dispatch the drag's events, with a
