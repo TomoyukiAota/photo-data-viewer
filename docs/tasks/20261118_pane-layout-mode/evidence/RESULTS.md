@@ -149,3 +149,65 @@ The mouse was moved across the menu in steps, in a headless Chromium, at
   submenu, and a tap on Home closed it alone, as before.
 - With the keyboard, the right arrow opened the submenu and the left arrow
   closed it, with the focus back on the entry.
+
+## The language's button out of the header
+
+Checked on 2026-11-19 on the branch `claude/remove-header-language-button`,
+with `main` merged in at `6b6deb6` (#90, the button about drag and drop),
+again at `42a576e` (#89, the order of the map buttons), and at `2a54a89`
+(#92, the submenu opened on hover).
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 55 suites, 776 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 52 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+After #92, which changes no screenshot, every screenshot was made again and
+matched the ones made after #89, but for differences of drawing: the photo
+in `heif-general` and `loaded-general-ar` by 1 to 4 of 255 in a channel,
+the text of Select Photo in `home-1200`, and one pixel of `loaded-raw`.
+They were left as they were, and passed the comparison. A dropped photo's
+test failed the comparison once, by 6 pixels of the ripple on the dialog's
+focused button, and passed twice when run again.
+
+The browser suite has the button's own test no more; the Polish header test
+checks that the sentence ends before the menu's button, as before #78, and
+the Arabic narrow test that it ends at the menu's button's right, before
+the submenu of the layouts is opened.
+
+### Reference screenshots
+
+Every screenshot that showed the button was made again, 23, and
+`language-picker` was removed. Each was looked at against the one on
+`main`, from which it differs, pixel by pixel, only where the button was,
+but at 320 pixels: there the sentence takes fewer lines, two in English
+where it took three, the button about drag and drop is beside Select Photo
+instead of under it, and what is under the header is higher by them.
+
+- `home-1280`, `home-1201`, `home-1200`, `home-1199`, `home-600`,
+  `home-320`.
+- `loaded-general`, `loaded-details`, `loaded-raw`, `empty-details`,
+  `heif-general`, `loaded-general-ar`.
+- `narrow-loaded`, `narrow-photo`, `narrow-loaded-ja`, `narrow-loaded-ar`,
+  `narrow-split-panes`.
+- `unsupported-dialog`, `layout-menu`, `drop-dialog`, `drop-dialog-ar`,
+  `drop-veil`, `drop-hint`.
+
+Made before #90 was merged, 12 of them were again the screenshots of
+before #78 (`3fcd017`), pixel for pixel, and the others differed from those
+only by what was merged since, or by 1 or 2 of 255 in a channel.
+
+After #89, the six screenshots of the coordinates' row (`heif-general`,
+`loaded-general`, `loaded-general-ar`, `narrow-loaded`, `narrow-loaded-ja`
+and `narrow-loaded-ar`) were made again on the merge. Each differs from the
+one made before the merge only in the order of the map buttons. The photo
+in #89's `loaded-general-ar` differs from the one before #89 by 1 to 4 of
+255 in a channel, a difference of drawing; here it is as it was before #89.
+
+`drop-veil` on `main` still had the button LAYOUT, and not the button about
+drag and drop, under the veil: a change that light under the veil is under
+the comparison's threshold of a pixel's colour, so it passed. All of them
+were therefore made with `--update-snapshots=all`, which leaves the files
+that did not change as they were, byte for byte.

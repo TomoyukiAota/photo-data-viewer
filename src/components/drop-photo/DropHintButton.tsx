@@ -32,9 +32,8 @@ function hasFinePointer(): boolean {
  * Details: A file is dragged from the file manager with one. A phone or a tablet has none, and Photo Location Map takes
  * no drop.
  *
- * The box is a dialog, as the language's box is (LanguagePicker): Escape, a click outside it or on the button closes
- * it, and gives the keyboard's focus back to the button. A file dragged into the window closes it as well, as a
- * dialog over the page would refuse the drop.
+ * The box is a dialog: Escape, a click outside it or on the button closes it, and gives the keyboard's focus back to
+ * the button. A file dragged into the window closes it as well, as a dialog over the page would refuse the drop.
  */
 const DropHintButton: React.FC = () => {
   const { t } = useTranslation();
