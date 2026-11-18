@@ -29,8 +29,8 @@ and the screen, but not which page is opened.
   (referrer, country) and with what (browser, OS, device), in Vercel's
   dashboard. GA4 has the same, but a content blocker keeps GA4's tag, which is
   Google's, from loading in many browsers. Vercel's script is loaded from the
-  app's own address, at a path chosen anew for each deployment, so its counts
-  miss fewer visitors. It is a view of what GA4 shows, counted more fully; it
+  app's own address, at a path of the project's own that Vercel gives the
+  build, so its counts miss fewer visitors. It is a view of what GA4 shows, counted more fully; it
   keeps a month on Hobby, and custom events need Pro.
 
 Both are worth adding: Speed Insights for what nothing else measures, Web
@@ -91,7 +91,7 @@ From Vercel's documentation, read on 2026-11-18 (links in the
   send nothing in a browser driven by automation anyway (they check
   `navigator.webdriver`).
 - **Content blockers.** A blocked script sends nothing, and the app works as
-  before. Vercel's path, new for each deployment, is blocked less than GA4's.
+  before. Vercel's path, the project's own, is blocked less than GA4's.
 
 ## Changes
 

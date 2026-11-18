@@ -5,8 +5,9 @@ Started on 2026-11-18. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Implemented and verified locally; it sends nothing until it is deployed. Web
-Analytics is enabled in the Vercel project already.
+Merged and deployed on 2026-11-18, and checked on the production site
+([results](./evidence/RESULTS.md#after-the-merge)). Web Analytics is enabled
+in the Vercel project.
 
 - The standalone app loads Vercel's Web Analytics and Speed Insights while
   "Send usage data" is on (`src/analytics/VercelAnalytics.tsx`). Turned off,
@@ -27,9 +28,9 @@ button, and Speed Insights' free tier needs no switch. The `pdv-in-plm`
 project answers with 404, which is as it should be: the app loads neither
 there. Speed Insights Plus, which the dashboard may offer, is for Pro.
 
-After the merge, on <https://photo-data-viewer.vercel.app>, the browser's developer tools
+On <https://photo-data-viewer.vercel.app>, the browser's developer tools
 show two scripts of the app's own address loaded after the page (each at a
-path that changes with the deployment), a request ending in `/view` for each
+path of the project's own), a request ending in `/view` for each
 page opened, and requests ending in `/vitals` soon after the page is shown and
 when the tab is hidden or another page is opened. With "Send usage data" off,
 none of them. The dashboard shows data after the first visits; Speed Insights
@@ -51,13 +52,16 @@ after a few days.
 
 ## Not verified
 
-- **What reaches the dashboards.** On the pull request's preview, the app
-  loaded both scripts from the paths Vercel chose for the build, and loaded
-  neither with the setting off or as Photo Location Map's window
-  ([results](./evidence/RESULTS.md#on-vercel-the-preview-of-the-pull-request)).
-  The scripts send nothing in a browser driven by a test, so the requests
-  that send, `/view` and `/vitals`, are from Vercel's documentation and the
-  scripts' code until a person's visit after the merge shows them.
+- **What reaches the dashboards.** On the production site, the app loads
+  both scripts, and neither with the setting off or as Photo Location Map's
+  window ([results](./evidence/RESULTS.md#after-the-merge)). The scripts send
+  nothing in a browser driven by a test, so the requests that send, `/view`
+  and `/vitals`, and the dashboards are for the maintainer's own visit to
+  show.
+- **The deployment for Photo Location Map opened in an ordinary browser**
+  loads both scripts, as the app counts it as the standalone app there. Its
+  address is for Photo Location Map alone; leaving them out of that build as
+  well is the maintainer's decision.
 - **The Electron suite** was not run, as it opens windows. The app does not
   render the components in Photo Location Map's window, which the unit test
   checks.
@@ -65,6 +69,6 @@ after a few days.
 
 ## Resuming
 
-After the merge, check the requests above on the production site in a
-browser that a person uses, with the setting on and off, and the dashboards
-a day later, and record them in the [results](./evidence/RESULTS.md).
+Nothing is pending in this repository. The maintainer looks at the
+dashboards a day after their own visit, and at Speed Insights' allowance a
+week after the merge.
