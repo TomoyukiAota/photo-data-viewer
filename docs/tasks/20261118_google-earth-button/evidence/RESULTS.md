@@ -233,3 +233,62 @@ screen:
 | `npm run test:unit:em:main` | 307 passing, 2 pending |
 | `npm run build:prod` | Passes |
 | `npm run test:e2e`, the whole suite | 55 passed, 1 skipped |
+
+## The order, after the merge
+
+After the merge, the Google Earth button was moved between the two others
+([the status](../STATUS.md#changed-after-the-merge)). Checked on 2026-11-18, on
+macOS with Node 26.13.0 and npm 11.20.0, on the branch
+`claude/map-button-order-b1e1fd` from `main` at `9bfe790`, and again on
+2026-11-19 with `main` at `6b6deb6` merged in. That has
+[#90](https://github.com/TomoyukiAota/photo-data-viewer/pull/90), whose button
+beside Select Photo is in the header of every screenshot below: the six were
+made again with it, and the row, measured again, was as below.
+
+The row was measured in the production build with headless Chrome, the demo
+photo loaded: as it is now, and in the same page with the Google Earth button
+moved back to the end of the row, as it was. The height of the row was the same
+both ways in every case, to a tenth of a pixel:
+
+| Window | Language | Layout | The row | The buttons, from where a line starts |
+| --- | --- | --- | --- | --- |
+| 1280 × 800 | English, Polish, Arabic | Split panes | 44 | Google Maps, Google Earth, Google Street View |
+| 375 wide | English | Single pane | 44 | The three on one line, in that order |
+| 340 and 320 wide | English; at 320 also Japanese and Arabic | Single pane | 77 | Google Maps and Google Earth; Google Street View on the second line |
+| 320 × 667 | Polish | Single pane | 79.1 | As at 320 in English |
+| 320 wide | English, Arabic; Polish at 320 × 667 | Split panes | 116 | One under another, in that order |
+
+A line starts at the right in Arabic. In every case each button was all in the
+window, beside the numbers, with its icon uncut, and the page was no wider than
+the window. In the split panes the table scrolls sideways in its pane, and the
+buttons were measured with it scrolled to its end, where they are all in the
+pane. Tab went from Google Maps to Google Earth to Google Street View in every
+case.
+
+The six reference screenshots that show the buttons were made anew, in Chrome on
+macOS (`PDV_CHROME=1 PDV_VISUAL=1`, with `--update-snapshots=changed`, which
+rewrites only those that no longer match). In each, only the two buttons that
+changed places differ from the screenshot of `main` by more than 32 in a
+channel:
+
+| Screenshot | Where it changed |
+| --- | --- |
+| `loaded-general`, `heif-general` | x 1003–1071, y 320–347 |
+| `loaded-general-ar` | x 852–920, y 320–347 |
+| `narrow-loaded` | x 241–308, y 395–461 |
+| `narrow-loaded-ja` | x 241–308, y 399–465 |
+| `narrow-loaded-ar` | x 11–78, y 361–427 |
+
+The photo in `loaded-general-ar` differs as well, by at most 34 in a channel,
+which the comparison does not count. `narrow-split-panes` shows the row without
+its buttons, which are beyond the edge of the pane until the table is scrolled,
+and did not change; nor did any other screenshot.
+
+| Check | Result |
+| --- | --- |
+| `npm ci` | Passes |
+| `npm run test:all` | Passes; 765 tests (758 before `main` at `6b6deb6` was merged in) |
+| `npm run build` | Passes |
+| `npm run build:plm` | Passes |
+| Browser suite in Chrome with the visual comparison | 51 passed (48 before) |
+| `npm run test:electron` | Not run: it opens windows on the machine |
