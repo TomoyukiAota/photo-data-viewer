@@ -64,6 +64,24 @@ The checks here open no window, so nothing was installed:
 
 [STATUS.md](../STATUS.md#resuming) lists how to try them once deployed.
 
+## The title bar in dark mode
+
+Checked on 2026-11-18, on `main` with the day's other changes (Next.js 16.4.6,
+an address for each language) and the two `theme-color`s added.
+
+| Command                                      | Result                                                                 |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
+| `npm run test:all`                           | Passed: 53 suites, 748 tests                                           |
+| `npm run build`                              | Passed. Each of its 344 pages has the manifest and both `theme-color`s |
+| `npm run build:plm`                          | Passed. None of its 8 pages has the manifest or a `theme-color`        |
+| `npm run test:e2e` (Playwright's Chromium)   | Passed: 47 tests, 1 of them new                                        |
+| `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e` | Passed: 47 tests; every screenshot matched, none was updated           |
+
+The new test emulates each color scheme and reads the `theme-color` that
+matches it: `#ffffff` in the light one, `#202124` in the dark one. What Chrome
+makes of it, the installed app's title bar and file dialog, only a window
+shows ([STATUS.md](../STATUS.md#resuming)).
+
 ## `next build` run by a coding agent
 
 When a coding agent runs `next build`, Next.js 16.4.3 stops it
