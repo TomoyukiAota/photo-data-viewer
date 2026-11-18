@@ -337,11 +337,14 @@ in what the buttons give to the usage data. That is their texts alone, without
 a time, so it cannot fail this way, and was left as it is.
 
 The checks below were run again with the change on `main` at `2a54a89`, which
-has [#92](https://github.com/TomoyukiAota/photo-data-viewer/pull/92):
+has [#92](https://github.com/TomoyukiAota/photo-data-viewer/pull/92), and with
+`main` at `ec638cb` merged in, which has
+[#91](https://github.com/TomoyukiAota/photo-data-viewer/pull/91) as well and
+takes away the tests of the language's button:
 
 | Check | Result |
 | --- | --- |
-| `npm run test:all` | Passes; 781 tests (765 on `42a576e`) |
+| `npm run test:all` | Passes; 776 tests (781 on `2a54a89`, 765 on `42a576e`) |
 | `npm run build` | Passes |
-| Browser suite in Chrome with the visual comparison | 53 passed (51 on `42a576e`) |
+| Browser suite in Chrome with the visual comparison | 52 passed (53 on `2a54a89`, 51 on `42a576e`) |
 | `npm run test:electron` | Not run: it opens windows on the machine |
