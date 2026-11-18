@@ -1,3 +1,4 @@
+import { menuClasses } from '@mui/material/Menu';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   act,
@@ -12,6 +13,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { trackChangedUserSetting } from '../../analytics/track-event';
 import { applyLanguage } from '../../i18n/i18n';
 import AppMenu from './AppMenu';
+import { restToClose, restToOpen } from './useSubmenuHover';
 
 // What is recorded is checked here, and sent nowhere.
 jest.mock('../../analytics/track-event');
@@ -205,4 +207,247 @@ it('is in the language that the app is shown in', async () => {
         (item) => item.querySelector('.MuiListItemText-primary')?.textContent,
       ),
   ).toEqual(['自動', '表示領域を分割する', '表示領域を分割しない']);
+});
+
+// TL;DR: With a mouse, the submenu opens when the pointer rests on its entry,
+// and closes when the pointer goes on to another entry, unless it is on its
+// way to the submenu (useSubmenuHover.ts).
+// Details: jsdom lays nothing out, so the submenu is given the box that it has
+// at 1280 pixels in English, on the left of the menu, from the top of its
+// entry down. The entry is 36 pixels high, and About is under it.
+describe('with a mouse', () => {
+  /**
+   * jsdom has no PointerEvent: a mouse's event that has the pointer's type
+   * stands in for it, which React reads as it reads a pointer's event.
+   */
+  class PointerEventInJsdom extends MouseEvent {
+    readonly pointerType: string;
+    constructor(type: string, init: PointerEventInit = {}) {
+      super(type, init);
+      this.pointerType = init.pointerType ?? '';
+    }
+  }
+  const hasPointerEvent = 'PointerEvent' in window;
+
+  beforeAll(() => {
+    if (!hasPointerEvent) {
+      Object.assign(window, { PointerEvent: PointerEventInJsdom });
+    }
+  });
+
+  afterAll(() => {
+    if (!hasPointerEvent) {
+      delete (window as { PointerEvent?: unknown }).PointerEvent;
+    }
+  });
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  /** The pointer of a mouse, moved to the point over the element. */
+  const moveMouse = (element: Element, clientX = 0, clientY = 0) =>
+    fireEvent.pointerMove(element, { pointerType: 'mouse', clientX, clientY });
+
+  /** The pointer of a mouse, moved off the element at the point. */
+  const leaveWithMouse = (element: Element, clientX: number, clientY: number) =>
+    fireEvent.pointerLeave(element, {
+      pointerType: 'mouse',
+      clientX,
+      clientY,
+    });
+
+  /** The pointer rests, or goes on, for the time given. */
+  const rest = (milliseconds: number) =>
+    act(() => jest.advanceTimersByTime(milliseconds));
+
+  /**
+   * The menu's entry About, under the entry Layout. A mouse reaches it while
+   * the submenu is open, though the submenu hides the menu from a screen
+   * reader then.
+   */
+  const about = () =>
+    screen.getByRole('menuitem', { name: 'About', hidden: true });
+
+  /** Opens the submenu with the pointer resting on its entry, and returns the two. */
+  function openByHover() {
+    const entry = layoutEntry();
+    moveMouse(entry);
+    rest(restToOpen);
+    const submenu = screen.getByRole('menu', { name: 'Layout' });
+    // Laid out as at 1280 pixels in English.
+    const paper = submenu.closest<HTMLElement>(`.${menuClasses.paper}`)!;
+    Object.defineProperties(paper, {
+      offsetLeft: { value: 629 },
+      offsetTop: { value: 246 },
+      offsetWidth: { value: 442 },
+      offsetHeight: { value: 144 },
+    });
+    return { entry, submenu };
+  }
+
+  it('opens the submenu once the pointer has rested on its entry, with the focus on the chosen layout, and the arrow back gives the focus to the entry', async () => {
+    render();
+    openMenu();
+    const entry = layoutEntry();
+    moveMouse(entry);
+    rest(restToOpen - 1);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    rest(1);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+    const submenu = screen.getByRole('menu', { name: 'Layout' });
+    const auto = within(submenu).getByRole('menuitemradio', {
+      name: 'Automatic',
+    });
+    expect(document.activeElement).toBe(auto);
+
+    fireEvent.keyDown(auto, { key: 'ArrowLeft' });
+    await waitFor(() => expect(screen.getAllByRole('menu')).toHaveLength(1));
+    expect(document.activeElement).toBe(entry);
+  });
+
+  it('does not open the submenu for a pointer that passes over its entry', () => {
+    render();
+    openMenu();
+    const entry = layoutEntry();
+    moveMouse(entry);
+    rest(restToOpen - 10);
+    moveMouse(entry);
+    rest(restToOpen - 10);
+    // On the entry for longer than a rest, without resting.
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    leaveWithMouse(entry, 1180, 282);
+    moveMouse(about(), 1180, 300);
+    rest(1000);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    expect(screen.getAllByRole('menu')).toHaveLength(1);
+  });
+
+  it('leaves a touch, which has no hover, to open the submenu with a tap', () => {
+    render();
+    openMenu();
+    const entry = layoutEntry();
+    fireEvent.pointerMove(entry, { pointerType: 'touch' });
+    rest(1000);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(entry);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('closes the submenu at once when the pointer goes on to another entry, away from the submenu, and gives the focus back to its entry', async () => {
+    render();
+    openMenu();
+    const { entry } = openByHover();
+    // Straight down, to About.
+    leaveWithMouse(entry, 1180, 282);
+    moveMouse(about(), 1180, 300);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    await waitFor(() => expect(screen.getAllByRole('menu')).toHaveLength(1));
+    expect(document.activeElement).toBe(entry);
+  });
+
+  it('keeps the submenu open while the pointer crosses another entry on its way to the submenu, or is beside the menus', () => {
+    render();
+    openMenu();
+    const { entry, submenu } = openByHover();
+    // Down and to the left, over About.
+    leaveWithMouse(entry, 1180, 282);
+    moveMouse(about(), 1150, 300);
+    rest(restToClose - 1);
+    moveMouse(about(), 1100, 312);
+    rest(restToClose - 1);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+    // In the submenu.
+    moveMouse(
+      within(submenu).getByRole('menuitemradio', { name: 'Single pane' }),
+      1000,
+      360,
+    );
+    rest(1000);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+    // Beside the menus, on the menu's backdrop.
+    const backdrop = document.querySelector(
+      '#menu-appbar > .MuiBackdrop-root',
+    )!;
+    moveMouse(backdrop, 1000, 600);
+    rest(1000);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('closes the submenu when the pointer rests over another entry, though on its way to the submenu', () => {
+    render();
+    openMenu();
+    const { entry } = openByHover();
+    leaveWithMouse(entry, 1180, 282);
+    moveMouse(about(), 1150, 300);
+    rest(restToClose - 1);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+    rest(1);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('keeps the submenu open, with the focus in it, at a click on its entry', () => {
+    render();
+    openMenu();
+    const { entry, submenu } = openByHover();
+    // The press leaves the focus where it is.
+    expect(fireEvent.mouseDown(entry)).toBe(false);
+    fireEvent.click(entry);
+    expect(entry.getAttribute('aria-expanded')).toBe('true');
+    expect(document.activeElement).toBe(
+      within(submenu).getByRole('menuitemradio', { name: 'Automatic' }),
+    );
+  });
+
+  it('closes the submenu at a press on another entry, whose click opens its page and closes the menu', async () => {
+    render();
+    openMenu();
+    const { entry } = openByHover();
+    fireEvent.pointerDown(about(), { pointerType: 'mouse' });
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(about());
+    expect(push.mock.calls).toEqual([['/about']]);
+    await waitFor(() => expect(screen.queryAllByRole('menu')).toHaveLength(0));
+  });
+
+  it('closes the submenu alone at a click beside the menus, which reaches the menu’s backdrop', async () => {
+    render();
+    openMenu();
+    const { entry } = openByHover();
+    fireEvent.click(
+      document.querySelector('#menu-appbar > .MuiBackdrop-root')!,
+    );
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+    rest(1000);
+    // The menu stays open.
+    expect(screen.getAllByRole('menu')).toHaveLength(1);
+    expect(layoutEntry()).toBe(entry);
+  });
+
+  it('does not open the submenu for a rest on its entry from before it was opened and closed in another way, or before the menu closed, or in the menu that is closing', async () => {
+    render();
+    openMenu();
+    const entry = layoutEntry();
+    moveMouse(entry);
+    act(() => entry.focus());
+    fireEvent.click(entry);
+    const submenu = screen.getByRole('menu', { name: 'Layout' });
+    fireEvent.keyDown(
+      within(submenu).getByRole('menuitemradio', { name: 'Automatic' }),
+      { key: 'ArrowLeft' },
+    );
+    rest(1000);
+    expect(entry.getAttribute('aria-expanded')).toBe('false');
+
+    moveMouse(entry);
+    fireEvent.keyDown(entry, { key: 'Escape' });
+    moveMouse(entry);
+    rest(1000);
+    await waitFor(() => expect(screen.queryAllByRole('menu')).toHaveLength(0));
+  });
 });

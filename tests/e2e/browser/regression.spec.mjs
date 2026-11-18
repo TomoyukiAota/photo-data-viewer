@@ -1615,6 +1615,88 @@ test('the layout is chosen in the submenu of the menu’s entry Layout, and is k
   );
 });
 
+/** The middle of an element's box. */
+async function middleOf(locator) {
+  const box = await locator.boundingBox();
+  return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+}
+
+// TL;DR: With a mouse, the submenu of the layouts opens when the pointer
+// rests on its entry, and closes when the pointer goes on to another entry,
+// unless it is on its way to the submenu.
+// Details: The way is the triangle between where the pointer left the entry
+// and the submenu's side that faces it
+// (src/components/app-menu/useSubmenuHover.ts). The pointer goes through the
+// submenu's layer to the menu under it: a click on the entry leaves the
+// submenu open, and one beside the menus closes the submenu alone. While the
+// submenu is open, the menu under it is hidden from a screen reader, so its
+// entries are found by what they are.
+test('with a mouse, the submenu of the layouts opens on its entry, and stays open on the way to it', async ({
+  page,
+}) => {
+  const menuButton = page.getByRole('button', { name: 'menu', exact: true });
+  const menu = page.locator('#menu-appbar');
+  const entry = page.locator('[aria-haspopup="menu"]');
+  const about = menu.locator('[role="menuitem"]', { hasText: 'About' });
+  const submenu = page.locator('#layout-submenu [role="menu"]');
+  const item = (name) => page.getByRole('menuitemradio', { name, exact: true });
+
+  await page.goto('/');
+  await menuButton.click();
+  // The pointer rests on the entry, once the menu has grown open.
+  await entry.hover();
+  await expect(submenu).toBeVisible();
+  await expect(entry).toHaveAttribute('aria-expanded', 'true');
+  await expect(item('Automatic')).toBeFocused();
+  // Where the pointer goes, once the submenu has grown open too: on the
+  // entry, a little towards its arrow, on About, and on the last mode.
+  await item('Single pane').hover({ trial: true });
+  const entryBox = await entry.boundingBox();
+  const onEntry = {
+    x: entryBox.x + entryBox.width * 0.6,
+    y: entryBox.y + entryBox.height / 2,
+  };
+  const aboutMiddle = await middleOf(about);
+  const singlePane = await middleOf(item('Single pane'));
+
+  // Straight down, to About: the submenu closes, and the focus is back on
+  // its entry.
+  await page.mouse.move(onEntry.x, onEntry.y);
+  await page.mouse.move(onEntry.x, aboutMiddle.y, { steps: 5 });
+  await expect(submenu).toBeHidden();
+  await expect(entry).toHaveAttribute('aria-expanded', 'false');
+  await expect(entry).toBeFocused();
+
+  // Back on the entry, and down and to the left, across About and Credits,
+  // to the last mode: the submenu stays open on the way.
+  await page.mouse.move(onEntry.x, onEntry.y, { steps: 5 });
+  await expect(submenu).toBeVisible();
+  await page.mouse.move(singlePane.x, singlePane.y, { steps: 20 });
+  await expect(entry).toHaveAttribute('aria-expanded', 'true');
+
+  // A click on the entry leaves the submenu open, with the focus in it, and
+  // one beside the menus closes the submenu alone.
+  await entry.click();
+  await expect(entry).toHaveAttribute('aria-expanded', 'true');
+  await expect(item('Automatic')).toBeFocused();
+  await page.mouse.click(300, 600);
+  await expect(submenu).toBeHidden();
+  await expect(menu).toBeVisible();
+
+  // On the way again, the last mode is chosen, once the submenu has grown
+  // open: the menu closes, and the focus is on its button.
+  await page.mouse.move(onEntry.x, onEntry.y, { steps: 5 });
+  await expect(submenu).toBeVisible();
+  await page.mouse.move(singlePane.x, singlePane.y, { steps: 20 });
+  await expect(entry).toHaveAttribute('aria-expanded', 'true');
+  await item('Single pane').click();
+  await expect(menu).toBeHidden();
+  await expect(menuButton).toBeFocused();
+  await expect(
+    page.getByRole('tab', { name: 'Photo', exact: true }),
+  ).toBeVisible();
+});
+
 // TL;DR: The button before the menu's chooses the language, as the language
 // picker of Photo Location Map's website does: a box with a search field
 // above the list of languages.
@@ -2545,5 +2627,49 @@ test.describe('in a browser whose language is Arabic', () => {
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
     await expect(page.locator('#menu-appbar')).toBeHidden();
+  });
+
+  test('with a mouse, the submenu of the layouts opens on its entry, on the right, and stays open on the way to it', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await page.getByRole('button', { name: 'القائمة', exact: true }).click();
+    // While the submenu is open, the menu under it is hidden from a screen
+    // reader: its entry is found by what it is.
+    const entry = page.locator('[aria-haspopup="menu"]');
+    const submenu = page.locator('#layout-submenu [role="menu"]');
+    const lastMode = submenu.getByRole('menuitemradio').nth(2);
+    // The pointer rests on the entry, once the menu has grown open.
+    await entry.hover();
+    await expect(submenu).toBeVisible();
+    // Towards the page: on the right of the menu, which is at the window's
+    // left. Measured once the submenu has grown open.
+    await lastMode.hover({ trial: true });
+    const entryBox = await entry.boundingBox();
+    expect((await submenu.boundingBox()).x).toBeGreaterThanOrEqual(
+      Math.floor(entryBox.x + entryBox.width),
+    );
+
+    // From the entry, a little towards its arrow, down and to the right,
+    // across the entries under its own, to the last mode: the submenu stays
+    // open on the way.
+    const onEntry = {
+      x: entryBox.x + entryBox.width * 0.4,
+      y: entryBox.y + entryBox.height / 2,
+    };
+    const lastModeMiddle = await middleOf(lastMode);
+    await page.mouse.move(onEntry.x, onEntry.y);
+    await page.mouse.move(lastModeMiddle.x, lastModeMiddle.y, { steps: 20 });
+    await expect(entry).toHaveAttribute('aria-expanded', 'true');
+
+    // Back on the entry, and straight down to the entry under it: the
+    // submenu closes.
+    await page.mouse.move(onEntry.x, onEntry.y, { steps: 5 });
+    await page.mouse.move(onEntry.x, onEntry.y + entryBox.height, {
+      steps: 5,
+    });
+    await expect(submenu).toBeHidden();
+    await expect(entry).toHaveAttribute('aria-expanded', 'false');
   });
 });
