@@ -239,7 +239,11 @@ screen:
 After the merge, the Google Earth button was moved between the two others
 ([the status](../STATUS.md#changed-after-the-merge)). Checked on 2026-11-18, on
 macOS with Node 26.13.0 and npm 11.20.0, on the branch
-`claude/map-button-order-b1e1fd` from `main` at `9bfe790`.
+`claude/map-button-order-b1e1fd` from `main` at `9bfe790`, and again on
+2026-11-19 with `main` at `6b6deb6` merged in. That has
+[#90](https://github.com/TomoyukiAota/photo-data-viewer/pull/90), whose button
+beside Select Photo is in the header of every screenshot below: the six were
+made again with it, and the row, measured again, was as below.
 
 The row was measured in the production build with headless Chrome, the demo
 photo loaded: as it is now, and in the same page with the Google Earth button
@@ -264,13 +268,14 @@ case.
 The six reference screenshots that show the buttons were made anew, in Chrome on
 macOS (`PDV_CHROME=1 PDV_VISUAL=1`, with `--update-snapshots=changed`, which
 rewrites only those that no longer match). In each, only the two buttons that
-changed places differ from the earlier screenshot by more than 32 in a channel:
+changed places differ from the screenshot of `main` by more than 32 in a
+channel:
 
 | Screenshot | Where it changed |
 | --- | --- |
 | `loaded-general`, `heif-general` | x 1003–1071, y 320–347 |
 | `loaded-general-ar` | x 852–920, y 320–347 |
-| `narrow-loaded` | x 241–308, y 365–431 |
+| `narrow-loaded` | x 241–308, y 395–461 |
 | `narrow-loaded-ja` | x 241–308, y 399–465 |
 | `narrow-loaded-ar` | x 11–78, y 361–427 |
 
@@ -282,8 +287,8 @@ and did not change; nor did any other screenshot.
 | Check | Result |
 | --- | --- |
 | `npm ci` | Passes |
-| `npm run test:all` | Passes; 758 tests |
+| `npm run test:all` | Passes; 765 tests (758 before `main` at `6b6deb6` was merged in) |
 | `npm run build` | Passes |
 | `npm run build:plm` | Passes |
-| Browser suite in Chrome with the visual comparison | 48 passed |
+| Browser suite in Chrome with the visual comparison | 51 passed (48 before) |
 | `npm run test:electron` | Not run: it opens windows on the machine |
