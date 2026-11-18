@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Asetukset",
     "language": "Kieli (Language)",
-    "about": "Tietoja"
+    "about": "Tietoja",
+    "credits": "Tekijät"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Asetukset - {{appName}}",
     "language": "Kieli - {{appName}}",
-    "about": "Tietoja - {{appName}}"
+    "about": "Tietoja - {{appName}}",
+    "credits": "Tekijät - {{appName}}"
   },
   "pageDescription": {
     "home": "Katso kuvasi EXIF-tiedot selaimessa: kuvauspäivä, sijainti (leveysaste ja pituusaste) kartalla, kameran asetukset jne. Kuvaa ei lähetetä millekään palvelimelle.",
     "demo": "Kokeile {{appName}} -sovellusta esimerkkikuvalla ja katso, mitä EXIF-tietoja se näyttää: kuvauspäivä, sijainti kartalla, kamera ja sen asetukset.",
     "settings": "Valitse, miten {{appName}} kirjoittaa päivämäärät ja kellonajat ja lähettääkö se käyttötietoja. Asetukset tallennetaan selaimeesi.",
     "language": "Valitse kieli, jolla {{appName}} näytetään, tai anna sen seurata selaimesi kieltä.",
-    "about": "Miten {{appName}} lukee kuvasi selaimessa lähettämättä sitä millekään palvelimelle, mitä käyttötietoja se kerää, sen lähdekoodi ja kuka sitä kehittää."
+    "about": "Miten {{appName}} lukee kuvasi selaimessa lähettämättä sitä millekään palvelimelle, mitä käyttötietoja se kerää, sen lähdekoodi ja kuka sitä kehittää.",
+    "credits": "{{appName}}-sovelluksen käyttämien kuvakkeiden tekijät. Kuvakkeet ovat Flaticonista."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Avaa GitHub-profiili"
     },
     "photoLocationMap": "Haluatko nähdä monen kuvan sijainnit kartalla kerralla?<br/> Sitä varten on <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Tekijät",
+    "icons": "Tämä sovellus käyttää Flaticonin kuvakkeita, joiden tekijät ovat seuraavat."
   }
 }

@@ -6,20 +6,23 @@
     "demo": "Demonstracija",
     "settings": "Nustatymai",
     "language": "Kalba (Language)",
-    "about": "Apie programą"
+    "about": "Apie programą",
+    "credits": "Padėkos"
   },
   "pageTitle": {
     "demo": "Demonstracija - {{appName}}",
     "settings": "Nustatymai - {{appName}}",
     "language": "Kalba - {{appName}}",
-    "about": "Apie programą - {{appName}}"
+    "about": "Apie programą - {{appName}}",
+    "credits": "Padėkos - {{appName}}"
   },
   "pageDescription": {
     "home": "Peržiūrėkite savo nuotraukos EXIF duomenis naršyklėje: fotografavimo datą, vietą (platumą ir ilgumą) žemėlapyje, fotoaparato nustatymus ir kt. Nuotrauka nesiunčiama į jokį serverį.",
     "demo": "Išbandykite programą {{appName}} su pavyzdine nuotrauka ir pažiūrėkite, kokius EXIF duomenis ji rodo: fotografavimo datą, vietą žemėlapyje, fotoaparatą ir jo nustatymus.",
     "settings": "Pasirinkite, kaip programa {{appName}} rašo datą ir laiką ir ar ji siunčia naudojimo duomenis. Nustatymai įrašomi jūsų naršyklėje.",
     "language": "Pasirinkite kalbą, kuria rodoma programa {{appName}}, arba leiskite jai naudoti jūsų naršyklės kalbą.",
-    "about": "Kaip programa {{appName}} nuskaito jūsų nuotrauką naršyklėje jos niekur nesiųsdama, kokius naudojimo duomenis ji renka, jos pirminis tekstas ir kas ją kuria."
+    "about": "Kaip programa {{appName}} nuskaito jūsų nuotrauką naršyklėje jos niekur nesiųsdama, kokius naudojimo duomenis ji renka, jos pirminis tekstas ir kas ją kuria.",
+    "credits": "Programos {{appName}} naudojamų piktogramų, paimtų iš „Flaticon“, autoriai."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Atidaryti „GitHub“ profilį"
     },
     "photoLocationMap": "Ar norite žemėlapyje iš karto matyti daugelio nuotraukų vietas?<br/> Tam skirta programa <plmLink>„Photo Location Map“</plmLink>."
+  },
+  "credits": {
+    "title": "Padėkos",
+    "icons": "Ši programa naudoja „Flaticon“ piktogramas, kurias sukūrė šie autoriai."
   }
 }

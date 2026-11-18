@@ -17,6 +17,7 @@ export const GA4_PAGE_TITLES: Readonly<Record<string, string>> = {
   '/settings': pageTitleDefaultValue.settings,
   '/language': pageTitleDefaultValue.language,
   '/about': pageTitleDefaultValue.about,
+  '/credits': pageTitleDefaultValue.credits,
 };
 
 export const GA4_FALLBACK_TITLE = appName.standalone;

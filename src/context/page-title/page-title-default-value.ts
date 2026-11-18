@@ -6,4 +6,5 @@ export const pageTitleDefaultValue = {
   settings: `Settings - ${appName.standalone}`,
   language: `Language - ${appName.standalone}`,
   about: `About - ${appName.standalone}`,
+  credits: `Credits - ${appName.standalone}`,
 };

@@ -130,6 +130,7 @@ const menuPaths = {
   Settings: '/settings',
   Language: '/language',
   About: '/about',
+  Credits: '/credits',
 };
 
 /**
@@ -532,6 +533,50 @@ test('photo values, tabs, rotation, splitter persistence, and navigation', async
   await expect(
     page.getByRole('cell', { name: 'Demo (Apple Park).jpg', exact: true }),
   ).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+/** The credits of the Credits page, in Flaticon's words, which stay in English in every language. */
+const creditLines = [
+  'Icons made by Magnific from www.flaticon.com',
+  'Icon made by srip from www.flaticon.com',
+  'Icon made by Dave Gandy from www.flaticon.com, licensed under CC BY 3.0',
+];
+
+test('the Credits page, the last entry of the menu, credits the authors of the icons, with links to them', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/about');
+  await page.getByRole('button', { name: 'menu', exact: true }).click();
+  await expect(page.getByRole('menuitem')).toHaveText(
+    Object.keys(menuPaths),
+  );
+  await page.keyboard.press('Escape');
+  await navigate(page, 'Credits');
+  await expect(page).toHaveTitle('Credits - Photo Data Viewer');
+  await expect(page.getByRole('listitem')).toHaveText(creditLines);
+  for (const [name, href] of [
+    ['Magnific', 'https://www.flaticon.com/authors/magnific'],
+    ['srip', 'https://www.flaticon.com/authors/srip'],
+    ['Dave Gandy', 'https://www.flaticon.com/authors/dave-gandy'],
+    ['CC BY 3.0', 'https://creativecommons.org/licenses/by/3.0/'],
+  ]) {
+    await expect(
+      page.getByRole('link', { name, exact: true }),
+    ).toHaveAttribute('href', href);
+  }
+  await expect(
+    page.getByRole('link', { name: 'www.flaticon.com', exact: true }),
+  ).toHaveCount(3);
+  // The icons are drawn, beside their author's line.
+  const icons = page.getByRole('listitem').locator('img');
+  await expect(icons).toHaveCount(5);
+  for (const icon of await icons.all()) {
+    expect(await icon.evaluate((img) => img.naturalWidth)).toBeGreaterThan(0);
+  }
+  await snapshot(page, 'credits');
   expect(errors).toEqual([]);
 });
 
@@ -1921,6 +1966,37 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
       page.getByRole('cell', { name: 'demo.jpg', exact: true }),
     ).toBeVisible();
   });
+
+  test('the Credits page and its entry in the menu are whole, and a credit continues on the next line', async ({
+    page,
+  }) => {
+    await page.goto('/credits');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pl');
+
+    // The menu's last entry, the page's, is all in the window.
+    await page.locator('button[aria-label]').first().click();
+    const lastEntry = page.getByRole('menuitem').last();
+    await expect(lastEntry).toBeInViewport({ ratio: 1 });
+    expect(await isCut(lastEntry)).toBe(false);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#menu-appbar')).toBeHidden();
+
+    // The title, the sentence and each credit are whole, in the window, and
+    // the longest credit takes more than one line.
+    const credits = page.getByRole('listitem');
+    await expect(credits).toHaveText(creditLines);
+    for (const element of [
+      ...(await page.locator('[class*="Credits_page-title"]').all()),
+      ...(await page.locator('[class*="Credits_intro"]').all()),
+      ...(await credits.all()),
+    ]) {
+      await expect(element).toBeInViewport({ ratio: 1 });
+      expect(await isCut(element)).toBe(false);
+    }
+    const longest = credits.last().locator('[dir="ltr"]');
+    expect((await longest.boundingBox()).height).toBeGreaterThan(30);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+  });
 });
 
 test.describe('on a phone', () => {
@@ -2070,6 +2146,26 @@ test.describe('in a browser whose language is Arabic', () => {
     await expect(
       page.getByRole('cell', { name: 'demo.jpg', exact: true }),
     ).toBeVisible();
+  });
+
+  test('the Credits page is laid out from the right, and its credits, in English, are read from the left', async ({
+    page,
+  }) => {
+    await page.goto('/credits');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await expect(page).toHaveTitle('شكر وتقدير - Photo Data Viewer');
+    const credits = page.getByRole('listitem');
+    await expect(credits).toHaveText(creditLines);
+    // An author's icons are where a line starts, at the right, and the credit
+    // beside them keeps the order of its English words.
+    for (const credit of await credits.all()) {
+      const line = credit.locator('[dir="ltr"]');
+      await expect(line).toHaveCSS('direction', 'ltr');
+      expect((await credit.locator('img').first().boundingBox()).x).toBeGreaterThan(
+        (await line.boundingBox()).x,
+      );
+    }
+    await snapshot(page, 'credits-ar');
   });
 
   test('the narrow layout is laid out from the right as well', async ({

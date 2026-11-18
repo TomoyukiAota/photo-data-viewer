@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Cài đặt",
     "language": "Ngôn ngữ (Language)",
-    "about": "Giới thiệu"
+    "about": "Giới thiệu",
+    "credits": "Ghi công"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Cài đặt - {{appName}}",
     "language": "Ngôn ngữ - {{appName}}",
-    "about": "Giới thiệu - {{appName}}"
+    "about": "Giới thiệu - {{appName}}",
+    "credits": "Ghi công - {{appName}}"
   },
   "pageDescription": {
     "home": "Xem dữ liệu EXIF của ảnh ngay trong trình duyệt: ngày chụp, vị trí (vĩ độ và kinh độ) trên bản đồ, các cài đặt máy ảnh, v.v. Ảnh không được gửi đến bất kỳ máy chủ nào.",
     "demo": "Dùng thử {{appName}} với một ảnh mẫu và xem dữ liệu EXIF mà ứng dụng hiển thị: ngày chụp, vị trí trên bản đồ, máy ảnh và các cài đặt của máy ảnh.",
     "settings": "Chọn cách {{appName}} viết ngày và giờ, và có gửi dữ liệu sử dụng hay không. Cài đặt được lưu trong trình duyệt của bạn.",
     "language": "Chọn ngôn ngữ hiển thị của {{appName}}, hoặc để ứng dụng theo ngôn ngữ của trình duyệt.",
-    "about": "Cách {{appName}} đọc ảnh của bạn trong trình duyệt mà không gửi đến bất kỳ máy chủ nào, dữ liệu sử dụng mà ứng dụng thu thập, mã nguồn và người phát triển."
+    "about": "Cách {{appName}} đọc ảnh của bạn trong trình duyệt mà không gửi đến bất kỳ máy chủ nào, dữ liệu sử dụng mà ứng dụng thu thập, mã nguồn và người phát triển.",
+    "credits": "Tác giả của các biểu tượng mà {{appName}} sử dụng, lấy từ Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Mở hồ sơ GitHub"
     },
     "photoLocationMap": "Bạn muốn xem vị trí của nhiều ảnh trên bản đồ cùng một lúc?<br/> Bạn có thể dùng <plmLink>Photo Location Map</plmLink> cho việc đó."
+  },
+  "credits": {
+    "title": "Ghi công",
+    "icons": "Ứng dụng này sử dụng các biểu tượng từ Flaticon do các tác giả sau tạo ra."
   }
 }

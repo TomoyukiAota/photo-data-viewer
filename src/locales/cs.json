@@ -6,20 +6,23 @@
     "demo": "Ukázka",
     "settings": "Nastavení",
     "language": "Jazyk (Language)",
-    "about": "O aplikaci"
+    "about": "O aplikaci",
+    "credits": "Poděkování"
   },
   "pageTitle": {
     "demo": "Ukázka - {{appName}}",
     "settings": "Nastavení - {{appName}}",
     "language": "Jazyk - {{appName}}",
-    "about": "O aplikaci - {{appName}}"
+    "about": "O aplikaci - {{appName}}",
+    "credits": "Poděkování - {{appName}}"
   },
   "pageDescription": {
     "home": "Zobrazte si data EXIF své fotky přímo v prohlížeči: datum pořízení, polohu (zeměpisnou šířku a zeměpisnou délku) na mapě, nastavení fotoaparátu atd. Fotka se neodesílá na žádný server.",
     "demo": "Vyzkoušejte aplikaci {{appName}} na ukázkové fotce a podívejte se, jaká data EXIF zobrazí: datum pořízení, polohu na mapě, fotoaparát a jeho nastavení.",
     "settings": "Zvolte, jak aplikace {{appName}} zapisuje datum a čas a zda odesílá údaje o používání. Nastavení se ukládá ve vašem prohlížeči.",
     "language": "Zvolte jazyk, ve kterém se aplikace {{appName}} zobrazuje, nebo nechte, ať se řídí jazykem vašeho prohlížeče.",
-    "about": "Jak aplikace {{appName}} čte vaši fotku v prohlížeči, aniž by ji odesílala na server, jaké údaje o používání shromažďuje, její zdrojový kód a kdo ji vyvíjí."
+    "about": "Jak aplikace {{appName}} čte vaši fotku v prohlížeči, aniž by ji odesílala na server, jaké údaje o používání shromažďuje, její zdrojový kód a kdo ji vyvíjí.",
+    "credits": "Autoři ikon, které aplikace {{appName}} používá a které pocházejí z Flaticonu."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Otevřít profil na GitHubu"
     },
     "photoLocationMap": "Chcete na mapě vidět místa pořízení mnoha fotek najednou?<br/> K tomu slouží <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Poděkování",
+    "icons": "Tato aplikace používá ikony z Flaticonu od následujících autorů."
   }
 }

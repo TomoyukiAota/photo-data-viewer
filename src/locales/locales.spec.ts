@@ -52,6 +52,7 @@ function tags(text: string): string {
 const names = [
   'EXIF',
   'exifr',
+  'Flaticon',
   'GitHub',
   'Google',
   'iOS',

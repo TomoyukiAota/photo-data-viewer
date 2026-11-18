@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Innstillinger",
     "language": "Språk (Language)",
-    "about": "Om"
+    "about": "Om",
+    "credits": "Kreditering"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Innstillinger - {{appName}}",
     "language": "Språk - {{appName}}",
-    "about": "Om - {{appName}}"
+    "about": "Om - {{appName}}",
+    "credits": "Kreditering - {{appName}}"
   },
   "pageDescription": {
     "home": "Se EXIF-informasjonen for bildet ditt i nettleseren: opptaksdato, sted (breddegrad og lengdegrad) på et kart, kamerainnstillinger osv. Bildet sendes ikke til noen server.",
     "demo": "Prøv {{appName}} med et eksempelbilde, og se hvilken EXIF-informasjon appen viser: opptaksdato, sted på et kart, kameraet og kamerainnstillingene.",
     "settings": "Velg hvordan {{appName}} skriver dato og klokkeslett, og om appen sender bruksdata. Innstillingene lagres i nettleseren din.",
     "language": "Velg språket {{appName}} vises på, eller la appen følge språket i nettleseren din.",
-    "about": "Slik leser {{appName}} bildet ditt i nettleseren uten å sende det til noen server, hvilke bruksdata appen samler inn, kildekoden og hvem som utvikler den."
+    "about": "Slik leser {{appName}} bildet ditt i nettleseren uten å sende det til noen server, hvilke bruksdata appen samler inn, kildekoden og hvem som utvikler den.",
+    "credits": "Opphavspersonene til ikonene som {{appName}} bruker, og som kommer fra Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Åpne GitHub-profilen"
     },
     "photoLocationMap": "Vil du se stedene for mange bilder på et kart på én gang?<br/> <plmLink>Photo Location Map</plmLink> er laget for det."
+  },
+  "credits": {
+    "title": "Kreditering",
+    "icons": "Denne appen bruker ikoner fra Flaticon, laget av følgende opphavspersoner."
   }
 }

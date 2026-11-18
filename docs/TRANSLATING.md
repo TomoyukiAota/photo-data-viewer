@@ -102,8 +102,8 @@ reviews the pull request:
   the English text has for wide screens; your translation may drop it or put it
   where your language breaks well.
 - The names of a text are those of the English text, written the same: EXIF,
-  exifr, GitHub, Google, iOS, Photo Location Map, Tomoyuki Aota, Twitter. An
-  ending may follow a name (`GitHubissa`).
+  exifr, Flaticon, GitHub, Google, iOS, Photo Location Map, Tomoyuki Aota,
+  Twitter. An ending may follow a name (`GitHubissa`).
 - `dateTime.weekdayPattern`, when the file has it, contains `ddd`.
 - A character that is not drawn is written as an escape, so that whoever reads
   the file sees that it is there: `\u00a0` for a no-break space, `\u00ad` for a
@@ -142,7 +142,12 @@ do not take longer with every language.
   of the layout: say so in the pull request, or open an issue, and leave the
   text as it should be.
 - Names stay as they are: Photo Data Viewer, Photo Location Map, EXIF, GitHub,
-  exifr.
+  exifr, Flaticon.
+- The Credits page credits the authors of the icons in lines that stay in
+  English, as Flaticon writes them; its title (`credits.title`, and
+  `menu.credits` in the menu) and the sentence before the lines
+  (`credits.icons`) are translated. Name the page as your language names a
+  page of credits or of acknowledgements.
 - Google's products are written as Google names them in your language, with
   "Google" as it is: `Google マップ`, `Mapy Google`, and `Google Maps` where
   Google keeps the English name.

@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Ayarlar",
     "language": "Dil (Language)",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "credits": "Emeği Geçenler"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Ayarlar - {{appName}}",
     "language": "Dil - {{appName}}",
-    "about": "Hakkında - {{appName}}"
+    "about": "Hakkında - {{appName}}",
+    "credits": "Emeği Geçenler - {{appName}}"
   },
   "pageDescription": {
     "home": "Fotoğrafınızın EXIF verilerini tarayıcınızda görüntüleyin: çekim tarihi, haritadaki konum (enlem ve boylam), kamera ayarları vb. Fotoğraf hiçbir sunucuya gönderilmez.",
     "demo": "{{appName}} uygulamasını örnek bir fotoğrafla deneyin ve gösterdiği EXIF verilerini görün: çekim tarihi, haritadaki konum, kamera ve ayarları.",
     "settings": "{{appName}} uygulamasının tarihleri ve saatleri nasıl yazacağını ve kullanım verilerini gönderip göndermeyeceğini seçin. Ayarlar tarayıcınıza kaydedilir.",
     "language": "{{appName}} uygulamasının görüntüleneceği dili seçin veya tarayıcınızın dilini izlemesine izin verin.",
-    "about": "{{appName}} uygulamasının fotoğrafınızı hiçbir sunucuya göndermeden tarayıcınızda nasıl okuduğu, topladığı kullanım verileri, kaynak kodu ve onu kimin geliştirdiği."
+    "about": "{{appName}} uygulamasının fotoğrafınızı hiçbir sunucuya göndermeden tarayıcınızda nasıl okuduğu, topladığı kullanım verileri, kaynak kodu ve onu kimin geliştirdiği.",
+    "credits": "{{appName}} uygulamasının kullandığı, Flaticon’dan alınan simgelerin yaratıcıları."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "GitHub profilini aç"
     },
     "photoLocationMap": "Birçok fotoğrafın konumunu haritada aynı anda görmek ister misiniz?<br/> Bunun için <plmLink>Photo Location Map</plmLink> kullanılabilir."
+  },
+  "credits": {
+    "title": "Emeği Geçenler",
+    "icons": "Bu uygulama, aşağıdaki yaratıcıların hazırladığı Flaticon simgelerini kullanır."
   }
 }

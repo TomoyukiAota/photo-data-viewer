@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Podešavanja",
     "language": "Jezik (Language)",
-    "about": "O aplikaciji"
+    "about": "O aplikaciji",
+    "credits": "Zasluge"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Podešavanja - {{appName}}",
     "language": "Jezik - {{appName}}",
-    "about": "O aplikaciji - {{appName}}"
+    "about": "O aplikaciji - {{appName}}",
+    "credits": "Zasluge - {{appName}}"
   },
   "pageDescription": {
     "home": "Pogledajte podatke EXIF svoje fotografije u pregledaču: datum snimanja, lokaciju (geografsku širinu i geografsku dužinu) na mapi, podešavanja fotoaparata itd. Fotografija se ne šalje ni na jedan server.",
     "demo": "Isprobajte aplikaciju {{appName}} sa primerom fotografije i pogledajte koje podatke EXIF prikazuje: datum snimanja, lokaciju na mapi, fotoaparat i njegova podešavanja.",
     "settings": "Izaberite kako aplikacija {{appName}} zapisuje datum i vreme i da li šalje podatke o korišćenju. Podešavanja se čuvaju u vašem pregledaču.",
     "language": "Izaberite jezik na kom se prikazuje aplikacija {{appName}} ili neka prati jezik vašeg pregledača.",
-    "about": "Kako aplikacija {{appName}} čita vašu fotografiju u pregledaču bez slanja na bilo koji server, koje podatke o korišćenju prikuplja, njen izvorni kôd i ko je razvija."
+    "about": "Kako aplikacija {{appName}} čita vašu fotografiju u pregledaču bez slanja na bilo koji server, koje podatke o korišćenju prikuplja, njen izvorni kôd i ko je razvija.",
+    "credits": "Autori ikona koje aplikacija {{appName}} koristi, a koje potiču sa sajta Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Otvori profil na GitHub-u"
     },
     "photoLocationMap": "Želite li da na mapi vidite lokacije mnogih fotografija odjednom?<br/> Za to je dostupan <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Zasluge",
+    "icons": "Ova aplikacija koristi ikone sa sajta Flaticon koje su izradili sledeći autori."
   }
 }

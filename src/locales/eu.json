@@ -6,20 +6,23 @@
     "demo": "Demoa",
     "settings": "Ezarpenak",
     "language": "Hizkuntza (Language)",
-    "about": "Honi buruz"
+    "about": "Honi buruz",
+    "credits": "Kredituak"
   },
   "pageTitle": {
     "demo": "Demoa - {{appName}}",
     "settings": "Ezarpenak - {{appName}}",
     "language": "Hizkuntza - {{appName}}",
-    "about": "Honi buruz - {{appName}}"
+    "about": "Honi buruz - {{appName}}",
+    "credits": "Kredituak - {{appName}}"
   },
   "pageDescription": {
     "home": "Ikusi zure argazkiaren EXIF datuak nabigatzailean bertan: ateratze-data, kokapena (latitudea eta longitudea) mapan, kameraren ezarpenak, etab. Argazkia ez da inongo zerbitzarira bidaltzen.",
     "demo": "Probatu {{appName}} adibideko argazki batekin, eta ikusi zer EXIF datu erakusten dituen: ateratze-data, kokapena mapan, kamera eta haren ezarpenak.",
     "settings": "Aukeratu nola idazten dituen {{appName}} aplikazioak data eta ordua, eta erabilera-datuak bidaltzen dituen ala ez. Ezarpenak zure nabigatzailean gordetzen dira.",
     "language": "Aukeratu zer hizkuntzatan erakusten den {{appName}}, edo utzi zure nabigatzailearen hizkuntzari jarraitzen.",
-    "about": "Nola irakurtzen duen {{appName}} aplikazioak zure argazkia nabigatzailean inongo zerbitzarira bidali gabe, zer erabilera-datu biltzen dituen, haren iturburu-kodea eta nork garatzen duen."
+    "about": "Nola irakurtzen duen {{appName}} aplikazioak zure argazkia nabigatzailean inongo zerbitzarira bidali gabe, zer erabilera-datu biltzen dituen, haren iturburu-kodea eta nork garatzen duen.",
+    "credits": "{{appName}} aplikazioak erabiltzen dituen ikonoen egileak. Ikonoak Flaticon-ekoak dira."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Ireki GitHub-eko profila"
     },
     "photoLocationMap": "Argazki askoren kokapenak mapa batean aldi berean ikusi nahi dituzu?<br/> Horretarako dago <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Kredituak",
+    "icons": "Aplikazio honek Flaticon-eko ikonoak erabiltzen ditu, egile hauek sortuak."
   }
 }

@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Configurações",
     "language": "Idioma (Language)",
-    "about": "Sobre"
+    "about": "Sobre",
+    "credits": "Créditos"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Configurações - {{appName}}",
     "language": "Idioma - {{appName}}",
-    "about": "Sobre - {{appName}}"
+    "about": "Sobre - {{appName}}",
+    "credits": "Créditos - {{appName}}"
   },
   "pageDescription": {
     "home": "Veja os dados EXIF da sua foto no navegador: a data da captura, a localização (latitude e longitude) em um mapa, as configurações da câmera etc. A foto não é enviada a nenhum servidor.",
     "demo": "Experimente o {{appName}} com uma foto de exemplo e veja os dados EXIF que ele exibe: a data da captura, a localização em um mapa, a câmera e as configurações dela.",
     "settings": "Escolha como o {{appName}} escreve datas e horas e se ele envia dados de uso. As configurações são salvas no seu navegador.",
     "language": "Escolha o idioma em que o {{appName}} é exibido ou deixe que ele siga o idioma do seu navegador.",
-    "about": "Como o {{appName}} lê sua foto no navegador sem enviá-la a nenhum servidor, quais dados de uso ele coleta, seu código-fonte e quem o desenvolve."
+    "about": "Como o {{appName}} lê sua foto no navegador sem enviá-la a nenhum servidor, quais dados de uso ele coleta, seu código-fonte e quem o desenvolve.",
+    "credits": "Os autores dos ícones que o {{appName}} usa, que vêm do Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Abrir o perfil no GitHub"
     },
     "photoLocationMap": "Quer ver no mapa os locais de muitas fotos de uma só vez?<br/> O <plmLink>Photo Location Map</plmLink> está disponível para isso."
+  },
+  "credits": {
+    "title": "Créditos",
+    "icons": "Este aplicativo usa ícones do Flaticon criados pelos seguintes autores."
   }
 }

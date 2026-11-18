@@ -6,20 +6,23 @@
     "demo": "Demó",
     "settings": "Beállítások",
     "language": "Nyelv (Language)",
-    "about": "Névjegy"
+    "about": "Névjegy",
+    "credits": "Köszönetnyilvánítás"
   },
   "pageTitle": {
     "demo": "Demó - {{appName}}",
     "settings": "Beállítások - {{appName}}",
     "language": "Nyelv - {{appName}}",
-    "about": "Névjegy - {{appName}}"
+    "about": "Névjegy - {{appName}}",
+    "credits": "Köszönetnyilvánítás - {{appName}}"
   },
   "pageDescription": {
     "home": "Tekintse meg fotója EXIF-adatait a böngészőjében: a készítés dátumát, a helyet (földrajzi szélesség és földrajzi hosszúság) a térképen, a fényképezőgép beállításait stb. A fotót semmilyen szerverre nem küldjük el.",
     "demo": "Próbálja ki a {{appName}} alkalmazást egy mintafotóval, és nézze meg, milyen EXIF-adatokat jelenít meg: a készítés dátumát, a helyet a térképen, a fényképezőgépet és annak beállításait.",
     "settings": "Válassza ki, hogyan írja a {{appName}} a dátumot és az időt, és küldjön-e használati adatokat. A beállításokat a böngészője tárolja.",
     "language": "Válassza ki, milyen nyelven jelenjen meg a {{appName}}, vagy kövesse a böngészője nyelvét.",
-    "about": "Hogyan olvassa be a {{appName}} a fotóját a böngészőben anélkül, hogy bármilyen szerverre elküldené, milyen használati adatokat gyűjt, a forráskódja és ki fejleszti."
+    "about": "Hogyan olvassa be a {{appName}} a fotóját a böngészőben anélkül, hogy bármilyen szerverre elküldené, milyen használati adatokat gyűjt, a forráskódja és ki fejleszti.",
+    "credits": "A {{appName}} által használt ikonok készítői. Az ikonok a Flaticonról származnak."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "A GitHub-profil megnyitása"
     },
     "photoLocationMap": "Szeretné egyszerre, térképen látni sok fotó készítési helyét?<br/> Erre szolgál a <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Köszönetnyilvánítás",
+    "icons": "Az alkalmazás a Flaticon ikonjait használja, amelyeket a következő alkotók készítettek."
   }
 }

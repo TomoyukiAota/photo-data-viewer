@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Ustawienia",
     "language": "Język (Language)",
-    "about": "Informacje"
+    "about": "Informacje",
+    "credits": "Podziękowania"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Ustawienia - {{appName}}",
     "language": "Język - {{appName}}",
-    "about": "Informacje - {{appName}}"
+    "about": "Informacje - {{appName}}",
+    "credits": "Podziękowania - {{appName}}"
   },
   "pageDescription": {
     "home": "Wyświetl dane EXIF swojego zdjęcia w przeglądarce: datę wykonania, położenie (szerokość geograficzną i długość geograficzną) na mapie, ustawienia aparatu itp. Zdjęcie nie jest wysyłane na żaden serwer.",
     "demo": "Wypróbuj aplikację {{appName}} na przykładowym zdjęciu i zobacz, jakie dane EXIF wyświetla: datę wykonania, położenie na mapie, aparat i jego ustawienia.",
     "settings": "Wybierz, jak aplikacja {{appName}} zapisuje datę i godzinę oraz czy wysyła dane o użytkowaniu. Ustawienia są zapisywane w Twojej przeglądarce.",
     "language": "Wybierz język, w którym wyświetlana jest aplikacja {{appName}}, lub pozwól jej używać języka Twojej przeglądarki.",
-    "about": "Jak aplikacja {{appName}} odczytuje Twoje zdjęcie w przeglądarce bez wysyłania go na jakikolwiek serwer, jakie dane o użytkowaniu zbiera, jej kod źródłowy i kto ją rozwija."
+    "about": "Jak aplikacja {{appName}} odczytuje Twoje zdjęcie w przeglądarce bez wysyłania go na jakikolwiek serwer, jakie dane o użytkowaniu zbiera, jej kod źródłowy i kto ją rozwija.",
+    "credits": "Autorzy ikon, których używa aplikacja {{appName}}, pochodzących z serwisu Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Otwórz profil w serwisie GitHub"
     },
     "photoLocationMap": "Chcesz zobaczyć na mapie miejsca wykonania wielu zdjęć naraz?<br/> Do tego służy <plmLink>Photo Location Map</plmLink>."
+  },
+  "credits": {
+    "title": "Podziękowania",
+    "icons": "Ta aplikacja korzysta z ikon z serwisu Flaticon, stworzonych przez następujących autorów."
   }
 }

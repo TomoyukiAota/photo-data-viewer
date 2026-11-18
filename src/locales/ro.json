@@ -6,20 +6,23 @@
     "demo": "Demo",
     "settings": "Setări",
     "language": "Limbă (Language)",
-    "about": "Despre"
+    "about": "Despre",
+    "credits": "Credite"
   },
   "pageTitle": {
     "demo": "Demo - {{appName}}",
     "settings": "Setări - {{appName}}",
     "language": "Limbă - {{appName}}",
-    "about": "Despre - {{appName}}"
+    "about": "Despre - {{appName}}",
+    "credits": "Credite - {{appName}}"
   },
   "pageDescription": {
     "home": "Vedeți datele EXIF ale pozei dvs. în browser: data fotografierii, locația (latitudinea și longitudinea) pe hartă, setările camerei etc. Poza nu este trimisă către niciun server.",
     "demo": "Încercați aplicația {{appName}} cu o poză de exemplu și vedeți ce date EXIF afișează: data fotografierii, locația pe hartă, camera și setările acesteia.",
     "settings": "Alegeți cum scrie aplicația {{appName}} data și ora și dacă trimite date de utilizare. Setările sunt salvate în browserul dvs.",
     "language": "Alegeți limba în care este afișată aplicația {{appName}} sau lăsați-o să urmeze limba browserului dvs.",
-    "about": "Cum citește aplicația {{appName}} poza dvs. în browser fără să o trimită către vreun server, ce date de utilizare colectează, codul sursă al aplicației și cine o dezvoltă."
+    "about": "Cum citește aplicația {{appName}} poza dvs. în browser fără să o trimită către vreun server, ce date de utilizare colectează, codul sursă al aplicației și cine o dezvoltă.",
+    "credits": "Autorii pictogramelor pe care le folosește aplicația {{appName}}, care provin de pe Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Deschide profilul GitHub"
     },
     "photoLocationMap": "Doriți să vedeți pe hartă locurile unde au fost făcute multe poze, toate deodată?<br/> <plmLink>Photo Location Map</plmLink> este disponibil în acest scop."
+  },
+  "credits": {
+    "title": "Credite",
+    "icons": "Această aplicație folosește pictograme de pe Flaticon, create de următorii autori."
   }
 }

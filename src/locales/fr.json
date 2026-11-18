@@ -6,20 +6,23 @@
     "demo": "Démo",
     "settings": "Paramètres",
     "language": "Langue (Language)",
-    "about": "À propos"
+    "about": "À propos",
+    "credits": "Crédits"
   },
   "pageTitle": {
     "demo": "Démo - {{appName}}",
     "settings": "Paramètres - {{appName}}",
     "language": "Langue - {{appName}}",
-    "about": "À propos - {{appName}}"
+    "about": "À propos - {{appName}}",
+    "credits": "Crédits - {{appName}}"
   },
   "pageDescription": {
     "home": "Affichez les données EXIF de votre photo dans votre navigateur\u00a0: la date de prise de vue, la localisation (latitude et longitude) sur une carte, les réglages de l’appareil photo, etc. La photo n’est envoyée à aucun serveur.",
     "demo": "Essayez {{appName}} avec une photo d’exemple et découvrez les données EXIF que l’application affiche\u00a0: la date de prise de vue, la localisation sur une carte, l’appareil photo et ses réglages.",
     "settings": "Choisissez comment {{appName}} écrit les dates et les heures, et si l’application envoie des données d’utilisation. Les paramètres sont enregistrés dans votre navigateur.",
     "language": "Choisissez la langue dans laquelle {{appName}} s’affiche, ou laissez l’application suivre la langue de votre navigateur.",
-    "about": "Comment {{appName}} lit votre photo dans votre navigateur sans l’envoyer à aucun serveur, les données d’utilisation que l’application collecte, son code source et qui la développe."
+    "about": "Comment {{appName}} lit votre photo dans votre navigateur sans l’envoyer à aucun serveur, les données d’utilisation que l’application collecte, son code source et qui la développe.",
+    "credits": "Les auteurs des icônes qu’utilise {{appName}}, qui proviennent de Flaticon."
   },
   "dateTime": {
     "weekdayPattern": "ddd"
@@ -142,5 +145,9 @@
       "title": "Ouvrir le profil GitHub"
     },
     "photoLocationMap": "Vous voulez voir sur une carte les lieux de nombreuses photos à la fois\u00a0?<br/> <plmLink>Photo Location Map</plmLink> est fait pour cela."
+  },
+  "credits": {
+    "title": "Crédits",
+    "icons": "Cette application utilise des icônes de Flaticon, créées par les auteurs suivants."
   }
 }
