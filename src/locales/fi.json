@@ -93,7 +93,10 @@
     "dropHere": "Pudota kuva valitaksesi sen.",
     "title": "Haluatko varmasti valita alla olevan kuvan?",
     "cancel": "Peruuta",
-    "select": "Valitse"
+    "select": "Valitse",
+    "hintButton": "Tietoja vetämisestä ja pudottamisesta",
+    "hintFinder": "Voit valita tiedoston myös vetämällä ja pudottamalla sen Finderista.",
+    "hintFileExplorer": "Voit valita tiedoston myös vetämällä ja pudottamalla sen Resurssienhallinnasta."
   },
   "pageNotShown": {
     "message": "Jokin meni vikaan, eikä tätä sivua voi näyttää.",

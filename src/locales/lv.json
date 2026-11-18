@@ -93,7 +93,10 @@
     "dropHere": "Nometiet fotoattēlu, lai to atlasītu.",
     "title": "Vai tiešām vēlaties atlasīt tālāk norādīto fotoattēlu?",
     "cancel": "Atcelt",
-    "select": "Atlasīt"
+    "select": "Atlasīt",
+    "hintButton": "Par vilkšanu un nomešanu",
+    "hintFinder": "Failu var atlasīt arī, velkot un nometot to no Finder.",
+    "hintFileExplorer": "Failu var atlasīt arī, velkot un nometot to no Failu pārlūka."
   },
   "pageNotShown": {
     "message": "Radās kļūda, un šo lapu nevar parādīt.",

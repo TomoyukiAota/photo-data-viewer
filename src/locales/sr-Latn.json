@@ -93,7 +93,10 @@
     "dropHere": "Otpustite fotografiju da biste je izabrali.",
     "title": "Da li ste sigurni da želite da izaberete fotografiju ispod?",
     "cancel": "Otkaži",
-    "select": "Izaberi"
+    "select": "Izaberi",
+    "hintButton": "O prevlačenju i otpuštanju",
+    "hintFinder": "Datoteku možete izabrati i tako što ćete je prevući i otpustiti iz Findera.",
+    "hintFileExplorer": "Datoteku možete izabrati i tako što ćete je prevući i otpustiti iz Istraživača datoteka."
   },
   "pageNotShown": {
     "message": "Nešto nije u redu i ovu stranicu nije moguće prikazati.",

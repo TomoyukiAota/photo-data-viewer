@@ -93,7 +93,10 @@
     "dropHere": "Spustite fotografijo, da jo izberete.",
     "title": "Ali ste prepričani, da želite izbrati spodnjo fotografijo?",
     "cancel": "Prekliči",
-    "select": "Izberi"
+    "select": "Izberi",
+    "hintButton": "O vlečenju in spuščanju",
+    "hintFinder": "Datoteko lahko izberete tudi tako, da jo povlečete in spustite iz Finderja.",
+    "hintFileExplorer": "Datoteko lahko izberete tudi tako, da jo povlečete in spustite iz Raziskovalca."
   },
   "pageNotShown": {
     "message": "Prišlo je do napake in te strani ni mogoče prikazati.",

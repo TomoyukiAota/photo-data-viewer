@@ -93,7 +93,10 @@
     "dropHere": "Drop the photo to select it.",
     "title": "Are you sure you want to select the photo below?",
     "cancel": "Cancel",
-    "select": "Select"
+    "select": "Select",
+    "hintButton": "About drag and drop",
+    "hintFinder": "You can also drag and drop a file from Finder to select it.",
+    "hintFileExplorer": "You can also drag and drop a file from File Explorer to select it."
   },
   "pageNotShown": {
     "message": "Something went wrong, and this page cannot be shown.",

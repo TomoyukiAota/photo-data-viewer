@@ -93,7 +93,10 @@
     "dropHere": "Engedje el a fotót a kiválasztásához.",
     "title": "Biztosan kiválasztja az alábbi fotót?",
     "cancel": "Mégsem",
-    "select": "Kiválasztás"
+    "select": "Kiválasztás",
+    "hintButton": "Tudnivalók az áthúzásról",
+    "hintFinder": "Fájlt úgy is kiválaszthat, hogy áthúzza a Finderből.",
+    "hintFileExplorer": "Fájlt úgy is kiválaszthat, hogy áthúzza a Fájlkezelőből."
   },
   "pageNotShown": {
     "message": "Hiba történt, ezért ez az oldal nem jeleníthető meg.",

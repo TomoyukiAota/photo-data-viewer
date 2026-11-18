@@ -93,7 +93,10 @@
     "dropHere": "拖放照片即可選取。",
     "title": "確定要選取以下照片嗎？",
     "cancel": "取消",
-    "select": "選取"
+    "select": "選取",
+    "hintButton": "關於拖放",
+    "hintFinder": "也可以從 Finder 拖放檔案來選取。",
+    "hintFileExplorer": "也可以從檔案總管拖放檔案來選取。"
   },
   "pageNotShown": {
     "message": "發生問題，無法顯示此頁面。",

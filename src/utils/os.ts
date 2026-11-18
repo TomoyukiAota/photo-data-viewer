@@ -11,3 +11,11 @@ export function isIos() {
     // iPad on iOS 13 detection
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
+
+/**
+ * Whether this is a Mac, whose file manager is the Finder. An iPad says that it is a Mac as well (see isIos), and is
+ * not one.
+ */
+export function isMac() {
+  return navigator.platform.startsWith('Mac') && !isIos();
+}
