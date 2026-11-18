@@ -14,8 +14,8 @@ jest.mock('next/router', () => ({ useRouter: () => mockRouter }));
 
 const loadPhoto = jest.fn();
 
-const VEIL_TEXT = 'Drop the photo here to select it.';
-const QUESTION = 'Are you sure you want to select this photo?';
+const VEIL_TEXT = 'Drop the photo to select it.';
+const QUESTION = 'Are you sure you want to select the photo below?';
 
 /** The app's part that takes a drop: the page, in the element that Next.js renders the app in, and the dialog. */
 function renderApp() {
@@ -108,7 +108,7 @@ it('shows that the page takes a file dragged over it, until the file leaves the 
   expect(veil()).toBeNull();
 });
 
-it('asks before a dropped photo is selected, and selects it with Select, which has the focus', async () => {
+it('asks before a dropped photo is selected, with the focus on Cancel, and selects it with Select', async () => {
   renderApp();
   const dropped = dropOnPage(dataTransfer({ files: ['demo.jpg'] }));
   expect(dropped.defaultPrevented).toBe(true);
@@ -116,8 +116,9 @@ it('asks before a dropped photo is selected, and selects it with Select, which h
 
   expect(dialog()).not.toBeNull();
   expect(askedAbout(dialog())).toBe('demo.jpg');
+  // Enter replaces nothing: the focus is on Cancel.
+  expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Cancel' }));
   const select = screen.getByRole('button', { name: 'Select' });
-  expect(document.activeElement).toBe(select);
   expect(trackOpenedDropPhotoDialog).toHaveBeenCalledWith(1);
   expect(loadPhoto).not.toHaveBeenCalled();
 

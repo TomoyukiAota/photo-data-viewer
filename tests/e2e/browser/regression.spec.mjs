@@ -769,7 +769,7 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
 
   // While the file is over the page, a veil says that the app takes it.
   const dataTransfer = await dragFiles(page, [photoFile], placeholder);
-  const veil = page.getByText('Drop the photo here to select it.', {
+  const veil = page.getByText('Drop the photo to select it.', {
     exact: true,
   });
   await expect(veil).toBeVisible();
@@ -779,26 +779,39 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
   await placeholder.dispatchEvent('drop', { dataTransfer });
   await expect(veil).toBeHidden();
   const dialog = page.getByRole('dialog', {
-    name: 'Are you sure you want to select this photo?',
+    name: 'Are you sure you want to select the photo below?',
     exact: true,
   });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText('demo.jpg');
+  // Cancel has the focus, so that Enter replaces nothing. Select, the action
+  // that the dialog asks about, is in the blue of the app's buttons, and
+  // Cancel in the grey of the dialogs' buttons.
+  const cancel = dialog.getByRole('button', { name: 'Cancel', exact: true });
   const select = dialog.getByRole('button', { name: 'Select', exact: true });
-  await expect(select).toBeFocused();
+  await expect(cancel).toBeFocused();
+  await expect(select).toHaveCSS('background-color', 'rgb(25, 118, 210)');
+  await expect(select).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(cancel).toHaveCSS('background-color', 'rgb(221, 221, 221)');
   await snapshot(page, 'drop-dialog');
 
-  // Cancel, or Escape, selects nothing.
-  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  // Cancel, Escape, or Enter on Cancel, selects nothing.
+  await cancel.click();
   await expect(dialog).toBeHidden();
   await dropFiles(page, [photoFile]);
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
+  await dropFiles(page, [photoFile]);
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(dialog).toBeHidden();
   await expect(placeholder).toBeVisible();
 
-  // Enter selects it, as Select has the focus.
+  // Tab moves to Select, and Enter selects the photo.
   await dropFiles(page, [photoFile]);
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(select).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(
@@ -846,7 +859,13 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
       events
         .filter((event) => event.action === 'Opened Drop Photo Dialog')
         .map((event) => JSON.parse(event.label)),
-    [{ fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }],
+    [
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+    ],
   );
   await expectSent(
     sent,
@@ -897,7 +916,7 @@ test('a dropped file that is not a photo gets the dialog that one chosen with th
   });
   expect(isTextTaken).toBe(false);
   await expect(
-    page.getByText('Drop the photo here to select it.', { exact: true }),
+    page.getByText('Drop the photo to select it.', { exact: true }),
   ).toBeHidden();
 
   await dropFiles(page, [

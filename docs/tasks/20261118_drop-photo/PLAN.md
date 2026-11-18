@@ -25,10 +25,11 @@ a drop does not change the page by itself.
 ### While a file is dragged over the page
 
 The page is covered by a veil with a dashed border and the text "Drop the
-photo here to select it.", so that the user sees before letting go that the
-app takes the file, and what it does with it. The pointer shows a copy as
-well (`dropEffect`). The veil takes no click and covers the whole window,
-under the dialogs and the menu.
+photo to select it.", so that the user sees before letting go that the app
+takes the file, and what it does with it. At first the text was "Drop the
+photo here to select it." ([the status](./STATUS.md#changed-after-the-merge)).
+The pointer shows a copy as well (`dropEffect`). The veil takes no click and
+covers the whole window, under the dialogs and the menu.
 
 ### Several files at once
 
@@ -61,20 +62,23 @@ also easier to learn than two.
 
 ### The dialog
 
-- **The question is the title**, "Are you sure you want to select this
-  photo?", and the file's name is the message under it, in its own
-  direction in a language written from right to left. The buttons are
+- **The question is the title**, "Are you sure you want to select the photo
+  below?" (at first "this photo"), and the file's name is the message under
+  it, in its own direction in a language written from right to left. The
+  buttons are
   **Cancel** and **Select**, in the order of MUI's dialogs: the one that
   dismisses first.
 - **It looks as the dialog of an unsupported file does**: the same size,
-  spaces, alignment and grey buttons, in styles that the two now share
+  spaces and alignment, in styles that the two now share
   (`src/components/dialog/_dialog.scss`). It is as wide and as high as its
   texts need, and the two buttons go one under the other where they do not
-  fit side by side.
-- **The keyboard**: Select has the focus when the dialog opens, so Enter
-  selects; Tab moves between the two buttons; Escape cancels, as does a
-  click outside the dialog. Cancelling loses nothing, so nothing has to keep
-  it open.
+  fit side by side. Cancel is grey, as that dialog's Close is, and Select is
+  in the blue of the app's buttons; at first both were grey (see
+  [the status](./STATUS.md#changed-after-the-merge)).
+- **The keyboard**: Cancel has the focus when the dialog opens, so Enter
+  replaces nothing; Tab moves between the two buttons; Escape cancels, as
+  does a click outside the dialog. Cancelling loses nothing, so nothing has
+  to keep it open. At first Select had the focus, so that Enter selected.
 - **"Cancel" is Photo Location Map's word** in each language
   (`common.cancel` there), as the words that the two applications share are
   the same in both (docs/TRANSLATING.md). "Select" is the verb of the

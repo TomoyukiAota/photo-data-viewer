@@ -13,6 +13,23 @@ All on 2026-11-18, on macOS, with Node 26.13.0 and npm 11.20.0.
 | The tests of a dropped photo, in Playwright's Chromium and in Firefox | Passed |
 | `npm run test:electron` | Not run: it opens windows |
 
+### After the merge
+
+The change that the maintainer asked for after the merge
+([the status](../STATUS.md#changed-after-the-merge)), on the branch
+`claude/drop-dialog-focus-and-colors`, from `main` at `f3034cf`:
+
+| Check | Result |
+| --- | --- |
+| `npm run test:all` | Passed: 748 tests in 53 suites |
+| `npm run build` | Passed |
+| `npm run build:plm` | Passed |
+| The browser suite, in Chrome, with the visual comparison | Passed: 46 tests. The tests of a dropped photo made `drop-veil.png`, `drop-dialog.png` and `drop-dialog-ar.png` anew; no other screenshot changed |
+| `npm run test:electron` | Not run: it opens windows |
+
+The Japanese veil and dialog, of which no test takes a screenshot, were
+looked at in Chrome at 320 and 1280 pixels.
+
 ## What the tests hold
 
 Unit tests:
@@ -24,7 +41,7 @@ Unit tests:
 - `src/components/drop-photo/DropPhoto.spec.tsx`, with the dialog: the veil
   while a file is dragged over the page, from one element to another, and
   gone once the file leaves the window or a mouse event comes; the copy
-  that the pointer shows; the dialog that names the file, with Select
+  that the pointer shows; the dialog that names the file, with Cancel
   focused; Select, Cancel, Escape and a click outside; the Home page opened
   first from another page; the first of several files, without folders;
   folders alone; text and links left to the browser; a drag that starts in
@@ -38,10 +55,12 @@ Unit tests:
 
 Browser tests, in `tests/e2e/browser/regression.spec.mjs`:
 
-- A photo dropped on the Home page: the veil, the dialog, Cancel, Escape,
-  Enter, the photo shown, a drag that starts in the page, and the events
-  that reach the analytics backend (`Opened Drop Photo Dialog` four times
-  with `fileCount: 1`, and `Loaded Photo` with `isDropped: true`).
+- A photo dropped on the Home page: the veil; the dialog, with Cancel
+  focused and the colors of the two buttons; Cancel, Escape, and Enter on
+  Cancel, which select nothing; Tab and Enter, which select the photo; a
+  drag that starts in the page; and the events that reach the analytics
+  backend (`Opened Drop Photo Dialog` five times with `fileCount: 1`, and
+  `Loaded Photo` with `isDropped: true`).
 - A photo dropped on the Settings page is shown on the Home page; of two
   files, the first.
 - A file that is not a photo gets the dialog of an unsupported file; a file
@@ -64,7 +83,7 @@ Added, of what this change adds; no other screenshot changed:
 | Screenshot | What it shows |
 | --- | --- |
 | `drop-veil.png` | The empty Home page at 1280 pixels, under the veil, while a file is dragged over it |
-| `drop-dialog.png` | The dialog that asks about `demo.jpg`, over the empty Home page, with Select focused |
+| `drop-dialog.png` | The dialog that asks about `demo.jpg`, over the empty Home page, with Cancel focused and Select in blue |
 | `drop-dialog-ar.png` | The same dialog in Arabic, at 320 pixels |
 
 The styles of the dialog of an unsupported file moved to
@@ -91,7 +110,7 @@ app have.
 | `da` | Slip billedet her for at vælge det. | Er du sikker på, at du vil vælge dette billede? | Annuller | Vælg |
 | `de` | Legen Sie das Foto hier ab, um es auszuwählen. | Möchten Sie dieses Foto wirklich auswählen? | Abbrechen | Auswählen |
 | `el` | Αφήστε τη φωτογραφία εδώ για να την επιλέξετε. | Θέλετε σίγουρα να επιλέξετε αυτήν τη φωτογραφία; | Ακύρωση | Επιλογή |
-| `en` | Drop the photo here to select it. | Are you sure you want to select this photo? | Cancel | Select |
+| `en` | Drop the photo to select it. | Are you sure you want to select the photo below? | Cancel | Select |
 | `es` | Suelta la foto aquí para seleccionarla. | ¿Seguro que quieres seleccionar esta foto? | Cancelar | Seleccionar |
 | `et` | Valimiseks lohistage foto siia. | Kas soovite kindlasti selle foto valida? | Loobu | Vali |
 | `eu` | Jaregin argazkia hemen hautatzeko. | Ziur argazki hau hautatu nahi duzula? | Utzi | Hautatu |
@@ -104,7 +123,7 @@ app have.
 | `hu` | Dobja ide a fotót a kiválasztásához. | Biztosan kiválasztja ezt a fotót? | Mégsem | Kiválasztás |
 | `id` | Lepaskan foto di sini untuk memilihnya. | Apakah Anda yakin ingin memilih foto ini? | Batal | Pilih |
 | `it` | Rilascia qui la foto per selezionarla. | Vuoi davvero selezionare questa foto? | Annulla | Seleziona |
-| `ja` | ここにドロップすると、この写真を選択します。 | この写真を選択してもよろしいですか？ | キャンセル | 選択 |
+| `ja` | ドロップして写真を選択できます。 | 以下の写真を選択してもよろしいですか？ | キャンセル | 選択 |
 | `ko` | 사진을 선택하려면 여기에 놓으세요. | 이 사진을 선택하시겠습니까? | 취소 | 선택 |
 | `lt` | Numeskite nuotrauką čia, kad ją pasirinktumėte. | Ar tikrai norite pasirinkti šią nuotrauką? | Atšaukti | Pasirinkti |
 | `lv` | Nometiet fotoattēlu šeit, lai to atlasītu. | Vai tiešām vēlaties atlasīt šo fotoattēlu? | Atcelt | Atlasīt |
@@ -138,7 +157,12 @@ Some choices in them:
   davvero`) rather than "are you sure", whose adjective has a gender there.
   Hebrew asks without addressing anyone (`לבחור את התמונה הזו?`), as Photo
   Location Map's question to continue does.
-- **Japanese**: the veil's sentence is in the form of the header's
-  (`写真ファイルを選択すると、EXIF データを表示します。`). Its first wording,
-  `写真を選択するには、ここにドロップしてください。`, left `ここに` alone on a
-  line of a phone.
+- **English and Japanese are the maintainer's** since the merge (see
+  [the status](../STATUS.md#changed-after-the-merge)). The Japanese veil's
+  text was first `写真を選択するには、ここにドロップしてください。`, which
+  left `ここに` alone on a line of a phone, and then
+  `ここにドロップすると、この写真を選択します。`, in the form of the header's
+  sentence; the question was `この写真を選択してもよろしいですか？`.
+- **The other 40 translations** were written from the English texts before
+  the merge, "Drop the photo here to select it." and "Are you sure you want
+  to select this photo?".
