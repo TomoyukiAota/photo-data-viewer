@@ -22,6 +22,7 @@ import {
   layoutModes,
   UserSettingKey,
 } from '../../utils/user-settings';
+import { SubmenuEntryHandlers } from './useSubmenuHover';
 
 /**
  * Two panes stacked beside a tall one, as the split panes are: the photo and
@@ -65,15 +66,19 @@ function submenuKeys(isRtl: boolean) {
  * (LayoutSubmenu): as the entries of the pages, with the icon of the split
  * panes, which it always has, and an arrow towards the submenu.
  *
- * TL;DR: A click, Enter, Space or the arrow towards the submenu opens it.
+ * TL;DR: A mouse's pointer that rests on the entry opens the submenu, and so
+ * do a click, Enter, Space and the arrow towards the submenu.
  * Details: As a submenu of a desktop's menu opens: its entry says that it
  * opens one and whether it is open, and the keyboard's focus goes to the
- * chosen mode.
+ * chosen mode. The pointer that goes on to another entry closes the submenu,
+ * unless it is on its way to the submenu (useSubmenuHover.ts).
  */
 export const LayoutMenuItem: React.FC<{
   id: string;
   isSubmenuOpen: boolean;
   onOpenSubmenu: (entry: HTMLElement) => void;
+  /** Opens and closes the submenu on hover (useSubmenuHover). */
+  hoverHandlers: SubmenuEntryHandlers;
 }> = (props) => {
   const { t } = useTranslation();
   const isRtl = useIsRtl();
@@ -81,6 +86,7 @@ export const LayoutMenuItem: React.FC<{
 
   return (
     <MenuItem
+      {...props.hoverHandlers}
       id={props.id}
       aria-haspopup='menu'
       aria-expanded={props.isSubmenuOpen}
@@ -120,7 +126,8 @@ export const LayoutMenuItem: React.FC<{
  * mode closes the menu too, once the submenu is closed, so that the focus
  * goes back to the menu's button through the entry: closed together, it was
  * lost. It is in the page beside the menu rather than inside it, so that its
- * keys do not move along the menu as well.
+ * keys do not move along the menu as well. With a mouse, the menu under it
+ * stays in reach (see `pointerEvents` below).
  */
 const LayoutSubmenu: React.FC<{
   /** The menu's entry Layout while the submenu is open, or null. */
@@ -169,7 +176,19 @@ const LayoutSubmenu: React.FC<{
           : { vertical: 'top', horizontal: side }
       }
       transformOrigin={{ vertical: 'top', horizontal: otherSide }}
+      // TL;DR: With a mouse, the pointer goes through the submenu's layer to
+      // the menu under it, beside the submenu.
+      // Details: The layer covers the window, to close the submenu at a click
+      // beside it. With a mouse, the pointer reaches the menu's other entries
+      // instead, which close the submenu on hover (useSubmenuHover.ts) and
+      // open their pages at a click, and the menu's own layer, at whose click
+      // the submenu closes alone (AppMenu.tsx). A touch, which has no hover,
+      // closes the submenu as it did.
+      sx={{
+        '@media (hover: hover) and (pointer: fine)': { pointerEvents: 'none' },
+      }}
       slotProps={{
+        paper: { sx: { pointerEvents: 'auto' } },
         transition: {
           // TL;DR: Placed again by its entry once it is open, and once the
           // menu is (AppMenu.tsx).

@@ -9,9 +9,11 @@ Started on 2026-11-18, on the branch `claude/pane-layout-mode-4500b2`, from
 Merged on 2026-11-18 as the button LAYOUT before the menu's button (#78).
 On the same day the maintainer asked for the choice to be moved into the
 menu, and for a language's button in its place: see
-[In the menu](#in-the-menu-with-the-languages-button-in-its-place). On
-2026-11-19 the maintainer had that button taken out of the header again:
-see [Out of the header](#the-languages-button-out-of-the-header).
+[In the menu](#in-the-menu-with-the-languages-button-in-its-place). After
+that, for the submenu to open when the mouse is on its entry: see
+[Opened on hover](#opened-on-hover). On 2026-11-19 the maintainer had the
+language's button taken out of the header again: see
+[Out of the header](#the-languages-button-out-of-the-header).
 
 - **The menu's entry Layout** (`src/components/app-menu/LayoutSubmenu.tsx`),
   after the entry Language, with the icon of the split panes, opens a
@@ -82,6 +84,34 @@ of Photo Location Map's website.
 - **The button is on the Home page alone**, in the header, where the button
   LAYOUT was. The other pages have the Language page in the menu.
 
+## Opened on hover
+
+Asked by the maintainer on 2026-11-18, after #88: the submenu of the
+layouts opens when the mouse's pointer is on its entry, without a click.
+How it does is in `src/components/app-menu/useSubmenuHover.ts`.
+
+- **The pointer that rests on the entry** for a tenth of a second opens the
+  submenu, with the focus on the chosen mode, as a click does. One that
+  passes over the entry, on its way to About, does not.
+- **The pointer that goes on to another entry** closes the submenu, and the
+  focus goes back to the entry, unless the pointer is on its way to the
+  submenu: in the triangle between where it left the entry and the
+  submenu's side that faces it, as a desktop's menus keep a submenu open
+  while the pointer crosses the entries between. A pointer that rests on
+  that way, over another entry, for 0.3 seconds closes the submenu too.
+  Beside the menus, the pointer leaves the submenu open.
+- **The menu under the submenu stays in reach** with a mouse: the pointer
+  goes through the submenu's layer, which covers the window, to the menu's
+  entries, which are hovered and clicked, and to the menu's backdrop, whose
+  click closes the submenu alone, as a click beside the submenu did. A
+  click on the entry leaves the submenu open, with the focus in it.
+- **A touch and the keyboard** work as they did. A touch has no hover: a
+  tap opens the submenu, and one beside the submenu closes it. The arrow
+  towards the submenu opens it, and the arrow back closes it alone.
+- **In both directions**: the submenu is on the left of the menu in
+  English and on its right in Arabic, towards the page in both, and under
+  its entry in a phone's width. The way to it is taken from where it is.
+
 ## The language's button out of the header
 
 Asked by the maintainer on 2026-11-19, while its height was being matched to
@@ -115,6 +145,9 @@ shown still knows.
   automatic mode first in the menu with the description under it, split
   panes kept at every width, the automatic layout in Photo Location Map, and
   what the usage data records ([plan](./PLAN.md#decisions)).
+- The maintainer, after #88: the submenu opens on hover. Its details follow
+  a desktop's menus, as asked with it: a short rest on the entry, the way
+  to the submenu, and the menu under the submenu in reach of the mouse.
 
 ## Resuming
 

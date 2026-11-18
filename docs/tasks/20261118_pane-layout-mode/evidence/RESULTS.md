@@ -113,18 +113,64 @@ Found and fixed while checking, in a headless browser:
   its list as it was, without the focus on the search field. The list starts
   anew at each opening.
 
+## Opened on hover
+
+Checked on 2026-11-19 on the branch `claude/layout-submenu-hover-78382b`,
+from `main` at `9bfe790`, after #88.
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 55 suites, 774 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 50 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+No screenshot changed: the submenu looks as it did, and `layout-menu`,
+which has it opened by the keyboard, matched as it was.
+
+The mouse was moved across the menu in steps, in a headless Chromium, at
+1280 pixels in English and in Arabic and at 320 pixels in English:
+
+- Resting on the entry opened the submenu, with the focus on Automatic.
+  Going from Language to About over the entry did not open it.
+- Straight down to About closed it, with the focus back on the entry. Down
+  and towards the submenu, across About and Credits, to Single pane, it
+  stayed open, and resting on About on that way closed it within 0.4
+  seconds. In Arabic the submenu opened on the right of the menu, and the
+  same ways did the same.
+- At 320 pixels, where the submenu is under its entry, going down went into
+  it, and going up to Language closed it.
+- A click on the entry left the submenu open, with the focus on Automatic
+  and the arrow keys moving in it. A click beside the menus closed the
+  submenu alone, and a second one the menu, with the focus on its button. A
+  press on About, on the way to the submenu, opened the About page, with the
+  focus on the menu's button.
+- Touched as a phone (Chrome's emulation of a Pixel 7), a tap opened the
+  submenu, and a tap on Home closed it alone, as before.
+- With the keyboard, the right arrow opened the submenu and the left arrow
+  closed it, with the focus back on the entry.
+
 ## The language's button out of the header
 
 Checked on 2026-11-19 on the branch `claude/remove-header-language-button`,
 with `main` merged in at `6b6deb6` (#90, the button about drag and drop),
-and again at `42a576e` (#89, the order of the map buttons).
+again at `42a576e` (#89, the order of the map buttons), and at `2a54a89`
+(#92, the submenu opened on hover).
 
 | Command | Result |
 | --- | --- |
-| `npm run test:all` | Lint and type check clean; 54 suites, 760 tests passed. |
+| `npm run test:all` | Lint and type check clean; 55 suites, 776 tests passed. |
 | `npm run build` and `npm run build:plm` | Passed. |
-| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 50 passed, with the visual comparison. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 52 passed, with the visual comparison. |
 | `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+After #92, which changes no screenshot, every screenshot was made again and
+matched the ones made after #89, but for differences of drawing: the photo
+in `heif-general` and `loaded-general-ar` by 1 to 4 of 255 in a channel,
+the text of Select Photo in `home-1200`, and one pixel of `loaded-raw`.
+They were left as they were, and passed the comparison. A dropped photo's
+test failed the comparison once, by 6 pixels of the ripple on the dialog's
+focused button, and passed twice when run again.
 
 The browser suite has the button's own test no more; the Polish header test
 checks that the sentence ends before the menu's button, as before #78, and
