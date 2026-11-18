@@ -93,7 +93,10 @@
     "dropHere": "Numeskite nuotrauką, kad ją pasirinktumėte.",
     "title": "Ar tikrai norite pasirinkti toliau pateiktą nuotrauką?",
     "cancel": "Atšaukti",
-    "select": "Pasirinkti"
+    "select": "Pasirinkti",
+    "hintButton": "Apie vilkimą ir numetimą",
+    "hintFinder": "Failą taip pat galite pasirinkti nuvilkę jį iš „Finder“.",
+    "hintFileExplorer": "Failą taip pat galite pasirinkti nuvilkę jį iš Failų naršyklės."
   },
   "pageNotShown": {
     "message": "Įvyko klaida, todėl šio puslapio parodyti negalima.",

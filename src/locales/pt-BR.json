@@ -93,7 +93,10 @@
     "dropHere": "Solte a foto para selecioná-la.",
     "title": "Tem certeza de que deseja selecionar a foto abaixo?",
     "cancel": "Cancelar",
-    "select": "Selecionar"
+    "select": "Selecionar",
+    "hintButton": "Sobre arrastar e soltar",
+    "hintFinder": "Você também pode selecionar um arquivo arrastando-o e soltando-o a partir do Finder.",
+    "hintFileExplorer": "Você também pode selecionar um arquivo arrastando-o e soltando-o a partir do Explorador de Arquivos."
   },
   "pageNotShown": {
     "message": "Algo deu errado, e esta página não pode ser exibida.",

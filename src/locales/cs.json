@@ -93,7 +93,10 @@
     "dropHere": "Pusťte fotku, chcete-li ji vybrat.",
     "title": "Opravdu chcete vybrat následující fotku?",
     "cancel": "Zrušit",
-    "select": "Vybrat"
+    "select": "Vybrat",
+    "hintButton": "O přetahování",
+    "hintFinder": "Soubor můžete vybrat také přetažením z Finderu.",
+    "hintFileExplorer": "Soubor můžete vybrat také přetažením z Průzkumníka souborů."
   },
   "pageNotShown": {
     "message": "Něco se pokazilo a tuto stránku nelze zobrazit.",

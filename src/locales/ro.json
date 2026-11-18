@@ -93,7 +93,10 @@
     "dropHere": "Plasați poza pentru a o selecta.",
     "title": "Sigur doriți să selectați poza de mai jos?",
     "cancel": "Anulează",
-    "select": "Selectează"
+    "select": "Selectează",
+    "hintButton": "Despre glisare și fixare",
+    "hintFinder": "Puteți selecta un fișier și prin glisarea și fixarea lui din Finder.",
+    "hintFileExplorer": "Puteți selecta un fișier și prin glisarea și fixarea lui din Explorer."
   },
   "pageNotShown": {
     "message": "A apărut o problemă, iar această pagină nu poate fi afișată.",

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import PhotoContext from '../../context/photo/photo-context';
 import { AppMenuRoom } from '../app-menu/AppMenu';
+import DropHintButton from '../drop-photo/DropHintButton';
 import LanguagePicker from '../language/LanguagePicker';
 import classes from './Header.module.scss';
 
@@ -67,6 +68,8 @@ const Header: React.FC<{ className?: string }> = (props) => {
           ref={inputElementRef}
           className={classes.input}
         />
+        {/* Beside Select Photo: a photo can also be dropped on the page. */}
+        <DropHintButton />
       </div>
       <div className={classes.end}>
         {/* Before the menu's button, in the middle of its height. */}

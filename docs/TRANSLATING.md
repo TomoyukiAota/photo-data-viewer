@@ -173,7 +173,16 @@ do not take longer with every language.
   question of the dialog that asks, once the file is dropped, whether to
   select it; the file's name is shown under it. `select` is the dialog's
   button that selects it, with the verb of `home.selectPhoto`, and `cancel`
-  is Photo Location Map's word.
+  is Photo Location Map's word. `hintButton` names the button beside Select
+  Photo, which is read aloud and shown when the mouse is over it; its box
+  says `hintFinder` on a Mac and `hintFileExplorer` elsewhere. Write the
+  file manager as the language's macOS and Windows name it: the Finder is
+  `Finder` in most languages, `访达` in Chinese (Simplified) and `فايندر` in
+  Arabic, as Apple's Mac User Guide in the language writes it; File Explorer
+  is the name that Microsoft's page "File Explorer in Windows" has in the
+  language (`エクスプローラー` in Japanese, `Explorer` in German, and the
+  English `File Explorer` where Windows keeps it, as in Thai). Give the name
+  the form that the sentence asks for (`Resurssienhallinnasta`).
 - A `{{placeholder}}` is written plainly in a language written from right to
   left as well. The app keeps what it puts there together by itself (between
   two characters that are not drawn, U+2068 and U+2069), so that a number or an
