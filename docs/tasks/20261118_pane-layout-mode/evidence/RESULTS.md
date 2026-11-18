@@ -80,3 +80,35 @@ Japanese and Arabic, matched as they were.
   Japanese, French and Latvian, the language with the longest word under the
   icon (IZKĀRTOJUMS). The space between the two buttons (8 pixels) was added
   for Latvian, where the two words nearly touched.
+
+## In the menu, with the language's button in its place
+
+Checked on 2026-11-18 on the branch `claude/layout-in-menu`, from `main` at
+`f3034cf`, after #78 and the other pull requests of the day were merged.
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 54 suites, 758 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 47 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+Every screenshot of the Home page shows the header, whose language's button
+is where the button LAYOUT was, so 20 were made again: the header's end, and
+nothing else at the widths where the sentence keeps its lines. `layout-menu`
+is now the menu with the submenu of the layouts open, and `language-picker`
+is new: the language's box open at 1280 pixels. The screenshots of the other
+pages matched as they were.
+
+Found and fixed while checking, in a headless browser:
+
+- **The focus after a choice in the submenu** was lost, on the page's body:
+  the submenu and the menu closed together. The menu now closes once the
+  submenu is closed, and the focus goes back to the menu's button.
+- **The submenu opened by the keyboard right after the menu** was placed by
+  where its entry was while the menu still grew: 65 pixels above it at 1280
+  pixels, and 7 pixels in Polish at 320. It is placed again when it has
+  opened and when the menu has, whichever is last.
+- **The language's box opened again before it had finished closing** kept
+  its list as it was, without the focus on the search field. The list starts
+  anew at each opening.
