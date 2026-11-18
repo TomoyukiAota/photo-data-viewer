@@ -91,8 +91,8 @@
     "close": "Zatvori"
   },
   "dropPhoto": {
-    "dropHere": "Ispustite fotografiju ovdje da biste je odabrali.",
-    "title": "Jeste li sigurni da želite odabrati ovu fotografiju?",
+    "dropHere": "Ispustite fotografiju da biste je odabrali.",
+    "title": "Jeste li sigurni da želite odabrati fotografiju u nastavku?",
     "cancel": "Odustani",
     "select": "Odaberi"
   },

@@ -92,10 +92,12 @@ it:
 - **The veil's text has no "here"**: "Drop the photo to select it.", in
   Japanese 「ドロップして写真を選択できます。」. It was "Drop the photo here
   to select it." (「ここにドロップすると、この写真を選択します。」).
-- **The other 40 translations are as they were**: they say "this photo" and
-  "here", as the English did.
+- **The other 40 languages follow the English**, as the maintainer asked:
+  the question asks about the photo below, and the veil's text has no
+  "here" ([the texts](./evidence/RESULTS.md#the-texts)).
 - **Screenshots**: `drop-dialog.png` and `drop-dialog-ar.png` changed for the
-  colors and the focus, and `drop-veil.png` for the English text.
+  colors, the focus and the question, and `drop-veil.png` for the English
+  text.
 
 ## Not verified
 
@@ -112,7 +114,7 @@ it:
 
 ## Resuming
 
-Left to the maintainer: whether the other 40 translations follow the two
-English texts that changed after the merge. A change of the decisions above
-is in `DropPhoto.tsx` (where a drop is taken, the veil, several files),
-`DropPhotoDialog.tsx` (the dialog) and `track-event.ts` (what is recorded).
+Nothing is pending once the change after the merge is merged. A change of
+the decisions above is in `DropPhoto.tsx` (where a drop is taken, the veil,
+several files), `DropPhotoDialog.tsx` (the dialog) and `track-event.ts`
+(what is recorded).

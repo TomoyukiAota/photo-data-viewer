@@ -2146,7 +2146,7 @@ test.describe('in a browser whose language is Arabic', () => {
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     await dropFiles(page, [photoFile]);
     const dialog = page.getByRole('dialog', {
-      name: 'هل تريد بالتأكيد اختيار هذه الصورة؟',
+      name: 'هل تريد بالتأكيد اختيار الصورة أدناه؟',
       exact: true,
     });
     await expect(dialog).toBeVisible();

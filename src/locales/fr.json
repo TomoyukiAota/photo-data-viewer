@@ -91,8 +91,8 @@
     "close": "Fermer"
   },
   "dropPhoto": {
-    "dropHere": "Déposez la photo ici pour la sélectionner.",
-    "title": "Voulez-vous vraiment sélectionner cette photo\u00a0?",
+    "dropHere": "Déposez la photo pour la sélectionner.",
+    "title": "Voulez-vous vraiment sélectionner la photo ci-dessous\u00a0?",
     "cancel": "Annuler",
     "select": "Sélectionner"
   },
