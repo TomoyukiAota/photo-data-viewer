@@ -93,7 +93,10 @@
     "dropHere": "Rilascia la foto per selezionarla.",
     "title": "Vuoi davvero selezionare la foto seguente?",
     "cancel": "Annulla",
-    "select": "Seleziona"
+    "select": "Seleziona",
+    "hintButton": "Informazioni sul trascinamento",
+    "hintFinder": "Puoi anche selezionare un file trascinandolo dal Finder.",
+    "hintFileExplorer": "Puoi anche selezionare un file trascinandolo da Esplora file."
   },
   "pageNotShown": {
     "message": "Si è verificato un problema e questa pagina non può essere visualizzata.",

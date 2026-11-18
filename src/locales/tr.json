@@ -93,7 +93,10 @@
     "dropHere": "Seçmek için fotoğrafı bırakın.",
     "title": "Aşağıdaki fotoğrafı seçmek istediğinizden emin misiniz?",
     "cancel": "Vazgeç",
-    "select": "Seç"
+    "select": "Seç",
+    "hintButton": "Sürükle ve bırak hakkında",
+    "hintFinder": "Bir dosyayı Finder’dan sürükleyip bırakarak da seçebilirsiniz.",
+    "hintFileExplorer": "Bir dosyayı Dosya Gezgini’nden sürükleyip bırakarak da seçebilirsiniz."
   },
   "pageNotShown": {
     "message": "Bir sorun oluştu ve bu sayfa gösterilemiyor.",

@@ -93,7 +93,10 @@
     "dropHere": "Valimiseks laske foto lahti.",
     "title": "Kas soovite kindlasti alloleva foto valida?",
     "cancel": "Loobu",
-    "select": "Vali"
+    "select": "Vali",
+    "hintButton": "Lohistamisest",
+    "hintFinder": "Faili saate valida ka, lohistades selle Finderist.",
+    "hintFileExplorer": "Faili saate valida ka, lohistades selle File Explorerist."
   },
   "pageNotShown": {
     "message": "Midagi läks valesti ja seda lehte ei saa kuvada.",

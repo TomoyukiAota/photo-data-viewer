@@ -93,7 +93,10 @@
     "dropHere": "Deixeu anar la foto per seleccionar-la.",
     "title": "Segur que voleu seleccionar la foto següent?",
     "cancel": "Cancel·la",
-    "select": "Selecciona"
+    "select": "Selecciona",
+    "hintButton": "Quant a arrossegar i deixar anar",
+    "hintFinder": "També podeu seleccionar un fitxer arrossegant-lo i deixant-lo anar des del Finder.",
+    "hintFileExplorer": "També podeu seleccionar un fitxer arrossegant-lo i deixant-lo anar des de l’Explorador de fitxers."
   },
   "pageNotShown": {
     "message": "S’ha produït un error i aquesta pàgina no es pot mostrar.",

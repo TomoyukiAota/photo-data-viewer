@@ -93,7 +93,10 @@
     "dropHere": "Legen Sie das Foto ab, um es auszuwählen.",
     "title": "Möchten Sie das folgende Foto wirklich auswählen?",
     "cancel": "Abbrechen",
-    "select": "Auswählen"
+    "select": "Auswählen",
+    "hintButton": "Über Drag & Drop",
+    "hintFinder": "Sie können eine Datei auch per Drag & Drop aus dem Finder auswählen.",
+    "hintFileExplorer": "Sie können eine Datei auch per Drag & Drop aus dem Explorer auswählen."
   },
   "pageNotShown": {
     "message": "Es ist ein Fehler aufgetreten, und diese Seite kann nicht angezeigt werden.",

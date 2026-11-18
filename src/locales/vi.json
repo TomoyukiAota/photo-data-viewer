@@ -93,7 +93,10 @@
     "dropHere": "Thả ảnh để chọn.",
     "title": "Bạn có chắc chắn muốn chọn ảnh bên dưới không?",
     "cancel": "Hủy",
-    "select": "Chọn"
+    "select": "Chọn",
+    "hintButton": "Giới thiệu về kéo và thả",
+    "hintFinder": "Bạn cũng có thể chọn tệp bằng cách kéo và thả từ Finder.",
+    "hintFileExplorer": "Bạn cũng có thể chọn tệp bằng cách kéo và thả từ File Explorer."
   },
   "pageNotShown": {
     "message": "Đã xảy ra sự cố và không thể hiển thị trang này.",
