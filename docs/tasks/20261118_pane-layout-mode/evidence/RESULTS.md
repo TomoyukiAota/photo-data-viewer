@@ -112,3 +112,40 @@ Found and fixed while checking, in a headless browser:
 - **The language's box opened again before it had finished closing** kept
   its list as it was, without the focus on the search field. The list starts
   anew at each opening.
+
+## Opened on hover
+
+Checked on 2026-11-19 on the branch `claude/layout-submenu-hover-78382b`,
+from `main` at `9bfe790`, after #88.
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 55 suites, 774 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS | 50 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+No screenshot changed: the submenu looks as it did, and `layout-menu`,
+which has it opened by the keyboard, matched as it was.
+
+The mouse was moved across the menu in steps, in a headless Chromium, at
+1280 pixels in English and in Arabic and at 320 pixels in English:
+
+- Resting on the entry opened the submenu, with the focus on Automatic.
+  Going from Language to About over the entry did not open it.
+- Straight down to About closed it, with the focus back on the entry. Down
+  and towards the submenu, across About and Credits, to Single pane, it
+  stayed open, and resting on About on that way closed it within 0.4
+  seconds. In Arabic the submenu opened on the right of the menu, and the
+  same ways did the same.
+- At 320 pixels, where the submenu is under its entry, going down went into
+  it, and going up to Language closed it.
+- A click on the entry left the submenu open, with the focus on Automatic
+  and the arrow keys moving in it. A click beside the menus closed the
+  submenu alone, and a second one the menu, with the focus on its button. A
+  press on About, on the way to the submenu, opened the About page, with the
+  focus on the menu's button.
+- Touched as a phone (Chrome's emulation of a Pixel 7), a tap opened the
+  submenu, and a tap on Home closed it alone, as before.
+- With the keyboard, the right arrow opened the submenu and the left arrow
+  closed it, with the focus back on the entry.
