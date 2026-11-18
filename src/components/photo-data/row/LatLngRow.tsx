@@ -41,7 +41,7 @@ function isGoogleEarthButtonShown(): boolean {
 /**
  * The latitude and the longitude of the photo, as one row of the General
  * tab's table, with the buttons that show the place in Google Maps, in
- * Google Street View and in Google Earth.
+ * Google Earth and in Google Street View, in this order.
  *
  * TL;DR: Each of the two names is beside its number, however many lines the
  * name takes.
@@ -77,17 +77,6 @@ const LatLngRow: React.FC<{
     );
   };
 
-  const handleGoogleStreetViewButtonClicked = () => {
-    openTabWithoutOpener(
-      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
-    );
-    trackOpenUrl(
-      'https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom',
-      'Show in Google Street View',
-      'Home Page'
-    );
-  };
-
   // Google Earth searches for the coordinates: it goes to the place and marks
   // it with a pin. An address with only the view (/web/@latitude,longitude,...)
   // goes there without a pin.
@@ -98,6 +87,17 @@ const LatLngRow: React.FC<{
     trackOpenUrl(
       'https://earth.google.com/web/search/ with latitude and longitude',
       'Show in Google Earth',
+      'Home Page'
+    );
+  };
+
+  const handleGoogleStreetViewButtonClicked = () => {
+    openTabWithoutOpener(
+      `https://www.google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${latitude},${longitude}`
+    );
+    trackOpenUrl(
+      'https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom',
+      'Show in Google Street View',
       'Home Page'
     );
   };
@@ -131,17 +131,6 @@ const LatLngRow: React.FC<{
                 alt={t('photoData.general.showInGoogleMaps')}
               />
             </IconButton>
-            <IconButton
-              className={classes['google-street-view-button']}
-              onClick={handleGoogleStreetViewButtonClicked}
-              title={t('photoData.general.showInGoogleStreetView')}
-            >
-              <img
-                className={classes['google-street-view-icon']}
-                src={IconDataUrl.googleStreetViewIcon}
-                alt={t('photoData.general.showInGoogleStreetView')}
-              />
-            </IconButton>
             {isGoogleEarthButtonShown() && (
               <IconButton
                 className={classes['google-earth-button']}
@@ -155,6 +144,17 @@ const LatLngRow: React.FC<{
                 />
               </IconButton>
             )}
+            <IconButton
+              className={classes['google-street-view-button']}
+              onClick={handleGoogleStreetViewButtonClicked}
+              title={t('photoData.general.showInGoogleStreetView')}
+            >
+              <img
+                className={classes['google-street-view-icon']}
+                src={IconDataUrl.googleStreetViewIcon}
+                alt={t('photoData.general.showInGoogleStreetView')}
+              />
+            </IconButton>
           </div>
         </>
       )}

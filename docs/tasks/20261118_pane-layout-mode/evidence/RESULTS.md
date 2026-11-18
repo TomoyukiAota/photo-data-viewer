@@ -116,7 +116,8 @@ Found and fixed while checking, in a headless browser:
 ## The language's button out of the header
 
 Checked on 2026-11-19 on the branch `claude/remove-header-language-button`,
-with `main` at `6b6deb6` (#90, the button about drag and drop) merged in.
+with `main` merged in at `6b6deb6` (#90, the button about drag and drop),
+and again at `42a576e` (#89, the order of the map buttons).
 
 | Command | Result |
 | --- | --- |
@@ -151,6 +152,13 @@ instead of under it, and what is under the header is higher by them.
 Made before #90 was merged, 12 of them were again the screenshots of
 before #78 (`3fcd017`), pixel for pixel, and the others differed from those
 only by what was merged since, or by 1 or 2 of 255 in a channel.
+
+After #89, the six screenshots of the coordinates' row (`heif-general`,
+`loaded-general`, `loaded-general-ar`, `narrow-loaded`, `narrow-loaded-ja`
+and `narrow-loaded-ar`) were made again on the merge. Each differs from the
+one made before the merge only in the order of the map buttons. The photo
+in #89's `loaded-general-ar` differs from the one before #89 by 1 to 4 of
+255 in a channel, a difference of drawing; here it is as it was before #89.
 
 `drop-veil` on `main` still had the button LAYOUT, and not the button about
 drag and drop, under the veil: a change that light under the veil is under
