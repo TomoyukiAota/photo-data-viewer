@@ -64,13 +64,6 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * in, or its code. The chosen entry stays chosen while the search hides it.
  */
 const LanguageList: React.FC<{
-  /**
-   * How the list looks: as the list of Photo Location Map's dialog on the
-   * Language page, or as the box of the language's button of Photo Location
-   * Map's website, in the language's button of the Home page's header
-   * (LanguagePicker).
-   */
-  look?: 'page' | 'popup';
   /** The Language setting that is chosen in the list. */
   selected: LanguageSetting;
   /**
@@ -82,7 +75,7 @@ const LanguageList: React.FC<{
   canChooseSelected?: boolean;
   /** Called with the entry the user chose, unless it is the chosen one already and that is no choice. */
   onChoose: (setting: LanguageSetting) => void;
-}> = ({ look = 'page', selected, canChooseSelected = false, onChoose }) => {
+}> = ({ selected, canChooseSelected = false, onChoose }) => {
   const { t, i18n } = useTranslation();
   const listId = useId();
   const listRef = useRef<HTMLUListElement>(null);
@@ -243,9 +236,7 @@ const LanguageList: React.FC<{
   };
 
   return (
-    <div
-      className={`${classes.container} ${look === 'popup' ? classes.popup : ''}`}
-    >
+    <div className={classes.container}>
       <div className={classes['search-field']}>
         <input
           ref={searchRef}

@@ -1706,84 +1706,6 @@ test('with a mouse, the submenu of the layouts opens on its entry, and stays ope
   ).toBeVisible();
 });
 
-// TL;DR: The button before the menu's chooses the language, as the language
-// picker of Photo Location Map's website does: a box with a search field
-// above the list of languages.
-// Details: A choice is the Language page's: the app is shown in the language
-// at once, which is saved and recorded, and on an address that names a
-// language the address of the language chosen opens.
-test('the language is chosen with the button before the menu’s, as on Photo Location Map’s website', async ({
-  page,
-}) => {
-  const sent = await collectEvents(page);
-  // The button at the end of the header that opens a dialog, after the
-  // sentence and Select Photo, beside which another button opens one.
-  const picker = page.locator(
-    '[class*="Header_end"] button[aria-haspopup="dialog"]',
-  );
-  const dialog = page.getByRole('dialog');
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('/');
-  await expect(picker).toHaveAccessibleName('Language English');
-  await expect(picker).toHaveAttribute('aria-expanded', 'false');
-
-  // The box opens under the button, at its end, with the focus in its search
-  // field and the chosen entry chosen.
-  await picker.click();
-  await expect(dialog).toHaveAccessibleName('Language');
-  await expect(
-    dialog.getByRole('searchbox', { name: 'Search', exact: true }),
-  ).toBeFocused();
-  await expect(dialog.locator('[aria-selected="true"]')).toHaveText([
-    'Use browser setting (English)',
-  ]);
-  const [pickerBox, dialogBox] = await Promise.all([
-    picker.boundingBox(),
-    dialog.boundingBox(),
-  ]);
-  expect(dialogBox.y).toBeGreaterThanOrEqual(pickerBox.y + pickerBox.height);
-  expect(
-    Math.abs(dialogBox.x + dialogBox.width - (pickerBox.x + pickerBox.width)),
-  ).toBeLessThanOrEqual(1);
-  await snapshot(page, 'language-picker');
-
-  // Escape closes it without a choice, and gives the focus back to the
-  // button.
-  await page.keyboard.press('Escape');
-  await expect(dialog).toBeHidden();
-  await expect(picker).toBeFocused();
-
-  // The name of a language typed in the search field, and Enter.
-  await page.keyboard.press('Enter');
-  await expect(
-    dialog.getByRole('searchbox', { name: 'Search', exact: true }),
-  ).toBeFocused();
-  await page.keyboard.type('deu');
-  await page.keyboard.press('Enter');
-  await expect(dialog).toBeHidden();
-  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
-  await expect(picker).toHaveAccessibleName('Sprache Deutsch');
-  await expect(picker).toBeFocused();
-  expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
-    'de',
-  );
-  await expectSent(
-    sent,
-    (events) => languageLabels(events, 'Changed User Setting'),
-    ['Language: de', 'Language in Use: de'],
-  );
-
-  // On an address that names a language, the address of the language chosen
-  // opens.
-  await page.goto('/ja');
-  await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
-  await picker.click();
-  await dialog.getByRole('option', { name: 'English', exact: true }).click();
-  await page.waitForURL((url) => url.pathname === '/en');
-  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(picker).toHaveAccessibleName('Language English');
-});
-
 // The suite above runs with the en-US locale (playwright.config.mjs); these run
 // as a browser set to Japanese, the first translation. The other languages are
 // checked by the unit test of the translation files, not here.
@@ -2119,45 +2041,21 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
 
     // The sentence takes more lines than in English, and the header grows
     // with it: the button under the sentence is all in view, above the tabs,
-    // and the sentence ends before the language's button, which is before
-    // the menu's button and in the middle of its height. The language's
-    // button is the one at the end of the header that opens a dialog.
+    // and the sentence ends before the menu's button.
     const button = page
       .locator('input[type=file]')
       .locator('xpath=preceding-sibling::button');
     const sentence = button.locator('xpath=preceding-sibling::div');
     const menuButton = page.locator('button[aria-label]:not([aria-haspopup])');
-    const languageButton = page.locator(
-      '[class*="Header_end"] button[aria-haspopup="dialog"]',
-    );
     await expect(button).toBeInViewport({ ratio: 1 });
-    await expect(languageButton).toBeInViewport({ ratio: 1 });
     const buttonBox = await button.boundingBox();
     const sentenceBox = await sentence.boundingBox();
     const menuBox = await menuButton.boundingBox();
-    const languageBox = await languageButton.boundingBox();
     const tabsBox = await page.getByRole('tablist').first().boundingBox();
     expect(sentenceBox.height).toBeGreaterThan(30); // More than one line.
     expect(buttonBox.y + buttonBox.height).toBeLessThanOrEqual(tabsBox.y);
-    expect(sentenceBox.x + sentenceBox.width).toBeLessThanOrEqual(
-      languageBox.x,
-    );
-    expect(languageBox.x + languageBox.width).toBeLessThanOrEqual(menuBox.x);
-    expect(Math.abs(centre(languageBox) - centre(menuBox))).toBeLessThanOrEqual(
-      1,
-    );
-    expect(await isCut(languageButton)).toBe(false);
+    expect(sentenceBox.x + sentenceBox.width).toBeLessThanOrEqual(menuBox.x);
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
-
-    // The language's box is all in the window, and no entry of it is cut.
-    await languageButton.click();
-    const box = page.getByRole('dialog');
-    await expect(box).toBeInViewport({ ratio: 1 });
-    for (const option of await box.getByRole('option').all()) {
-      expect(await isCut(option)).toBe(false);
-    }
-    await page.keyboard.press('Escape');
-    await expect(box).toBeHidden();
 
     // Each of the latitude and the longitude has its name beside its number,
     // though the name takes two lines of the names' column here.
@@ -2590,33 +2488,19 @@ test.describe('in a browser whose language is Arabic', () => {
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
 
-    // The language's button is before the menu's, at its right and in the
-    // middle of its height, and the sentence ends before it, at its right.
-    // The language's box and the submenu of the layouts are in the window.
+    // The sentence ends before the menu's button, at its right, and the
+    // submenu of the layouts is in the window.
     const menuButton = page.getByRole('button', {
       name: 'القائمة',
-      exact: true,
-    });
-    const languageButton = page.getByRole('button', {
-      name: 'اللغة العربية',
       exact: true,
     });
     const sentence = page.getByText('اختر صورتك لعرض بيانات EXIF.', {
       exact: true,
     });
-    const [menuBox, languageBox, sentenceBox] = await Promise.all(
-      [menuButton, languageButton, sentence].map((locator) =>
-        locator.boundingBox(),
-      ),
+    const [menuBox, sentenceBox] = await Promise.all(
+      [menuButton, sentence].map((locator) => locator.boundingBox()),
     );
-    const middle = (box) => box.y + box.height / 2;
-    expect(menuBox.x + menuBox.width).toBeLessThanOrEqual(languageBox.x);
-    expect(languageBox.x + languageBox.width).toBeLessThanOrEqual(
-      sentenceBox.x,
-    );
-    expect(Math.abs(middle(languageBox) - middle(menuBox))).toBeLessThanOrEqual(
-      1,
-    );
+    expect(menuBox.x + menuBox.width).toBeLessThanOrEqual(sentenceBox.x);
 
     await loadPhoto(page);
     await expectButtonsBesideNumbers(page, { rightToLeft: true });
@@ -2624,10 +2508,6 @@ test.describe('in a browser whose language is Arabic', () => {
 
     // After the screenshot, which would have the focus that Escape leaves on
     // a button.
-    await languageButton.click();
-    await expect(page.getByRole('dialog')).toBeInViewport({ ratio: 1 });
-    await page.keyboard.press('Escape');
-    await expect(page.getByRole('dialog')).toBeHidden();
     await menuButton.click();
     await page.getByRole('menuitem', { name: 'التخطيط', exact: true }).click();
     await expect(page.locator('#layout-submenu [role="menu"]')).toBeInViewport({
