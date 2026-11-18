@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useIsRtl } from '../../direction/DirectionProvider';
 import classes from './AppMenu.module.scss';
 import LayoutSubmenu, { LayoutMenuItem } from './LayoutSubmenu';
+import useSubmenuHover from './useSubmenuHover';
 
 interface Page {
   pathname: string;
@@ -85,19 +86,24 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
   const [layoutEntry, setLayoutEntry] = useState<HTMLElement | null>(null);
   const layoutEntryId = useId();
   const submenuActions = useRef<PopoverActions>(null);
+  const layoutEntryHover = useSubmenuHover({
+    isMenuOpen: Boolean(anchorElNav),
+    openEntry: layoutEntry,
+    setOpenEntry: setLayoutEntry,
+  });
 
   const handleOpenMenu: React.MouseEventHandler<HTMLElement> = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleMenuItemClicked = (page: Page) => {
-    router.push(page.pathname);
-    setAnchorElNav(null);
-  };
-
   const handleCloseMenu = () => {
     setLayoutEntry(null);
     setAnchorElNav(null);
+  };
+
+  const handleMenuItemClicked = (page: Page) => {
+    router.push(page.pathname);
+    handleCloseMenu();
   };
 
   // The entries of the pages, with Layout after Language: the three entries
@@ -126,6 +132,7 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         id={layoutEntryId}
         isSubmenuOpen={Boolean(layoutEntry)}
         onOpenSubmenu={setLayoutEntry}
+        hoverHandlers={layoutEntryHover}
       />,
     ];
   });
@@ -160,7 +167,13 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
           horizontal: 'center',
         }}
         open={Boolean(anchorElNav)}
-        onClose={handleCloseMenu}
+        onClose={(_event, reason) => {
+          // A click beside the menus closes the submenu alone, with a mouse
+          // too, whose pointer goes through the submenu's layer to this one
+          // (LayoutSubmenu).
+          if (reason === 'backdropClick' && layoutEntry) setLayoutEntry(null);
+          else handleCloseMenu();
+        }}
         slotProps={{
           backdrop: { style: { backgroundColor: '#222222', opacity: 0.4 } },
           // The submenu, opened while the menu grew, is placed again by its
