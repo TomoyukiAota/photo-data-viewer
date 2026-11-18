@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Kart",
       "photo": "Bilde"
+    },
+    "layout": {
+      "buttonLabel": "oppsett",
+      "label": "OPPSETT",
+      "auto": "Automatisk",
+      "autoDescription": "Delte ruter i et bredt vindu, én rute i et smalt",
+      "splitPanes": "Delte ruter",
+      "singlePane": "Én rute"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Vis i Google Maps",
       "showInGoogleStreetView": "Vis i Google Street View",
+      "showInGoogleEarth": "Vis i Google Earth",
       "iosNote": "For iOS-brukere: iOS fjerner i noen tilfeller deler av EXIF-informasjonen (f.eks. breddegrad og lengdegrad). Les mer på <pageLink>denne siden</pageLink>."
     },
     "rawData": {

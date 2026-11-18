@@ -31,6 +31,14 @@
       "data": "Podatki",
       "map": "Zemljevid",
       "photo": "Fotografija"
+    },
+    "layout": {
+      "buttonLabel": "postavitev",
+      "label": "POSTAVITEV",
+      "auto": "Samodejno",
+      "autoDescription": "Razdeljena podokna v širokem oknu, eno podokno v ozkem",
+      "splitPanes": "Razdeljena podokna",
+      "singlePane": "Eno podokno"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Prikaži v Google Zemljevidih",
       "showInGoogleStreetView": "Prikaži v Google Street View",
+      "showInGoogleEarth": "Prikaži v Google Earth",
       "iosNote": "Za uporabnike sistema iOS: iOS v nekaterih primerih odstrani nekatere podatke EXIF (npr. zemljepisno širino in dolžino). Podrobnosti preberite na <pageLink>tej strani</pageLink>."
     },
     "rawData": {

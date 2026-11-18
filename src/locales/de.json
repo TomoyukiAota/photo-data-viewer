@@ -31,6 +31,14 @@
       "data": "Daten",
       "map": "Karte",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "Layout",
+      "label": "LAYOUT",
+      "auto": "Automatisch",
+      "autoDescription": "Geteilte Bereiche in einem breiten Fenster, ein einzelner Bereich in einem schmalen",
+      "splitPanes": "Geteilte Bereiche",
+      "singlePane": "Einzelner Bereich"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "In Google Maps anzeigen",
       "showInGoogleStreetView": "In Google Street View anzeigen",
+      "showInGoogleEarth": "In Google Earth anzeigen",
       "iosNote": "Hinweis für iOS: iOS entfernt in manchen Fällen einige EXIF-Daten (z. B. Breiten- und Längengrad). Einzelheiten finden Sie auf <pageLink>dieser Seite</pageLink>."
     },
     "rawData": {

@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Kort",
       "photo": "Billede"
+    },
+    "layout": {
+      "buttonLabel": "layout",
+      "label": "LAYOUT",
+      "auto": "Automatisk",
+      "autoDescription": "Opdelte ruder i et bredt vindue, én rude i et smalt",
+      "splitPanes": "Opdelte ruder",
+      "singlePane": "Én rude"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Vis i Google Maps",
       "showInGoogleStreetView": "Vis i Google Street View",
+      "showInGoogleEarth": "Vis i Google Earth",
       "iosNote": "Til iOS-brugere: iOS fjerner i nogle tilfælde visse EXIF-oplysninger (f.eks. breddegrad og længdegrad). Læs mere på <pageLink>denne side</pageLink>."
     },
     "rawData": {

@@ -31,6 +31,14 @@
       "data": "Údaje",
       "map": "Mapa",
       "photo": "Fotka"
+    },
+    "layout": {
+      "buttonLabel": "rozloženie",
+      "label": "ROZLOŽENIE",
+      "auto": "Automaticky",
+      "autoDescription": "Rozdelené tably v širokom okne, jedna tabla v úzkom",
+      "splitPanes": "Rozdelené tably",
+      "singlePane": "Jedna tabla"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Zobraziť v Mapách Google",
       "showInGoogleStreetView": "Zobraziť v Google Street View",
+      "showInGoogleEarth": "Zobraziť v Google Earth",
       "iosNote": "Pre používateľov iOS: systém iOS v niektorých prípadoch odstraňuje niektoré údaje EXIF (napr. zemepisnú šírku a dĺžku). Podrobnosti nájdete na <pageLink>tejto stránke</pageLink>."
     },
     "rawData": {

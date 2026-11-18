@@ -1,10 +1,19 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { trackOpenUrl } from '../../../analytics/track-event';
+import { AppIntegration } from '../../../app-integration/app-integration';
 import { LoadedPhotoData } from '../../../context/photo/loaded-photo-data';
 import { applyLanguage } from '../../../i18n/i18n';
 import LatLngRow from './LatLngRow';
 
-afterEach(() => act(() => applyLanguage('en')));
+// What a button records is checked here, and sent nowhere.
+jest.mock('../../../analytics/track-event');
+
+afterEach(() => {
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
+  return act(() => applyLanguage('en'));
+});
 
 /** A photo as far as this row looks at it: whether a file is loaded, and its location if it has one. */
 function photo(location?: { latitude: number; longitude: number }): LoadedPhotoData {
@@ -34,18 +43,69 @@ it('writes the numbers from left to right in every language, so that a minus sig
   expect(screen.getByText('-122.005661').getAttribute('dir')).toBe('ltr');
 });
 
-it('has the two buttons that show the place, named in the language', async () => {
+it('has the three buttons that show the place, named in the language', async () => {
   render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
   expect(screen.getAllByRole('button').map((button) => button.title)).toEqual([
     'Show in Google Maps',
     'Show in Google Street View',
+    'Show in Google Earth',
   ]);
 
   await act(() => applyLanguage('ja'));
   expect(screen.getAllByRole('button').map((button) => button.title)).toEqual([
     'Google マップで表示',
     'Google ストリートビューで表示',
+    'Google Earth で表示',
   ]);
+});
+
+it('opens Google Earth in a new tab at the place, which Google Earth marks, and the tab cannot reach this page', () => {
+  const tab = { opener: window } as unknown as Window;
+  const open = jest.spyOn(window, 'open').mockReturnValue(tab);
+  render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
+
+  fireEvent.click(screen.getByRole('button', { name: 'Show in Google Earth' }));
+  // A search for the coordinates, which puts a pin on them.
+  expect(open.mock.calls).toEqual([['https://earth.google.com/web/search/37.332558,-122.005661', '_blank']]);
+  expect(tab.opener).toBeNull();
+});
+
+it('records which button was used in the usage data, and not where the photo was taken', () => {
+  jest.spyOn(window, 'open').mockReturnValue(null);
+  render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
+
+  for (const button of screen.getAllByRole('button')) fireEvent.click(button);
+  const recorded = jest.mocked(trackOpenUrl).mock.calls;
+  expect(recorded).toEqual([
+    ['https://maps.google.com/ with query parameters for latitude, longitude, and zoom', 'Show in Google Maps', 'Home Page'],
+    ['https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom', 'Show in Google Street View', 'Home Page'],
+    ['https://earth.google.com/web/search/ with latitude and longitude', 'Show in Google Earth', 'Home Page'],
+  ]);
+  expect(JSON.stringify(recorded)).not.toMatch(/37\.33|122\.00/);
+});
+
+describe('in Photo Location Map, which records the address that a button opens', () => {
+  beforeEach(() => jest.spyOn(AppIntegration, 'isPlm', 'get').mockReturnValue(true));
+  afterEach(() => window.history.replaceState(null, '', '/'));
+
+  /** The titles of the buttons, with the page opened at `address`, as Photo Location Map opens it. */
+  function buttonsAt(address: string): string[] {
+    window.history.replaceState(null, '', address);
+    render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
+    return screen.getAllByRole('button').map((button) => button.title);
+  }
+
+  it('has the Google Earth button where the address says that its link is recorded without the place', () => {
+    expect(buttonsAt('/?plmBridge=1&language=en&googleEarth=1')).toEqual([
+      'Show in Google Maps',
+      'Show in Google Street View',
+      'Show in Google Earth',
+    ]);
+  });
+
+  it('has no Google Earth button in a version that would record its link with the coordinates', () => {
+    expect(buttonsAt('/?plmBridge=1&language=en')).toEqual(['Show in Google Maps', 'Show in Google Street View']);
+  });
 });
 
 it('says once that the location is not available for a photo without one, and has no buttons then', () => {

@@ -31,6 +31,14 @@
       "data": "Δεδομένα",
       "map": "Χάρτης",
       "photo": "Φωτογραφία"
+    },
+    "layout": {
+      "buttonLabel": "διάταξη",
+      "label": "ΔΙΑΤΑΞΗ",
+      "auto": "Αυτόματα",
+      "autoDescription": "Διαιρεμένα τμήματα παραθύρου σε φαρδύ παράθυρο, ένα τμήμα παραθύρου σε στενό",
+      "splitPanes": "Διαιρεμένα τμήματα παραθύρου",
+      "singlePane": "Ένα τμήμα παραθύρου"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Εμφάνιση στους Χάρτες Google",
       "showInGoogleStreetView": "Εμφάνιση στο Google Street View",
+      "showInGoogleEarth": "Εμφάνιση στο Google Earth",
       "iosNote": "Για χρήστες iOS: σε ορισμένες περιπτώσεις το iOS αφαιρεί κάποια δεδομένα EXIF (π.χ. γεωγραφικό πλάτος και μήκος). Διαβάστε <pageLink>αυτήν τη σελίδα</pageLink> για λεπτομέρειες."
     },
     "rawData": {

@@ -31,6 +31,14 @@
       "data": "Duomenys",
       "map": "Žemėlapis",
       "photo": "Nuotrauka"
+    },
+    "layout": {
+      "buttonLabel": "išdėstymas",
+      "label": "IŠDĖSTYMAS",
+      "auto": "Automatinis",
+      "autoDescription": "Padalytos sritys plačiame lange, viena sritis siaurame",
+      "splitPanes": "Padalytos sritys",
+      "singlePane": "Viena sritis"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Rodyti „Google“ žemėlapiuose",
       "showInGoogleStreetView": "Rodyti naudojant „Google Street View“",
+      "showInGoogleEarth": "Rodyti naudojant „Google Earth“",
       "iosNote": "„iOS“ naudotojams: kai kuriais atvejais „iOS“ pašalina dalį EXIF duomenų (pvz., platumą ir ilgumą). Daugiau informacijos rasite <pageLink>šiame puslapyje</pageLink>."
     },
     "rawData": {

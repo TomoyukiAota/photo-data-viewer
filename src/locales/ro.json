@@ -31,6 +31,14 @@
       "data": "Date",
       "map": "Hartă",
       "photo": "Poză"
+    },
+    "layout": {
+      "buttonLabel": "aspect",
+      "label": "ASPECT",
+      "auto": "Automat",
+      "autoDescription": "Panouri împărțite într-o fereastră lată, un singur panou într-una îngustă",
+      "splitPanes": "Panouri împărțite",
+      "singlePane": "Un singur panou"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Afișează în Google Maps",
       "showInGoogleStreetView": "Afișează în Google Street View",
+      "showInGoogleEarth": "Afișează în Google Earth",
       "iosNote": "Pentru utilizatorii iOS: în unele cazuri, iOS elimină anumite date EXIF (de ex., latitudinea și longitudinea). Citiți <pageLink>această pagină</pageLink> pentru detalii."
     },
     "rawData": {

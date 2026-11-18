@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Karta",
       "photo": "Bild"
+    },
+    "layout": {
+      "buttonLabel": "layout",
+      "label": "LAYOUT",
+      "auto": "Automatiskt",
+      "autoDescription": "Delade rutor i ett brett fönster, en enda ruta i ett smalt",
+      "splitPanes": "Delade rutor",
+      "singlePane": "En enda ruta"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Visa i Google Maps",
       "showInGoogleStreetView": "Visa i Google Street View",
+      "showInGoogleEarth": "Visa i Google Earth",
       "iosNote": "För iOS-användare: iOS tar i vissa fall bort en del EXIF-information (t.ex. latitud och longitud). Läs mer på <pageLink>den här sidan</pageLink>."
     },
     "rawData": {

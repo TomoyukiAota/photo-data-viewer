@@ -31,6 +31,14 @@
       "data": "データ",
       "map": "マップ",
       "photo": "写真"
+    },
+    "layout": {
+      "buttonLabel": "レイアウト",
+      "label": "レイアウト",
+      "auto": "自動",
+      "autoDescription": "ウィンドウが広いときは表示領域を分割し、狭いときは分割しない",
+      "splitPanes": "表示領域を分割する",
+      "singlePane": "表示領域を分割しない"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Google マップで表示",
       "showInGoogleStreetView": "Google ストリートビューで表示",
+      "showInGoogleEarth": "Google Earth で表示",
       "iosNote": "iOS では、EXIF データの一部（緯度・経度など）が削除される場合があります。詳しくは<pageLink>こちらのページ</pageLink>をご覧ください。"
     },
     "rawData": {

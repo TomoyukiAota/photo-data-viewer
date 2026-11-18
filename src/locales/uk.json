@@ -31,6 +31,14 @@
       "data": "Дані",
       "map": "Карта",
       "photo": "Фотографія"
+    },
+    "layout": {
+      "buttonLabel": "макет",
+      "label": "МАКЕТ",
+      "auto": "Автоматично",
+      "autoDescription": "Розділені області в широкому вікні, одна область у вузькому",
+      "splitPanes": "Розділені області",
+      "singlePane": "Одна область"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Показати в Google Картах",
       "showInGoogleStreetView": "Показати в Google Street View",
+      "showInGoogleEarth": "Показати в Google Планета Земля",
       "iosNote": "Для користувачів iOS: у деяких випадках iOS видаляє частину даних EXIF (наприклад, широту й довготу). Докладніше читайте на <pageLink>цій сторінці</pageLink>."
     },
     "rawData": {

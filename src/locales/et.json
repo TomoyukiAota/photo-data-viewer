@@ -31,6 +31,14 @@
       "data": "Andmed",
       "map": "Kaart",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "paigutus",
+      "label": "PAIGUTUS",
+      "auto": "Automaatne",
+      "autoDescription": "Jagatud paanid laias aknas, üks paan kitsas",
+      "splitPanes": "Jagatud paanid",
+      "singlePane": "Üks paan"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Kuva Google Mapsis",
       "showInGoogleStreetView": "Kuva Google Street View’s",
+      "showInGoogleEarth": "Kuva Google Earthis",
       "iosNote": "iOS-i kasutajatele: iOS eemaldab mõnel juhul osa EXIF-andmeid (nt laius- ja pikkuskraadi). Üksikasju leiate <pageLink>sellelt lehelt</pageLink>."
     },
     "rawData": {

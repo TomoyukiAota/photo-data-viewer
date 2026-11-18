@@ -31,6 +31,14 @@
       "data": "資料",
       "map": "地圖",
       "photo": "照片"
+    },
+    "layout": {
+      "buttonLabel": "版面配置",
+      "label": "版面配置",
+      "auto": "自動",
+      "autoDescription": "視窗較寬時分割窗格，較窄時使用單一窗格",
+      "splitPanes": "分割窗格",
+      "singlePane": "單一窗格"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "在 Google 地圖中顯示",
       "showInGoogleStreetView": "在 Google 街景服務中顯示",
+      "showInGoogleEarth": "在 Google 地球中顯示",
       "iosNote": "iOS 使用者請注意：在某些情況下，iOS 會移除部分 EXIF 資料（例如緯度和經度）。詳情請參閱<pageLink>此頁面</pageLink>。"
     },
     "rawData": {

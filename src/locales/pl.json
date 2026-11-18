@@ -31,6 +31,14 @@
       "data": "Dane",
       "map": "Mapa",
       "photo": "Zdjęcie"
+    },
+    "layout": {
+      "buttonLabel": "układ",
+      "label": "UKŁAD",
+      "auto": "Automatyczny",
+      "autoDescription": "Podzielone okienka w szerokim oknie, jedno okienko w wąskim",
+      "splitPanes": "Podzielone okienka",
+      "singlePane": "Jedno okienko"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Pokaż w Mapach Google",
       "showInGoogleStreetView": "Pokaż w Google Street View",
+      "showInGoogleEarth": "Pokaż w Google Earth",
       "iosNote": "Dla użytkowników iOS: w niektórych przypadkach iOS usuwa część danych EXIF (np. szerokość i długość geograficzną). Szczegóły znajdziesz na <pageLink>tej stronie</pageLink>."
     },
     "rawData": {

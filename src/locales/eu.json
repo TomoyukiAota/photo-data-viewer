@@ -31,6 +31,14 @@
       "data": "Datuak",
       "map": "Mapa",
       "photo": "Argazkia"
+    },
+    "layout": {
+      "buttonLabel": "diseinua",
+      "label": "DISEINUA",
+      "auto": "Automatikoa",
+      "autoDescription": "Panel zatituak leiho zabal batean, panel bakarra leiho estu batean",
+      "splitPanes": "Panel zatituak",
+      "singlePane": "Panel bakarra"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Erakutsi Google Maps-en",
       "showInGoogleStreetView": "Erakutsi Google Street View-n",
+      "showInGoogleEarth": "Erakutsi Google Earth-en",
       "iosNote": "iOS erabiltzaileentzat: kasu batzuetan, iOS-ek EXIF datu batzuk kentzen ditu (adib., latitudea eta longitudea). Xehetasunetarako, irakurri <pageLink>orri hau</pageLink>."
     },
     "rawData": {

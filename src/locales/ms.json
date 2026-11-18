@@ -31,6 +31,14 @@
       "data": "Data",
       "map": "Peta",
       "photo": "Foto"
+    },
+    "layout": {
+      "buttonLabel": "tataletak",
+      "label": "TATALETAK",
+      "auto": "Automatik",
+      "autoDescription": "Anak tetingkap berpisah dalam tetingkap yang lebar, satu anak tetingkap dalam tetingkap yang sempit",
+      "splitPanes": "Anak tetingkap berpisah",
+      "singlePane": "Satu anak tetingkap"
     }
   },
   "photo": {
@@ -67,6 +75,7 @@
       "dimensions": "{{width}} × {{height}}",
       "showInGoogleMaps": "Tunjukkan dalam Google Maps",
       "showInGoogleStreetView": "Tunjukkan dalam Google Street View",
+      "showInGoogleEarth": "Tunjukkan dalam Google Earth",
       "iosNote": "Bagi pengguna iOS: dalam sesetengah keadaan, iOS mengalih keluar sebahagian data EXIF (cth. latitud dan longitud). Sila baca <pageLink>halaman ini</pageLink> untuk butiran."
     },
     "rawData": {
