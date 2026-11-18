@@ -67,5 +67,5 @@ installable, and says what Chrome finds missing.
 - Share a photo to the app from another app on Android: `share_target`.
 - Record whether the app was opened as an installed app (the
   `display-mode: standalone` media query), to see whether the installed app is
-  used.
+  used: done, see [opened as the installed app](../20261118_installed-app-usage/STATUS.md).
 - Working offline, if it is wanted: see the [plan](./PLAN.md#working-offline).
