@@ -1,6 +1,7 @@
+import { AppIntegration } from '../app-integration/app-integration';
 import { LoadedPhotoData } from '../context/photo/loaded-photo-data';
 import { AnalyticsEvent, trackEvent } from './analytics';
-import { toGa4Params } from './event-fields';
+import { EventFields, toGa4Params } from './event-fields';
 import { Ga4EventName, isValidGa4Name } from './ga4-event-name';
 import {
   trackAppIntegrationMode,
@@ -118,6 +119,35 @@ describe('track-event', () => {
       language: navigator.language,
       screen: expect.stringMatching(/^\d+x\d+$/),
       viewport: expect.stringMatching(/^\d+x\d+$/),
+    });
+  });
+
+  describe('the page load says how the app was opened', () => {
+    afterEach(() => {
+      delete (window as { matchMedia?: unknown }).matchMedia;
+      jest.restoreAllMocks();
+    });
+
+    function pageLoaded(): EventFields {
+      jest.clearAllMocks();
+      trackPageLoaded();
+      return sent().find((event) => event.action === 'Page Loaded')?.label as EventFields;
+    }
+
+    it("as standalone in the installed app's window, which GA4 receives as display_mode", () => {
+      window.matchMedia = jest.fn(
+        (query: string) => ({ matches: query === '(display-mode: standalone)', media: query }) as MediaQueryList,
+      );
+      const label = pageLoaded();
+      expect(label).toMatchObject({ displayMode: 'standalone' });
+      expect(toGa4Params(label)).toMatchObject({ display_mode: 'standalone' });
+    });
+
+    it("not in Photo Location Map's window, which is always that application's", () => {
+      jest.spyOn(AppIntegration, 'isStandalone', 'get').mockReturnValue(false);
+      const label = pageLoaded();
+      expect(label.displayMode).toBeUndefined();
+      expect(toGa4Params(label)).not.toHaveProperty('display_mode');
     });
   });
 

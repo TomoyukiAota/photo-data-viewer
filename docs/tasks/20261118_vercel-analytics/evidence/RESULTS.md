@@ -48,8 +48,9 @@ the scripts as Vercel's CDN serves them
 own address).
 
 - **Where the scripts come from.** In production, from the path that Vercel
-  gives at build time (`NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG`, chosen
-  anew for each build), or else `/_vercel/insights/script.js` and
+  gives at build time (`NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG`; the
+  preview and the production deployment had the same paths, so they are the
+  project's, not the build's), or else `/_vercel/insights/script.js` and
   `/_vercel/speed-insights/script.js`. When `NODE_ENV` is `development` or
   `test`, Vercel's debug versions from `va.vercel-scripts.com`, which log to
   the console and send nothing.
@@ -101,9 +102,30 @@ nothing in a browser driven by automation, so nothing was sent.
 | `/`, with "Send usage data" off | None | None |
 | `/?plmBridge=1`, as Photo Location Map's isolated window | None | None |
 
-No error on the page in any. The paths are the ones Vercel chose for the
-build (Resilient Intake), not `/_vercel/...`: the build was given its
+No error on the page in any. The paths are the ones Vercel gives the build
+(Resilient Intake), not `/_vercel/...`: the build was given its
 configuration, as the packages read it.
+
+## After the merge
+
+The pull request was merged on 2026-11-18 at 05:13 UTC, and the production
+deployment served it from 05:18. Opened as above, in headless Chromium:
+
+| Opened | Scripts the app added | Requests of the page's own address, besides `/` and `/_next/` |
+| --- | --- | --- |
+| <https://photo-data-viewer.vercel.app/> | Web Analytics' and Speed Insights', as on the preview, at the same paths | The two scripts, answered with 200 |
+| The same, with "Send usage data" off | None | None |
+| The same, at `/?plmBridge=1`, as Photo Location Map's isolated window | None | None |
+| <https://pdv-in-plm.vercel.app/?plmBridge=1&language=en>, as Photo Location Map's isolated window opens the deployment for it | None | None |
+
+No error on the page in any. Opened in an ordinary browser, the deployment
+for Photo Location Map counts as the standalone app, as the app tells Photo
+Location Map's windows apart as it runs, and loads both scripts as well,
+which that deployment answers with 200. Its address is for Photo Location Map
+alone, and search engines are asked not to index it.
+
+What reaches the dashboards is for a person's visit to show: the scripts send
+nothing in a browser driven by a test.
 
 ## The addresses of each language
 

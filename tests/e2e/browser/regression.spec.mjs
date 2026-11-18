@@ -1111,6 +1111,44 @@ test("Vercel's Web Analytics and Speed Insights are loaded only while usage data
   ).toEqual(['undefined', 'undefined']);
 });
 
+// TL;DR: The page load says whether the installed app was opened.
+// Details: In the installed app's window, the display-mode media feature is
+// standalone (src/analytics/display-mode.ts). Neither Playwright nor the
+// DevTools protocol shows a page as an installed app or emulates the
+// feature, so the second load answers that one media query as the installed
+// app's window does, and every other query as the browser does.
+test('the page load says whether the app was opened in a tab or as the installed app', async ({
+  page,
+}) => {
+  const sent = await collectEvents(page);
+  const displayModes = (events) =>
+    events
+      .filter((event) => event.action === 'Page Loaded')
+      .map((event) => JSON.parse(event.label).displayMode);
+
+  await page.goto('/');
+  await expectSent(sent, displayModes, ['browser']);
+
+  await page.addInitScript(() => {
+    const matchMedia = window.matchMedia.bind(window);
+    window.matchMedia = (query) =>
+      query.includes('display-mode')
+        ? {
+            matches: query === '(display-mode: standalone)',
+            media: query,
+            onchange: null,
+            addEventListener() {},
+            removeEventListener() {},
+            addListener() {},
+            removeListener() {},
+            dispatchEvent: () => false,
+          }
+        : matchMedia(query);
+  });
+  await page.reload();
+  await expectSent(sent, displayModes, ['browser', 'standalone']);
+});
+
 test('the language is recorded when the app opens, when it is changed, and when the Language page is left', async ({
   page,
 }) => {

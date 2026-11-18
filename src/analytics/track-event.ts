@@ -2,6 +2,7 @@ import { AppIntegration } from '../app-integration/app-integration';
 import { LoadedPhotoData } from '../context/photo/loaded-photo-data';
 import { PhotoDimensions } from '../context/photo-dimensions/photo-dimensions-type';
 import { trackEvent } from './analytics';
+import { displayMode } from './display-mode';
 import { Ga4EventName } from './ga4-event-name';
 
 export interface PhotoLoadDetails {
@@ -97,8 +98,9 @@ export function trackRanDemo() {
   trackEvent({ category: 'Demo', action: 'Ran Demo', ga4Name: Ga4EventName.RanDemo });
 }
 
-// Once per page load: where the visitor came from, and what they view the app with.
-// Photo Location Map records the same of its own launch, as events.
+// Once per page load: where the visitor came from, what they view the app with, and
+// whether they opened the installed app. Photo Location Map records the same of its
+// own launch, as events.
 export function trackPageLoaded() {
   trackEvent({
     category: 'Page',
@@ -111,6 +113,10 @@ export function trackPageLoaded() {
       screen: `${window.screen.width}x${window.screen.height}`,
       viewport: `${window.innerWidth}x${window.innerHeight}`,
       devicePixelRatio: window.devicePixelRatio,
+      // `standalone` when the installed app was opened (display-mode.ts), as it is at the
+      // load: what the window is made into later does not change how it was opened. Left
+      // out in Photo Location Map's window, which is always that application's.
+      displayMode: AppIntegration.isStandalone ? displayMode() : undefined,
     },
     ga4Name: Ga4EventName.PageLoaded,
   });
