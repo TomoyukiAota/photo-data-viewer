@@ -90,8 +90,8 @@
     "close": "Itxi"
   },
   "dropPhoto": {
-    "dropHere": "Jaregin argazkia hemen hautatzeko.",
-    "title": "Ziur argazki hau hautatu nahi duzula?",
+    "dropHere": "Jaregin argazkia hautatzeko.",
+    "title": "Ziur beheko argazkia hautatu nahi duzula?",
     "cancel": "Utzi",
     "select": "Hautatu"
   },

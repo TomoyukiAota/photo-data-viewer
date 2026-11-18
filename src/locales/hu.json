@@ -90,8 +90,8 @@
     "close": "Bezárás"
   },
   "dropPhoto": {
-    "dropHere": "Dobja ide a fotót a kiválasztásához.",
-    "title": "Biztosan kiválasztja ezt a fotót?",
+    "dropHere": "Engedje el a fotót a kiválasztásához.",
+    "title": "Biztosan kiválasztja az alábbi fotót?",
     "cancel": "Mégsem",
     "select": "Kiválasztás"
   },

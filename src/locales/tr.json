@@ -90,8 +90,8 @@
     "close": "Kapat"
   },
   "dropPhoto": {
-    "dropHere": "Seçmek için fotoğrafı buraya bırakın.",
-    "title": "Bu fotoğrafı seçmek istediğinizden emin misiniz?",
+    "dropHere": "Seçmek için fotoğrafı bırakın.",
+    "title": "Aşağıdaki fotoğrafı seçmek istediğinizden emin misiniz?",
     "cancel": "Vazgeç",
     "select": "Seç"
   },

@@ -435,6 +435,26 @@ test('Chrome offers to install the app, with its name and icons', async ({
   }
 });
 
+// The page's theme-color, which Chrome takes for the installed app's title bar
+// in place of the manifest's, and with it whether the window and its file
+// dialog are light or dark.
+test("the installed app's title bar is white, and dark when the system is dark", async ({
+  page,
+}) => {
+  await page.goto('/');
+  const themeColor = () =>
+    page.evaluate(
+      () =>
+        [...document.querySelectorAll('meta[name=theme-color]')].find(
+          (meta) => matchMedia(meta.media).matches,
+        )?.content,
+    );
+  await page.emulateMedia({ colorScheme: 'light' });
+  expect(await themeColor()).toBe('#ffffff');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  expect(await themeColor()).toBe('#202124');
+});
+
 test('photo values, tabs, rotation, splitter persistence, and navigation', async ({
   page,
 }) => {
@@ -772,7 +792,7 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
 
   // While the file is over the page, a veil says that the app takes it.
   const dataTransfer = await dragFiles(page, [photoFile], placeholder);
-  const veil = page.getByText('Drop the photo here to select it.', {
+  const veil = page.getByText('Drop the photo to select it.', {
     exact: true,
   });
   await expect(veil).toBeVisible();
@@ -782,26 +802,39 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
   await placeholder.dispatchEvent('drop', { dataTransfer });
   await expect(veil).toBeHidden();
   const dialog = page.getByRole('dialog', {
-    name: 'Are you sure you want to select this photo?',
+    name: 'Are you sure you want to select the photo below?',
     exact: true,
   });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText('demo.jpg');
+  // Cancel has the focus, so that Enter replaces nothing. Select, the action
+  // that the dialog asks about, is in the blue of the app's buttons, and
+  // Cancel in the grey of the dialogs' buttons.
+  const cancel = dialog.getByRole('button', { name: 'Cancel', exact: true });
   const select = dialog.getByRole('button', { name: 'Select', exact: true });
-  await expect(select).toBeFocused();
+  await expect(cancel).toBeFocused();
+  await expect(select).toHaveCSS('background-color', 'rgb(25, 118, 210)');
+  await expect(select).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(cancel).toHaveCSS('background-color', 'rgb(221, 221, 221)');
   await snapshot(page, 'drop-dialog');
 
-  // Cancel, or Escape, selects nothing.
-  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  // Cancel, Escape, or Enter on Cancel, selects nothing.
+  await cancel.click();
   await expect(dialog).toBeHidden();
   await dropFiles(page, [photoFile]);
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
+  await dropFiles(page, [photoFile]);
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(dialog).toBeHidden();
   await expect(placeholder).toBeVisible();
 
-  // Enter selects it, as Select has the focus.
+  // Tab moves to Select, and Enter selects the photo.
   await dropFiles(page, [photoFile]);
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(select).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(
@@ -849,7 +882,13 @@ test('a photo dropped on the page is selected once the dialog asks, and recorded
       events
         .filter((event) => event.action === 'Opened Drop Photo Dialog')
         .map((event) => JSON.parse(event.label)),
-    [{ fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }, { fileCount: 1 }],
+    [
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+      { fileCount: 1 },
+    ],
   );
   await expectSent(
     sent,
@@ -900,7 +939,7 @@ test('a dropped file that is not a photo gets the dialog that one chosen with th
   });
   expect(isTextTaken).toBe(false);
   await expect(
-    page.getByText('Drop the photo here to select it.', { exact: true }),
+    page.getByText('Drop the photo to select it.', { exact: true }),
   ).toBeHidden();
 
   await dropFiles(page, [
@@ -2263,7 +2302,7 @@ test.describe('in a browser whose language is Arabic', () => {
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     await dropFiles(page, [photoFile]);
     const dialog = page.getByRole('dialog', {
-      name: 'هل تريد بالتأكيد اختيار هذه الصورة؟',
+      name: 'هل تريد بالتأكيد اختيار الصورة أدناه؟',
       exact: true,
     });
     await expect(dialog).toBeVisible();

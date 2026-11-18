@@ -90,8 +90,8 @@
     "close": "关闭"
   },
   "dropPhoto": {
-    "dropHere": "将照片拖放到此处进行选择。",
-    "title": "确定要选择此照片吗？",
+    "dropHere": "拖放照片即可选择。",
+    "title": "确定要选择以下照片吗？",
     "cancel": "取消",
     "select": "选择"
   },

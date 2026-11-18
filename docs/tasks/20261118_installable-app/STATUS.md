@@ -14,8 +14,10 @@ site.
   offers to install a page from the address bar and its menu. Edge, built on
   Chromium, makes the same check. No service worker is needed for either.
 - Installed, the app opens in a window of its own, without the browser's tabs
-  and address bar, with a white title bar like the app's header, and has its
-  own icon among the system's apps.
+  and address bar, and has its own icon among the system's apps. Its title bar
+  is white like the app's header, and dark when the system is in dark mode
+  ([plan](./PLAN.md#the-title-bar-in-dark-mode)), to make its file dialog dark
+  there too, as in a tab.
 - Safari reads the same manifest for Add to Dock on macOS and Add to Home
   Screen on iPhone and iPad; iPhone and iPad take their icon from
   `apple-touch-icon`. Neither was tried here.
@@ -35,7 +37,9 @@ On 2026-11-18 the owner approved what was proposed:
   `node scripts/generate-icons.mjs`
   ([DEVELOPMENT.md](../../DEVELOPMENT.md#the-apps-icon)).
 - The white title bar of the installed app, the color of the app's header
-  (`theme_color`), rather than the blue of the icon.
+  (`theme_color`), rather than the blue of the icon. After the app was
+  deployed, the owner found its file dialog white under macOS's dark mode, and
+  chose a dark title bar in dark mode, to make the window dark there.
 - No `short_name`: a phone's home screen shows "Photo Data Viewer", shortened
   where it is too long.
 - No working offline for now ([plan](./PLAN.md#working-offline)).
@@ -54,6 +58,9 @@ Once deployed, try it where the checks here could not, with a window:
    `apple-touch-icon`, and the app opens without Safari's toolbar.
 4. On Android, Chrome's menu offers Install app; the icon is the maskable one,
    cut to the launcher's shape.
+5. With macOS in dark mode, open the installed app: its title bar is dark, and
+   Select Photo opens a dark file dialog, as in a tab. In light mode both are
+   white.
 
 The browser test (`Chrome offers to install the app, with its name and icons`)
 fails when a change to the manifest or the icons makes the app no longer

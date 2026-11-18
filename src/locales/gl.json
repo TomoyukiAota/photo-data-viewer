@@ -90,8 +90,8 @@
     "close": "Pechar"
   },
   "dropPhoto": {
-    "dropHere": "Solta a foto aquí para seleccionala.",
-    "title": "Seguro que queres seleccionar esta foto?",
+    "dropHere": "Solta a foto para seleccionala.",
+    "title": "Seguro que queres seleccionar a foto seguinte?",
     "cancel": "Cancelar",
     "select": "Seleccionar"
   },

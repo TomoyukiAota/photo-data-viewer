@@ -90,8 +90,8 @@
     "close": "Zatvori"
   },
   "dropPhoto": {
-    "dropHere": "Otpustite fotografiju ovde da biste je izabrali.",
-    "title": "Da li ste sigurni da želite da izaberete ovu fotografiju?",
+    "dropHere": "Otpustite fotografiju da biste je izabrali.",
+    "title": "Da li ste sigurni da želite da izaberete fotografiju ispod?",
     "cancel": "Otkaži",
     "select": "Izaberi"
   },

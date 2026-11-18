@@ -90,8 +90,8 @@
     "close": "關閉"
   },
   "dropPhoto": {
-    "dropHere": "將照片拖放到這裡進行選取。",
-    "title": "確定要選取這張照片嗎？",
+    "dropHere": "拖放照片即可選取。",
+    "title": "確定要選取以下照片嗎？",
     "cancel": "取消",
     "select": "選取"
   },

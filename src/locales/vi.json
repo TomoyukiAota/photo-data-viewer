@@ -90,8 +90,8 @@
     "close": "Đóng"
   },
   "dropPhoto": {
-    "dropHere": "Thả ảnh vào đây để chọn.",
-    "title": "Bạn có chắc chắn muốn chọn ảnh này không?",
+    "dropHere": "Thả ảnh để chọn.",
+    "title": "Bạn có chắc chắn muốn chọn ảnh bên dưới không?",
     "cancel": "Hủy",
     "select": "Chọn"
   },

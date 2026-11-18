@@ -29,4 +29,16 @@
   > button {
     @include dialog.button;
   }
+
+  // Select, the action that the dialog asks about, is in the blue of the
+  // app's buttons, and Cancel in the grey of the dialogs' buttons, so that the
+  // two are told apart at a glance.
+  > button.select {
+    background-color: #1976d2;
+    color: #ffffff;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
 }

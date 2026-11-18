@@ -90,8 +90,8 @@
     "close": "Zavrieť"
   },
   "dropPhoto": {
-    "dropHere": "Pustite fotku sem, ak ju chcete vybrať.",
-    "title": "Naozaj chcete vybrať túto fotku?",
+    "dropHere": "Pustite fotku, ak ju chcete vybrať.",
+    "title": "Naozaj chcete vybrať nasledujúcu fotku?",
     "cancel": "Zrušiť",
     "select": "Vybrať"
   },

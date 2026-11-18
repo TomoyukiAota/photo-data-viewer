@@ -90,8 +90,8 @@
     "close": "Tanca"
   },
   "dropPhoto": {
-    "dropHere": "Deixeu anar la foto aquí per seleccionar-la.",
-    "title": "Segur que voleu seleccionar aquesta foto?",
+    "dropHere": "Deixeu anar la foto per seleccionar-la.",
+    "title": "Segur que voleu seleccionar la foto següent?",
     "cancel": "Cancel·la",
     "select": "Selecciona"
   },

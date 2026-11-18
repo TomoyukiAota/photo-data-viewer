@@ -90,8 +90,8 @@
     "close": "Luk"
   },
   "dropPhoto": {
-    "dropHere": "Slip billedet her for at vælge det.",
-    "title": "Er du sikker på, at du vil vælge dette billede?",
+    "dropHere": "Slip billedet for at vælge det.",
+    "title": "Er du sikker på, at du vil vælge billedet nedenfor?",
     "cancel": "Annuller",
     "select": "Vælg"
   },

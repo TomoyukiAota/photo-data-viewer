@@ -12,8 +12,8 @@ import classes from './DropPhotoDialog.module.scss';
 
 /**
  * Asks before a photo dropped on the page (src/components/drop-photo/DropPhoto.tsx) is selected, so that a photo
- * dropped by accident does not replace the one shown. Select has the focus, so Enter selects; Escape, or a click
- * outside the dialog, cancels.
+ * dropped by accident does not replace the one shown. Cancel has the focus, so that Enter, as Escape and a click
+ * outside the dialog, replaces nothing; Select is the one in color, the action that the dialog asks about.
  */
 const DropPhotoDialog: React.FC = () => {
   const { t } = useTranslation();
@@ -52,10 +52,10 @@ const DropPhotoDialog: React.FC = () => {
           {file?.name}
         </div>
         <div className={classes.buttons}>
-          <Button variant='text' onClick={handleCancel}>
+          <Button variant='text' onClick={handleCancel} autoFocus>
             {t('dropPhoto.cancel')}
           </Button>
-          <Button variant='text' onClick={handleSelect} autoFocus>
+          <Button variant='text' onClick={handleSelect} className={classes.select}>
             {t('dropPhoto.select')}
           </Button>
         </div>

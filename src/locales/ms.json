@@ -90,8 +90,8 @@
     "close": "Tutup"
   },
   "dropPhoto": {
-    "dropHere": "Lepaskan foto di sini untuk memilihnya.",
-    "title": "Adakah anda pasti mahu memilih foto ini?",
+    "dropHere": "Lepaskan foto untuk memilihnya.",
+    "title": "Adakah anda pasti mahu memilih foto di bawah?",
     "cancel": "Batal",
     "select": "Pilih"
   },

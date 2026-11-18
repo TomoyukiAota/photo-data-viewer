@@ -90,8 +90,8 @@
     "close": "Închide"
   },
   "dropPhoto": {
-    "dropHere": "Plasați poza aici pentru a o selecta.",
-    "title": "Sigur doriți să selectați această poză?",
+    "dropHere": "Plasați poza pentru a o selecta.",
+    "title": "Sigur doriți să selectați poza de mai jos?",
     "cancel": "Anulează",
     "select": "Selectează"
   },
