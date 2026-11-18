@@ -992,7 +992,9 @@ test('a photo whose GPS values are empty is shown without a location', async ({
  * Checks the three buttons beside the numbers of the latitude and the
  * longitude of the photo loaded: each is all in the window, beside the
  * numbers on the side where a line ends (the left, in a language written
- * from right to left), and none covers another. Returns their boxes.
+ * from right to left), and none covers another. They are seen in the order
+ * of the page, which the keyboard follows: each comes after the one before
+ * it on the same line, or on a line below it. Returns their boxes.
  */
 async function expectButtonsBesideNumbers(page, { rightToLeft = false } = {}) {
   const row = page.getByText('37.332558', { exact: true }).locator('xpath=..');
@@ -1023,10 +1025,22 @@ async function expectButtonsBesideNumbers(page, { rightToLeft = false } = {}) {
   boxes.forEach((a, i) =>
     boxes.slice(i + 1).forEach((b) => expect(overlap(a, b)).toBe(false)),
   );
+  boxes.slice(1).forEach((b, i) => {
+    const a = boxes[i];
+    if (b.y < a.y + a.height && a.y < b.y + b.height) {
+      if (rightToLeft) {
+        expect(b.x + b.width).toBeLessThanOrEqual(a.x);
+      } else {
+        expect(b.x).toBeGreaterThanOrEqual(a.x + a.width);
+      }
+    } else {
+      expect(b.y).toBeGreaterThanOrEqual(a.y + a.height);
+    }
+  });
   return boxes;
 }
 
-test('the buttons beside the coordinates are on one line, and the Google Earth button opens the place, which the usage data does not record', async ({
+test('the buttons beside the coordinates are on one line, in the order that the keyboard follows, and the Google Earth button opens the place, which the usage data does not record', async ({
   page,
   context,
 }) => {
@@ -1041,6 +1055,18 @@ test('the buttons beside the coordinates are on one line, and the Google Earth b
     (box) => box.y + box.height / 2,
   );
   expect(Math.max(...centres) - Math.min(...centres)).toBeLessThanOrEqual(1);
+  // Google Maps, Google Earth and Google Street View, from one to the next
+  // with Tab.
+  const names = [
+    'Show in Google Maps',
+    'Show in Google Earth',
+    'Show in Google Street View',
+  ];
+  await page.getByRole('button', { name: names[0], exact: true }).focus();
+  for (const name of names.slice(1)) {
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name, exact: true })).toBeFocused();
+  }
 
   const opened = page.waitForEvent('popup');
   await page
