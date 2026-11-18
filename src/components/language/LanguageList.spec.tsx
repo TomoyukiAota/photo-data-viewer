@@ -369,6 +369,33 @@ describe('the search field', () => {
     fireEvent.click(option('日本語'));
     expect(onChoose.mock.calls).toEqual([['ja']]);
   });
+
+  // As in Photo Location Map's dialog and its website's box.
+  it('moves the focus into the list with the down arrow, to the entry that the Tab key reaches', () => {
+    renderList('ja');
+    fireEvent.keyDown(searchField(), { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(option('日本語'));
+
+    search('deu');
+    fireEvent.keyDown(searchField(), { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(option('Deutsch'));
+  });
+
+  it("chooses the first language that the search finds with Enter, rather than the browser's entry, which has a language's name too", () => {
+    const { onChoose } = renderList('ja');
+    search('english');
+    expect(labels()).toEqual(['Use browser setting (English)', 'English']);
+    fireEvent.keyDown(searchField(), { key: 'Enter' });
+    expect(onChoose.mock.calls).toEqual([['en']]);
+  });
+
+  it('chooses nothing with Enter while nothing is typed, or nothing is found', () => {
+    const { onChoose } = renderList('ja');
+    fireEvent.keyDown(searchField(), { key: 'Enter' });
+    search('zzz');
+    fireEvent.keyDown(searchField(), { key: 'Enter' });
+    expect(onChoose).not.toHaveBeenCalled();
+  });
 });
 
 describe('when the page opens', () => {

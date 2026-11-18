@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Ustawienia",
     "language": "Język (Language)",
+    "layout": "Układ",
     "about": "Informacje",
     "credits": "Podziękowania"
   },
@@ -36,8 +37,6 @@
       "photo": "Zdjęcie"
     },
     "layout": {
-      "buttonLabel": "układ",
-      "label": "UKŁAD",
       "auto": "Automatyczny",
       "autoDescription": "Podzielone okienka w szerokim oknie, jedno okienko w wąskim",
       "splitPanes": "Podzielone okienka",

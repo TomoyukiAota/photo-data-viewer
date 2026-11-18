@@ -6,6 +6,7 @@
     "demo": "Predstavitev",
     "settings": "Nastavitve",
     "language": "Jezik (Language)",
+    "layout": "Postavitev",
     "about": "O aplikaciji",
     "credits": "Zasluge"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotografija"
     },
     "layout": {
-      "buttonLabel": "postavitev",
-      "label": "POSTAVITEV",
       "auto": "Samodejno",
       "autoDescription": "Razdeljena podokna v širokem oknu, eno podokno v ozkem",
       "splitPanes": "Razdeljena podokna",

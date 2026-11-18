@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Pengaturan",
     "language": "Bahasa (Language)",
+    "layout": "Tata letak",
     "about": "Tentang",
     "credits": "Kredit"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "tata letak",
-      "label": "TATA LETAK",
       "auto": "Otomatis",
       "autoDescription": "Panel terbagi di jendela yang lebar, satu panel di jendela yang sempit",
       "splitPanes": "Panel terbagi",

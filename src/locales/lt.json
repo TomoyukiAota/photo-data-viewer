@@ -6,6 +6,7 @@
     "demo": "Demonstracija",
     "settings": "Nustatymai",
     "language": "Kalba (Language)",
+    "layout": "Išdėstymas",
     "about": "Apie programą",
     "credits": "Padėkos"
   },
@@ -36,8 +37,6 @@
       "photo": "Nuotrauka"
     },
     "layout": {
-      "buttonLabel": "išdėstymas",
-      "label": "IŠDĖSTYMAS",
       "auto": "Automatinis",
       "autoDescription": "Padalytos sritys plačiame lange, viena sritis siaurame",
       "splitPanes": "Padalytos sritys",

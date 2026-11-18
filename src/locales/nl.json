@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Instellingen",
     "language": "Taal (Language)",
+    "layout": "Indeling",
     "about": "Over",
     "credits": "Credits"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "indeling",
-      "label": "INDELING",
       "auto": "Automatisch",
       "autoDescription": "Gesplitste deelvensters in een breed venster, één deelvenster in een smal venster",
       "splitPanes": "Gesplitste deelvensters",

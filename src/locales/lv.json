@@ -6,6 +6,7 @@
     "demo": "Demonstrācija",
     "settings": "Iestatījumi",
     "language": "Valoda (Language)",
+    "layout": "Izkārtojums",
     "about": "Par lietotni",
     "credits": "Pateicības"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotoattēls"
     },
     "layout": {
-      "buttonLabel": "izkārtojums",
-      "label": "IZKĀRTOJUMS",
       "auto": "Automātiski",
       "autoDescription": "Sadalītas rūtis platā logā, viena rūts šaurā",
       "splitPanes": "Sadalītas rūtis",

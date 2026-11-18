@@ -6,6 +6,7 @@
     "demo": "데모",
     "settings": "설정",
     "language": "언어 (Language)",
+    "layout": "레이아웃",
     "about": "정보",
     "credits": "크레딧"
   },
@@ -36,8 +37,6 @@
       "photo": "사진"
     },
     "layout": {
-      "buttonLabel": "레이아웃",
-      "label": "레이아웃",
       "auto": "자동",
       "autoDescription": "창이 넓으면 분할 창, 좁으면 단일 창",
       "splitPanes": "분할 창",

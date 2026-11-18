@@ -170,3 +170,82 @@ $search-icon-gap: 8px; // Between the icon and the field's edge, and its text.
     padding: 0;
   }
 }
+
+// TL;DR: The list in the box of the language's button of the Home page's
+// header (LanguagePicker), which looks as the box of Photo Location Map's
+// website does: its sizes and colors are that box's.
+// Details: Rounded corners, the website's blue for the chosen entry, and a
+// box of seven entries and a half, which shrinks with what the search leaves:
+// nothing is under it that would move. Half an entry at the box's edge shows
+// that the list goes on, where the browser hides its scrollbar.
+.popup {
+  $popup-border: 1px solid #ced4da;
+  $popup-primary: #0d6efd;
+
+  .search {
+    border: $popup-border;
+    border-radius: 4px;
+    padding: 6px 10px;
+    padding-inline-end: $search-icon-gap + $search-icon-size + $search-icon-gap;
+
+    &::placeholder {
+      color: #6c757d;
+    }
+
+    &:focus-visible {
+      outline-color: $popup-primary;
+      outline-offset: -1px;
+    }
+  }
+
+  .search-icon {
+    color: #6c757d;
+  }
+
+  .box {
+    height: auto;
+    border: $popup-border;
+    border-radius: 4px;
+    overflow: hidden; // The entries keep inside the rounded corners.
+  }
+
+  .languages {
+    max-height: 7.5 * $row-height;
+    // The scrollbar's room is kept, so that the box is as wide as the widest
+    // entry beside it needs, and stays so while the search lists fewer.
+    scrollbar-gutter: stable;
+
+    &::-webkit-scrollbar-track {
+      background: #f1f3f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-color: #f1f3f5;
+    }
+  }
+
+  .language {
+    padding: 6px 10px;
+
+    &:hover {
+      background: #f1f3f5;
+    }
+
+    &[aria-selected='true'] {
+      background: $popup-primary;
+    }
+
+    &:focus-visible {
+      outline-color: $popup-primary;
+    }
+
+    &[aria-selected='true']:focus-visible {
+      outline-color: white;
+    }
+  }
+
+  .no-languages {
+    padding: 6px 10px;
+    color: #6c757d;
+  }
+}

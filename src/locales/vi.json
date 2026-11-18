@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Cài đặt",
     "language": "Ngôn ngữ (Language)",
+    "layout": "Bố trí",
     "about": "Giới thiệu",
     "credits": "Ghi công"
   },
@@ -36,8 +37,6 @@
       "photo": "Ảnh"
     },
     "layout": {
-      "buttonLabel": "bố trí",
-      "label": "BỐ TRÍ",
       "auto": "Tự động",
       "autoDescription": "Chia ngăn khi cửa sổ rộng, một ngăn khi cửa sổ hẹp",
       "splitPanes": "Chia ngăn",

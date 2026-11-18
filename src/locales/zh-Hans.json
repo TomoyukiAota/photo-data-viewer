@@ -6,6 +6,7 @@
     "demo": "演示",
     "settings": "设置",
     "language": "语言 (Language)",
+    "layout": "布局",
     "about": "关于",
     "credits": "致谢"
   },
@@ -36,8 +37,6 @@
       "photo": "照片"
     },
     "layout": {
-      "buttonLabel": "布局",
-      "label": "布局",
       "auto": "自动",
       "autoDescription": "窗口较宽时拆分窗格，较窄时使用单个窗格",
       "splitPanes": "拆分窗格",

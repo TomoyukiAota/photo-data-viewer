@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Postavke",
     "language": "Jezik (Language)",
+    "layout": "Raspored",
     "about": "O aplikaciji",
     "credits": "Zasluge"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotografija"
     },
     "layout": {
-      "buttonLabel": "raspored",
-      "label": "RASPORED",
       "auto": "Automatski",
       "autoDescription": "Podijeljena okna u širokom prozoru, jedno okno u uskom",
       "splitPanes": "Podijeljena okna",

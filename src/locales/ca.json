@@ -6,6 +6,7 @@
     "demo": "Demostració",
     "settings": "Configuració",
     "language": "Idioma (Language)",
+    "layout": "Disposició",
     "about": "Quant a",
     "credits": "Crèdits"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "disposició",
-      "label": "DISPOSICIÓ",
       "auto": "Automàtica",
       "autoDescription": "Subfinestres dividides en una finestra ampla, una sola subfinestra en una d’estreta",
       "splitPanes": "Subfinestres dividides",

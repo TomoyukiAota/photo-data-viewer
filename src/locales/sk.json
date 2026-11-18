@@ -6,6 +6,7 @@
     "demo": "Ukážka",
     "settings": "Nastavenia",
     "language": "Jazyk (Language)",
+    "layout": "Rozloženie",
     "about": "O aplikácii",
     "credits": "Poďakovanie"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotka"
     },
     "layout": {
-      "buttonLabel": "rozloženie",
-      "label": "ROZLOŽENIE",
       "auto": "Automaticky",
       "autoDescription": "Rozdelené tably v širokom okne, jedna tabla v úzkom",
       "splitPanes": "Rozdelené tably",

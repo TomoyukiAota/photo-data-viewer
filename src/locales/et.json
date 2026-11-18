@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Seaded",
     "language": "Keel (Language)",
+    "layout": "Paigutus",
     "about": "Teave",
     "credits": "Tänuavaldused"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "paigutus",
-      "label": "PAIGUTUS",
       "auto": "Automaatne",
       "autoDescription": "Jagatud paanid laias aknas, üks paan kitsas",
       "splitPanes": "Jagatud paanid",

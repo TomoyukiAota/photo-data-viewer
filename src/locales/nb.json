@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Innstillinger",
     "language": "Språk (Language)",
+    "layout": "Oppsett",
     "about": "Om",
     "credits": "Kreditering"
   },
@@ -36,8 +37,6 @@
       "photo": "Bilde"
     },
     "layout": {
-      "buttonLabel": "oppsett",
-      "label": "OPPSETT",
       "auto": "Automatisk",
       "autoDescription": "Delte ruter i et bredt vindu, én rute i et smalt",
       "splitPanes": "Delte ruter",

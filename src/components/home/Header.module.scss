@@ -22,21 +22,24 @@
   overflow-wrap: anywhere; // A word wider than the header continues on the next line.
 }
 
-// TL;DR: The layout's button (LayoutMenu), before the menu's button, and at
-// its height.
+// TL;DR: The end of the header: the language's button (LanguagePicker), and
+// the room for the menu's button, beside which it is in the middle of that
+// button's height.
 // Details: The menu's button lies over the header 30 pixels below the
 // window's top (AppMenu.tsx), and stays there when the header grows with its
 // texts; the texts are in the middle of the header's height. 10 of the 30
-// pixels are the header's padding. The word under each button's icon may
-// reach the button's edges, as IZKĀRTOJUMS and IZVĒLNE do in Latvian: the
-// space between the two buttons keeps the two words apart.
-.layout-menu {
+// pixels are the header's padding. The room is as high as the menu's button
+// in every language, so the language's button is in the middle of it. The
+// space before them leaves "Wybierz zdjęcie", the button under the Polish
+// sentence, on one line at 320 pixels.
+.end {
   flex: none;
   align-self: flex-start;
   display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 30px - 10px;
-  margin-inline-start: 26px;
-  margin-inline-end: 8px;
+  margin-inline-start: 16px;
 }
 
 .text {

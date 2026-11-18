@@ -6,6 +6,7 @@
     "demo": "デモ",
     "settings": "設定",
     "language": "言語 (Language)",
+    "layout": "レイアウト",
     "about": "このアプリについて",
     "credits": "クレジット"
   },
@@ -36,8 +37,6 @@
       "photo": "写真"
     },
     "layout": {
-      "buttonLabel": "レイアウト",
-      "label": "レイアウト",
       "auto": "自動",
       "autoDescription": "ウィンドウが広いときは表示領域を分割し、狭いときは分割しない",
       "splitPanes": "表示領域を分割する",

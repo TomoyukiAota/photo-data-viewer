@@ -6,6 +6,7 @@
     "demo": "डेमो",
     "settings": "सेटिंग",
     "language": "भाषा (Language)",
+    "layout": "लेआउट",
     "about": "परिचय",
     "credits": "श्रेय"
   },
@@ -36,8 +37,6 @@
       "photo": "फ़ोटो"
     },
     "layout": {
-      "buttonLabel": "लेआउट",
-      "label": "लेआउट",
       "auto": "स्वचालित",
       "autoDescription": "चौड़ी विंडो में विभाजित फलक, और संकरी विंडो में एकल फलक",
       "splitPanes": "विभाजित फलक",

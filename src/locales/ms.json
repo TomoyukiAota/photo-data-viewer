@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Tetapan",
     "language": "Bahasa (Language)",
+    "layout": "Tataletak",
     "about": "Perihal",
     "credits": "Kredit"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "tataletak",
-      "label": "TATALETAK",
       "auto": "Automatik",
       "autoDescription": "Anak tetingkap berpisah dalam tetingkap yang lebar, satu anak tetingkap dalam tetingkap yang sempit",
       "splitPanes": "Anak tetingkap berpisah",
