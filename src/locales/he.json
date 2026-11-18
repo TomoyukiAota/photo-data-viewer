@@ -6,6 +6,7 @@
     "demo": "הדגמה",
     "settings": "הגדרות",
     "language": "שפה (Language)",
+    "layout": "פריסה",
     "about": "אודות",
     "credits": "קרדיטים"
   },
@@ -36,8 +37,6 @@
       "photo": "תמונה"
     },
     "layout": {
-      "buttonLabel": "פריסה",
-      "label": "פריסה",
       "auto": "אוטומטית",
       "autoDescription": "חלוניות מפוצלות בחלון רחב, וחלונית אחת בחלון צר",
       "splitPanes": "חלוניות מפוצלות",

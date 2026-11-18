@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Setări",
     "language": "Limbă (Language)",
+    "layout": "Aspect",
     "about": "Despre",
     "credits": "Credite"
   },
@@ -36,8 +37,6 @@
       "photo": "Poză"
     },
     "layout": {
-      "buttonLabel": "aspect",
-      "label": "ASPECT",
       "auto": "Automat",
       "autoDescription": "Panouri împărțite într-o fereastră lată, un singur panou într-una îngustă",
       "splitPanes": "Panouri împărțite",

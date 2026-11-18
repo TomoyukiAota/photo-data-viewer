@@ -6,6 +6,7 @@
     "demo": "示範",
     "settings": "設定",
     "language": "語言 (Language)",
+    "layout": "版面配置",
     "about": "關於",
     "credits": "致謝"
   },
@@ -36,8 +37,6 @@
       "photo": "照片"
     },
     "layout": {
-      "buttonLabel": "版面配置",
-      "label": "版面配置",
       "auto": "自動",
       "autoDescription": "視窗較寬時分割窗格，較窄時使用單一窗格",
       "splitPanes": "分割窗格",

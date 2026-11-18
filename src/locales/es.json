@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Ajustes",
     "language": "Idioma (Language)",
+    "layout": "Diseño",
     "about": "Acerca de",
     "credits": "Créditos"
   },
@@ -36,8 +37,6 @@
       "photo": "Foto"
     },
     "layout": {
-      "buttonLabel": "diseño",
-      "label": "DISEÑO",
       "auto": "Automático",
       "autoDescription": "Paneles divididos en una ventana ancha, panel único en una estrecha",
       "splitPanes": "Paneles divididos",

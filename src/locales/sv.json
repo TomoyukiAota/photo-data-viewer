@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Inställningar",
     "language": "Språk (Language)",
+    "layout": "Layout",
     "about": "Om",
     "credits": "Erkännanden"
   },
@@ -36,8 +37,6 @@
       "photo": "Bild"
     },
     "layout": {
-      "buttonLabel": "layout",
-      "label": "LAYOUT",
       "auto": "Automatiskt",
       "autoDescription": "Delade rutor i ett brett fönster, en enda ruta i ett smalt",
       "splitPanes": "Delade rutor",

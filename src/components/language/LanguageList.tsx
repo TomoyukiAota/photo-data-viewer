@@ -64,6 +64,13 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * in, or its code. The chosen entry stays chosen while the search hides it.
  */
 const LanguageList: React.FC<{
+  /**
+   * How the list looks: as the list of Photo Location Map's dialog on the
+   * Language page, or as the box of the language's button of Photo Location
+   * Map's website, in the language's button of the Home page's header
+   * (LanguagePicker).
+   */
+  look?: 'page' | 'popup';
   /** The Language setting that is chosen in the list. */
   selected: LanguageSetting;
   /**
@@ -75,7 +82,7 @@ const LanguageList: React.FC<{
   canChooseSelected?: boolean;
   /** Called with the entry the user chose, unless it is the chosen one already and that is no choice. */
   onChoose: (setting: LanguageSetting) => void;
-}> = ({ selected, canChooseSelected = false, onChoose }) => {
+}> = ({ look = 'page', selected, canChooseSelected = false, onChoose }) => {
   const { t, i18n } = useTranslation();
   const listId = useId();
   const listRef = useRef<HTMLUListElement>(null);
@@ -161,6 +168,35 @@ const LanguageList: React.FC<{
     if (setting !== selected || canChooseSelected) onChoose(setting);
   };
 
+  // TL;DR: From the search field, the down arrow goes into the list, and
+  // Enter chooses the first language that the search finds.
+  // Details: As in Photo Location Map's dialog and its website's box, for a
+  // user who types the name of a language and presses Enter, or goes on with
+  // the arrow keys. The first entry, which follows the browser, has a
+  // language's name in it too, and is chosen so only when the search finds
+  // no language.
+  const handleSearchKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (listed.length === 0) return;
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const index = listed.findIndex((item) => item.setting === tabStop);
+      focusEntry(Math.max(index, 0));
+    } else if (
+      event.key === 'Enter' &&
+      search.trim() !== '' &&
+      !event.nativeEvent.isComposing
+    ) {
+      event.preventDefault();
+      const first =
+        listed.find((item) => item.setting !== languageSettingAuto) ??
+        listed[0];
+      choose(first.setting);
+    }
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     const setting = (event.target as HTMLElement).dataset.setting;
@@ -207,7 +243,9 @@ const LanguageList: React.FC<{
   };
 
   return (
-    <div className={classes.container}>
+    <div
+      className={`${classes.container} ${look === 'popup' ? classes.popup : ''}`}
+    >
       <div className={classes['search-field']}>
         <input
           ref={searchRef}
@@ -215,6 +253,7 @@ const LanguageList: React.FC<{
           className={classes.search}
           value={search}
           onChange={(event) => setSearch(event.target.value)}
+          onKeyDown={handleSearchKeyDown}
           placeholder={t('language.search')}
           aria-label={t('language.search')}
           aria-controls={listId}

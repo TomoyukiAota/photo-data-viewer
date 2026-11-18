@@ -6,6 +6,7 @@
     "demo": "Demó",
     "settings": "Beállítások",
     "language": "Nyelv (Language)",
+    "layout": "Elrendezés",
     "about": "Névjegy",
     "credits": "Köszönetnyilvánítás"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotó"
     },
     "layout": {
-      "buttonLabel": "elrendezés",
-      "label": "ELRENDEZÉS",
       "auto": "Automatikus",
       "autoDescription": "Széles ablakban felosztott ablaktáblák, keskeny ablakban egy ablaktábla",
       "splitPanes": "Felosztott ablaktáblák",

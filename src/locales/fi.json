@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Asetukset",
     "language": "Kieli (Language)",
+    "layout": "Asettelu",
     "about": "Tietoja",
     "credits": "Tekijät"
   },
@@ -36,8 +37,6 @@
       "photo": "Kuva"
     },
     "layout": {
-      "buttonLabel": "asettelu",
-      "label": "ASETTELU",
       "auto": "Automaattinen",
       "autoDescription": "Jaetut ruudut leveässä ikkunassa, yksi ruutu kapeassa",
       "splitPanes": "Jaetut ruudut",

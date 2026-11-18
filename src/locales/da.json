@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Indstillinger",
     "language": "Sprog (Language)",
+    "layout": "Layout",
     "about": "Om",
     "credits": "Kreditering"
   },
@@ -36,8 +37,6 @@
       "photo": "Billede"
     },
     "layout": {
-      "buttonLabel": "layout",
-      "label": "LAYOUT",
       "auto": "Automatisk",
       "autoDescription": "Opdelte ruder i et bredt vindue, én rude i et smalt",
       "splitPanes": "Opdelte ruder",

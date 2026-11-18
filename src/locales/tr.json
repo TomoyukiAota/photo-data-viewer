@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Ayarlar",
     "language": "Dil (Language)",
+    "layout": "Düzen",
     "about": "Hakkında",
     "credits": "Emeği Geçenler"
   },
@@ -36,8 +37,6 @@
       "photo": "Fotoğraf"
     },
     "layout": {
-      "buttonLabel": "düzen",
-      "label": "DÜZEN",
       "auto": "Otomatik",
       "autoDescription": "Geniş pencerede bölünmüş bölmeler, dar pencerede tek bölme",
       "splitPanes": "Bölünmüş bölmeler",

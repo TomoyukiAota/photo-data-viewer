@@ -6,6 +6,7 @@
     "demo": "Demoa",
     "settings": "Ezarpenak",
     "language": "Hizkuntza (Language)",
+    "layout": "Diseinua",
     "about": "Honi buruz",
     "credits": "Kredituak"
   },
@@ -36,8 +37,6 @@
       "photo": "Argazkia"
     },
     "layout": {
-      "buttonLabel": "diseinua",
-      "label": "DISEINUA",
       "auto": "Automatikoa",
       "autoDescription": "Panel zatituak leiho zabal batean, panel bakarra leiho estu batean",
       "splitPanes": "Panel zatituak",

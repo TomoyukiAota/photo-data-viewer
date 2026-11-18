@@ -6,6 +6,7 @@
     "demo": "Demo",
     "settings": "Settings",
     "language": "Language",
+    "layout": "Layout",
     "about": "About",
     "credits": "Credits"
   },
@@ -36,8 +37,6 @@
       "photo": "Photo"
     },
     "layout": {
-      "buttonLabel": "layout",
-      "label": "LAYOUT",
       "auto": "Automatic",
       "autoDescription": "Split panes in a wide window, a single pane in a narrow one",
       "splitPanes": "Split panes",

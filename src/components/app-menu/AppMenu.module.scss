@@ -1,6 +1,5 @@
-// TL;DR: The face of a button of the header (HeaderButtonFace): an icon with
-// a word under it, such as the word for a menu. The button is as wide and as
-// high as the word needs, and never smaller than it is in English.
+// TL;DR: The icon with the word for a menu under it. The button is as wide
+// and as high as the word needs, and never smaller than it is in English.
 // Details: The word differs in length from language to language (MENU,
 // メニュー, IZBORNIK). It may reach into the button's padding, as メニュー always
 // has, so the button keeps its size up to a word as wide as the button, and
