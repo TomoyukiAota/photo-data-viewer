@@ -63,15 +63,15 @@ Checked on 2026-11-18, from the sources linked below.
 
 1. **The manifest**, `public/manifest.webmanifest`:
 
-   | Member               | Value                                       | Why                                                                                |
-   | -------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------- |
-   | `id`                 | `/`                                         | The app's identity, which stays the same if `start_url` changes one day.           |
-   | `name`               | Photo Data Viewer                           | The app's name, the same in every language.                                        |
-   | `start_url`, `scope` | `/`                                         | It opens on the Home page, and every page of the app stays in its window.          |
-   | `display`            | `standalone`                                | A window of its own, without the browser's tabs and address bar.                   |
-   | `background_color`   | `#ffffff`                                   | The window before the page is drawn, which is white.                               |
-   | `theme_color`        | `#ffffff`                                   | The window's title bar, in the white of the app's header, so that the two are one. |
-   | `icons`              | 192 and 512 pixels, and the same `maskable` | The icon where it is shown as it is, and where the system cuts it to its shape.    |
+   | Member               | Value                                       | Why                                                                                  |
+   | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
+   | `id`                 | `/`                                         | The app's identity, which stays the same if `start_url` changes one day.             |
+   | `name`               | Photo Data Viewer                           | The app's name, the same in every language.                                          |
+   | `start_url`, `scope` | `/`                                         | It opens on the Home page, and every page of the app stays in its window.            |
+   | `display`            | `standalone`                                | A window of its own, without the browser's tabs and address bar.                     |
+   | `background_color`   | `#ffffff`                                   | The window before the page is drawn, which is white.                                 |
+   | `theme_color`        | `#ffffff`                                   | The window's title bar, in the white of the app's header; dark in dark mode (below). |
+   | `icons`              | 192 and 512 pixels, and the same `maskable` | The icon where it is shown as it is, and where the system cuts it to its shape.      |
 
    The app's own menu goes to every page, so the window needs no back button.
    Links to other sites (GitHub, Google Maps) open in the browser, as they open
@@ -129,6 +129,29 @@ which is not the app's. With the new one, the tab, the bookmarks and the
 installed app show the same icon. Both deployments serve the same `public`
 folder, so Photo Location Map's has the new favicon too; its window does not
 show one.
+
+## The title bar in dark mode
+
+Added after the app was deployed. Under macOS's dark mode, the installed
+app's window was light with the manifest's white `theme_color`, and so was
+the file dialog that "Select Photo" opens in it, which is dark in a tab: the
+owner found it so. Chrome colors the installed app's title bar with the page's
+`<meta name="theme-color">`, in place of the manifest's `theme_color`
+([`AppBrowserController::GetThemeColor`](https://chromium.googlesource.com/chromium/src/+/main/chrome/browser/ui/web_applications/app_browser_controller.cc)),
+and it takes a `media` attribute for each color scheme.
+
+`src/pages/_document.tsx` gives two, in the standalone deployment alone:
+
+| `media`                         | Color     | Why                                                                                    |
+| ------------------------------- | --------- | -------------------------------------------------------------------------------------- |
+| `(prefers-color-scheme: light)` | `#ffffff` | As before: the white of the app's header.                                              |
+| `(prefers-color-scheme: dark)`  | `#202124` | Chrome's own dark gray (`kGoogleGrey900`), as the browser around the page is in a tab. |
+
+In dark mode the title bar is then dark, with the page white under it, as the
+page is in a tab, and the window and its file dialog are meant to be dark with
+it, which only a window shows ([STATUS.md](./STATUS.md#resuming)). The page
+itself has no dark mode. Safari takes the same colors for its tab bar, and
+Chrome on Android for its address bar.
 
 ## Working offline
 

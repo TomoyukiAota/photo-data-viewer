@@ -434,6 +434,26 @@ test('Chrome offers to install the app, with its name and icons', async ({
   }
 });
 
+// The page's theme-color, which Chrome takes for the installed app's title bar
+// in place of the manifest's, and with it whether the window and its file
+// dialog are light or dark.
+test("the installed app's title bar is white, and dark when the system is dark", async ({
+  page,
+}) => {
+  await page.goto('/');
+  const themeColor = () =>
+    page.evaluate(
+      () =>
+        [...document.querySelectorAll('meta[name=theme-color]')].find(
+          (meta) => matchMedia(meta.media).matches,
+        )?.content,
+    );
+  await page.emulateMedia({ colorScheme: 'light' });
+  expect(await themeColor()).toBe('#ffffff');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  expect(await themeColor()).toBe('#202124');
+});
+
 test('photo values, tabs, rotation, splitter persistence, and navigation', async ({
   page,
 }) => {

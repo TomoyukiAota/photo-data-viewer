@@ -28,11 +28,27 @@ export default function Document({ locale }: DocumentProps) {
             opens in a window of its own; Safari's Add to Dock and Add to Home Screen read it too. The
             icon for iPhone and iPad is apple-touch-icon (docs/tasks/20261118_installable-app). The
             deployment in Photo Location Map, built with PDV_IN_PLM=True, is shown in that
-            application's window, and has neither. */}
+            application's window, and has none of these. */}
         {process.env.PDV_IN_PLM !== 'True' && (
           <>
             <link rel='manifest' href='/manifest.webmanifest' />
             <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+            {/* TL;DR: The installed app's title bar is white, and dark when the system is dark.
+                Details: Chrome colors the installed app's title bar with the page's theme-color, in
+                place of the manifest's theme_color. With the manifest's white alone, the window was
+                light under macOS's dark mode, and so was its file dialog, which is dark in a tab. In
+                dark mode the title bar is Chrome's own dark gray, as the browser around the page is
+                in a tab, so that the window and its dialogs are dark as well. */}
+            <meta
+              name='theme-color'
+              media='(prefers-color-scheme: light)'
+              content='#ffffff'
+            />
+            <meta
+              name='theme-color'
+              media='(prefers-color-scheme: dark)'
+              content='#202124'
+            />
           </>
         )}
         {/* Google Analytics. When usage data is turned off in Settings (src/analytics/opt-out.ts),
