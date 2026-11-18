@@ -93,7 +93,10 @@
     "dropHere": "Déposez la photo pour la sélectionner.",
     "title": "Voulez-vous vraiment sélectionner la photo ci-dessous\u00a0?",
     "cancel": "Annuler",
-    "select": "Sélectionner"
+    "select": "Sélectionner",
+    "hintButton": "À propos du glisser-déposer",
+    "hintFinder": "Vous pouvez aussi sélectionner un fichier en le faisant glisser depuis le Finder.",
+    "hintFileExplorer": "Vous pouvez aussi sélectionner un fichier en le faisant glisser depuis l’Explorateur de fichiers."
   },
   "pageNotShown": {
     "message": "Une erreur s’est produite et cette page ne peut pas être affichée.",

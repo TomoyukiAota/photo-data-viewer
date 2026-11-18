@@ -93,7 +93,10 @@
     "dropHere": "Largue a fotografia para a selecionar.",
     "title": "Tem a certeza de que pretende selecionar a fotografia abaixo?",
     "cancel": "Cancelar",
-    "select": "Selecionar"
+    "select": "Selecionar",
+    "hintButton": "Acerca de arrastar e largar",
+    "hintFinder": "Também pode selecionar um ficheiro arrastando-o e largando-o a partir do Finder.",
+    "hintFileExplorer": "Também pode selecionar um ficheiro arrastando-o e largando-o a partir do Explorador de Ficheiros."
   },
   "pageNotShown": {
     "message": "Ocorreu um problema e esta página não pode ser apresentada.",

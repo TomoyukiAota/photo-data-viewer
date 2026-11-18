@@ -93,7 +93,10 @@
     "dropHere": "Släpp bilden för att välja den.",
     "title": "Vill du verkligen välja bilden nedan?",
     "cancel": "Avbryt",
-    "select": "Välj"
+    "select": "Välj",
+    "hintButton": "Om dra och släpp",
+    "hintFinder": "Du kan också välja en fil genom att dra och släppa den från Finder.",
+    "hintFileExplorer": "Du kan också välja en fil genom att dra och släppa den från Utforskaren."
   },
   "pageNotShown": {
     "message": "Något gick fel och den här sidan kan inte visas.",

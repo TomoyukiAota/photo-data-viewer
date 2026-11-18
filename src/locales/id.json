@@ -93,7 +93,10 @@
     "dropHere": "Lepaskan foto untuk memilihnya.",
     "title": "Apakah Anda yakin ingin memilih foto di bawah ini?",
     "cancel": "Batal",
-    "select": "Pilih"
+    "select": "Pilih",
+    "hintButton": "Tentang seret dan lepas",
+    "hintFinder": "Anda juga dapat memilih file dengan menyeret dan melepaskannya dari Finder.",
+    "hintFileExplorer": "Anda juga dapat memilih file dengan menyeret dan melepaskannya dari File Explorer."
   },
   "pageNotShown": {
     "message": "Terjadi kesalahan, dan halaman ini tidak dapat ditampilkan.",

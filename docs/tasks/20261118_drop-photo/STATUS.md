@@ -6,12 +6,14 @@ decisions, and the [results](./evidence/RESULTS.md).
 
 After the merge, the maintainer tried the dialog and changed its buttons and
 the English and Japanese texts:
-[Changed after the merge](#changed-after-the-merge).
+[Changed after the merge](#changed-after-the-merge). Then the maintainer
+asked for a button beside Select Photo that says that a file can be dropped:
+[The button about drag and drop](#the-button-about-drag-and-drop).
 
 ## Current state
 
-Merged on 2026-11-18 as `358465b`. The change after it is on the branch
-`claude/drop-dialog-focus-and-colors`.
+Merged on 2026-11-18 as `358465b`, and the change after it as `7eb33ec`. The
+button about drag and drop is on the branch `claude/drop-hint-button`.
 
 - **A file dropped on any page** of the standalone app is taken
   (`src/components/drop-photo/DropPhoto.tsx`): the browser no longer opens it
@@ -99,6 +101,55 @@ it:
   colors, the focus and the question, and `drop-veil.png` for the English
   text.
 
+## The button about drag and drop
+
+On 2026-11-19 the maintainer asked for a button with an "i" beside Select
+Photo, which opens a box that says that a file can also be dragged from the
+file manager and dropped: from the Finder on macOS, and from File Explorer
+on the other systems, Windows above all
+(`src/components/drop-photo/DropHintButton.tsx`).
+
+- **Where it is**: right beside Select Photo, in the middle of its height,
+  and on the next line where the two do not fit side by side, as in a
+  desktop browser 320 pixels wide in English. It is there only in the
+  standalone app, where the main pointer is a mouse or a trackpad
+  (`(hover: hover) and (pointer: fine)`), and not on an iPad, which says
+  that it is a Mac: a file is dragged from a file manager with a mouse, and
+  Photo Location Map takes no drop.
+- **The box** is a dialog, as the language's box is: under the button, from
+  the edge where its line starts; Escape, a click outside it or on the
+  button closes it, and gives the focus back to the button. The button says
+  that it opens a dialog, and whether it is open. A file dragged into the
+  window closes the box at once, as the page would refuse a drop over a
+  dialog.
+- **The system** is told by `navigator.platform`: a Mac's starts with `Mac`.
+  Every other system, Linux and ChromeOS too, gets File Explorer, as the
+  maintainer asked.
+- **The names**: the Finder is `Finder` in most languages, `访达` in Chinese
+  (Simplified) and `فايندر` in Arabic, as Apple's Mac User Guide writes it in
+  ten of the languages that were looked at. File Explorer is the name that
+  Microsoft's page "File Explorer in Windows" has in the language, in 36
+  languages; Windows keeps the English name in Estonian, Indonesian, Thai
+  and Vietnamese. That page has no Catalan, Galician, Basque, Hindi or Malay
+  version: Catalan and Galician have the names that their speakers use
+  (`Explorador de fitxers`, `Explorador de ficheiros`), Hindi the name
+  written in its script (`फ़ाइल एक्सप्लोरर`), and Basque and Malay the
+  English name ([the names](./evidence/RESULTS.md#the-names-of-the-file-managers)).
+- **Each language has two sentences**, one for each file manager, rather than
+  one with the name put in: many languages give a name another form in a
+  sentence (`Resurssienhallinnasta`, `из Проводника`).
+- **The Japanese texts are the maintainer's words**:
+  `ドラッグアンドドロップについて` for the button, and
+  `Finder からファイルをドラッグアンドドロップして選択することもできます。`.
+  English says "a file" as they do.
+- **Screenshots**: every screenshot of the Home page shows the button, as
+  the browser suite's browser has a mouse: 21 of them changed, by the button
+  alone, or by the line that it takes under Select Photo in English at 320
+  pixels (`home-320.png`, `narrow-loaded.png`, `narrow-photo.png`,
+  `narrow-split-panes.png`). `drop-hint.png` is new: the box, open.
+- **Two tests found the language's button** as the one that opens a dialog,
+  which this one does too: they look for it at the end of the header now.
+
 ## Not verified
 
 - **A real drag from the file manager**, from Windows Explorer above all,
@@ -111,10 +162,16 @@ it:
 - **Photo Location Map**: the Electron suite opens windows and was not run.
   The app listens for nothing there, which the unit test checks.
 - **The 41 translations**: no speaker has read them.
+- **The names of File Explorer in Catalan, Galician, Basque, Hindi and
+  Malay**, which Microsoft's page does not have.
+- **The button on a real Mac and on Windows with a mouse**: the browser
+  suite's browser has a mouse, and its tests say that the system is the one
+  or the other.
 
 ## Resuming
 
-Nothing is pending once the change after the merge is merged. A change of
-the decisions above is in `DropPhoto.tsx` (where a drop is taken, the veil,
-several files), `DropPhotoDialog.tsx` (the dialog) and `track-event.ts`
+Nothing is pending once the button about drag and drop is merged. A change
+of the decisions above is in `DropPhoto.tsx` (where a drop is taken, the
+veil, several files), `DropPhotoDialog.tsx` (the dialog),
+`DropHintButton.tsx` (the button about drag and drop) and `track-event.ts`
 (what is recorded).

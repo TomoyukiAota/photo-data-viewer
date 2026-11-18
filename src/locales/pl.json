@@ -93,7 +93,10 @@
     "dropHere": "Upuść zdjęcie, aby je wybrać.",
     "title": "Czy na pewno chcesz wybrać poniższe zdjęcie?",
     "cancel": "Anuluj",
-    "select": "Wybierz"
+    "select": "Wybierz",
+    "hintButton": "Informacje o przeciąganiu i upuszczaniu",
+    "hintFinder": "Możesz też wybrać plik, przeciągając go z Findera i upuszczając.",
+    "hintFileExplorer": "Możesz też wybrać plik, przeciągając go z Eksploratora plików i upuszczając."
   },
   "pageNotShown": {
     "message": "Coś poszło nie tak i nie można wyświetlić tej strony.",
