@@ -91,8 +91,8 @@
     "close": "Sluit"
   },
   "dropPhoto": {
-    "dropHere": "Zet de foto hier neer om deze te selecteren.",
-    "title": "Weet je zeker dat je deze foto wilt selecteren?",
+    "dropHere": "Zet de foto neer om deze te selecteren.",
+    "title": "Weet je zeker dat je de onderstaande foto wilt selecteren?",
     "cancel": "Annuleer",
     "select": "Selecteer"
   },

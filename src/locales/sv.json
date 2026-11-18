@@ -91,8 +91,8 @@
     "close": "Stäng"
   },
   "dropPhoto": {
-    "dropHere": "Släpp bilden här för att välja den.",
-    "title": "Vill du verkligen välja den här bilden?",
+    "dropHere": "Släpp bilden för att välja den.",
+    "title": "Vill du verkligen välja bilden nedan?",
     "cancel": "Avbryt",
     "select": "Välj"
   },

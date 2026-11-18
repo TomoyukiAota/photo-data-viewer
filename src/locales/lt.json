@@ -91,8 +91,8 @@
     "close": "Uždaryti"
   },
   "dropPhoto": {
-    "dropHere": "Numeskite nuotrauką čia, kad ją pasirinktumėte.",
-    "title": "Ar tikrai norite pasirinkti šią nuotrauką?",
+    "dropHere": "Numeskite nuotrauką, kad ją pasirinktumėte.",
+    "title": "Ar tikrai norite pasirinkti toliau pateiktą nuotrauką?",
     "cancel": "Atšaukti",
     "select": "Pasirinkti"
   },

@@ -91,8 +91,8 @@
     "close": "Sulje"
   },
   "dropPhoto": {
-    "dropHere": "Pudota kuva tähän valitaksesi sen.",
-    "title": "Haluatko varmasti valita tämän kuvan?",
+    "dropHere": "Pudota kuva valitaksesi sen.",
+    "title": "Haluatko varmasti valita alla olevan kuvan?",
     "cancel": "Peruuta",
     "select": "Valitse"
   },

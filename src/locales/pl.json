@@ -91,8 +91,8 @@
     "close": "Zamknij"
   },
   "dropPhoto": {
-    "dropHere": "Upuść zdjęcie tutaj, aby je wybrać.",
-    "title": "Czy na pewno chcesz wybrać to zdjęcie?",
+    "dropHere": "Upuść zdjęcie, aby je wybrać.",
+    "title": "Czy na pewno chcesz wybrać poniższe zdjęcie?",
     "cancel": "Anuluj",
     "select": "Wybierz"
   },
