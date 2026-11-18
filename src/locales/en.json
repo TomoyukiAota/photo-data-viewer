@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "This application fetches EXIF data from your file within your browser, <br/>so the file is kept within your browser and not sent to any servers.",
-    "usageData": "To improve this application, it collects usage information, such as <br/>the pages that are opened, the file format of the loaded photo and <br/>the errors that occurred, along with your IP address and the approximate <br/>location derived from it. You can turn this off in <settingsLink>Settings</settingsLink>.",
+    "usageData": "To improve this application, it collects usage information, such as <br/>the pages that are opened, the time they take to load and respond, <br/>the file format of the loaded photo and the errors that occurred, <br/>along with your IP address and the approximate location derived from it. <br/>You can turn this off in <settingsLink>Settings</settingsLink>.",
     "reportIssues": "If you find any bugs or issues, please submit them in <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "The source code of this application is hosted on <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Translations into other languages are welcome: see <guideLink>how to translate this application</guideLink>.",

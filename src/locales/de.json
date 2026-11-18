@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Diese App liest die EXIF-Daten Ihrer Datei direkt in Ihrem Browser aus. <br/>Die Datei bleibt daher in Ihrem Browser und wird an keinen Server gesendet.",
-    "usageData": "Zur Verbesserung dieser App werden Nutzungsdaten erfasst, etwa <br/>welche Seiten geöffnet werden, welches Dateiformat das geladene Foto hat und <br/>welche Fehler auftreten, zusammen mit Ihrer IP-Adresse und dem daraus <br/>abgeleiteten ungefähren Standort. Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
+    "usageData": "Zur Verbesserung dieser App werden Nutzungsdaten erfasst, etwa <br/>welche Seiten geöffnet werden, wie lange sie zum Laden und Reagieren brauchen, <br/>welches Dateiformat das geladene Foto hat und welche Fehler auftreten, <br/>zusammen mit Ihrer IP-Adresse und dem daraus abgeleiteten ungefähren Standort. <br/>Sie können dies in den <settingsLink>Einstellungen</settingsLink> deaktivieren.",
     "reportIssues": "Wenn Sie Fehler oder Probleme finden, melden Sie diese bitte unter <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Der Quellcode dieser App ist auf <gitHubLink>GitHub</gitHubLink> verfügbar.",
     "translations": "Übersetzungen in andere Sprachen sind willkommen: siehe <guideLink>So übersetzen Sie diese App</guideLink>.",

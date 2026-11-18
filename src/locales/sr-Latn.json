@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Ova aplikacija čita podatke EXIF iz vaše datoteke unutar vašeg pregledača, <br/>pa datoteka ostaje u pregledaču i ne šalje se ni na jedan server.",
-    "usageData": "Radi poboljšanja ove aplikacije prikupljaju se podaci o korišćenju, na primer <br/>koje se stranice otvaraju, koji je format datoteke učitane fotografije i koje su se <br/>greške dogodile, zajedno sa vašom IP adresom i približnom lokacijom <br/>izvedenom iz nje. To možete isključiti u <settingsLink>Podešavanjima</settingsLink>.",
+    "usageData": "Radi poboljšanja ove aplikacije prikupljaju se podaci o korišćenju, na primer <br/>koje se stranice otvaraju, koliko brzo se učitavaju i reaguju, <br/>koji je format datoteke učitane fotografije i koje su se greške dogodile, <br/>zajedno sa vašom IP adresom i približnom lokacijom izvedenom iz nje. <br/>To možete isključiti u <settingsLink>Podešavanjima</settingsLink>.",
     "reportIssues": "Ako pronađete greške ili probleme, prijavite ih na <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Izvorni kôd ove aplikacije nalazi se na <gitHubLink>GitHub-u</gitHubLink>.",
     "translations": "Prevodi na druge jezike su dobrodošli: pogledajte <guideLink>kako prevesti ovu aplikaciju</guideLink>.",

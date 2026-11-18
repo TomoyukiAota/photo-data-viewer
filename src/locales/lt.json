@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Ši programa EXIF duomenis iš jūsų failo nuskaito jūsų naršyklėje, <br/>todėl failas lieka naršyklėje ir nėra siunčiamas į jokius serverius.",
-    "usageData": "Siekiant tobulinti šią programą, renkama naudojimo informacija, pavyzdžiui, <br/>kurie puslapiai atidaromi, kokio failo formato nuotrauka įkelta ir kokios <br/>klaidos įvyko, kartu su jūsų IP adresu ir pagal jį nustatyta apytiksle <br/>vieta. Tai galite išjungti puslapyje <settingsLink>Nustatymai</settingsLink>.",
+    "usageData": "Siekiant tobulinti šią programą, renkama naudojimo informacija, pavyzdžiui, <br/>kurie puslapiai atidaromi, kaip greitai jie įkeliami ir reaguoja, <br/>kokio failo formato nuotrauka įkelta ir kokios klaidos įvyko, <br/>kartu su jūsų IP adresu ir pagal jį nustatyta apytiksle vieta. <br/>Tai galite išjungti puslapyje <settingsLink>Nustatymai</settingsLink>.",
     "reportIssues": "Jei radote klaidų ar problemų, praneškite apie jas puslapyje <issuesLink>„GitHub Issues“</issuesLink>.",
     "sourceCode": "Šios programos pirminis tekstas laikomas platformoje <gitHubLink>„GitHub“</gitHubLink>.",
     "translations": "Vertimai į kitas kalbas yra laukiami: skaitykite, <guideLink>kaip išversti šią programą</guideLink>.",

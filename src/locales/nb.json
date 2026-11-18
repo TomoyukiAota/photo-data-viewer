@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Denne appen henter EXIF-informasjon fra filen din i nettleseren din, <br/>så filen blir værende i nettleseren og sendes ikke til noen servere.",
-    "usageData": "For å forbedre denne appen samles det inn bruksinformasjon, for eksempel <br/>hvilke sider som åpnes, hvilket filformat det innlastede bildet har, og hvilke <br/>feil som oppstår, sammen med IP-adressen din og den omtrentlige <br/>posisjonen som utledes av den. Du kan slå dette av i <settingsLink>Innstillinger</settingsLink>.",
+    "usageData": "For å forbedre denne appen samles det inn bruksinformasjon, for eksempel <br/>hvilke sider som åpnes, hvor raskt de lastes inn og svarer, <br/>hvilket filformat det innlastede bildet har, og hvilke feil som oppstår, <br/>sammen med IP-adressen din og den omtrentlige posisjonen som utledes av den. <br/>Du kan slå dette av i <settingsLink>Innstillinger</settingsLink>.",
     "reportIssues": "Hvis du finner feil eller problemer, kan du melde dem i <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kildekoden til denne appen ligger på <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Oversettelser til andre språk er velkomne: se <guideLink>hvordan du oversetter denne appen</guideLink>.",

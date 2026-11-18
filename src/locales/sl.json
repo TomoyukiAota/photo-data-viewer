@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Ta aplikacija prebere podatke EXIF iz vaše datoteke v vašem brskalniku, <br/>zato datoteka ostane v brskalniku in se ne pošlje na noben strežnik.",
-    "usageData": "Za izboljšanje te aplikacije se zbirajo podatki o uporabi, na primer <br/>katere strani se odpirajo, kakšna je oblika zapisa naložene fotografije in katere <br/>napake so se zgodile, skupaj z vašim naslovom IP in približno lokacijo, <br/>ki je izpeljana iz njega. To lahko izklopite v <settingsLink>Nastavitvah</settingsLink>.",
+    "usageData": "Za izboljšanje te aplikacije se zbirajo podatki o uporabi, na primer <br/>katere strani se odpirajo, kako hitro se naložijo in odzovejo, <br/>kakšna je oblika zapisa naložene fotografije in katere napake so se zgodile, <br/>skupaj z vašim naslovom IP in približno lokacijo, ki je izpeljana iz njega. <br/>To lahko izklopite v <settingsLink>Nastavitvah</settingsLink>.",
     "reportIssues": "Če najdete napake ali težave, jih sporočite v <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Izvorna koda te aplikacije je na voljo na <gitHubLink>GitHubu</gitHubLink>.",
     "translations": "Prevodi v druge jezike so dobrodošli: oglejte si, <guideLink>kako prevesti to aplikacijo</guideLink>.",

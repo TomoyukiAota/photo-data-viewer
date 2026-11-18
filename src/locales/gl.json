@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Esta aplicación obtén os datos EXIF do teu ficheiro dentro do teu navegador, <br/>polo que o ficheiro permanece no navegador e non se envía a ningún servidor.",
-    "usageData": "Para mellorar esta aplicación, recóllese información de uso, como <br/>que páxinas se abren, que formato de ficheiro ten a foto cargada e que <br/>erros se producen, xunto co teu enderezo IP e a localización aproximada <br/>que se deduce del. Podes desactivalo en <settingsLink>Configuración</settingsLink>.",
+    "usageData": "Para mellorar esta aplicación, recóllese información de uso, como <br/>que páxinas se abren, canto tempo tardan en cargar e en responder, <br/>que formato de ficheiro ten a foto cargada e que erros se producen, <br/>xunto co teu enderezo IP e a localización aproximada que se deduce del. <br/>Podes desactivalo en <settingsLink>Configuración</settingsLink>.",
     "reportIssues": "Se atopas erros ou problemas, comunícaos en <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "O código fonte desta aplicación está aloxado en <gitHubLink>GitHub</gitHubLink>.",
     "translations": "As traducións a outros idiomas son benvidas: consulta <guideLink>como traducir esta aplicación</guideLink>.",

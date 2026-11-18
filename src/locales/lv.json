@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Šī lietotne nolasa EXIF datus no jūsu faila jūsu pārlūkprogrammā, <br/>tāpēc fails paliek pārlūkprogrammā un netiek nosūtīts ne uz vienu serveri.",
-    "usageData": "Lai uzlabotu šo lietotni, tiek apkopota lietošanas informācija, piemēram, <br/>kuras lapas tiek atvērtas, kāds ir ielādētā fotoattēla faila formāts un kādas <br/>kļūdas radās, kā arī jūsu IP adrese un no tās izsecinātā aptuvenā <br/>atrašanās vieta. To varat izslēgt lapā <settingsLink>Iestatījumi</settingsLink>.",
+    "usageData": "Lai uzlabotu šo lietotni, tiek apkopota lietošanas informācija, piemēram, <br/>kuras lapas tiek atvērtas, cik ātri tās ielādējas un reaģē, <br/>kāds ir ielādētā fotoattēla faila formāts un kādas kļūdas radās, <br/>kā arī jūsu IP adrese un no tās izsecinātā aptuvenā atrašanās vieta. <br/>To varat izslēgt lapā <settingsLink>Iestatījumi</settingsLink>.",
     "reportIssues": "Ja atrodat kļūdas vai problēmas, lūdzu, ziņojiet par tām vietnē <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Šīs lietotnes pirmkods atrodas vietnē <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Tulkojumi citās valodās ir laipni gaidīti: skatiet, <guideLink>kā tulkot šo lietotni</guideLink>.",

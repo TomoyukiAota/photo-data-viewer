@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Aplikasi ini mengambil data EXIF dari file Anda di dalam browser Anda, <br/>sehingga file tetap berada di browser Anda dan tidak dikirim ke server mana pun.",
-    "usageData": "Untuk meningkatkan aplikasi ini, informasi penggunaan dikumpulkan, seperti <br/>halaman mana yang dibuka, format file foto yang dimuat, dan kesalahan <br/>yang terjadi, beserta alamat IP Anda dan perkiraan lokasi <br/>yang diperoleh darinya. Anda dapat menonaktifkannya di <settingsLink>Pengaturan</settingsLink>.",
+    "usageData": "Untuk meningkatkan aplikasi ini, informasi penggunaan dikumpulkan, seperti <br/>halaman mana yang dibuka, seberapa cepat halaman dimuat dan merespons, <br/>format file foto yang dimuat, dan kesalahan yang terjadi, <br/>beserta alamat IP Anda dan perkiraan lokasi yang diperoleh darinya. <br/>Anda dapat menonaktifkannya di <settingsLink>Pengaturan</settingsLink>.",
     "reportIssues": "Jika Anda menemukan bug atau masalah, laporkan di <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Kode sumber aplikasi ini tersedia di <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Terjemahan ke bahasa lain sangat diharapkan: lihat <guideLink>cara menerjemahkan aplikasi ini</guideLink>.",

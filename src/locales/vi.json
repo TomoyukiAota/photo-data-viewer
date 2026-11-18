@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Ứng dụng này lấy dữ liệu EXIF từ tệp của bạn ngay trong trình duyệt của bạn, <br/>vì vậy tệp được giữ trong trình duyệt và không được gửi đến bất kỳ máy chủ nào.",
-    "usageData": "Để cải thiện ứng dụng này, ứng dụng thu thập thông tin sử dụng, chẳng hạn như <br/>những trang nào được mở, định dạng tệp của ảnh đã tải và những lỗi nào <br/>đã xảy ra, cùng với địa chỉ IP của bạn và vị trí gần đúng <br/>được suy ra từ địa chỉ đó. Bạn có thể tắt tính năng này trong <settingsLink>Cài đặt</settingsLink>.",
+    "usageData": "Để cải thiện ứng dụng này, ứng dụng thu thập thông tin sử dụng, chẳng hạn như <br/>những trang nào được mở, thời gian tải và phản hồi của trang, <br/>định dạng tệp của ảnh đã tải và những lỗi nào đã xảy ra, <br/>cùng với địa chỉ IP của bạn và vị trí gần đúng được suy ra từ địa chỉ đó. <br/>Bạn có thể tắt tính năng này trong <settingsLink>Cài đặt</settingsLink>.",
     "reportIssues": "Nếu bạn tìm thấy lỗi hoặc sự cố, vui lòng báo cáo tại <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "Mã nguồn của ứng dụng này được lưu trữ trên <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Rất hoan nghênh các bản dịch sang ngôn ngữ khác: hãy xem <guideLink>cách dịch ứng dụng này</guideLink>.",

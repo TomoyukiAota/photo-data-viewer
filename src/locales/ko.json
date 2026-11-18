@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "이 앱은 브라우저 안에서 파일의 EXIF 데이터를 읽습니다. <br/>따라서 파일은 브라우저 안에만 있으며 어떤 서버로도 전송되지 않습니다.",
-    "usageData": "이 앱을 개선하기 위해 열어 본 페이지, 불러온 사진의 파일 형식, 발생한 오류 등의 <br/>사용 정보를 IP 주소 및 IP 주소에서 추정한 대략적인 위치와 함께 수집합니다. <br/><settingsLink>설정</settingsLink>에서 이 기능을 끌 수 있습니다.",
+    "usageData": "이 앱을 개선하기 위해 열어 본 페이지, 페이지 로딩과 응답에 걸린 시간, <br/>불러온 사진의 파일 형식, 발생한 오류 등의 사용 정보를 <br/>IP 주소 및 IP 주소에서 추정한 대략적인 위치와 함께 수집합니다. <br/><settingsLink>설정</settingsLink>에서 이 기능을 끌 수 있습니다.",
     "reportIssues": "버그나 문제를 발견하면 <issuesLink>GitHub Issues</issuesLink>에 알려 주세요.",
     "sourceCode": "이 앱의 소스 코드는 <gitHubLink>GitHub</gitHubLink>에 공개되어 있습니다.",
     "translations": "다른 언어로의 번역을 환영합니다. <guideLink>이 앱을 번역하는 방법</guideLink>을 참고하세요.",

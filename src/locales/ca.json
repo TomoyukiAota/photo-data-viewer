@@ -128,7 +128,7 @@
   },
   "about": {
     "keptInBrowser": "Aquesta aplicació obté les dades EXIF del vostre fitxer dins del navegador, <br/>de manera que el fitxer es queda al navegador i no s’envia a cap servidor.",
-    "usageData": "Per millorar aquesta aplicació, es recull informació d’ús, com ara <br/>quines pàgines s’obren, quin format de fitxer té la foto carregada i quins <br/>errors es produeixen, juntament amb la vostra adreça IP i la ubicació <br/>aproximada que se’n dedueix. Podeu desactivar-ho a <settingsLink>Configuració</settingsLink>.",
+    "usageData": "Per millorar aquesta aplicació, es recull informació d’ús, com ara <br/>quines pàgines s’obren, quant de temps triguen a carregar-se i a respondre, <br/>quin format de fitxer té la foto carregada i quins errors es produeixen, <br/>juntament amb la vostra adreça IP i la ubicació aproximada que se’n dedueix. <br/>Podeu desactivar-ho a <settingsLink>Configuració</settingsLink>.",
     "reportIssues": "Si trobeu errors o problemes, comuniqueu-los a <issuesLink>GitHub Issues</issuesLink>.",
     "sourceCode": "El codi font d’aquesta aplicació està allotjat a <gitHubLink>GitHub</gitHubLink>.",
     "translations": "Les traduccions a altres idiomes són benvingudes: consulteu <guideLink>com es tradueix aquesta aplicació</guideLink>.",

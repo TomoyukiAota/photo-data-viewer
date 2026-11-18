@@ -319,7 +319,7 @@ speaker of the language has reviewed them yet.
 | हिन्दी                 | `hi`      | Hindi                 | Machine translation, not reviewed yet |
 | ไทย                    | `th`      | Thai                  | Machine translation, not reviewed yet |
 | 한국어                    | `ko`      | Korean                | Machine translation, not reviewed yet |
-| 日本語                    | `ja`      | Japanese              | Reviewed by the maintainer, except the texts of the Language page and `pageDescription` |
+| 日本語                    | `ja`      | Japanese              | Reviewed by the maintainer, except the texts of the Language page, `pageDescription`, and, in the About page's text on usage data, the time the pages take to load and respond |
 | 简体中文                   | `zh-Hans` | Chinese (Simplified)  | Machine translation, not reviewed yet |
 | 繁體中文                   | `zh-Hant` | Chinese (Traditional) | Machine translation, not reviewed yet |
 
