@@ -43,19 +43,20 @@ it('writes the numbers from left to right in every language, so that a minus sig
   expect(screen.getByText('-122.005661').getAttribute('dir')).toBe('ltr');
 });
 
-it('has the three buttons that show the place, named in the language', async () => {
+it('has the buttons of Google Maps, Google Earth and Google Street View, in this order, named in the language', async () => {
   render(<LatLngRow loadedPhotoData={photo({ latitude: 37.332558, longitude: -122.005661 })} />);
+  // In the order of the page, which the keyboard follows.
   expect(screen.getAllByRole('button').map((button) => button.title)).toEqual([
     'Show in Google Maps',
-    'Show in Google Street View',
     'Show in Google Earth',
+    'Show in Google Street View',
   ]);
 
   await act(() => applyLanguage('ja'));
   expect(screen.getAllByRole('button').map((button) => button.title)).toEqual([
     'Google マップで表示',
-    'Google ストリートビューで表示',
     'Google Earth で表示',
+    'Google ストリートビューで表示',
   ]);
 });
 
@@ -78,8 +79,8 @@ it('records which button was used in the usage data, and not where the photo was
   const recorded = jest.mocked(trackOpenUrl).mock.calls;
   expect(recorded).toEqual([
     ['https://maps.google.com/ with query parameters for latitude, longitude, and zoom', 'Show in Google Maps', 'Home Page'],
-    ['https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom', 'Show in Google Street View', 'Home Page'],
     ['https://earth.google.com/web/search/ with latitude and longitude', 'Show in Google Earth', 'Home Page'],
+    ['https://www.google.com/maps/ with query parameters for latitude, longitude, and zoom', 'Show in Google Street View', 'Home Page'],
   ]);
   expect(JSON.stringify(recorded)).not.toMatch(/37\.33|122\.00/);
 });
@@ -95,11 +96,11 @@ describe('in Photo Location Map, which records the address that a button opens',
     return screen.getAllByRole('button').map((button) => button.title);
   }
 
-  it('has the Google Earth button where the address says that its link is recorded without the place', () => {
+  it('has the Google Earth button, between the two others, where the address says that its link is recorded without the place', () => {
     expect(buttonsAt('/?plmBridge=1&language=en&googleEarth=1')).toEqual([
       'Show in Google Maps',
-      'Show in Google Street View',
       'Show in Google Earth',
+      'Show in Google Street View',
     ]);
   });
 
