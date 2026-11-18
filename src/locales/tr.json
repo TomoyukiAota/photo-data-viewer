@@ -15,7 +15,7 @@
     "about": "Hakkında - {{appName}}"
   },
   "pageDescription": {
-    "home": "Fotoğrafınızın EXIF verilerini tarayıcınızda görüntüleyin: çekim tarihi, haritadaki konum, kamera ve ayarları. Fotoğraf hiçbir sunucuya gönderilmez.",
+    "home": "Fotoğrafınızın EXIF verilerini tarayıcınızda görüntüleyin: çekim tarihi, haritadaki konum (enlem ve boylam), kamera ayarları vb. Fotoğraf hiçbir sunucuya gönderilmez.",
     "demo": "{{appName}} uygulamasını örnek bir fotoğrafla deneyin ve gösterdiği EXIF verilerini görün: çekim tarihi, haritadaki konum, kamera ve ayarları.",
     "settings": "{{appName}} uygulamasının tarihleri ve saatleri nasıl yazacağını ve kullanım verilerini gönderip göndermeyeceğini seçin. Ayarlar tarayıcınıza kaydedilir.",
     "language": "{{appName}} uygulamasının görüntüleneceği dili seçin veya tarayıcınızın dilini izlemesine izin verin.",

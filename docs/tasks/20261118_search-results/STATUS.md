@@ -34,16 +34,20 @@ languages in search results, and the decision, in
 
 ## For the maintainer to review
 
-1. **The wording of the descriptions**, `pageDescription` in `src/locales/en.json`;
-   the Home page's above all, which Google shows under the app's name:
+1. **The wording of the descriptions**, `pageDescription` in `src/locales/en.json`.
+   The maintainer reworded the Home page's, which Google shows under the app's
+   name, to name the latitude and the longitude:
 
    > View the EXIF data of your photo in your browser: the date taken, the
-   > location on a map, the camera and its settings. The photo is not sent to
-   > any server.
+   > location (latitude and longitude) on a map, the camera settings, etc. The
+   > photo is not sent to any server.
 
-   The Japanese ones, which the maintainer reviews, are in
-   `src/locales/ja.json`; TRANSLATING.md lists `pageDescription` as not reviewed
-   in Japanese yet. The others are machine translation, as most texts are.
+   It has 176 characters, so a search result on a computer may cut its last
+   sentence. The other languages follow it, with their own files' words for the
+   latitude and the longitude (`photoData.general`). The Japanese ones, which
+   the maintainer reviews, are in `src/locales/ja.json`; TRANSLATING.md lists
+   `pageDescription` as not reviewed in Japanese yet. The others are machine
+   translation, as most texts are.
 2. **The address without a language is served with the app's name as its
    title on every page.** An English title per page would show in English in the
    tab, for a moment, before the texts of another language arrive. Google reads

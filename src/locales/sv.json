@@ -15,7 +15,7 @@
     "about": "Om - {{appName}}"
   },
   "pageDescription": {
-    "home": "Visa EXIF-informationen för din bild i webbläsaren: fotograferingsdatum, plats på en karta, kameran och dess inställningar. Bilden skickas inte till någon server.",
+    "home": "Visa EXIF-informationen för din bild i webbläsaren: fotograferingsdatum, plats (latitud och longitud) på en karta, kamerainställningar m.m. Bilden skickas inte till någon server.",
     "demo": "Prova {{appName}} med en exempelbild och se vilken EXIF-information appen visar: fotograferingsdatum, plats på en karta, kameran och dess inställningar.",
     "settings": "Välj hur {{appName}} skriver datum och tid, och om appen skickar användningsdata. Inställningarna sparas i din webbläsare.",
     "language": "Välj vilket språk {{appName}} visas på, eller låt appen följa din webbläsares språk.",

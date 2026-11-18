@@ -15,7 +15,7 @@
     "about": "Par lietotni - {{appName}}"
   },
   "pageDescription": {
-    "home": "Skatiet sava fotoattēla EXIF datus pārlūkprogrammā: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus. Fotoattēls netiek nosūtīts ne uz vienu serveri.",
+    "home": "Skatiet sava fotoattēla EXIF datus pārlūkprogrammā: uzņemšanas datumu, atrašanās vietu (ģeogrāfisko platumu un ģeogrāfisko garumu) kartē, fotokameras iestatījumus u. c. Fotoattēls netiek nosūtīts ne uz vienu serveri.",
     "demo": "Izmēģiniet lietotni {{appName}} ar parauga fotoattēlu un apskatiet, kādus EXIF datus tā rāda: uzņemšanas datumu, atrašanās vietu kartē, fotokameru un tās iestatījumus.",
     "settings": "Izvēlieties, kā lietotne {{appName}} raksta datumu un laiku un vai tā sūta lietošanas datus. Iestatījumi tiek saglabāti jūsu pārlūkprogrammā.",
     "language": "Izvēlieties valodu, kurā tiek rādīta lietotne {{appName}}, vai ļaujiet tai izmantot jūsu pārlūkprogrammas valodu.",

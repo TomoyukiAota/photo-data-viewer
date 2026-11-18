@@ -81,6 +81,8 @@ phone.
 | `/settings` | 125        | Choose how Photo Data Viewer writes dates and times, and whether it sends usage data. The settings are saved in your browser.                                |
 | `/language` | 102        | Choose the language that Photo Data Viewer is shown in, or let it follow the language of your browser.                                                      |
 
+The maintainer reworded the Home page's afterwards, as STATUS.md says.
+
 The deployment for Photo Location Map serves its pages without any of these
 tags, as before: no title, no description. The page for an address that has
 no page (404) has none of them in either deployment, as before.

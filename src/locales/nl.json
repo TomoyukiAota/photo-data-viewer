@@ -15,7 +15,7 @@
     "about": "Over - {{appName}}"
   },
   "pageDescription": {
-    "home": "Bekijk de EXIF-gegevens van je foto in je browser: de opnamedatum, de locatie op een kaart, de camera en de instellingen ervan. De foto wordt niet naar een server verzonden.",
+    "home": "Bekijk de EXIF-gegevens van je foto in je browser: de opnamedatum, de locatie (breedtegraad en lengtegraad) op een kaart, de camera-instellingen enzovoort. De foto wordt niet naar een server verzonden.",
     "demo": "Probeer {{appName}} uit met een voorbeeldfoto en bekijk welke EXIF-gegevens de app toont: de opnamedatum, de locatie op een kaart, de camera en de instellingen ervan.",
     "settings": "Kies hoe {{appName}} datums en tijden schrijft en of de app gebruiksgegevens verstuurt. De instellingen worden in je browser bewaard.",
     "language": "Kies de taal waarin {{appName}} wordt weergegeven, of laat de app de taal van je browser volgen.",
