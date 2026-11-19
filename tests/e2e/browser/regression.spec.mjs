@@ -372,15 +372,17 @@ test('Chrome offers to install the app, with its name and icons', async ({
   );
   const baseURL = testInfo.project.use.baseURL;
   const appOrigin = new URL(baseURL).origin;
-  const context = await playwright.chromium.launchPersistentContext(
-    testInfo.outputPath('profile'),
-    {
-      ...launchOptions,
-      channel: launchOptions.channel ?? 'chromium',
-      headless,
-      baseURL,
-    },
-  );
+  // TL;DR: The browser's profile is in a temporary folder, which Playwright
+  // deletes when the browser is closed.
+  // Details: An empty path asks Playwright for one. A profile in the test's
+  // output folder stayed there, and CI uploaded it with the results whenever
+  // a test failed: it was most of what CI kept of the failure.
+  const context = await playwright.chromium.launchPersistentContext('', {
+    ...launchOptions,
+    channel: launchOptions.channel ?? 'chromium',
+    headless,
+    baseURL,
+  });
   try {
     // Nothing but the app is reached: no analytics, fonts or map tiles.
     await context.route(

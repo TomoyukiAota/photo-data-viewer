@@ -77,7 +77,7 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Three tests run in a browser set to Japanese (`ja-JP`) and five in one set to
+Four tests run in a browser set to Japanese (`ja-JP`) and five in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
 for those languages. The suite stays with these three languages and Polish

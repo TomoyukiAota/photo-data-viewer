@@ -92,3 +92,35 @@ a function with `'use cache'` called through `unstable_cache()`, which this
 Pages Router app does not use. The same command run again within five minutes
 passes, with a warning (`node_modules/next/dist/lib/upgrade/nudge.js`). The
 builds above passed that way.
+
+## The browser's profile in a temporary folder
+
+Checked on 2026-11-19 on the branch `claude/browser-test-profile-and-count`,
+from `main` at `f46d7b3` (#94).
+
+The test opened its browser with a profile in its output folder
+(`testInfo.outputPath('profile')`), under `test-results/`. The profile stayed
+there after the test, passed or failed, and CI uploads `test-results/` when a
+browser test fails. In the artifact of run 44350188843, where another test
+had failed, the profile was 8.9 of the 9.4 MB, unpacked, and 173 of the 175
+files; the other two were the failed test's trace and its error context.
+
+The test now passes an empty path, for which Playwright makes a profile in
+the system's temporary folder (`playwright_chromiumdev_profile-…`) and deletes
+it when the browser is closed. On a failure to delete it, Playwright writes to
+its log and the test goes on.
+
+| Check                                                                    | Result                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The test, `--repeat-each=3`, in Playwright's Chromium (the full browser) | 3 passed. Each run had its own profile in the temporary folder, deleted when its browser was closed; none was left. `test-results/` had nothing in it but Playwright's record of the run, `.last-run.json`. |
+| The same in Chrome (`PDV_CHROME=1`)                                      | The same.                                                                                                                                                                                                   |
+| `npm run test:all`                                                       | Lint and type check clean; 55 suites, 776 tests passed.                                                                                                                                                     |
+| `npm run build` and `npm run build:plm`                                  | Passed.                                                                                                                                                                                                     |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS              | 52 passed, with the visual comparison. `test-results/` had nothing in it but `.last-run.json`, and no profile was left in the temporary folder.                                                             |
+| `npm run test:electron`, and the browser suite in Firefox                | Not run.                                                                                                                                                                                                    |
+
+With `main` merged in at `bafeb7f` (#95 and #96, which change other tests in
+the same file), the checks were run again: `npm run test:all` (56 suites, 785
+tests), both builds and the browser suite with the visual comparison (53
+tests) passed, no screenshot changed, no profile was left in the temporary
+folder, and `test-results/` had nothing in it but `.last-run.json`.
