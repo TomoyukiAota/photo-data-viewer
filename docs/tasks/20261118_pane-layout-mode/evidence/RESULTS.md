@@ -368,6 +368,13 @@ pixels from the window's left and top:
 | 320, single pane | English | x 246–302 | x 16–304, in the window's margins |
 | 320, single pane | Arabic | x 18–69, at the window's left | x 16–304 |
 
+With `main` merged in at `7cec082` (#100, which adds a sentence to the
+status's first paragraph, where this adds one too), the checks were run
+again: `npm run test:all` (57 suites, 794 tests), both builds and the
+browser suite with the visual comparison (58 tests) passed, and no
+screenshot changed. The Electron tests were not run again: #100 changes
+the documents and the Language page alone.
+
 ### Reference screenshots
 
 `plm-layout-menu` and `plm-layout-menu-ar` are new: the button's menu open
