@@ -58,7 +58,6 @@ const DropHintButton: React.FC = () => {
     <>
       <IconButton
         size='small'
-        className={classes.button}
         aria-label={label}
         title={label}
         aria-haspopup='dialog'

@@ -53,22 +53,24 @@ const Header: React.FC<{ className?: string }> = (props) => {
     <div className={`${props.className ?? ''} ${classes.header}`}>
       <div className={classes.content}>
         <div className={classes.text}>{t('home.selectYourPhoto')}</div>
-        <Button
-          variant='outlined'
-          onClick={handleButtonClicked}
-          sx={{ textTransform: 'none' }}
-        >
-          {t('home.selectPhoto')}
-        </Button>
-        <input
-          type='file'
-          onClick={handleInputClicked}
-          onChange={handleInputChange}
-          ref={inputElementRef}
-          className={classes.input}
-        />
-        {/* Beside Select Photo: a photo can also be dropped on the page. */}
-        <DropHintButton />
+        <div className={classes.buttons}>
+          <Button
+            variant='outlined'
+            onClick={handleButtonClicked}
+            sx={{ textTransform: 'none' }}
+          >
+            {t('home.selectPhoto')}
+          </Button>
+          <input
+            type='file'
+            onClick={handleInputClicked}
+            onChange={handleInputChange}
+            ref={inputElementRef}
+            className={classes.input}
+          />
+          {/* Beside Select Photo: a photo can also be dropped on the page. */}
+          <DropHintButton />
+        </div>
       </div>
       {/* The menu's button lies over this end of the header. */}
       <AppMenuRoom className={classes['menu-room']} />

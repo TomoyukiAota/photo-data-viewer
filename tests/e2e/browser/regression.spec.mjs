@@ -999,13 +999,12 @@ for (const { platform, system, fileManager } of [
       includeHidden: true,
     });
 
-    // Right beside Select Photo, on its line.
+    // Beside Select Photo, on its line, 8 pixels from it.
     const [selectBox, hintBox] = await Promise.all([
       selectPhoto.boundingBox(),
       hint.boundingBox(),
     ]);
-    expect(hintBox.x).toBeGreaterThanOrEqual(selectBox.x + selectBox.width);
-    expect(hintBox.x - (selectBox.x + selectBox.width)).toBeLessThan(10);
+    expect(hintBox.x - (selectBox.x + selectBox.width)).toBeCloseTo(8, 0);
     expect(
       Math.abs(
         hintBox.y + hintBox.height / 2 - (selectBox.y + selectBox.height / 2),
@@ -1056,6 +1055,32 @@ for (const { platform, system, fileManager } of [
     ).toBeVisible();
   });
 }
+
+test('the button beside Select Photo goes under it, where the two do not fit side by side, and starts where its line starts', async ({
+  page,
+}) => {
+  // Narrower than a phone, where the two do not fit side by side in English.
+  await page.setViewportSize({ width: 260, height: 800 });
+  await page.goto('/');
+  const selectPhoto = page.getByRole('button', {
+    name: 'Select Photo',
+    exact: true,
+  });
+  const hint = page.getByRole('button', {
+    name: 'About drag and drop',
+    exact: true,
+  });
+  await expect(hint).toBeVisible();
+
+  // Under Select Photo, and not moved in from where its line starts by the
+  // space that is between the two on one line.
+  const [selectBox, hintBox] = await Promise.all([
+    selectPhoto.boundingBox(),
+    hint.boundingBox(),
+  ]);
+  expect(hintBox.y).toBeGreaterThanOrEqual(selectBox.y + selectBox.height);
+  expect(hintBox.x).toBeCloseTo(selectBox.x, 0);
+});
 
 test('a photo whose GPS values are empty is shown without a location', async ({
   page,
@@ -2110,7 +2135,7 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     const button = page
       .locator('input[type=file]')
       .locator('xpath=preceding-sibling::button');
-    const sentence = button.locator('xpath=preceding-sibling::div');
+    const sentence = button.locator('xpath=../preceding-sibling::div');
     const menuButton = page.locator('button[aria-label]:not([aria-haspopup])');
     await expect(button).toBeInViewport({ ratio: 1 });
     const buttonBox = await button.boundingBox();
