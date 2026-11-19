@@ -143,6 +143,34 @@ else: `home-1280`, `home-1201`, `home-1200`, `home-1199`, `home-600`,
 and the box that hangs from it were and are. Every other screenshot is
 the same, byte for byte.
 
+### The Japanese word for drag and drop
+
+The change of the Japanese texts that the maintainer asked for on
+2026-11-19 ([the status](../STATUS.md#the-japanese-word-for-drag-and-drop)),
+on the branch `claude/ja-drag-drop-ampersand`, from `main` at `bafeb7f`:
+
+| Check | Result |
+| --- | --- |
+| `npm run test:all` | Passed: 785 tests in 56 suites |
+| `npm run build` | Passed |
+| `npm run build:plm` | Passed |
+| The browser suite, in Chrome, with the visual comparison | Passed: 55 tests, the two new ones among them. No screenshot changed |
+| `npm run test:electron` | Not run: it opens windows |
+
+**The sentence in the box**, in Chrome at 1280 pixels, as on Windows and on
+a Mac, in lines read from the page by the top of each letter's box:
+
+| Text | Windows | A Mac |
+| --- | --- | --- |
+| Before, on `main` | エクスプローラーからファイルを / ドラッグアンドドロップして / 選択することもできます。 | Finder からファイルを / ドラッグアンドドロップして / 選択することもできます。 |
+| `＆` alone | エクスプローラーからファイルをドラッグ / ＆ドロップして選択することもできます。 | Finder からファイルをドラッグ＆ / ドロップして選択することもできます。 |
+| `＆` with a word joiner on each side | エクスプローラーからファイルを / ドラッグ＆ドロップして / 選択することもできます。 | Finder からファイルをドラッグ＆ドロップして / 選択することもできます。 |
+
+The new test failed on both systems with `＆` alone, the word's letters on
+two lines, and passed with the joiners. The locale check, which takes a
+word joiner for a character that is not drawn
+(`src/locales/locales.spec.ts`), passed with the joiners written `\u2060`.
+
 ## What the tests hold
 
 Unit tests:
@@ -367,7 +395,7 @@ and `Datei-Explorer` in its text; its Dutch page `Bestandenverkenner`, and
 | `hu` | Tudnivalók az áthúzásról | Fájlt úgy is kiválaszthat, hogy áthúzza a Finderből. | Fájlt úgy is kiválaszthat, hogy áthúzza a Fájlkezelőből. |
 | `id` | Tentang seret dan lepas | Anda juga dapat memilih file dengan menyeret dan melepaskannya dari Finder. | Anda juga dapat memilih file dengan menyeret dan melepaskannya dari File Explorer. |
 | `it` | Informazioni sul trascinamento | Puoi anche selezionare un file trascinandolo dal Finder. | Puoi anche selezionare un file trascinandolo da Esplora file. |
-| `ja` | ドラッグアンドドロップについて | Finder からファイルをドラッグアンドドロップして選択することもできます。 | エクスプローラーからファイルをドラッグアンドドロップして選択することもできます。 |
+| `ja` | ドラッグ＆ドロップについて | Finder からファイルをドラッグ＆ドロップして選択することもできます。 | エクスプローラーからファイルをドラッグ＆ドロップして選択することもできます。 |
 | `ko` | 끌어서 놓기 정보 | Finder에서 파일을 끌어다 놓아 선택할 수도 있습니다. | 파일 탐색기에서 파일을 끌어다 놓아 선택할 수도 있습니다. |
 | `lt` | Apie vilkimą ir numetimą | Failą taip pat galite pasirinkti nuvilkę jį iš „Finder“. | Failą taip pat galite pasirinkti nuvilkę jį iš Failų naršyklės. |
 | `lv` | Par vilkšanu un nomešanu | Failu var atlasīt arī, velkot un nometot to no Finder. | Failu var atlasīt arī, velkot un nometot to no Failu pārlūka. |

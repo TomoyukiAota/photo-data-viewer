@@ -107,7 +107,8 @@ reviews the pull request:
 - `dateTime.weekdayPattern`, when the file has it, contains `ddd`.
 - A character that is not drawn is written as an escape, so that whoever reads
   the file sees that it is there: `\u00a0` for a no-break space, `\u00ad` for a
-  soft hyphen.
+  soft hyphen, `\u2060` for a word joiner, which keeps the letters on its two
+  sides on one line (`ドラッグ\u2060＆\u2060ドロップ`).
 - Every file is listed in `src/i18n/languages.ts` with a name in the language
   and in English, and what a language loads there is its own file and a dayjs
   locale that exists. The list is in the order of the names.

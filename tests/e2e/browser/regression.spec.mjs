@@ -1082,6 +1082,52 @@ test('the button beside Select Photo goes under it, where the two do not fit sid
   expect(hintBox.x).toBeCloseTo(selectBox.x, 0);
 });
 
+for (const { platform, system } of [
+  { platform: 'Win32', system: 'Windows' },
+  { platform: 'MacIntel', system: 'a Mac' },
+]) {
+  test(`the box of the button beside Select Photo ends no line inside the Japanese word for drag and drop, on ${system}`, async ({
+    page,
+    browserName,
+  }) => {
+    // Chrome ends a line of Japanese between two phrases (`word-break:
+    // auto-phrase` in globals.scss), and takes the ＆ of ドラッグ＆ドロップ
+    // for the end of one: a line ended after ドラッグ or after ＆, until a
+    // word joiner (`\u2060` in ja.json) was put on each side of it.
+    test.skip(
+      browserName !== 'chromium',
+      'Chromium alone ends a line of Japanese between two phrases.',
+    );
+    await emulatePlatform(page, platform);
+    await page.goto('/ja');
+    await page
+      .getByRole('button', { name: 'ドラッグ＆ドロップについて', exact: true })
+      .click();
+    const sentence = page.getByRole('dialog').locator('p');
+    await expect(sentence).toBeVisible();
+
+    // The line of each letter of the word, as the top of the letter's box.
+    const { word, tops } = await sentence.evaluate((p) => {
+      const text = p.firstChild;
+      const start = text.data.indexOf('ドラッグ');
+      const end = text.data.indexOf('ドロップ', start) + 'ドロップ'.length;
+      const range = document.createRange();
+      const tops = new Set();
+      for (let i = start; i < end; i += 1) {
+        range.setStart(text, i);
+        range.setEnd(text, i + 1);
+        tops.add(Math.round(range.getBoundingClientRect().top));
+      }
+      return {
+        word: text.data.slice(start, end).replaceAll('\u2060', ''),
+        tops: [...tops],
+      };
+    });
+    expect(word).toBe('ドラッグ＆ドロップ');
+    expect(tops).toHaveLength(1);
+  });
+}
+
 test('a photo whose GPS values are empty is shown without a location', async ({
   page,
 }) => {
