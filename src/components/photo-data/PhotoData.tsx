@@ -1,8 +1,8 @@
-import Tabs from '@mui/material/Tabs';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import StyledTab from '../tab/StyledTab';
+import TabBar from '../tab/TabBar';
 import PhotoDataDetails from './PhotoDataDetails';
 import PhotoDataGeneral from './PhotoDataGeneral';
 import PhotoDataRawData from './PhotoDataRawData';
@@ -15,7 +15,11 @@ const TabName = {
   RawData: 'Raw Data',
 };
 
-const PhotoData: React.FC<{ className?: string }> = (props) => {
+const PhotoData: React.FC<{
+  className?: string;
+  /** What comes after the tabs, at the end of their row: the button Layout in Photo Location Map (Home.tsx). */
+  afterTabs?: React.ReactNode;
+}> = (props) => {
   const { t } = useTranslation();
   const [selectedTabName, setSelectedTabName] = useState(TabName.General);
 
@@ -28,25 +32,15 @@ const PhotoData: React.FC<{ className?: string }> = (props) => {
 
   return (
     <div className={classes.container}>
-      {/*
-        Scrollable, for a language whose labels are wider than a phone's window:
-        the tabs are swiped along, and choosing one brings it into view.
-        TL;DR: without MUI's scroll buttons.
-        Details: MUI shows them when a tab is less than 99% in view, and this
-        bar is a pixel lower than its tabs while the table under it is tall, so
-        they would appear with nothing to scroll.
-      */}
-      <Tabs
+      <TabBar
         value={selectedTabName}
         onChange={handleTabsChange}
-        variant='scrollable'
-        scrollButtons={false}
-        sx={{ borderBottom: 1, borderColor: 'divider', padding: '0 10px' }}
+        end={props.afterTabs}
       >
         <StyledTab label={t('photoData.tabs.general')} value={TabName.General} />
         <StyledTab label={t('photoData.tabs.details')} value={TabName.Details} />
         <StyledTab label={t('photoData.tabs.rawData')} value={TabName.RawData} />
-      </Tabs>
+      </TabBar>
       <div className={classes['tab-content']}>
         {selectedTabName === TabName.General && <PhotoDataGeneral />}
         {selectedTabName === TabName.Details && <PhotoDataDetails />}

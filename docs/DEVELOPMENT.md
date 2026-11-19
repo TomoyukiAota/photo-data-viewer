@@ -77,7 +77,7 @@ its imports depend on the active build mode.
 The browser suite starts the standalone production server on port 3200. It uses
 public/synthetic fixtures, intercepts analytics and map tiles, and loads the same
 Roboto font used by the reference application.
-Four tests run in a browser set to Japanese (`ja-JP`) and five in one set to
+Four tests run in a browser set to Japanese (`ja-JP`) and six in one set to
 Arabic (`ar-EG`), the one language written from right to left that the suite
 covers; their screenshots (`*-ja.png`, `*-ar.png`) also use the system's fonts
 for those languages. The suite stays with these three languages and Polish
@@ -85,17 +85,25 @@ for those languages. The suite stays with these three languages and Polish
 `src/locales/locales.spec.ts` instead, which takes no longer with more
 languages
 ([TRANSLATING.md](./TRANSLATING.md#what-the-check-verifies)).
-Six tests run in Polish at the width of a phone (320 pixels). Polish stands
+Seven tests run in Polish at the width of a phone (320 pixels). Polish stands
 for the languages that write more than English does: its sentences take more
 lines, and its names of the latitude and the longitude take two each. The
 tests hold the layout to what it is made for, that a text of any length is
 shown whole: the header as high as its text, which ends before the menu's
 button, each name beside its number, a field as wide as its label, the
 dialogs, the veil over a page that a file is dragged over, the messages, the
-box of the button about drag and drop, the submenu of the layouts and the
-Credits page uncut, and the split panes inside the window.
+box of the button about drag and drop, the submenu of the layouts, the button
+Layout of Photo Location Map's window with its menu, and the Credits page
+uncut, and the split panes inside the window.
 They find their elements by where they are and name no Polish text, so that a
 change of a translation does not break them.
+Three tests, in English, Polish and Arabic, open the Home page as Photo
+Location Map's isolated window does: with `plmBridge=1` and the other
+parameters that it passes in the address, and a stand-in for its bridge,
+which gives the photo and keeps the events that the page sends it. The page
+is the standalone server's, which the address puts in the mode of that
+window: the deployment for Photo Location Map is built from the same pages,
+and the Electron tests below open it.
 The tests of a photo dropped on the page dispatch the drag's events, with a
 `DataTransfer` that holds the file: Playwright cannot drag a file from outside
 the browser, and its own drag, which starts in the page, gives the page no
