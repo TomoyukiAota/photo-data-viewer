@@ -57,9 +57,9 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * in Japanese.
  *
  * TL;DR: It looks and works like the list in Photo Location Map, so that the
- * two applications ask for the language in the same way. Only the language of
- * the first entry differs: Photo Location Map writes its own in the language
- * that it is shown in.
+ * two applications ask for the language in the same way. Photo Location Map's
+ * first entry, which follows the system's language, is written in that
+ * language too.
  * Details: a list box of which one entry is chosen, in a box of seven entries
  * that scrolls. The box keeps that height whatever the search leaves, so that
  * nothing below it moves while the user types. The arrow keys, Home and End
