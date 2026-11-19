@@ -384,6 +384,39 @@ and About pages:
   this.
 - "No data" is in the middle of the empty table.
 
+## The first entry in the browser's language
+
+Checked on 2026-11-19, on the branch `claude/browser-setting-entry-7642a4`
+from `main` at `f46d7b3`, in headless Chrome on macOS 27
+([status](../STATUS.md#the-first-entry-in-the-browsers-language)).
+
+| Page shown in | Browser set to | The first entry                 | `lang` | Direction     |
+| ------------- | -------------- | ------------------------------- | ------ | ------------- |
+| English       | Japanese       | ブラウザの設定に従う（日本語）  | `ja`   | left to right |
+| Japanese      | English        | Use browser setting (English)   | `en`   | left to right |
+| English       | Arabic         | استخدام إعداد المتصفح (العربية) | `ar`   | right to left |
+| Arabic        | English        | Use browser setting (English)   | `en`   | left to right |
+| Japanese      | Japanese       | ブラウザの設定に従う（日本語）  | `ja`   | left to right |
+
+- In the browser set to Japanese, with English chosen, the Language page did
+  not fetch the texts of Japanese, opened at its address or from the menu,
+  and the entry was in Japanese from the start. With the setting that follows
+  the browser, the page is in Japanese, and its texts are fetched for it, as
+  before.
+- From the build, compressed with Brotli: the Language page's data, which the
+  menu fetches to open the page, went from 0.1 kB to 1.3 kB, and the page
+  opened at its address from 1.1 kB to 2.4 kB. The texts of Japanese, which
+  the page would have fetched otherwise, are 2.4 kB, and a dayjs locale comes
+  with them.
+- `npm run test:all` (lint, type check, 56 suites and 785 tests),
+  `npm run build`, `npm run build:plm` and the browser suite with
+  `PDV_CHROME=1 PDV_VISUAL=1` (52 tests, with the visual comparison) passed.
+- No reference screenshot changed. `language.png`, `language-ja.png` and
+  `language-ar.png` show the page in the browser's language, where the entry
+  reads as before; made again with `--update-snapshots=all`, they came out
+  the same, byte for byte.
+- Not run: the Electron suite, and the browser suite in Firefox.
+
 ## Found on the way
 
 - **react-reflex gives its panes a little less than the room they have**:

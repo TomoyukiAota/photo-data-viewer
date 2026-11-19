@@ -742,10 +742,10 @@ test('the Language page lists the languages, narrows them down, and applies the 
   ).toBeFocused();
   await page.keyboard.press('Home');
   await expect(options.first()).toBeFocused();
-  // The entry that follows the browser, which names the browser's language.
-  // Its German words are not checked: they are a translation, which a review
-  // may change.
-  await expect(options.first()).toContainText('(English)');
+  // The entry that follows the browser is in the browser's language, English,
+  // on the page in German too, as each language is under its own name.
+  await expect(options.first()).toHaveText('Use browser setting (English)');
+  await expect(options.first()).toHaveAttribute('lang', 'en');
   await page.keyboard.press('Space');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(chosen).toHaveText(['Use browser setting (English)']);
@@ -1789,11 +1789,45 @@ test.describe('in a browser whose language is Japanese', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(list).toHaveAccessibleName('Language');
     await expect(chosen).toHaveText(['English']);
-    await expect(list.getByRole('option').first()).toHaveText(
-      'Use browser setting (日本語)',
-    );
+    // The entry that follows the browser stays in the browser's language, as
+    // each language is under its own name. The search finds it by its text in
+    // English as well.
+    const browserEntry = list.getByRole('option').first();
+    await expect(browserEntry).toHaveText('ブラウザの設定に従う（日本語）');
+    await expect(browserEntry).toHaveAttribute('lang', 'ja');
+    const englishSearch = page.getByRole('searchbox', {
+      name: 'Search',
+      exact: true,
+    });
+    await englishSearch.fill('browser');
+    await expect(list.getByRole('option')).toHaveText([
+      'ブラウザの設定に従う（日本語）',
+    ]);
+    await englishSearch.fill('');
+
+    // TL;DR: The app starts in English after the reload, without the texts of
+    // Japanese, and the entry is in Japanese from the start all the same.
+    // Details: the page brings the entry's text in every language with it
+    // (browser-setting-labels.ts). Every text that the entry has, from when
+    // it is first in the page, is recorded.
+    await page.addInitScript(() => {
+      const texts = [];
+      window.browserEntryTexts = texts;
+      new MutationObserver(() => {
+        const text = document.querySelector('[role="option"]')?.textContent;
+        if (text !== undefined && texts.at(-1) !== text) texts.push(text);
+      }).observe(document, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+    });
     await page.reload();
     await expect(chosen).toHaveText(['English']);
+    await expect(browserEntry).toHaveText('ブラウザの設定に従う（日本語）');
+    expect(await page.evaluate(() => window.browserEntryTexts)).toEqual([
+      'ブラウザの設定に従う（日本語）',
+    ]);
     expect(await page.evaluate(() => localStorage.getItem('Language'))).toBe(
       'en',
     );
@@ -1995,7 +2029,11 @@ test.describe('what search engines read', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
 
     // The browser's language opens the address without a language, whose lang
-    // is the language shown, not the locale that Next.js gives it.
+    // is the language shown, not the locale that Next.js gives it. Its entry
+    // is in the browser's language, English, on the page in Japanese.
+    await expect(list.getByRole('option').first()).toHaveText(
+      'Use browser setting (English)',
+    );
     await list.getByRole('option').first().click();
     await page.waitForURL((url) => url.pathname === '/language');
     await expect(list).toHaveAccessibleName('Language');
@@ -2451,6 +2489,22 @@ test.describe('in a browser whose language is Arabic', () => {
     // again.
     await list.getByRole('option', { name: 'English', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+    // The entry that follows the browser stays in Arabic, from right to left,
+    // and starts where the lines of the page start, at the left, as the entry
+    // of Arabic does.
+    const browserEntry = list.getByRole('option').first();
+    await expect(browserEntry).toHaveText(
+      'استخدام إعداد المتصفح (\u2068العربية\u2069)',
+    );
+    await expect(browserEntry).toHaveAttribute('lang', 'ar');
+    const browserText = browserEntry.locator('bdi');
+    await expect(browserText).toHaveCSS('direction', 'rtl');
+    const arabicText = list
+      .getByRole('option', { name: 'العربية', exact: true })
+      .locator('bdi');
+    expect((await browserText.boundingBox()).x).toBe(
+      (await arabicText.boundingBox()).x,
+    );
     const englishMenuButton = page.getByRole('button', {
       name: 'menu',
       exact: true,

@@ -13,6 +13,10 @@ On 2026-11-14 the usage data was made to tell the language that the app is
 shown in, and the language that a visitor leaves the Language page with:
 [What is recorded about the language](#what-is-recorded-about-the-language).
 
+On 2026-11-19 the list's first entry was written in the browser's language, on
+a page in any language:
+[The first entry in the browser's language](#the-first-entry-in-the-browsers-language).
+
 ## What was asked
 
 Photo Location Map got its first translation and a list to choose the language
@@ -67,7 +71,8 @@ second look.
 - **The first entry reads "Use browser setting (English)"**, and in Japanese
   ブラウザの設定に従う（日本語）, which is the text the maintainer reviewed for
   the select it replaces. It parallels Photo Location Map's "Use system setting
-  (English)".
+  (English)". Since 2026-11-19 it is written in the browser's language, on a
+  page in any language ([below](#the-first-entry-in-the-browsers-language)).
 - **The names and their order are the maintainer's**, fixed after the first
   report, and Photo Location Map's too: each language under its own name,
   capitalized as macOS lists them, those in Latin letters by alphabet and then
@@ -78,7 +83,8 @@ second look.
   Japanese. The browser has those names (`Intl.DisplayNames`), so the app has
   no table of them.
 - **The search finds the first entry by its text alone** ("browser",
-  "setting"), not by the language it stands for.
+  "setting"), not by the language it stands for. Since 2026-11-19, by its text
+  in the browser's language and in the page's.
 - **The box keeps the height of seven entries** whatever the search leaves, as
   Photo Location Map's does, so that nothing below it moves while the user
   types. At first it was as high as its entries.
@@ -408,6 +414,44 @@ page to another page, which is the one they settled on.
   data" is off. In Photo Location Map's window, the setting recorded is the
   one saved in that window, which is not used there; the language in use is
   the one to go by.
+
+### The first entry in the browser's language
+
+Changed on 2026-11-19, on the branch `claude/browser-setting-entry-7642a4`, at
+the maintainer's request. The first entry was written in the language of the
+page, with the browser's language in parentheses under its own name: "Use
+browser setting (日本語)" on a page in English in a browser in Japanese, two
+languages in one entry, where each other entry is wholly in its own language.
+
+- **The entry is written in the language that it follows**, the one that
+  `browserLanguage()` resolves to: its text and the name in parentheses, with
+  that language's punctuation as its translation has it, so
+  ブラウザの設定に従う（日本語） on a page in any language. Where the browser
+  asks for none of the languages of the list, that is English, as before.
+- **It has that language's `lang` and direction**: its text is in a `<bdi>`
+  with the `dir` of its language, as each entry's now is, so that Arabic is
+  written from right to left on a page in English. It starts where the lines
+  of the page start, as the entry of Arabic does.
+- **The page brings the text of every language with it**, from its
+  `getStaticProps`, which makes them from the translation files when the app
+  is built (`src/components/language/browser-setting-labels.ts`): 1.2 kB more
+  on the Language page alone, compressed
+  ([results](./evidence/RESULTS.md#the-first-entry-in-the-browsers-language)).
+  The app fetches the language that it shows, so on a page in another
+  language than the browser's, the browser's texts are not there. Fetching
+  them for this one text would have shown the entry in another language, or
+  without a text, until they arrived, and kept it so where they could not be
+  fetched; and it would have fetched a whole translation, 2.4 kB for
+  Japanese, and a dayjs locale.
+- **The search finds the entry by its text in the page's language as well**,
+  which is what the entry said before: "browser" finds
+  ブラウザの設定に従う（日本語） on a page in English, as a language is found
+  by its name in the page's language.
+- **Photo Location Map's "Use system setting" now works otherwise**: it is
+  written in the language that Photo Location Map is shown in, with the
+  system's language in parentheses under its own name. That repository was
+  left as it is. `docs/TRANSLATING.md` says so, and that the text of this
+  entry is read by people whose browser is set to its language.
 
 ## Not verified
 

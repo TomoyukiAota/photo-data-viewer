@@ -2,9 +2,19 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { applyLanguage } from '../../i18n/i18n';
 import { languages, LanguageSetting } from '../../i18n/languages';
+import {
+  BrowserSettingLabels,
+  loadBrowserSettingLabels,
+} from './browser-setting-labels';
 import LanguageList from './LanguageList';
 
 // The tests run in English, in a browser that asks for English (jest.setup.ts).
+
+/** The text of the first entry in every language, which the Language page's props bring. */
+let browserSettingLabels: BrowserSettingLabels;
+beforeAll(async () => {
+  browserSettingLabels = await loadBrowserSettingLabels();
+});
 
 function options(): HTMLElement[] {
   return screen.queryAllByRole('option');
@@ -34,7 +44,13 @@ function chosen(): (string | null)[] {
 
 function renderList(selected: LanguageSetting = 'auto') {
   const onChoose = jest.fn();
-  const view = render(<LanguageList selected={selected} onChoose={onChoose} />);
+  const view = render(
+    <LanguageList
+      selected={selected}
+      browserSettingLabels={browserSettingLabels}
+      onChoose={onChoose}
+    />,
+  );
   return { onChoose, ...view };
 }
 
@@ -47,12 +63,17 @@ describe('the list', () => {
     ]);
   });
 
-  it('tells which language each name is written in, by which it is drawn and read aloud', () => {
+  it('tells which language each text is written in, by which it is drawn, in its direction, and read aloud', () => {
     renderList();
     expect(options().map((element) => element.getAttribute('lang'))).toEqual([
       'en',
       ...languages.map((language) => language.code),
     ]);
+    expect(
+      options().map((element) =>
+        element.querySelector('bdi')?.getAttribute('dir'),
+      ),
+    ).toEqual(['ltr', ...languages.map((language) => language.direction)]);
   });
 
   it('is a list box named Language, of which the chosen setting is the one entry chosen', () => {
@@ -60,7 +81,13 @@ describe('the list', () => {
     expect(screen.getByRole('listbox', { name: 'Language' })).toBeTruthy();
     expect(chosen()).toEqual(['Use browser setting (English)']);
 
-    rerender(<LanguageList selected='ja' onChoose={onChoose} />);
+    rerender(
+      <LanguageList
+        selected='ja'
+        browserSettingLabels={browserSettingLabels}
+        onChoose={onChoose}
+      />,
+    );
     expect(chosen()).toEqual(['日本語']);
   });
 
@@ -79,7 +106,14 @@ describe('the list', () => {
 
   it('tells that the chosen entry was chosen again where the page takes that for a choice', () => {
     const onChoose = jest.fn();
-    render(<LanguageList selected='ja' canChooseSelected onChoose={onChoose} />);
+    render(
+      <LanguageList
+        selected='ja'
+        browserSettingLabels={browserSettingLabels}
+        canChooseSelected
+        onChoose={onChoose}
+      />,
+    );
     const japanese = option('日本語');
 
     fireEvent.click(japanese);
@@ -463,25 +497,110 @@ describe('when the page opens', () => {
     const { rerender, onChoose } = renderList('auto');
     const japanese = option('日本語');
     japanese.focus();
-    rerender(<LanguageList selected='ja' onChoose={onChoose} />);
+    rerender(
+      <LanguageList
+        selected='ja'
+        browserSettingLabels={browserSettingLabels}
+        onChoose={onChoose}
+      />,
+    );
     expect(document.activeElement).toBe(japanese);
+  });
+});
+
+/** The characters around a value in a text written from right to left, which keep it together (text-values.ts). */
+const isolateStart = String.fromCodePoint(0x2068);
+const isolateEnd = String.fromCodePoint(0x2069);
+
+describe("in a browser whose language is another than the page's", () => {
+  /** The browser's `navigator.languages`, while a test makes it ask for others. */
+  let browserLanguages: jest.SpyInstance | undefined;
+
+  /** Makes the browser ask for these languages, the most preferred first, until the test ends. */
+  function browserAsksFor(...tags: string[]) {
+    browserLanguages = jest
+      .spyOn(navigator, 'languages', 'get')
+      .mockReturnValue(tags);
+  }
+
+  function first(): HTMLElement {
+    return options()[0];
+  }
+
+  afterEach(async () => {
+    browserLanguages?.mockRestore();
+    browserLanguages = undefined;
+    await act(() => applyLanguage('en'));
+  });
+
+  it("writes the first entry in the browser's language, with its name, as each language is under its own name", () => {
+    browserAsksFor('ja-JP', 'en-US');
+    renderList();
+    expect(searchField()).toBeTruthy(); // The page is in English.
+    expect(first().textContent).toBe('ブラウザの設定に従う（日本語）');
+    expect(first().getAttribute('lang')).toBe('ja');
+    expect(first().querySelector('bdi')?.getAttribute('dir')).toBe('ltr');
+    expect(chosen()).toEqual(['ブラウザの設定に従う（日本語）']);
+  });
+
+  it('writes it in English on a page in Japanese, in a browser in English', async () => {
+    await act(() => applyLanguage('ja'));
+    renderList();
+    expect(screen.getByRole('searchbox', { name: '検索' })).toBeTruthy();
+    expect(first().textContent).toBe('Use browser setting (English)');
+    expect(first().getAttribute('lang')).toBe('en');
+  });
+
+  it("writes it from right to left in a browser in Arabic, with the language's name kept together", () => {
+    browserAsksFor('ar-EG');
+    renderList();
+    expect(first().textContent).toBe(
+      `استخدام إعداد المتصفح (${isolateStart}العربية${isolateEnd})`,
+    );
+    expect(first().getAttribute('lang')).toBe('ar');
+    expect(first().querySelector('bdi')?.getAttribute('dir')).toBe('rtl');
+  });
+
+  it('writes it in the language that the browser is followed in, which is English where the app has none of its languages', () => {
+    browserAsksFor('xx-XX', 'de-AT', 'ja');
+    const { unmount } = renderList();
+    expect(first().getAttribute('lang')).toBe('de');
+    expect(first().textContent).toContain('(Deutsch)');
+    unmount();
+
+    browserAsksFor('xx-XX', 'yy');
+    renderList();
+    expect(first().textContent).toBe('Use browser setting (English)');
+    expect(first().getAttribute('lang')).toBe('en');
+  });
+
+  it("finds it by its text in the browser's language, and in the page's, which the reader of the page types", () => {
+    browserAsksFor('ja-JP');
+    renderList();
+    search('ブラウザ');
+    expect(labels()).toEqual(['ブラウザの設定に従う（日本語）']);
+    search('browser');
+    expect(labels()).toEqual(['ブラウザの設定に従う（日本語）']);
+    search('日本語');
+    expect(labels()).toEqual(['ブラウザの設定に従う（日本語）', '日本語']);
   });
 });
 
 describe('in a page shown in Arabic, which is written from right to left', () => {
   afterEach(() => act(() => applyLanguage('en')));
 
-  it("keeps the name of the browser's language together in the first entry", async () => {
+  it("writes the first entry in the browser's language all the same, which is English here, from left to right", async () => {
     await act(() => applyLanguage('ar'));
     renderList('auto');
-    const start = String.fromCodePoint(0x2068);
-    const end = String.fromCodePoint(0x2069);
-    expect(labels()[0]).toBe(`استخدام إعداد المتصفح (${start}English${end})`);
+    expect(labels()[0]).toBe('Use browser setting (English)');
+    expect(options()[0].querySelector('bdi')?.getAttribute('dir')).toBe('ltr');
 
-    // What is typed finds it as it is read, without those two characters.
+    // Its text in Arabic finds it, with the name of the browser's language
+    // kept together there, as it is read, without the two characters around
+    // the name.
     const field = screen.getByRole('searchbox', { name: 'بحث' });
-    fireEvent.change(field, { target: { value: '(english)' } });
-    expect(labels()).toEqual([`استخدام إعداد المتصفح (${start}English${end})`]);
+    fireEvent.change(field, { target: { value: 'المتصفح (english)' } });
+    expect(labels()).toEqual(['Use browser setting (English)']);
   });
 });
 

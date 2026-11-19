@@ -1,16 +1,17 @@
-import { LanguageSetting } from '../../i18n/languages';
+import { LanguageCode, LanguageSetting } from '../../i18n/languages';
 
 /** An entry of the list on the Language page. */
 export interface LanguageListItem {
   /** The value of the Language setting that the entry stands for. */
   setting: LanguageSetting;
-  /** The text of the entry: a language's own name, or the choice to follow the browser. */
+  /** The text of the entry: a language's own name, or the choice to follow the browser, in the browser's language. */
   label: string;
-  /** The language that the label is written in, by which it is drawn and read aloud. */
-  labelLanguage: string;
+  /** The language that the label is written in, by which it is drawn, in its direction, and read aloud. */
+  labelLanguage: LanguageCode;
   /**
-   * What the search finds the entry by, besides its label: a language's English
-   * name, its code, and its name in the language the page is shown in.
+   * What the search finds the entry by, besides its label: for a language, its
+   * English name, its code, and its name in the language the page is shown in;
+   * for the first entry, its text in the language the page is shown in.
    */
   keywords: readonly string[];
 }

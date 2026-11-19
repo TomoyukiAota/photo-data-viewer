@@ -10,6 +10,7 @@ import {
 } from '../../i18n/languages';
 import { browserLanguage } from '../../i18n/resolve-language';
 import { valuesIn } from '../../i18n/text-values';
+import type { BrowserSettingLabels } from './browser-setting-labels';
 import {
   findByTyping,
   LanguageListItem,
@@ -48,12 +49,17 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
 
 /**
  * The list to choose the Language setting from, with a field above it that
- * narrows the list down: the browser's language first, with the language that it
- * stands for in this browser, then each language under its own name, so that a
- * user who cannot read the current language still finds theirs.
+ * narrows the list down: the choice to follow the browser's language first,
+ * then each language under its own name, so that a user who cannot read the
+ * current language still finds theirs. For the same reason, the first entry is
+ * written in the browser's language, with the name of that language, whatever
+ * language the page is shown in: 「ブラウザの設定に従う（日本語）」 in a browser
+ * in Japanese.
  *
  * TL;DR: It looks and works like the list in Photo Location Map, so that the
- * two applications ask for the language in the same way.
+ * two applications ask for the language in the same way. Only the language of
+ * the first entry differs: Photo Location Map writes its own in the language
+ * that it is shown in.
  * Details: a list box of which one entry is chosen, in a box of seven entries
  * that scrolls. The box keeps that height whatever the search leaves, so that
  * nothing below it moves while the user types. The arrow keys, Home and End
@@ -61,11 +67,14 @@ function canTakeFocusQuietly(field: HTMLElement): boolean {
  * entry that starts with it, and Space or Enter chooses the entry under it.
  * The search is without regard to case or diacritics, and finds a language by
  * its own name, its English name, its name in the language the page is shown
- * in, or its code. The chosen entry stays chosen while the search hides it.
+ * in, or its code, and the first entry by its text in the browser's language
+ * or in the page's. The chosen entry stays chosen while the search hides it.
  */
 const LanguageList: React.FC<{
   /** The Language setting that is chosen in the list. */
   selected: LanguageSetting;
+  /** The text of the first entry in every language, of which the list shows the browser's (browser-setting-labels.ts). */
+  browserSettingLabels: BrowserSettingLabels;
   /**
    * Whether choosing the chosen entry again is a choice as well. It is not
    * while the app is shown in that entry's language, as there is nothing to do;
@@ -75,7 +84,12 @@ const LanguageList: React.FC<{
   canChooseSelected?: boolean;
   /** Called with the entry the user chose, unless it is the chosen one already and that is no choice. */
   onChoose: (setting: LanguageSetting) => void;
-}> = ({ selected, canChooseSelected = false, onChoose }) => {
+}> = ({
+  selected,
+  browserSettingLabels,
+  canChooseSelected = false,
+  onChoose,
+}) => {
   const { t, i18n } = useTranslation();
   const listId = useId();
   const listRef = useRef<HTMLUListElement>(null);
@@ -91,17 +105,22 @@ const LanguageList: React.FC<{
     [i18n.language],
   );
 
+  /** The language that the first entry follows, and is written in. */
+  const browser = browserLanguage();
+
   const items: LanguageListItem[] = [
     {
       setting: languageSettingAuto,
-      label: t(
-        'language.useBrowserSetting',
-        valuesIn(i18n.language, {
-          language: getLanguage(browserLanguage()).name,
-        }),
-      ),
-      labelLanguage: i18n.language,
-      keywords: [],
+      label: browserSettingLabels[browser],
+      labelLanguage: browser,
+      // Its text in the language of the page as well, for a user who reads
+      // that language: "browser" finds it on a page in English.
+      keywords: [
+        t(
+          'language.useBrowserSetting',
+          valuesIn(i18n.language, { language: getLanguage(browser).name }),
+        ),
+      ],
     },
     ...languages.map((language) => ({
       setting: language.code,
@@ -283,8 +302,10 @@ const LanguageList: React.FC<{
               onClick={() => choose(item.setting)}
               onFocus={() => setFocused(item.setting)}
             >
-              {/* On its own, so that a name written in the other direction than the page keeps its order. */}
-              <bdi>{item.label}</bdi>
+              {/* On its own, in the direction of its language, so that a text written in the other direction than the page keeps its order. */}
+              <bdi dir={getLanguage(item.labelLanguage).direction}>
+                {item.label}
+              </bdi>
             </li>
           ))}
         </ul>
