@@ -16,6 +16,7 @@ language's button taken out of the header again: see
 [Out of the header](#the-languages-button-out-of-the-header). On the same
 day the maintainer had the entry Layout moved up the menu: see
 [Layout before Language and Settings](#layout-before-language-and-settings).
+Each of these was merged, the last on 2026-11-20 as `92da7e6` (#99).
 On 2026-11-20 the maintainer had the layout chosen in Photo Location Map's
 window too, with a button at the end of the tabs: see
 [In Photo Location Map](#in-photo-location-map).
@@ -155,8 +156,9 @@ Demo, Layout, Language, Settings, About and Credits, in Japanese `ホーム`,
 `デモ`, `レイアウト`, `言語 (Language)`, `設定`, `このアプリについて` and
 `クレジット`. They were Home, Demo, Settings, Language, Layout, About and
 Credits: Layout moves up from the fifth place to the third, and Settings
-down from the third to the fifth. On the branch `claude/menu-order-594291`,
-from `main` at `931cfb4`.
+down from the third to the fifth. Made on the branch
+`claude/menu-order-594291`, from `main` at `931cfb4`, and merged on
+2026-11-20 as `92da7e6` (#99).
 
 - **The three entries that set how the app is shown** stay together, in
   the third to the fifth places, in the reverse order: Layout, Language and

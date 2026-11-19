@@ -5,7 +5,8 @@ Started on 2026-11-18. See the [results](./evidence/RESULTS.md).
 ## Current state
 
 Done, and checked locally. On 2026-11-18 the owner asked for it to be merged
-into `main`, from which Vercel deploys both deployments.
+into `main`, from which Vercel deploys both deployments, and it was merged on
+the same day as `629cb90` (#82).
 
 - `next` and `eslint-config-next` are 16.4.6 instead of 16.4.3, pinned and in
   step, as before. 16.4.6 is the latest release of 16.4, and npm's `latest`.

@@ -170,9 +170,12 @@ do not take longer with every language.
   written in that language, whatever language the page is shown in, as each
   language below it is listed under its own name. So your text is read by
   people whose browser is set to your language, on a page in any language, and
-  `{{language}}` is your language's own name, such as `Deutsch` in German. It
-  parallels "Use system setting" in Photo Location Map, which is written in the
-  language that Photo Location Map is shown in instead.
+  `{{language}}` is your language's own name, such as `Deutsch` in German.
+  Photo Location Map writes the first entries of its lists in the same way
+  ([its pull request #754](https://github.com/TomoyukiAota/photo-location-map/pull/754)):
+  "Use system setting" in the language that the system is set to, and the
+  "Use browser setting" of its website's language picker in the browser's
+  language.
 - `dropPhoto` has the texts of a photo dropped on the page. `dropHere` is
   shown over the page while a file is dragged over it. `title` is the
   question of the dialog that asks, once the file is dropped, whether to

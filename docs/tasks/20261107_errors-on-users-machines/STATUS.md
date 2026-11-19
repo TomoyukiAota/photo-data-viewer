@@ -5,7 +5,7 @@ Started on 2026-11-07. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Complete; verified locally.
+Complete; verified locally. Merged on 2026-11-08 as `1ff7a50` (#70).
 
 - A photo whose GPS values are empty is shown with "Location data (latitude and
   longitude) is not available." and an empty map, as for a photo without GPS
@@ -21,7 +21,7 @@ Complete; verified locally.
 
 ## Resuming
 
-Nothing is pending in this repository once the pull request is merged.
+Nothing is pending in this repository.
 
 - Seeing the errors: the analytics backend stores the new event as it stores the
   others; showing it with the rest of the errors is work in that backend.
