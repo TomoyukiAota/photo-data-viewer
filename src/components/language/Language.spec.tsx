@@ -7,6 +7,10 @@ import {
 } from '../../analytics/track-event';
 import PhotoContext from '../../context/photo/photo-context';
 import i18next, { applyLanguage, loadLanguage } from '../../i18n/i18n';
+import {
+  BrowserSettingLabels,
+  loadBrowserSettingLabels,
+} from './browser-setting-labels';
 import Language from './Language';
 
 // What the page records is checked here, and sent nowhere.
@@ -39,6 +43,12 @@ async function atAddressOf(language: string) {
 
 const reloadPhoto = jest.fn();
 
+/** The text of the list's first entry in every language, which the page's props bring. */
+let browserSettingLabels: BrowserSettingLabels;
+beforeAll(async () => {
+  browserSettingLabels = await loadBrowserSettingLabels();
+});
+
 function page() {
   return (
     <PhotoContext.Provider
@@ -49,7 +59,7 @@ function page() {
         reloadPhoto,
       }}
     >
-      <Language />
+      <Language browserSettingLabels={browserSettingLabels} />
     </PhotoContext.Provider>
   );
 }
@@ -122,7 +132,8 @@ it('follows the browser again when its entry is chosen', async () => {
   renderPage();
   expect(chosen()).toEqual(['日本語']);
 
-  await choose('ブラウザの設定に従う（English）');
+  // Its entry is in the browser's language, English, on the page in Japanese too.
+  await choose('Use browser setting (English)');
 
   expect(i18next.language).toBe('en');
   expect(chosen()).toEqual(['Use browser setting (English)']);
@@ -190,10 +201,10 @@ it("asks for the browser's language again in the same way, and keeps following t
   // the setting follows the browser.
   await act(() => applyLanguage('ja'));
   renderPage();
-  expect(chosen()).toEqual(['ブラウザの設定に従う（English）']);
+  expect(chosen()).toEqual(['Use browser setting (English)']);
   const saved = localStorage.getItem('Language');
 
-  await choose('ブラウザの設定に従う（English）');
+  await choose('Use browser setting (English)');
 
   expect(i18next.language).toBe('en');
   expect(chosen()).toEqual(['Use browser setting (English)']);
@@ -242,7 +253,7 @@ describe('at an address that names a language', () => {
   it("opens the address without a language for the browser's entry", async () => {
     await atAddressOf('de');
     renderPage();
-    await choose('Browsereinstellung verwenden (English)');
+    await choose('Use browser setting (English)');
 
     expect(i18next.language).toBe('en');
     expect(push).toHaveBeenCalledWith('/language', undefined, { locale: 'default' });

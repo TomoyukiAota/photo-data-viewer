@@ -30,6 +30,20 @@
   margin-bottom: 15px;
 }
 
+// TL;DR: Select Photo and the (i) beside it (DropHintButton), 8 pixels apart,
+// the (i) in the middle of Select Photo's height.
+// Details: The space is a gap, which is there only between the two on one
+// line: where they do not fit side by side, the (i) goes to the next line and
+// starts where that line starts, under Select Photo. A margin of the (i) would
+// move it in from there, and a class of this app's cannot give it one: MUI's
+// `margin: 0` of a button comes after the class, and wins.
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 8px;
+}
+
 .input {
   display: none;
 }
