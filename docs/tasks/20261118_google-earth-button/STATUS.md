@@ -5,6 +5,8 @@ Started on 2026-11-18. See the [plan](./PLAN.md) and the
 
 After the merge, the maintainer moved the button between those of Google Maps
 and Google Street View: [Changed after the merge](#changed-after-the-merge).
+The browser test's check of the usage data was then made to look for the
+coordinates alone: [The test of the usage data](#the-test-of-the-usage-data).
 
 ## Current state
 
@@ -72,6 +74,15 @@ button between the two others:
   only the two buttons that changed places differ in them.
   `narrow-split-panes` shows the row without its buttons, which are beyond
   the edge of the pane until the table is scrolled, and is as it was.
+
+## The test of the usage data
+
+On 2026-11-19 the browser test's check that no event sent has the photo's
+place was made to look for the latitude or the longitude with four decimals
+or more. It had looked for `37.33` or `122.00`, and failed once in CI on the
+time of an event, whose seconds were `37.335`. It still fails when the place
+is sent, which was tried on purpose
+([results](./evidence/RESULTS.md#the-check-of-the-usage-data-after-the-merge)).
 
 ## Not checked
 

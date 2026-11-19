@@ -1188,7 +1188,16 @@ test('the buttons beside the coordinates are on one line, in the order that the 
       ],
     ],
   );
-  expect(JSON.stringify(sent.events)).not.toMatch(/37\.33|122\.00/);
+  // Nor does any event carry the place, in a form that the app writes it in.
+  // TL;DR: The latitude or the longitude with four decimals or more.
+  // Details: The address that the button opens has every digit of them
+  // (37.33255833333334, -122.00566111111111), and the page has six
+  // (37.332558, -122.005661). The check looks for four and five as well,
+  // rounded or cut, and for no fewer: each event has the time it was
+  // recorded at (`client_ts`), with three decimals after the seconds. A
+  // check for 37.33 failed once in CI, on Ubuntu, with an event recorded at
+  // 13:16:37.335.
+  expect(JSON.stringify(sent.events)).not.toMatch(/37\.332[56]|122\.005[67]/);
 });
 
 test('errors nothing handled are sent to the analytics backend', async ({
