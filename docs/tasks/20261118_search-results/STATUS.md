@@ -11,6 +11,12 @@ its address; every page has an address in each of the 42 languages;
 `robots.txt` and a sitemap are served; the deployment for Photo Location Map
 asks search engines not to index it.
 
+On 2026-11-20 a link to any page got an image for its preview, the icon's
+drawing and the app's name on the icon's blue, which the maintainer chose
+from three ([PLAN.md](./PLAN.md#the-image-of-a-link-preview)). It is #102,
+from the branch `claude/link-preview-image`, which GitHub merges once its
+checks pass.
+
 What was found and checked is in [evidence/RESULTS.md](./evidence/RESULTS.md);
 the plan and the reasons are in [PLAN.md](./PLAN.md); the ways to show the
 languages in search results, and the decision, in
@@ -34,6 +40,7 @@ languages in search results, and the decision, in
 | `public/robots.txt`, `public/sitemap.xml` | New. |
 | Tests | Unit tests of all of the above; browser tests in `regression.spec.mjs` ("what search engines read", and in Japanese, the page before its texts arrive). |
 | `docs/TRANSLATING.md`, `docs/DEVELOPMENT.md`, `docs/CONTRIBUTING.md`, `README.md` | The addresses of the languages, the descriptions and the sitemap; the deployment for Photo Location Map is not indexed. |
+| `public/link-preview.png`, `scripts/generate-icons.mjs`, `SearchHead.tsx` (2026-11-20) | The image of a link preview, which the icon's script draws, and its tags: `og:image` with its width, height and alternative text, and X's `summary_large_image` with `twitter:image`. Tested in `SearchHead.spec.tsx` and the browser suite. |
 
 ## For the maintainer to review
 
@@ -57,6 +64,11 @@ languages in search results, and the decision, in
    each page's own title anyway, as it runs the page.
 3. **The sitemap lists the Home page and the About page** at every address. The
    other pages have addresses and heads in every language, but are not listed.
+4. **The image of a link preview**, which the maintainer chose on 2026-11-20
+   from three: the icon as it is, a small square beside the text; a wide image
+   on white; and this one, a wide image on the icon's blue, which looks the same
+   on a light page and on a dark one
+   ([PLAN.md](./PLAN.md#the-image-of-a-link-preview)).
 
 ## After the deployment
 
@@ -71,20 +83,23 @@ These need the maintainer's Google account:
 - After a few weeks, Search Console's report of the pages says how many of the
   addresses of the languages Google has indexed.
 
+Once the image of a link preview is deployed, share a link to a page in a
+chat app or on a social network, and see the image in its preview. A site that
+previewed the address before may keep its old preview for a while.
+
 ## Not verified
 
 - What Google and other search engines do with the new pages: that needs the
   deployment, and Google to read them.
-- How chat apps and social networks draw a link to the app: the tags were
-  checked in the HTML, not in those apps.
+- How chat apps and social networks draw a link to the app, and its image: the
+  tags and the image were checked as they are served, not in those apps, and no
+  address was given to a service that previews links.
 - Photo Location Map's window itself (the Electron suite opens windows on the
   machine): its deployment was checked with `curl` and a headless browser.
 
 ## Follow-ups
 
-- An image for link previews (`og:image`): the app has an icon now
-  (`public/`), which a preview could show; with a wide image made for previews,
-  `twitter:card` becomes `summary_large_image`.
+None: the one there was, an image for link previews, was added on 2026-11-20.
 
 ## To resume
 
@@ -93,3 +108,8 @@ texts `pageTitle` and `pageDescription` in the translation files, and, for a
 page to be listed, `public/sitemap.xml`; the unit tests of `SearchHead` check the
 sitemap against the languages, and the browser suite checks what the pages are
 served with.
+
+To change the image of a link preview, change its drawing in
+`scripts/generate-icons.mjs` and run it, and give the file a new name, in the
+script and in `linkPreviewImage` in `SearchHead.tsx`, as sites keep the image
+of an address for a while.

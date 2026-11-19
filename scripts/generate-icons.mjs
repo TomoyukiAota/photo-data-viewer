@@ -8,6 +8,10 @@
 //   themselves.
 // - public/favicon.ico: the browser's tab and bookmarks, at 16, 32 and 48
 //   pixels.
+// - public/link-preview.png: the image that sites and chat apps show with the
+//   title and the description of a link to any page of the app
+//   (src/components/search-head/SearchHead.tsx), 1200 by 630 pixels: the
+//   drawing and the app's name, in white on the icon's blue.
 //
 // The icon is a photo with an "i" for its information, the Material icons
 // "photo" and "info" from Google's Material Icons (Apache License 2.0), which
@@ -18,7 +22,10 @@
 //   node scripts/generate-icons.mjs
 //
 // It draws in Playwright's Chromium, which the browser tests install
-// (`npx playwright install chromium`), without opening a window.
+// (`npx playwright install chromium`), without opening a window. The app's
+// name is written in Roboto, the app's font, which it loads from Google Fonts
+// as the app does: it needs the network, and stops if the font does not
+// arrive, rather than write the name in another font.
 
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -111,6 +118,39 @@ function ico(images) {
   return Buffer.concat([header, ...images.map(({ data }) => data)]);
 }
 
+/** The app's name, the same in every language (src/app-integration/app-name.ts). */
+const APP_NAME = 'Photo Data Viewer';
+
+/**
+ * Roboto in the weight that the image writes the name in, from Google Fonts,
+ * as src/pages/_document.tsx loads it.
+ */
+const ROBOTO =
+  'https://fonts.googleapis.com/css?family=Roboto:500&display=swap';
+
+/**
+ * The image of a link to the app, as an SVG of 1200 by 630 pixels, the size
+ * that sites and chat apps show large: the drawing above the app's name,
+ * together in the middle, in white on the icon's blue, which looks the same on
+ * a light page and a dark one. A site that cuts it to a square keeps them. The
+ * name is the only text, so the image is the same in every language.
+ */
+function linkPreviewSvg() {
+  const [width, height] = [1200, 630];
+  const glyphBox = 250; // The side of the drawing's box of 24.
+  const drawn = (glyphBox * 20.5) / 24; // The drawing reaches 20.5 of its 24.
+  const fontSize = 64;
+  // The height of Roboto's capitals. No letter of the name goes below its line.
+  const capitals = fontSize * 0.711;
+  const gap = 64;
+  const top = (height - (drawn + gap + capitals)) / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <rect width="${width}" height="${height}" fill="${BLUE}"/>
+  <g transform="translate(${width / 2} ${top + drawn / 2}) scale(${glyphBox / 24}) translate(-12 -12)">${PHOTO_INFO_GLYPH}</g>
+  <text x="${width / 2}" y="${top + drawn + gap + capitals}" text-anchor="middle" font-family="Roboto" font-weight="500" font-size="${fontSize}" fill="#fff">${APP_NAME}</text>
+</svg>`;
+}
+
 const browser = await chromium.launch();
 const page = await browser.newPage({ deviceScaleFactor: 1 });
 
@@ -124,6 +164,26 @@ async function draw(layout, size) {
     omitBackground: true,
     clip: { x: 0, y: 0, width: size, height: size },
   });
+}
+
+/** The image of a link to the app, as a PNG. */
+async function drawLinkPreview() {
+  await page.setViewportSize({ width: 1200, height: 630 });
+  await page.setContent(
+    `<html><head><link rel="stylesheet" href="${ROBOTO}"></head><body style="margin:0">${linkPreviewSvg()}</body></html>`,
+  );
+  // The faces of Roboto that the name needs, once loaded: none when Google
+  // Fonts was not reached, and the browser would write the name in another
+  // font.
+  const faces = await page.evaluate(
+    (name) =>
+      document.fonts
+        .load('500 64px Roboto', name)
+        .then((loaded) => loaded.length),
+    APP_NAME,
+  );
+  if (!faces) throw new Error(`Roboto was not loaded from ${ROBOTO}.`);
+  return page.screenshot({ clip: { x: 0, y: 0, width: 1200, height: 630 } });
 }
 
 await mkdir('public/icons', { recursive: true });
@@ -141,5 +201,6 @@ for (const size of [16, 32, 48]) {
   favicons.push({ size, data: await draw(layout, size) });
 }
 await writeFile('public/favicon.ico', ico(favicons));
+await writeFile('public/link-preview.png', await drawLinkPreview());
 
 await browser.close();

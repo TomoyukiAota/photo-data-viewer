@@ -8,6 +8,25 @@ import { LanguageCode, languageCodes } from '../../i18n/languages';
 export const SITE_URL = 'https://photo-data-viewer.vercel.app';
 
 /**
+ * The image that a link to any page is previewed with, above or beside its
+ * title and description: the icon's drawing and the app's name, in white on
+ * the icon's blue (public/link-preview.png, drawn by
+ * scripts/generate-icons.mjs). 1200 by 630 pixels is the size that sites and
+ * chat apps show large. The name is all that it says, the same in every
+ * language, and so is its alternative text. A link preview needs a whole
+ * address, on the standalone app as the canonical addresses are.
+ *
+ * Sites and chat apps keep the image of an address for a while: a changed
+ * image needs a new name to be shown at once.
+ */
+export const linkPreviewImage = {
+  url: `${SITE_URL}/link-preview.png`,
+  width: 1200,
+  height: 630,
+  alt: appName.standalone,
+} as const;
+
+/**
  * The pages that search engines are told about, by their paths, with the keys
  * of their title and their description in the translation files
  * (src/locales). The Home page's title is the app's name, the same in every
@@ -67,7 +86,8 @@ export function addressOf(
  * The tags of a page's head that search engines and link previews read: its
  * description, its canonical address, its address in each language
  * (`hreflang`, and `x-default` for the one without a language, which follows
- * the browser), and Open Graph's and X's tags for a link to it.
+ * the browser), and Open Graph's and X's tags for a link to it, with the image
+ * of its preview (`linkPreviewImage`), which X shows large.
  *
  * With `withTitle`, the title as well: _app.tsx renders the head with it alone
  * until the page is shown, and so the page is served with it. A page whose
@@ -81,8 +101,11 @@ export function addressOf(
  * not change when the page runs. The deployment for Photo Location Map has none
  * (search-head-props.ts): its window takes the title of its page, which is the
  * photo's once it is loaded (src/context/photo/PhotoProvider.tsx), and search
- * engines are asked not to index it (next.config.js). Neither has a page
- * without props, such as the one for an address that has no page.
+ * engines are asked not to index it (next.config.js). Its address is for Photo
+ * Location Map to open, not for people to share, so it has no image of a link
+ * preview either: without a title and a description, an image alone would be
+ * no preview. A page without props, such as the one for an address that has no
+ * page, has none of the head.
  */
 const SearchHead: React.FC<{
   head: SearchHeadProps | null | undefined;
@@ -110,7 +133,13 @@ const SearchHead: React.FC<{
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:url' content={url} />
-      <meta name='twitter:card' content='summary' />
+      <meta property='og:image' content={linkPreviewImage.url} />
+      <meta property='og:image:width' content={`${linkPreviewImage.width}`} />
+      <meta property='og:image:height' content={`${linkPreviewImage.height}`} />
+      <meta property='og:image:alt' content={linkPreviewImage.alt} />
+      <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:image' content={linkPreviewImage.url} />
+      <meta name='twitter:image:alt' content={linkPreviewImage.alt} />
     </Head>
   );
 };

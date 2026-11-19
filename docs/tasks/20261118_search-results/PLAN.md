@@ -93,7 +93,82 @@ Found on 2026-11-18 ([evidence/RESULTS.md](./evidence/RESULTS.md)):
   sitemap; **`public/sitemap.xml`** lists the Home page and the About page at all
   86 addresses. A language that is added gets its two addresses there, which a
   unit test names.
-- **No image for link previews yet** (see STATUS.md).
+- **No image for link previews** at first: the app had no image then. One was
+  added afterwards ([below](#the-image-of-a-link-preview)).
+
+## The image of a link preview
+
+Added on 2026-11-20, as the follow-up of this task, once the app had an icon
+([installable app](../20261118_installable-app/PLAN.md#the-icon)). Until then
+every page was served with the tags of a link preview but no image, and
+`twitter:card` `summary`: a shared link showed a title and a description
+alone ([evidence/RESULTS.md](./evidence/RESULTS.md#the-image-of-a-link-preview)).
+
+### The choice
+
+The maintainer chose from three, which were shown with mock-ups of a link to
+`/ja` in a generic chat app, on a light page and a dark one:
+
+| Option    | Image                                                                           | How a shared link shows it                                                                                                     |
+| --------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| A         | The icon as it is, `public/icons/icon-512.png`, 512 by 512                      | A small square beside the title and the description. Its corners are transparent, and show whatever the site puts behind them. |
+| B         | 1200 by 630: the icon and the app's name on white                               | A large image above or below the text: a white block on a dark page.                                                           |
+| C, chosen | 1200 by 630: the icon's drawing and the app's name in white, on the icon's blue | A large image above or below the text, the same on a light page and on a dark one.                                             |
+
+X and Discord show a large image for `twitter:card` `summary_large_image`, and
+a small one beside the text for `summary`
+([X](https://developer.x.com/cards/markup),
+[Discord](https://docs.discord.com/developers/link-previews/overview)).
+Facebook and others choose by the image's size: below 600 by 315 pixels, a
+small one; 1200 by 630, in the ratio 1.91 to 1, is the size most of them
+advise for a large one.
+
+### The image
+
+`public/link-preview.png`, which [`scripts/generate-icons.mjs`](../../../scripts/generate-icons.mjs)
+draws with the icons ([DEVELOPMENT.md](../../DEVELOPMENT.md#the-apps-icon)):
+
+- 1200 by 630 pixels, in `#1976d2`, the icon's blue; a PNG of 19 KB, without
+  transparency, so that every site shows the same colors.
+- The icon's drawing, the photo and the "i", above the app's name in Roboto
+  500, the app's font, at 64 pixels, together in the middle. A site that cuts a
+  square out of the middle keeps both: the drawing spans x 493 to 706 and the
+  name x 339 to 864, inside the square from 285 to 915.
+- The name is all that it says, so the image is the same in every language.
+
+### The tags
+
+`SearchHead.tsx` gives every page, in every language, the same:
+
+| Tag                                  | Content                                                 |
+| ------------------------------------ | ------------------------------------------------------- |
+| `og:image`                           | `https://photo-data-viewer.vercel.app/link-preview.png` |
+| `og:image:width`, `og:image:height`  | `1200`, `630`                                           |
+| `og:image:alt`                       | `Photo Data Viewer`                                     |
+| `twitter:card`                       | `summary_large_image` (was `summary`)                   |
+| `twitter:image`, `twitter:image:alt` | The same as `og:image` and `og:image:alt`               |
+
+- **A whole address**, on the standalone app, as the canonical addresses are:
+  a link preview does not resolve a path.
+- **The width and the height** let a site lay out the large preview before it
+  has the image.
+- **The alternative text is the app's name**, which is all that the image
+  says. It needs no translation.
+- **X's own tags** too: X reads `og:image` when `twitter:image` is missing, but
+  its documentation names no such fallback for the alternative text, which
+  `twitter:image:alt` gives.
+- **A changed image needs a new name.** Sites and chat apps keep the image of
+  an address for a while.
+
+### Not in the deployment for Photo Location Map
+
+That deployment has no tag of a link preview, the image neither. It is served
+without the head of `SearchHead` (no title, no description, no `og:*`), as its
+window takes the title of its page; its address is for Photo Location Map to
+open, does not work in a browser ([CONTRIBUTING.md](../../CONTRIBUTING.md#deployments)),
+and is sent with `X-Robots-Tag: noindex`. An image without a title and a
+description would be no preview. Both deployments serve the same `public/`, so
+the file is there too, named by nothing.
 
 ## Steps
 
@@ -112,3 +187,6 @@ Found on 2026-11-18 ([evidence/RESULTS.md](./evidence/RESULTS.md)):
       with Back, and the sitemap.
 - [ ] After the deployment, by the maintainer: Google Search Console (see
       STATUS.md).
+- [x] The image of a link preview (2026-11-20): three options, the
+      maintainer's choice, the image and its tags; unit tests of the tags and of
+      the file's size, browser tests of what is served.
