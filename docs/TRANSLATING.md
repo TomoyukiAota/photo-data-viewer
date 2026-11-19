@@ -224,7 +224,9 @@ do not take longer with every language.
   window's width, as `autoDescription` says. Name the layout and the panes
   as your language's software does: the word for a layout as Windows' File
   Explorer and Office name the group of layouts, and a pane as they name the
-  preview pane and the reading pane.
+  preview pane and the reading pane. In Photo Location Map's window, which
+  shows no menu, the same word is under the icon of a button at the end of
+  the tabs, which opens the same layouts.
 - The days of the week and AM/PM in dates come from dayjs' locale, not from
   the file. The digits of a date are 0 to 9 in every language, as its other
   numbers are. One value in the file is not a text but a dayjs pattern:

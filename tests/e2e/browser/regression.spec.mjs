@@ -1816,6 +1816,173 @@ test('with a mouse, the submenu of the layouts opens on its entry, and stays ope
 // The suite above runs with the en-US locale (playwright.config.mjs); these run
 // as a browser set to Japanese, the first translation. The other languages are
 // checked by the unit test of the translation files, not here.
+/**
+ * Opens the Home page as Photo Location Map's isolated window opens it: with
+ * the parameters that it passes, and a stand-in for its bridge, which gives
+ * demo.jpg and keeps the events that the page sends it in `window.plmEvents`.
+ *
+ * TL;DR: On the suite's standalone server, which shows the page as in Photo
+ * Location Map's window by the address, as the deployment for it does.
+ * Details: The two deployments are built from the same pages. Next.js gives
+ * the standalone one an address for each language, and sets the page's
+ * `lang` to the locale of `/`, `default`, which the tests here do not look
+ * at. The Electron tests open the deployment for Photo Location Map itself
+ * (docs/DEVELOPMENT.md).
+ */
+async function openInPhotoLocationMap(page, language = 'en') {
+  await page.route('**/plm-photo/demo.jpg', (route) =>
+    route.fulfill({ contentType: 'image/jpeg', body: photo }),
+  );
+  await page.addInitScript(() => {
+    window.plmEvents = [];
+    window.plmPhotoDataViewer = {
+      version: 1,
+      readPhoto: async () => ({
+        name: 'demo.jpg',
+        type: 'image/jpeg',
+        url: '/plm-photo/demo.jpg',
+      }),
+      trackEvent: (category, action, label, value) =>
+        window.plmEvents.push({ category, action, label, value }),
+    };
+  });
+  await page.goto(
+    `/?plmBridge=1&dateFormat=YYYY-MM-DD&clockSystemFormat=24-hour&language=${language}`,
+  );
+  await expect(
+    page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+  ).toBeVisible();
+}
+
+// TL;DR: In Photo Location Map, whose window shows neither the header nor
+// the menu, the button Layout chooses the layout: at the end of the topmost
+// tabs, the data's beside the split panes, and Data, Map and Photo in a
+// single pane.
+// Details: It opens the modes of the menu's entry Layout, under it, with its
+// end at the button's end. A choice is kept in the window's storage, sent to
+// Photo Location Map as a setting's change is, and gives the focus to the
+// button at the end of the new layout's tabs, which is another element.
+test('in Photo Location Map, the button at the end of the topmost tabs chooses the layout, which is kept and recorded', async ({
+  page,
+}) => {
+  const panes = page.locator('.reflex-container.vertical');
+  const photoTab = page.getByRole('tab', { name: 'Photo', exact: true });
+  // Found while its menu is open too, which hides the page under the menu
+  // from a screen reader, as MUI does.
+  const button = page.getByRole('button', {
+    name: 'Layout',
+    exact: true,
+    includeHidden: true,
+  });
+  const menu = page.getByRole('menu', { name: 'Layout' });
+  const item = (name) => menu.getByRole('menuitemradio', { name, exact: true });
+  const changes = () =>
+    page.evaluate(() =>
+      window.plmEvents
+        .filter(
+          (event) =>
+            event.action === '[PDV] Changed User Setting' &&
+            /^LayoutMode:/.test(event.label),
+        )
+        .map((event) => event.label),
+    );
+  const pageIsWiderThanTheWindow = () =>
+    page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+
+  // Split panes in this wide window, in the automatic mode, and no menu.
+  await openInPhotoLocationMap(page);
+  await expect(panes).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'menu', exact: true }),
+  ).toBeHidden();
+
+  // After the data's tabs, in their row, 18 pixels from the window's right.
+  const [buttonBox, tabsBox] = await Promise.all([
+    button.boundingBox(),
+    page.getByRole('tablist').boundingBox(),
+  ]);
+  expect(buttonBox.x).toBeGreaterThanOrEqual(tabsBox.x + tabsBox.width);
+  expect(Math.round(buttonBox.x + buttonBox.width)).toBe(1280 - 18);
+  expect(buttonBox.y).toBeGreaterThanOrEqual(tabsBox.y);
+  expect(buttonBox.y + buttonBox.height).toBeLessThanOrEqual(
+    tabsBox.y + tabsBox.height,
+  );
+  expect(await pageIsWiderThanTheWindow()).toBe(false);
+
+  // By the keyboard: the button opens the menu with the focus on the mode
+  // chosen, under the button, with its right end at the button's.
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(button).toHaveAttribute('aria-expanded', 'true');
+  await expect(item('Automatic')).toBeFocused();
+  await expect(item('Automatic')).toHaveAttribute('aria-checked', 'true');
+  await expect(item('Split panes')).toHaveAttribute('aria-checked', 'false');
+  await expect(item('Single pane')).toHaveAttribute('aria-checked', 'false');
+  // MUI places the menu at whole pixels, and its size has fractions in some
+  // fonts: a pixel apart at most.
+  await untilStill(menu);
+  const menuBox = await menu.boundingBox();
+  expect(
+    Math.abs(menuBox.x + menuBox.width - (buttonBox.x + buttonBox.width)),
+  ).toBeLessThanOrEqual(1);
+  expect(
+    Math.abs(menuBox.y - (buttonBox.y + buttonBox.height)),
+  ).toBeLessThanOrEqual(1);
+  await snapshot(page, 'plm-layout-menu', { withMenu: true });
+  await page.keyboard.press('End');
+  await expect(item('Single pane')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(menu).toBeHidden();
+
+  // A single pane, with the button after its tabs, Data, Map and Photo,
+  // and the focus on it.
+  await expect(photoTab).toBeVisible();
+  await expect(panes).toHaveCount(0);
+  await expect(button).toBeFocused();
+  const paneTabsBox = await page.getByRole('tablist').first().boundingBox();
+  const singlePaneButtonBox = await button.boundingBox();
+  expect(singlePaneButtonBox.x).toBeGreaterThanOrEqual(
+    paneTabsBox.x + paneTabsBox.width,
+  );
+  expect(singlePaneButtonBox.y).toBeLessThan(
+    paneTabsBox.y + paneTabsBox.height,
+  );
+  expect(await page.evaluate(() => localStorage.getItem('LayoutMode'))).toBe(
+    'singlePane',
+  );
+  await expect.poll(changes).toEqual(['LayoutMode: singlePane']);
+
+  // Kept when the page is loaded again, as Photo Location Map's window keeps
+  // the page's storage.
+  await page.reload();
+  await expect(
+    page.getByRole('cell', { name: 'demo.jpg', exact: true }),
+  ).toBeVisible();
+  await expect(photoTab).toBeVisible();
+  await expect(panes).toHaveCount(0);
+
+  // Escape closes the menu, and leaves the layout as it is.
+  await button.click();
+  await expect(item('Single pane')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await expect(button).toBeFocused();
+  await expect(photoTab).toBeVisible();
+
+  // With the mouse: the split panes again, and the button after the data's
+  // tabs, with the focus.
+  await button.click();
+  await item('Split panes').click();
+  await expect(menu).toBeHidden();
+  await expect(panes).toBeVisible();
+  await expect(photoTab).toHaveCount(0);
+  await expect(button).toBeFocused();
+  await expect.poll(changes).toEqual(['LayoutMode: splitPanes']);
+  expect(await pageIsWiderThanTheWindow()).toBe(false);
+});
+
 test.describe('in a browser whose language is Japanese', () => {
   test.use({ locale: 'ja-JP' });
 
@@ -2284,6 +2451,62 @@ test.describe('in a language with longer words (Polish), on a phone', () => {
     expect(await pageIsWiderThanTheWindow(page)).toBe(false);
   });
 
+  test('in Photo Location Map, the button Layout and its menu are whole, and the tabs beside it scroll', async ({
+    page,
+  }) => {
+    await openInPhotoLocationMap(page, 'pl');
+
+    // A single pane in this window. The button, after Data, Map and Photo,
+    // is in the window, with its word on one line and whole; the tabs
+    // scroll beside it.
+    const button = page.locator('button[aria-haspopup="menu"]');
+    const word = button.locator(':scope > span > span');
+    await expect(word).not.toHaveText('Layout'); // In the language passed.
+    await expect(button).toBeInViewport({ ratio: 1 });
+    expect(await isCut(word)).toBe(false);
+    const wordBox = await word.boundingBox();
+    const fontSize = await word.evaluate((element) =>
+      parseFloat(getComputedStyle(element).fontSize),
+    );
+    expect(wordBox.height).toBeLessThan(fontSize * 2); // One line.
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+
+    // The menu: each mode's name, and the description under the automatic
+    // one, are whole and in the window.
+    await button.click();
+    const menu = page.locator(
+      `#${await button.getAttribute('aria-controls')} [role="menu"]`,
+    );
+    await untilStill(menu);
+    await expect(menu).toBeInViewport({ ratio: 1 });
+    const texts = menu.locator('.MuiListItemText-root > *');
+    await expect(texts).toHaveCount(4);
+    for (const text of await texts.all()) {
+      await expect(text).toBeInViewport({ ratio: 1 });
+      expect(await isCut(text)).toBe(false);
+    }
+
+    // Split panes: the button after the data's tabs, inside the data's
+    // column, which is inside the window.
+    await menu.getByRole('menuitemradio').nth(1).click();
+    await expect(menu).toBeHidden();
+    const columns = page.locator(
+      '.reflex-container.vertical > .reflex-element',
+    );
+    await expect(columns).toHaveCount(2);
+    const [dataBox, buttonBox] = await Promise.all([
+      columns.nth(1).boundingBox(),
+      button.boundingBox(),
+    ]);
+    expect(buttonBox.x).toBeGreaterThanOrEqual(dataBox.x);
+    expect(buttonBox.x + buttonBox.width).toBeLessThanOrEqual(
+      dataBox.x + dataBox.width,
+    );
+    expect(dataBox.x + dataBox.width).toBeLessThanOrEqual(320);
+    expect(await isCut(word)).toBe(false);
+    expect(await pageIsWiderThanTheWindow(page)).toBe(false);
+  });
+
   test('a field of the Settings page is as wide as its label, which is not cut', async ({
     page,
   }) => {
@@ -2722,5 +2945,43 @@ test.describe('in a browser whose language is Arabic', () => {
     });
     await expect(submenu).toBeHidden();
     await expect(entry).toHaveAttribute('aria-expanded', 'false');
+  });
+  test("in Photo Location Map, the button Layout is at the end of the data's tabs, on their left, and its menu opens over the data", async ({
+    page,
+  }) => {
+    await openInPhotoLocationMap(page, 'ar');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    const button = page.getByRole('button', { name: 'التخطيط', exact: true });
+    const menu = page.getByRole('menu', { name: 'التخطيط' });
+
+    // The data stays on the right, beside the photo and the map, with its
+    // tabs from its right: the button is after them, on their left, 18
+    // pixels from where the data's column begins.
+    const data = page
+      .locator('.reflex-container.vertical > .reflex-element')
+      .nth(1);
+    const [dataBox, tabsBox, buttonBox] = await Promise.all([
+      data.boundingBox(),
+      page.getByRole('tablist').boundingBox(),
+      button.boundingBox(),
+    ]);
+    expect(dataBox.x).toBeGreaterThan(600);
+    expect(Math.round(buttonBox.x - dataBox.x)).toBe(18);
+    expect(buttonBox.x + buttonBox.width).toBeLessThanOrEqual(tabsBox.x);
+
+    // Under the button, with its left end at the button's, a pixel apart at
+    // most: over the data.
+    await button.click();
+    await untilStill(menu);
+    const menuBox = await menu.boundingBox();
+    expect(Math.abs(menuBox.x - buttonBox.x)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(menuBox.y - (buttonBox.y + buttonBox.height)),
+    ).toBeLessThanOrEqual(1);
+    expect(menuBox.x + menuBox.width).toBeLessThanOrEqual(1280);
+    await snapshot(page, 'plm-layout-menu-ar', { withMenu: true });
+    await page.keyboard.press('Escape');
+    await expect(menu).toBeHidden();
+    await expect(button).toBeFocused();
   });
 });

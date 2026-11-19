@@ -49,11 +49,13 @@ describe('useLayoutMode', () => {
     expect(localStorage.getItem('LayoutMode')).toBe('columns');
   });
 
-  // Its window has no header, and so no button to change the mode back with.
-  it('is the automatic mode in Photo Location Map, whatever is stored', () => {
+  // Its window shows no menu, and has the button Layout at the end of the
+  // tabs instead (LayoutButton).
+  it('is the stored mode in Photo Location Map too', () => {
+    jest.spyOn(AppIntegration, 'isPlm', 'get').mockReturnValue(true);
     jest.spyOn(AppIntegration, 'isStandalone', 'get').mockReturnValue(false);
     localStorage.setItem('LayoutMode', 'singlePane');
     const { result } = renderHook(() => useLayoutMode());
-    expect(result.current).toBe('auto');
+    expect(result.current).toBe('singlePane');
   });
 });

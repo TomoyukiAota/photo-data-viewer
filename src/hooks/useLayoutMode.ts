@@ -1,4 +1,3 @@
-import { AppIntegration } from '../app-integration/app-integration';
 import {
   isLayoutMode,
   LayoutMode,
@@ -33,19 +32,15 @@ export function isWideLayout(
 }
 
 /**
- * The layout mode that applies: the one chosen with the button before the
- * menu's (LayoutMenu), or the automatic one for a stored value that is none of
- * the modes.
- *
- * TL;DR: In Photo Location Map, the layout is always the automatic one.
- * Details: Its window shows no header, and so no button to choose the mode
- * with. A mode stored there in some other way could not be changed back.
+ * The layout mode that applies: the one chosen in the submenu of the menu's
+ * entry Layout (LayoutSubmenu), or, in Photo Location Map, whose window shows
+ * no menu, with the button Layout at the end of the tabs (LayoutButton); the
+ * automatic one for a stored value that is none of the modes.
  */
 export function useLayoutMode(): LayoutModeType {
   const stored = useLocalStorage<unknown>(
     UserSettingKey.LayoutMode,
     UserSettingDefaultValue.LayoutMode,
   );
-  if (!AppIntegration.isStandalone) return LayoutMode.Auto;
   return isLayoutMode(stored) ? stored : LayoutMode.Auto;
 }
