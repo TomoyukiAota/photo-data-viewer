@@ -1630,6 +1630,32 @@ async function middleOf(locator) {
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 }
 
+// TL;DR: Waits until nothing moves the element: until the menu that it is
+// in has grown open.
+// Details: Playwright's wait for a stable element is not enough for a menu
+// that has just opened. Until Chrome has started the menu's growing, which
+// can take a few frames on a slow machine, the menu keeps the smaller size
+// that it starts from, which Playwright takes for stable. The pointer was
+// then put on the entry in that smaller menu, and once the menu had grown,
+// it was on another entry.
+async function untilStill(locator) {
+  await expect
+    .poll(
+      () =>
+        locator.evaluate((element) =>
+          document
+            .getAnimations()
+            .some(
+              (animation) =>
+                animation.playState === 'running' &&
+                animation.effect?.target?.contains(element),
+            ),
+        ),
+      { intervals: [50] },
+    )
+    .toBe(false);
+}
+
 // TL;DR: With a mouse, the submenu of the layouts opens when the pointer
 // rests on its entry, and closes when the pointer goes on to another entry,
 // unless it is on its way to the submenu.
@@ -1653,13 +1679,14 @@ test('with a mouse, the submenu of the layouts opens on its entry, and stays ope
   await page.goto('/');
   await menuButton.click();
   // The pointer rests on the entry, once the menu has grown open.
+  await untilStill(entry);
   await entry.hover();
   await expect(submenu).toBeVisible();
   await expect(entry).toHaveAttribute('aria-expanded', 'true');
   await expect(item('Automatic')).toBeFocused();
   // Where the pointer goes, once the submenu has grown open too: on the
   // entry, a little towards its arrow, on About, and on the last mode.
-  await item('Single pane').hover({ trial: true });
+  await untilStill(item('Single pane'));
   const entryBox = await entry.boundingBox();
   const onEntry = {
     x: entryBox.x + entryBox.width * 0.6,
@@ -2530,11 +2557,12 @@ test.describe('in a browser whose language is Arabic', () => {
     const submenu = page.locator('#layout-submenu [role="menu"]');
     const lastMode = submenu.getByRole('menuitemradio').nth(2);
     // The pointer rests on the entry, once the menu has grown open.
+    await untilStill(entry);
     await entry.hover();
     await expect(submenu).toBeVisible();
     // Towards the page: on the right of the menu, which is at the window's
     // left. Measured once the submenu has grown open.
-    await lastMode.hover({ trial: true });
+    await untilStill(lastMode);
     const entryBox = await entry.boundingBox();
     expect((await submenu.boundingBox()).x).toBeGreaterThanOrEqual(
       Math.floor(entryBox.x + entryBox.width),

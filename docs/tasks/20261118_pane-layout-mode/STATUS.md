@@ -112,6 +112,10 @@ How it does is in `src/components/app-menu/useSubmenuHover.ts`.
   English and on its right in Arabic, towards the page in both, and under
   its entry in a phone's width. The way to it is taken from where it is.
 
+The browser tests of the mouse wait until a menu has grown open before
+they put the pointer on it or measure it: Playwright's own wait was not
+enough in CI ([results](./evidence/RESULTS.md#the-test-of-the-mouse-made-steady)).
+
 ## The language's button out of the header
 
 Asked by the maintainer on 2026-11-19, while its height was being matched to

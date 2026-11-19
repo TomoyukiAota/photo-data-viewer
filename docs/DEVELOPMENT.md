@@ -117,6 +117,11 @@ default does not check that, and Chrome installs nothing from an Incognito
 window, so the test opens Playwright's full Chromium, which
 `npx playwright install chromium` installs beside the shell, in a profile of
 its own, without a window as well. It is skipped in Firefox.
+The tests of the mouse on the menu wait until the menu has grown open
+(`untilStill`) before they put the pointer on an entry or measure one.
+Playwright's own wait for a stable element can end before Chrome has
+started the menu's growing, and once the menu has grown, the pointer is on
+another entry.
 For visual comparisons on the same macOS/Chrome environment as the committed
 baseline, run `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e`. Do not update snapshots
 to accept an unexplained UI change. Cross-platform CI runs functional assertions.
