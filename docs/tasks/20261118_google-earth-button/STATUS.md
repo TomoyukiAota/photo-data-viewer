@@ -14,7 +14,10 @@ Merged on 2026-11-18, together with the change in Photo Location Map that it
 needs to show the button there: pull requests
 [#80](https://github.com/TomoyukiAota/photo-data-viewer/pull/80) here, as
 `3fcd017`, and [#740](https://github.com/TomoyukiAota/photo-location-map/pull/740)
-there. The change after it is on the branch `claude/map-button-order-b1e1fd`.
+there. The change after it was merged on 2026-11-19 as `42a576e`
+([#89](https://github.com/TomoyukiAota/photo-data-viewer/pull/89)), and the
+test of the usage data on the same day as `13d60ea`
+([#93](https://github.com/TomoyukiAota/photo-data-viewer/pull/93)).
 
 - The coordinates row of the General tab has a button between the Google Maps
   and Google Street View buttons, which opens

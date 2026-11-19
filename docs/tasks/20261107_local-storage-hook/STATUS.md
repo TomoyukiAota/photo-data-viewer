@@ -5,7 +5,7 @@ Started on 2026-11-07. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Complete; verified locally and in CI.
+Complete; verified locally and in CI. Merged on 2026-11-07 as `c5e988f` (#67).
 
 - [`src/hooks/useLocalStorage.ts`](../../../src/hooks/useLocalStorage.ts)
   replaces `@rehooks/local-storage`, which is removed from the dependencies. It
@@ -48,7 +48,7 @@ this.
 
 ## Resuming
 
-Nothing is pending once the pull request is merged. Read and write settings
-through `useLocalStorage`, `writeStorage` and `readStorage`. Code that writes a key
-directly must store strings that are not JSON-quoted, as the code listed in the
+Nothing is pending. Read and write settings through `useLocalStorage`,
+`writeStorage` and `readStorage`. Code that writes a key directly must store
+strings that are not JSON-quoted, as the code listed in the
 [plan](./PLAN.md#what-must-not-change) does.

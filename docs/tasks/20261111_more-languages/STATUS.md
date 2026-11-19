@@ -34,7 +34,9 @@ localized in, and to ask for the language in the same way:
 All of it is implemented and checked locally. It was merged on 2026-11-14
 as `6834366`, and both deployments, the app's own and the one that Photo
 Location Map opens, were checked after it
-([results](./evidence/RESULTS.md#after-the-merge)).
+([results](./evidence/RESULTS.md#after-the-merge)). The first entry in the
+browser's language was merged on 2026-11-19 as `6ce54e7`
+([#95](https://github.com/TomoyukiAota/photo-data-viewer/pull/95)).
 
 - **42 languages** (`src/i18n/languages.ts`, `src/locales/`). The 40 new
   translations are machine translation that no speaker has reviewed;
@@ -418,10 +420,12 @@ page to another page, which is the one they settled on.
 ### The first entry in the browser's language
 
 Changed on 2026-11-19, on the branch `claude/browser-setting-entry-7642a4`, at
-the maintainer's request. The first entry was written in the language of the
-page, with the browser's language in parentheses under its own name: "Use
-browser setting (日本語)" on a page in English in a browser in Japanese, two
-languages in one entry, where each other entry is wholly in its own language.
+the maintainer's request, and merged on the same day as `6ce54e7`
+([#95](https://github.com/TomoyukiAota/photo-data-viewer/pull/95)). The first
+entry was written in the language of the page, with the browser's language in
+parentheses under its own name: "Use browser setting (日本語)" on a page in
+English in a browser in Japanese, two languages in one entry, where each other
+entry is wholly in its own language.
 
 - **The entry is written in the language that it follows**, the one that
   `browserLanguage()` resolves to: its text and the name in parentheses, with
@@ -447,11 +451,15 @@ languages in one entry, where each other entry is wholly in its own language.
   which is what the entry said before: "browser" finds
   ブラウザの設定に従う（日本語） on a page in English, as a language is found
   by its name in the page's language.
-- **Photo Location Map's "Use system setting" now works otherwise**: it is
-  written in the language that Photo Location Map is shown in, with the
-  system's language in parentheses under its own name. That repository was
-  left as it is. `docs/TRANSLATING.md` says so, and that the text of this
-  entry is read by people whose browser is set to its language.
+- **Photo Location Map's "Use system setting" works the same way** since
+  [its pull request #754](https://github.com/TomoyukiAota/photo-location-map/pull/754),
+  merged on 2026-11-20: it is written in the language that the system is set
+  to, and the "Use browser setting" of its website's language picker in the
+  browser's language. This change had left that repository as it was, with
+  the entry written in the language that Photo Location Map is shown in.
+  `docs/TRANSLATING.md` says that the text of this entry is read by people
+  whose browser is set to its language, and that Photo Location Map writes
+  its first entries in the same way.
 
 ## Not verified
 

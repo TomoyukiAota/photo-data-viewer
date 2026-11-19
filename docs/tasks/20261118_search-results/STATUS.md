@@ -2,11 +2,14 @@
 
 ## Where it stands
 
-Done, on its branch, to be merged as the maintainer asked. Every page is served
-with a title, a description, a canonical address, its address in every language
-and the tags of a link preview, in the language of its address; every page has
-an address in each of the 42 languages; `robots.txt` and a sitemap are served;
-the deployment for Photo Location Map asks search engines not to index it.
+Done, and merged on 2026-11-18 as `b1cb101` (#81), as the maintainer asked.
+The maintainer's wording of the Home page's description, which names the
+latitude and the longitude, was merged on the same day as `1acacf4` (#84).
+Every page is served with a title, a description, a canonical address, its
+address in every language and the tags of a link preview, in the language of
+its address; every page has an address in each of the 42 languages;
+`robots.txt` and a sitemap are served; the deployment for Photo Location Map
+asks search engines not to index it.
 
 What was found and checked is in [evidence/RESULTS.md](./evidence/RESULTS.md);
 the plan and the reasons are in [PLAN.md](./PLAN.md); the ways to show the

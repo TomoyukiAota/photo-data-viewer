@@ -17,9 +17,9 @@ more space between the two:
 ## Current state
 
 Merged on 2026-11-18 as `358465b`, and the change after it as `7eb33ec`. The
-button about drag and drop was merged on 2026-11-19 as `6b6deb6`, and the
-space beside Select Photo as `bafeb7f`. The Japanese word for drag and drop
-is on the branch `claude/ja-drag-drop-ampersand`.
+button about drag and drop was merged on 2026-11-19 as `6b6deb6`, the space
+beside Select Photo as `bafeb7f`, and the Japanese word for drag and drop as
+`931cfb4`.
 
 - **A file dropped on any page** of the standalone app is taken
   (`src/components/drop-photo/DropPhoto.tsx`): the browser no longer opens it
@@ -250,9 +250,8 @@ drop.
 
 ## Resuming
 
-Nothing is pending once the Japanese word for drag and drop is merged. A change
-of the decisions above is in `DropPhoto.tsx` (where a drop is taken, the
-veil, several files), `DropPhotoDialog.tsx` (the dialog),
-`DropHintButton.tsx` (the button about drag and drop), `Header.module.scss`
-(the space between it and Select Photo) and `track-event.ts` (what is
-recorded).
+Nothing is pending. A change of the decisions above is in `DropPhoto.tsx`
+(where a drop is taken, the veil, several files), `DropPhotoDialog.tsx` (the
+dialog), `DropHintButton.tsx` (the button about drag and drop),
+`Header.module.scss` (the space between it and Select Photo) and
+`track-event.ts` (what is recorded).
