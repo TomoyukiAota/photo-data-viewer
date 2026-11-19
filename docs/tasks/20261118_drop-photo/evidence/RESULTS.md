@@ -55,6 +55,94 @@ The button that the maintainer asked for on 2026-11-19
 The button and its box were looked at in Chrome in English and Japanese at
 1280 pixels, in Arabic at 600, and in Polish and Japanese at 320.
 
+### The space beside Select Photo
+
+The space that the maintainer asked for on 2026-11-19
+([the status](../STATUS.md#the-space-beside-select-photo)), on the branch
+`claude/select-photo-gap-3b8882`, made from `main` at `f46d7b3` and moved
+onto `main` at `6ce54e7`, which changed the Language page, before it was
+pushed. The checks are on the latter:
+
+| Check | Result |
+| --- | --- |
+| `npm run test:all` | Passed: 785 tests in 56 suites |
+| `npm run build` | Passed |
+| `npm run build:plm` | Passed |
+| The browser suite, in Chrome, with the visual comparison | Passed: 53 tests, the new one among them, after the 23 screenshots below were made anew |
+| `npm run test:electron` | Not run: it opens windows |
+
+**The margin that was not applied.** In the production build of `main`, the
+"i" had a `margin-inline-start` of 0. Its class's rule,
+`.DropHintButton_button__… { margin-inline-start: 4px }`, was in a
+stylesheet of `/_next/static/css/` that comes before the
+`<style data-emotion="css">` in which MUI puts
+`.css-… { margin: 0; vertical-align: middle }` for a button, and both are a
+single class. Building with 8 pixels there changed nothing: the
+screenshots of the Home page were the same. From Select Photo's border to
+the "i"'s circle, the reference screenshots and the maintainer's
+screenshot of the site have about 7 pixels.
+
+**The space now**, measured in Chrome in the production build:
+
+| | Before | After |
+| --- | --- | --- |
+| Between the two buttons' boxes, on one line | 0 | 8 |
+| From Select Photo's border to the circle, on one line | 6.7 | 14.7 |
+| From where the line starts to the circle, on the next line | 6.7 | 6.7 |
+
+**At 320 pixels, in the 42 languages.** The "i" takes 30 pixels, and 38
+with the space before it. Where Select Photo leaves less, the "i" is on the
+next line. These are the eight languages whose Select Photo leaves the
+least room; in the others it leaves more than 42.6 pixels:
+
+| Code | Select Photo | Room beside it | The "i" before | The "i" now |
+| --- | --- | --- | --- | --- |
+| `fr` | 185.5 | 14.5 | Next line | Next line |
+| `el` | 184.5 | 15.5 | Next line | Next line |
+| `ru` | 184.0 | 16.0 | Next line | Next line |
+| `uk` | 176.6 | 23.4 | Next line | Next line |
+| `pt-PT` | 171.6 | 28.4 | Next line | Next line |
+| `lt` | 165.6 | 34.4 | Beside it | Next line |
+| `ca` | 163.5 | 36.5 | Beside it | Next line |
+| `hr` | 157.4 | 42.6 | Beside it | Beside it |
+
+On the next line, the "i"'s box starts where the line starts in all seven,
+and its middle is 33.3 pixels under Select Photo's, as before. Beside it,
+the two are 8 pixels apart in the other 35, at the left in Hebrew and
+Arabic, with their middles at one height. No page is wider than the
+window. Arabic, put on the next line in a window 240 pixels wide, starts
+the "i" at the right, where its line starts.
+
+**The flex box moves nothing else.** Before the gap was set, the flex box
+was tried with no gap, in English at 1280 and 320 pixels, in Japanese,
+Arabic, Polish, French and Hindi at 320, and in Thai at 1280: the header,
+the sentence, Select Photo and the "i" were where they had been, to a
+hundredth of a pixel. A margin at the end of Select Photo, which a line's
+end hides too, would have done the same without the box; like a margin of
+the "i", it would have had to be set in MUI's own styles (`sx`) to be
+applied. Where the "i" is not shown, on a phone and in Photo Location Map,
+the box holds Select Photo alone, which is where it was: on a touch phone,
+in English, Japanese, Arabic, Polish and French, the header, the sentence
+and Select Photo were where they are without the box.
+
+**The tests fail when the space is wrong.** With styles put in the page by
+a copy of the two checks, not kept: without the gap, as before this change,
+the check of the 8 pixels failed (0); with the space as a margin of the "i"
+in place of the gap, the check of the next line failed (the "i" 8 pixels in
+from where Select Photo starts). Each passed with the other change.
+
+**Screenshots.** Made anew with `--update-snapshots=all`, and each compared
+by pixel with the one before and looked at. 22 differ in the 228 pixels
+where the "i" was and is, 8 pixels further from Select Photo, and nowhere
+else: `home-1280`, `home-1201`, `home-1200`, `home-1199`, `home-600`,
+`home-320`, `loaded-general`, `loaded-details`, `loaded-raw`,
+`empty-details`, `heif-general`, `layout-menu`, `narrow-loaded`,
+`narrow-photo`, `narrow-split-panes`, `narrow-loaded-ja`,
+`narrow-loaded-ar`, `loaded-general-ar`, `drop-dialog`, `drop-dialog-ar`,
+`drop-veil` and `unsupported-dialog`. `drop-hint.png` differs where the "i"
+and the box that hangs from it were and are. Every other screenshot is
+the same, byte for byte.
+
 ## What the tests hold
 
 Unit tests:

@@ -8,12 +8,15 @@ After the merge, the maintainer tried the dialog and changed its buttons and
 the English and Japanese texts:
 [Changed after the merge](#changed-after-the-merge). Then the maintainer
 asked for a button beside Select Photo that says that a file can be dropped:
-[The button about drag and drop](#the-button-about-drag-and-drop).
+[The button about drag and drop](#the-button-about-drag-and-drop), and for
+more space between the two:
+[The space beside Select Photo](#the-space-beside-select-photo).
 
 ## Current state
 
 Merged on 2026-11-18 as `358465b`, and the change after it as `7eb33ec`. The
-button about drag and drop is on the branch `claude/drop-hint-button`.
+button about drag and drop was merged on 2026-11-19 as `6b6deb6`. The space
+beside Select Photo is on the branch `claude/select-photo-gap-3b8882`.
 
 - **A file dropped on any page** of the standalone app is taken
   (`src/components/drop-photo/DropPhoto.tsx`): the browser no longer opens it
@@ -150,6 +153,50 @@ on the other systems, Windows above all
 - **Two tests found the language's button** as the one that opens a dialog,
   which this one does too: they look for it at the end of the header now.
 
+## The space beside Select Photo
+
+On 2026-11-19 the maintainer found Select Photo and the "i" beside it too
+close together. Of four renderings of the Home page, with the "i" 4, 8, 12
+and 16 pixels from Select Photo, they chose 8: the "i"'s circle about 15
+pixels from the button's border, about the space that the button has
+between its border and its text.
+
+- **The 4 pixels before it had never been applied.**
+  `DropHintButton.module.scss` gave the "i" `margin-inline-start: 4px`, but
+  MUI's `margin: 0` of a button overrode it: MUI adds its styles after the
+  app's stylesheets, and of two classes of the same weight, the later one
+  wins. The margin was 0, and the circle about 7 pixels from the border:
+  the 5 of the button's padding around its icon and the 1.7 inside the
+  icon, as the maintainer's screenshot of the site shows. The renderings
+  had the margin applied, and showed the look before as 11 pixels.
+- **The space is a gap** (`.buttons` in
+  `src/components/home/Header.module.scss`): Select Photo, the input of
+  files and the "i" are in a flex box, 8 pixels apart (`column-gap`), the
+  "i" in the middle of Select Photo's height. It is a box of the app's,
+  which MUI gives no styles, and the "i" has no margin.
+- **Where the two do not fit side by side**, the "i" goes to the next line
+  and starts where that line starts, as it did: a gap is there only between
+  two things on one line. A margin of the "i" would have moved it in from
+  there by 8 pixels, its circle under the first letters of Select Photo,
+  which looked out of place.
+- **At 320 pixels**, the "i" is beside Select Photo in 35 languages, at its
+  left in Hebrew and Arabic. It is on the next line in the seven whose
+  Select Photo is the longest: French, the longest, Greek, Russian,
+  Ukrainian, Portuguese (Portugal), Lithuanian and Catalan. Lithuanian and
+  Catalan are new to that: their Select Photo leaves room for the "i" but
+  not for the space before it. English has the two on one line at 320
+  pixels since the language's button left the header
+  ([#91](https://github.com/TomoyukiAota/photo-data-viewer/pull/91)).
+- **The tests**: the test of the button checks that it is 8 pixels from
+  Select Photo, which would have failed while the margin was not applied.
+  A new test checks that the "i", in a window 260 pixels wide, where
+  English does not have the two on one line, is under Select Photo and
+  starts where Select Photo starts. A Polish test finds the sentence
+  before the flex box now.
+- **Screenshots**: 23 changed, every one that shows the "i": it is 8 pixels
+  further from Select Photo, and in `drop-hint.png` the box that hangs from
+  it is too ([the list](./evidence/RESULTS.md#the-space-beside-select-photo)).
+
 ## Not verified
 
 - **A real drag from the file manager**, from Windows Explorer above all,
@@ -170,8 +217,9 @@ on the other systems, Windows above all
 
 ## Resuming
 
-Nothing is pending once the button about drag and drop is merged. A change
+Nothing is pending once the space beside Select Photo is merged. A change
 of the decisions above is in `DropPhoto.tsx` (where a drop is taken, the
 veil, several files), `DropPhotoDialog.tsx` (the dialog),
-`DropHintButton.tsx` (the button about drag and drop) and `track-event.ts`
-(what is recorded).
+`DropHintButton.tsx` (the button about drag and drop), `Header.module.scss`
+(the space between it and Select Photo) and `track-event.ts` (what is
+recorded).
