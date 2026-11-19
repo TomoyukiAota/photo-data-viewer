@@ -6,6 +6,7 @@ import { AppIntegration } from '../../app-integration/app-integration';
 import { languageCodes } from '../../i18n/languages';
 import SearchHead, {
   addressOf,
+  linkPreviewImage,
   SearchHeadProps,
   searchPages,
   SITE_URL,
@@ -70,6 +71,23 @@ it("serves a page without a language with the app's name as its title, the same 
   );
 });
 
+it("previews a link to any page, in any language, with the same image of the app's drawing and name, which X shows large", () => {
+  const home: SearchHeadProps = { ...about, page: '/' };
+  for (const head of [about, aboutInJapanese, home]) {
+    const { unmount } = render(<SearchHead head={head} />);
+    const image = 'https://photo-data-viewer.vercel.app/link-preview.png';
+    expect(content('meta[property="og:image"]')).toBe(image);
+    expect(content('meta[property="og:image:width"]')).toBe('1200');
+    expect(content('meta[property="og:image:height"]')).toBe('630');
+    // The name is all that the image says, the same in every language.
+    expect(content('meta[property="og:image:alt"]')).toBe('Photo Data Viewer');
+    expect(content('meta[name="twitter:card"]')).toBe('summary_large_image');
+    expect(content('meta[name="twitter:image"]')).toBe(image);
+    expect(content('meta[name="twitter:image:alt"]')).toBe('Photo Data Viewer');
+    unmount();
+  }
+});
+
 it('lists the address of the page in every language, and the one without a language as x-default', () => {
   for (const head of [about, aboutInJapanese]) {
     const { unmount } = render(<SearchHead head={head} />);
@@ -112,7 +130,7 @@ it("has nothing in Photo Location Map's window, whose title is the photo's", () 
   expect(document.head.querySelector('title, meta, link')).toBeNull();
 });
 
-describe('the files for search engines', () => {
+describe('the files for search engines and link previews', () => {
   // Git on Windows may check the files out with CRLF line endings.
   const publicFile = (name: string) =>
     readFileSync(join(__dirname, '../../../public', name), 'utf8').replace(
@@ -143,6 +161,20 @@ describe('the files for search engines', () => {
     expect(Object.keys(searchPages)).toEqual(
       expect.arrayContaining(['/', '/about']),
     );
+  });
+
+  it('the image of a link preview is at the path of its address, a PNG of the size that the head gives', () => {
+    // Drawn by scripts/generate-icons.mjs.
+    const { pathname } = new URL(linkPreviewImage.url);
+    const png = readFileSync(join(__dirname, '../../../public', pathname));
+    // A PNG starts with its signature, then its first chunk, IHDR, which
+    // begins with the width and the height.
+    expect([...png.subarray(0, 8)]).toEqual([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+    ]);
+    expect(png.toString('latin1', 12, 16)).toBe('IHDR');
+    expect(png.readUInt32BE(16)).toBe(linkPreviewImage.width);
+    expect(png.readUInt32BE(20)).toBe(linkPreviewImage.height);
   });
 });
 

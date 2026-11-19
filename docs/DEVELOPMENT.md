@@ -178,8 +178,11 @@ Tests create disposable profiles.
 The icon of the installed app, the icon for iPhone and iPad and the favicon
 (`public/icons/`, `public/apple-touch-icon.png` and `public/favicon.ico`) are
 drawn by [`scripts/generate-icons.mjs`](../scripts/generate-icons.mjs), which
-holds the drawing. After changing it, run `node scripts/generate-icons.mjs` and
-commit the files it writes. The web app manifest,
+holds the drawing. It also draws the image of a link preview,
+`public/link-preview.png` ([below](#search-engines)), whose app name it writes
+in Roboto from Google Fonts, so it needs the network. After changing the
+drawing, run `node scripts/generate-icons.mjs` and commit the files it writes.
+The web app manifest,
 [`public/manifest.webmanifest`](../public/manifest.webmanifest), lists the icons
 of the installed app; the
 [installable app record](./tasks/20261118_installable-app/PLAN.md) says why each
@@ -209,6 +212,16 @@ own title once it is shown. [`robots.txt`](../public/robots.txt) names
 page at every address. The deployment for Photo Location Map has no addresses
 for the languages, is served without that head, and is sent with
 `X-Robots-Tag: noindex`.
+
+A link to any page is previewed with the same image,
+[`public/link-preview.png`](../public/link-preview.png): the icon's drawing and
+the app's name in white on the icon's blue, 1200 by 630 pixels, which most
+sites show large, as X does for `summary_large_image`. The name is all that it
+says, so the image is the same in every language, and so is its alternative
+text. The deployment for Photo Location Map has none, as it has none of the
+head. Sites and chat apps keep the image of an address for a while: a changed
+image needs a new name, in `linkPreviewImage` in `SearchHead.tsx`, to be shown
+at once.
 
 To see what a page is served with, `curl` it, or open it in a browser with
 JavaScript turned off. The ways to show the languages in search results that

@@ -201,3 +201,76 @@ now have `getStaticProps`, which gives `searchHead: null` there.
 - Not run: the Electron suite, which opens windows on the machine, and Firefox.
   The deployment for Photo Location Map was checked with `curl` and headless
   Chromium as above.
+
+## The image of a link preview
+
+Added on 2026-11-20, after this task was merged
+([PLAN.md](../PLAN.md#the-image-of-a-link-preview)).
+
+### Before
+
+Checked on 2026-11-20 with `curl`, against production and against
+`npm run build` and `npm run build:plm` of `main` at `92da7e6`, served with
+`next start` on ports 3350 and 3352:
+
+- The standalone app, at `/`, `/ja`, `/ja/about`, `/ar/credits` and
+  `/de/settings`: the title, the description, the canonical address, and
+  `og:type`, `og:site_name`, `og:title`, `og:description` and `og:url` in the
+  language of the address, with `twitter:card` `summary`. No `og:image` and no
+  `twitter:image`. Production served the same.
+- The deployment for Photo Location Map, at `/`, `/?plmBridge=1&language=ja`
+  and `/about`, and production's `/`: `X-Robots-Tag: noindex`, and no title, no
+  description, no `og:*` and no `twitter:*`.
+
+### After
+
+Built from the branch, on `main` at `7cec082`, and served as above, with
+`NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=` as in CI.
+
+Each page checked, `/`, `/demo`, `/ja`, `/ja/about`, `/ar/credits` and
+`/de/settings`, is served with these after `og:url`, once each (React adds
+`data-next-head=""` to each):
+
+```html
+<meta property="og:image" content="https://photo-data-viewer.vercel.app/link-preview.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Photo Data Viewer"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://photo-data-viewer.vercel.app/link-preview.png"/>
+<meta name="twitter:image:alt" content="Photo Data Viewer"/>
+```
+
+- They are in the head, within the first 6 KB of each page, which has 8.5 to
+  9 KB.
+- `/link-preview.png` is answered with 200, `image/png` and the 19,269 bytes
+  of `public/link-preview.png`: 1200 by 630 pixels, without transparency.
+  Measured in Chromium, the drawing spans x 493 to 706 and y 153 to 366, and
+  the name x 339 to 864 and y 428 to 477: together they are 153 pixels from the
+  top and 152 from the bottom, and inside the square of 630 in the middle,
+  x 285 to 915.
+- `node scripts/generate-icons.mjs`, run twice, wrote the same
+  `public/link-preview.png`, and the icons as they are committed, byte for
+  byte.
+- The deployment for Photo Location Map is served as before: `/`,
+  `/?plmBridge=1&language=ja` and `/about` have `X-Robots-Tag: noindex` and no
+  `og:*` or `twitter:*`. It serves `/link-preview.png` too, with
+  `X-Robots-Tag: noindex`, as both deployments serve `public/`; no page of it
+  names the file.
+
+### Checks
+
+- `npm run test:all`: lint and type check clean; 56 suites, 787 tests pass
+  (785 on `main`, and the two new tests of `SearchHead`).
+- `npm run build` and `npm run build:plm`: pass, at the first run.
+- The browser suite with the visual comparison against the committed
+  screenshots, `PDV_CHROME=1 PDV_VISUAL=1 npm run test:e2e` against the server
+  on port 3350 (`PDV_BASE_URL`): all 55 pass. No reference screenshot changed.
+  The check that a page which runs has one `og:image` was added after that run;
+  the six tests of "what search engines read", run again with it, pass.
+- Breakage (temporary): a width of 1201 in `linkPreviewImage` fails the test
+  of the head and the test of the file.
+- Not run: the Electron suite, which opens windows on the machine, and Firefox.
+  No address was given to a service that previews links, so how chat apps and
+  social networks draw the preview is not checked
+  ([STATUS.md](../STATUS.md#not-verified)).

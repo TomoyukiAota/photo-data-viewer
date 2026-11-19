@@ -1985,7 +1985,8 @@ test.describe('in a browser whose language is Japanese', () => {
 });
 
 // TL;DR: What search engines and link previews read: the head of a page, which
-// SearchHead.tsx gives, robots.txt and the sitemap.
+// SearchHead.tsx gives, the image of a link preview, robots.txt and the
+// sitemap.
 // Details: a search engine or a link preview that does not run the page reads
 // the page as it is served, which is its head alone, as the app renders nothing
 // until it runs in the browser (_app.tsx). Google runs the page as well, and
@@ -1996,9 +1997,10 @@ test.describe('what search engines read', () => {
   test.describe('as a page is served, before it runs', () => {
     test.use({ javaScriptEnabled: false });
 
-    test('each page has a title, a description and the address that search engines show', async ({
+    test('each page has a title, a description, the address that search engines show and the image of a link preview, which is served', async ({
       page,
     }) => {
+      const image = 'https://photo-data-viewer.vercel.app/link-preview.png';
       for (const path of Object.values(menuPaths)) {
         const response = await page.goto(path);
         expect(response.headers()['x-robots-tag']).toBeUndefined();
@@ -2016,7 +2018,23 @@ test.describe('what search engines read', () => {
           'content',
           address,
         );
+        await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+          'content',
+          image,
+        );
+        await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+          'content',
+          'summary_large_image',
+        );
       }
+
+      // The image is served from public/, at the path of its address, as a PNG
+      // of 1200 by 630 pixels: the width and the height start its first chunk.
+      const served = await page.request.get(new URL(image).pathname);
+      expect(served.status()).toBe(200);
+      expect(served.headers()['content-type']).toBe('image/png');
+      const png = await served.body();
+      expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([1200, 630]);
     });
 
     test("a page at a language's address has its title and description in that language, and lists the page's address in every language", async ({
@@ -2042,6 +2060,15 @@ test.describe('what search engines read', () => {
       await expect(
         page.locator('link[rel="alternate"][hreflang="x-default"]'),
       ).toHaveAttribute('href', 'https://photo-data-viewer.vercel.app/about');
+      // The image of a link preview says the app's name alone, which is the
+      // same in every language, and so is its alternative text.
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+        'content',
+        'https://photo-data-viewer.vercel.app/link-preview.png',
+      );
+      await expect(
+        page.locator('meta[property="og:image:alt"]'),
+      ).toHaveAttribute('content', 'Photo Data Viewer');
 
       // A language written from right to left is served so.
       await page.goto('/ar');
@@ -2073,6 +2100,10 @@ test.describe('what search engines read', () => {
     );
     await expect(page.locator('title')).toHaveCount(1);
     await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+    // Next.js keeps one tag of each name, but does not do so for Open Graph's
+    // tags, which have a property instead: a head given twice would show them
+    // twice.
+    await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
   });
 
   test("a language's address shows the page in that language, whatever the browser's, and the menu keeps it", async ({
