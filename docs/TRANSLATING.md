@@ -165,9 +165,13 @@ do not take longer with every language.
   read the current language still finds where to change it. The page's title,
   `language.title`, is the word alone.
 - `language.useBrowserSetting` is the first entry of the list on the Language
-  page: the choice to follow the language that the browser is set to.
-  `{{language}}` is the name of that language, such as `English`. It parallels
-  "Use system setting" in Photo Location Map.
+  page: the choice to follow the language that the browser is set to. It is
+  written in that language, whatever language the page is shown in, as each
+  language below it is listed under its own name. So your text is read by
+  people whose browser is set to your language, on a page in any language, and
+  `{{language}}` is your language's own name, such as `Deutsch` in German. It
+  parallels "Use system setting" in Photo Location Map, which is written in the
+  language that Photo Location Map is shown in instead.
 - `dropPhoto` has the texts of a photo dropped on the page. `dropHere` is
   shown over the page while a file is dragged over it. `title` is the
   question of the dialog that asks, once the file is dropped, whether to

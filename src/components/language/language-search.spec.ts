@@ -86,16 +86,19 @@ describe('matchesSearch', () => {
     expect(matchesSearch(brazilianPortuguese, 'pt-pt')).toBe(false);
   });
 
-  it('finds the entry that follows the browser by its text alone', () => {
+  it("finds the entry that follows the browser by its text alone, in the browser's language and in the page's", () => {
+    // In a browser in Japanese, on a page in English (LanguageList.tsx).
     const browser: LanguageListItem = {
       setting: 'auto',
-      label: 'Use browser setting (English)',
-      labelLanguage: 'en',
-      keywords: [],
+      label: 'ブラウザの設定に従う（日本語）',
+      labelLanguage: 'ja',
+      keywords: ['Use browser setting (日本語)'],
     };
+    expect(matchesSearch(browser, 'ブラウザ')).toBe(true);
     expect(matchesSearch(browser, 'browser')).toBe(true);
-    expect(matchesSearch(browser, 'eng')).toBe(true);
-    expect(matchesSearch(browser, 'en-US')).toBe(false);
+    expect(matchesSearch(browser, '日本語')).toBe(true);
+    expect(matchesSearch(browser, 'japanese')).toBe(false);
+    expect(matchesSearch(browser, 'ja-JP')).toBe(false);
   });
 });
 
