@@ -147,7 +147,10 @@ the same, byte for byte.
 
 The change of the Japanese texts that the maintainer asked for on
 2026-11-19 ([the status](../STATUS.md#the-japanese-word-for-drag-and-drop)),
-on the branch `claude/ja-drag-drop-ampersand`, from `main` at `bafeb7f`:
+on the branch `claude/ja-drag-drop-ampersand`, made from `main` at
+`bafeb7f`. Before it was pushed, `main` at `26faec8`, which changed how the
+browser suite's install test keeps its browser's profile, was merged into
+it. The checks passed on both, the same in each; these are on the merge:
 
 | Check | Result |
 | --- | --- |
