@@ -13,8 +13,9 @@ asks search engines not to index it.
 
 On 2026-11-20 a link to any page got an image for its preview, the icon's
 drawing and the app's name on the icon's blue, which the maintainer chose
-from three ([PLAN.md](./PLAN.md#the-image-of-a-link-preview)). It is on the
-branch `claude/link-preview-image`, to be merged as the maintainer approves.
+from three ([PLAN.md](./PLAN.md#the-image-of-a-link-preview)). It is #102,
+from the branch `claude/link-preview-image`, which GitHub merges once its
+checks pass.
 
 What was found and checked is in [evidence/RESULTS.md](./evidence/RESULTS.md);
 the plan and the reasons are in [PLAN.md](./PLAN.md); the ways to show the

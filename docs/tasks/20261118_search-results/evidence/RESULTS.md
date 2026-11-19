@@ -274,3 +274,10 @@ Each page checked, `/`, `/demo`, `/ja`, `/ja/about`, `/ar/credits` and
   No address was given to a service that previews links, so how chat apps and
   social networks draw the preview is not checked
   ([STATUS.md](../STATUS.md#not-verified)).
+
+With `main` merged in at `e1bd4b0` (#101, which also changes
+`docs/DEVELOPMENT.md` and the browser suite), the checks were run again:
+`npm run test:all` (57 suites, 796 tests), both builds and the browser suite
+with the visual comparison (58 tests) passed, and no screenshot changed. The
+served heads, checked again with `curl` in both builds, are as above. The
+Electron tests were not run.
