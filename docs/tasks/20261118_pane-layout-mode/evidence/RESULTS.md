@@ -251,3 +251,10 @@ A copy of the suite, not kept, started the menus' growing late with a
 instead, in 20 tries each of the click and the hover that the test starts
 with, left the pointer on the entry every time: there, the growing started
 in time, and Playwright saw it.
+
+With `main` merged in at `13d60ea` (#93, which changes the Google Earth
+test in the same file), the checks were run again: `npm run test:all` (55
+suites, 776 tests), both builds and the browser suite with the visual
+comparison (52 tests) passed, no screenshot changed, and the two tests
+passed 50 times of 50 with `--repeat-each=25`, four at a time, in
+Playwright's Chromium.
