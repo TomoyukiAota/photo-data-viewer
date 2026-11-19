@@ -115,6 +115,12 @@ app.whenReady().then(async () => {
               nodeInPage: typeof require !== 'undefined' || typeof process !== 'undefined', text: document.body.innerText,
               fileInputCount: document.querySelectorAll('input[type=file]').length,
               menuVisible: menuButton.getBoundingClientRect().width > 0,
+              // The word of the button Layout, which the window shows at the end of the data's tabs instead of the
+              // menu (src/components/layout-mode/LayoutButton.tsx), or null if it is not shown.
+              layoutButton: (() => {
+                const button = document.querySelector('button[aria-haspopup="menu"]');
+                return button && button.getBoundingClientRect().width > 0 ? button.innerText : null;
+              })(),
               dateFormat: localStorage.getItem('DateFormat'),
               clockSystemFormat: localStorage.getItem('ClockSystemFormat'),
               lang: document.documentElement.lang,

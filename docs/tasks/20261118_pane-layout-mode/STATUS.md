@@ -16,6 +16,9 @@ language's button taken out of the header again: see
 [Out of the header](#the-languages-button-out-of-the-header). On the same
 day the maintainer had the entry Layout moved up the menu: see
 [Layout before Language and Settings](#layout-before-language-and-settings).
+On 2026-11-20 the maintainer had the layout chosen in Photo Location Map's
+window too, with a button at the end of the tabs: see
+[In Photo Location Map](#in-photo-location-map).
 
 - **The menu's entry Layout** (`src/components/app-menu/LayoutSubmenu.tsx`),
   after Demo and before Language and Settings, with the icon of the split
@@ -34,8 +37,10 @@ day the maintainer had the entry Layout moved up the menu: see
 - **Split panes are kept at every width**: at 320 pixels each column is
   about 150 pixels, and the table scrolls sideways in its pane
   (`narrow-split-panes.png`).
-- **In Photo Location Map** there is no menu, so no choice, and the layout is
-  always the automatic one.
+- **In Photo Location Map**, whose window shows no menu, the button Layout
+  at the end of the topmost tabs chooses the layout
+  ([below](#in-photo-location-map)). Until 2026-11-20 there was no choice
+  there, and the layout was always the automatic one.
 - **The usage data** records the setting as the others are, when the page is
   loaded and when it changes, and "App Layout" when a change of the mode
   changes the layout shown.
@@ -176,6 +181,58 @@ from `main` at `931cfb4`.
   pixels in English, was made anew. No other reference screenshot shows the
   menu.
 
+## In Photo Location Map
+
+Asked by the maintainer on 2026-11-20: the layout is chosen in Photo
+Location Map's window too, which shows neither the header nor the menu. Of
+the places proposed, a button in the page, an entry of Photo Location Map's
+own menu View and its Settings dialog, the maintainer chose the button in
+the page, with the icon of the split panes. On the branch
+`claude/layout-in-plm`, from `main` at `92da7e6`.
+
+- **The button Layout** (`src/components/layout-mode/LayoutButton.tsx`) is
+  at the end of the topmost tabs (`Home.tsx`): the data's, General, Details
+  and Raw Data, beside the split panes, and Data, Map and Photo in a single
+  pane, where the data's own tabs, under those, have none. It ends 18
+  pixels from the side of the tabs' pane: at the window's right, and in a
+  language written from right to left at the left of the data's tabs, which
+  stay on the right of the window beside the photo and the map, or at the
+  window's left in a single pane.
+- **Its face** is the icon of the split panes, whichever mode is chosen, as
+  the menu's entry has it, with the entry's word, `menu.layout`, under it
+  on one line: 56 × 44 pixels in English, 80 × 48 in Japanese. The tabs
+  beside it scroll to give it room. It is shown pressed while its menu is
+  open.
+- **Its menu** has the submenu's three modes, as radio items with the check
+  mark at the chosen one (`useLayoutModeItems`, which the submenu now uses
+  too, with the icon, `SplitPanesIcon`), and opens under the button with
+  its end at the button's: over the data, or over the single pane.
+- **A choice takes effect once the menu is closed.** The focus goes to the
+  button at the end of the new layout's tabs, which is another element: the
+  button that leaves gives it to the one drawn (`LayoutButtonFocus`), as the
+  header kept the focus on its button when the layout under it changed.
+  Escape closes the menu, and leaves the layout as it is.
+- **The choice is kept** in the page's storage in Photo Location Map's
+  window, apart from the standalone app's in a browser, and the other open
+  windows of the viewer follow it, as a browser's other tabs do
+  (`useLocalStorage`). `useLayoutMode` reads it there as well: it gave the
+  automatic mode in Photo Location Map, whatever was stored. A change is
+  sent to Photo Location Map as a setting's change is, through its bridge.
+- **In every version of Photo Location Map**: each installed version opens
+  the deployment for it, and the window with Node.js of the earlier ones
+  shows the button too (the Electron tests).
+- **The standalone app is as it was.** With nothing after them, the tabs
+  are their own row, as before (`TabBar`), and the menu's entry Layout and
+  its submenu are unchanged: no reference screenshot changed.
+- **No text is new**: the button's word is the menu's entry's, and its menu
+  is the submenu's. `docs/TRANSLATING.md` says where the word is shown.
+- **Tests**: the button's unit tests (`LayoutButton.spec.tsx`); three
+  browser tests that open the page as Photo Location Map's isolated window
+  does, in English, Polish and Arabic, with the screenshots
+  `plm-layout-menu` and `plm-layout-menu-ar`; and the Electron tests check
+  the button's word in both windows
+  ([results](./evidence/RESULTS.md#in-photo-location-map)).
+
 ## What was decided, and by whom
 
 - The maintainer: the names of the modes, `Split panes`, `Single pane` and
@@ -191,6 +248,10 @@ from `main` at `931cfb4`.
   to the submenu, and the menu under the submenu in reach of the mouse.
 - The maintainer, on 2026-11-19: the menu's order, Home, Demo, Layout,
   Language, Settings, About and Credits.
+- The maintainer, on 2026-11-20: the layout is chosen in Photo Location
+  Map's window too, with a button at the end of the topmost tabs, whose
+  icon is the split panes', as the menu's entry has it, whichever mode is
+  chosen. The standalone app is left as it is.
 
 ## Resuming
 

@@ -89,6 +89,7 @@ for (const filename of ['demo.jpg', 'demo.heic']) {
     expect(result.electron).toBe('32.0.2');
     expect(result.fileInputCount).toBe(0);
     expect(result.menuVisible).toBe(false);
+    expect(result.layoutButton).toBe('Layout');
     expect(result.dateFormat).toBe('DD/MM/YYYY');
     expect(result.clockSystemFormat).toBe('12-hour');
     // English, as Photo Location Map's window is, until it passes a language.
@@ -135,6 +136,7 @@ for (const [window, env] of [
     expect(result.dir).toBe('ltr');
     expect(result.text).toContain('全般'); // The General tab.
     expect(result.text).not.toContain('General');
+    expect(result.layoutButton).toBe('レイアウト');
     expect(result.title).toBe('demo.jpg - Photo Location Map');
     expect(result.errors).toEqual([]);
   });
@@ -154,6 +156,7 @@ test('embedded mode lays a language written from right to left out from the righ
   expect(result.dir).toBe('rtl');
   expect(result.text).toContain('عام'); // The General tab.
   expect(result.text).not.toContain('General');
+  expect(result.layoutButton).toBe('التخطيط');
   expect(result.title).toBe('demo.jpg - Photo Location Map');
   expect(result.errors).toEqual([]);
 });
@@ -171,6 +174,7 @@ for (const transport of ['url', 'ipc']) {
       expect(result.nodeInPage).toBe(false);
       expect(result.fileInputCount).toBe(0);
       expect(result.menuVisible).toBe(false);
+      expect(result.layoutButton).toBe('Layout');
       expect(result.dateFormat).toBe('DD/MM/YYYY');
       expect(result.clockSystemFormat).toBe('12-hour');
       // English, as Photo Location Map's window is, until it passes a language.

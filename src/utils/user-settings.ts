@@ -4,7 +4,10 @@ import { DateTimeFormat } from './date-time-format';
 export const UserSettingKey = {
   DateFormat: 'DateFormat',
   ClockSystemFormat: 'ClockSystemFormat',
-  /** How the Home page lays out its panes (LayoutMode); chosen with the button before the menu's. */
+  /**
+   * How the Home page lays out its panes (LayoutMode); chosen in the submenu of the menu's entry Layout, or with the
+   * button Layout in Photo Location Map, whose window shows no menu.
+   */
   LayoutMode: 'LayoutMode',
   /** The sizes of the split panes, the layout that the code calls wide. */
   WideLayoutPhotoDataPaneFlex: 'WideLayoutPhotoDataPaneFlex',

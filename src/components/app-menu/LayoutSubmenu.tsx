@@ -9,47 +9,16 @@ import {
   PopoverActions,
   useMediaQuery,
 } from '@mui/material';
-import { createSvgIcon } from '@mui/material/SvgIcon';
-import { useId, useRef } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useIsRtl } from '../../direction/DirectionProvider';
 import { useLayoutMode } from '../../hooks/useLayoutMode';
 import { useUserSettings } from '../../hooks/useUserSettings';
-import {
-  LayoutMode,
-  LayoutModeType,
-  layoutModes,
-  UserSettingKey,
-} from '../../utils/user-settings';
+import { LayoutModeType, UserSettingKey } from '../../utils/user-settings';
+import SplitPanesIcon from '../layout-mode/SplitPanesIcon';
+import { useLayoutModeItems } from '../layout-mode/useLayoutModeItems';
 import { SubmenuEntryHandlers } from './useSubmenuHover';
-
-/**
- * Two panes stacked beside a tall one, as the split panes are: the photo and
- * the map on the left, and the data on the right, in a language written from
- * right to left too. It is MUI's SpaceDashboard icon, mirrored.
- */
-const SplitPanesIcon = createSvgIcon(
-  <path d='M13 21h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-6zm-2 0H5c-1.1 0-2-.9-2-2v-7h8zM3 10V5c0-1.1.9-2 2-2h6v7z' />,
-  'SplitPanes',
-);
-
-/** The keys of each mode's texts in src/locales. */
-const modeTexts: Record<
-  LayoutModeType,
-  {
-    nameKey:
-      'home.layout.auto' | 'home.layout.splitPanes' | 'home.layout.singlePane';
-    descriptionKey?: 'home.layout.autoDescription';
-  }
-> = {
-  [LayoutMode.Auto]: {
-    nameKey: 'home.layout.auto',
-    descriptionKey: 'home.layout.autoDescription',
-  },
-  [LayoutMode.SplitPanes]: { nameKey: 'home.layout.splitPanes' },
-  [LayoutMode.SinglePane]: { nameKey: 'home.layout.singlePane' },
-};
 
 /** The submenu's id, which its entry in the menu names while it is open. */
 const submenuId = 'layout-submenu';
@@ -118,16 +87,15 @@ export const LayoutMenuItem: React.FC<{
  * The submenu of the layout modes, which the menu's entry Layout opens
  * (LayoutMenuItem), beside the menu, towards the page.
  *
- * TL;DR: The modes are radio items, with the check mark at the chosen one, as
- * the menu has it at the page shown, and without icons.
- * Details: A screen reader says which mode is chosen. The submenu opens with
- * the keyboard's focus on it. Escape or the arrow back towards the menu
- * closes the submenu alone, and gives the focus back to its entry; choosing a
- * mode closes the menu too, once the submenu is closed, so that the focus
- * goes back to the menu's button through the entry: closed together, it was
- * lost. It is in the page beside the menu rather than inside it, so that its
- * keys do not move along the menu as well. With a mouse, the menu under it
- * stays in reach (see `pointerEvents` below).
+ * TL;DR: The modes are radio items (useLayoutModeItems), and the submenu opens
+ * with the keyboard's focus on the chosen one.
+ * Details: Escape or the arrow back towards the menu closes the submenu
+ * alone, and gives the focus back to its entry; choosing a mode closes the
+ * menu too, once the submenu is closed, so that the focus goes back to the
+ * menu's button through the entry: closed together, it was lost. It is in the
+ * page beside the menu rather than inside it, so that its keys do not move
+ * along the menu as well. With a mouse, the menu under it stays in reach (see
+ * `pointerEvents` below).
  */
 const LayoutSubmenu: React.FC<{
   /** The menu's entry Layout while the submenu is open, or null. */
@@ -139,11 +107,9 @@ const LayoutSubmenu: React.FC<{
   /** Closes the menu, once the submenu is closed after a mode is chosen. */
   onChosen: () => void;
 }> = (props) => {
-  const { t } = useTranslation();
   const isRtl = useIsRtl();
   const layoutMode = useLayoutMode();
   const { setUserSetting } = useUserSettings();
-  const id = useId();
   /** Whether a mode was chosen, which closes the menu once the submenu is closed. */
   const isChosen = useRef(false);
   // In a phone's width the menu takes most of the window, and the submenu
@@ -159,6 +125,7 @@ const LayoutSubmenu: React.FC<{
     isChosen.current = true;
     props.onClose();
   };
+  const items = useLayoutModeItems(handleModeChosen);
 
   return (
     <Menu
@@ -213,40 +180,7 @@ const LayoutSubmenu: React.FC<{
         },
       }}
     >
-      {layoutModes.map((mode) => {
-        const isChosen = mode === layoutMode;
-        const { nameKey, descriptionKey } = modeTexts[mode];
-        // The entry is named by its name alone, and its description, under
-        // the name, is read after it.
-        const nameId = `${id}${mode}-name`;
-        const descriptionId = `${id}${mode}-description`;
-        return (
-          <MenuItem
-            key={mode}
-            role='menuitemradio'
-            aria-checked={isChosen}
-            aria-labelledby={descriptionKey ? nameId : undefined}
-            aria-describedby={descriptionKey ? descriptionId : undefined}
-            // The submenu opens with the focus on the chosen mode.
-            selected={isChosen}
-            onClick={() => handleModeChosen(mode)}
-            // A text wider than the window continues on the next line.
-            sx={{ whiteSpace: 'normal' }}
-          >
-            <ListItemIcon>
-              <Check style={{ visibility: isChosen ? 'visible' : 'hidden' }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={t(nameKey)}
-              secondary={descriptionKey && t(descriptionKey)}
-              slotProps={{
-                primary: { id: nameId },
-                secondary: { id: descriptionId },
-              }}
-            />
-          </MenuItem>
-        );
-      })}
+      {items}
     </Menu>
   );
 };

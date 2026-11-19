@@ -310,3 +310,66 @@ rewrites only what no longer matches. It differs from the one on `main`
 only at x 622–1239, y 161–408: the entries that changed places, and the
 submenu where it was and where it is, with their shadows. No other
 screenshot changed.
+
+## In Photo Location Map
+
+Checked on 2026-11-20 on macOS 27 with Node 26.13.0 / npm 11.20.0, on the
+branch `claude/layout-in-plm` from `main` at `92da7e6`
+([the status](../STATUS.md#in-photo-location-map)).
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 57 suites, 794 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS, against `next start` of the build | 58 tests: the 56 that were there passed, with the visual comparison; the 3 new ones passed, 3 times each, once their 2 screenshots were made. |
+| `npm run test:electron` with Electron 32.0.2 | 11 passed. |
+| `npm run test:electron -- --grep "isolated window"` with Electron 45.3.2, Photo Location Map's | 7 passed. |
+| The browser suite in Firefox | Not run. |
+
+The button and its menu were measured in the deployment for Photo Location
+Map (`npm run build:plm`, then `next start`), opened in headless Chromium as
+its isolated window opens it, with a stand-in for its bridge, in each of the
+42 languages and in five windows: 1240 × 772 in the automatic mode, which
+splits the panes there; split panes at 640 × 600 and at 400 × 600; and a
+single pane at 900 × 640 and at 320 × 640. Of the 210, none had a problem:
+
+- The button was in its tabs' row and its pane, its end 18 pixels from the
+  side of the pane, its word on one line and not cut, and the page no wider
+  than the window. The row was 49 pixels high in every language, its line
+  included.
+- The menu was in the window, its top at the button's bottom (0 or 1
+  pixel), with the focus on the mode chosen, and no text in it was cut.
+- At 400 pixels, the data's column is 196 pixels wide, and its tabs
+  scrolled beside the button in every language.
+
+The button, from the narrowest to the widest, at 1240 pixels:
+
+| Language | Button (width × height) |
+| --- | --- |
+| Chinese (Simplified) | 44 × 47 |
+| Vietnamese | 49 × 44 |
+| Hebrew | 50 × 44 |
+| Arabic, Polish | 51 × 44 |
+| Danish, English, German, Italian, Portuguese (Brazil), Swedish | 56 × 44 |
+| Japanese | 80 × 48 |
+| Lithuanian, Latvian | 81 × 44 |
+| Bulgarian | 94 × 44 |
+
+In English, Japanese, Arabic and German, the button and the menu, in
+pixels from the window's left and top:
+
+| Window | Language | Button | Menu |
+| --- | --- | --- | --- |
+| 1240, automatic | English | x 1166–1222 | x 780–1222, from y 46 |
+| 1240, automatic | Japanese | x 1142–1222 | x 729–1222, from y 48 |
+| 1240, automatic | Arabic | x 642–693, after the data's tabs, on their left | x 642–1028, from y 46 |
+| 1240, automatic | German | x 1166–1222 | x 629–1222, from y 46 |
+| 640, split panes | Arabic | x 342–393 | x 238–624: moved left to stay in the window |
+| 320, single pane | English | x 246–302 | x 16–304, in the window's margins |
+| 320, single pane | Arabic | x 18–69, at the window's left | x 16–304 |
+
+### Reference screenshots
+
+`plm-layout-menu` and `plm-layout-menu-ar` are new: the button's menu open
+in Photo Location Map's window at 1280 pixels, in English and in Arabic. No
+other screenshot changed.

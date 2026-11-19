@@ -1,0 +1,13 @@
+// The icon with the word Layout under it (LayoutButton), in the height of the
+// tabs' row. The button is as wide as the word, which stays on one line: the
+// tabs beside it scroll to give it room.
+.face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face-text {
+  font-size: 12px;
+  white-space: nowrap;
+}
