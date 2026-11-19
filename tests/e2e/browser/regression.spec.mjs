@@ -128,8 +128,8 @@ async function dropFiles(page, files, target = page.locator('#__next')) {
 const menuPaths = {
   Home: '/',
   Demo: '/demo',
-  Settings: '/settings',
   Language: '/language',
+  Settings: '/settings',
   About: '/about',
   Credits: '/credits',
 };
@@ -573,11 +573,17 @@ test('the Credits page, the last entry of the menu, credits the authors of the i
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/about');
   await page.getByRole('button', { name: 'menu', exact: true }).click();
-  // The entries of the pages, and Layout, which opens a submenu, after
+  // The entries of the pages, and Layout, which opens a submenu, before
   // Language.
-  const entries = Object.keys(menuPaths);
-  entries.splice(entries.indexOf('Language') + 1, 0, 'Layout');
-  await expect(page.getByRole('menuitem')).toHaveText(entries);
+  await expect(page.getByRole('menuitem')).toHaveText([
+    'Home',
+    'Demo',
+    'Layout',
+    'Language',
+    'Settings',
+    'About',
+    'Credits',
+  ]);
   await page.keyboard.press('Escape');
   await navigate(page, 'Credits');
   await expect(page).toHaveTitle('Credits - Photo Data Viewer');
@@ -1745,7 +1751,8 @@ test('with a mouse, the submenu of the layouts opens on its entry, and stays ope
   const menuButton = page.getByRole('button', { name: 'menu', exact: true });
   const menu = page.locator('#menu-appbar');
   const entry = page.locator('[aria-haspopup="menu"]');
-  const about = menu.locator('[role="menuitem"]', { hasText: 'About' });
+  // The entry under Layout.
+  const language = menu.locator('[role="menuitem"]', { hasText: 'Language' });
   const submenu = page.locator('#layout-submenu [role="menu"]');
   const item = (name) => page.getByRole('menuitemradio', { name, exact: true });
 
@@ -1758,26 +1765,26 @@ test('with a mouse, the submenu of the layouts opens on its entry, and stays ope
   await expect(entry).toHaveAttribute('aria-expanded', 'true');
   await expect(item('Automatic')).toBeFocused();
   // Where the pointer goes, once the submenu has grown open too: on the
-  // entry, a little towards its arrow, on About, and on the last mode.
+  // entry, a little towards its arrow, on Language, and on the last mode.
   await untilStill(item('Single pane'));
   const entryBox = await entry.boundingBox();
   const onEntry = {
     x: entryBox.x + entryBox.width * 0.6,
     y: entryBox.y + entryBox.height / 2,
   };
-  const aboutMiddle = await middleOf(about);
+  const languageMiddle = await middleOf(language);
   const singlePane = await middleOf(item('Single pane'));
 
-  // Straight down, to About: the submenu closes, and the focus is back on
+  // Straight down, to Language: the submenu closes, and the focus is back on
   // its entry.
   await page.mouse.move(onEntry.x, onEntry.y);
-  await page.mouse.move(onEntry.x, aboutMiddle.y, { steps: 5 });
+  await page.mouse.move(onEntry.x, languageMiddle.y, { steps: 5 });
   await expect(submenu).toBeHidden();
   await expect(entry).toHaveAttribute('aria-expanded', 'false');
   await expect(entry).toBeFocused();
 
-  // Back on the entry, and down and to the left, across About and Credits,
-  // to the last mode: the submenu stays open on the way.
+  // Back on the entry, and down and to the left, across Language, to the
+  // last mode: the submenu stays open on the way.
   await page.mouse.move(onEntry.x, onEntry.y, { steps: 5 });
   await expect(submenu).toBeVisible();
   await page.mouse.move(singlePane.x, singlePane.y, { steps: 20 });

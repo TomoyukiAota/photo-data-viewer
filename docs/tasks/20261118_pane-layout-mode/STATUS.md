@@ -13,13 +13,15 @@ menu, and for a language's button in its place: see
 that, for the submenu to open when the mouse is on its entry: see
 [Opened on hover](#opened-on-hover). On 2026-11-19 the maintainer had the
 language's button taken out of the header again: see
-[Out of the header](#the-languages-button-out-of-the-header).
+[Out of the header](#the-languages-button-out-of-the-header). On the same
+day the maintainer had the entry Layout moved up the menu: see
+[Layout before Language and Settings](#layout-before-language-and-settings).
 
 - **The menu's entry Layout** (`src/components/app-menu/LayoutSubmenu.tsx`),
-  after the entry Language, with the icon of the split panes, opens a
-  submenu of three modes: **Automatic** ("Split panes in a wide window, a
-  single pane in a narrow one"), which is the default and today's
-  behaviour, **Split panes** and **Single pane**. In Japanese, the
+  after Demo and before Language and Settings, with the icon of the split
+  panes, opens a submenu of three modes: **Automatic** ("Split panes in a
+  wide window, a single pane in a narrow one"), which is the default and
+  today's behaviour, **Split panes** and **Single pane**. In Japanese, the
   maintainer's words: `自動`, `表示領域を分割する` and `表示領域を分割しない`.
 - **The choice is a setting**, `LayoutMode` (`auto`, `splitPanes`,
   `singlePane`), kept in the browser as the other settings are
@@ -52,11 +54,13 @@ a submenu without icons, and the entry has the icon of the split panes,
 always. In the header, where the button LAYOUT was, is the language picker
 of Photo Location Map's website.
 
-- **The entry Layout** comes after Language: Settings, Language and Layout
-  are the entries that set how the app is shown. It has an arrow towards
-  its submenu, as a desktop's menu has. A click, Enter, Space or that arrow
-  key opens the submenu with the focus on the chosen mode; the arrow back
-  or Escape closes it alone, and gives the focus back to the entry.
+- **The entry Layout** came after Language: Settings, Language and Layout
+  are the entries that set how the app is shown. Since 2026-11-19 it is
+  before the two ([below](#layout-before-language-and-settings)). It has an
+  arrow towards its submenu, as a desktop's menu has. A click, Enter, Space
+  or that arrow key opens the submenu with the focus on the chosen mode;
+  the arrow back or Escape closes it alone, and gives the focus back to the
+  entry.
 - **The submenu** is beside the menu, towards the page, and under the entry
   in a phone's width, where the menu takes most of the window and the
   submenu would lie over its entry. Its modes have no icons; the chosen one
@@ -92,7 +96,7 @@ How it does is in `src/components/app-menu/useSubmenuHover.ts`.
 
 - **The pointer that rests on the entry** for a tenth of a second opens the
   submenu, with the focus on the chosen mode, as a click does. One that
-  passes over the entry, on its way to About, does not.
+  passes over the entry, on its way to another entry, does not.
 - **The pointer that goes on to another entry** closes the submenu, and the
   focus goes back to the entry, unless the pointer is on its way to the
   submenu: in the triangle between where it left the entry and the
@@ -139,6 +143,39 @@ shown still knows.
   drop (#90) is beside Select Photo instead of under it, and everything
   under the header is higher by them.
 
+## Layout before Language and Settings
+
+Asked by the maintainer on 2026-11-19: the menu's entries in the order Home,
+Demo, Layout, Language, Settings, About and Credits, in Japanese `ホーム`,
+`デモ`, `レイアウト`, `言語 (Language)`, `設定`, `このアプリについて` and
+`クレジット`. They were Home, Demo, Settings, Language, Layout, About and
+Credits: Layout moves up from the fifth place to the third, and Settings
+down from the third to the fifth. On the branch `claude/menu-order-594291`,
+from `main` at `931cfb4`.
+
+- **The three entries that set how the app is shown** stay together, in
+  the third to the fifth places, in the reverse order: Layout, Language and
+  Settings. Home, Demo, About and Credits keep their places. The order is
+  the same in every language, in a language written from right to left too.
+- **The order is one list**, `menuEntries` in
+  `src/components/app-menu/AppMenu.tsx`, which has Layout among the pages.
+  The entries were made from the list of the pages before, with Layout
+  added after Language.
+- **The submenu of the layouts** opens beside its entry, in the entry's new
+  place: at 1280 pixels its top is 72 pixels higher than it was, and in a
+  phone's width, where it is under the entry, 96 pixels higher, over the
+  entries under Layout. It opens on hover, with a click, a tap, Enter,
+  Space and the arrow towards it, as it did
+  ([results](./evidence/RESULTS.md#layout-before-language-and-settings)).
+- **The entry under Layout** is Language instead of About. The tests of the
+  mouse go straight down to Language, and across it towards the submenu.
+  The unit tests that stand for the submenu's place (`AppMenu.spec.tsx` and
+  `useSubmenuHover.spec.ts`) have its boxes as measured in the new place.
+- **In Photo Location Map** there is no menu, as before.
+- **Screenshots**: `layout-menu`, the menu with the submenu open at 1280
+  pixels in English, was made anew. No other reference screenshot shows the
+  menu.
+
 ## What was decided, and by whom
 
 - The maintainer: the names of the modes, `Split panes`, `Single pane` and
@@ -152,6 +189,8 @@ shown still knows.
 - The maintainer, after #88: the submenu opens on hover. Its details follow
   a desktop's menus, as asked with it: a short rest on the entry, the way
   to the submenu, and the menu under the submenu in reach of the mouse.
+- The maintainer, on 2026-11-19: the menu's order, Home, Demo, Layout,
+  Language, Settings, About and Credits.
 
 ## Resuming
 
