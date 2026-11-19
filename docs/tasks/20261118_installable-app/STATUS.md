@@ -66,6 +66,12 @@ The browser test (`Chrome offers to install the app, with its name and icons`)
 fails when a change to the manifest or the icons makes the app no longer
 installable, and says what Chrome finds missing.
 
+The test's browser has a profile in a temporary folder, which Playwright
+deletes when the test closes the browser. Until 2026-11-19 the profile was in
+the test's output folder, where it stayed, and CI uploaded it whenever a
+browser test failed: most of what CI kept of a failure
+([results](./evidence/RESULTS.md#the-browsers-profile-in-a-temporary-folder)).
+
 ## Follow-ups
 
 - Open a photo with the installed app from Finder or Explorer: `file_handlers`
