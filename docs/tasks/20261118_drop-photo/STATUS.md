@@ -8,15 +8,18 @@ After the merge, the maintainer tried the dialog and changed its buttons and
 the English and Japanese texts:
 [Changed after the merge](#changed-after-the-merge). Then the maintainer
 asked for a button beside Select Photo that says that a file can be dropped:
-[The button about drag and drop](#the-button-about-drag-and-drop), and for
+[The button about drag and drop](#the-button-about-drag-and-drop), for
 more space between the two:
-[The space beside Select Photo](#the-space-beside-select-photo).
+[The space beside Select Photo](#the-space-beside-select-photo), and for
+`ドラッグ＆ドロップ` in its Japanese texts:
+[The Japanese word for drag and drop](#the-japanese-word-for-drag-and-drop).
 
 ## Current state
 
 Merged on 2026-11-18 as `358465b`, and the change after it as `7eb33ec`. The
-button about drag and drop was merged on 2026-11-19 as `6b6deb6`. The space
-beside Select Photo is on the branch `claude/select-photo-gap-3b8882`.
+button about drag and drop was merged on 2026-11-19 as `6b6deb6`, and the
+space beside Select Photo as `bafeb7f`. The Japanese word for drag and drop
+is on the branch `claude/ja-drag-drop-ampersand`.
 
 - **A file dropped on any page** of the standalone app is taken
   (`src/components/drop-photo/DropPhoto.tsx`): the browser no longer opens it
@@ -142,8 +145,10 @@ on the other systems, Windows above all
   one with the name put in: many languages give a name another form in a
   sentence (`Resurssienhallinnasta`, `из Проводника`).
 - **The Japanese texts are the maintainer's words**:
-  `ドラッグアンドドロップについて` for the button, and
-  `Finder からファイルをドラッグアンドドロップして選択することもできます。`.
+  `ドラッグ＆ドロップについて` for the button, and
+  `Finder からファイルをドラッグ＆ドロップして選択することもできます。`,
+  which said `ドラッグアンドドロップ` at first
+  ([The Japanese word for drag and drop](#the-japanese-word-for-drag-and-drop)).
   English says "a file" as they do.
 - **Screenshots**: every screenshot of the Home page shows the button, as
   the browser suite's browser has a mouse: 21 of them changed, by the button
@@ -197,6 +202,34 @@ between its border and its text.
   further from Select Photo, and in `drop-hint.png` the box that hangs from
   it is too ([the list](./evidence/RESULTS.md#the-space-beside-select-photo)).
 
+## The Japanese word for drag and drop
+
+On 2026-11-19 the maintainer asked for `ドラッグ＆ドロップ` in place of
+`ドラッグアンドドロップ` in the Japanese texts of the button about drag and
+drop.
+
+- **Three texts in `src/locales/ja.json`** had the word, and no other text
+  of the app: `hintButton`, `ドラッグ＆ドロップについて`, which the button
+  has as its name and its tooltip, and `hintFinder` and `hintFileExplorer`,
+  the sentence in its box. The other languages are unchanged.
+- **The ampersand is the full-width one**, `＆` (U+FF06), as the maintainer
+  wrote it.
+- **A word joiner is on each side of the ＆** in the sentence
+  (`ドラッグ\u2060＆\u2060ドロップ`). Chrome ends a line of Japanese between
+  two phrases (`word-break: auto-phrase` in `src/styles/globals.scss`), and
+  takes the ＆ for the end of one: without the joiners, the sentence was in
+  two lines, the first ending after `ドラッグ` on Windows, so that the
+  second started with `＆`, and after `＆` on a Mac. With them, the word is
+  on one line. Elsewhere a line of Japanese may end between any two
+  letters, in this word as in the one before it. The button's name and
+  tooltip have no joiners: they are short, on one line.
+- **A test** opens the box in Japanese, on Windows and on a Mac, and checks
+  that the word is on one line. It failed without the joiners.
+- **No screenshot changed**: the four Japanese screenshots do not open the
+  box, a tooltip is not in a screenshot, and `drop-hint.png` is in English.
+  The box was looked at in Chrome, before and after the change
+  ([the box](./evidence/RESULTS.md#the-japanese-word-for-drag-and-drop)).
+
 ## Not verified
 
 - **A real drag from the file manager**, from Windows Explorer above all,
@@ -217,7 +250,7 @@ between its border and its text.
 
 ## Resuming
 
-Nothing is pending once the space beside Select Photo is merged. A change
+Nothing is pending once the Japanese word for drag and drop is merged. A change
 of the decisions above is in `DropPhoto.tsx` (where a drop is taken, the
 veil, several files), `DropPhotoDialog.tsx` (the dialog),
 `DropHintButton.tsx` (the button about drag and drop), `Header.module.scss`
