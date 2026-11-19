@@ -36,11 +36,18 @@ interface Page {
   icon: React.JSX.Element;
 }
 
-const pages: Page[] = [
+/**
+ * The menu's entries, in order: the pages that they open, and `'layout'`, the
+ * entry Layout, which opens the submenu of the layouts (LayoutSubmenu).
+ * Layout, Language and Settings, the three entries that set how the app is
+ * shown, are together.
+ */
+const menuEntries: (Page | 'layout')[] = [
   { pathname: '/', nameKey: 'menu.home', icon: <HomeIcon /> },
   { pathname: '/demo', nameKey: 'menu.demo', icon: <PlayArrowIcon /> },
-  { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
+  'layout',
   { pathname: '/language', nameKey: 'menu.language', icon: <LanguageIcon /> },
+  { pathname: '/settings', nameKey: 'menu.settings', icon: <SettingsIcon /> },
   { pathname: '/about', nameKey: 'menu.about', icon: <InfoIcon /> },
   { pathname: '/credits', nameKey: 'menu.credits', icon: <AttributionIcon /> },
 ];
@@ -106,11 +113,20 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
     handleCloseMenu();
   };
 
-  // The entries of the pages, with Layout after Language: the three entries
-  // that set how the app is shown together.
-  const entries = pages.flatMap((page) => {
+  const entries = menuEntries.map((page) => {
+    if (page === 'layout') {
+      return (
+        <LayoutMenuItem
+          key='layout'
+          id={layoutEntryId}
+          isSubmenuOpen={Boolean(layoutEntry)}
+          onOpenSubmenu={setLayoutEntry}
+          hoverHandlers={layoutEntryHover}
+        />
+      );
+    }
     const isCurrentPage = router.pathname === page.pathname;
-    const entry = (
+    return (
       <MenuItem
         key={page.pathname}
         onClick={() => handleMenuItemClicked(page)}
@@ -124,17 +140,6 @@ const AppMenu: React.FC<{ className?: string; isVisible: boolean }> = (
         <ListItemText>{t(page.nameKey)}</ListItemText>
       </MenuItem>
     );
-    if (page.pathname !== '/language') return [entry];
-    return [
-      entry,
-      <LayoutMenuItem
-        key='layout'
-        id={layoutEntryId}
-        isSubmenuOpen={Boolean(layoutEntry)}
-        onOpenSubmenu={setLayoutEntry}
-        hoverHandlers={layoutEntryHover}
-      />,
-    ];
   });
 
   return (

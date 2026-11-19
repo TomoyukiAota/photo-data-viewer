@@ -258,3 +258,55 @@ suites, 776 tests), both builds and the browser suite with the visual
 comparison (52 tests) passed, no screenshot changed, and the two tests
 passed 50 times of 50 with `--repeat-each=25`, four at a time, in
 Playwright's Chromium.
+
+## Layout before Language and Settings
+
+Checked on 2026-11-19 on macOS 27 with Node 26.13.0 / npm 11.20.0, on the
+branch `claude/menu-order-594291` from `main` at `931cfb4`
+([the status](../STATUS.md#layout-before-language-and-settings)).
+
+| Command | Result |
+| --- | --- |
+| `npm run test:all` | Lint and type check clean; 56 suites, 785 tests passed. |
+| `npm run build` and `npm run build:plm` | Passed. |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS, against `next start` of the build | 55 passed, with the visual comparison. |
+| `npm run test:electron`, and the browser suite in Firefox | Not run. |
+
+The menu was measured in the production build with headless Chrome, on
+`main` and with the change, with the submenu opened by the pointer resting
+on its entry. The menu is where it was and as large, each entry as high as
+it was; only the order of the entries changed, and the submenu moved with
+its entry. In pixels from the window's top:
+
+| Window | Language | The entry Layout | The submenu of the layouts |
+| --- | --- | --- | --- |
+| 1280 × 800 | English | 174–210 (was 246–282) | x 629–1071, y 174–318 (was 246–390), left of the menu |
+| 1280 × 800 | Japanese | 176–212 (was 248–284) | x 522–1015, y 176–320 (was 248–392), left of the menu |
+| 1280 × 800 | Arabic | 174–210 (was 246–282) | x 229–615, y 174–318 (was 246–390), right of the menu |
+| 320 × 800 | English | 198–246 (was 294–342) | x 16–304, y 246–434 (was 342–530), under the entry |
+| 320 × 667 | Polish | 198–246 (was 294–342) | x 16–304, y 246–434 (was 342–530), under the entry |
+| 320 × 800 | Japanese | 200–248 (was 296–344) | x 16–304, y 248–456 (was 344–552), under the entry |
+
+The boxes measured on `main` were those that `AppMenu.spec.tsx` and
+`useSubmenuHover.spec.ts` had, so the two were given the boxes measured with
+the change: the same, 72 pixels higher at 1280 pixels and 96 pixels higher
+at 320.
+
+With the keyboard, in English, Japanese and Arabic at 1280 pixels, the down
+arrow went from Home along Demo, Layout, Language, Settings, About and
+Credits, and back to Home. The arrow towards the submenu (the left arrow in
+Arabic) opened it on Layout, with the focus on Automatic and the submenu's
+top at its entry's, and the arrow back closed it, with the focus back on
+Layout.
+
+In the browser test of the mouse in English, the pointer that goes from
+Layout towards the last mode now crosses Language alone before it is over
+the submenu, and the one that goes straight down reaches Language.
+
+### Reference screenshot
+
+`layout-menu` was made anew, with `--update-snapshots=changed`, which
+rewrites only what no longer matches. It differs from the one on `main`
+only at x 622–1239, y 161–408: the entries that changed places, and the
+submenu where it was and where it is, with their shadows. No other
+screenshot changed.

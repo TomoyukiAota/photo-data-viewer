@@ -68,7 +68,7 @@ function openSubmenu(name = 'Layout') {
   return { entry, submenu: screen.getByRole('menu', { name }) };
 }
 
-it('has the entry Layout after the entry Language, with the icon of the split panes, and says that it opens a menu', () => {
+it('has the entry Layout after Demo, before Language and Settings, with the icon of the split panes, and says that it opens a menu', () => {
   render();
   const menu = openMenu();
   const names = within(menu)
@@ -77,9 +77,9 @@ it('has the entry Layout after the entry Language, with the icon of the split pa
   expect(names).toEqual([
     'Home',
     'Demo',
-    'Settings',
-    'Language',
     'Layout',
+    'Language',
+    'Settings',
     'About',
     'Credits',
   ]);
@@ -214,7 +214,7 @@ it('is in the language that the app is shown in', async () => {
 // way to the submenu (useSubmenuHover.ts).
 // Details: jsdom lays nothing out, so the submenu is given the box that it has
 // at 1280 pixels in English, on the left of the menu, from the top of its
-// entry down. The entry is 36 pixels high, and About is under it.
+// entry down. The entry is 36 pixels high, and Language is under it.
 describe('with a mouse', () => {
   /**
    * jsdom has no PointerEvent: a mouse's event that has the pointer's type
@@ -267,12 +267,12 @@ describe('with a mouse', () => {
     act(() => jest.advanceTimersByTime(milliseconds));
 
   /**
-   * The menu's entry About, under the entry Layout. A mouse reaches it while
-   * the submenu is open, though the submenu hides the menu from a screen
-   * reader then.
+   * The menu's entry Language, under the entry Layout. A mouse reaches it
+   * while the submenu is open, though the submenu hides the menu from a
+   * screen reader then.
    */
-  const about = () =>
-    screen.getByRole('menuitem', { name: 'About', hidden: true });
+  const language = () =>
+    screen.getByRole('menuitem', { name: 'Language', hidden: true });
 
   /** Opens the submenu with the pointer resting on its entry, and returns the two. */
   function openByHover() {
@@ -284,7 +284,7 @@ describe('with a mouse', () => {
     const paper = submenu.closest<HTMLElement>(`.${menuClasses.paper}`)!;
     Object.defineProperties(paper, {
       offsetLeft: { value: 629 },
-      offsetTop: { value: 246 },
+      offsetTop: { value: 174 },
       offsetWidth: { value: 442 },
       offsetHeight: { value: 144 },
     });
@@ -321,8 +321,8 @@ describe('with a mouse', () => {
     rest(restToOpen - 10);
     // On the entry for longer than a rest, without resting.
     expect(entry.getAttribute('aria-expanded')).toBe('false');
-    leaveWithMouse(entry, 1180, 282);
-    moveMouse(about(), 1180, 300);
+    leaveWithMouse(entry, 1180, 210);
+    moveMouse(language(), 1180, 228);
     rest(1000);
     expect(entry.getAttribute('aria-expanded')).toBe('false');
     expect(screen.getAllByRole('menu')).toHaveLength(1);
@@ -343,9 +343,9 @@ describe('with a mouse', () => {
     render();
     openMenu();
     const { entry } = openByHover();
-    // Straight down, to About.
-    leaveWithMouse(entry, 1180, 282);
-    moveMouse(about(), 1180, 300);
+    // Straight down, to Language.
+    leaveWithMouse(entry, 1180, 210);
+    moveMouse(language(), 1180, 228);
     expect(entry.getAttribute('aria-expanded')).toBe('false');
     await waitFor(() => expect(screen.getAllByRole('menu')).toHaveLength(1));
     expect(document.activeElement).toBe(entry);
@@ -355,18 +355,18 @@ describe('with a mouse', () => {
     render();
     openMenu();
     const { entry, submenu } = openByHover();
-    // Down and to the left, over About.
-    leaveWithMouse(entry, 1180, 282);
-    moveMouse(about(), 1150, 300);
+    // Down and to the left, over Language.
+    leaveWithMouse(entry, 1180, 210);
+    moveMouse(language(), 1150, 228);
     rest(restToClose - 1);
-    moveMouse(about(), 1100, 312);
+    moveMouse(language(), 1100, 240);
     rest(restToClose - 1);
     expect(entry.getAttribute('aria-expanded')).toBe('true');
     // In the submenu.
     moveMouse(
       within(submenu).getByRole('menuitemradio', { name: 'Single pane' }),
       1000,
-      360,
+      288,
     );
     rest(1000);
     expect(entry.getAttribute('aria-expanded')).toBe('true');
@@ -383,8 +383,8 @@ describe('with a mouse', () => {
     render();
     openMenu();
     const { entry } = openByHover();
-    leaveWithMouse(entry, 1180, 282);
-    moveMouse(about(), 1150, 300);
+    leaveWithMouse(entry, 1180, 210);
+    moveMouse(language(), 1150, 228);
     rest(restToClose - 1);
     expect(entry.getAttribute('aria-expanded')).toBe('true');
     rest(1);
@@ -408,10 +408,10 @@ describe('with a mouse', () => {
     render();
     openMenu();
     const { entry } = openByHover();
-    fireEvent.pointerDown(about(), { pointerType: 'mouse' });
+    fireEvent.pointerDown(language(), { pointerType: 'mouse' });
     expect(entry.getAttribute('aria-expanded')).toBe('false');
-    fireEvent.click(about());
-    expect(push.mock.calls).toEqual([['/about']]);
+    fireEvent.click(language());
+    expect(push.mock.calls).toEqual([['/language']]);
     await waitFor(() => expect(screen.queryAllByRole('menu')).toHaveLength(0));
   });
 
