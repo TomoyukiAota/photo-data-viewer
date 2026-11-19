@@ -110,11 +110,17 @@ the system's temporary folder (`playwright_chromiumdev_profile-…`) and deletes
 it when the browser is closed. On a failure to delete it, Playwright writes to
 its log and the test goes on.
 
-| Check                                                                    | Result                                                                                                                                                |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The test, `--repeat-each=3`, in Playwright's Chromium (the full browser) | 3 passed. Each run had its own profile in the temporary folder, deleted when its browser was closed; none was left, and `test-results/` stayed empty. |
-| The same in Chrome (`PDV_CHROME=1`)                                      | The same.                                                                                                                                             |
-| `npm run test:all`                                                       | Lint and type check clean; 55 suites, 776 tests passed.                                                                                               |
-| `npm run build` and `npm run build:plm`                                  | Passed.                                                                                                                                               |
-| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS              | 52 passed, with the visual comparison. `test-results/` stayed empty, and no profile was left in the temporary folder.                                 |
-| `npm run test:electron`, and the browser suite in Firefox                | Not run.                                                                                                                                              |
+| Check                                                                    | Result                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The test, `--repeat-each=3`, in Playwright's Chromium (the full browser) | 3 passed. Each run had its own profile in the temporary folder, deleted when its browser was closed; none was left. `test-results/` had nothing in it but Playwright's record of the run, `.last-run.json`. |
+| The same in Chrome (`PDV_CHROME=1`)                                      | The same.                                                                                                                                                                                                   |
+| `npm run test:all`                                                       | Lint and type check clean; 55 suites, 776 tests passed.                                                                                                                                                     |
+| `npm run build` and `npm run build:plm`                                  | Passed.                                                                                                                                                                                                     |
+| Browser suite, `PDV_CHROME=1 PDV_VISUAL=1`, Chrome on macOS              | 52 passed, with the visual comparison. `test-results/` had nothing in it but `.last-run.json`, and no profile was left in the temporary folder.                                                             |
+| `npm run test:electron`, and the browser suite in Firefox                | Not run.                                                                                                                                                                                                    |
+
+With `main` merged in at `bafeb7f` (#95 and #96, which change other tests in
+the same file), the checks were run again: `npm run test:all` (56 suites, 785
+tests), both builds and the browser suite with the visual comparison (53
+tests) passed, no screenshot changed, no profile was left in the temporary
+folder, and `test-results/` had nothing in it but `.last-run.json`.
