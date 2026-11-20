@@ -3,6 +3,7 @@ import { GA_DISABLE_PROPERTY, GA_ID, GA_ID_EXISTS, GTAG_SRC } from '../analytics
 import { GA4_FALLBACK_TITLE, GA4_PAGE_TITLES, PHOTO_PATH_PARAM } from '../analytics/ga4-page';
 import { LANGUAGE_PREFIX, languageOfLocale } from '../i18n/address';
 import { getLanguage } from '../i18n/languages';
+import { reloadForMissingBuildFilesScript } from '../page-load/reload-for-missing-build-files';
 import { UserSettingKey } from '../utils/user-settings';
 
 export default function Document({ locale }: DocumentProps) {
@@ -16,6 +17,12 @@ export default function Document({ locale }: DocumentProps) {
       dir={language ? getLanguage(language).direction : undefined}
     >
       <Head>
+        {/* First, before Next.js' own scripts and stylesheets: it loads the page again when one of
+            them does not load, as while the server changes deployments
+            (src/page-load/reload-for-missing-build-files.ts). */}
+        <script
+          dangerouslySetInnerHTML={{ __html: reloadForMissingBuildFilesScript }}
+        />
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'

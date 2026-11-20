@@ -1318,6 +1318,142 @@ test('errors nothing handled are sent to the analytics backend', async ({
     ]);
 });
 
+/**
+ * Answers 404 for each file of the page's own build, under /_next/static/,
+ * for which `isMissing(url, load)` is true, `load` being the page load that
+ * asks for the file, counted from 1, as Vercel's server does while it changes
+ * deployments. Gives the page's loads, each with the time it was asked for
+ * and the time its load event fired.
+ */
+async function serveWithMissingBuildFiles(page, isMissing) {
+  const loads = [];
+  page.on('request', (request) => {
+    if (request.isNavigationRequest() && request.frame() === page.mainFrame())
+      loads.push({ requested: Date.now() });
+  });
+  page.on('load', () => {
+    loads.at(-1).loaded = Date.now();
+  });
+  await page.route('**/_next/static/**', (route) =>
+    isMissing(route.request().url(), loads.length)
+      ? route.fulfill({ status: 404, contentType: 'text/plain', body: '' })
+      : route.fallback(),
+  );
+  return loads;
+}
+
+const appScript = /\/_next\/static\/chunks\/pages\/_app-/;
+
+// TL;DR: A page that its server gives without some files of its own build,
+// as Vercel's does while it changes deployments, loads itself again half a
+// second after its load, at most 3 times a minute, and then starts.
+// Details: src/page-load/reload-for-missing-build-files.ts. The cases leave
+// out the files that were answered 404 in the change watched on 2026-11-20,
+// the _app script or the main script, or every file of the build
+// (docs/tasks/20261120_reload-on-missing-build-files).
+test.describe('a page whose server does not have files of its build', () => {
+  for (const [files, missing] of [
+    ['its _app script', appScript],
+    ['its main script', /\/_next\/static\/chunks\/main-/],
+    ['any file of its build', /\/_next\/static\//],
+  ]) {
+    test(`loads itself again once loaded, when it does not have ${files}, and then starts`, async ({
+      page,
+    }) => {
+      const loads = await serveWithMissingBuildFiles(
+        page,
+        (url, load) => load === 1 && missing.test(url),
+      );
+      await page.goto('/');
+      await expect(
+        page.getByRole('button', { name: 'Select Photo' }),
+      ).toBeVisible();
+      expect(loads).toHaveLength(2);
+      // Once the load has ended, and well before Photo Location Map's e2e
+      // suite would load the page itself, 2 seconds later.
+      const waited = loads[1].requested - loads[0].loaded;
+      expect(waited).toBeGreaterThanOrEqual(400);
+      expect(waited).toBeLessThan(1500);
+      expect(
+        await page.evaluate(
+          () => performance.getEntriesByType('navigation')[0].type,
+        ),
+      ).toBe('reload');
+    });
+  }
+
+  test('loads itself again 3 times within a minute at most, and is then left as it is', async ({
+    page,
+  }) => {
+    const warnings = [];
+    page.on('console', (message) => {
+      if (message.type() === 'warning') warnings.push(message.text());
+    });
+    const loads = await serveWithMissingBuildFiles(page, (url) =>
+      appScript.test(url),
+    );
+    await page.goto('/');
+    await expect
+      .poll(() => loads.filter(({ loaded }) => loaded).length, {
+        timeout: 15000,
+      })
+      .toBe(4);
+    // Longer than the wait before another load and that load.
+    await page.waitForTimeout(2000);
+    expect(loads).toHaveLength(4);
+    await expect(page.locator('#__next')).toBeEmpty();
+    expect(warnings.at(-1)).toMatch(
+      /loaded itself again 3 times within a minute, so it is left as it is\.$/,
+    );
+  });
+
+  test("shows the photo that Photo Location Map's window gives, once it has loaded itself again", async ({
+    page,
+  }) => {
+    const loads = await serveWithMissingBuildFiles(
+      page,
+      (url, load) => load === 1 && appScript.test(url),
+    );
+    await openInPhotoLocationMap(page);
+    expect(loads).toHaveLength(2);
+  });
+
+  test('does nothing for files of other sites, nor for a file of the build that fails once the app runs', async ({
+    page,
+  }) => {
+    // The fonts' stylesheets, which the head links before Next.js' own.
+    await page.route(/fonts\.googleapis\.com/, (route) =>
+      route.fulfill({ status: 404, body: '' }),
+    );
+    // The chunks that webpack loads once the app runs, such as the map's,
+    // which the page shows from the start in a window this wide; the page's
+    // own scripts are in its HTML.
+    const html = await (await page.request.get('/')).text();
+    const pageScripts = [...html.matchAll(/<script[^>]* src="([^"]+)"/g)].map(
+      ([, src]) => src,
+    );
+    const failedChunks = [];
+    const loads = await serveWithMissingBuildFiles(page, (url) => {
+      const { pathname } = new URL(url);
+      if (
+        !pathname.startsWith('/_next/static/chunks/') ||
+        pageScripts.includes(pathname)
+      )
+        return false;
+      failedChunks.push(pathname);
+      return true;
+    });
+    await page.goto('/');
+    await expect(
+      page.getByRole('button', { name: 'Select Photo' }),
+    ).toBeVisible();
+    await expect.poll(() => failedChunks.length).toBeGreaterThan(0);
+    // Longer than the wait before another load.
+    await page.waitForTimeout(2000);
+    expect(loads).toHaveLength(1);
+  });
+});
+
 // The scripts that send to Vercel are Vercel's, and do nothing in a browser
 // driven by a test. What the app gives them is checked instead: the calls it
 // queues for them, which a script takes when it loads, and the function that
