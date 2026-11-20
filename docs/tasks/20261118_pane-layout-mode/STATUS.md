@@ -19,7 +19,8 @@ day the maintainer had the entry Layout moved up the menu: see
 Each of these was merged, the last on 2026-11-20 as `92da7e6` (#99).
 On 2026-11-20 the maintainer had the layout chosen in Photo Location Map's
 window too, with a button at the end of the tabs: see
-[In Photo Location Map](#in-photo-location-map).
+[In Photo Location Map](#in-photo-location-map). It was merged on the same
+day as `e1bd4b0` (#101).
 
 - **The menu's entry Layout** (`src/components/app-menu/LayoutSubmenu.tsx`),
   after Demo and before Language and Settings, with the icon of the split
@@ -189,8 +190,10 @@ Asked by the maintainer on 2026-11-20: the layout is chosen in Photo
 Location Map's window too, which shows neither the header nor the menu. Of
 the places proposed, a button in the page, an entry of Photo Location Map's
 own menu View and its Settings dialog, the maintainer chose the button in
-the page, with the icon of the split panes. On the branch
-`claude/layout-in-plm`, from `main` at `92da7e6`.
+the page, with the icon of the split panes. Made on the branch
+`claude/layout-in-plm`, from `main` at `92da7e6`, and merged on
+2026-11-20 as `e1bd4b0` (#101). Both deployments were looked at once it
+was deployed: see the [results](./evidence/RESULTS.md#after-the-merge).
 
 - **The button Layout** (`src/components/layout-mode/LayoutButton.tsx`) is
   at the end of the topmost tabs (`Home.tsx`): the data's, General, Details

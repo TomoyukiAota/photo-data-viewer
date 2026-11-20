@@ -380,3 +380,17 @@ the documents and the Language page alone.
 `plm-layout-menu` and `plm-layout-menu-ar` are new: the button's menu open
 in Photo Location Map's window at 1280 pixels, in English and in Arabic. No
 other screenshot changed.
+
+### After the merge
+
+Once `e1bd4b0` (#101) was deployed, on 2026-11-20, both deployments were
+looked at in headless Chromium:
+
+- **The deployment for Photo Location Map**, `pdv-in-plm.vercel.app`,
+  opened as its isolated window opens it, with the stand-in for its bridge
+  and the usage data turned off: in English, Japanese and Arabic, in the
+  five windows above, the button and its menu were where they were in the
+  build and as large, to the pixel, and none of the 15 had a problem.
+- **The standalone app**, `photo-data-viewer.vercel.app`, at 1280 and 600
+  pixels: no button after the tabs, and the menu's entry Layout opened its
+  three modes, as before.
