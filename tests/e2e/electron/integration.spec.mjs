@@ -142,6 +142,36 @@ for (const [window, env] of [
   });
 }
 
+// The page's server answers its _app script with a 404 in its first load, as
+// Vercel's does while it changes deployments: the page loads itself again once
+// that load has ended, which loadURL() waits for, and then shows the photo
+// (src/page-load/reload-for-missing-build-files.ts).
+for (const [window, env] of [
+  ['window with Node.js', {}],
+  ['isolated window', { PDV_ELECTRON_HOST: 'isolated' }],
+]) {
+  test(`embedded mode loads itself again once loaded, when its server does not have a file of its build, in its ${window}`, async () => {
+    test.skip(
+      !process.env.PDV_ELECTRON_PATH,
+      'Set PDV_ELECTRON_PATH to the companion-compatible Electron executable.',
+    );
+    const result = await runInElectron('demo.jpg', {
+      ...env,
+      PDV_ELECTRON_MISSING_BUILD_FILES: '1',
+    });
+    expect(result.loads).toBe(2);
+    expect(result.reloadWaitedMs).toBeGreaterThanOrEqual(400);
+    expect(result.reloadWaitedMs).toBeLessThan(1500);
+    expect(result.title).toBe('demo.jpg - Photo Location Map');
+    expect([result.width, result.height]).toEqual([3024, 4032]);
+    expect(result.text).toContain('demo.jpg');
+    // The 404 is in the console, as an error of the network.
+    expect(
+      result.errors.filter((message) => !message.startsWith('Failed to load resource')),
+    ).toEqual([]);
+  });
+}
+
 test('embedded mode lays a language written from right to left out from the right, in the isolated window', async () => {
   test.skip(
     !process.env.PDV_ELECTRON_PATH,

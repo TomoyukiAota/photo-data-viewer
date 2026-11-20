@@ -70,16 +70,47 @@ app.whenReady().then(async () => {
       ? { contextIsolation: true, nodeIntegration: false, sandbox: true, preload: join(__dirname, 'isolated-preload.cjs') }
       : { nodeIntegration: true, contextIsolation: false },
   });
+  // PDV_ELECTRON_MISSING_BUILD_FILES=n answers the page's _app script with
+  // the server's 404 in the page's first n loads, as Vercel's server does while
+  // it changes deployments; the page then loads itself again once its load has
+  // ended (src/page-load/reload-for-missing-build-files.ts). Electron keeps one
+  // listener of this event per session, which also blocks the analytics.
+  const origin = new URL(process.env.PDV_ELECTRON_URL).origin;
+  const buildFiles = `${origin}/_next/static/`;
+  let missingLoads = Number(process.env.PDV_ELECTRON_MISSING_BUILD_FILES || 0);
   win.webContents.session.webRequest.onBeforeRequest(
     {
       urls: [
         '*://*.google-analytics.com/*',
         '*://www.googletagmanager.com/*',
         '*://*.analytics.photo-data-viewer.tomoyukiaota.com/*',
+        `${buildFiles}*`,
       ],
     },
-    (_, callback) => callback({ cancel: true }),
+    (details, callback) => {
+      if (!details.url.startsWith(buildFiles)) {
+        callback({ cancel: true });
+      } else if (missingLoads > 0 && details.url.startsWith(`${buildFiles}chunks/pages/_app-`)) {
+        missingLoads--;
+        callback({ redirectURL: `${buildFiles}not-in-this-deployment.js` });
+      } else {
+        callback({});
+      }
+    },
   );
+  // The page's loads, and how long after the first had ended the second started.
+  let loads = 0;
+  let firstLoadEnded;
+  let reloadWaitedMs;
+  win.webContents.on('did-finish-load', () => {
+    loads++;
+    firstLoadEnded ??= Date.now();
+  });
+  win.webContents.on('did-start-navigation', (event, _url, isSameDocument, isMainFrame) => {
+    if ((event.isMainFrame ?? isMainFrame) && !(event.isSameDocument ?? isSameDocument) && firstLoadEnded !== undefined) {
+      reloadWaitedMs ??= Date.now() - firstLoadEnded;
+    }
+  });
   const errors = [];
   const diagnostics = [];
   win.webContents.on('console-message', (_, level, message) =>
@@ -98,7 +129,13 @@ app.whenReady().then(async () => {
     errors.push(details.reason),
   );
   try {
+    // As Photo Location Map loads the page: this rejects if the page starts
+    // another load before this one has ended.
     await win.loadURL(process.env.PDV_ELECTRON_URL);
+    const expectedLoads = 1 + Number(process.env.PDV_ELECTRON_MISSING_BUILD_FILES || 0);
+    for (const until = Date.now() + 10000; loads < expectedLoads && Date.now() < until; ) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
     const result = await win.webContents
       .executeJavaScript(`new Promise((resolve, reject) => {
       const start = Date.now();
@@ -148,7 +185,7 @@ app.whenReady().then(async () => {
     }
     writeFileSync(
       process.env.PDV_ELECTRON_RESULT,
-      JSON.stringify({ ...result, errors, trackedEvents }),
+      JSON.stringify({ ...result, errors, trackedEvents, loads, reloadWaitedMs }),
     );
     app.exit(0);
   } catch (error) {

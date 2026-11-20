@@ -236,6 +236,27 @@ JavaScript turned off. The ways to show the languages in search results that
 were weighed are in
 [the task record](./tasks/20261118_search-results/evidence/LANGUAGES.md).
 
+## While a deployment changes
+
+Each merge to `main` deploys both deployments anew. For several seconds then,
+Vercel's server can give a page the HTML of one deployment and the files under
+`/_next/static/` of the other, which answers 404 for them: such a page never
+starts and shows nothing. A script that
+[`_document.tsx`](../src/pages/_document.tsx) puts first in each page's head,
+[`reload-for-missing-build-files.ts`](../src/page-load/reload-for-missing-build-files.ts),
+then loads the page again: once its load has ended, half a second later, at
+most 3 times a minute, and only while the app has not started. Its comment
+says why each of these is so, and
+[the task record](./tasks/20261120_reload-on-missing-build-files/PLAN.md) has
+the measurements and what was weighed.
+
+The browser suite's cases of "a page whose server does not have files of its
+build" answer 404 for such files, in the first load or in every one. The
+Electron suite's (`PDV_ELECTRON_MISSING_BUILD_FILES` in
+[`main.cjs`](../tests/e2e/electron/main.cjs)) check, in both windows of
+Photo Location Map, that the page lets `loadURL()` end the load that it waits
+for, and then shows the photo.
+
 ## Task records
 
 Keep task-specific plans, progress and evidence under
