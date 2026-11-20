@@ -5,7 +5,11 @@ Started on 2026-11-20. See the [plan](./PLAN.md) and the
 
 ## Current state
 
-Done and checked locally, in review; not merged yet.
+Done, and checked locally. Merged on 2026-11-20 as `1b42c3c` (#104), at
+13:45:52 UTC. Vercel's production deployments of it ended at 13:50:07 UTC
+(photo-data-viewer) and 13:52:22 UTC (pdv-in-plm), and both serve the script:
+the heads of https://photo-data-viewer.vercel.app/ and
+https://pdv-in-plm.vercel.app/ have `ReloadsForMissingBuildFiles`.
 
 - A page whose server does not have a script or a stylesheet of its own
   build, as while Vercel changes the deployment, loads itself again 500 ms
@@ -20,17 +24,18 @@ Done and checked locally, in review; not merged yet.
 
 ## Resuming
 
-- A merge to `main` deploys both deployments. The change of deployment that
-  the merge itself causes can still give a page the HTML of the deployment
-  before, which has no script: a page loaded in those seconds can still be
-  empty. From the next change on, the HTML of both deployments has it.
+Nothing is pending in this repository.
+
+- The change of deployment that #104 itself caused could still give a page
+  the HTML of the deployment before, which has no script. From the next change
+  on, the HTML of both deployments has it.
 - To see that a deployment has it, `curl` its page and look for
   `ReloadsForMissingBuildFiles` in the head.
-- Photo Location Map's `expectShownInViewer` should then load only a page that
-  is still the same document after its 2 seconds, so that its reload and the
+- Photo Location Map's `expectShownInViewer` should load only a page that is
+  still the same document after its 2 seconds, so that its reload and the
   page's own do not stop each other
   ([the plan](./PLAN.md#photo-location-maps-e2e-suite)). That is a change in
-  its repository, and works before this one is deployed too.
+  its repository.
 
 ## Follow-ups
 
